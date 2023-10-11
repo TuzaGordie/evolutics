@@ -1,0 +1,46 @@
+<!-- <app-form-navigation [title] = "'Search Quotation'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <!-- <h1 class="my-5">Quotation Search List</h1> -->
+      <table class="table table-responsive table-striped">
+        <thead class="py-3">
+          <tr>
+            <th scope="col">{{'Quotation No</th>
+            <th scope="col">{{'Full Name</th>
+            <th scope="col">{{'Product Class</th>
+            <th scope="col">{{'product Code</th>
+            <th scope="col">{{'Last Updated On</th>
+            <th scope="col">{{'Referrer No</th>
+            <th scope="col">{{'Agent No</th>
+            <th scope="col">{{'Iterations</th>
+            <th scope="col">{{'Total Premium</th>
+            <th scope="col">{{'Days to SLA</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quote of quotations">
+            <td routerLink="../view-quotation" [queryParams]="{quoteNo:quote.quoteNo}">{{quote.quoteNo}}</td>
+            <td class="name">{{quote.ownerName}}</td>
+            <td>{{quote.productClass}}</td>
+            <td>{{quote.productCode}}</td>
+            <td>{{quote.modifiedOn}}</td>
+            <td>{{quote.referrerNo}}</td>
+            <td>{{quote.agentNo}}</td>
+            <td>{{quote.iterations}}</td>
+            <td>{{quote.totalPeriodicPremium | number}}</td>
+            <td>{{quote.daysToQuoteExpiry}}</td>
+          </tr>
+
+          <tr *ngIf="quotations.length === 0">
+            <td colspan="12">
+              <span class="text-primary">No records were found.</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

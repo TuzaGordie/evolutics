@@ -1,0 +1,37 @@
+<div class="container-fluid bgcol">
+  <div class="row bggrey">
+
+    <div class="col-12 col-lg-5 mx-auto">
+      <div class="row bgcol d-flex justify-content-center ">
+        <div class="restrict-height m-4">
+          <p matDialogTitle>{{'Policy Status Summary at a Report Date'|appTranslate|async}}</p>
+          <canvas baseChart class="spacing mb-4 " [datasets]="barChartData" [labels]="barChartLabels"
+            [options]="barChartOptions" [legend]="barChartLegend" [colors]="chartColors" [chartType]="barChartType">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-5 mx-auto">
+      <div class="row  d-flex justify-content-center ">
+        <div class="restrict-height m-4">
+          <p matDialogTitle>{{'Policy Activation History'|appTranslate|async}}</p>
+          <canvas baseChart class="spacing mb-4 " [datasets]="barChartData1" [labels]="barChartLabels1"
+            [options]="barChartOptions1" [legend]="barChartLegend2" [chartType]="barChartType1">
+
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 my-3 mx-auto">
+      <div class="row  d-flex justify-content-center ">
+        <div class="restrict-height m-4">
+          <p matDialogTitle>{{'YTD Analysis of Activated Policies'|appTranslate|async}}</p>
+          <canvas baseChart class="spacing mb-4 " [datasets]="barChartData2" [labels]="barChartLabels2"
+            [options]="barChartOptions2" [legend]="barChartLegend" [chartType]="barChartType2">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

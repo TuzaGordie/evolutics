@@ -1,0 +1,176 @@
+<!-- <app-form-navigation [title]="'Set Up / Address / Country'"></app-form-navigation> -->
+<loader [loading]="loading" text="Processing....">
+  <form #f="ngForm" novalidate>
+    <div class="container-sm mt-5 mx-auto">
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Country Code"|appTranslate|async}}</label>
+
+          <input [(ngModel)]="countryData.country.code" [attr.disabled]="disableCode === true ? '' : null"
+            name="countryCode" type="text" class="form-control control-bg-gray" />
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Country Group"|appTranslate|async}}</label>
+          <select [(ngModel)]="countryData.country.group" name="countryGroup" type="text"
+            class="form-control control-bg-gray">
+            <option value="{{ item.group }}" *ngFor="let item of countryGroup">
+              {{ item.group }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.description" name="description" type="text"
+            class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"TT Country Name"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.ttCountryName" name="ttCountryName" type="text"
+            class="form-control control-bg-gray" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Default Banking Method"|appTranslate|async}}</label>
+          <select [(ngModel)]="countryData.country.bankingMethod" name="bankingMethod" type="text"
+            class="form-control control-bg-gray">
+            <option value="{{ item.code }}" *ngFor="let item of bankingMethods">
+              {{ item.title }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Sort Code Basis"|appTranslate|async}}</label>
+          <select [(ngModel)]="countryData.country.sortCodeBasis" name="sortCodeBasis" type="text"
+            class="form-control control-bg-gray">
+            <option value="{{ item.code }}" *ngFor="let item of sortCodeBasis">
+              {{ item.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Direct Debit Method"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.directDebitMethod" name="directDebitMethod" type="text"
+            class="form-control control-bg-gray" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Validate Bank Sort"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.validateSortCode" name="validateSortCode" type="checkbox"
+            class="form-control control-bg-gray" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Default Language"|appTranslate|async}}</label>
+          <select [(ngModel)]="countryData.countryLang.language" name="language" type="text"
+            class="form-control control-bg-gray" class="form-control control-bg-gray">
+            <option value="{{ item.code }}" *ngFor="let item of language">
+              {{ item.title }}
+              <!-- <input
+            [(ngModel)]="countryData.countryLang.code"
+            value="{{ item.code }}"
+            type="hidden"
+          /> -->
+            </option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Post Code Prefix"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.postcodePrefix" name="postcodePrefix" type="text"
+            class="form-control control-bg-gray" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Bank Account Minium Length"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.bankAccountMinLength" name="bankAccountMinLength" type="text"
+            min="1" class="form-control control-bg-gray" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Bank Account Maximum Length"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.bankAccountMaxLength" name="bankAccountMaxLength" type="text"
+            class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Bank Account Validation"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.accValidation" name="accValidation" type="text"
+            class="form-control control-bg-gray" />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Phone Number Basis"|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray">
+            <option></option>
+            <option value="{{ item.code }}" *ngFor="let item of phoneNoBasis">
+              {{ item.title }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Phone Number Prefix"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.phoneNoPrefix" name="phoneNoPrefix" type="number" min="1"
+            class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Phone Number Length Validation"|appTranslate|async}}</label>
+          <input [(ngModel)]="countryData.country.phoneNoLength" name="phoneNoLength" type="number" min="1"
+            class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <br />
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <app-button (click)="createCountry()" buttonType="save"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</loader>
+<!-- <div class="container ">
+    <div class="row">
+        <div class="col-md-6 ">
+            <label class="form-label text-primary">{{"Select Country Group "|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray">
+    <option></option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-4  ">
+            <label class="form-label text-primary">{{"Select Country Group "|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray">
+    <option></option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+        </div>
+        <div class="col-2">
+            <br />
+                <app-button [buttonType]="'show'" routerLink=""></app-button>
+
+        </div>
+
+    </div>
+
+</div> -->

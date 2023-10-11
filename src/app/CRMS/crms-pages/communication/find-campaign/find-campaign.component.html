@@ -1,0 +1,72 @@
+<app-form-navigation [title]="'Find Campaign'"></app-form-navigation>
+<div class="row mt-5 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+    <label for="" class="form-label">{{'Company'|appTranslate|async}}</label>
+  </div>
+  <div class="col-6">
+    <select class="form-control control-bg-gray">
+      <option value=""></option>
+    </select>
+  </div>
+</div>
+<div class="row mt-4 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+    <label for="" class="form-label">{{'Customer Group'|appTranslate|async}}</label>
+  </div>
+  <div class="col-6">
+    <select class="form-control control-bg-gray">
+      <option value=""></option>
+    </select>
+  </div>
+</div>
+<div class="row mt-4 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+    <label for="" class="form-label">{{'Communication Channel'|appTranslate|async}}</label>
+  </div>
+  <div class="col-6">
+    <select class="form-control control-bg-gray">
+      <option value=""></option>
+    </select>
+  </div>
+</div>
+<div class="row mt-4 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+    <label for="" class="form-label">{{'Date From'|appTranslate|async}}</label>
+  </div>
+  <div class="col-6">
+    <input class="form-control control-bg-gray" type="date"/>
+
+  </div>
+</div>
+<div class="row mt-4 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+    <label for="" class="form-label">{{'Date To'|appTranslate|async}}</label>
+  </div>
+  <div class="col-6">
+    <input class="form-control control-bg-gray" type="date"/>
+
+  </div>
+</div>
+<div class="row mt-4 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+    <label for="" class="form-label">{{'Campaign'|appTranslate|async}}</label>
+  </div>
+  <div class="col-6">
+    <select class="form-control control-bg-gray">
+      <option value=""></option>
+    </select>
+  </div>
+</div>
+<div class="row mt-4 justify-content-center">
+  <div class="col-2 d-flex align-items-center">
+
+  </div>
+  <div class="col-6">
+    <div class="row justify-content-end">
+      <div class="col-3">
+        <app-button buttonType="searchRed" routerLink="/crms/found-campaign"></app-button>
+      </div>
+
+    </div>
+  </div>
+</div>

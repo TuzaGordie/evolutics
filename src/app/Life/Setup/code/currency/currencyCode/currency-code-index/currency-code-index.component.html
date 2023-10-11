@@ -1,0 +1,30 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Currency / Code'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <label for="">{{"Select Currency"|appTranslate|async}}</label>
+          <select type="text" class="form-control control-bg-gray" [(ngModel)]="currencyCode">
+            <option *ngFor="let currencyCode of currencyCodes" [value]="currencyCode.code">
+              {{currencyCode.code}} - {{currencyCode.description}}
+            </option>
+          </select>
+
+          <span class="text-danger" *ngIf="message.error">{{"Field cannot be blank"|appTranslate|async}}</span>
+        </div>
+      </div>
+      <div class="row mt-4 g-2">
+        <div class="col">
+          <app-button buttonType="show" (click)="show()"></app-button>
+        </div>
+        <div class="col">
+          <app-button buttonType="create" routerLink="../create"></app-button>
+        </div>
+        <div class="col">
+          <app-button buttonType="clone" (click)="clone()"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

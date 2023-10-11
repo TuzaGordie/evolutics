@@ -1,0 +1,61 @@
+<app-form-navigation [title]="'CRM / Setups / Client Life Cycle'"></app-form-navigation>
+<div class="container-sm mt-5 " id="form-body" [formGroup]="clientLifeCycleForm">
+  <div class="row g-3">
+    <div class="col">
+      <div class="form-group mt-2">
+        <!-- <label>Lifecycle Stage Code</label> -->
+        <label class="form-label text-primary">Client LifeCycle</label>
+        <input class="form-control control-bg-gray" type="text" formControlName="clientLifeCycle"/>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group mt-2">
+        <label class="form-label text-primary">Description</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="description"/>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row g-3">
+    <div class="col-12">
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <!-- <label class="col-md-4">Client Join Date</label> -->
+
+          <div class="col">
+            <label class="form-label text-primary">{{'Min Client Duration (Years)'|appTranslate|async}}</label>
+            <input class="form-control  control-bg-gray" type="text" formControlName="clientDuration"/>
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Max Client Duration (Years)'|appTranslate|async}}</label>
+            <input class="form-control  control-bg-gray" type="text" formControlName="clientDuration"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12">
+      <div class="form-group mt-2">
+        <label>{{'Maintain Active Policy for entire period'|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" type="checkbox" formControlName="maintainActivePolicy"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <app-button buttonType="submitRed"></app-button>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="" [formGroup]="form">
+  <div class="modal-header">
+    <h5 class="modal-title" id="MatrixModalLabel">{{"Matrix"|appTranslate|async}}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-1">
+          <div class="form-group">
+            <label class="text-primary form-label ">{{"Axis"|appTranslate|async}}</label>
+            <p class="text-primary form-control " style="border: none">X</p>
+
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="text-primary form-label ">{{"Selection"|appTranslate|async}}</label> 
+            <app-input-basic [light]="true" [showLabel]="false" type="select" [options]="lookUpFieldlist" labelType="ct" valueField="code"
+               [form]="form" name="axisXValue" [stacked]="true" [showValidationIcon]="false" [showValidation]="axisXValue.invalid" #axisXValue>
+            </app-input-basic> 
+          </div>
+        </div>
+
+        <div class="col" *ngIf="false">
+          <div class="form-group">
+            <label class="text-primary form-label ">{{"Filter (E.g No of Covers. No of Members)"|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-1">
+          <div class="form-group">
+            <label class="text-primary form-label ">&nbsp;</label>
+            <p class="text-primary form-control " style="border: none">Y</p>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="text-primary form-label ">&nbsp;</label> 
+            <app-input-basic [light]="true" [showLabel]="false" type="select" [options]="lookUpFieldlist" labelType="ct"
+              valueField="code"
+               [form]="form" name="axisYValue" [stacked]="true" [showValidationIcon]="false" [showValidation]="axisYValue.invalid" #axisYValue>
+            </app-input-basic> 
+          </div>
+        </div>
+        <div class="col" *ngIf="false">
+          <div class="form-group">
+            <label class="text-primary form-label ">&nbsp;</label>
+            <select class="form-control  control-bg-gray">
+              <option value="" disabled></option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-between">
+
+    <div class="text-danger" >
+    {{errorMsg}}
+    </div>
+    <app-btn type="primary" icon="save" [valid]="form?.valid" (mclick)="save()">Save Changes</app-btn>
+  </div>
+</div>

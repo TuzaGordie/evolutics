@@ -1,0 +1,23 @@
+<div [formGroup]="form">
+  <div class="row g-3 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h6 class="text-primary m-0">{{"Additional Mandatory Policy Issue Information"|appTranslate|async}}</h6>
+    </div>
+    <div class="col-auto ">
+      <text-case-1 lbl="Product" [val]="product?.basic?.code +' - '+product?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+  <hr>
+  <div class="row align-items-center ">
+    <div class="col-lg-4" *ngFor="let item of policyAndQuoteInfos">
+      <div class="form-group mt-2">
+        <label class="text-primary d-flex align-items-center justify-content-between">
+          {{item.label|appTranslate|async}}
+          <input class="ms-2 form-control  control-bg-gray width-unset" type="checkbox"
+            formControlName="{{item.name}}" />
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

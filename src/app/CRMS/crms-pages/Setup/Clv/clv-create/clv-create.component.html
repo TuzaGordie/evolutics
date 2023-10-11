@@ -1,0 +1,135 @@
+<app-form-navigation [title]="'CRM / Setups / CLV'"></app-form-navigation>
+<div class="container-sm mt-5 " id="form-body">
+  <form [formGroup]="clvForm">
+  <div class="row g-3" >
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'CLV Group Code'|appTranslate|async}}</label>
+        <input readonly="true" class="form-control control-bg-gray" type="text" formControlName="clvGroup" />
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'Description'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="description" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'Company'|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray" formControlName="company">
+          <option></option>
+          <option *ngFor="let company of companiesList" [ngValue]="company.code">{{company.code}} -  {{company.description}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row g-3">
+    <div class="col-4">
+      <div class="form-group mt-2">
+          <label class="text-primary form-label">{{'Customer Attributes'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray" formControlName="customerAttribute">
+              <option></option>
+              <option *ngFor="let attribute of customerAttributesList" [value]="attribute.code">{{attribute.title}}</option>
+          </select>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'Condition1'|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray" formControlName="condition1">
+          <option></option>
+          <option *ngFor="let condition of conditionsList" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'Value'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="value1" />
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'Condition2'|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray" formControlName="condition2">
+          <option></option>
+          <option *ngFor="let condition of conditionsList" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class="text-primary form-label">{{'Value'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="value2" />
+      </div>
+    </div>
+  </div>
+
+  <!-- <hr> -->
+
+  <!-- <div class="row g-3" *ngFor="let attribute of customerAttributesForm.controls">
+    <ng-container [formGroup]="$any(attribute)">
+      <div class="col-4">
+        <div class="form-group mt-2">
+            <label class="text-primary form-label">{{'Customer Attributes'|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray" formControlName="customerAttribute">
+                <option></option>
+                <option *ngFor="let attribute of customerAttributesList" [value]="attribute.code">{{attribute.title}}</option>
+            </select>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">{{'Condition1'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray" formControlName="condition1">
+            <option></option>
+            <option *ngFor="let condition of conditionsList" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">{{'Value'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" formControlName="value1" />
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">{{'Condition2'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray" formControlName="condition2">
+            <option></option>
+            <option *ngFor="let condition of conditionsList" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">{{'Value'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" formControlName="value2" />
+        </div>
+      </div>
+    </ng-container>
+  </div> -->
+
+  <div class="row g-3">
+    <div class="col-2">
+      <!-- <div class="form-group mt-2">
+        <app-button buttonType="addred" (click)="onAddNewAttributesLine()"></app-button>
+      </div> -->
+    </div>
+    <div class="col-8"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <app-btn [valid]="clvForm?.valid" (click)="submitClient()" icon="save" buttonType="submitRed">Submit</app-btn>
+      </div>
+    </div>
+  </div>
+</form>
+</div>

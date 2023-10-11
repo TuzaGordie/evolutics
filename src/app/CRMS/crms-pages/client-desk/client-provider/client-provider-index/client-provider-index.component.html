@@ -1,0 +1,70 @@
+<app-form-navigation [title] = "'Client Desk / Create New Client / Provider'"></app-form-navigation> 
+
+<div class="container mt-5">
+    <form >
+      <div class="col-7 mx-auto">
+        <div class="row justify-content-center mt-5">
+          <label for="" class="text-primary">Clone An Existing Provider</label>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label">Enter Provider No</label>
+              <input type="text" class="form-control control-bg-gray" [(ngModel)]="providerNo" name="providerNo">
+            </div>
+          </div>
+          <div class="col d-flex align-items-center" *ngIf="providerNo == '1'" >
+            <label for="" class="text-primary"> Sinaly Diarassouba <span class="text-success">&check; </span></label>
+          </div>
+          <div class="col-3">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-button buttonType="findsmall"></app-button>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button buttonType="clone"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center mt-5 mb-5">
+          <label for="" class="text-primary">Create From Scratch</label>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label">Enter Client Number</label>
+              <input type="text" class="inputClient" [(ngModel)]="clientNo" name="clientNo"
+                     class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col d-flex align-items-center" *ngIf="clientNo == '1'" >
+            <label for="" class="text-primary"> Sinaly Diarassouba <span class="text-success">&check; </span></label>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button buttonType="findsmall"></app-button>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button buttonType="create"></app-button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="clientNo == '1'" class="row justify-content-end mt-5">
+  
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button buttonType="next" routerLink="/life/client-desk/create-provider-client"></app-button>
+            </div>
+          </div>
+  
+  
+        </div>
+      </div>
+  
+  
+    </form>
+  
+  </div>
+  

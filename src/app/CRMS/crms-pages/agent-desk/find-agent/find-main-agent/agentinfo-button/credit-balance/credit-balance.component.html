@@ -1,0 +1,54 @@
+<app-form-navigation [title] = "'View Client'"></app-form-navigation> 
+<div class="container-fluid my-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h1 class="my-5">Pending Payments</h1>
+        
+            <table class="table" style="font-size: 14px;">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">Payment Id</th>
+                    <th scope="col">Batch No</th>
+                    <th scope="col">Initial Estimate</th>
+                    <th scope="col">Adjustments</th>   
+                    <th scope="col">Current Estimate</th>
+                    <th scope="col">Claim Status</th>   
+                    <th scope="col">Days To SLA</th>   
+                    <th scope="col" style="border-top-right-radius: 12px;">Completion Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of pendingPaymentsList">
+                    <th scope="row">{{item.PAYOUT_CODE}}</th>
+                    <td>{{item.BATCH_NO}}</td>
+                    <td>{{item.INITIAL_ESTIMATE}}</td>
+                    <td></td>
+                    <td>{{item.CURRENT_ESTIMATE}}</td>
+                    <td>{{item.CLAIM_NO}}</td>
+                    <td>{{item.DAY_TO_SLA}}</td>
+                    <td>{{item.COMPLETE_RATE}}</td>
+                    <td class="p-0">
+                        <button type="button"  class="btn-ir p-0 px-1 mx-1 btn-radius" >
+                            <span class="my-auto btn-table">Change Status</span></button>
+                            <button type="button"  class="btn-ir p-0 px-1 mx-1 btn-radius" >
+                                <span class=" my-auto btn-table">Generate DV</span></button>
+                                <button type="button"  class="btn-ir p-0 px-3 mx-1 btn-radius" >
+                                    <span class=" my-auto btn-table">Adjust</span></button>
+                                    <button type="button"  class="btn-ir p-0 px-3 mx-1 btn-radius " >
+                                        <span class=" my-auto btn-table">History</span></button>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+    
+    </div>
+    <div class="col-md-12 mx-auto mt-5">
+        <button type="button"  class="btn p-0 px-4 btn-radius py-2" style="float: right; background-color: #5D26CE; color:white">
+            <span class="mx-3 my-auto">Register New Claim</span></button>
+    </div>
+    </div>
+
+        </div>
+
+    

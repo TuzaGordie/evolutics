@@ -1,0 +1,65 @@
+<div class="modal fade" id="sav_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="savingsForm" class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">Target Contribution Frequency</label>
+            <select formControlName="frequency" name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <ng-container *ngFor="let t of targetContributionFreqOptions$">
+                <option [value]="t.frequency">{{t.frequency}}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">Target Basis</label>
+            <input formControlName="basis" type="text" class="control-bg-gray form-control">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">Target Amount</label>
+            <input formControlName="amount" type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">Deposit</label>
+            <input formControlName="deposit" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="" class="form-label text-primary">At Maturity, convert to</label>
+            <input formControlName="convert" type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">Contribution Payment Term</label>
+            <input formControlName="term" type="text" class="form-control control-bg-gray" placeholder="Years">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="months" type="text" class="form-control control-bg-gray" placeholder="Months">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">Enter a Drawdown Benefit Payment Schedule</label>
+            <input formControlName="schedule" type="checkbox" class="form-control control-bg-gray">
+          </div>
+
+        </div>
+      </form>
+      <div class="modal-footer">
+
+        <app-button (click)="stop" [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>

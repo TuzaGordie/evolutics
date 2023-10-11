@@ -1,0 +1,21 @@
+<div class="row align-items-center">
+    <label class="col-md-{{stacked?'12 pb-0  hide-scroll-x':mini?'auto':lblCl}} m-0" for="{{id}}"
+      [ngClass]="{'text-primary form-label':colored,'overflow-x-auto':stacked,'py-2':theme==1,'form-label':theme==2,light,small,small1:xsmall}"
+      *ngIf="showLabel" [matTooltip]="hint" (click)="log()">
+      {{label|appTranslate|async}}
+    </label>
+    <div class="{{stacked?'col-12':'col-md'}} position-relative">
+      <form  >
+        <input type="text"  [(ngModel)]="model"  placeholder="{{placeholder}}" id="{{id}}" [disabled]="disabled"
+          [required]="required" [readonly]="readonly" (keyup)="filterOptions($event)" [name]="name" #tag="ngModel"
+          value="{{__value}}"  [matAutocomplete]="auto" [class]="inpCl|inputClass:tag.valid:tag.invalid:showValidation" (focus)="filterOptions($event)">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith" (optionSelected)="change($event)">
+          <mat-option *ngFor="let item of filteredOptions ; trackBy:iS.trackByValue" [value]="item.value">
+            {{item.label}}
+          </mat-option>
+        </mat-autocomplete> 
+        <app-validation-message-ngmodel  [isError]="tag.invalid && tag.touched" [validationKey]="'required' | toAny" [name]="name"></app-validation-message-ngmodel>
+      </form>
+    </div>
+  </div>
+  

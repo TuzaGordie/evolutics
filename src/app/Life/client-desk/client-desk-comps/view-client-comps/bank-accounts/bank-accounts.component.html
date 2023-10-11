@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title id="staticBackdropLabel">{{'Edit Bank No'|appTranslate|async}}</h5>
+  <div mat-dialog-close><span class="fa fa-close"></span></div>
+</div>
+<mat-dialog-content>
+    <table class="table table-borderless table-striped mt-5">
+        <thead>
+          <tr class="">
+            <th scope="col">{{'Bank No'|appTranslate|async}}</th>
+            <th scope="col">{{'Account Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Account Type'|appTranslate|async}}</th>
+            <th scope="col">{{'Bank Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Sort Code'|appTranslate|async}}</th>
+            <th scope="col">{{'Account No'|appTranslate|async}}</th>
+            <th scope="col">{{'Blocked'|appTranslate|async}}</th>
+            <th>
+              Edit
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let bank of bankAccountsForm.controls">
+            <tr [formGroup]="$any(bank)">
+              <td>{{bank.get('no')?.value}}</td>
+              <td>{{bank.get('accountName')?.value}}</td>
+              <td>{{bank.get('accountType')?.value}}</td>
+              <td>{{bank.get('bankName')?.value}}</td>
+              <td>{{bank.get('sortCode')?.value}}</td>
+              <td>{{bank.get('accountNo')?.value}}</td>
+              <td>
+                <select formControlName="blocked" [attr.disabled]="editBankStatus[bank.value.id] == 'EDITING' ? null : 'disabled'"
+                  class="form-control">
+                  <option [value]="true">{{'Yes'|appTranslate|async}}</option>
+                  <option [value]="false">{{'No'|appTranslate|async}}</option>
+                </select>
+              </td>
+              <td class="position-relative">
+                <app-button *ngIf="editBankStatus[bank.value.id] == 'VIEW'" buttonType="edit" (click)="editBankStatus[bank.value.id] = 'EDITING'"></app-button>
+                <app-button *ngIf="editBankStatus[bank.value.id] == 'EDITING'" buttonType="custSave" (click)="editBankAccount(bank)"></app-button>
+                <div *ngIf="editBankStatus[bank.value.id] == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                  <div class="fa fa-refresh fa-spin"></div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+          <!-- <tr *ngIf="showNewBankAccountForm" [formGroup]="newBankAccountForm">
+            <td>
+            </td>
+            <td>
+              <input type="text" formControlName="accountName" class="form-control" [ngClass]="isFieldInvalid(newBankAccountForm, 'accountName') && 'border border-danger'">
+            </td>
+            <td><input type="text" formControlName="accountType" class="form-control" [ngClass]="isFieldInvalid(newBankAccountForm, 'accountType') && 'border border-danger'"></td>
+            <td>
+              <input type="text" formControlName="bankName" class="form-control" [ngClass]="isFieldInvalid(newBankAccountForm, 'bankName') && 'border border-danger'">
+            </td>
+            <td>
+              <input type="text" formControlName="sortCode" class="form-control">
+            </td>
+            <td>
+              <input type="text" formControlName="accountNo" class="form-control" [ngClass]="isFieldInvalid(newBankAccountForm, 'accountNo') && 'border border-danger'">
+            </td>
+            <td>
+              <select formControlName="blocked" class="form-control" [ngClass]="isFieldInvalid(newBankAccountForm, 'blocked') && 'border border-danger'">
+                <option [value]="true">{{'Yes'|appTranslate|async}}</option>
+                <option [value]="false">{{'No'|appTranslate|async}}</option>
+              </select>
+            </td>
+            <td class="position-relative">
+              <app-button *ngIf="!isCreatingBankAccount" buttonType="custSave" (click)="createBankAccount()"></app-button>
+              <div *ngIf="isCreatingBankAccount" class="position-absolute top-50 start-50 translate-middle">
+                <div class="fa fa-refresh fa-spin"></div>
+              </div>
+            </td>
+          </tr> -->
+        </tbody>
+      </table>
+      <!-- <p *ngIf="newBankAccountForm.invalid && newBankAccountForm.touched" class="text-center text-danger">{{'fill in all required fields'|appTranslate|async}}</p> -->
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <app-button [buttonType]="'addCustom'" [text]="'Create new Account'" (click)="createNewPaymentMethod()"></app-button>
+</mat-dialog-actions>

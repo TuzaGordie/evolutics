@@ -1,0 +1,378 @@
+<loader [loading]="loading" text="{{loadingText}}" class="vh-80">
+  <!-- <app-form-navigation [cashtitle]="'Receipting/Create New'"></app-form-navigation> -->
+  <div class="container-fluid my-5">
+
+    <div class="row mb-5">
+      <div class="d-flex justify-content-around">
+        <ng-container *ngIf="hide == false">
+
+          <div class="d-block col-md-5">
+            <div class="row">
+              <div class="col-3">
+                <label class="text-primary">{{'Coupon No'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <input type="text" (blur)="getPolicyDetailsByCouponNo()" name="couponNo" [disabled]="isCouponNo"
+                  [(ngModel)]="receipt.couponNo" class="inputform" (keyup)="disableFields()"
+                  (keyup)="handleEmpty('receipt.couponNo')">
+              </div>
+              <div class="col-3">
+                <app-btn icon="search" type="secondary" (mclick)="openCouponFinderModal()" [disabled]="isCouponNo">Find</app-btn>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-3">
+                <label class="text-primary">{{'Quote No'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <input type="text" (blur)="getNameByQuoteNo()" name="quoteNo" [disabled]="isQuoteNo"
+                  [(ngModel)]="receipt.quoteNo" class="inputform" (keyup)="disableFields()"
+                  (keyup)="handleEmpty('receipt.quoteNo')">
+              </div>
+              <div class="col-3">
+                <app-btn [disabled]="isQuoteNo" icon="search" type="secondary" (mclick)="openQuoteFinderModal()">Find
+                </app-btn>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-3">
+                <label class="text-primary">{{'Agent No'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <input type="text" (blur)="getAgentByAgentNo()" class="inputform" name="agentNo" [disabled]="isAgentNo"
+                  [(ngModel)]="receipt.agentNo" (keyup)="disableFields()" (keyup)="handleEmpty('receipt.agentNo')">
+              </div>
+              <div class="col-3">
+                <app-btn [disabled]="isAgentNo" icon="search" type="secondary" (mclick)="openAgentFinderModal()">Find
+                </app-btn>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-3">
+                <label class="text-primary">{{'Policy No'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <input type="text" (blur)="getNameByPolicyNo()" (blur)="getPolicyDetails()" name="policyNo" [disabled]="isPolicyNo"
+                  [(ngModel)]="receipt.policyNo" class="inputform" (keyup)="disableFields()" (keyup)="handleEmpty('receipt.policyNo')">
+              </div>
+              <div class="col-3">
+                <app-btn [disabled]="isPolicyNo" icon="search" type="secondary" (mclick)="openPolicyFinderModal()">Find
+                </app-btn>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-3">
+                <label class="text-primary">{{'Policy code'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <select [(ngModel)]="receipt.policyCode" class="inputform" (change)="selectPolicyCode()">
+                  <option></option>
+                  <option *ngFor="let policyCode of policyCodes" [value]="policyCode.policyCode">
+                    {{policyCode.policyCode}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-3">
+                <label class="text-primary">{{'Policy No suffix'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <select [(ngModel)]="receipt.policyNoSuffix" (change)="updateRefCat()" class="inputform"
+                  value="{{receipt.policyNoSuffix}}">
+                  <option *ngFor="let policyNoSuffix of policyNoSuffixes" [value]="policyNoSuffix.policyNoSuffix">
+                    {{policyNoSuffix.policyNoSuffix}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="d-block col-md-5">
+          <ng-container *ngIf="hide == false">
+            <div class="">
+              <input type="text" disabled [(ngModel)]="couponDisplay" class="inputform">
+            </div>
+            <div class="mt-4">
+              <input type="text" disabled [(ngModel)]="ownerNameQuote" class="inputform">
+            </div>
+            <div class="mt-4">
+              <input type="text" disabled [(ngModel)]="agent" class="inputform">
+            </div>
+            <div class="mt-4">
+              <input type="text" disabled [(ngModel)]="ownerNamePolicy" class="inputform">
+            </div>
+            <div class="row mt-4">
+              <div class="col-3">
+                <label class="text-primary">{{'Debit note No'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <select [(ngModel)]="receipt.dnNo" class="inputform">
+                  <option value=""></option>
+                  <option *ngFor="let debitNote of debitNotes" [value]="debitNote.no">
+                    {{debitNote.no}} - {{debitNote.amount | number}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </ng-container>
+
+          <div class="mt-5" [ngClass]="{batchposition: hide == true}">
+            <div class="row">
+              <div class="col-6">
+                <app-input-ngmodel type="checkbox" label="Batch" [light]="false" [stacked]="false" [mini]="true"
+                  id="myCheckBox" #myCheckbox (mchange)="checkCheckBoxvalue(myCheckbox.value)"></app-input-ngmodel>
+
+              </div>
+              <div class="col-6">
+                <button
+                  class="btn btn-outline-primary"
+                  (click)="openPolicyDetailsModal()"
+                  [disabled]="!policyDetailsExist || isLoadingPolicyDetails"
+                  [matTooltip]="!policyDetailsExist ? 'enter Policy No and Code to enable details' : ''"
+                >
+                  <span *ngIf="isLoadingPolicyDetails" class="spinner-border spinner-border-sm text-primary" role="status"></span>
+                  {{'Policy Details'|appTranslate|async}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="my-3">
+
+    <div class="row">
+      <div class="col pl-4">
+        <h5 class="fw-bold margin-left">{{'Payment Details'|appTranslate|async}}</h5>
+      </div>
+    </div>
+    <div class="mt-3">
+      <div class="row">
+        <div class="d-block col-md-6">
+
+          <div>
+            <label class="text-primary">{{'Amount Received'|appTranslate|async}}</label><br>
+            <input type="text" class="inputform mt-2" name="amout" (keyup)="sumGrossPremium()"
+              [(ngModel)]="receipt.amount" style="width: 55%;" appCommafyNumber>
+          </div>
+          <div class="mt-4">
+            <div class="check-flex">
+              <app-input-ngmodel type="checkbox" label="Deduction Made at Source" [light]="false" [model]="receipt.dedSource"
+                [stacked]="false" [mini]="true" id="deductionMadeAtSource" #deductionMadeAtSource (mchange)="checkCheckBox(deductionMadeAtSource.value)">
+              </app-input-ngmodel>
+              <app-input-ngmodel type="checkbox" label="Batch" [light]="false" [model]="receipt.dedSource"
+                [stacked]="false" [mini]="true" id="batch" #myvalue (mchange)="checkCheckBoxvalue(myvalue.value)">
+              </app-input-ngmodel>
+
+            </div>
+          </div>
+          <ng-container *ngIf="hidecontent === true">
+            <div class="d-flex mt-4 justify-content-between">
+              <label class="text-primary">{{'Commissions deducted at source'|appTranslate|async}}</label><br>
+              <input type="number" value="0" class="inputform" (keyup)="sumGrossPremium()" name="commDeduct"
+                [(ngModel)]="receipt.commDeduct" style="width: 55%;">
+            </div>
+            <div class="d-flex mt-4 justify-content-between">
+              <label class="text-primary">{{'VAT deducted at source'|appTranslate|async}}</label><br>
+              <input type="number" value="0" class="inputform" (keyup)="sumGrossPremium()" name="vatDeduct"
+                [(ngModel)]="receipt.vatDeduct" style="width: 55%;">
+            </div>
+            <div class="d-flex mt-4 justify-content-between">
+              <label class="text-primary">{{'WHT deducted at source'|appTranslate|async}}</label><br>
+              <input type="number" value="0" class="inputform" (keyup)="sumGrossPremium()" name="whtDeduct"
+                [(ngModel)]="receipt.whtDeduct" style="width: 55%;">
+            </div>
+            <div class="d-flex mt-4 justify-content-between">
+              <label class="text-primary">{{'Co-insurrance fee amount'|appTranslate|async}}</label><br>
+              <input type="number" value="0" class="inputform" (keyup)="sumGrossPremium()" name="coinsDeduct"
+                [(ngModel)]="receipt.coinsDeduct" style="width: 55%;">
+            </div>
+            <div class="d-flex mt-4 justify-content-between">
+              <label class="text-primary">{{'Underwriting express'|appTranslate|async}}</label><br>
+              <input type="number" value="0" class="inputform" (keyup)="sumGrossPremium()" name="uwExpDeduct"
+                [(ngModel)]="receipt.uwExpDeduct" style="width: 55%;">
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="d-block col-md-6">
+          <div class="">
+            <label class="text-primary">{{'Gross premium'|appTranslate|async}}</label>
+            <input type="text" name="Gross" disabled [(ngModel)]="receipt.netAmount" class="inputform" appCommafyNumber>
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Currency'|appTranslate|async}}</label>
+            <select class="inputform" name="currency" [(ngModel)]="receipt.currency">
+              <option *ngFor="let currency of currencies" [value]="currency.validCurrency || currency.code">
+                {{currency.code || currency.validCurrency}} - {{currency.description}}
+              </option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Payment Mode'|appTranslate|async}}</label>
+            <select class="inputform" name="payInType" [(ngModel)]="receipt.payInType" #paymentMode>
+              <option *ngFor="let paymentMethod of paymentMethods" [value]="paymentMethod.code">
+                {{paymentMethod.code}} - {{paymentMethod.description}}
+              </option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Cheque no'|appTranslate|async}}</label>
+            <input type="text" class="inputform" name="chequeNo" [(ngModel)]="receipt.chequeNo" [disabled]="paymentMode.value !='CHQ'" [style.cursor]="paymentMode.value != 'CHQ' ? 'not-allowed' : ''">
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Effective Date'|appTranslate|async}}</label>
+            <input type="date" class="inputform" name="effDt" [(ngModel)]="receipt.effDate">
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Receipt purpose'|appTranslate|async}}</label>
+            <select class="inputform" name="reason" [(ngModel)]="receipt.reason">
+              <option *ngFor="let reason of reasons" [value]="reason.code">{{reason.code}} - {{reason.title}}</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Received from Client Number'|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col-6">
+                <input type="text" (keyup.enter)="getClientNameByClientNo()" class="inputform" name="receiptNo"
+                  [(ngModel)]="receipt.clientNo">
+              </div>
+              <div class="col-3">
+                <app-btn icon="search" type="secondary" (mclick)="openClientFinderModal()">Find</app-btn>
+              </div>
+              <div class="col-3">
+                <app-btn icon="add" type="secondary" (mclick)="createClient()">Create</app-btn>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <label class="text-primary">{{'Received from client name'|appTranslate|async}}</label>
+            <input type="text" class="inputform" [(ngModel)]="receipt.clientName" name="ownerName">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="my-3">
+
+    <div class="row">
+      <div class="d-flex justify-content-around">
+        <div class="d-block  col-md-5">
+          <h5 class="fw-bold">{{'Bank'|appTranslate|async}}</h5>
+          <div class="d-flex mt-4 justify-content-between">
+            <label class="text-primary">{{'Received Bank'|appTranslate|async}}</label>
+            <select class="inputform" name="bankCode" (change)="getCompanyBankAccs()" [(ngModel)]="receipt.bankCode"
+              style="width: 65%;">
+              <option *ngFor="let bankCode of bankCodes" [value]="bankCode.code">
+                {{bankCode.code}} - {{bankCode.description}}
+              </option>
+            </select>
+          </div>
+          <div class="d-flex mt-4 justify-content-between">
+            <label class="text-primary">{{'Bank Account'|appTranslate|async}}</label>
+            <select class="inputform" name="bankAccount" [(ngModel)]="receipt.bankAccount" style="width: 65%;">
+              <option *ngFor="let bankAcc of bankAccs" [value]="bankAcc.accountNo">
+                {{bankAcc.companyCode}}
+                -
+                {{bankAcc.description}} - {{bankAcc.accountNo}} </option>
+            </select>
+          </div>
+        </div>
+        <div class="d-block  col-md-5">
+          <h5 class="fw-bold">{{'Reference'|appTranslate|async}}</h5>
+          <div class="mt-4 d-flex mt-4 justify-content-between">
+            <label class="text-primary">{{'Ref No'|appTranslate|async}}</label><br>
+            <input type="text" name="transRefNo" [(ngModel)]="receipt.transRefNo" class="inputform" style="width: 65%;">
+          </div>
+          <div class="mt-4 d-flex mt-4 justify-content-between">
+            <label class="text-primary">{{'Narration'|appTranslate|async}}</label><br>
+            <input type="text" [(ngModel)]="receipt.description" class="inputform" style="width: 65%;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="my-3">
+
+    <div class="mt-2 row">
+      <div class="d-flex justify-content-between">
+        <div class="col-md-auto">
+          <div class="row ">
+            <div class="col-md-auto mt-2">
+              <input class="form-control" [attr.disabled]="hide === false ? '' : null" id="upload_file" type="file"
+                #fileTag (change)="onFileSelected($event)" hidden />
+              <app-btn icon="upload" [disabled]="!hide" type="secondary"
+                text="Upload batch file" [matMenuTriggerFor]="uploadBatchMenu"></app-btn>
+              <mat-menu #uploadBatchMenu="matMenu">
+                <button mat-menu-item (click)="fileTag.click()">
+                  {{'Select File'|appTranslate|async}} 
+                </button>
+                <a mat-menu-item download href="/assets/data/receipt-template.csv">
+                  {{'Download Template'|appTranslate|async}}
+                </a>
+              </mat-menu>
+              <span class="mt-1" *ngIf="fileName">{{fileName}}</span>
+            </div> 
+            <div class="col-md-auto mt-2">
+              <app-btn icon="edit" [disabled]="!hide" type="secondary" (mclick)="openBatchReceiptModal('MANUAL')">Fill information manually</app-btn>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-auto">
+          <div class=" row">
+            <div class="col-auto mt-2">
+              <app-btn icon="save" [disabled]="hide" type="secondary" (mclick)="saveReciept()">Save</app-btn>
+            </div>
+            <div class="col-auto mt-2">
+              <app-btn icon="post" type="secondary" (mclick)="postReciept()">Post</app-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl ">
+      <div class="modal-content " style="height: 70vh;">
+        <div class="modal-body py-5">
+          <h1 class="text-center my-3"><i class="fas fa-check text-green" style="font-size: 85px; "></i>
+          </h1>
+          <h2 class="text-center my-5">
+            {{'Receipt No'|appTranslate|async}}
+            <span class="text-danger">XXXX</span>
+            {{'generated for this transaction'|appTranslate|async}}
+          </h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-bs-dismiss="modal" class="btn px-4 py-2 find-button">
+            <i class="far fa-save px-2 "></i> {{'Save'|appTranslate|async}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" *ngIf="showFileNameModal" id="fileUploadModal" tabindex="-1"
+    aria-labelledby="fileUploadModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-xl ">
+      <div class="modal-content " style="height: 70vh;">
+        <div class="modal-body py-5">
+          <h1 class="text-center my-3"><i class="fas fa-check text-green" style="font-size: 85px; "></i>
+          </h1>
+          <h2 class="text-center my-5">{{receiptUpload.fileName}}</h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-bs-dismiss="modal" class="btn px-4 py-2 find-button">
+            <i class="far fa-save px-2 "></i> {{'Save'|appTranslate|async}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

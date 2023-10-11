@@ -1,0 +1,411 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class="container">
+    <div class="d-flex justify-content-end my-3" *ngIf="showEditButton">
+      <button class="btn btn-lg" [ngClass]="editMode ? 'btn-primary' : 'btn-outline-primary'"
+        (click)="editMode = !editMode">
+        <span class="fa fa-edit"></span> {{'Edit'|appTranslate|async}}
+      </button>
+    </div>
+    <hr *ngIf="showEditButton">
+    <form #questionForm="ngForm">
+      <div class="row">
+        <div class="col">
+          <label for="" class="form-label text-primary">{{"Question Set Code"|appTranslate|async}}</label>
+          <input disabled="true" type="text" [(ngModel)]="uwrQuestionData.uwrQuestion.code" name="code"
+            #questSetCode="ngModel" required id="" class="form-control control-bg-gray" />
+
+          <div class="text-danger" *ngIf="
+            questSetCode?.errors && (questSetCode.dirty || questSetCode.touched)
+          ">
+            <p *ngIf="questSetCode?.errors.required">
+              {{'Question Set Code is required'|appTranslate|async}}
+            </p>
+          </div>
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+          <textarea name="" id="" rows="1" [(ngModel)]="uwrQuestionData.uwrQuestion.description" name="description"
+            class="form-control control-bg-gray" [disabled]="!editMode"></textarea>
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">{{"Set Category"|appTranslate|async}}</label>
+
+          <select [(ngModel)]="uwrQuestionData.uwrQuestion.uwQuestSetCat" name="uwQuestSetCat" #setCategory="ngModel"
+            required class="form-control control-bg-gray" [disabled]="!editMode">
+            <option value=""></option>
+            <option *ngFor="let items of setCategoryArray" value="{{ items.code }}">
+              {{ items.code }} - {{ items.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+            setCategory?.errors && (setCategory.dirty || setCategory.touched)
+          ">
+            <p *ngIf="setCategory?.errors.required">{{"Category is required"|appTranslate|async}}</p>
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="" class="form-label text-primary">{{"Company Filter"|appTranslate|async}}</label>
+          <select [(ngModel)]="uwrQuestionData.uwrQuestion.companyCode" (ngModelChange)="compFilterChanged($event)"
+            name="companyCode" #companyFilter="ngModel" required class="form-control control-bg-gray"
+            [disabled]="!editMode">
+            <option value=""></option>
+            <option *ngFor="let items of companyFilterArray" value="{{ items.code }}">
+              {{ items.code }} - {{ items.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+            companyFilter?.errors &&
+            (companyFilter.dirty || companyFilter.touched)
+          ">
+            <p *ngIf="companyFilter?.errors.required">
+              {{'Company Filter is required'|appTranslate|async}}
+            </p>
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="" class="form-label text-primary">{{"Sum Assured Basis"|appTranslate|async}}</label>
+
+          <select [(ngModel)]="uwrQuestionData.uwrQuestion.triggerBasis" name="triggerBasis" #triggerBasis="ngModel"
+            required class="form-control control-bg-gray" [disabled]="!editMode">
+            <option value=""></option>
+            <option *ngFor="let items of triggerBasisArray" value="{{ items.code }}">
+              {{ items.code }} - {{ items.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+            triggerBasis?.errors && (triggerBasis.dirty || triggerBasis.touched)
+          ">
+            <p *ngIf="triggerBasis?.errors.required">{{"Trigger Basis required"|appTranslate|async}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col">
+          <label for="" class="form-label text-primary">{{"Lower Qualify Age"|appTranslate|async}}</label>
+
+          <input type="number" min="1" max="99" step="1" class="form-control control-bg-gray" name="lowerLimitAge"
+            [(ngModel)]="uwrQuestionData.uwrQuestion.lowerLimitAge" [disabled]="!editMode" appIntegerOnly>
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">{{'Upper Qualify Age'|appTranslate|async}}</label>
+          <input type="number" min="1" max="99" step="1" class="form-control control-bg-gray" name="upperLimitAge"
+            [(ngModel)]="uwrQuestionData.uwrQuestion.upperLimitAge" [disabled]="!editMode" appIntegerOnly>
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">{{'Lower Qualify Sum Assured'|appTranslate|async}} </label>
+          <input class="form-control control-bg-gray" name="lowerLimitSa" appCommafyNumber
+            [(ngModel)]="uwrQuestionData.uwrQuestion.lowerLimitSa" [disabled]="!editMode">
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">{{'Upper Qualify Sum Assured'|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" name="upperLimitSa" appCommafyNumber
+            [(ngModel)]="uwrQuestionData.uwrQuestion.upperLimitSa" [disabled]="!editMode">
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+          <app-autocomplete-ng-model [options]="currencyArray" [showLabel]="false" [valueField]="'code'"
+            [labelType]="'cd'" [stacked]="false" [(model)]="uwrQuestionData.uwrQuestion.currency" name="currency"
+            [required]="true" [disabled]="!editMode"></app-autocomplete-ng-model>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-3">
+        <div class="col-2">
+          <button [disabled]="!editMode" class="btn btn-outline-primary w-100" (click)="saveBasicSection()">
+            <i *ngIf="!isSavingBasic" class="fas fa-save"></i>
+            <i *ngIf="isSavingBasic" class="fa fa-sync fa-spin"></i>
+            {{(isSavingBasic ? 'Saving...' : 'Save')|appTranslate|async}}
+          </button>
+        </div>
+      </div>
+      <hr class="mt-5 mb-0">
+      <div class="position-relative pt-5">
+        <!-- below is an overlay to prevent interaction with this section when basic section above is not yet saved -->
+        <div *ngIf="disableTableSection" class="position-absolute top-0 w-100 start-0 h-100 disable-table-section"
+          matTooltip="Edit and save Basic section above to unlock below section"></div>
+
+        <table class="table">
+          <thead class="py-3">
+            <tr>
+              <th scope="col" style="border-bottom-left-radius: 12px">
+                {{'Quest Code'|appTranslate|async}}
+              </th>
+              <th scope="col" style="width:30%">{{'Text'|appTranslate|async}}</th>
+              <th scope="col">{{'Response Required'|appTranslate|async}}</th>
+              <th scope="col">{{'Mandatory'|appTranslate|async}}</th>
+              <th scope="col">{{'Response Type'|appTranslate|async}}</th>
+              <th scope="col" *ngIf="anyListValueSource">{{'List Value Source'|appTranslate|async}}</th>
+              <th scope="col" *ngIf="anyQuestionHasButton"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uwrQuestionData.uwrQuestionLists; let i = index" style="vertical-align: top">
+              <th scope="row">
+                <input disabled class="form-control form-control-sm control-bg-gray" type="text"
+                  [(ngModel)]="item.uwrQuestionList.questCode" name="questCode_{{ item.uwrQuestionList.rowId }}" #questCode="ngModel" required
+                  [disabled]="!editMode" />
+              </th>
+              <th scope="row">
+                <textarea rows="1" class="form-control control-bg-gray" [(ngModel)]="item.uwrQuestionList.text"
+                  name="text_{{item.uwrQuestionList.rowId}}" required [disabled]="!editMode">
+                </textarea>
+              </th>
+              <th scope="row">
+                <input type="checkbox" class="form-control control-bg-gray mx-auto" [(ngModel)]="item.uwrQuestionList.responseReq"
+                  name="responseReq_{{ item.uwrQuestionList.rowId }}" #responseReq="ngModel" required [disabled]="!editMode" />
+              </th>
+              <th scope="row">
+                <input type="checkbox" class="form-control control-bg-gray mx-auto" [(ngModel)]="item.uwrQuestionList.mandatory"
+                  name="mandatory_{{ item.uwrQuestionList.rowId }}" #mandatory="ngModel" required [disabled]="!editMode" />
+              </th>
+              <!-- Validation -->
+              <th scope="row">
+                <select (change)="responseTypeChanged($event, item)" [(ngModel)]="item.uwrQuestionList.responseType"
+                  name="responseType_{{ item.uwrQuestionList.rowId }}" #responseType="ngModel" required
+                  class="form-control control-bg-gray" [disabled]="!editMode || !item.uwrQuestionList.responseReq" [ngClass]="{}">
+                  <option value=""></option>
+                  <option *ngFor="let responseTypeItem of responseTypeArray" value="{{ responseTypeItem.code }}">
+                    {{ responseTypeItem.code }} - {{ responseTypeItem.title }}
+                  </option>
+                </select>
+                <div class="text-danger" *ngIf="
+                  _responseType[item.uwrQuestionList.rowId]?.errors &&
+                  (_responseType[item.uwrQuestionList.rowId].dirty || _responseType[item.uwrQuestionList.rowId].touched)
+                ">
+                  <p *ngIf="_responseType[item.uwrQuestionList.rowId].errors?.required">
+                    {{'Response Type is required'|appTranslate|async}}
+                  </p>
+                </div>
+              </th>
+              <th scope="row">
+                <select name="" id="" *ngIf="item.uwrQuestionList.responseType == 'LV'" class="form-control control-bg-gray"
+                  [disabled]="!editMode">
+                  <option value=""></option>
+                  <option *ngFor="let items of uwQuestionLV" [value]="items">
+                    {{items || ''}}
+                  </option>
+                </select>
+              </th>
+              <th scope="row ">
+                <button *ngIf="item.uwrQuestionList.responseType == 'YN'" class="btn btn-outline-primary w-100"
+                  (click)="onActionModalView(item.uwrQuestionList.rowId)">
+                  {{'Action'|appTranslate|async}}
+                </button>
+                <button
+                  *ngIf="item.uwrQuestionList.responseType == 'FD' || item.uwrQuestionList.responseType == 'FI' || item.uwrQuestionList.responseType == 'LV'"
+                  class="btn btn-outline-primary w-100" (click)="onExampleView(item.uwrQuestionList.rowId)">
+                  {{'Decision'|appTranslate|async}}
+                </button>
+              </th>
+              <!-- <td>
+          <button class="btn btn-outline-primary btn-clone">
+            <i class="fas fa-pencil-alt"></i> Edit
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-outline-primary">
+            <i class="fas fa-plus"></i> Insert
+          </button>
+        </td> -->
+              <td>
+                <button (click)="deleteUwrQuestionList(i)" class="btn btn-dark w-100" [disabled]="!editMode">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-outline-primary w-100" (click)="addUwrQuestionList(i)" [disabled]="!editMode">
+                  <span class="fas fa-plus"></span>
+                </button>
+              </td>
+              <!-- Modal -->
+              <div class="modal fade" id="actionModal_{{item.uwrQuestionList.rowId}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        {{'Action'|appTranslate|async}}
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="" class="form-label text-primary">{{'If Yes Text'|appTranslate|async}}</label>
+                            <textarea [(ngModel)]="item.uwrQuestionList.ifYesText" name="ifYesText_{{item.uwrQuestionList.rowId}}" id="" rows="1"
+                              class="form-control control-bg-gray"></textarea>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="" class="form-label text-primary">{{'If Question Set
+                              Code'|appTranslate|async}}</label>
+                            <select [(ngModel)]="item.uwrQuestionList.ifYesQuestSetCode" name="ifYesQuestSetCode_{{item.uwrQuestionList.rowId}}" id=""
+                              class="form-control control-bg-gray">
+                              <option></option>
+                              <option *ngFor="let items of uwQuestionCodeAndDesc" [value]="items.code">
+                                {{items.code}} - {{items.description}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="" class="form-label text-primary">{{'If Yes Question
+                              Code'|appTranslate|async}}</label>
+                            <select [(ngModel)]="item.uwrQuestionList.ifYesQuestCode" name="ifYesQuestCode_{{item.uwrQuestionList.rowId}}" id=""
+                              class="form-control control-bg-gray">
+                              <option></option>
+                              <option *ngFor="let items of uwQuestionList" [value]="items.code">
+                                {{items.code}} - {{items.description}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <label for="" class="form-label text-primary">{{'If Yes List
+                              value'|appTranslate|async}}</label>
+                            <select [(ngModel)]="item.uwrQuestionList.ifYesListValue" name="ifYesListValue_{{item.uwrQuestionList.rowId}}" id=""
+                              class="form-control control-bg-gray">
+                              <option value=""></option>
+                              <option *ngFor="let items of unitValueList" [value]="items.code">
+                                {{items.code}} - {{items.description}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="exampleModal_{{item.uwrQuestionListResult?.rowId}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        {{'Underwriting Result Decision'|appTranslate|async}}
+                      </h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col">
+                            <label for="" class="form-label text-primary">{{'Value Unit'|appTranslate|async}}</label>
+
+                            <select [(ngModel)]="item.uwrQuestionListResult.valueUnit" name="valueUnit_{{ item.uwrQuestionListResult?.rowId }}" #valueUnit="ngModel"
+                              required class="form-control control-bg-gray">
+                              <option value=""></option>
+                              <option *ngFor="let items of valueUnitArray" value="{{ items.code }}">
+                                {{ items.code }} - {{ items.title }}
+                              </option>
+                            </select>
+
+                            <div class="text-danger" *ngIf="
+                              valueUnit?.errors &&
+                              (valueUnit.dirty || valueUnit.touched)
+                            ">
+                              <p *ngIf="valueUnit?.errors.required">
+                                {{'Value Unit is required'|appTranslate|async}}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <label for="" class="form-label text-primary">{{'Value From'|appTranslate|async}}</label>
+
+                            <input class="form-control form-control-sm control-bg-gray" type="number"
+                              [(ngModel)]="item.uwrQuestionListResult.valueFrom" name="valueFrom_{{ item.uwrQuestionListResult?.rowId }}" #valueFrom="ngModel"
+                              required />
+
+                            <div class="text-danger" *ngIf="
+                              valueFrom.errors &&
+                              (valueFrom.dirty || valueFrom.touched)
+                            ">
+                              <p *ngIf="valueFrom.errors.required">
+                                {{'Value From is required'|appTranslate|async}}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <label for="" class="form-label text-primary">{{'Value To'|appTranslate|async}}</label>
+
+                            <input class="form-control form-control-sm control-bg-gray" type="number"
+                              [(ngModel)]="item.uwrQuestionListResult.valueTo" name="valueTo_{{ item.uwrQuestionListResult?.rowId }}" #valueTo="ngModel" required />
+
+                            <div class="text-danger" *ngIf="
+                              valueTo.errors &&
+                              (valueTo.dirty || valueTo.touched)
+                            ">
+                              <p *ngIf="valueTo.errors.required">
+                                {{'Value To is required'|appTranslate|async}}
+                              </p>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <label for="" class="form-label text-primary">{{'Loading'|appTranslate|async}}</label>
+
+                            <input class="form-control form-control-sm control-bg-gray" type="number"
+                              [(ngModel)]="item.uwrQuestionListResult.loading" name="loading_{{ item.uwrQuestionListResult?.rowId }}" #loading="ngModel" required />
+
+                            <div class="text-danger" *ngIf="
+                              loading.errors &&
+                              (loading.dirty || loading.touched)
+                            ">
+                              <p *ngIf="loading.errors.required">
+                                {{'Loading is required'|appTranslate|async}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- <div class="row justify-content-end mt-4">
+                      <div class="col-2">
+                        <app-button buttonType="add"></app-button>
+                      </div>
+                    </div> -->
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-2">
+            <button class="btn btn-outline-primary w-100" (click)="addUwrQuestionList()" [disabled]="!editMode">
+              <span class="fas fa-plus"></span>
+              {{'Add'|appTranslate|async}}
+            </button>
+          </div>
+        </div>
+        <div class="row justify-content-end mt-4">
+          <div class="col-2">
+            <button class="btn btn-outline-primary w-100" (click)="submitQuestion()" [disabled]="!editMode">
+              <i class="fas fa-check"></i>
+              {{'Submit'|appTranslate|async}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</loader>

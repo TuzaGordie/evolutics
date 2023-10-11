@@ -1,0 +1,23 @@
+<!-- <app-form-navigation [title]="'Create New Assets'"></app-form-navigation> -->
+<div class="container col-6 mx-auto">
+    <br><br>
+    <div class="row">
+        <div class="col">
+            <label>Select Asset Class</label>
+            <select class="form-control control-bg-gray" #assetClass>
+                <option></option>
+                <option value="motor">Motor</option>
+                <option value="property">Property</option>
+                <option value="machinery">Machinery</option>
+            </select>
+        </div>
+    </div>
+
+    <br>
+    <div class="row justify-content-end">
+        <div class="col-md-3">
+            <app-button buttonType="addCustomGB" text="Create New" (click)="onCreateClick()"></app-button>
+        </div>
+    </div>
+    <br>
+</div>

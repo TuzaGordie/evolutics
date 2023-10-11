@@ -1,0 +1,106 @@
+<form [formGroup]="viewClientForm">
+  <div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>Edit Client Information</h5>
+    <button
+      type="button"
+      class="btn-close"
+      mat-dialog-close
+      aria-label="Close"
+    ></button>
+  </div>
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-label text-red">First Name</label>
+          <input
+            type="text"
+            class="form-control control-bg-gray"
+            formControlName="firstName"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-label text-red">Middle Name</label>
+          <input
+            type="text"
+            class="form-control control-bg-gray"
+            formControlName="middleName"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-label text-red">Last Name</label>
+          <input
+            type="text"
+            class="form-control control-bg-gray"
+            formControlName="surname"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-label text-red">Title</label>
+          <select class="form-control control-bg-gray" formControlName="title">
+            <option *ngFor="let title of TITLES">{{ title }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-label text-red">Marital Status</label>
+          <select
+            class="form-control control-bg-gray"
+            formControlName="maritalStatus"
+          >
+            <option value=""></option>
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="divorced">Divorced</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="form-group">
+          <label class="form-label text-red">Gender</label>
+
+          <select class="form-control control-bg-gray" formControlName="gender">
+            <option value=""></option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+              <label class="form-label text-red">Language</label>
+              <input
+                type="text"
+                formControlName="language"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col" [formGroup]="clientDetailsForm">
+            <div class="form-group">
+              <label class="form-label text-red">Age Group</label>
+              <input
+                type="text"
+                formControlName="ageGroup"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <app-button buttonType="save-red" (click)="onClose()"></app-button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,151 @@
+<!-- <app-form-navigation [title]="'View Client / Documents'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row justify-content-between ">
+    <div class="col-md-12 mx-auto">
+
+      <div class="row justify-content-center align-items-end" [formGroup]="filterDocsForm">
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Document Category'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray" formControlName="category"
+              (change)="filterDocs()" (change)="onCategorySelect()">
+              <option value=""></option>
+              <option value="" *ngFor="let category of categoryList" [value]="category.code">{{category.code}} -
+                {{category.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Document Subcategory'|appTranslate|async}}</label>
+            <div class="position-relative">
+              <select name="" id="" class="form-control control-bg-gray" formControlName="subCategory"
+                (change)="filterDocs()">
+                <option value=""></option>
+                <option value="" *ngFor="let subCat of subCategoryList" [ngValue]="subCat.code">{{subCat.code}} -
+                  {{subCat.title}}</option>
+              </select>
+              <span class="position-absolute start-50 top-50 translate-middle" *ngIf="loadingSubCategories">
+                <span class="fa fa-spinner fa-spin"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Created From'|appTranslate|async}}</label>
+            <input type="date" class="control-bg-gray form-control" formControlName="createdFrom"
+              (change)="filterDocs()">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Created To'|appTranslate|async}}</label>
+            <input type="date" class="control-bg-gray form-control" formControlName="createdTo" (change)="filterDocs()">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'How'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray" formControlName="how" (change)="filterDocs()">
+              <option value=""></option>
+              <option value="" *ngFor="let how of howList" [value]="how.code">{{how.code}} - {{how.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+          <app-btn type="secondary" (mclick)="clearFilters()">Clear Filters</app-btn>
+        </div>
+      </div>
+
+      <p class="py-3"><b class="text-primary">{{'Client Name:'|appTranslate|async}}</b> <span class="px-3">{{clientFullName}}</span></p>
+      <div class="border">
+        <loader [loading]="loadingTable" text="Loading Table">
+          <table class="table table-responsive  table-striped mb-0">
+            <thead class="py-3 theader">
+              <tr>
+                <th scope="col">{{'File Name'|appTranslate|async}}</th>
+                <th scope="col" style="border-bottom-left-radius: 12px;">{{'Category'|appTranslate|async}}</th>
+                <th scope="col">{{'Sub Category'|appTranslate|async}}</th>
+                <th scope="col">{{'Document Title'|appTranslate|async}}</th>
+                <th scope="col">{{'Created On'|appTranslate|async}}</th>
+                <th scope="col">{{'Created By'|appTranslate|async}}</th>
+                <th scope="col">{{'Auth By'|appTranslate|async}}</th>
+                <th scope="col">{{'How'|appTranslate|async}}</th>
+                <th scope="col" style="border-top-right-radius: 12px;">{{'Box No.'|appTranslate|async}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of filteredDocsList">
+                <th (click)="downloadDocument($event, item)">
+                  <a href="">{{item.name}}</a>
+                </th>
+                <td scope="row">{{item.docCat}}</td>
+                <td>{{item.docSubCat}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.createdOn|date:'long'}}</td>
+                <td>{{item.createdBy}}</td>
+                <td>{{item.authorizedUser}}</td>
+                <td>{{item.how}}</td>
+                <td>{{item.docBox}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </loader>
+      </div>
+
+    </div>
+
+    <div class="col-md-2  mt-5">
+      <app-btn type="secondary" icon="upload" (mclick)="openAddDocument()">Add Document</app-btn>
+    </div>
+    <div class="col-md-3 mt-5">
+      <!-- <app-btn type="primary" icon="generate" (mclick)="gen()">Generate Document</app-btn> -->
+      <app-btn type="primary" icon="generate" data-bs-toggle="modal" data-bs-target="#generateDocumentModal">Generate
+        Document
+      </app-btn>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<div class="modal fade" id="generateDocumentModal" tabindex="-1" aria-labelledby="generateDocumentModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Generate Document'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="overflow-y:auto;">
+
+        <div class=" py-3">
+          <div class="row text-primary">
+            <div class="col-3 text-center">
+              {{'Normal Trigger'|appTranslate|async}}
+            </div>
+            <div class="col-3">
+              {{'Document'|appTranslate|async}}
+            </div>
+          </div>
+          <div class="row mb-2 align-items-center" *ngFor="let item of correspondenceList">
+            <div class="col-3 text-center">
+              {{(item.sendBy | sendBy)|appTranslate|async}}
+            </div>
+            <div class="col-3">
+              {{item.code}}_{{item.description}}
+            </div>
+            <div class="col-2 text-center">
+              <button class="btn btn-dark curved" data-bs-dismiss="modal" (click)="generateCorrespondence(item.code)">
+                {{'Generate'|appTranslate|async}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--// -->

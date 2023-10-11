@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{"Underwriting Events"|appTranslate|async}}</h1>
+
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <label class="py-2">{{"Life Assured"|appTranslate|async}}</label><br>
+          <select class="inputform">
+            <!-- <option [value]="null">{{"Select Provider"|appTranslate|async}}</option>
+            <option [value]="item.code" *ngFor="let item of providerList">{{item.CODE_TITLE}}</option> -->
+          </select>
+          <!-- <div *ngIf="validation.accountNo.errors && (validation.accountNo.dirty || validation.accountNo.touched)">
+              <div class="text-danger" *ngIf="validation.accountNo?.errors?.required">Field is invalid!
+              </div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <label class="py-2">{{"Condition Reported"|appTranslate|async}}</label><br>
+        <div class="col-md-4">
+
+          <select class="inputform">
+            <!--  <option [value]="null">{{"Select Provider"|appTranslate|async}}</option>
+             <option [value]="item.code" *ngFor="let item of providerList">{{item.CODE_TITLE}}</option> -->
+          </select>
+
+          <!--  <div *ngIf="validation.accountNo.errors && (validation.accountNo.dirty || validation.accountNo.touched)">
+               <div class="text-danger" *ngIf="validation.accountNo?.errors?.required">Field is invalid!
+               </div>
+           </div> -->
+        </div>
+        <div class="col-md-2">
+        
+          <app-button buttonType="add"></app-button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+

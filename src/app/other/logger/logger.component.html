@@ -1,0 +1,58 @@
+ <div class="container-fluid py-5">
+   <div class="d-flex justify-content-between align-items-center">
+     <h3 class="text-center text-primary mb-4">Logged Post Requests</h3>
+     <div class="d-flex">
+     <app-btn help="Refresh" [showHelpIcon]="false" [iconBtn]="true" icon="renew" (mclick)="ngOnInit()" ></app-btn>
+     </div>
+   </div>
+   <ng-container *ngIf="this.lS.isAuthed; else elseTemplate">
+     <div class="">
+       <table class="table border table-bordered">
+         <thead>
+           <th></th>
+           <th width="30%">Payload</th>
+           <th>Route</th>
+           <th>Endpoint</th>
+           <th>Files</th>
+           <th>Status</th>
+           <th>Time</th>
+           <th> </th>
+         </thead>
+         <tbody>
+           <tr *ngFor="let item of lS.logs;let i=index; trackBy:trackByID"
+             [ngClass]="{failure:!item?.isSuccess,success:item?.isSuccess}">
+             <!-- <td>{{item?.title}}</td> -->
+             <td>{{i+1}}</td>
+             <td><div class="payload">{{item?.payload|json}}</div></td>
+             <td><a routerLink="{{item.route}}" target="_blank">{{item?.route}}</a></td>
+             <td>{{item?.endpoint}}</td>
+             <td>
+               <div class="">
+                 <div class="" *ngFor="let file of item?.files">
+                   <div>Title: {{file.title}}</div>
+                   <div>Size: {{file.size}}</div>
+                   <div>Type: {{file.type}}</div>
+                 </div>
+               </div>
+             </td>
+             <td>{{item?.isSuccess?'Success':'Failure'}}</td>
+             <td>{{item?.time|date:'long'}}</td>
+             <td>
+               <div class=" ">
+                 <app-btn icon="clone" [cdkCopyToClipboard]="item?.payload|json" (mclick)="copied()" [iconBtn]="true" type="outline" help="Copy paylod to clipboard" [showHelpIcon]="false"></app-btn>
+                 <div class="my-1"></div>
+                 <app-btn icon="download" [iconBtn]="true" type="outline" help="Download payload" (mclick)="makeTextFile(item)" [showHelpIcon]="false"></app-btn>
+               </div>
+             </td>
+           </tr>
+         </tbody>
+       </table>
+       <app-btn icon="lock" type="secondary" (click)="lock()">Lock Logs</app-btn>
+     </div>
+   </ng-container>
+   <ng-template #elseTemplate>
+     <app-btn icon="unlock" type="secondary" (click)="ngOnInit()">Unlock Logs</app-btn>
+   </ng-template>
+
+
+ </div>

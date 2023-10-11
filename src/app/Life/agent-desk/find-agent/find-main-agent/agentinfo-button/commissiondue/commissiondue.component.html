@@ -1,0 +1,451 @@
+<div class="container mt-5">
+
+
+  <div class="row">
+    <div class="col-2">
+      <label for="" class="form-label">{{"Agent No"|appTranslate|async}}: <span class="text-primary">{{agentNo}}</span></label>
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label">{{"Agent Name"|appTranslate|async}}: <span class="text-primary">{{agentName}}</span></label>
+    </div>
+  </div>
+  <div class="row justify-content-between my-5">
+    <div class="col-2">
+      <label for="" class="form-label">{{"Total Due"|appTranslate|async}}: <span class="text-primary">{{totalDue}}</span></label>
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label">{{"Balance Unpaid b/f"|appTranslate|async}}: <span class="text-primary">{{balanceUnpaidBroughtForward}}</span></label>
+    </div>
+  </div>
+
+
+  <table class="table table-responsive  border-top">
+    <thead class="py-3 theader ">
+    <tr>
+      <th scope="col">{{"Policy No"|appTranslate|async}}</th>
+      <th scope="col">{{"Effective Date"|appTranslate|async}}</th>
+      <th scope="col">{{"Cover Code"|appTranslate|async}}</th>
+      <th scope="col">{{"Currency"|appTranslate|async}}</th>
+      <th scope="col">{{"Type"|appTranslate|async}}</th>
+      <th scope="col">{{"Payment Recieved"|appTranslate|async}}</th>
+      <th scope="col">{{"Receipt NO"|appTranslate|async}}</th>
+      <th scope="col">{{"Commission Due"|appTranslate|async}}</th>
+      <th scope="col">{{"Tax Due"|appTranslate|async}}</th>
+      <th scope="col">{{"Net Commission Due"|appTranslate|async}}</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- <tr *ngFor="let item of commissionDueList" (click)="navigateback();">
+      <th scope="row">{{item.policyNo}}</th>
+      <td>{{item.effectiveDate}}</td>
+      <td>2</td>
+      <td>{{currency}}</td>
+      <td>{{"WC"|appTranslate|async}}</td>
+      <td>600,000</td>
+      <td>{{"GJJH"|appTranslate|async}}</td>
+      <td>60,0000</td>
+      <td>5,000</td>
+      <td>55,000</td>
+
+    </tr> -->
+    </tbody>
+  </table>
+  <p *ngIf="!commissionDueList || commissionDueList.length == 0" class="text-center">{{"No Commissions due"|appTranslate|async}}</p>
+
+  <div class="d-flex justify-content-end mt-5 mb-3 ">
+    <div class="me-4">
+      <app-button buttonType="btnCustomClone" text="Manual Commission" data-bs-toggle="modal"
+                  data-bs-target="#manualCommissionModal">
+      </app-button>
+    </div>
+    <div class="me-4">
+      <app-button buttonType="btnCustomClone" text="Advance Payment" data-bs-toggle="modal"
+                  data-bs-target="#advancePaymentModal">
+      </app-button>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="overlay" *ngIf="anypopup">
+
+</div>
+<div class="secondoverlay" *ngIf="popups.manualCommission">
+  <div class="overlay-content">
+    <div class="overlay-header">
+      <div class="header-right">
+        <div>{{"Manual Commisions"|appTranslate|async}}</div>
+      </div>
+
+      <div class="header-left flex-center" (click)="closepopup('manualCommission')">
+        <i class="fas fa-times"></i>
+      </div>
+
+    </div>
+
+    <div class="overlay-subheader flex-center ">
+      <div>
+        <span class="bold">{{"Agent No"|appTranslate|async}}: </span><span>{{agentNo}} </span>
+      </div>
+
+      <div>
+        <span class="bold">{{"Agent Name"|appTranslate|async}}: </span><span>{{agentName}} </span>
+      </div>
+      <div>
+        <span class="bold">{{"Currency"|appTranslate|async}}: </span><span>{{currency}} </span>
+      </div>
+      <div>
+        <span class="bold">{{"Balane b/f"|appTranslate|async}}: </span><span>{{balanceBroughtForward}}</span>
+      </div>
+
+      <div>
+        <span class="bold">{{"Pending payments"|appTranslate|async}}: </span><span>{{pendingPayments}}</span>
+      </div>
+    </div>
+    <div class="toflexstart d-flex flex-column align-items-start">
+      <div class="overlay-body flex-center  justify-content-between ">
+        <div class="mb-input">
+          <label class="label">
+            Type
+          </label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+            <option *ngFor="let type of typesList" [value]="type.code">{{type.code}} - {{type.title}}</option>
+          </select>
+        </div>
+        <div class="mb-input">
+          <label class="label">
+            Amount
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+
+          <label class="label">
+            Policy No
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+          <label class="label">
+            Owner Name
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+
+          <label class="label">
+            Cover No
+          </label>
+
+          <input class="input">
+
+        </div>
+
+      </div>
+
+      <div class="mb-whole">
+
+        <label class="label">
+          Narration
+        </label>
+
+        <textarea class="input">
+       </textarea>
+      </div>
+    </div>
+    <div class="row justify-content-end mt-2">
+      <div class="col-auto">
+        <app-btn icon="save" type="secondary">Submit</app-btn>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="secondoverlay" *ngIf="popups.advancePayment">
+  <div class="overlay-content">
+    <div class="overlay-header">
+      <div class="header-right">
+        <div>{{"Advance Payment"|appTranslate|async}}</div>
+      </div>
+
+      <div class="header-left flex-center" (click)="closepopup('advancePayment')">
+        <i class="fas fa-times"></i>
+      </div>
+
+    </div>
+    <div class="d-flex ">
+      <div class="overlay-subheader flex-center  flex-column align-items-start">
+        <div class="d-flex justify-content-between w-100">
+          <div>
+            <span class="bold">{{"Agent Name"|appTranslate|async}}: </span><span>{{agentName}} </span>
+          </div>
+          <div>
+            <span class="bold">{{"Currency"|appTranslate|async}}: </span><span>{{currency}} </span>
+          </div>
+          <div>
+            <span class="bold">{{"Balane b/f"|appTranslate|async}}: </span><span>{{balanceBroughtForward}}</span>
+          </div>
+          <div>
+            <span class="bold">{{"Recent Avg Monthly Commission"|appTranslate|async}}:</span><span>{{recentAverageMonthlyCommission}</span>
+          </div>
+
+          <div>
+            <span class="bold">{{"Pending payments"|appTranslate|async}}: </span><span>{{pendingPayments}}</span>
+          </div>
+        </div>
+        <div class="justify-content-between d-flex my-4 flex-wrap">
+          <label for="">{{"Payment Amount"|appTranslate|async}}</label>
+          <input class="input  mx-2" style="width:120px;">
+          <span class="text-primary text-sm">Payment amount is xxx in excess of agent's commission due + balance c/f
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="toflexstart d-flex flex-column align-items-start">
+      <div class="overlay-body flex-center  justify-content-between ">
+        <div class="mb-input">
+          <label class="label">
+            Type
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+          <label class="label">
+            Currency
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+
+          <label class="label">
+            Charges
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+          <label class="label">
+            Payee No
+          </label>
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+
+          <label class="label">
+            Payee Name
+          </label>
+
+          <input class="input">
+
+        </div>
+        <div class="mb-input">
+
+          <label class="label">
+            Bank Account
+          </label>
+
+          <input class="input">
+
+        </div>
+
+      </div>
+
+      <div class="mb-whole">
+
+        <label class="label">
+          Narration
+        </label>
+
+        <textarea class="input">
+       </textarea>
+      </div>
+    </div>
+    <div class="row justify-content-end mt-2">
+      <div class="col-auto">
+        <app-btn icon="save" type="secondary">Submit</app-btn>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="manualCommissionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{"Manual Commissions"|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label">{{"Agent No"|appTranslate|async}}: <span class="text-primary">{{agentNo}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Agent Name"|appTranslate|async}}: <span class="text-primary">{{agentName}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Currency"|appTranslate|async}}: <span class="text-primary">{{currency}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Balance b/f"|appTranslate|async}}: <span class="text-primary">{{balanceBroughtForward}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Pending Payments"|appTranslate|async}}: <span class="text-primary">{{pendingPayments}}</span></label>
+            </div>
+          </div>
+          <hr>
+          <div class="row mt-3">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Type"|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                  <option *ngFor="let type of typesList" [value]="type.code">{{type.code}} - {{type.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Amount"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Policy No"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Owner Name"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Cover No"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group">
+              <label for="" class="form-label">{{"Narration"|appTranslate|async}}</label>
+              <textarea name="" id="" rows="5" class="form-control control-bg-gray"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-button buttonType="submit" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="advancePaymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{"Advance Payment"|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label">{{"Agent Name"|appTranslate|async}}: <span class="text-primary">{{agentName}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Currency"|appTranslate|async}}: <span class="text-primary">{{currency}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Balance b/f"|appTranslate|async}}: <span class="text-primary">{{balanceBroughtForward}}</span></label>
+            </div>
+            <div class="col-3">
+              <label for="" class="form-label">{{"Recent Avg Monthly Commission"|appTranslate|async}}: <span class="text-primary">{{recentAverageMonthlyCommission}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label">{{"Pending Payments"|appTranslate|async}}: <span class="text-primary">{{pendingPayments}}</span></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Payment Amount"|appTranslate|async}}</label>
+                <input type="text" class="control-bg-gray form-control">
+              </div>
+            </div>
+            <div class="col-10">
+              <label for="" class="form-label ">&nbsp;</label>
+              <p class="small1 text-primary my-auto">Payment amount is {{paymentAmount || 0}} in excess of agent's commission due + balance c/f</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row mt-3">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Type"|appTranslate|async}}</label>
+                <select name="" id="" class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Charges"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Payee No"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Payee Name"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Bank Account"|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="form-group">
+              <label for="" class="form-label">{{"Narration"|appTranslate|async}}</label>
+              <textarea name="" id="" rows="5" class="form-control control-bg-gray"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-button buttonType="submit" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

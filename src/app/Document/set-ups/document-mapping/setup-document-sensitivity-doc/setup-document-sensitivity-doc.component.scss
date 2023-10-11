@@ -1,0 +1,43 @@
+.header {
+  font-size: 40px;
+  font-weight: 400;
+  margin: 40px 0;
+}
+
+.save-button {
+  background-color: #0bbbc833;
+  border: 1px solid #00BCC8;
+  color: #00BCC8;
+}
+
+.save-button:hover {
+  background-color: #00BCC8;
+  color: #fff;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  color: #00BCC8;
+}
+
+.document-color {
+  color: #00BCC8;
+}
+
+.pagination-color {
+  background-color: #00BCC8;
+  color: #fff;
+}
+
+.nodisplay {
+  display: none;
+}
+
+.search-form {
+  white-space: nowrap;
+  max-width: 80vw;
+}

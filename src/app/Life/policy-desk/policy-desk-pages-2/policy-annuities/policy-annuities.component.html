@@ -1,0 +1,498 @@
+<div class="">
+
+  <div class="my-2">
+    <table class="table table-responsive table-striped text-center">
+      <thead class="py-3 theader">
+      <tr>
+
+        <th scope="col">{{ 'Type' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Gross Amount' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Period' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Frequency' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Reversionary' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'Claim No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Escalation' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Schedule' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'User' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Details' | appTranslate | async }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><p data-bs-toggle="tooltip"
+               data-bs-html="true"
+               trigger="hover focus"
+               delay="0"
+               title="
+               Tax:
+               Net Amount:
+               Paid:
+             ">--</p></td>
+        <td></td>
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="
+            Guaranty:
+            Deferred:
+             Term:
+           "
+          >
+            <i class="fas fa-calendar-alt"></i>
+          </button>
+        </td>
+        <td>
+
+        </td>
+
+        <td><input type="checkbox" class="form-control mx-auto"
+                   data-bs-toggle="tooltip"
+                   data-bs-html="true"
+                   trigger="hover focus"
+                   delay="0"
+                   title="
+           Rate :
+           "></td>
+        <td></td>
+        <td>
+          <input type="checkbox" class="form-control mx-auto" data-bs-toggle="tooltip"
+                 data-bs-html="true"
+                 trigger="hover focus"
+                 delay="0"
+                 title="
+          Basis:
+          Rate:
+           ">
+        </td>
+        <td>
+          <input type="checkbox" class="form-control mx-auto" data-bs-toggle="tooltip"
+                 data-bs-html="true"
+                 trigger="hover focus"
+                 delay="0"
+                 title="
+          Basis:
+          Rate:
+           ">
+        </td>
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="
+            Created By:
+
+"
+          >
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="
+            Created On:
+         "
+          >
+            <i class="fas fa-calendar-alt"></i>
+          </button>
+        </td>
+
+
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="
+           Source:
+           PFA:
+           Founded Policy:
+
+           "
+          >
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row justify-content-between">
+    <div class="col-2">
+      <app-btn data-bs-toggle="modal" icon="history" data-bs-target="#HistoryModal">History</app-btn>
+    </div>
+    <div class="col-2">
+      <app-btn data-bs-toggle="modal" data-bs-target="#PayeeDetailsModal">Payee Details</app-btn>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="PayeeDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Payee Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="my-2">
+          <table class="table table-responsive table-striped text-center">
+            <thead class="py-3 theader">
+            <tr>
+
+              <th scope="col">{{ 'Payee' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Amount' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Proportion' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Bank Number' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Category' | appTranslate | async }}</th>
+
+
+              <th scope="col">{{ 'User' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Details' | appTranslate | async }}</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td></td>
+              <td>
+                <p data-bs-toggle="tooltip"
+                   data-bs-html="true"
+                   trigger="hover focus"
+                   delay="0"
+                   title="
+               First Pay Amount:
+               Next Pay Amount:
+               Final Pay Amount:
+             ">--</p>
+              </td>
+              <td>
+
+              </td>
+              <td>
+
+              </td>
+
+              <td>
+              </td>
+
+
+              <td>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-html="true"
+                  trigger="hover focus"
+                  delay="0"
+                  title="
+            Created By:
+            Updated By:
+            Auth By:
+
+"
+                >
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-html="true"
+                  trigger="hover focus"
+                  delay="0"
+                  title="
+            Created On:
+            Next Pay Date:
+            First Pay Date:
+            Final Pay Date:
+         "
+                >
+                  <i class="fas fa-calendar-alt"></i>
+                </button>
+              </td>
+
+
+              <td>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-html="true"
+                  trigger="hover focus"
+                  delay="0"
+                  title="
+           Relationship:
+           Payment Method:
+           Payee:
+           Policy Number:
+
+           "
+                >
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td>
+                <app-btn icon="edit" type="primary"></app-btn>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-btn icon="add" data-bs-toggle="modal" data-bs-target="#addRecordModal">Add Record</app-btn>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-btn icon="checked">Submit</app-btn>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="HistoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="my-2">
+          <table class="table table-responsive table-striped text-center">
+            <thead class="py-3 theader">
+            <tr>
+
+              <th scope="col">{{ 'Payout ID' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Amount' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Method' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Bank Number' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Control' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Feedback' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Policy' | appTranslate | async }}</th>
+
+
+              <th scope="col">{{ 'User' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Details' | appTranslate | async }}</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td></td>
+              <td>
+                <p data-bs-toggle="tooltip"
+                   data-bs-html="true"
+                   trigger="hover focus"
+                   delay="0"
+                   title="
+               First Pay Amount:
+               Next Pay Amount:
+               Final Pay Amount:
+             ">--</p>
+              </td>
+              <td>
+
+              </td>
+              <td>
+
+              </td>
+
+              <td>
+              </td>
+              <td>
+                <input type="checkbox" class="mx-auto form-control"
+                       data-bs-toggle="tooltip"
+                       data-bs-html="true"
+                       trigger="hover focus"
+                       delay="0"
+                       title="
+           Success:
+
+
+">
+              </td>
+              <td>
+                <input type="checkbox" class="mx-auto form-control">
+              </td>
+
+
+              <td>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-html="true"
+                  trigger="hover focus"
+                  delay="0"
+                  title="
+            Created By:
+            Controlled By:
+            Updated By:
+
+
+"
+                >
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-html="true"
+                  trigger="hover focus"
+                  delay="0"
+                  title="
+            Created On:
+            Controlled On:
+            Feedback On:
+            Sent To Bank On:
+
+         "
+                >
+                  <i class="fas fa-calendar-alt"></i>
+                </button>
+              </td>
+
+
+              <td>
+                <button
+                  class="btn btn-dark"
+                  type="button"
+                  data-bs-toggle="tooltip"
+                  data-bs-html="true"
+                  trigger="hover focus"
+                  delay="0"
+                  title="
+           Reference:
+           Bank Code:
+           Bank Account:
+           Bank Name:
+
+           "
+                >
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td>
+                <app-btn icon="edit" type="primary"></app-btn>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Record</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <label for="" class="form-label text-primary">Payee Number</label>
+                  <select class="form-control control-bg-gray"></select>
+                </div>
+                <div class="col-3">
+                  <label for="" class="form-label text-primary">&nbsp;</label>
+                  <app-btn icon="search"></app-btn>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">&nbsp;</label>
+                  <input class="form-control control-bg-gray">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col">
+              <label for="" class="form-label text-primary">Proportion</label>
+              <input class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col">
+              <label for="" class="form-label text-primary">Amount</label>
+              <input class="form-control control-bg-gray" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col">
+              <label for="" class="form-label text-primary">{{'Bank Number'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray"></select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <div class="col">
+              <label for="" class="form-label text-primary">{{'Category'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray"></select>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+
+        <app-btn icon="save">Save</app-btn>
+
+
+      </div>
+    </div>
+  </div>
+</div>

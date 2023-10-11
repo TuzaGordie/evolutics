@@ -1,0 +1,43 @@
+<app-form-navigation></app-form-navigation>
+<div class="container-fluid mt-5">
+  <div class="">
+    <div class="">
+      <label >
+        Product:
+        <span class="text-primary">
+                {{prod}}
+            </span>
+      </label>
+    </div>
+
+    <div class="mt-5 table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <th *ngFor="let thData of thList" class="small1">{{thData}}</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of tdVal">
+          <td><a routerLink='/actuarial/liability/life/result/show/policy'
+                 (click)='check(product.policy)'>{{product.policy}}</a></td>
+          <td>{{product.balance}}</td>
+          <td>{{product.contribution}}</td>
+          <td>{{product.premiumDeduction}}</td>
+          <td>{{product.policyCharges}}</td>
+          <td>{{product.maturityPayment}}</td>
+          <td>{{product.withdrawals}}</td>
+          <td>{{product.surrender}}</td>
+          <td>{{product.adjustment}}</td>
+          <td>{{product.interestCredit}}</td>
+          <td>{{product.bonus}}</td>
+          <td>{{product.liability}}</td>
+          <td>{{product.status}}</td>
+
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>

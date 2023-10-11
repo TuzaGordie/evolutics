@@ -1,0 +1,12 @@
+<div class="container ">
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <h4>{{'Create Account'|appTranslate|async}}</h4>
+    </div>
+    <div class="col-auto">
+      <app-btn type="danger-outline" icon="close" (mclick)="close()">Close</app-btn>
+    </div>
+  </div>
+  <app-create-account-form [clientNo]="data?.clientNo" [showSubmissionBtn]="true" (submitted)="close($event)">
+  </app-create-account-form>
+</div>

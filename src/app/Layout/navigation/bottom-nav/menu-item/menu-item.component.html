@@ -1,0 +1,21 @@
+<ng-container *ngIf="menuItem|isMenuEnabled:uS.environment?.userMenu?.userMenuConfigDetails as menuCheck; ">
+  <ng-container *ngIf="menuItem.hasSub; else elseNoSubsTemplate">
+
+    <a aria-expanded="false" class="nav-link hasDropDown px-md-0 px-lg-0 px-sm-0 px-xl-1" role="button"
+      [id]="menuItem.id"
+      [matMenuTriggerFor]="menuComp.matMenu">
+      <span class="{{menuItem.icon}}"></span>
+      {{menuItem.label|appTranslate|async}} </a>
+    <app-menu-items #menuComp [xPosition]="menuItem.submenuPosition" [menuItems]="menuItem.subs" ></app-menu-items>
+  </ng-container>
+
+  <ng-template #elseNoSubsTemplate>
+
+    <a aria-expanded="false" class="nav-link  px-md-0 px-lg-0 px-sm-0 px-xl-1"
+      [mrouterLink]="menuCheck.enabled?menuItem.link:null" role="button" [id]="menuItem.id">
+      <span class="{{menuItem.icon}}"></span>
+      {{menuItem.label|appTranslate|async}}</a>
+
+  </ng-template>
+
+</ng-container>

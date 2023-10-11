@@ -1,0 +1,70 @@
+<app-form-navigation [title]="'Set Up / Codes / Lead Classification'"></app-form-navigation>
+<loader [loading]="loading" [height]="formTag.offsetHeight">
+  <div class="container">
+    <form [formGroup]="form" (submit)="onSubmit()" #formTag>
+      <div class="row">
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+          <app-input-basic label="Company" [form]="form" type="select" name="company" [stacked]="true"
+            [options]="setS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" valueField="code" #companyCode>
+          </app-input-basic>
+        </div>
+        <div class="col-4">
+          <app-input-basic label="Lead Status Code" type="text" [form]="form" name="leadStatusCode" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-2">
+
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+          <app-input-basic label="Process Node" [form]="form" type="select" name="processNode" [stacked]="true"
+            [options]="setS.getCodeSubGroup|functionCaller1:'PROCESS_NODE'|async" valueField="code" labelType="ct" #processNode>
+          </app-input-basic>
+        </div>
+        <div class="col-4">
+          <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-2">
+
+        </div>
+      </div>
+      <div formArrayName="destinationStatus">
+      <div class="row mt-2" *ngFor="let ds of destinationStatus.controls; let m = index;" [formGroupName]="m">
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+          <app-input-basic label="Destination Status" [form]="ds" type="select" name="destinationStatus" [stacked]="true"
+          [options]="setS.getLeadClass|functionCaller|async" labelType="cd" valueField="description"
+          #destinationStatus>
+        </app-input-basic>
+        </div>
+        <div class="col-2">
+          <label></label>
+          <app-btn (click)="addDestinationStatus()" type="secondary" icon="add" [valid]="showmode" buttonType="addred"></app-btn>
+        </div>
+        <div class="col-2">
+          <label></label>
+          <app-btn (click)="removeDestinationStatus(m)" type="secondary" icon="delete" [valid]="showmode"  buttonType="delete"></app-btn>
+        </div>
+      </div>
+    </div>
+      <div class="row mt-2">
+        <div class="col-2">
+        </div>
+        <div class="col-2">
+          <app-btn type="secondary" icon="save" [valid]="form?.valid" (mclick)="onSubmit()">Submit</app-btn>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</loader>

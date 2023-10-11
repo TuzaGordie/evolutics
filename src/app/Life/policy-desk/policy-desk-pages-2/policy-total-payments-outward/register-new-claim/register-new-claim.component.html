@@ -1,0 +1,96 @@
+<div class="d-flex justify-content-between">
+  <div class="page-head-pop-up m-0" mat-dialog-title>{{'Register New Claim'|appTranslate|async}}</div>
+  <div class="">
+    <span class="btn btn-close" (click)="close()"></span>
+  </div>
+</div>
+<hr />
+<mat-dialog-content #contentWrapper>
+  <ul
+    class="nav nav-pills mb-3 mx-auto justify-content-center"
+    style="width: fit-content"
+    id="nav-tab"
+    role="tablist"
+  >
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active small1"
+        id="pills-basic-tab"
+        (click)="openTab('basic', contentWrapper)"
+        type="button"
+        role="tab"
+        aria-controls="pills-basic"
+        aria-selected="true"
+      >
+        {{'Basic'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link small1"
+        id="pills-document-tab"
+        (click)="openTab('document', contentWrapper)"
+        type="button"
+        role="tab"
+        aria-controls="pills-document"
+        aria-selected="false"
+        [style.cursor]="!claimNo ? 'not-allowed' : ''"
+        [matTooltip]="!claimNo ? 'register a claim to proceed' : ''"
+      >
+        {{'Document'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link small1"
+        id="pills-estimate-tab"
+        (click)="openTab('estimate', contentWrapper)"
+        type="button"
+        role="tab"
+        aria-controls="pills-estimate"
+        aria-selected="false"
+        [style.cursor]="!claimNo ? 'not-allowed' : ''"
+        [matTooltip]="!claimNo ? 'register a claim to proceed' : ''"
+      >
+        {{'Estimate'|appTranslate|async}}
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content justify-content-start" id="pills-tabContent">
+    <div
+      class="tab-pane fade show active"
+      id="pills-basic"
+      role="tabpanel"
+      aria-labelledby="pills-basic-tab"
+    >
+      <basic-register-new-claim
+        [clientNo]="clientNo"
+        [policyNo]="policyNo"
+        (claimNo)="claimNo = $event"
+        (basicInfo)="basicInfo = $event"
+      ></basic-register-new-claim>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-document"
+      role="tabpanel"
+      aria-labelledby="pills-document-tab"
+    >
+      <document-register-new-claim
+        [claimNo]="claimNo"
+      ></document-register-new-claim>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-estimate"
+      role="tabpanel"
+      aria-labelledby="pills-estimate-tab"
+    >
+      <estimate-register-new-claim
+        [claimNo]="claimNo"
+        [claimEstimate]="basicInfo?.initialEstimate"
+        [coverName]="basicInfo?.coverName"
+      ></estimate-register-new-claim>
+    </div>
+  </div>
+</mat-dialog-content>

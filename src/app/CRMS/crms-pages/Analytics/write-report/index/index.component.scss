@@ -1,0 +1,18 @@
+.btn-outline-secondry{
+    border-color: red;
+    color: red;
+}
+.nav-pills{
+    padding: 2px;
+    background: #e3e5e7;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background: #fff !important;
+    color:rgb(0, 81, 255) !important;
+}
+.nav-link{    
+    color:#4e555c !important;
+}
+.fade:not(.show){
+    display: none;
+}

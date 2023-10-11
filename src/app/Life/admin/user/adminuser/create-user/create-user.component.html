@@ -1,0 +1,306 @@
+<loader [loading]="loading" [text]="loadingText">
+  <mat-tab-group dynamicHeight mat-align-tabs="center">
+    <mat-tab label="Basics">
+      <div class="row  mt-2">
+        <div class="col-md-4">
+          <app-input-basic name="email" [form]="userFG" label="Office Email" [type]="isCreate?'text':'viewer'"
+            [stacked]="true" (mchange)="makeUserCode()" #emailTag></app-input-basic>
+          <app-validation-message [control]="emailTag.control" label="Office Email"></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="userName" [form]="userFG" label="Username" [type]="isCreate?'text':'viewer'"
+            [stacked]="true" #unTag>
+          </app-input-basic>
+          <app-validation-message [control]="unTag.control" label="Username"></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="group" [form]="userFG" label="User Group" type="select" [stacked]="true"
+            [options]="userService.getusersGroup|functionCaller|async"
+            (mchange)="usergroupTag.valid?getUserGroup($event):null" valueField="group" labelField="group"
+            #usergroupTag>
+          </app-input-basic>
+          <app-validation-message [input]="usergroupTag"></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="clientNo" [form]="userFG" label="Client Number of User" type="viewer" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="firstName" [form]="userFG" label="First Name" type="viewer" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="lastName" [form]="userFG" label="Last Name" type="viewer" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="userMenu" [form]="userFG" label="User Menu" type="select" [stacked]="true"
+            labelType="ud" valueField="userMenu" [disabled]="!usergroupTag.value||usergroupTag.invalid"
+            [options]="umS.getAllUserMenus|functionCaller|async">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="language" [form]="userFG" label="Language" type="select" [stacked]="true" [options]="codeService
+            .getCodesByCodeSubGroup|functionCaller1:('LANGUAGE')|async" valueField="code" labelType="ct">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-autocomplete label="Direct supervisor" [options]="users" valueField="userName" labelType="uf"
+            [form]="userFG" name="directSupervisor" #ds [stacked]="true">
+          </app-autocomplete>
+          <app-validation-message [control]="ds.control"></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="status" [form]="userFG" [readonly]="isCreate" label="Status" type="select"
+            [stacked]="true" [options]="codeService
+            .getCodesByCodeSubGroup|functionCaller1:('USER_STATUS')|async" valueField="code" labelType="ct">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="partTimeWeight" [form]="userFG" label="Part Time Workflow Weighting (%)" type="number"
+            [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="appraisalCode" [form]="userFG" label="Appraisal Level Code" type="select"
+            [stacked]="true" [options]="appraisalService.getAppraisalsSetup|functionCaller|async" valueField="code"
+            labelType="cd" #appraisalCodeTag>
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="appraisalCoy" [form]="userFG" label="Appraisal Company Code" type="select"
+            [stacked]="true" [options]="appraisalService
+            .getAppraisalLinksByAppraisalCode|functionCaller1:appraisalCodeTag.value|async" valueField="coyLink"
+            labelField="coyLink">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="divCode" [form]="userFG" label="Appraisal Division Code" type="select" [stacked]="true"
+            [options]="appraisalService
+            .getAppraisalLinksByAppraisalCode|functionCaller1:appraisalCodeTag.value|async" valueField="divLink"
+            labelField="divLink">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="subDivCode" [form]="userFG" label="Appraisal Sub Division Code" type="select"
+            [stacked]="true" [options]="appraisalService
+            .getAppraisalLinksByAppraisalCode|functionCaller1:appraisalCodeTag.value|async" valueField="subDivLink"
+            labelField="subDivLink">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="teamCode" [form]="userFG" label="Appraisal Team Code" type="select" [stacked]="true"
+            [options]="appraisalService
+            .getAppraisalLinksByAppraisalCode|functionCaller1:appraisalCodeTag.value|async" valueField="teamLink"
+            labelField="teamLink">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="userJobRole" [form]="userFG" label="User Job Role" type="text" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="expiryOn" [form]="userFG" label="Access Expiry Date" type="date" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="docBox" [form]="userFG" label="Current Box Number" type="text" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-input-basic name="primaryCompany" [form]="userFG" label="Primary Company" type="select" [stacked]="true"
+            [options]="companyCodes" valueField="code" labelType="cd" (mchange)="patchCompanyList($event)"
+            #primaryCompanyTag>
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-4">
+          <app-autocomplete label="Relief Officer" hint="Default User for pending tasks when out of office"
+            [options]="users" valueField="userName" labelType="uf" [form]="userFG" name="reliefOfficer" #ro
+            [stacked]="true"></app-autocomplete>
+          <app-validation-message [control]="ro.control"></app-validation-message>
+        </div>
+      </div>
+      <div class="row  justify-content-center align-items-end">
+        <div class="col-md-4 mt-4 text-center">
+          <img [src]="userImageUrl?.value||uploadImg||'assets/img/avatar.png'" class="pp mb-2 pointer"
+            (click)="upload_file.click()">
+          <form [formGroup]="form">
+            <div class="">
+              <input [disabled]="isShow" hidden class="form-control" id="upload_file" accept=".png,.jpg,.jpeg,.gif"
+                type="file" #upload_file (change)="uploadFile($event)" />
+              <app-btn type="secondary" icon="upload" (mclick)="upload_file.click()">Upload Passport Photo
+              </app-btn>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-4 mt-4">
+          <app-btn type="secondary" icon="guard" (mclick)="openAccess()">Access
+          </app-btn>
+        </div>
+      </div>
+
+
+      <div class="row justify-content-center" *ngIf="isShow">
+        <div class="col-md-3">
+          <app-input-basic name="outOfOffice" [form]="userFG" label="Out of Office" type="checkbox" [stacked]="true"
+            #outOfOfficeTag>
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-md-3">
+          <app-input-basic name="onBreak" [form]="userFG" label="On break" type="checkbox" [stacked]="true">
+          </app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+        <ng-container *ngIf="outOfOfficeTag.value==true">
+          <div class="col-md-3">
+            <app-input-basic name="outOfOfficeFrom" [form]="usersOutOfOfficeFG" label="Start Date" type="date"
+              [stacked]="true">
+            </app-input-basic>
+            <app-validation-message></app-validation-message>
+          </div>
+          <div class="col-md-3">
+            <app-input-basic name="outOfOfficeTo" [form]="usersOutOfOfficeFG" label="End Date" type="date"
+              [stacked]="true">
+            </app-input-basic>
+            <app-validation-message></app-validation-message>
+          </div>
+        </ng-container>
+
+      </div>
+      <div class="row align-items-end mb-2 mt-2" *ngFor="let usersCompany of userCompanyFA.controls; let i = index">
+        <div class="col-md">
+          <app-input-basic name="appraisalCompany" [form]="usersCompany" label="Company Data Allowed Access"
+            type="select" [stacked]="true" [options]="companyCodes" valueField="code" labelType="cd"
+            #appraisalCompanyTag>
+          </app-input-basic>
+          <!-- <app-validation-message></app-validation-message> -->
+        </div>
+        <div class="col-md">
+          <app-input-basic name="branches" [form]="userBranchesFA.controls[i]" label="Branches Data Allowed Access To"
+            type="select" [stacked]="true"
+            [options]="branchService.getBranchesByCompCode|functionCaller1:appraisalCompanyTag.value|async"
+            valueField="code" labelType="cd">
+          </app-input-basic>
+          <!-- <app-validation-message></app-validation-message> -->
+        </div>
+        <div class="col-md-auto d-flex">
+          <app-btn [iconBtn]="true" icon="delete" type="danger-outline" [disabled]="i==0"
+            (click)="removeUserCompany(i)">
+          </app-btn>
+          <span class="mx-1"></span>
+          <app-btn [iconBtn]="true" icon="add" type="outline" (click)="addUserCompany(i+1)">
+          </app-btn>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Limits">
+      <div *ngFor="let item of userTiersFA.controls; let i = index;">
+        <div class="row">
+          <div class="col-md ">
+            <app-input-basic name="tierCategory" [form]="item" label="Tier Category" type="select" labelType="ct"
+              valueField="code" [stacked]="true" [options]="tierCategories"></app-input-basic>
+          </div>
+          <div class="col-md ">
+            <app-input-basic name="currCode" [form]="item" label="Currency" type="select" labelType="cd"
+              valueField="code" [stacked]="true" [options]="currencies"></app-input-basic>
+          </div>
+          <div class="col-md ">
+            <app-input-basic name="tierCode" [form]="item" label="Currency" type="select" labelType="ct"
+              valueField="code" [stacked]="true" [options]="tiers"></app-input-basic>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group me-2">
+              <label for="" class="text-primary">&nbsp;</label>
+              <app-btn type="danger-outline" [iconBtn]="true" icon="delete" (mclick)="removeUserTiers(i)">
+              </app-btn>
+            </div>
+            <div class="form-group">
+              <label for="" class="text-primary">&nbsp;</label>
+              <app-btn type="outline" [iconBtn]="true" icon="add" (mclick)="addUserTiers( i+1)">
+              </app-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Office Schedule">
+      <table class="table table-borderless mt-3">
+        <thead>
+          <tr>
+            <th>{{'Day'|appTranslate|async}}</th>
+            <th>{{'Start Time'|appTranslate|async}}</th>
+            <th>{{'Close Time'|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of userWorkingTimesFA.controls let i = index">
+            <td scope="row">{{(item|toAny)?.controls?.day?.value}}</td>
+            <td>
+              <app-input-basic [showLabel]="false" name="openTime" [form]="item" type="time"></app-input-basic>
+            </td>
+            <td>
+              <app-input-basic [showLabel]="false" name="closeTime" [form]="item" type="time"></app-input-basic>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class=" mt-5 row justify-content-end" *ngIf="!isShow">
+        <div class="col-md-auto">
+          <app-btn type="secondary" [form]="form" icon="save" (mclick)="createNewUser()" [text]="'Save'">
+          </app-btn>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="d-flex justify-content-end mt-2" *ngIf="isShow">
+    <app-btn text="Edit" routerLink="../edit" [queryParamsHandling]="'merge'" icon="edit" type="secondary"></app-btn>
+  </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="BoxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Set Out Of Office'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col">
+              <label for="" class="text-primary">{{'Starting Date'|appTranslate|async}}</label>
+              <input type="datetime-local" class="form-control control-bg-gray" />
+            </div>
+
+            <div class="col">
+              <label for="" class="text-primary">{{'Ending Date'|appTranslate|async}}</label>
+              <input type="datetime-local" class="form-control control-bg-gray" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="submit" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</loader>

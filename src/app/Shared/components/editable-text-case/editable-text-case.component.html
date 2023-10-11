@@ -1,0 +1,28 @@
+<div class="row align-items-center">
+  <label [matTooltip]="hint" class="col-md-{{stacked?'12 pb-0':mini?'auto':''}} m-0"
+    [ngClass]="{'text-primary':coloredLbl,light:light}">
+    {{label|appTranslate|async}}
+  </label>
+  <div class="{{stacked?'col-12':'col-md'}} position-relative">
+    <div class="row align-items-center">
+      <ng-container *ngIf="editing; else elseTemplate">
+        <div class="col-9 pe-0">
+          <app-input-basic [form]="form" [stacked]="true" [showLabel]="false" [name]="name" [type]="type">
+          </app-input-basic>
+        </div>
+        <div class="col-auto ">
+          <i (click)="reset()" class="ps-1 pointer fas fa-undo-alt text-danger"></i>
+        </div>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a [mrouterLink]="route"
+          class="{{!coloredVal?'':'text-primary'}} col-{{!stacked?'auto':showEditing?'9':'12'}} lbl" >
+          <div class="hide-scroll-x overflow-x-auto">{{((value|valueFormatter:formatter)|async)||'-'}}</div>
+        </a>
+        <div class="col-auto " *ngIf="showEditing">
+          <i (click)="unreset()" class="ps-1 pointer fas fa-pencil-alt {{!coloredVal?'':'text-primary'}}"></i>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

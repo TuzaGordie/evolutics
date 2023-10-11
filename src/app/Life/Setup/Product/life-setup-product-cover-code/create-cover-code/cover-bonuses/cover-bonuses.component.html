@@ -1,0 +1,158 @@
+<loader [text]="loadingText" [loading]="loading">
+ 
+    <div class="row justify-content-between align-items-center mt-2 ">
+        <div class="col-md-6 mb-2">
+          <h5 class="text-primary">{{"Bonuses"|appTranslate|async}}</h5>
+        </div>
+        <div class="col-auto mb-2">
+          <text-case-1 lbl="Cover"
+            [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+          </text-case-1>
+        </div>
+      </div>
+    <!--    <div class="row g-3">
+               <div class="col-6">
+                 <div class="form-group mt-2">
+                   <label class=" text-primary">{{"Date To"|appTranslate|async}}</label>
+                 </div>
+               </div>
+               <div class="col-6">
+                 <div class="form-group mt-2">
+                   <label class=" text-primary">{{"Date From"|appTranslate|async}}</label>
+    
+                 </div>
+               </div>
+             </div> -->
+
+    <!--   <ng-container *ngIf="createCoverCode.basic.basic.code != null && createCoverCode.basic.id != null" formArrayName="bonusArray">
+    
+    
+                <div class="row g-3">
+                  <div class="col-6">
+                    <div class="form-group mt-2">
+                      <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.basic.bonusVersionNo" type="date"/>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group mt-2">
+                      <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.basic.bonusVersionDate" type="date"/>
+                    </div>
+                  </div>
+                </div>
+            </ng-container> -->
+
+
+    <hr>
+    <ng-container>
+        <ng-container *ngFor="let item of createCoverCode.bonuses; let i = index">
+            <div class="row g-3">
+                <div class="col-5">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Promo Bonus Basis"|appTranslate|async}}</label>
+                       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.promoBonusBasis">
+                            <option></option>
+                            <option *ngFor="let ot of bonusBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+                            </option>
+                        </select>
+                    </div>                    
+                </div>
+                <div class="col-5">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Promo Bonus Rate (%)"|appTranslate|async}}</label>
+                        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.promoBonusRate"
+                            type="number" />
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">&nbsp;<br /></label>
+                        <app-button (click)="removeBonus(i)" [buttonType]="'delete'"></app-button>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Promo Bonus Rate Table"|appTranslate|async}}</label>
+                       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.promoBonusTable">
+                            <option></option>
+                            <option *ngFor="let ot of bonusRateBasisList" [ngValue]="ot.code">{{ot.code}} -
+                                {{ot.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- <div class="row g-3"> -->
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Annual Bonus Basis"|appTranslate|async}}</label>
+                       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.annualBonusBasis">
+                            <option></option>
+                            <option *ngFor="let ot of bonusBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Annual Bonus Rate (%)"|appTranslate|async}}</label>
+                        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.annualBonusRate" type="number" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Annual Bonus Table"|appTranslate|async}}</label>
+                       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.annualBonusTable">
+                            <option></option>
+                            <option *ngFor="let ot of bonusRateBasisList" [ngValue]="ot.code">{{ot.code}} -
+                                {{ot.description}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Date From"|appTranslate|async}}</label>
+                        <input #inp="ngModel" class="form-control  control-bg-gray" [value]="item.dateFrom | date" [(ngModel)]="item.dateFrom" type="date" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group mt-2">
+                        <label class=" text-primary">{{"Date To"|appTranslate|async}}</label>
+                        <input #inp="ngModel" class="form-control  control-bg-gray" [value]="item.dateTo | date" [(ngModel)]="item.dateTo" type="date" />
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </ng-container>
+    </ng-container>
+
+    <div class="row g-3 justify-content-end">
+
+        <div class="col-1">
+            <div class="form-group mt-2">
+                <label class=" text-primary">&nbsp;<br /></label>
+
+                <app-button (click)="addNewBonusRow()" [buttonType]="'addCustom'"></app-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3" *ngIf="!coverService.isShow">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <div class="form-group mt-2">
+                <label class=" text-primary">&nbsp;<br /></label>
+                <app-button (click)="saveBonuses()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+            </div>
+        </div>
+    </div>
+</loader>

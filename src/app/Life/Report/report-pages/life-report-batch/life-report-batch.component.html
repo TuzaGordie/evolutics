@@ -1,0 +1,94 @@
+<div class="container">
+  <form [formGroup]="form">
+    <div class="row mt-2">
+      <div class="col">
+        <app-input-basic label="Report Group" type="select" [form]="form" name="reportGroupCode" [stacked]="true"
+        [options]="frS.getReportGroupCodes|functionCaller|async" labelType="ct" #reportGroupCode>
+      </app-input-basic>
+      </div>
+      <div class="col">
+        <app-input-basic label="Report" type="select" [form]="form" name="report" [stacked]="true"
+          [options]="frS.getReportGroupReportList|functionCaller1:reportGroupCode.value?.code|async" labelType="cd"
+          #report>
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-lg-6 my-2 my-lg-0">
+        <ng-container formArrayName="userGroup">
+          <ng-container *ngFor="let subForm of userGroup?.controls; let k = index " [formGroupName]="k">
+            <div class="row d-flex align-items-end">
+              <div class="col">
+                <app-input-basic label="User Groups Permitted" type="select" [form]="subForm" valueField="group"
+                  [optionFormatter]="userGroupLabelFormatter" name="group" [stacked]="true"
+                  [options]="frS.getUserGroupList|httpListCaller|async">
+                </app-input-basic>
+              </div>
+              <div class="col-auto">
+                <app-btn icon="delete" mclass="ms-2" [iconBtn]="true" type="danger-outline"
+                  [disabled]="userGroup?.length==1" (mclick)="removeUserGroup(k)" *ngIf="!isShow"></app-btn>
+              </div>
+              <div class="col-auto">
+                <app-btn group="add" [iconBtn]="true" (mclick)="addNewUserGroupRow(null,k+1)" *ngIf="!isShow">
+                </app-btn>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="col-lg-6 my-2 my-lg-0">
+        <ng-container formArrayName="webuserGroup">
+          <ng-container *ngFor="let subform of webuserGroup?.controls; let k = index " [formGroupName]="k">
+            <div class="row d-flex align-items-end">
+              <div class="col">
+                <app-input-basic label="Web User Groups Permitted" type="select" [form]="subform" valueField="group"
+                  [optionFormatter]="userGroupLabelFormatter" name="group" [stacked]="true" [options]="[]">
+                </app-input-basic>
+              </div>
+              <div class="col-auto">
+                <app-btn icon="delete" mclass="ms-2" [iconBtn]="true" type="danger-outline"
+                  [disabled]="webuserGroup?.length==1" (mclick)="removeWebuserGroup(k)" *ngIf="!isShow"></app-btn>
+              </div>
+              <div class="col-auto">
+                <app-btn group="add" [iconBtn]="true" (mclick)="addNewWebuserGroupRow(null,k+1)" *ngIf="!isShow">
+                </app-btn>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{'Generate Frequency'|appTranslate|async}}</label>
+          <select name="" id="" class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{'Generate Day'|appTranslate|async}}</label>
+          <input type="text" id="" class="form-control control-bg-gray">
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{'Report Format'|appTranslate|async}}</label>
+          <select name="" id="" class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+    <div class="row mt-4 justify-content-end">
+      <div class="col-2">
+        <app-button buttonType="submit"></app-button>
+      </div>
+    </div>
+  </form>
+</div>

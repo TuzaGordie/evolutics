@@ -1,0 +1,962 @@
+<app-form-navigation [title]="'Client Desk / Create New Client / Provider'"></app-form-navigation>
+
+<div class="container-fluid mt-2" id="form-body">
+    <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-clientInfoTab-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-clientInfoTab" type="button" role="tab" aria-controls="pills-clientInfoTab"
+                aria-selected="true">
+                Client Information
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-providerInfoTab-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-providerInfoTab" type="button" role="tab" aria-controls="pills-providerInfoTab"
+                aria-selected="false">
+                Provider Information
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-paymentdetails-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-paymentdetails" type="button" role="tab" aria-controls="pills-paymentdetails"
+                aria-selected="false">
+                Payment Details
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-licenseTab-tab" data-bs-toggle="pill" data-bs-target="#pills-licenseTab"
+                type="button" role="tab" aria-controls="pills-licenseTab" aria-selected="false">
+                License
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-accountsTab-tab" data-bs-toggle="pill"
+                data-bs-target="#pills-accountsTab" type="button" role="tab" aria-controls="pills-accountsTab"
+                aria-selected="false">
+                Accounts
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent" >
+        <form [formGroup]="CreateProviderForm" (submit)="onSubmitProvider()">
+        <div class="container">
+            <div class="tab-pane fade show active" id="pills-clientInfoTab" role="tabpanel" formGroupName="postProviderForm"
+                aria-labelledby="pills-clientInfoTab-tab">
+                <!-- client info goes here -->
+                <div class="container my-5" >
+
+                    <div class="d-flex justify-content-around">
+                        <span class="p-2">Client Class: <span style="color:#be0707">Individual</span></span>
+                        <span class="p-2">Client Number: <span
+                                style="color: #be0707">{{findClientService.clientInfo?.CLIENT_NO}}</span></span>
+
+                        <button type="button" [routerLink]="['/life/clientnote']" routerLinkActive="router-link-active"
+                            class="btn-i p-0 px-4 " style="float: right;">
+                            <span class="mx-3 my-auto">Note</span></button>
+                    </div>
+                    <hr style="margin-top: 5px;">
+
+                    <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+                        <div class="d-block text-center mr-2 py-5">
+                            <div class="profileimg mt-5 mx-3">
+                                <!-- <img src="../../../../../assets/img/avatar.jpg"
+                             class="profileimg mt-5 mb-2"> -->
+                            </div>
+                            <p class="pt-2">{{findClientService.clientInfo?.FIRST_NAME}}</p>
+                            <span style="color:#2ecc71">Active</span>
+                        </div>
+
+                        <div class="d-block mx-2">
+                            <div class="mt-4">
+                                <label>Full Name</label><br>
+                                <input type="text" formControlName="fullName" readonly class="inputform1 ">
+
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Redg No</label><br>
+                                <input type="text" formControlName="firstName" readonly class="inputform1">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>No of Employees</label><br>
+                                <input type="text" formControlName="middleName" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Financial Size Category</label><br>
+                                <input type="text" formControlName="surname" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Sector</label><br>
+                                <input type="text" formControlName="gender" readonly class="inputform1 ">
+
+                            </div>
+                        </div>
+
+                        <div class="d-block mx-2">
+                            <div class="mt-4">
+                                <label>Phone Number 1</label><br>
+                                <input type="text" formControlName="phoneNo" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Phone Number 2</label><br>
+                                <input type="text" formControlName="phoneNo2" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Email</label><br>
+                                <input type="text" formControlName="email" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Website</label><br>
+                                <input type="text" formControlName="email2" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Address</label><br>
+                                <input type="text" formControlName="address" readonly class="inputform1 ">
+
+                            </div>
+                        </div>
+
+                        <div class="d-block mx-2">
+                            <div class="mt-4">
+                                <label>CRN ID</label><br>
+                                <input type="text" formControlName="dob" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Client Category</label><br>
+                                <input type="text" formControlName="category" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Language</label><br>
+                                <input type="text" formControlName="kyc" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Date Created</label><br>
+                                <input type="text" formControlName="idNo" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>State</label><br>
+                                <input type="text" formControlName="language" readonly class="inputform1 ">
+
+                            </div>
+                        </div>
+
+                        <div class="d-block mx-2">
+                            <div class="mt-4">
+                                <label>Provider Type</label><br>
+                                <input type="text" formControlName="employer" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Band</label><br>
+                                <input type="text" formControlName="crm" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Bank No</label><br>
+                                <input type="text" formControlName="bankNo" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>CLV</label><br>
+                                <input type="text" formControlName="dateCreated" readonly class="inputform1">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Communication</label><br>
+                                <input type="text" formControlName="communication" readonly class="inputform1 ">
+
+                            </div>
+                        </div>
+
+                        <div class="d-block mx-2">
+                            <div class="mt-4">
+                                <label>Provider Code</label><br>
+                                <input type="text" formControlName="maritalStatus" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>No of Groups</label><br>
+                                <input type="text" formControlName="band" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Group No</label><br>
+                                <input type="text" formControlName="groupNo" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>CLV</label><br>
+                                <input type="text" formControlName="clv" readonly class="inputform1 ">
+
+                            </div>
+                            <div class="mt-4">
+                                <label>Social Media</label><br>
+                                <input type="text" formControlName="socialmedia" readonly class="inputform1 ">
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <hr class="my-5">
+                    <div class="d-flex justify-content-around my-5 ">
+                        <div>
+                            <button type="button" class="hoverbtn btn-i py-0 px-4"
+                                [routerLink]="['/life/endorsements']">
+                                <span class="mx-4 my-auto">Endorsements</span></button>
+                        </div>
+                        <div>
+                            <button type="button" class=" hoverbtn btn-i py-0 px-4 " [routerLink]="['/life/documents']">
+                                <span class="mx-4 my-auto">Documents</span></button>
+                        </div>
+                        <div>
+                            <button type="button" class=" hoverbtn btn-i py-0 px-4" [routerLink]="['/life/workflows']">
+                                <span class="mx-4 my-auto">Workflows</span></button>
+                        </div>
+                        <div>
+                            <button type="button" class=" hoverbtn btn-i py-0 px-4" [routerLink]="['/life/web-login']">
+                                <span class="mx-4 my-auto">Web log in</span></button>
+                        </div>
+
+
+
+
+
+                    </div>
+
+                    <div id="section_cardsno" class="section-cards d-flex justify-content-around">
+                        <div class="card color1 shadow-sm" [routerLink]="['/life/policies']">
+                            <div class="card-body">
+                                <h6 class="card-title">No of Policies</h6>
+                                <p id="card-text">{{policyLength}}</p>
+                            </div>
+
+                        </div>
+                        <div class="card color1 shadow-sm" [routerLink]="['/life/relationships']">
+                            <div class="card-body">
+                                <h6 class="card-title">No Of Relationships</h6>
+                                <p id="card-text">{{relationshipLength}}</p>
+                            </div>
+
+                        </div>
+                        <div class="card color1 shadow-sm" [routerLink]="['/life/business']">
+                            <div class="card-body">
+                                <h6 class="card-title">Other Business</h6>
+                                <p id="card-text">{{policyLength}}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <form [formGroup]="viewClientForm">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Client Info</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+
+                                        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+                                            <div class="d-block mx-2">
+                                                <div class="mt-4">
+                                                    <label>Full Name</label><br>
+                                                    <input type="text" formControlName="fullName"
+                                                        [readonly]="checkReadonly('fullName')"
+                                                        [ngClass]="{higlightbox: checkHighlight('fullName')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>First Name</label><br>
+                                                    <input type="text" formControlName="firstName"
+                                                        [readonly]="checkReadonly('firstName')"
+                                                        [ngClass]="{higlightbox: checkHighlight('firstName')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Middle Name</label><br>
+                                                    <input type="text" formControlName="middleName"
+                                                        [readonly]="checkReadonly('middleName')"
+                                                        [ngClass]="{higlightbox: checkHighlight('middleName')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Surname</label><br>
+                                                    <input type="text" formControlName="surname"
+                                                        [readonly]="checkReadonly('surname')"
+                                                        [ngClass]="{higlightbox: checkHighlight('surname')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Gender</label><br>
+                                                    <input type="text" formControlName="gender"
+                                                        [readonly]="checkReadonly('gender')"
+                                                        [ngClass]="{higlightbox: checkHighlight('gender')}"
+                                                        class="inputform ">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-block mx-2">
+                                                <div class="mt-4">
+                                                    <label>Phone Number 1</label><br>
+                                                    <input type="text" formControlName="phoneNo"
+                                                        [readonly]="checkReadonly('phoneNo')"
+                                                        [ngClass]="{higlightbox: checkHighlight('phoneNo')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Phone Number 2</label><br>
+                                                    <input type="text" formControlName="phoneNo2"
+                                                        [readonly]="checkReadonly('phoneNo2')"
+                                                        [ngClass]="{higlightbox: checkHighlight('phoneNo2')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Email</label><br>
+                                                    <input type="text" formControlName="email"
+                                                        [readonly]="checkReadonly('email')"
+                                                        [ngClass]="{higlightbox: checkHighlight('email')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Email 2</label><br>
+                                                    <input [readonly]="checkReadonly('email2')" type="text"
+                                                        formControlName="email2"
+                                                        [ngClass]="{higlightbox: checkHighlight('email2')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Address</label><br>
+                                                    <input [readonly]="checkReadonly('address')" type="text"
+                                                        formControlName="address"
+                                                        [ngClass]="{higlightbox: checkHighlight('address')}"
+                                                        class="inputform ">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-block mx-2">
+                                                <div class="mt-4">
+                                                    <label>Date of Birth</label><br>
+                                                    <input [readonly]="checkReadonly('dob')" type="text"
+                                                        formControlName="dob"
+                                                        [ngClass]="{higlightbox: checkHighlight('dob')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Category</label><br>
+                                                    <input [readonly]="checkReadonly('category')" type="text"
+                                                        formControlName="category"
+                                                        [ngClass]="{higlightbox: checkHighlight('category')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <!--  <div class="mt-4">
+                                                <label>KYC</label><br>
+                                                <input [readonly]="checkReadonly('kyc')" type="text" formControlName="language"
+                                                [ngClass]="{higlightbox: checkHighlight('kyc')}"
+                                                class="inputform " >
+                                            </div> -->
+                                                <div class="mt-4">
+                                                    <label>ID Number</label><br>
+                                                    <input [readonly]="checkReadonly('idNo')" type="text"
+                                                        formControlName="idNo"
+                                                        [ngClass]="{higlightbox: checkHighlight('idNo')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Language</label><br>
+                                                    <input [readonly]="checkReadonly('language')" type="text"
+                                                        formControlName="language"
+                                                        [ngClass]="{higlightbox: checkHighlight('language')}"
+                                                        class="inputform ">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-block mx-2">
+                                                <div class="mt-4">
+                                                    <label>Employer</label><br>
+                                                    <input [readonly]="checkReadonly('employer')" type="text"
+                                                        formControlName="employer"
+                                                        [ngClass]="{higlightbox: checkHighlight('employer')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>CRM ID</label><br>
+                                                    <input [readonly]="checkReadonly('crm')" type="text"
+                                                        formControlName="crm"
+                                                        [ngClass]="{higlightbox: checkHighlight('crm')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <!-- <div class="mt-4">
+                                                <label>Bank No</label><br>
+                                                <input [readonly]="checkReadonly('bankNo')" type="text" formControlName="bankNo"
+                                                [ngClass]="{higlightbox: checkHighlight('bankNo')}"
+                                                class="inputform " >
+                                                         </div> -->
+                                                <div class="mt-4">
+                                                    <label>Date Created</label><br>
+                                                    <input [readonly]="checkReadonly('dateCreated')" type="text"
+                                                        formControlName="dateCreated"
+                                                        [ngClass]="{higlightbox: checkHighlight('dateCreated')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Communication</label><br>
+                                                    <input [readonly]="checkReadonly('communication')" type="text"
+                                                        formControlName="communication"
+                                                        [ngClass]="{higlightbox: checkHighlight('communication')}"
+                                                        class="inputform ">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-block mx-2">
+                                                <div class="mt-4">
+                                                    <label>Marital Status</label><br>
+                                                    <input [readonly]="checkReadonly('maritalStatus')" type="text"
+                                                        formControlName="maritalStatus"
+                                                        [ngClass]="{higlightbox: checkHighlight('maritalStatus')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Band</label><br>
+                                                    <input [readonly]="checkReadonly('band')" type="text"
+                                                        formControlName="band"
+                                                        [ngClass]="{higlightbox: checkHighlight('band')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Group No</label><br>
+                                                    <input [readonly]="checkReadonly('groupNo')" type="text"
+                                                        formControlName="groupNo"
+                                                        [ngClass]="{higlightbox: checkHighlight('groupNo')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>CLV</label><br>
+                                                    <input [readonly]="checkReadonly('clv')" type="text"
+                                                        formControlName="clv"
+                                                        [ngClass]="{higlightbox: checkHighlight('clv')}"
+                                                        class="inputform ">
+                                                </div>
+                                                <div class="mt-4">
+                                                    <label>Social Media</label><br>
+                                                    <input [readonly]="checkReadonly('socialmedia')" type="text"
+                                                        formControlName="socialmedia"
+                                                        [ngClass]="{higlightbox: checkHighlight('socialmedia')}"
+                                                        class="inputform ">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-block ml-2">
+                                                <div class="mt-4">
+                                                    <label>Provider Code</label><br>
+                                                    <input [readonly]="checkReadonly('providerCode')" type="text"
+                                                        formControlName="providerCode"
+                                                        [ngClass]="{higlightbox: checkHighlight('providerCode')}"
+                                                        class="inputform ">
+                                                </div>
+
+                                                <div class="d-block ml-2">
+                                                    <div class="mt-4">
+                                                        <label>Enrolee No</label><br>
+                                                        <input [readonly]="checkReadonly('enroleeNo')" type="text"
+                                                            formControlName="enroleeNo"
+                                                            [ngClass]="{higlightbox: checkHighlight('enroleeNo')}"
+                                                            class="inputform ">
+                                                    </div>
+                                                </div>
+                                                <div class="d-block ml-2">
+                                                    <div class="mt-4">
+                                                        <label>Suffix</label><br>
+                                                        <input [readonly]="checkReadonly('suffix')" type="text"
+                                                            formControlName="suffix"
+                                                            [ngClass]="{higlightbox: checkHighlight('suffix')}"
+                                                            class="inputform ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">update</button>
+             -->
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+                                        <button type="button"  data-bs-dismiss="modal"
+                                            class="border-0 next-blue">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-providerInfoTab" role="tabpanel"
+                aria-labelledby="pills-providerInfoTab-tab">
+                <div class="row g-3">
+                    <div class="col" formGroupName="clientProvider">
+                        <div class="form-group mt-2">
+                            <label>Provider Type</label>
+                            <select class="form-control control-bg-gray" formControlName="providerCat">
+                                <option *ngFor="let ot of providerTypeList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Status</label>
+                            <select class="form-control control-bg-gray" formControlName="PROVIDER_STATUS">
+                                <option *ngFor="let ot of providerStatusList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2" formGroupName="clientProvider">
+                            <label>Sub Provider Type</label>
+                            <select class="form-control control-bg-gray" formControlName="providerSubcat">
+                                <option *ngFor="let ot of providerSubCategoryList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2" formGroupName="clientProvider">
+                            <label>Tarrif Code</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of tarrifCodeList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2" formGroupName="clientProvider">
+                            <label>Network </label>
+                            <select class="form-control control-bg-gray" formControlName="network">
+                                <option *ngFor="let ot of providerNetworkList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-4" formGroupName="clientProvider">
+                        <div class="form-group mt-2" >
+                            <label>Discipline Category</label>
+                            <select class="form-control control-bg-gray" formControlName="disciplineCategory">
+                                <option *ngFor="let ot of disciplineCatList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-2 d-flex flex-row justify-content-end">
+                        <button type="button" class="add-btn1">Add</button>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col" formGroupName="clientProvider">
+                        <div class="form-group mt-2">
+                            <label>Disciplines</label>
+                            <select class="form-control control-bg-gray" formControlName="discipline">
+                                <option *ngFor="let ot of disciplineList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-2" formGroupName="providerDiscipline">
+                        <div class="form-group mt-2">
+                            <label>Quantity Basis</label>
+                            <select class="form-control control-bg-gray" formControlName="quantityBasis">
+                                <option *ngFor="let ot of qtyBasisList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-2" formGroupName="providerDiscipline">
+                        <div class="form-group mt-2">
+                            <label>Quantity Available</label>
+                            <input class="form-control control-bg-gray" type="text" formControlName="quantity" />
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex flex-row justify-content-end">
+                        <button type="button" class="add-btn1">Add</button>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6" formGroupName="providerBranches">
+                        <div class="form-group mt-2">
+                            <label>Branch Addresses</label>
+                            <input class="form-control control-bg-gray" type="text" formControlName="branchAddress" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2" formGroupName="providerBranches">
+                            <label>Branch State</label>
+                            <input class="form-control control-bg-gray" type="textarea" formControlName="branchCity" />
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex flex-row justify-content-end">
+                        <button type="button" class="add-btn1">Add</button>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6" formGroupName="clientProvider">
+                        <div class="form-group mt-2">
+                            <label>Description of Facility</label>
+                            <input class="form-control control-bg-gray" style="padding-bottom: 3.375rem" type="textarea"
+                                formControlName="facilityDescription" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-6">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <button type="button" class="add-btn1">
+                                Upload Photos of Facility
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="row d-flex flex-row justify-content-end mt-5">
+                        <div class="col-5 d-flex flex-row justify-content-end">
+                            <button type="button" class="add-btn1">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-paymentdetails" role="tabpanel"
+                aria-labelledby="pills-paymentdetails-tab">
+                <div class="row g-3">
+                    <div class="col" formGroupName="clientProvider">
+                        <div class="form-group mt-2">
+                            <label>Payment Method</label>
+                            <select class="form-control control-bg-gray" formControlName="PAY_METHOD">
+                                <option *ngFor="let ot of paymentMethodList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col" formGroupName="clientProvider">
+                        <div class="form-group mt-2">
+                            <label>Payee Name</label>
+                            <input class="form-control control-bg-gray" type="textarea" formControlName="PAYEE_NAME" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col" formGroupName="clientProvider">
+                        <div class="form-group mt-2">
+                            <label>Frequency of Payment</label>
+                            <select class="form-control control-bg-gray" formControlName="PAY_FREQ">
+                                <option *ngFor="let ot of paymentFreqList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mx-auto">
+                        <h1 class="my-5">Existing Accounts for Client XXXX</h1>
+
+                        <table class="table table-responsive  table-striped">
+                            <thead class="py-3">
+                                <tr>
+                                    <th scope="col">Bank No</th>
+                                    <th scope="col">Payee Name</th>
+                                    <th scope="col">Account Type</th>
+                                    <th scope="col">Account No</th>
+                                    <th scope="col">Institution Code</th>
+                                    <th scope="col">Select</th>
+                                </tr>
+                            </thead>
+                            <!-- <tbody>
+                          <tr *ngFor="let item of quotationInfoList" (click)="viewInfo(item.QUOTE_NO)">
+                            <th scope="row">{{item.QUOTE_NO}}</th>
+                            <td>{{item.OWNER_NAME}}</td>
+                            <td>{{item.INDIVIDUAL}}</td>
+                            <td>{{item.PRODUCT_CLASS}}</td>
+                            <td>{{item.PRODUCT_CODE}}</td>
+                            <td>{{item.LAST_UPDATE}}</td>
+                            <td>{{item.REFERRER_NO}}</td>
+                            <td>{{item.AGENT_NO}}</td>
+                            <td>{{item.ITERATIONS}}</td>
+                            <td>{{item.TOTAL_PREMIUMS}}</td>
+                            <td>{{item.DAYS_TO_SLA}}</td>
+                          </tr>
+                        </tbody> -->
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="row g-3">
+                    <div class="row d-flex flex-row justify-content-end mt-5">
+                        <div class="col-2 d-flex flex-row justify-content-end">
+                            <button type="button" class="add-btn1">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-licenseTab" role="tabpanel" aria-labelledby="pills-licenseTab-tab" formGroupName="clientProviderLicense">
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>License Type</label>
+                            <select class="form-control control-bg-gray" formControlName="licenceType">
+                                <option *ngFor="let ot of licenseTypeList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>License Issue Date</label>
+                            <input class="form-control control-bg-gray" type="date"
+                                formControlName="licenceStart" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>License Authority</label>
+                            <select class="form-control control-bg-gray" formControlName="licensedAuthority">
+                                <option *ngFor="let ot of licenseAuthList" [ngValue]="ot.title">
+                                    {{ ot.code }} - {{ ot.title }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>License Expiry Date</label>
+                            <input class="form-control control-bg-gray" type="date"
+                                formControlName="licenceExpiry" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>License Condition</label>
+                            <input class="form-control control-bg-gray" style="padding-bottom: 3.375rem" type="textarea"
+                                formControlName="LICENSE_condition" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="row d-flex flex-row justify-content-end mt-5">
+                        <div class="col-5 d-flex flex-row justify-content-end">
+                            <button type="button" onclick="" class="add-btn1">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-accountsTab" role="tabpanel" aria-labelledby="pills-accountsTab-tab">
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Free Due To</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Free Due From</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Premium Due To </label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Premium Due To</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Claim Due To </label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Claim Due From</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Medical UW Due To</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Medical UW Due From</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Commissions Due To</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Coinsurance Commissions Due From</label>
+                            <select class="form-control control-bg-gray">
+                                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                                    {{ ot.FIRST_NAME }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="row d-flex flex-row justify-content-end mt-5">
+                        <div class="col-2 d-flex flex-row justify-content-end">
+                            <button type="submit" class="add-btn1">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- </form> -->
+        </div>
+        </form>
+
+    </div>
+</div>

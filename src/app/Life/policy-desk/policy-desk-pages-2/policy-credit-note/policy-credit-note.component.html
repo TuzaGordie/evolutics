@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12 mx-auto d-flex justify-content-between">
+    <div class="page-head m-0">{{'Credit Notes'|appTranslate|async}}</div>
+    <div class="row">
+      <div class="mb-2 col-auto">
+        <text-case-1 lbl="Agent No:" [stacked]="false" [val]="num"></text-case-1>
+      </div>
+      <div class="mb-2 col-auto">
+        <text-case-1 lbl="Agent Name:" [stacked]="false" [val]="name"></text-case-1>
+      </div>
+    </div>
+  </div>
+  <div class="my-3 d-flex justify-content-between">
+    <div class="mb-2 col-auto">
+      <text-case-1 lbl="Total Unsettled:" [stacked]="false" [val]="tot"></text-case-1>
+    </div>
+    <div class="mb-2 col-auto">
+      <text-case-1 lbl="Days Outstanding:" [stacked]="false" [val]="days"></text-case-1>
+    </div>
+  </div>
+  <div class="my-3">
+    <table-plain [data]="list" [displayedColumns]="dCols"></table-plain>
+  </div>
+  <div class="mt-5 row justify-content-between">
+    <div class="col-3 ">
+      <app-btn icon='view' type="secondary" (mclick)="view()">View Credit Note Documents</app-btn>
+    </div>
+    <div class="col-3 ">
+      <app-btn icon='add' type="secondary" (mclick)="add()">Add Credit Note</app-btn>
+    </div>
+  </div>
+</div>

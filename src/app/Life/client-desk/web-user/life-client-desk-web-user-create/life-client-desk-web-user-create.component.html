@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{"Web User Code"|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{"Web User Group"|appTranslate|async}}</label>
+        <select name="" id="" class="control-bg-gray form-control">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <label for="" class="form-label">
+      {{"Document Access"|appTranslate|async}}
+    </label>
+  </div>
+  <div class="row mt-2" *ngFor="let i of docCounter()">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"Document Category"|appTranslate|async}}
+        </label>
+        <select name="" id="" class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"Document SubCategory"|appTranslate|async}}
+        </label>
+        <select name="" id="" class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2 justify-content-end">
+    <div class="col-2">
+      <app-button buttonType="add" (click)="docInc()"></app-button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <label for="" class="form-label">
+      {{"Document Access"|appTranslate|async}}
+    </label>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Client"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Policy"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Agent"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Quotation"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Batch Reports"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"Run Reports"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"Create Lead"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Lead"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"View Sales Analytics"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">
+          {{"Create Quotation"|appTranslate|async}}
+        </label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+
+
+
+  </div>
+  <div class="row mt-2 justify-content-end">
+    <div class="col-2">
+      <app-button buttonType="save"></app-button>
+    </div>
+  </div>
+</div>

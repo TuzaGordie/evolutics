@@ -1,0 +1,40 @@
+<div class="p-3">
+  <h2 mat-dialog-title>{{'Change Status'|appTranslate|async}}</h2>
+  <mat-dialog-content>
+    <form>
+      <div class="row my-3">
+        <div class="col-md-6">
+          <label for="cover">{{'Cover'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-6">
+          <label for="premiumPaidToDate">{{'Premium Paid to Date'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-6">
+          <label for="currentStatus">{{'Current Status'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-6">
+          <label for="newStatus">{{'New Status'|appTranslate|async}}</label>
+          <select class="inputform">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="row my-3 align-items-center">
+        <div class="col-md-2">
+          <label for="narration">Narration- <span class="opacity-50 d-block">{{'optional'|appTranslate|async}}</span></label>
+        </div>
+        <div class="col-md-10">
+          <textarea rows="4" class="inputform"></textarea>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-primary py-3 px-5" mat-dialog-close><i class="fa fa-save"></i>&nbsp;Submit</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>

@@ -1,0 +1,55 @@
+
+<!-- Bootstrap modal -->
+
+<button #launchBtn type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" hidden aria-hidden="true">
+  {{'launch'|appTranslate|async}}
+</button>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">{{'Error'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCloseClick()" #closeBtn></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+
+             <div class="d-inline-flex align-items-center mb-3">
+                 <label class="me-3">
+                    {{'Reason'|appTranslate|async}}:
+                 </label>
+                 <select class="form-control control-bg-gray">
+                   <option></option>
+                   <option *ngFor="let reason of errorReasonsList" [value]="reason.code">{{reason.title}}</option>
+                 </select>
+             </div>
+             
+             <div class="d-inline-flex align-items-center mb-3">
+                <label class="me-3">
+                  {{'Severity'|appTranslate|async}}
+                </label>
+                <select class="form-control control-bg-gray">
+                  <option></option>
+                  <option *ngFor="let severity of errorSeveritiesList" [value]="severity.code">{{severity.title}}</option>
+                </select>
+            </div>
+            </div>
+            <hr>
+            <br>
+            <div class="row">
+                <label class="fw-bold">
+                  {{'Additional Comment'|appTranslate|async}}
+                </label>
+                <textarea class="form-control control-bg-gray"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="default" text="Submit Error" data-bs-dismiss="modal" (click)="onCloseClick()"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #successMessgae>
+    <p class="fw-bold mb-4">This task will be marked defective for user J-BOND upon submission</p>
+  </ng-template>

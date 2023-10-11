@@ -1,0 +1,18 @@
+<loader [loading]="loading"> 
+  <div class=" mt-5">
+    <div class="row">
+      <div class="col-md-auto">
+        <text-case-1 lbl="Agent Name" [val]="agentName"></text-case-1>
+      </div>
+      <div class="col-md-auto">
+        <text-case-1 lbl="Total Sum At Risk"
+          [val]="totalSumAtRisk"></text-case-1>
+      </div>
+    </div>
+    <table-plain [pageSize]="20" [showPager]="true" [distinct]="true" [centerCells]="true" [nowrap]="true"
+      noItemTxt="There are no policies to display" [data]="policyList" [displayedColumns]="dCols"
+      label="Agent {{agentNo}} Policies" [showExport]="true" [showFilter]="true">
+    </table-plain>
+  </div>
+</loader>
+

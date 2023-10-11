@@ -1,0 +1,197 @@
+<app-form-navigation></app-form-navigation>
+<div class="container">
+  <div class="mb-5">
+    <form [formGroup]='form'>
+      <hr>
+      <div class="row d-flex align-items-end py-2" *ngFor="let i of plCounter()">
+        <div class="col-md-4">
+          <label for="versionNo" class="form-label text-primary">Version No</label>
+          <input type="number" class="form-control control-bg-gray" formControlName="versionNo">
+        </div>
+        <div class="col-md-4">
+          <label for="versionDate" class="form-label text-primary">Version Date</label>
+          <input type="date" class="form-control control-bg-gray" formControlName="versionDate">
+        </div>
+        <div class="col-md-2">
+          <label for="versionDate" class="form-label text-primary">&nbsp;</label>
+          <app-button buttonType="add" (click)="plInc()"></app-button>
+        </div>
+      </div>
+      <hr>
+      <div class="row mb-5">
+        <div class="col-md-4">
+          <div class="mt-2">
+            <label for="GYFR" class="form-label text-primary">Gross Yield Fixed Rate (%)</label>
+            <input type="text" title='Gross Yield Fixed Rate (%)' formControlName="GYFR"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="GYFT" class="form-label text-primary">Gross Yield Fixed Table</label>
+            <select type="select" title='Gross Yield Fixed Table' formControlName="GYFT"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="GYMR" class="form-label text-primary">Gross Yield Margin Rate (%)</label>
+            <input type="text" title='Gross Yield Margin Rate (%)' formControlName="GYMR"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="MRT" class="form-label text-primary">Mortality Rate Table</label>
+            <select type="select" title='Mortality Rate Table' formControlName="MRT"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="PMR" class="form-label text-primary">Profit Margin Rate (% of Premium)</label>
+            <input type="text" title='Profit Margin Rate (%)' formControlName="PMR"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="PMRT" class="form-label text-primary">Profit Margin Rate Table</label>
+            <select type="select" title='Profit Margin Rate Table' formControlName="PMRT"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="REFA" class="form-label text-primary">Renewal Expense Fixed Amount</label>
+            <input type="text" title='Renewal Expense Fixed Amount' formControlName="REFA"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="REAT" class="form-label text-primary">Renewel Expense Amount Table</label>
+            <select type="select" title='Renewel Expense Amount Table' formControlName="REAT"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mt-2">
+            <label for="UWEFA" class="form-label text-primary">UW Expense Fixed Amount</label>
+            <input type="text" title='UW Expense Fixed Amount' formControlName="UWEFA"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="UWET" class="form-label text-primary">UW Expense Table</label>
+            <select type="select" title='UW Expense Table' formControlName="UWET" class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="inflationRate" class="form-label text-primary">Inflation Rate (% at every anniversary)</label>
+            <input type="text" title='Inflation Rate (%)' formControlName="inflationRate"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="IRT" class="form-label text-primary">Inflation Rate Table</label>
+            <select type="select" title='Inflation Rate Table' formControlName="IRT"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="OMR" class="form-label text-primary">Other Margins Rate (% of Premium)</label>
+            <input type="text" title='Other Margins Rate (%)' formControlName="OMR"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="OMT" class="form-label text-primary">Other Margins Table</label>
+            <select type="select" title='Other Margins Table' formControlName="OMT"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="IEA" class="form-label text-primary">Intial Expense Amount</label>
+            <input type="text" title='Intial Expense Amount' formControlName="IEA" class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="CER" class="form-label text-primary">Commission Exp Rate(% of every premium)</label>
+            <input type="text" title='Commission Exp Rate' formControlName="CER" class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="CET" class="form-label text-primary">Commission Exp Table</label>
+            <select type="select" title='Commission Exp Table' formControlName="CET"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mt-2">
+            <label for="HCER" class="form-label text-primary">Hierachy Comm Exp Rate (% of every commission)</label>
+            <input type="text" title='Hierachy Comm Exp Rate (%)' formControlName="HCER"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="HCET" class="form-label text-primary">Hierachy Comm Exp Table</label>
+            <select type="select" title='Hierachy Comm Exp Table' formControlName="HCET"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="LFR" class="form-label text-primary">Lapse Fixed Rate (%)</label>
+            <input type="text" title='Lapse Fixed Rate (%)' formControlName="LFR" class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="LRT" class="form-label text-primary">Lapse Rate Table</label>
+            <select type="select" title='Lapse Rate Table' formControlName="LRT" class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="regulatory1" class="form-label text-primary">Regulatory Levy 1 Basis</label>
+            <select type="select" title='Regulatory Levy 1 Basis' formControlName="regulatory1"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="regulatory1Rate" class="form-label text-primary">Regulatory Levy 1 Rate</label>
+            <input type="text" title='Regulatory Levy 1 Rate' formControlName="regulatory1Rate"
+                   class="form-control control-bg-gray">
+          </div>
+          <div class="mt-2">
+            <label for="regulatory2" class="form-label text-primary">Regulatory Levy 2 Basis</label>
+            <select type="select" title='Regulatory Levy 2 Basis' formControlName="regulatory2"
+                    class="form-control control-bg-gray">
+              <option value="tb1">tb1</option>
+              <option value="tb1">tb2</option>
+            </select>
+          </div>
+          <div class="mt-2">
+            <label for="regulatory2Rate" class="form-label text-primary">Regulatory Levy 2 Rate</label>
+            <input type="text" title='Regulatory Levy 2 Rate' formControlName="regulatory2Rate"
+                   class="form-control control-bg-gray">
+          </div>
+
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <div class="col-2">
+          <app-button buttonType="save"></app-button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+</div>

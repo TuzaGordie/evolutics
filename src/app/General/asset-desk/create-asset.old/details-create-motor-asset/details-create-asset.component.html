@@ -1,0 +1,321 @@
+<loader [loading]="loading" text="Saving Asset Details...">
+
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="container-fluid">
+          <div class="control-grp">
+            <label class="form-label "> Vehicle Type</label>
+            <select [(ngModel)]="vehicleType" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Vehicle Type</option>
+              <option *ngFor="let asset of VehicleTypeData" [value]="asset.code">{{asset.code}} - {{asset.title}}
+              </option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Brand</label>
+            <select [(ngModel)]="brand" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Brand</option>
+              <option *ngFor="let asset of brandData" [value]="asset.code">{{asset.code}} - {{asset.description}}
+              </option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Make</label>
+            <select [(ngModel)]="make" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Make</option>
+              <option *ngFor="let asset of aS.getMake|functionCaller1:brand|async" [value]="asset.code">{{asset.code}} -
+                {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Model</label>
+            <select [(ngModel)]="model" class="form-control control-bg-gray ht-41" (change)="patchByModel($event)">
+              <option [ngValue]="null">Select Model</option>
+              <option *ngFor="let asset of aS.getModel|functionCaller1:make|async" [value]="asset.code">{{asset.code}} -
+                {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Manufacture Year</label>
+            <input type="date" class="form-control control-bg-gray mr-2" [(ngModel)]="manufactureYear"
+              name="manufactureYear">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Usage</label>
+            <select [(ngModel)]="usage" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Usage</option>
+              <option *ngFor="let asset of UsageData" [value]="asset.code">{{asset.code}} - {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Category</label>
+            <!--<select class="form-control control-bg-gray mr-2" required>
+                        <option value=""></option>
+                        <option value="">1</option>
+                    </select>-->
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="category" name="category">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Fuel Type</label>
+            <select [(ngModel)]="fuelType" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select FuelType</option>
+              <option *ngFor="let asset of FuelTypeData" [value]="asset.code">{{asset.code}} - {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Tonnage</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="tonnage" name="tonnage">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> HorsePower</label>
+            <input type="number" pattern="/^-?(0|[1-9]\d*)?$/" class="form-control control-bg-gray mr-2"
+              [(ngModel)]="horsePower" name="horsePower">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> No of Seats</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="noOfSeat" name="noOfSeat">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> No of Authorised Drivers</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="noOfAuthorizeddriver"
+              name="noOfAuthorizeddriver">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Displacement</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="displacement" name="displacement">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Transmission</label>
+            <select [(ngModel)]="transmission" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Transmission</option>
+              <option *ngFor="let asset of getTransmissions|functionCaller|async" value="{{asset.code}}">{{asset.code}}
+                -
+                {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div><br>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="container-fluid">
+          <div class="control-grp">
+            <label class="form-label "> Nature of goods transported</label>
+            <select [(ngModel)]="natureOfGoodstransported" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Nature of Goods</option>
+              <option *ngFor="let asset of NatureofgoodstransportedData" [value]="asset.code">{{asset.code}} -
+                {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="col">
+              <div class="control-grp">
+                <label class="form-label "> Enter Owner Client Number</label>
+                <input type="text" class="form-control control-bg-gray mr-2" (keyup)="checkClientNo()"
+                  [(ngModel)]="clientNum" name="enterOwnerClientNo">
+                <div style="display: none;"><i class="fa fa-check"></i></div>
+                <div style="display: none;"><i class="fa fa-times"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="control-grp">
+                <label class="form-label ">&nbsp;</label>
+                <input type="text" readonly class="form-control control-bg-gray mr-2" [value]="clientName"
+                  name="enterOwnerClientNo">
+                <div style="display: none;"><i class="fa fa-check"></i></div>
+                <div style="display: none;"><i class="fa fa-times"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Estimated Value by Client</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="estimatedValueByclient"
+              name="estimatedValueByclient">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Estimated Value by System</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="estimatedValueBySystem"
+              name="estimatedValueBySystem">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Country</label>
+            <select [(ngModel)]="country" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Country</option>
+              <option *ngFor="let asset of lS.getCountries|functionCaller|async" value="{{asset.code}}">{{asset.code}} -
+                {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Region</label>
+            <select [(ngModel)]="region" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Region</option>
+              <option *ngFor="let asset of lS.getRegion|functionCaller1:country|async" [value]="asset.code">
+                {{asset.code}} - {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> State</label>
+            <select [(ngModel)]="state" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select State</option>
+              <option *ngFor="let asset of lS.getStates|functionCaller1:region|async" [value]="asset.code">
+                {{asset.code}} - {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Address</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="address" name="address">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Geolocation</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="geolocation" name="geolocation">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+
+          <div class="control-grp">
+            <label class="form-label "> Currency</label>
+            <select [(ngModel)]="currency" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Currency</option>
+              <option *ngFor="let asset of CurrencyData" [value]="asset.code">{{asset.code}} - {{asset.description}}
+              </option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Registration No</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="registrationNo"
+              name="registrationNo">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Chasis Number</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="chasisNumber" name="chasisNumber">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Engine Number</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="enginNumber" name="enginNumber">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <div class="row">
+              <div class="col d-inline-flex">
+                <label class="me-3 ">
+                  Tracked
+                </label>
+                <input type="checkbox" [(ngModel)]="tracked" name="tracked"
+                  class="mt-auto form-control control-bg-gray d-inline-block">
+              </div>
+              <div class="col d-inline-flex">
+                <label class="me-3 ">
+                  Trailer
+                </label>
+                <input type="checkbox" [(ngModel)]="trailer" name="trailer"
+                  class="mt-auto form-control control-bg-gray d-inline-block">
+              </div>
+              <div class="col d-inline-flex">
+                <label class="me-3 ">
+                  Dual Control
+                </label>
+                <input type="checkbox" [(ngModel)]="duelControl" name="duelControl"
+                  class="mt-auto form-control control-bg-gray d-inline-block">
+              </div>
+            </div>
+          </div><br>
+        </div>
+      </div>
+      <div class="row justify-content-between btns-area">
+        <div class="col-md-6">
+          <div class="row">
+            <!--<div class="col-5">
+                    <app-button buttonType="defaultGB" text="Content"></app-button>
+                </div>
+                <div class="col-5">
+                    <app-button buttonType="defaultGB"  text="Risk Survey"></app-button>
+                </div>-->
+          </div>
+        </div>
+        <div class="col-md-2">
+          <!--<app-button buttonType="defaultGB" text="Submit"></app-button>-->
+          <app-btn icon="save" mclass="btn btn-outline-warning btn-lg btn-clone w-100" (click)="save()">Save</app-btn>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+</loader>

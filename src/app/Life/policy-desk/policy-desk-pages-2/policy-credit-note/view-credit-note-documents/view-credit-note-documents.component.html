@@ -1,0 +1,13 @@
+<div class="">
+  <div class="d-flex justify-content-between">
+    <div class="page-head m-0">
+      {{'View Credit Note Documents'|appTranslate|async}}
+    </div>
+    <div class="">
+      <img src="../../../../../assets/img/close.svg" alt="" class="pointer" (click)="close()">
+    </div>
+  </div>
+  <div class="">
+    <table-plain [data]="list" [displayedColumns]="dCols"></table-plain>
+  </div>
+</div>

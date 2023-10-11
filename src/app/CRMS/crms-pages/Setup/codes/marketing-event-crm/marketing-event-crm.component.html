@@ -1,0 +1,142 @@
+<app-form-navigation [title]="'Set Up / Codes / Marketing Events'"></app-form-navigation>
+<loader [loading]="loading" [height]="formTag.offsetHeight">
+<div class="container">
+  <form [formGroup]="form" (submit)="onSubmit()" #formTag>
+  <div class="row">
+    <div class="col">
+      <app-input-basic label="Event Code" type="text" [disabled]="true" [form]="form" name="eventCode" [stacked]="true">
+      </app-input-basic>
+    </div>
+
+    <div class="col">
+      <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Company" [form]="form" type="select" name="company" [stacked]="true"
+      [options]="setS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" labelField="code" valueField="code" #companyCode>
+    </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Currency" [form]="form" type="select" name="currency" valueField="code" [stacked]="true"
+      [options]="setS.getCurrency|functionCaller|async" labelType="cd" #currency>
+    </app-input-basic>
+    </div>
+
+
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <app-input-basic label="Estimated Cost Event" type="text" [form]="form" name="estimatedEventCost" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <app-input-basic label="Partner No" (keyup)="findPartner()" type="text" [form]="form" name="partnerNo" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-red">&nbsp;</label>
+          <app-btn routerLink="find-provider" [valid]="showmode" icon="search" buttonType="find"></app-btn>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <app-input-basic label="Partner Name" type="text" [form]="form" name="partnerName" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row mt-2">
+    <label for="" class="">Location</label>
+  </div>
+  <div formArrayName="locationList">
+  <div class="row mt-2 g-2" *ngFor="let loca of locationList.controls; let m = index;" [formGroupName]="m">
+    <div class="col">
+      <app-input-basic label="Event Country" [form]="loca" type="select" name="eventCountry" [stacked]="true"
+      [options]="setS.getCountry|functionCaller|async" labelType="cd" valueField="code" #eventCountry>
+    </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Event Region" [form]="loca" type="select" name="eventRegion" [stacked]="true"
+      [options]="setS.getRegionByCountry|functionCaller1:eventCountry?.value|async" valueField="code" labelType="cd" #eventRegion>
+    </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Event City" [form]="loca" type="select" name="eventCity" [stacked]="true"
+      [options]="setS.getCityByRegion|functionCaller1:eventRegion?.value|async" valueField="code" labelType="cd" #eventCity>
+    </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Event Town" [form]="loca" type="select" name="eventTown" [stacked]="true"
+      [options]="setS.getTownByCity|functionCaller1:eventCity?.value|async" valueField="code" labelType="cd" #eventTown>
+    </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Event Address" type="text" [form]="loca" name="eventAddress" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Date From" type="date" [form]="loca" name="dateFrom" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Date To" type="date" [form]="loca" name="dateTo" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-red">&nbsp;</label>
+      <app-btn (click)="locationInc()" type="secondary" icon="add" [valid]="showmode" buttonType="addred"></app-btn>
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-red">&nbsp;</label>
+      <app-btn (click)="removeLocation(m)" type="secondary" icon="delete" [valid]="showmode"  buttonType="delete"></app-btn>
+    </div>
+  </div>
+</div>
+
+  <div class="row mt-2">
+
+
+  </div>
+
+  <div class="row mt-2">
+    <label for="" class="">Expectations</label>
+  </div>
+
+  <div formArrayName="marketingExpectList">
+  <div class="row mt-2 g-2" *ngFor="let exp of marketingExpectList.controls; let i = index;" [formGroupName]="i">
+    <div class="col">
+      <app-input-basic label="Attribute" type="select" [form]="exp" name="attribute" [stacked]="true"
+       labelType="ct" [options]="customerAttributesList" labelType="ct" valueField="code" labelField="code">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Value Expected" type="text" [form]="exp" name="valueExpected" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-red">&nbsp;</label>
+      <app-btn (click)="expectationInc()" type="secondary" icon="add" [valid]="showmode" buttonType="addred"></app-btn>
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-red">&nbsp;</label>
+      <app-btn (click)="removeExpectations(i)" type="secondary" icon="add" [valid]="showmode" buttonType="delete"></app-btn>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <label></label>
+      <!-- <app-button (click)="addDestinationStatus()"  buttonType="addred"></app-button> -->
+      <app-btn type="secondary" icon="save" [valid]="form?.valid" (mclick)="onSubmit()">Submit</app-btn>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+</loader>
+

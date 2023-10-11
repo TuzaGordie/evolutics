@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="d-flex">
+        <p class="py-3 mx-3"><b>Client Name:</b> <span class="px-3">{{clientFullName}}</span>
+        </p>
+        <p class="py-3 mx-3"><b>Family size:</b> <span class="px-3">{{clientRelationshipsForm.value.length}}</span></p>
+      </div>
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <!-- <th scope="col" style="border-bottom-left-radius: 12px;">Client Number</th> -->
+          <!-- <th scope="col">Is</th> -->
+          <!-- <th scope="col">Connector</th> -->
+          <th scope="col">Full Name</th>
+          <th scope="col">Rel</th>
+          <th scope="col">Email</th>
+          <th scope="col">Client Number</th>
+          <th scope="col">Client Status</th>
+          <th scope="col" style="border-top-right-radius: 12px;">Rel Date</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let relation of clientRelationshipsForm.controls; index as i">
+          <tr [formGroup]="$any(clientRelationshipsForm.controls[i])">
+            <!-- <th scope="row"><input formControlName="clientNo" readonly></th> -->
+            <td><input formControlName="fullName" readonly></td>
+            <td>
+              <select formControlName="relationship" readonly [attr.disabled]="true">
+                <option *ngFor="let type of RELATIONSHIP_TYPES" [value]="type.code">{{type.description}}</option>
+              </select>
+            </td>
+            <td><input formControlName="email" readonly type="email"></td>
+            <td><input formControlName="relClientNo" readonly></td>
+            <td><input formControlName="clientStatus" readonly></td>
+            <td><input formControlName="relDt" readonly type="date"></td>
+            <td>
+              <app-button buttonType="edit"></app-button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngFor="let relation of newRelationsList; index as i">
+          <tr [formGroup]="newRelationsList[i]">
+            <!-- <th scope="row">
+              <input formControlName="clientNo" readonly>
+            </th> -->
+            <td>
+              <input formControlName="fullName" class="form-control">
+            </td>
+            <td>
+              <select formControlName="relationship" class="form-control">
+                <option *ngFor="let type of RELATIONSHIP_TYPES" [value]="type.code">{{type.description}}</option>
+              </select>
+            </td>
+            <td>
+              <input formControlName="email" class="form-control">
+            </td>
+            <td>
+              <input formControlName="relClientNo" class="form-control">
+            </td>
+            <td>
+              <input formControlName="clientStatus" class="form-control">
+            </td>
+            <td>
+              <input formControlName="relDt" class="form-control" type="date">
+            </td>
+            <td>
+              <app-button buttonType="custSave" (click)="onSaveNewRelation(newRelationsList[i])"></app-button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-3">
+
+        <app-button [buttonType]="'addCustom'" [text]="'Set New Relationship'" (click)="addNewRelationForm()"
+        ></app-button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="">
+  <div class="d-flex justify-content-evenly align-items-center">
+    <div class="m-0 page-head-pop-up text-center w-100">
+      {{'Create Payment Outward'|appTranslate|async}}
+    </div>
+    <div class="">
+      <img src="../../../../../assets/img/close.svg" alt="" class="pointer" (click)="close()">
+    </div>
+  </div>
+  <div class=" my-3">
+    <div class="row justify-content-between">
+      <div class="col-lg-2" *ngFor="let item of lbls">
+        <text-case-1 [lbl]="item.key" [val]="item.value" [stacked]="false"></text-case-1>
+      </div>
+    </div>
+  </div>
+
+  <div class=" my-3">
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th *ngFor="let item of dCols">{{item.t}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of rows">
+              <td *ngFor="let input of item.inputs;let i = index">
+                <ng-container *ngIf="i!=2; else elseTemplate">
+                  <app-input [input]="input" [stacked]="false" [showLabel]="false"></app-input>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  {{input?.formControl?.value}}
+                </ng-template>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <app-btn icon="add" (mclick)="addRow()" type="secondary">Add</app-btn>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <app-input [input]="inputs[1]" [stacked]="true"></app-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-1 mt-md-3">
+    <div class="col-md-3">
+      <app-btn icon="checked" type="primary" (mclick)="save()">Submit</app-btn>
+    </div>
+  </div>
+</div>

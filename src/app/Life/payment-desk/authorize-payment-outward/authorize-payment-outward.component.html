@@ -1,0 +1,1480 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="form-group mt-2">
+        <div class="row g-3 form-group mt-2 pt-2">
+          <div class="col-1">
+            <label class="text-primary form-label">{{'Show All'|appTranslate|async}}</label>
+            <input class="form-control width-unset control-bg-gray" id="showAll" type="checkbox" (change)="reset()" />
+          </div>
+          <div class="col form-group">
+            <label class="text-primary form-label">{{'Payment Status'|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray" [(ngModel)]="filterPaymentStatus" (change)="filter()">
+              <option value=""></option>
+              <option [value]="status.code" *ngFor="let status of paymentStatus">{{status.code}}-{{status.title}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col">
+            <label class="text-primary form-label">SLA Level</label>
+            <select class="form-control  control-bg-gray"></select>
+          </div> -->
+          <div class="col form-group">
+            <label class="text-primary form-label">{{'Currency'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="filterCurrency" (change)="filter()">
+              <option value=""></option>
+              <option [value]="currency.code" *ngFor="let currency of currencies">
+                {{currency.code}}-{{currency.description}}</option>
+            </select>
+          </div>
+          <div class="col form-group">
+            <label class="text-primary form-label">{{'Company'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="filterCompanyCode" (change)="filter()">
+              <option value=""></option>
+              <option [value]="company.code" *ngFor="let company of companies">{{company.code}}-{{company.description}}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col-2 form-group">
+            <label for="" class="form-label text-primary">Items per page</label>
+            <select class="form-control control-bg-gray" #select>
+              <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+            </select>
+          </div>
+        </div> -->
+        </div>
+
+        <div class="items-per-page mt-2">
+          <div class="left">
+            <div class="row" *ngIf="checkedList2.length">
+              <div class="col">
+                <!-- <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizePaymentModal">Authorize</span> -->
+                <span class="badge bg-primary" (click)="openAuthorizeDialog()">{{'Authorize'|appTranslate|async}}</span>
+              </div>
+              <div class="col">
+                <!-- <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declinePaymentModal">Decline</span> -->
+                <span class="badge bg-danger" (click)="openDeclineDialog()">{{'Decline'|appTranslate|async}}</span>
+
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div>
+
+            </div>
+          </div>
+        </div>
+
+        <table class="table table-responsive  table-striped form-group mt-2 pt-2">
+          <thead class="py-3">
+            <tr>
+              <th scope="col">{{'Payment ID'|appTranslate|async}}</th>
+              <th scope="col">{{'Policy No'|appTranslate|async}}</th>
+              <th scope="col">{{'Initial Estimate'|appTranslate|async}}</th>
+              <th scope="col">{{'Adjustments'|appTranslate|async}}</th>
+              <th scope="col">{{'Final Amount'|appTranslate|async}}</th>
+              <th scope="col">{{'Currency'|appTranslate|async}}</th>
+              <th scope="col">{{'Company Code'|appTranslate|async}}</th>
+              <th scope="col">{{'Created On'|appTranslate|async}}</th>
+              <th scope="col">{{'Created By'|appTranslate|async}}</th>
+              <th scope="col">{{'Updated By'|appTranslate|async}}</th>
+              <th scope="col">{{'Payment Status'|appTranslate|async}}</th>
+              <th scope="col">
+                <input type="checkbox" class="form-control" [(ngModel)]="isMasterSel" name="select" value=""
+                  (change)="checkUncheckAll()">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let payment of authorizePayments" class="nowrap">
+              <td><a routerLink="../view-payout" [queryParams]="{slug:payment.PaymentId}">{{payment.id}}</a>
+              </td>
+              <td><a routerLink="../../policy-desk/view-policy" [queryParams]="{number:payment.policyNo,code:payment.policyCode,suffix:payment.policyNoSuffix}">{{payment.policyNo}}</a></td>
+              <td>{{payment.initialAmount | number}}</td>
+              <td>{{payment.adjAmt | number}}</td>
+              <td>{{payment.netAmt | number}}</td>
+              <td>{{payment.currency}}</td>
+              <td>{{payment.companyCode}}</td>
+              <td>{{payment.createdOn | date}}</td>
+              <td>{{payment.createdBy}}</td>
+              <td>{{payment.lastChangeBy}}</td>
+              <td>{{payment.status}}</td>
+              <td>
+                <input type="checkbox" class="form-control" [(ngModel)]="payment.selected" value="{{payment.ClaimNo}}"
+                  (change)="isAllSelected()">
+              </td>
+            </tr>
+            <tr *ngIf="authorizePayments.length === 0">
+              <td colspan="14">
+                <span class="text-primary">{{'No records were found.'|appTranslate|async}}</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- <div class="row justify-content-end">
+        <div class="col-2"><app-button buttonType="save"></app-button> </div>
+      </div> -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+              <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy No'|appTranslate|async}}: </label><label
+                    class="valuehead">LTR21456</label></li>
+
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Owner Client Number'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Joint Owner Client Number'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'External Ref'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Cover Name'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+
+              </ul>
+              <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Referrer'|appTranslate|async}}: </label><label
+                    class="valuehead">256-Amala Boy</label></li>
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Cover Name'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy Code Claim On'|appTranslate|async}}: </label><label
+                    class="valuehead">3</label></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+
+              </ul>
+
+              <hr>
+
+              <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                <li class="nav-item" role="presentation"><label class="valuehead">{{'Renewals'|appTranslate|async}}</label></li>
+
+                <li class="nav-item" role="presentation"><label class="valuehead">1</label></li>
+                <li class="nav-item" role="presentation"><label class="valuehead">2</label></li>
+                <li class="nav-item" role="presentation"><label class="valuehead">3</label></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+                <li class="nav-item" role="presentation"></li>
+              </ul>
+              <hr>
+
+              <div class="row g-3">
+                <div class="col-2">
+                  <div class="form-group mt-2">
+                    {{'Owner Full Name'|appTranslate|async}}
+                    <label class="text-primary form-label">James Bond</label>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Joint Owner Full Name'|appTranslate|async}}
+                      <label class="text-primary form-label">James Bond</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Policy Matures'|appTranslate|async}}
+                      <label class="text-primary form-label">23/Oct/2021</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Policy Issue Date'|appTranslate|async}}
+                      <label class="text-primary form-label">23/Oct/2021</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Policy Status'|appTranslate|async}}
+                      <label class="text-primary form-label">23/Oct/2021</label>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Currency'|appTranslate|async}}
+                      <label class="text-primary form-label">NGN</label>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+                <div class="row g-3">
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Outstanding Premiums'|appTranslate|async}}
+                      <label class="text-primary form-label">23000</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Outstanding Target Contribution'|appTranslate|async}}
+                      <label class="text-primary form-label">23000</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Total Sum at Risk'|appTranslate|async}}
+                      <label class="text-primary form-label">200000</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Deposit Balance'|appTranslate|async}}
+                      <label class="text-primary form-label">400000</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Annualsed Premium'|appTranslate|async}}
+                      <label class="text-primary form-label">23000</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Premium Payment Term'|appTranslate|async}}
+                      <label class="text-primary form-label">0 Yr 6 mo</label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Policy Term'|appTranslate|async}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label class="text-primary form-label">0 Yr 6 mo</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Premium Payment Method'|appTranslate|async}}
+                      <label class="text-primary form-label">Direct Debits</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Payee Account'|appTranslate|async}}
+                      <label class="text-primary form-label">XXX_1</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Payment Outwards Account'|appTranslate|async}}
+                      <label class="text-primary form-label">XXX_1</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Benefits Assigned To'|appTranslate|async}}
+                      <label class="text-primary form-label">3456 James-Bond</label>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Branch'|appTranslate|async}}
+                      <label class="text-primary form-label">LA01</label>
+                    </div>
+                  </div>
+
+                </div>
+
+                <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+                  <thead class="py-3">
+                  <tr>
+
+                    <th scope="col">{{'Cover Code'|appTranslate|async}}</th>
+                    <th scope="col">{{'Cover Name'|appTranslate|async}}</th>
+                    <th scope="col">{{'Life Assured'|appTranslate|async}}</th>
+                    <th scope="col">{{'Issued Age'|appTranslate|async}}</th>
+                    <th scope="col">{{'Current Age'|appTranslate|async}}</th>
+                    <th scope="col">{{'Prem Freq/Method'|appTranslate|async}}</th>
+                    <th scope="col">{{'Periodic Premium'|appTranslate|async}}</th>
+                    <th scope="col">{{'Sum Assured'|appTranslate|async}}</th>
+                    <th scope="col">{{'Issue Dt'|appTranslate|async}}</th>
+                    <th scope="col">{{'Next Prem Due Dt'|appTranslate|async}}</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>LRT</td>
+                    <td>Life Rider</td>
+                    <td>4567</td>
+                    <td>6667</td>
+                    <td>25000</td>
+                    <td>MD</td>
+                    <td>35000</td>
+                    <td>50000</td>
+                    <td>1/Jan/2021</td>
+                    <td>23/Oct/2021</td>
+                  </tr>
+                  <tr>
+                    <td>LRT</td>
+                    <td>Life Rider</td>
+                    <td>4567</td>
+                    <td>6667</td>
+                    <td>25000</td>
+                    <td>MD</td>
+                    <td>35000</td>
+                    <td>50000</td>
+                    <td>1/Jan/2021</td>
+                    <td>23/Oct/2021</td>
+                  </tr>
+                  <tr>
+                    <td>LRT</td>
+                    <td>Life Rider</td>
+                    <td>4567</td>
+                    <td>6667</td>
+                    <td>25000</td>
+                    <td>MD</td>
+                    <td>35000</td>
+                    <td>50000</td>
+                    <td>1/Jan/2021</td>
+                    <td>23/Oct/2021</td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
+
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Documents'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Workflows'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Endorsements'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Reinsurance'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Pricing'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Underwriting'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Commissions'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Future Actions'|appTranslate|async}}</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="btn btn btn-outline-primary btn-lg btn-clone" type="button">{{'Peril'|appTranslate|async}}</button>
+                  </li>
+                </ul>
+                <div id="section_home">
+                  <div class="container-fluid p-3">
+                    <div id="section_cardsno" class="section-cards" class="row justify-content-around">
+
+                      <div class="row">
+                        <div class="col-md-2">
+                          <a data-bs-toggle="modal" href="#" data-bs-target="#lossratios">
+                            <div class="col">
+                              <div class="card color7 shadow-sm">
+                                <div class="card-body">
+                                  <p>{{'Loss Ratios'|appTranslate|async}}</p>
+                                </div>
+
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+
+                        <div class="col-md-2">
+
+                          <div class="col">
+                            <div class="card color6 shadow-sm">
+                              <div class="card-body">
+                                <p>{{'Loss Detail'|appTranslate|async}}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+                          <a data-bs-toggle="modal" href="#" data-bs-target="#payee">
+                            <div class="col">
+                              <div class="card color6 shadow-sm">
+                                <div class="card-body">
+                                  <p>{{'Payee'|appTranslate|async}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <div class="col-md-2" data-bs-toggle="modal" href="#" data-bs-target="#adjustments" data-bs-dismiss="modal">
+                          <a>
+                            <div class="col">
+                              <div class="card color6 shadow-sm">
+                                <div class="card-body">
+                                  <p>{{'Claim Adjustments'|appTranslate|async}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <div class="col-md-2">
+
+                          <div class="col">
+                            <div class="card color6 shadow-sm">
+                              <div class="card-body">
+                                <p>{{'Loss Parties'|appTranslate|async}}</p>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+                          <a data-bs-toggle="modal" href="#" data-bs-target="#athorisation">
+                            <div class="col">
+                              <div class="card color6 shadow-sm">
+                                <div class="card-body">
+                                  <p>{{'Payment Athorisation History'|appTranslate|async}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-1 pt-1">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                      <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModals">
+                        <app-button [buttonType]="'action'"></app-button>
+                      </a>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+            <div class="container">
+              <div class="form-group mt-2">
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-5">
+                      <label class="text-primary form-label">{{'User Id'|appTranslate|async}}:J-Bond</label>
+
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+                    <div class="col-6 form-group mt-6 pt-6">
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-5">
+                      <label class="text-primary form-label">{{'Password'|appTranslate|async}}</label>
+                      <input class="form-control  control-bg-gray" type="text"/>
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+                    <div class="col-6 form-group mt-6 pt-6">
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-7">
+                      <label class="text-primary form-label">{{'Comment(Optional)'|appTranslate|async}}</label>
+                      <textarea class="form-control  control-bg-gray"></textarea>
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+                    <div class="col-4 form-group mt-6 pt-6">
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-1 pt-1">
+                    <div class="col-4"></div>
+                    <div class="col-2">
+                      <label class="text-primary form-label">{{'Create Workflows'|appTranslate|async}}</label>
+                    </div>
+                    <div class="col-1">
+                      <input class="form-control width-unset control-bg-gray largerCheckbox" type="checkbox"/>
+                    </div>
+                    <div class="col-2">
+                      <app-button [buttonType]="'Authorise'"></app-button>
+                    </div>
+                    <div class="col-2">
+                      <app-button [buttonType]="'Decline'"></app-button>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-7">
+
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+                    <div class="col-4 form-group mt-6 pt-6">
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-7">
+
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+                    <div class="col-4 form-group mt-6 pt-6">
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="lossratios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <label class="valuehead">{{'Loss Retio'|appTranslate|async}}</label>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+            <div class="container">
+              <div class="form-group mt-2">
+
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy No'|appTranslate|async}}: </label><label
+                    class="valuehead">LTR21456</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Owner'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Initial Estimate'|appTranslate|async}}: </label><label
+                    class="valuehead">12000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Adjustments'|appTranslate|async}}: </label><label
+                    class="valuehead">22000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Final Amount'|appTranslate|async}}: </label><label
+                    class="valuehead">23000</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Payment Type'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                </ul>
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Cover Name'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy Code Claim On'|appTranslate|async}}: </label><label
+                    class="valuehead">3</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Sector'|appTranslate|async}}: </label><label
+                    class="valuehead">M-Manufacturing</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Client Segment'|appTranslate|async}}: </label><label
+                    class="valuehead">C</label></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+
+                </ul>
+
+                <hr>
+
+                <div class="row g-3">
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Aggregate Loss Retio Client'|appTranslate|async}}
+                      <label class="valuehead">97%</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Aggregate Loss Retio Policy No'|appTranslate|async}}
+                      <label class="valuehead">97%</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Aggregate Loss Retio Policy Code'|appTranslate|async}}
+                      <label class="valuehead">97%</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Aggregate Loss Retio Sector'|appTranslate|async}}
+                      <label class="valuehead">97%</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Aggregate Loss Retio Segment'|appTranslate|async}}
+                      <label class="valuehead">97%</label>
+                    </div>
+                  </div>
+
+
+                </div>
+                <hr>
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-2 pt-2">
+
+                    <div class="col-4 form-group">
+                      <label class="text-primary form-label">{{'Sort Filter Criteria'|appTranslate|async}}</label>
+                      <select class="form-control  control-bg-gray"></select>
+                    </div>
+
+                  </div>
+                </div>
+
+                <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+                  <thead class="py-3">
+                  <tr>
+
+                    <th scope="col">{{'Year'|appTranslate|async}}</th>
+                    <th scope="col">{{'Client Number'|appTranslate|async}}</th>
+                    <th scope="col">{{'Policy No'|appTranslate|async}}</th>
+                    <th scope="col">{{'Policy Code'|appTranslate|async}}</th>
+                    <th scope="col">{{'Total Premium'|appTranslate|async}}</th>
+                    <th scope="col">{{'Total Claim'|appTranslate|async}}</th>
+                    <th scope="col">{{'Loss Retio Policy'|appTranslate|async}}</th>
+                    <th scope="col">{{'Loss Retio Sector'|appTranslate|async}}</th>
+                    <th scope="col">{{'Loss Retio Segment'|appTranslate|async}}</th>
+
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>2020</td>
+                    <td>4567</td>
+                    <td>LTR4567</td>
+                    <td>1</td>
+                    <td>25000</td>
+                    <td>35000</td>
+                    <td>65%</td>
+                    <td>65%</td>
+                    <td>65%</td>
+
+                  </tr>
+                  <tr>
+                    <td>2020</td>
+                    <td>4567</td>
+                    <td>LTR4567</td>
+                    <td>1</td>
+                    <td>25000</td>
+                    <td>35000</td>
+                    <td>65%</td>
+                    <td>65%</td>
+                    <td>65%</td>
+
+                  </tr>
+
+                  </tbody>
+                </table>
+
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-1 pt-1">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                      <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModals">
+                        <app-button [buttonType]="'action'"></app-button>
+                      </a>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="payee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <label class="valuehead">{{'Payee'|appTranslate|async}}</label>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+            <div class="container">
+              <div class="form-group mt-2">
+
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy No'|appTranslate|async}}: </label><label
+                    class="valuehead">LTR21456</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Owner'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Initial Estimate'|appTranslate|async}}: </label><label
+                    class="valuehead">12000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Adjustments'|appTranslate|async}}: </label><label
+                    class="valuehead">22000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Final Amount'|appTranslate|async}}: </label><label
+                    class="valuehead">23000</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Payment Type'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                </ul>
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Cover Name'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy Code Claim On'|appTranslate|async}}: </label><label
+                    class="valuehead">3</label></li>
+
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+
+                </ul>
+
+                <hr>
+
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation"><label class="valuehead">{{'Renewals'|appTranslate|async}}</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="valuehead">1</label></li>
+                  <li class="nav-item" role="presentation"><label class="valuehead">2</label></li>
+                  <li class="nav-item" role="presentation"><label class="valuehead">3</label></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                </ul>
+                <hr>
+
+                <div class="row g-3">
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Proportion(%)'|appTranslate|async}}
+                      <label class="valuehead">100</label>
+                    </div>
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Amount'|appTranslate|async}}
+                      <label class="valuehead">179000</label>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Currency'|appTranslate|async}}
+                      <label class="valuehead">NGN</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Payment Type'|appTranslate|async}}
+                      <label class="valuehead">Bank Credit</label>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Payee No'|appTranslate|async}}
+                      <label class="valuehead">978</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                      {{'Payee Policy No'|appTranslate|async}}
+                      <label class="valuehead">LTR9097</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                       {{'Payee Name'|appTranslate|async}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label class="valuehead">J-Bond</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group mt-2">
+                       {{'Bank No'|appTranslate|async}}&nbsp;&nbsp;&nbsp;&nbsp;
+                      <label class="valuehead">28844840008</label>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="form-group mt-2">
+                      {{'Claim No'|appTranslate|async}}
+                      <label class="valuehead">97785</label>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+                <div class="form-group mt-2">
+
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-9">
+                      <label class="text-primary form-label">{{'Narration'|appTranslate|async}}</label>
+                      <textarea class="form-control  control-bg-gray"></textarea>
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+
+                  </div>
+                </div>
+
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-1 pt-1">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                      <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModals">
+                        <app-button [buttonType]="'action'"></app-button>
+                      </a>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="adjustments" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <label class="valuehead">{{'Claim Adjustments'|appTranslate|async}}</label>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+            <div class="container">
+              <div class="form-group mt-2">
+
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy No'|appTranslate|async}}: </label><label
+                    class="valuehead">LTR21456</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Owner'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Initial Estimate'|appTranslate|async}}: </label><label
+                    class="valuehead">12000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Adjustments'|appTranslate|async}}: </label><label
+                    class="valuehead">22000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Updated Amount'|appTranslate|async}}: </label><label
+                    class="valuehead">23000</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Payment Type'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Currency'|appTranslate|async}}: </label><label
+                    class="valuehead">NGN</label></li>
+
+                </ul>
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Cover Name'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy Code Claim On'|appTranslate|async}}: </label><label
+                    class="valuehead">3</label></li>
+
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+
+                </ul>
+
+                <hr>
+
+                <table class="table table-responsive">
+                  <thead>
+                  <tr>
+                    <th scope="col">{{'Claim No'|appTranslate|async}}</th>
+                    <th scope="col">{{'Initial Estimate'|appTranslate|async}}</th>
+                    <th scope="col">{{'Adjustment'|appTranslate|async}}</th>
+                    <th scope="col">{{'Revised Estimate'|appTranslate|async}}</th>
+                    <th scope="col">{{'Adj Reason'|appTranslate|async}}</th>
+                    <th scope="col">{{'Currency'|appTranslate|async}}</th>
+                    <th scope="col">{{'Created By'|appTranslate|async}}</th>
+                    <th scope="col">{{'Created At'|appTranslate|async}}</th>
+                    <th scope="col">{{'Adj Auth User'|appTranslate|async}}</th>
+                    <th scope="col">{{'Adj Auth At'|appTranslate|async}}</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>12563</td>
+                    <td>10000</td>
+                    <td>12000</td>
+                    <td>25000</td>
+                    <td>Interest</td>
+                    <td>NGN</td>
+                    <td>J-Bond</td>
+                    <td>1/1/2020</td>
+                    <td>P-Parker</td>
+                    <td>1/1/2020</td>
+                  </tr>
+                  <tr>
+                    <td>12563</td>
+                    <td>10000</td>
+                    <td>12000</td>
+                    <td>25000</td>
+                    <td>Interest</td>
+                    <td>NGN</td>
+                    <td>J-Bond</td>
+                    <td>1/1/2020</td>
+                    <td>P-Parker</td>
+                    <td>1/1/2020</td>
+                  </tr>
+                  </tbody>
+                </table>
+
+
+                <div class="form-group mt-2">
+
+                  <div class="row g-3 form-group mt-2 pt-2">
+                    <div class="col-9">
+                      <label class="text-primary form-label">{{'Narration'|appTranslate|async}}</label>
+                      <textarea class="form-control  control-bg-gray"></textarea>
+                    </div>
+                    <div class="col-1 form-group mt-2 pt-2"></div>
+
+                  </div>
+                </div>
+
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-1 pt-1">
+                    <div class="col-8"></div>
+                    <div class="col-2">
+
+                      <app-button [buttonType]="'adjusts'"></app-button>
+
+                    </div>
+
+                    <div class="col-2">
+                      <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModals">
+                        <app-button [buttonType]="'action'"></app-button>
+                      </a>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="athorisation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <label class="valuehead">{{'Athorisation History'|appTranslate|async}}</label>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+            <div class="container">
+              <div class="form-group mt-2">
+
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy No'|appTranslate|async}}: </label><label
+                    class="valuehead">LTR21456</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Owner'|appTranslate|async}}: </label><label
+                    class="valuehead">XXXXX</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Initial Estimate'|appTranslate|async}}: </label><label
+                    class="valuehead">12000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Adjustments'|appTranslate|async}}: </label><label
+                    class="valuehead">22000</label></li>
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Final Amount'|appTranslate|async}}: </label><label
+                    class="valuehead">23000</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Payment Type'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+
+                </ul>
+                <ul class="nav nav-pills nav-fill sales-ul mb-3" id="nav-tab" role="tablist">
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Cover Name'|appTranslate|async}}: </label><label
+                    class="valuehead">Saving</label></li>
+
+                  <li class="nav-item" role="presentation"><label class="labelhead">{{'Policy Code Claim On'|appTranslate|async}}: </label><label
+                    class="valuehead">3</label></li>
+
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+                  <li class="nav-item" role="presentation"></li>
+
+                </ul>
+
+                <hr>
+
+                <table>
+
+                  <tr>
+                    <td scope="col" class="athorisation">{{'Athorisation Tier'|appTranslate|async}}</td>
+                    <td scope="col" class="athorisation">{{'Authorised By'|appTranslate|async}}</td>
+                    <td scope="col" class="athorisation">{{'Athorisation Date'|appTranslate|async}}</td>
+                    <td scope="col" class="athorisation">{{'Athorisation Time'|appTranslate|async}}</td>
+                    <td scope="col" class="athorisation">{{'Claim No'|appTranslate|async}}</td>
+
+                  </tr>
+
+                  <tbody>
+                  <tr>
+                    <td class="valuehead">1</td>
+                    <td class="valuehead">Queen Mary</td>
+                    <td class="valuehead">1/1/2020</td>
+                    <td class="valuehead">10</td>
+                    <td class="valuehead">5678</td>
+                  </tr>
+                  <tr>
+                    <td class="valuehead">2</td>
+                    <td class="valuehead">Queen Mary</td>
+                    <td class="valuehead">1/1/2020</td>
+                    <td class="valuehead">10</td>
+                    <td class="valuehead">5678</td>
+                  </tr>
+                  <tr>
+                    <td class="valuehead">3</td>
+                    <td class="valuehead">Queen Mary</td>
+                    <td class="valuehead">1/1/2020</td>
+                    <td class="valuehead">10</td>
+                    <td class="valuehead">5678</td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
+
+                <div class="form-group mt-2">
+                  <div class="row g-3 form-group mt-1 pt-1">
+                    <div class="col-10"></div>
+
+                    <div class="col-2">
+                      <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModals">
+                        <app-button [buttonType]="'action'"></app-button>
+                      </a>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-0">
+            <div class="col-2 ">
+              <p>{{'Payout No'|appTranslate|async}}: <span class="text-primary">LRP3440298</span></p>
+
+            </div>
+            <div class="col-2 ">
+              <p>{{'Claim No'|appTranslate|async}}: <span class="text-primary">xxx</span></p>
+
+            </div>
+            <div class="col-2 ">
+              <p>{{'Policy No'|appTranslate|async}}: <span class="text-primary">LRP3440298</span></p>
+
+            </div>
+            <div class="col-2 ">
+              <p>{{'Owner Client Number'|appTranslate|async}}: <span class="text-primary">xxxxxx</span></p>
+
+            </div>
+            <div class="col ">
+              <p>{{'Joint Owner Client Number'|appTranslate|async}}: <span class="text-primary">xxxxx</span></p>
+
+            </div>
+            <div class="col ">
+              <p>{{'External Ref'|appTranslate|async}} : <span class="text-primary">xxxxx</span></p>
+
+            </div>
+
+
+          </div>
+          <div class="row g-0">
+            <div class="col-2 ">
+              <p>{{'Cover Name'|appTranslate|async}} : <span class="text-primary">Savigns</span></p>
+
+            </div>
+            <div class="col-2 ">
+              <p>{{'Referer'|appTranslate|async}} : <span class="text-primary">256-amala</span></p>
+
+            </div>
+            <div class="col-3 ">
+              <p>{{'Policy Code Claimed on'|appTranslate|async}} : <span class="text-primary">3</span></p>
+
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-2">
+              <span class="text-primary text-bold">Renewals:</span>
+            </div>
+            <div class="col-1">
+              1
+            </div>
+            <div class="col-1">
+              2
+            </div>
+            <div class="col-1">
+              3
+            </div>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Owner Full Name'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Joint Owner Full Name'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Matures'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Issue Date'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Status'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Currency'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Outstanding premiums'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Outstanding targetcontributions'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Total Sum at Risk'|appTranslate|async}}</label></div>
+          </div>
+          <div class="row">
+            <div class="col"><p>James Bond</p></div>
+            <div class="col"><p>Ogbene Tchokubu</p></div>
+            <div class="col"><p>31/oct/2024</p></div>
+            <div class="col"><p>12/oct/2023</p></div>
+            <div class="col"><p>23/oct/1975</p></div>
+            <div class="col"><p>NGN</p></div>
+            <div class="col"><p>23,000</p></div>
+            <div class="col"><p>20,000</p></div>
+            <div class="col"><p>2,000,000</p></div>
+
+          </div>
+          <div class="row">
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Deposit Balance'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Annualised Premium'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Premium Payment Term'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Term'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Premium Payment Method'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Payee Account'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Payment Outwards Accounts'|appTranslate|async}}</label>
+            </div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'Benefits Assigned To'|appTranslate|async}}</label></div>
+            <div class="col"><label for="" class="form-label text-primary small1">{{'LA01'|appTranslate|async}}</label></div>
+          </div>
+          <div class="row">
+            <div class="col"><p>405,000</p></div>
+            <div class="col"><p>230,000</p></div>
+            <div class="col"><p>0 yr 6 mo</p></div>
+            <div class="col"><p>0 yr 6 mo</p></div>
+            <div class="col"><p>Direct Debits</p></div>
+            <div class="col"><p>xxx_1</p></div>
+            <div class="col"><p>xxx_1</p></div>
+            <div class="col"><p>3432-James Bond</p></div>
+            <div class="col"><p>LA01</p></div>
+
+          </div>
+
+          <table class="table table-striped mt-4">
+            <thead>
+            <tr>
+              <th scope="col">{{'Cover Code'|appTranslate|async}}</th>
+              <th scope="col">{{'Cover Name'|appTranslate|async}}</th>
+              <th scope="col">{{'Life Assured'|appTranslate|async}}</th>
+              <th scope="col">{{'Issued Age'|appTranslate|async}}</th>
+              <th scope="col">{{'Current Age'|appTranslate|async}}</th>
+              <th scope="col">{{'Prem Freq/Method'|appTranslate|async}}</th>
+              <th scope="col">{{'Periodic Premium'|appTranslate|async}}</th>
+              <th scope="col">{{'Sum Assured'|appTranslate|async}}</th>
+              <th scope="col">{{'Issue Dt'|appTranslate|async}}</th>
+              <th scope="col">{{'Next Prem Due Date'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">LRT</th>
+              <td>Retirement Savings</td>
+              <td>4587</td>
+              <td>6777</td>
+              <td>---</td>
+              <td>MD</td>
+              <td>25,000</td>
+              <td>500,000</td>
+              <td>01/jan/2022</td>
+              <td>23/Oct/2020</td>
+            </tr>
+            <tr>
+              <th scope="row">LRT</th>
+              <td>Retirement Savings</td>
+              <td>4587</td>
+              <td>6777</td>
+              <td>---</td>
+              <td>MD</td>
+              <td>25,000</td>
+              <td>500,000</td>
+              <td>01/jan/2022</td>
+              <td>23/Oct/2020</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="row justify-content-center my-4">
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Workflows'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Reinsurance'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Pricing'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Underwriting'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Commissions'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Future Actions'"></app-button>
+            </div>
+            <div class="col">
+              <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Peril'"></app-button>
+            </div>
+
+          </div>
+
+          <div class="d-flex justify-content-around section-cards-2 card-blue">
+            <div class="card color2 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Loss Ratios'|appTranslate|async}}</h6>
+
+              </div>
+
+            </div>
+            <div class="card color1 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Loss Details'|appTranslate|async}}</h6>
+
+              </div>
+
+            </div>
+            <div class="card color1 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Payee'|appTranslate|async}}</h6>
+
+              </div>
+
+            </div>
+            <div class="card color1 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Claim Adjustment'|appTranslate|async}}</h6>
+
+              </div>
+
+            </div>
+            <div class="card color1 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Loss Parties'|appTranslate|async}}</h6>
+
+              </div>
+
+            </div>
+            <div class="card color1 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Payment Auth History'|appTranslate|async}}</h6>
+
+              </div>
+
+            </div>
+            <div class="card color2 shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">{{'Time Outside SLA<'|appTranslate|async}}</h6>
+                <p class="card-number">10Hr:15mn</p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <app-btn type="primary" icon="cogs" data-bs-dismiss="modal" text="Action">Action</app-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

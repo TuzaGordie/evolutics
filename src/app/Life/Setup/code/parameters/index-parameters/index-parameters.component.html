@@ -1,0 +1,55 @@
+<!-- <app-form-navigation [title]="'Set Up / Code'"></app-form-navigation> -->
+<div class="container">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <label>{{"Select Code Group"|appTranslate|async}}</label>
+      <select class="form-control form-control-md control-bg-gray" (change)="getAllCodeSubGroupsByGroup()" [(ngModel)]="codeGroup">
+        <option *ngFor="let allCode of allCodeGroups" [value]="allCode?.group">
+          {{allCode?.description}}
+        </option>
+      </select>
+
+    </div>
+
+  </div><br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <label>{{"Select Code SubGroup "|appTranslate|async}}</label>
+      <select class="form-control form-control-md control-bg-gray" #code [(ngModel)]="codeSubgroup">
+        <option></option>
+        <option *ngFor="let allCode of allCodeSubGroups" [value]="allCode">
+          {{allCode}}
+        </option>
+      </select>
+      <span class="text-danger" *ngIf="message.error">{{"Kindly select a code group and a code sub group."|appTranslate|async}}</span>
+    </div>
+
+  </div> <br>
+
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'show'" (click)="show()"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" icon='add' (mclick)="createSubGroup()">Create Sub Group</app-btn>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" icon='add' (mclick)="createGroup()">Create Group</app-btn>
+    </div>
+
+  </div>
+
+</div>

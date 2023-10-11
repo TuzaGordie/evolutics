@@ -1,0 +1,85 @@
+<div class="container mt-5">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="row" >
+       
+        <div class="col-md-4" formArrayName="contactDetails" *ngFor= "let data of allContact.controls; let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex"><h2 class="py-4 ">Contact Info {{1+i}}</h2></div>
+                    <div class="d-flex"><div class="d-flex"><i class="fas fa-trash my-auto" (click)="onDeleteContact(i)"></i></div></div>
+                </div>
+                
+                
+                <hr style="width: 65%; height: 2px;">
+            
+           <!--  <div class="mt-4 " >
+                
+                <label>Client Number</label><br>
+                <div class="d-flex">
+                <input type="text" style="width: 40%;" formControlName="clientNo" class="inputform">
+                <button class="py-auto btn-dark mx-1 px-4 border-0 ">Find</button>
+                <button class="py-auto createbtn px-4 ">Create New</button>
+            </div>
+            </div> -->
+            <div class="mt-4">
+                <label>Full Name</label><br>
+                <input type="text" formControlName="name" class="inputform" required>
+                <div *ngIf="validation.name.errors && (validation.name.dirty || validation.name.touched)">
+                    <div class="text-danger" *ngIf="validation.name?.errors?.required">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>Relationship</label><br>
+                <!-- <input type="text" formControlName="relationship" class="inputform" required> -->
+                <select formControlName="relationship" class="inputform" required>
+                    <option [value]="null">Select Relationship</option>
+                    <option [value]="item.CODE" *ngFor="let item of relationList">{{item.CODE_TITLE}}</option>
+                </select>
+                <div *ngIf="validation.relationship.errors && (validation.relationship.dirty || validation.relationship.touched)">
+                    <div class="text-danger" *ngIf="validation.relationship?.errors?.required">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>Phone number</label><br>
+                <input type="number" formControlName="phoneNo" class="inputform" required>
+                <div *ngIf="validation.phoneNo.errors && (validation.phoneNo.dirty || validation.phoneNo.touched)">
+                    <div class="text-danger" *ngIf="validation.phoneNo?.errors?.required">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>Email</label><br>
+                <input type="email" formControlName="email" class="inputform" required>
+                <div *ngIf="validation.email.errors && (validation.email.dirty || validation.email.touched)">
+                    <div class="text-danger" *ngIf="validation.email?.errors?.required || validation.email?.errors?.pattern">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            
+        </ng-container>
+        
+        </div>
+    
+      
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-3"> <button type="button" (click)="onContactInfo()" class="btn addbtn px-5">Add Contact</button>
+        </div>
+        
+    </div>
+    
+    <div class="d-flex justify-content-between my-5">
+        <div class="d-flex" >
+            <button type="button" (click)="changeTab('companyInfo')"  class="border-0 prev ml-3"><i class="fas fa-arrow-left"></i></button>
+            <span class="mx-3 my-auto">Prev</span>
+        </div>
+        <div class="d-flex">
+            <span class="mx-3 my-auto">Next</span>
+            <button type="submit" (click)="changeTab('directors')" [disabled]="contactForm.invalid" class="border-0 next ml-3"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+</form>
+</div>

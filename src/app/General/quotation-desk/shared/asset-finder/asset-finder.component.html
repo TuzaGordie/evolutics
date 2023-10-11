@@ -1,0 +1,190 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{ 'Find Asset' | appTranslate | async }}</h5>
+  <span class="fas fa-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content>
+  <div class="my-3 justify-content-center">
+    <div class="row mb-2 row-cols-3">
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="policyNo"
+          [disabled]="loading"
+          placeholder="{{ 'Policy Number' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="clientNo"
+          [disabled]="loading"
+          placeholder="{{ 'Client Number' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="ownerName"
+          [disabled]="loading"
+          placeholder="{{ 'Owner Name' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+    </div>
+    <div class="row mb-2 row-cols-3">
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="externalRef"
+          [disabled]="loading"
+          placeholder="{{ 'External Ref' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="groupNo"
+          [disabled]="loading"
+          placeholder="{{ 'Group Number' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <select
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="assetType"
+          [disabled]="loading"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        >
+          <option selected>Asset Type</option>
+          <option value="M">Motor</option>
+          <option value="P">Property</option>
+          <option value="T">Mobile</option>
+          <option value="MC">Machinery</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-2 row-cols-3">
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="date"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="dateFrom"
+          [disabled]="loading"
+          placeholder="{{ 'Created Date From' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="date"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="dateTo"
+          [disabled]="loading"
+          placeholder="{{ 'Created Date To' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+      <div
+        class="form-group d-flex justify-content-center"
+        style="white-space: nowrap"
+      >
+        <input
+          type="text"
+          class="form-control control-bg-gray me-2"
+          [(ngModel)]="vehicleModel"
+          [disabled]="loading"
+          placeholder="{{ 'Vehicle Model' | appTranslate | async }}"
+          #name="ngModel"
+          (keyup.enter)="findCoupon()"
+        />
+      </div>
+    </div>
+  </div>
+  <div>
+    <button class="btn btn-outline-primary btn-lg" (click)="findCoupon()">
+      <span class="fas fa-search" *ngIf="!loading"></span>
+      <span class="fas fa-sync fa-spin" *ngIf="loading"></span>
+      {{ (loading ? 'Searching...' : 'Search') | appTranslate | async }}
+    </button>
+  </div>
+  <p *ngIf="name.invalid && name.touched" class="text-danger small text-center">
+    {{ 'Enter a name to search' | appTranslate | async }}
+  </p>
+  <div class="table-responsive row my-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{ 'Asset No' | appTranslate | async }}</th>
+          <th>{{ 'Registration No' | appTranslate | async }}</th>
+          <th>{{ 'Purchase Value' | appTranslate | async }}</th>
+          <th>{{ 'Market Value by Client' | appTranslate | async }}</th>
+          <th>{{ 'Engine Number' | appTranslate | async }}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coupon of coupons">
+          <td>{{ coupon.assetNo || '-' }}</td>
+          <td>{{ coupon.registrationNo || '-' }}</td>
+          <td>{{ coupon.purValue || 0 | number }}</td>
+          <td>{{ coupon.mvClient || 0 | number }}</td>
+          <td>{{ coupon.engineNo || 0 }}</td>
+          <td>
+            <button
+              (click)="onSelectCoupon(coupon)"
+              class="btn btn-outline-primary btn-lg"
+            >
+              {{ 'Select' | appTranslate | async }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-center" *ngIf="!coupons.length">
+      {{ 'No Asset found' | appTranslate | async }}
+    </p>
+  </div>
+</mat-dialog-content>

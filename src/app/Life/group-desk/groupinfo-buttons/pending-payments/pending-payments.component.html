@@ -1,0 +1,62 @@
+<app-form-navigation [title] = "'View Client'"></app-form-navigation>
+<div class="container-fluid mt-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h1 class="my-5">{{'Pending Payments'|appTranslate|async}}</h1>
+
+            <table class="table table-responsive  table-striped">
+                <thead class="py-3">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">Payment Id'|appTranslate|async}}</th>
+                    <th scope="col">{{'Batch No'|appTranslate|async}}</th>
+                    <th scope="col">{{'Initial Estimate'|appTranslate|async}}</th>
+                    <th scope="col">{{'Adjustments'|appTranslate|async}}</th>
+                    <th scope="col">{{'Current Estimate'|appTranslate|async}}</th>
+                    <th scope="col">{{'Claim Status'|appTranslate|async}}</th>
+                    <th scope="col">{{'Days To SLA'|appTranslate|async}}</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">{{'Completion Rate'|appTranslate|async}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Mark</td>
+                    <td>Mark</td>
+                    <td>
+                        <button type="button"  class="btn-i p-0 px-1 mx-1 " >
+                            <span class="my-auto">{{'Change Status'|appTranslate|async}}</span></button>
+                            <button type="button"  class="btn-i p-0 px-1 mx-1 " >
+                                <span class=" my-auto">{{'Generate DV'|appTranslate|async}}</span></button>
+                                <button type="button"  class="btn-i p-0 px-1 mx-1 " >
+                                    <span class=" my-auto">{{'Adjust'|appTranslate|async}}</span></button>
+                                    <button type="button"  class="btn-i p-0 px-1 mx-1 " >
+                                        <span class=" my-auto">{{'History'|appTranslate|async}}</span></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                </tbody>
+              </table>
+
+    </div>
+    <div class="col-md-12 mx-auto mt-5">
+        <button type="button"  class="btn p-0 px-4 btn-radius " style="float: right; background-color: #5D26CE; color:white">
+            <span class="mx-3 my-auto">{{'Register New Claim'|appTranslate|async}}</span></button>
+    </div>
+    </div>
+
+        </div>
+

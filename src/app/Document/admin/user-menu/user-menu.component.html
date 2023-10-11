@@ -1,0 +1,36 @@
+<app-form-navigation [title]="'Document / User Menu'"></app-form-navigation>
+
+<div class="container-sm mt-5 " id="form-body">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label>Select User Menu</label>
+            <select class="form-select mt-4 form-control-lg control-bg-gray">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+  
+          <div class="form-group row mt-4">
+            <div class="col-sm-4 d-grid gap-1">
+              <button type="button" [routerLink]="['/document/admin/usermenu/view']" class="btn show-button px-4 py-2"> <i
+                  class="far fa-eye px-2"></i> Show</button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <button type="button" [routerLink]="['/document/admin/usermenu/create']" class="btn create-button px-4 py-2"> <i
+                  class="fas fa-plus px-2"></i> Create New</button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <button type="button" [routerLink]="['/document/admin/usermenu/clone']" class="btn create-button px-4 py-2"> <i
+                  class="far fa-clone px-2"></i> Clone</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

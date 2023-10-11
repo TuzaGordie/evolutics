@@ -1,0 +1,18 @@
+@import "variables";
+.checkmark {  position: absolute;  left: 93%;  top: 12%;  font-size: 25px;  display: block !important;}
+.bordercheck {  border: 2px solid $primary;  outline: 0;}
+.borderuncheck {  border: 2px solid red;  outline: 0;}
+.uncheckmark {  position: absolute;  left: 94%;  top: 12%;  font-size: 25px;  color: red;  display: block !important;}
+
+.actuarial {  .bordercheck {    border-color: $actuarial_color;  }  .checkmark {    color: $actuarial_color;  }}
+.analytics {  .bordercheck {    border-color: $analytics_color;  }  .checkmark {    color: $analytics_color;  }}
+.assets {  .bordercheck {    border-color: $assets_color;  }  .checkmark {    color: $assets_color;  }}
+.crms {  .bordercheck {    border-color: $crm_color;  }  .checkmark {    color: $crm_color;  }}
+.dbcloner {  .bordercheck {    border-color: $dbcloner_color;  }  .checkmark {    color: $dbcloner_color;  }}
+.document {  .bordercheck {    border-color: $document_color;  }  .checkmark {    color: $document_color;  }}
+.finance {  .bordercheck {    border-color: $finance_color;  }  .checkmark {    color: $finance_color;  }}
+.general {  .bordercheck {    border-color: $general_color;  }  .checkmark {    color: $general_color;  }}
+.health {  .bordercheck {    border-color: $health_color;  }  .checkmark {    color: $health_color;  }}
+.human {  .bordercheck {    border-color: $human_color;  }  .checkmark {    color: $human_color;  }}
+.life {  .bordercheck {    border-color: $primary;  }  .checkmark {    color: $primary;  }}
+.receipt {  .bordercheck {    border-color: $cash_color;  }  .checkmark {    color: $cash_color;  }}

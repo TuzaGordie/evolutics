@@ -1,0 +1,309 @@
+<div class="row mt-3 mb-4">
+  <div class="col-md-auto">
+    <span
+      >{{ 'Product Code' | appTranslate | async }}:
+      <span class="text-primary">{{ product?.code }}</span></span
+    >
+  </div>
+  <div class="col-md-auto">
+    <span
+      >{{ 'Product Description' | appTranslate | async }}:
+      <span class="text-primary">{{ product?.description }}</span></span
+    >
+  </div>
+  <div class="col-md-auto">
+    <span
+      >{{ 'Quote No' | appTranslate | async }}:
+      <span class="text-primary">{{ quoteNo }}</span></span
+    >
+  </div>
+  <!-- <div class="col-3">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Cover type</label>
+        <select name="" id="" class="form-control control-bg-gray" [(ngModel)]='systemSelect'>
+          <option value="motor">Motor</option>
+          <option value="houseHolder">Householder</option>
+          <option value="travel">Travel</option>
+        </select>
+      </div>
+    </div> -->
+</div>
+<!--
+<q-building #bl_modal></q-building>
+<q-defense-recourse #dr_modal></q-defense-recourse>
+<q-life-insurance #lil_modal></q-life-insurance>
+<q-motor-accessories #acc_modal></q-motor-accessories>
+<q-motor-third-party #tp_modal></q-motor-third-party>
+<q-savings #sav_modal></q-savings>
+<q-property-content #pc_modal></q-property-content>
+<q-marine-cargo #mc_modal></q-marine-cargo>
+<q-marine-hull #mh_modal></q-marine-hull>
+<q-bond #bond_modal></q-bond>
+<q-life-risk #lir_modal></q-life-risk> -->
+
+<!-- <div>
+  <br>
+  <div class="row mt-3 mb-4">
+    <div class="col-md-auto">
+      <span>Product Code: <span class="text-primary">{{product.code}}</span></span>
+    </div>
+    <div class="col-md-auto">
+      <span>Product Description: <span class="text-primary">{{product.description}}</span></span>
+    </div>
+    <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Cover type</label>
+          <select name="" id="" class="form-control control-bg-gray" [(ngModel)]='systemSelect'>
+            <option value="motor">Motor</option>
+            <option value="houseHolder">Householder</option>
+            <option value="travel">Travel</option>
+          </select>
+        </div>
+      </div>
+  </div>
+  <form [formGroup]="coverDetailsForm">
+    <div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">Application Date</label>
+            <input type="date" [min]="todate" (change)="changeDiscCode()" formControlName="applicationDate" class="form-control control-bg-gray">
+          </div>
+
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">Commencement Date</label>
+            <input formControlName="commencementDate" type="date" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Policy Term</label>
+            <input formControlName="policyTerm" type="text " class="form-control control-bg-gray" placeholder="Years">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input type="text " class="form-control control-bg-gray" placeholder="Months">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input type="text " class="form-control control-bg-gray" placeholder="Days">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">Currency</label>
+            <select formControlName="currency" name="" id="" class="form-control control-bg-gray">
+              <option></option>
+              <ng-container *ngFor="let currency of (currencyOptions$ | async)">
+                <option [value]="currency?.validCurrency">
+                  {{currency?.validCurrency + ' - ' + currency?.description}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Premium Payment Term</label>
+            <input formControlName="premiumPaymentTerm" type="text" class="form-control control-bg-gray" placeholder="Years">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input type="text" class="form-control control-bg-gray" placeholder="Months">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input type="text" class="form-control control-bg-gray" placeholder="Days">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">Premium payment Method</label>
+            <select formControlName="premiumPaymentMethod" name="" id="" class="form-control control-bg-gray">
+              <option>Select one option</option>
+              <ng-container *ngFor="let method of (premiumPaymentMethodOptions$ | async)">
+                <option [value]="method.code">
+                  {{method.description}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">Premium Payment Frequency</label>
+            <select formControlName="premiumPayFreq" id="" class="form-control control-bg-gray">
+              <option>Select one</option>
+              <ng-container *ngFor="let freq of freq">
+                <option [value]="freq.freq">
+                  {{freq.desc}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label class="form-label text-primary">Discount Code</label>
+            <select formControlName="discountCode" name="" id="" (change)="changeDiscCode()" class="form-control control-bg-gray">
+              <option></option>
+              <ng-container *ngFor="let dc of ( discountCodeOptions$ | async )">
+                <option [value]="dc.code">{{dc.code}} - {{dc.description}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label class="form-label text-primary">Discount rate</label>
+            <input readonly formControlName="discountRate" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Asset ID</label>
+            <input formControlName="assetNo" type="text" class="form-control control-bg-gray border border-success">
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="searchCustomGB" routerLink="/general/asset-desk/find-asset"></app-button>
+
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Redg No</label>
+            <input formControlName="redgNo" readonly type="text" class="form-control control-bg-gray" [value]="redgNoFromCheck">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">Pay As You Go</label>
+            <input formControlName="payAsYouGo" type="checkbox" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Purchase Value</label>
+            <input formControlName="purchaseValue" class="form-control control-bg-gray" />
+
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Market Value by Client</label>
+            <input formControlName="marketValueByClient" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">Adjusted Market Value</label>
+            <input formControlName="marketValueBySystem" class="form-control control-bg-gray" />
+          </div>
+        </div>
+
+      </div>
+      <hr>
+      <div class="row g-2">
+        <div class="col-4"><label for="" class="text-primary form-label">Select Cover</label></div>
+        <div class="col-2"><label for="" class="text-primary form-label">Assured</label></div>
+        <div class="col-2"><label for="" class="text-primary form-label">Assured Name</label></div>
+        <div class="col-1"><label for="" class="text-primary form-label">&nbsp;</label></div>
+        <div class="col-2"><label for="" class="text-primary form-label">Assured Relationship to Owner</label></div>
+        <div class="col-1"><label for="" class="text-primary form-label text-center w-100">Details</label></div>
+      </div>
+      <div class="text-center" *ngIf="coverScreens && coverScreens.length == 0">
+        No Covers to display
+      </div>
+      <div *ngIf="coverScreens && coverScreens.length > 0">
+        <div formArrayName="covers" *ngFor="let cover of coverDetailsForm.get('covers')['controls']; let i = index">
+        <div class="row" formGroupName="{{i}}">
+          <div
+            class="row g-2 mb-2"
+          >
+          <div class="col-4">
+            <div class="form-group">
+              <div class="row d-flex align-items-center">
+                <div *ngIf="isDependent[i]" class="col-1"></div>
+                <div class="col-2"><input readonly [checked]="selected[i]" class="form-control control-bg-gray"
+                    type="checkbox" [disabled]="newCoverScreens[i].info.base || newCoverScreens[i].info.mandatory" (change)="setSelected(i)">
+                  </div>
+                <div class="col"><label for="" class="text-black-50 form-label small1">
+                    {{newCoverScreens[i].info.coverCode || newCoverScreens[i].info.riderCoverCode}} - {{newCoverScreens[i].info.description}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <input #imput formControlName="assuredNo" type="text" class="form-control control-bg-gray" (change)="findAssured(i, imput.value)">
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <input formControlName="assuredName" readonly [value]="client[i]?.fullName" type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-1">
+            <app-button [buttonType]="'createCustom2GB'" routerLink="/general/client-desk/create/individual"
+              [text]="'Assured'"></app-button>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <input formControlName="assuredRel" readonly [value]="assuredRelToOwner$[i]" type="text"
+                class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-1 ">
+            <input [disabled]="!selected[i]"  class="form-control control-bg-gray mx-auto mt-1" (click)="showCoverScreen($event, newCoverScreens[i].screen.code, i)"
+              data-bs-toggle="tooltip" data-bs-placement="top" title="
+                {{ modal[i] }}
+              "  type="checkbox">
+          </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="row g-2 justify-content-start mt-3 pb-2">
+        <hr>
+        <div class="col-3">
+          <label for="" class="form-label text-primary">
+            RISK QUESTIONNAIRE
+          </label>
+        </div>
+        <div class="col-3">
+          <a href="" data-bs-toggle="modal" data-bs-target="#questionnaire"> Click Here</a>
+        </div>
+        <hr>
+      </div>
+      <div class="row g-2 justify-content-end mt-3">
+        <div class="col-3">
+          <app-button [buttonType]="'addCustomGB'" data-bs-toggle="modal" data-bs-target="#addAnotherAsset"
+            [text]="'Add another Asset'"></app-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> -->

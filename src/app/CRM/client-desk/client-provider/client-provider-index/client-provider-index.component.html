@@ -1,0 +1,153 @@
+<app-form-navigation [title] = "'Client Desk / Create New Client / Provider'"></app-form-navigation> 
+
+<div class="container mt-5">
+    <form [formGroup]="findClientIndexProviderForm">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="row  my-2" >
+                    <div class="col-4" >
+                        <label class="py-2">Enter Provider No</label>
+                    </div>
+                  
+                  
+
+                
+
+             
+                    
+                </div>
+
+                <div class="row ">
+                    <div class="col">
+                        <input type="text" formControlName="providerNo" class="inputClient" [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required (keyup)="setProviderList()">
+                        <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i
+                                class="fa fa-check"></i></div>
+                        <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"> <i
+                                class="fa fa-times"></i></div>
+                    </div>
+                    <div class="col" style="width: 60%; margin-right: -70px;" >
+                        <button type="submit" class="btn-dark-red"
+                            [disabled]="validResult == 'false' || validResult == '' " style="width: 60%; margin-right: -70px;"
+                            (click)="onFindProvider()"> <i class="fa fa-clipboard"></i> Clone Provider</button>
+                    </div>
+
+                    
+
+                    <div class="col">
+                        
+                        <li [value]="item.FULL_NAME" *ngFor="let item of providerInfoList">{{item.FULL_NAME}}</li>
+                    </div>
+
+                </div>
+
+                <div class="row my-2" >
+                    <div class="col-4" >
+                        <label class="py-2">Enter Client Number</label>
+                    </div>
+                  
+                  
+
+                
+
+             
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <input type="text" formControlName="clientNo" class="inputClient" [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required (keyup)="setClientList()">
+                        <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i
+                                class="fa fa-check"></i></div>
+                        <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"> <i
+                                class="fa fa-times"></i></div>
+                    </div>
+                    <div class="col" style="width: 60%; margin-right: -70px;" >
+                        <button type="submit" class="btn-red"
+                            [disabled]="validResult == 'false' || validResult == '' " style="width: 60%; margin-right: -70px;"
+                            (click)="onFindClient()">Find Client</button>
+                    </div>
+
+                    <div class="col">
+                        <button type="submit" class="btn-dark-red"
+                            
+                            (click)="onCreate()">Create New Client</button>
+                    </div>
+
+                    <div class="col">
+                        
+                        <li [value]="item.FULL_NAME" *ngFor="let item of clientInfoList">{{item.FULL_NAME}}</li>
+                    </div>
+
+                </div>
+
+                <div class="row my-2">
+                    
+                    <div class="col">
+                        <button type="submit" class="btn-red"
+                            
+                            (click)="onCreateProvider()"><i class="fa fa-plus"></i>   Create New Provider</button>
+                    </div>
+
+                    <div class="col">
+                        
+                        <!-- <li [value]="item.OWNER_NAME" *ngFor="let item of clientList">{{item.FULL_NAME}}</li> -->
+                    </div>
+
+                </div>
+
+             
+               
+
+
+
+                
+               
+
+            </div>
+
+          
+
+            <!-- <div class=" my-5">
+            <div  style="float: right; margin-top: 10%;">
+                
+              <button type="submit" [disabled]="validResult == 'false' || validResult == '' " 
+              [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"  
+              class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                  <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="row my-2" >
+                   
+                  
+                    
+                </div>
+
+             
+               
+
+
+
+                
+               
+
+            </div>
+
+          
+
+            <!-- <div class=" my-5">
+            <div  style="float: right; margin-top: 10%;">
+                
+              <button type="submit" [disabled]="validResult == 'false' || validResult == '' " 
+              [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"  
+              class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                  <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div> -->
+        </div>
+
+    </form>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between align-items-center" mat-dialog-title>
+  <div class="text-center row mt-2 w-100 pe-4">
+    <div class="col" *ngFor="let item of tabs">
+      <div [class]="item.value==sTab?.value ? 'border-bottom border-primary border-5 rounded-0' : ''"
+      (click)="open(item)" class="p-2 rounded pointer me-2 w-100">{{item.key}}</div>
+    </div>
+  </div>
+</div>
+<mat-dialog-content>
+  <div [ngSwitch]="sTab?.value" class="py-4">
+    <div class="" *ngSwitchCase="'bc'">
+      <app-client-basic-register-new-claim (next)="open(tabs[1])"></app-client-basic-register-new-claim>
+    </div>
+    <div class="" *ngSwitchCase="'doc'">
+      <app-client-document-register-new-claim (next)="open(tabs[2])"></app-client-document-register-new-claim>
+    </div>
+    <div class="" *ngSwitchCase="'est'">
+      <app-client-estimate-register-new-claim></app-client-estimate-register-new-claim>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,25 @@
+<div class="h-100">
+  <div *ngIf="loading" class=" {{height?'':class}}  center  " id="loader" [ngStyle]="{height }"  >
+    <div class=" text-center">
+      <div>
+        <div class="lds-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <h5 class="mt-2 noselect" *ngIf="text">{{text|appTranslate|async}}</h5>
+    </div>
+  </div>
+
+  <div [hidden]="loading">
+  <!-- <div > -->
+    <ng-content></ng-content>
+  </div>
+</div>

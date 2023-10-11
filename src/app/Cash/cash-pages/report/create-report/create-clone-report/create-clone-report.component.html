@@ -1,0 +1,338 @@
+<app-form-navigation [cashtitle] = "'Reports/Create Clone Reports'"></app-form-navigation> 
+<div class="container">
+    <div class="row g-3">
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Report Code</label>
+                <input class="form-control  control-bg-gray" type="text" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Report Group</label>
+                <input class="form-control  control-bg-gray" type="text" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Description</label>
+                <input class="form-control  control-bg-gray" type="text" />
+            </div>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Table Group</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Primary Table</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-check mt-4"><label class="form-check-label"> Do not repeat multiple fieldnames </label>
+                <input type="checkbox" class="form-check-input"></div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Report Header</label>
+                <input class="form-control  control-bg-gray" type="text" />
+            </div>
+        </div>
+    </div>
+    <div class="row g-3">
+        <h5 class="check-border py-2">
+            <!--Limits &nbsp;&nbsp; -->
+            <span class="grey"><!--(Can be written at User Level) --></span></h5>
+
+        <h6 class="text-green">Filter Criteria</h6>
+    </div>
+    <div class="row g-3" *ngFor="let item of items">
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Field name</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Operator</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Value</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Connector</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group mt-2">
+                <label> &nbsp;</label>
+                <button type="button"  (click)="copy()"
+                class="btn btn-prime  px-4 py-2 mt-3 bg-white"> <i class="fas fa-plus px-2 "></i> Add</button>
+                <i class="fas fa-trash px-2" (click)="delete(item)"></i>
+            </div>
+        </div>
+        <h6 class="text-green">Sort Criteria</h6>
+    </div>
+    <div class="row g-3" *ngFor="let item1 of items1">
+        <!-- formArrayName="multiSortCriteria" -->
+        <!-- <ng-container *ngFor="let multiSort of todos.controls.multiSortCriteria.controls;let s=index" [formGroupName]="s"> -->
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Field Name</label>
+                <select class="form-control control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Sort By</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group mt-2">
+                <label> &nbsp;</label>
+                <button type="button"  (click)="copy1()"
+                class="btn btn-prime  px-4 py-2 mt-3 bg-white"> <i class="fas fa-plus px-2 "></i> Add</button>
+                <i class="fas fa-trash px-2" (click)="delete1(item1)"></i>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <!-- </ng-container> -->
+        <h6 class="text-green">Output Fields</h6>
+    </div>
+    <div class="row g-3" *ngFor="let item2 of items2">
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Field Type</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Field Name</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Field Format</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Truncate</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group mt-2">
+                <label> &nbsp;</label>
+                <button type="button"  (click)="copy2()"
+          class="btn btn-prime  px-4 py-2 mt-3 bg-white"> <i class="fas fa-plus px-2 "></i> Add</button>
+          <i class="fas fa-trash px-2" (click)="delete2(item2)"></i>
+            </div>
+        </div>
+        <h6 class="text-green">Additional Field From Adjoining Table</h6>
+    </div>
+    <div class="row g-3" *ngFor="let item3 of items3">
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Table Group</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Table Name</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Table Link</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label>Field Name</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group mt-2">
+                <label> &nbsp;</label>
+                <button type="button"  (click)="copy3()"
+                class="btn btn-prime  px-4 py-2 mt-3 bg-white"> <i class="fas fa-plus px-2 "></i> Add</button>
+                <i class="fas fa-trash px-2" (click)="delete3(item3)"></i>
+            </div>
+        </div>
+        <h6></h6>
+    </div>
+    <div class="row g-3" *ngFor="let item4 of items4">
+        <div class="col">
+            <div class="form-group mt-2">
+                <label >Report Created By</label>
+                <input type="text" class="form-control  control-bg-gray" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mt-2">
+                <label >User Groups Permitted</label>
+                <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group mt-2">
+                <label> &nbsp;</label>
+                <button type="button"  (click)="copy4()"
+                class="btn btn-prime  px-4 py-2 mt-3 bg-white"> <i class="fas fa-plus px-2 "></i> Add</button>
+                <i class="fas fa-trash px-2" (click)="delete4(item4)"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="row d-flex flex-row justify-content-end my-5">
+            <div class="col-2 d-flex flex-row justify-content-end">
+                <button type="button" class="btn w-100  btn-prime btn-radius bg-white btn-radius"><i class="far fa-save px-2 "></i>  Save</button>
+            </div>
+            <div class="col-2 d-flex flex-row justify-content-end">
+                <button type="button" class="btn w-100 btn-prime bg-white "><i class="far fa-save px-2 "></i> Save and Run</button>
+            </div>
+        </div>
+    </div>
+</div>

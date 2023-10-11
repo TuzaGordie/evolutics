@@ -1,0 +1,184 @@
+<!-- <app-form-navigation [title]="'Set Up / Correspondence / Template'"></app-form-navigation> -->
+
+
+ <loader [loading]="connection.creating">
+ 
+
+<br>
+<div class="">
+    <div class="row" *ngIf="!upload">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <label class="text-primary" >{{"Upload a New Template Stored on your PC"|appTranslate|async}}</label>
+            <app-button [buttonType]="'uploadLg'" (click)="toggleUpload()"></app-button>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <br>
+
+    <div *ngIf="upload">
+        <div class="row">
+            <div class="col-md-3">
+    
+            </div>
+    
+            <div class="col-md-6">
+                <label class="text-primary" >{{"File"|appTranslate|async}}</label>
+                <input class="form-control" id="upload_file" type="file" #file (change)="onChange(file)" />
+                <app-btn (mclick)="trigger()" icon="upload" type="secondary">Select a file...</app-btn>
+                <span class="mt-1" *ngIf="fileName">{{fileName}}</span>
+                <div class="text-danger" *ngIf="isFile">
+                    {{'Choose a file...'|appTranslate|async}}
+                </div>
+            </div>
+            <div class="col-md-1">
+              <i class="fa fa-times mt-5 color-primary" (click)="toggleUpload()"></i>
+            </div>
+        </div>
+        <br>
+        <div class="row mt-3">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <label class="text-primary" >{{"Template Category"|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-50" [(ngModel)]="templateCategory">
+                    <option *ngFor="let category of categories" [ngValue]="category.code">{{category.code}} -
+                      {{category.title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row mt-3">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <label class="text-primary" >{{"Description"|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" type="text" name="description" [(ngModel)]="description">
+            </div>
+        </div>
+        <br>
+        <div class="row mt-2">
+            <div class="col-md-3">
+    
+            </div>
+    
+            <div class="col-md-6">
+                <button type="submit" (click)="uploadTemplate()" class="btn btn-primary form-control save-button">
+                    <i class="fa fa-save"></i>
+                    <span>{{ connection.creating ? ' Uploading...' : connection.error ? ' Try Again' : ' Upload'}}</span>
+                </button>
+            </div>
+            <div class="col-md-3">
+    
+            </div>
+    
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+            <label class="text-primary" >{{"Delete an existing Template"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" [(ngModel)]="deleteTemplateName" #DeleteTemplate (change)="getTemplateCode(DeleteTemplate.value)">
+                <option *ngIf="connection.retrieving">{{"Fetching data..."|appTranslate|async}}</option>
+                <option *ngFor="let template of templates" [value]="template.code">
+                    {{template.templateName}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="text-primary" ></label> <br>
+            <button class="btn btn-primary mt-2 w-100" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                {{'Delete'|appTranslate|async}}
+            </button>
+        </div>
+
+    </div><br><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+
+        <div class="col-md-6">
+            <label class="text-primary" >{{"Retrieve an existing Template"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" [(ngModel)]="retrieveTemplateName" #retrieveTemplate (change)="getTemplateCode(retrieveTemplate.value)">
+                <option *ngIf="connection.retrieving">{{"Fetching data..."|appTranslate|async}}</option>
+                <option *ngFor="let template of templates" [ngValue]="template.code">
+                    {{template.code}} - {{template.templateName}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="text-primary" ></label> <br>
+            <button class="btn btn-primary mt-2 w-100" (click)="getTemplate()">
+                <span>{{ connectionRetrieve.creating ? ' Retrieving...' : connectionRetrieve.error ? ' Try Again' : '
+                    Retrieve'}}</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="px-3 mt-5" *ngIf="template">
+
+    <div class="table-responsive-lg">
+        <table class="table table-bordered table-striped table-responsive" id="table">
+            <thead>
+                <tr>
+                    <th class="p-3" scope="col">{{"Id"|appTranslate|async}}</th>
+                    <th class="p-3" scope="col">{{"Code"|appTranslate|async}}</th>
+                    <th class="p-3" scope="col">{{"Template Name"|appTranslate|async}}</th>
+                    <th class="p-3" scope="col">{{"Template Category"|appTranslate|async}}</th>
+                    <th class="p-3" scope="col">{{"Description"|appTranslate|async}}</th>
+                    <th class="p-3" scope="col">{{"Action"|appTranslate|async}}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngIf="template">
+                    <td>{{template.id}}</td>
+                    <td>{{template.code}}</td>
+                    <td>{{template.templateName}}</td>
+                    <td>{{template.templateCategory}}</td>
+                    <td>{{template.description}}</td>
+                    <td>
+                        <span data-bs-toggle="tooltip" data-bs-placement="left" title="Edit" routerLink="../update-template/{{template.code}}">
+                          <i class="fa fa-edit"></i>
+                        </span>
+                        <span data-bs-toggle="tooltip" data-bs-placement="left" title="Download File" (click)=" viewFile(template.docKey, template.templateName)">
+                          <i class="fa fa-download"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="exampleModalLabel">{{"WARNING"|appTranslate|async}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><b>{{"Are you sure you want to delete "|appTranslate|async}}<span class="text-primary">{{deleteTemplateName}}</span> </b></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary px-5" data-bs-dismiss="modal"
+                  (click)="deleteTemplate()">{{"YES"|appTranslate|async}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+ </loader>

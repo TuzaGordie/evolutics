@@ -1,0 +1,55 @@
+<!-- <app-form-navigation [title]="'Set Up / Commission Codes'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container-sm mt-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <br />
+        <br />
+
+        <div class="form-group mt-2">
+          <label>{{"Select Commission Group "|appTranslate|async}}</label>
+          <select #commGroupInput class="form-control form-control-lg control-bg-gray" [(ngModel)]="commGroupValue"
+            (ngModelChange)="commGroupChange()" [ngModelOptions]="{ standalone: true }">
+            <option *ngFor="let item of commGroup" value="{{ item.code }}">
+              {{ item.code }} - {{ item.title }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Commission Code "|appTranslate|async}}</label>
+          <select [disabled]="!commGroupValue" (ngModelChange)="commCodeChange()" [(ngModel)]="selectCommCodeValue"
+            [ngModelOptions]="{ standalone: true }" class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option *ngFor="let item of commTypes" value="{{ item.code }}">
+              {{ item.code }} - {{ item?.description }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Unallocated Commission Code "|appTranslate|async}}</label>
+          <select [disabled]="!selectCommCodeValue" [(ngModel)]="unallocatedCommCode"
+            [ngModelOptions]="{ standalone: true }" class="form-control form-control-lg control-bg-gray">
+            <option *ngFor="let item of unallocatedCommissionCodes" value="{{ item?.code }}">
+              {{ item.code }} - {{ item?.description }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'show'" (click)="show()" routerLink="../create-commission-code">
+            </app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../create-commission-code"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'clone'" (click)="clone()"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

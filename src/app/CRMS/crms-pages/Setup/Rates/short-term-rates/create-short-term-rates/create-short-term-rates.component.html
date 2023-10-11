@@ -1,0 +1,75 @@
+<div class="container-fluid mt-2 " id="form-body">
+
+  <div class="tab-content" id="pills-tabContent">
+    <form [formGroup]="CreateSTRateForm" (submit)="onSubmit()">
+      <div class="container">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Short Term Code'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="number" formControlName="code" />
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-2">
+
+                <label>{{'Description'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="description" />
+
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+          <br><br><br>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-3">
+                <label>{{'Days'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="number" formControlName="days" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-3">
+                <label>{{'Factor (Of Full Year Premium)'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="number" formControlName="factor" />
+              </div>
+            </div>
+            <!-- <div class="col">
+                        <div class="form-group mt-3">
+                            </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-3">
+                           </div> -->
+          </div>
+
+        </div>
+
+
+
+
+
+        <div class="row g-3">
+          <div class="row d-flex flex-row justify-content-end mt-5">
+
+            <div class="col-2 d-flex flex-row justify-content-end">
+              <button type="submit" class="add-btn1">{{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+  <br><br><br><br>
+
+</div>

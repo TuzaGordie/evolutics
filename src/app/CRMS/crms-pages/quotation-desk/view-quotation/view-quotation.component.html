@@ -1,0 +1,294 @@
+<app-form-navigation [title]="'View Quotation'"></app-form-navigation>
+<div class="container my-5">
+    <form [formGroup]="viewQuotationForm">
+        <div class="d-flex justify-content-around">
+            <span class="p-2">Quote No:  <span style="color: #514ef5">{{findQuotationService.quotationInfo?.AGENT_NO}}</span></span>
+            <span class="p-2">Owner Client Number: <span style="color: #514ef5">{{findQuotationService.quotationInfo?.OWNER_CLIENT_NO}}</span></span>
+            <span class="p-2">Joint Owner Client Number: <span style="color: #514ef5">{{findQuotationService.quotationInfo?.GROUP_OWNER_CLIENT_NO}}</span></span>
+            <span class="p-2">Agent: <span style="color: #514ef5">{{findQuotationService.quotationInfo?.AGENT_NAME}}</span></span>
+            <span class="p-2">Referrer: <span style="color: #514ef5">{{findQuotationService.quotationInfo?.JOINT_OWNER_NAME}}</span></span>
+
+
+
+        </div>
+        <hr style="margin-top: 5px;">
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Owner Full Name</label><br>
+                    <input type="text" formControlName="fullName" readonly class="inputform1 ">
+
+
+                </div>
+                <div class="mt-4">
+                    <label>Annualised Premium</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+                    
+
+                </div>
+
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Joint Owner Full Name</label><br>
+                    <input type="text" formControlName="jointOwnerName" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Premium Payment Term</label><br>
+                    <input type="text" formControlName="premTermPayment" readonly class="inputform1 ">
+
+                </div>
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Cover Expires</label><br>
+                    <input type="text" formControlName="expiryDate" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Policy Term</label><br>
+                    <input type="text" formControlName="policyTerm" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Cover Commence</label><br>
+                    <input type="text" formControlName="coverCommence" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Created Date</label><br>
+                    <input type="text" formControlName="coverCommence" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Quote Status</label><br>
+                    <input type="text" formControlName="quoteStatus" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Created By</label><br>
+                    <input type="text" formControlName="createdBy" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Currency</label><br>
+                    <input type="text" formControlName="currencyType" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Annuities</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Initial Quote Valid Days</label><br>
+                    <input type="text" formControlName="quoteValidity" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Total No of Lives Covered</label><br>
+                    <input type="text" formControlName="livesCovered" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Total Sum at Risk</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Branch</label><br>
+                    <input type="text" formControlName="branch" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Uncovered Exposure</label><br>
+                    <input type="text" formControlName="uncoveredExposure" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                        (click)="onEdit('uncoveredExposure')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+
+            </div>
+
+        </div>
+        <br>
+        <br>
+    
+
+    </form>
+
+    <br>
+    <div class="col-md-12 mx-auto">
+
+        <table class="table" >
+            <thead class="py-3">
+                <tr>
+                    <th scope="col">Cover Code</th>
+                    <th scope="col">Cover Name</th>
+                    <th scope="col">Life Assured</th>
+                    <th scope="col">App Age</th>
+                    <th scope="col">Prem Freq/Method</th>
+                    <th scope="col">Periodic Premium</th>
+                    <th scope="col">Sum Assured</th>
+
+
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of quotationInfoList">
+              <tr >
+                <th scope="row">{{item.QUOTE_NO}}</th>
+                <td >{{item.AGENT_NAME}}</td>
+                <td>{{item.NO_OF_LIVES_COVERED}}</td>
+                <td>{{item.ITERATIONS}}</td>
+                <td>{{item.DAYS_TO_SLA}}</td>
+                <td>{{item.CREATED_DATE_FROM}}</td>
+                <td>{{item.UNCOVERED_EXPOSURE}}</td>
+               
+                
+              </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <hr class="my-5">
+    <div class="d-flex justify-content-around my-5 "><button type="button" class="btn-ir py-0 px-4 "
+            [routerLink]="['/life/documents']">
+            <span class="mx-4 my-auto">Documents</span></button>
+        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+            <span class="mx-4 my-auto">Modify</span></button>
+        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+            <span class="mx-4 my-auto">Pricing</span></button>
+        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+            <span class="mx-4 my-auto">Generate</span></button>
+        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+            <span class="mx-4 my-auto">Not taken up</span></button>
+        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+            <span class="mx-4 my-auto">Convert To Policy</span></button>
+        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+            <span class="mx-4 my-auto">Authorise Guide</span></button>
+
+    </div>
+
+    <div id="section_cardsno" class="section-cards d-flex justify-content-around">
+        <div class="card color1 shadow-sm" [routerLink]="['']">
+            <div class="card-body">
+                <h6 class="card-title">Total Periodic Premium</h6>
+                <p id="card-text">{{findQuotationService.quotationInfo?.TOTAL_SUM_AT_RISK}}</p>
+            </div>
+
+        </div>
+        <div class="card color1 shadow-sm" [routerLink]="['']">
+            <div class="card-body">
+                <h6 class="card-title">No Of Iterations</h6>
+                <p id="card-text">{{findQuotationService.quotationInfo?.INIT_QUOTE_VALIDITY}}</p>
+            </div>
+
+        </div>
+        <div class="card color1 shadow-sm" [routerLink]="['']">
+            <div class="card-body">
+                <h6 class="card-title">Days to Auto Expiry</h6>
+                <p id="card-text">{{findQuotationService.quotationInfo?.DAYS_TO_SLA}}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form [formGroup]="viewQuotationForm">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Quotation Info</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                      
+
+                        <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-secondary">update</button>
+ -->
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal"
+                            class="border-0 next-blue">Update</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="notemodel" tabindex="-1" aria-labelledby="notemodelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notemodelLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-4">
+                <label>Note</label><br>
+                <input type="textarea" formControlName="note" 
+                class="inputform " >
+            </div>
+            <div class="mt-4">
+                <label>Visible to All</label>
+                <input type="checkbox" formControlName="visiblebox"  >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

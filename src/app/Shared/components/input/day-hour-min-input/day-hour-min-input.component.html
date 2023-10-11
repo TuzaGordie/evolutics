@@ -1,0 +1,25 @@
+<div class="row">
+  <app-input-label [colored]="colored" [form]="form" [hint]="hint" [id]="id" [invalidCheckbox]="invalidCheckbox"
+    [isRequired]="isRequired" [label]="label" [lblCl]="lblCl" [light]="light" [mini]="mini" [showLabel]="showLabel"
+    [small]="small" [stacked]="stacked" [theme]="theme" [xsmall]="xsmall">
+  </app-input-label>
+  <div class="{{ stacked ? 'col-12' : 'col-md' }} position-relative">
+      <div class="row">
+          <div class="col-4">
+            <app-input-basic [showLabel]="false" [form]="subForm" name="days" [min]="0" [type]="type" [stacked]="true"
+              placeholder="days" [showValidation]="daysTag.invalid" #daysTag>
+            </app-input-basic>
+          </div>
+          <div class="col-4">
+            <app-input-basic [showLabel]="false" [form]="subForm" name="hours" [min]="0" [type]="type" [stacked]="true"
+              placeholder="hours" [showValidation]="hoursTag.invalid" #hoursTag>
+            </app-input-basic>
+          </div>
+          <div class="col-4">
+            <app-input-basic [showLabel]="false" [form]="subForm" name="mins" [min]="0" [type]="type" [stacked]="true"
+              placeholder="minutes" [showValidation]="minsTag.invalid" #minsTag>
+            </app-input-basic>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<app-form-navigation [cashtitle]="'Set Up / Code'"></app-form-navigation>
+<div class="container justify-content-center" [formGroup]="createGroupForm" (ngSubmit)="createCodeGroup()">
+    <div class="row">
+  
+      <div class="col-md-6">
+        <label class="form-label text-primary">Group</label>
+        <input class="form-control form-control-md control-bg-gray" formControlName="group" name="group">
+        <div class="text-danger" mat-error
+          *ngIf="createGroupForm.get('group').invalid && createGroupForm.get('group').dirty"> Required </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label text-primary">Description</label>
+        <input class="form-control form-control-md control-bg-gray" formControlName="description" name="description">
+        <div class="text-danger" mat-error
+          *ngIf="createGroupForm.get('description').invalid && createGroupForm.get('description').dirty"> Required </div>
+      </div>
+  
+  
+    </div>
+    <div class="row mt-5 justify-content-end">
+      <div class="col-2">
+        <app-button buttonType="save" (click)="createCodeGroup()"></app-button>
+      </div>
+    </div>
+  
+  
+  </div>
+  

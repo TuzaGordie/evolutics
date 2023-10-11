@@ -1,0 +1,10 @@
+<div class="">
+  <h5 class="text-center">
+    {{"Choose your preferred report format"|appTranslate|async}}
+  </h5>
+</div>
+<div class="d-lg-flex justify-content-center">
+  <div *ngFor="let item of btns" class="m-2">
+    <app-btn type="secondary" icon="save" (mclick)="item.action()">{{item.key}}</app-btn>
+  </div>
+</div>

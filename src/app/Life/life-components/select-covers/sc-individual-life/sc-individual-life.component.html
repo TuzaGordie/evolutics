@@ -1,0 +1,166 @@
+<div class="">
+  <div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">Individual Life Risk</h5>
+    <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Pricing Basis</label>
+          <select name="" id="" class="form-control control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Initial Sum Assured</label>
+          <input type="text" class="form-control control-bg-gray">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Benefit Payment Frequency</label>
+          <select name="" id="" class="form-control control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Sum Assured Escalation rate (%) before chaim</label>
+          <input type="text" class="form-control control-bg-gray">
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Sum Assured Escalation rate (%) post chaim</label>
+          <input type="text" class="form-control control-bg-gray">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Premium Payment Term</label>
+          <input type="text" placeholder="Years" class="form-control control-bg-gray">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <input type="text" placeholder="months" class="form-control control-bg-gray">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Benefit Payment Term</label>
+          <input type="text" placeholder="Years" class="form-control control-bg-gray">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <input type="text" placeholder="months" class="form-control control-bg-gray">
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Enter Benefit Payment Schedule</label>
+          <input type="checkbox" class="form-control control-bg-gray">
+        </div>
+      </div>
+
+    </div>
+    <div class="row my-4">
+      <hr>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="from-group">
+          <label for="" class="form-label">Bank No</label>
+          <input type="text" class="form-control  control-bg-gray">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="from-group align-items-center pt-2">
+          <label for="" class="form-label">&nbsp;</label>
+          <app-btn type="outline" icon="add" (mclick)="add()">Add</app-btn>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <p>Existing Account for Client xxxx</p>
+    </div>
+
+    <div class="row mt-3">
+      <table class="table table-responsive  table-striped">
+        <thead>
+          <tr class="py-5 bg-primary text-white">
+            <th scope="col" class="text-white">Bank No</th>
+            <th scope="col" class="text-white">Payee Name</th>
+            <th scope="col" class="text-white">Account Type</th>
+            <th scope="col" class="text-white">Account No</th>
+            <th scope="col" class="text-white">Institution</th>
+            <th scope="col" class="text-white">Select</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>6567_1</td>
+            <td>James Bond</td>
+            <td>Mobile Money</td>
+            <td>090897676776</td>
+            <td>MTN</td>
+            <td>
+              <button class="btn btn-outline-primary p-2">Select</button>
+            </td>
+          </tr>
+          <tr>
+            <td>6567_1</td>
+            <td>James Bond</td>
+            <td>Mobile Money</td>
+            <td>090897676776</td>
+            <td>MTN</td>
+            <td>
+              <button class="btn  btn-outline-primary p-2">Select</button>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <div class="from-group">
+          <label for="" class="form-label">Payment Method</label>
+          <select name="" id="" class="form-control  control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="from-group">
+          <label for="" class="form-label">Payee Name</label>
+          <input type="text" class="form-control  control-bg-gray">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <app-btn type="outline" icon="save" (mclick)="save()">Save</app-btn>
+  </div>
+</div>
+ 

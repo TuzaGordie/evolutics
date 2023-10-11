@@ -1,0 +1,235 @@
+<loader [loading]="loading">
+  <div class="container">
+
+    <div class="row justify-content-end">
+      <div class="col-auto">
+        <app-btn type="primary" data-bs-toggle="modal" data-bs-target="#coverDetailsModal">View Cover Details</app-btn>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">
+        {{ 'Basic Details' | appTranslate | async }}
+      </h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center">
+          <div class="mx-1 col-md mb-3 lbl1" *ngFor="let item of lbls1 ">
+            <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [mini]="true" [form]="form"
+                                    [label]="item.label" [name]="item.key" [coloredLbl]="false" [coloredVal]="true"
+                                    [showEditing]="item.editable" [hint]="item.hint" [light]="true"
+                                    [value]="item.value">
+            </app-editable-text-case>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">
+        {{ 'Policy Details' | appTranslate | async }}
+      </h5>
+      <div class="card-body">
+        <div class=" row justify-content-between align-items-center py-2">
+          <div class="col-md-auto">
+            <div class=" row">
+              <div class="col-md-auto ">
+                <app-input-basic [mini]="true" (mchange)="refetch()" [light]="true" [form]="form" label="Policy Code"
+                                 name="policyCode" [colored]="true" type="select" [options]="policyCodes"
+                                 valueField="policyCode"
+                                 labelField="policyCode">
+                </app-input-basic>
+              </div>
+              <div class="col-md-auto ">
+                <app-input-basic [mini]="true" [light]="true" [form]="form" label="Policy No Suffix"
+                                 name="policyNoSuffix"
+                                 [colored]="true" type="select">
+                </app-input-basic>
+              </div>
+              <div class="col-md-auto " *ngFor="let item of lbls3 ">
+                <app-editable-text-case [formatter]="item.formatter" [stacked]="false" [mini]="true" [form]="form"
+                                        [label]="item.label" [name]="item.key" [coloredLbl]="true" [coloredVal]="false"
+                                        [showEditing]="item.editable" [hint]="item.hint" [light]="true"
+                                        [value]="item.value"
+                                        [action]="item.action">
+                </app-editable-text-case>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto">
+            <div class="row">
+              <div class="col-md-auto my-2 ">
+                <app-btn type="secondary" icon="edit" (mclick)="notes()">Note</app-btn>
+              </div>
+              <div class="col-md-auto my-2 ">
+                <app-btn (mclick)="generateDocumentsParams()" icon="renew" type="secondary">Renewal</app-btn>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="pt-2">
+          <div class="row">
+            <div class=" col-xxl-2 mb-3" *ngFor="let item of lbls2 ">
+              <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [action]="item.action" [form]="form"
+                                      [label]="item.label" [name]="item.key" [coloredLbl]="true" [coloredVal]="false"
+                                      [type]="item.inputType"
+                                      [showEditing]="item.editable" [hint]="item.hint" [light]="true"
+                                      [value]="item.value">
+              </app-editable-text-case>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center my-4">
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" routerLink="documents"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    [text]="'Documents'"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" routerLink="workflows"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    [text]="'Workflows'"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Endorsements'"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    routerLink="endorsements"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Pricing'"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    routerLink="pricing"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Underwriting'"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    routerLink="underwritings"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Commissions'"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    routerLink="commissions"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Future Actions'"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    routerLink="future-actions"></app-button>
+      </div>
+      <div class="col">
+        <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Peril'"
+                    [queryParams]="{policyNo:policyNo,policyCode:policyCode,policyNoSuffix:suffix,clientNo:policy?.ownerClientNo}"
+                    routerLink="perils"></app-button>
+      </div>
+    </div>
+
+    <div
+      class="py-3 d-lg-flex justify-content-center section-cards"
+      id="section_cardsno"
+    >
+      <ng-container *ngFor="let item of btns2">
+        <div
+          class="card bg-card color1 shadow-sm mx-1 my-1 pointer {{ item.cls }}"
+          routerLink="../{{ item?.action }}"
+          [queryParams]="{ policyNo, policyCode, policyNoSuffix:suffix, clientNo:policy?.ownerClientNo, owner:policy?.ownerName}"
+        >
+          <div class="card-body">
+            <h6 class="card-title">{{ item.key | appTranslate | async }}</h6>
+            <p class="btn-card-value" [innerHTML]="item.value"></p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</loader>
+
+<div class="modal fade" id="editbank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+          <tr class="">
+            <th scope="col">{{'Bank No'|appTranslate|async}}</th>
+            <th scope="col">{{'Account Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Bank Method'|appTranslate|async}}</th>
+            <th scope="col">{{'Bank Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Sort Code'|appTranslate|async}}</th>
+            <th scope="col">{{'Account No'|appTranslate|async}}</th>
+            <th scope="col">{{'Blocked'|appTranslate|async}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>5667_1</td>
+            <td>Ogene Obaseki</td>
+            <td>NG Banking</td>
+            <td>FBN</td>
+            <td>05677889</td>
+            <td>21923776</td>
+            <td><select name="" id="">
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td>5667_1</td>
+            <td>Ogene Obaseki</td>
+            <td>NG Banking</td>
+            <td>FBN</td>
+            <td>05677889</td>
+            <td>21923776</td>
+            <td><select name="" id="">
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select></td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-btn icon="add" type="dark" data-bs-dismiss="modal"
+          >Create new Account</app-btn
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="coverDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Cover Details'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <loader [loading]="tableLoading" class="vh-30" text="Obtaining Covers">
+            <table-plain [pageSize]="tableLimit" [showPager]="showPager" [distinct]="true" [nowrap]="true"
+                         noItemTxt="There are no covers" [data]="covers" [displayedColumns]="dCols">
+            </table-plain>
+          </loader>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>

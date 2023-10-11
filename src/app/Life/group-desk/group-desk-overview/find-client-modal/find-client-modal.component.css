@@ -1,0 +1,42 @@
+.cdk-overlay-pane.my-dialog {
+  position: relative !important;
+}
+
+.close.mat-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  line-height: 14px;
+  min-width: auto;
+}
+
+.theader {
+  background-color: #514ef5;
+  color: white !important;
+}
+.theader tr th {
+  color: white !important;
+}
+
+.close {
+  background: black;
+  color: white;
+  border-radius: 50%;
+  border: 0px;
+  float: right;
+}
+
+div {
+  position: relative;
+}
+div .summarizeby {
+  float: right;
+  font-size: small;
+}
+
+.excel {
+  color: white;
+  background-color: black;
+  padding: 10px, border-radius 50%;
+}/*# sourceMappingURL=find-client-modal.component.css.map */

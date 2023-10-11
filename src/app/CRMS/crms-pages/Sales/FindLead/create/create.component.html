@@ -1,0 +1,299 @@
+
+<div class="flex-lg-1 h-screen overflow-y-lg-auto">
+  <header>
+    <div class="container-fluid">
+      <div class="border-bottom pt-6">
+        <div class="row  mb-3 align-items-center justify-content-around">
+          <div class="col-sm " style="margin-right: 97px;">
+            <p>3 Records</p>
+            <!-- <p  style="margin-top: -14px;font-size: 13px;margin-left: 5px;"></p> -->
+          </div>
+          <div class="col-2 justify-content-end">
+
+            <app-button buttonType="addCustom" routerLink="../create-lead" text="Create Lead"></app-button>
+
+
+          </div>
+        </div>
+        <ul class="nav nav-tabs overflow-x border-0">
+          <li class="nav-item"><a class="nav-link">All Contacts</a></li>
+          <li class="nav-item"><a class="nav-link active">My Contacts</a></li>
+          <li class="nav-item"><a class="nav-link active">Unassigned Contacts</a></li>
+        </ul>
+
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto" >
+            <div class="nav me-1">
+              <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+              <div class="input-group rounded">
+
+                <input type="text" class="form-control " placeholder="Search Name">
+              </div>
+            </div>
+            <div class="nav me-1">
+              <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+              <div class="input-group rounded">
+
+                <input type="text" class="form-control " placeholder="Search Phone">
+              </div>
+            </div>
+            <div class="nav me-1">
+              <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+              <div class="input-group rounded">
+
+                <input type="text" class="form-control " placeholder="Search Email">
+              </div>
+            </div>
+            <div class="nav me-1">
+              <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+              <div class="input-group rounded">
+
+                <input type="text" class="form-control " placeholder="Search Owner">
+              </div>
+            </div>
+
+            <!--
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                          </ul>
+                        </div> -->
+            <li class="nav-item dropdown text-primary">
+              <a class="nav-link dropdown-toggle text-primary" id="navbarDropdown" role="button"
+                 data-bs-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Create Date
+              </a>
+              <div class="dropdown-menu" style="margin:0;padding:0;" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" style="margin:0;padding:0;">
+
+                </a>
+                <div class="submenu-bar-dropdown">
+                  <a class="dropdown-item active" style="margin:0;padding:4px;">
+                    <h6>Today</h6>
+                    <label>Today from midnight until the current time</label>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Yesterday</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last week</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last Month</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last 3 Months</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last 6 Months</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last Year</h6>
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown text-primary">
+              <a class="nav-link dropdown-toggle text-primary" id="navbarDropdown" role="button"
+                 data-bs-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Last Activity date
+              </a>
+              <div class="dropdown-menu" style="margin:0;padding:0;" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" style="margin:0;padding:0;">
+
+                </a>
+                <div class="submenu-bar-dropdown">
+                  <a class="dropdown-item active" style="margin:0;padding:4px;">
+                    <h6>Today</h6>
+                    <label>Today from midnight until the current time</label>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Yesterday</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last week</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last Month</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last 3 Months</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last 6 Months</h6>
+                  </a>
+                  <a class="dropdown-item" style="margin:0;padding:4px;">
+                    <h6>Last Year</h6>
+                  </a>
+                </div>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-primary" id="navbarDropdown" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Lead Status
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item">Action</a>
+                <a class="dropdown-item">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-primary" id="navbarDropdown" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Lead Quaity
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item">Action</a>
+                <a class="dropdown-item">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-primary" id="navbarDropdown" role="button" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Sort By
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item">Action</a>
+                <a class="dropdown-item">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item">Something else here</a>
+              </div>
+            </li>
+            <div class="nav">
+              <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+              <div class="input-group rounded">
+
+                <button class="btn btn-outline-primary" id="search-addon">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <!-- <li class="nav-item">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" aria-expanded="false">
+                <i class="fa fa-sliders" style="margin-left: 2px;"></i> More Filters
+              </a>
+            </li> -->
+          </ul>
+          <!-- <div> -->
+          <div class="nav" style="margin-right: 8px;margin-left: 8px;">
+            <!-- <button type="button" class="btn btn-primary top-btn navbar-btn mr-auto">
+              Table Actions
+              <i class="fab fa-arrow-alt-down"></i>
+            </button> -->
+            <app-btn icon="download" type="outline">Download</app-btn>
+          </div>
+
+
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main class="py-6 bg-surface-secondary">
+    <div class="container-fluid">
+      <div class="">
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table  table-bordered table-hover table-nowrap">
+              <thead class="thead-light table-light">
+              <tr>
+
+                <!-- <th class="table-head text-start" scope="col">NAME</th>
+                <th class="table-head text-start"scope="col">EMAIL</th>
+                <th class="table-head text-start" scope="col">PHONE NUMBER</th>
+                <th class="table-head text-start" scope="col">CONTACT OWNER</th>
+                <th class="table-head text-start" scope="col">PRIMARY CONTACT</th> -->
+
+                <th class="table-head text-start" scope="col">Lead ID</th>
+                <th class="table-head text-start" scope="col">Client Number</th>
+                <th class="table-head text-start" scope="col">Prospect Days</th>
+                <th class="table-head text-start" scope="col">Sales Channel</th>
+                <th class="table-head text-start" scope="col">Sales Personnel</th>
+                <th class="table-head text-start" scope="col">Last Activity Date</th>
+                <th class="table-head text-start" scope="col">Stage</th>
+                <th class="table-head text-start" scope="col">Lead Quality</th>
+                <th class="table-head text-start" scope="col">Estimated Revenue</th>
+                <th class="table-head text-start" scope="col">Prob Conversion</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+
+                <td><a routerLink="../view-lead" [queryParams]="{id:9088}">9088</a></td>
+                <td><a routerLink="../../view-client" [queryParams]="{id:57888}">57888</a></td>
+                <td>23</td>
+                <td>Agency</td>
+                <td>IND-Garba Shehu</td>
+                <td>1-Feb-21</td>
+                <td>Cold</td>
+                <td>V</td>
+                <td>400,000</td>
+                <td>30%</td>
+              </tr>
+              <tr>
+
+                <td><a routerLink="../view-lead" [queryParams]="{id:908867688}">88676</a></td>
+                <td><a routerLink="../../view-client" [queryParams]="{id:6899}">6899</a></td>
+                <td>34</td>
+                <td>BancAssurance</td>
+                <td>RM- Olawale Fashola</td>
+                <td>1-Feb-21</td>
+                <td>Cold</td>
+                <td>L</td>
+                <td>400,000</td>
+                <td>40%</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer border-0 py-5">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <!-- <li class="page-item disabled"> -->
+                <a class="page-link" tabindex="-1">prev</a>
+                <!-- </li> -->
+                <li class="page-item"><a class="page-link">1</a></li>
+                <!-- <li class="page-item"> -->
+                <a class="page-link">next</a>
+                <!-- </li> -->
+              </ul>
+            </nav>
+            <label></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

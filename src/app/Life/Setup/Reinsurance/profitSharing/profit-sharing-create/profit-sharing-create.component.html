@@ -1,0 +1,84 @@
+<!-- <app-form-navigation [title]="'Set Up / Reinsurance / Profit-Sharing'"></app-form-navigation> -->
+<div class="container pt-4">
+  <div class="row mt-4">
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Profit Share Code"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Profit Share Rate (%)"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Profit Share Table"|appTranslate|async}}</label>
+      <select name="" id="" class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Version Date Basis"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Version No"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Version Date From"|appTranslate|async}}</label>
+      <input type="date" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{"Version Date To"|appTranslate|async}}</label>
+      <input type="date" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4">
+      <label for="" class="form-label">{{"Calculation"|appTranslate|async}}</label>
+    </div>
+  </div>
+  <div class="row mt-2" *ngFor="let i of tableCounter()">
+    <div class="col-3">
+      <label for="" class="form-label text-primary">{{"Line No"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col-3">
+      <label for="" class="form-label text-primary">{{"Calculate Item"|appTranslate|async}}</label>
+      <select name="" id="" class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="col-3">
+      <label for="" class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-primary">{{"Connector"|appTranslate|async}}</label>
+      <select name="" id="" class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <app-button buttonType="add" (click)="tableInc()"></app-button>
+    </div>
+    <div class="col-1">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <app-button buttonType="delete" (click)="tableDec()"></app-button>
+    </div>
+  </div>
+
+  <div class="row mt-4 justify-content-end">
+    <div class="col-2">
+      <app-button buttonType="save"></app-button>
+    </div>
+
+  </div>
+
+</div>

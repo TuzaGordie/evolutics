@@ -1,0 +1,39 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Premium Frequencies'"></app-form-navigation> -->
+
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <label>{{"Select Premium Payment Frequency"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" [(ngModel)]="premfreqCode" name="premfreqCode" #premFreqField>
+                <option></option>
+                <option *ngFor="let premFreq of premFreqs" [value]="premFreq.code">
+                    {{premFreq.code}} - {{premFreq.title}}
+                </option>
+            </select>
+
+            <span class="text-danger" *ngIf="message.error">{{"Field cannot be blank"|appTranslate|async}}</span>
+        </div>
+
+    </div><br>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+            <label>&nbsp;</label>
+            <app-btn icon="show" type="dark" (mclick)="show()" [disabled]="!premFreqField.value">Show</app-btn>
+        </div>
+        <div class="col-md-3">
+            <label>&nbsp;</label>
+            <app-button [buttonType]="'create'" routerLink="../create-premfreq"></app-button>
+        </div>
+
+    </div>
+
+</div>

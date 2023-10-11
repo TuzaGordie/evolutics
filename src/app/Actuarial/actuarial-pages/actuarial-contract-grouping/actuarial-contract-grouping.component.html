@@ -1,0 +1,257 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-4">
+      <label for="" class="form-label text-primary">{{'Company Code'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+
+
+    <div class="col-2">
+      <label for="" class="form-label">&nbsp;</label>
+      <app-btn type="dark" icon="show" [disabled]="true">{{'Show'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label">&nbsp;</label>
+      <app-btn type="outline" icon="edit">{{'Edit'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <label for="" class="form-label text-primary">{{'Grouping Basis'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label text-primary">{{'Version Number'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label text-primary">{{'Version Date'|appTranslate|async}}</label>
+      <input type="date" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h5 class="text-primary">Basic Grouping</h5>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <table class="table table-responsive  table-striped">
+      <thead class="py-3 theader">
+      <tr>
+
+        <th scope="col">{{'Serial Number'|appTranslate|async}}</th>
+        <th scope="col">{{'Grouping Code'|appTranslate|async}}</th>
+        <th scope="col">{{'Description'|appTranslate|async}}</th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{'1'|appTranslate|async}}</td>
+        <td>{{'O'|appTranslate|async}}</td>
+        <td>{{'Onerous At Initial Recognition'|appTranslate|async}}</td>
+
+        <td>
+          <button class="btn btn-dark w-100" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal"><i class="fa fa-info"></i> {{'Details'|appTranslate|async}}</button>
+        </td>
+        <td>
+          <app-btn icon="edit" type="outline"></app-btn>
+        </td>
+        <td>
+          <app-btn icon="delete" type="dark"></app-btn>
+        </td>
+      </tr>
+      <tr>
+        <td>{{'2'|appTranslate|async}}</td>
+        <td>{{'NO'|appTranslate|async}}</td>
+        <td>{{'No Significant Possibility Of Becoming Onerous'|appTranslate|async}}</td>
+
+        <td>
+          <button class="btn btn-dark w-100" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal"><i class="fa fa-info"></i> {{'Details'|appTranslate|async}}</button>
+        </td>
+        <td>
+          <app-btn icon="edit" type="outline"></app-btn>
+        </td>
+        <td>
+          <app-btn icon="delete" type="dark"></app-btn>
+        </td>
+      </tr>
+      <tr>
+        <td>{{'3'|appTranslate|async}}</td>
+        <td>{{'RC'|appTranslate|async}}</td>
+        <td>{{'All Remaining Contracts'|appTranslate|async}}</td>
+
+        <td>
+          <button class="btn btn-dark w-100" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal"><i class="fa fa-info"></i> {{'Details'|appTranslate|async}}</button>
+        </td>
+        <td>
+          <app-btn icon="edit" type="outline"></app-btn>
+        </td>
+        <td>
+          <app-btn icon="delete" type="dark"></app-btn>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <h5 class="text-primary">Advanced Grouping</h5>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <app-btn icon="add" type="secondary" data-bs-toggle="modal"
+               data-bs-target="#exampleModal">{{'Add New Record'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-responsive  table-striped">
+      <thead class="py-3 theader">
+      <tr>
+
+        <th scope="col">{{'Serial Number'|appTranslate|async}}</th>
+        <th scope="col">{{'Grouping Code'|appTranslate|async}}</th>
+        <th scope="col">{{'Description'|appTranslate|async}}</th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+
+        <td>
+          <button class="btn btn-dark w-100" data-bs-toggle="modal"
+                  data-bs-target="#detailsModal"><i class="fa fa-info"></i> {{'Details'|appTranslate|async}}</button>
+        </td>
+        <td>
+          <app-btn icon="edit" type="outline"></app-btn>
+        </td>
+        <td>
+          <app-btn icon="delete" type="dark"></app-btn>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Add New Record'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary" disabled="true">{{'Grouping Code'|appTranslate|async}}</label>
+            <input name="" id="" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray">
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-dark" data-bs-toggle="modal"
+                data-bs-target="#detailsModal"><i class="fa fa-info"></i> {{'Details'|appTranslate|async}}</button>
+        <app-btn type="secondary" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+
+          </div>
+        </div>
+        <div class="row" *ngFor="let if of sortCounter()">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Attribute'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Condition 1'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Value 1'|appTranslate|async}}</label>
+            <input name="" id="" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Condition 2'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Value 2'|appTranslate|async}}</label>
+            <input name="" id="" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn type="secondary" icon="add" (click)="sortInc()"></app-btn>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn type="dark" icon="delete" (click)="sortDec()"></app-btn>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <app-btn type="secondary" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,190 @@
+<loader [loading]="loading">
+  <div class="container mt-2 " id="form-body">
+    <ul class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+          type="button" role="tab" aria-controls="pills-basic" aria-selected="true">{{'Structure'|appTranslate|async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button [disabled]="!rate" #rateEntryBtn class="nav-link" id="pills-dependent-tab" data-bs-toggle="pill"
+          data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+          (click)="fetchBasicRate()" aria-selected="false">{{'Rate Entry'|appTranslate|async}}
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content " id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+        <div class="">
+          <form [formGroup]="form">
+            <div class="row g-3">
+              <div class="col-md-1 d-flex " *ngIf="rate?.code">
+                <app-input-basic [light]="true" label="Rate Code" type="text" [form]="form" name="code"
+                  [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md-{{rate?.code?'5':'6'}}">
+                <app-input-basic [light]="true" label="Description" type="text" [form]="form" name="description"
+                  [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Partition 1" type="select" [options]="rateKeys"
+                  labelType="ct" [form]="form" name="ratePartition1" [showValidationIcon]="false"
+                  [showValidation]="key1.invalid" #key1 valueField="code" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Category" type="select" [options]="rateCategoryList"
+                  labelType="ct" [form]="form" name="category" valueField="code" [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Partition 2" type="select" [options]="rateKeys"
+                  labelType="ct" [form]="form" name="ratePartition2" [showValidationIcon]="false"
+                  [showValidation]="key2.invalid" #key2 valueField="code" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Group" type="select" [options]="rateGroupList"
+                  labelType="ct" valueField="code" [form]="form" name="group" [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Partition 3" type="select" [options]="rateKeys"
+                  labelType="ct" [form]="form" name="ratePartition3" [showValidationIcon]="false"
+                  [showValidation]="key3.invalid" #key3 valueField="code" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3 align-items-end">
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Retrieval Basis" type="select" [options]="rateRetrievals"
+                  labelType="ct" [form]="form" name="retrievalBasis" valueField="code" [stacked]="true"
+                
+                  (mchange)="onRateRetrievalBasisChange()" #rrbTag>
+                </app-input-basic>
+              </div>
+              <div class="col-auto">
+              <app-btn text="Show" group="show" [disabled]="!rrbTag?.control?.valid"  [matTooltip]="rateRetrievalBasisTooltip|functionCaller2:form?.value?.retrievalBasis:refreshRRBTooltip" (mclick)="openRRB()"></app-btn>
+              </div>
+              <div class="col-md-6">
+                <app-input-basic [light]="true" label="Rate Partition 4" type="select" [options]="rateKeys"
+                  labelType="ct" [form]="form" name="ratePartition4" [showValidationIcon]="false"
+                  [showValidation]="key4.invalid" valueField="code" [stacked]="true" #key4>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Value Basis" type="select" [options]="valueBasis" labelType="ct"
+                  valueField="code" [form]="form" name="valueBasis" [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Rate Partition 5" type="select" [options]="rateKeys"
+                  labelType="ct" [form]="form" name="ratePartition5" [showValidationIcon]="false"
+                  [showValidation]="key5.invalid" #key5 valueField="code" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Value Parameter" type="select" [options]="valueParam"
+                  labelType="ct" valueField="code" [form]="form" name="valueParameter" [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md">
+                <app-input-basic [light]="true" label="Duration Calculation Basis" type="select"
+                  [options]="durationBasisCalc" [disabled]="!isDurationCalcBasisMandatory"
+                  [required]="isDurationCalcBasisMandatory" labelType="ct" [form]="form"
+                  valueField="code" name="durationCalcBasis"
+                  [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <app-input-basic [light]="true" label="Version Date Basis" type="select" [form]="form"
+                  name="versionDateBasis" labelType="ct" valueField="code"
+                  [options]="grS.getVersionDateBasis|functionCaller|async" [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md-auto  ">
+                <app-input-basic [light]="true" label="Exact Axis" type="checkbox" [form]="form" name="exactAxis"
+                  [stacked]="true">
+                </app-input-basic>
+              </div>
+              <div class="col-md text-center">
+                <app-input-basic [light]="true" label="Exact Rule" type="select" [form]="form" name="exactRule"
+                  labelType="ct" valueField="code" [options]="grS.getExactRules|functionCaller|async" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row g-3 align-items-end">
+              <ng-container formArrayName="rateVersion">
+                <ng-container
+                  *ngFor="let subForm of versions?.controls;let i = index; let isFirst= first; let isLast = last"
+                  [formGroupName]="i">
+                  <div class="col-lg-6">
+                    <div class="row align-items-end">
+                      <div class="col-md">
+                        <app-input-basic [light]="true" label="Version Number" type="viewer" [form]="subForm"
+                          name="versionNo" [stacked]="true" [showValidationIcon]="false"
+                          [showValidation]="versionNo.invalid" #versionNo>
+                        </app-input-basic>
+                      </div>
+                      <div class="col-md">
+                        <app-input-basic [light]="true" label="Version Date" [type]="subForm.value.id?'viewer':'date'"
+                          [form]="subForm"
+                          name="versionDate" [stacked]="true" [showValidationIcon]="false"
+                          [showValidation]="versionDate.invalid" #versionDate>
+                        </app-input-basic>
+                      </div>
+                      <div class="col-auto" *ngIf="!isShow">
+                        <app-btn icon="delete" type="danger-outline" [iconBtn]="true" [disabled]="versions?.length==1||subForm.value.id"
+                          (mclick)="removeVersionRow(i)">
+                        </app-btn>
+                      </div>
+                      <div class="col-auto">
+                        <app-btn icon="add" type="outline" [iconBtn]="true" [disabled]="versions?.controls[i+1]?.value.id" (mclick)="addVersionRow(null,i+1)"
+                          *ngIf="!isShow">
+                        </app-btn>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col-lg-auto mt-4 d-flex">
+                <app-btn type="secondary" *ngIf="isShow" routerLink="../edit" [queryParamsHandling]="'merge'"
+                  icon="edit" text="Edit">
+                </app-btn>
+                <span class="mx-1"></span>
+                <app-btn type="secondary" *ngIf="isShow" routerLink="../clone" [queryParamsHandling]="'merge'"
+                  icon="clone" text="Clone">
+                </app-btn>
+              </div>
+              <div class="col-lg-auto mt-4">
+                <app-btn type="secondary" *ngIf="!isShow" [valid]="form?.valid" (mclick)="basicSubmit()" icon="save"
+                  text="Submit"></app-btn>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <app-rate-entry-form [isShow]="isShow" [isCreate]="isCreate" [isClone]="isClone" [rate]="rate">
+        </app-rate-entry-form>
+      </div>
+    </div>
+  </div>
+</loader>

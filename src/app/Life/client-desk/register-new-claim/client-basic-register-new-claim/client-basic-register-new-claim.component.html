@@ -1,0 +1,76 @@
+<div class="container">
+  <h2 class="py-3">{{"Register New Claim"|appTranslate|async}}</h2>
+  <form >
+    <div class="row py-3">
+      <div class="col-md-4">
+        <label for="cover">{{"Cover"|appTranslate|async}}</label>
+        <select class="inputform" id="cover">
+          <option [value]="null"></option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="peril">{{"Peril"|appTranslate|async}}</label>
+        <select class="inputform" id="peril">
+          <option [value]="null"></option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="proximateCause">{{"Proximate Cause"|appTranslate|async}}</label>
+        <select class="inputform" id="proximateCause">
+          <option [value]="null"></option>
+        </select>
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-md-4">
+        <label for="severityLevel">{{"Severity Level"|appTranslate|async}}</label>
+        <input class="inputform">
+      </div>
+      <div class="col-md-4">
+        <label for="eventDate">{{"Event Date"|appTranslate|async}}</label>
+        <input class="inputform">
+      </div>
+      <div class="col-md-4">
+        <label for="eventTime">{{"Event Time"|appTranslate|async}}</label>
+        <input class="inputform">
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-md-4">
+        <label for="reportDate">{{"Report Date"|appTranslate|async}}</label>
+        <input type="text" class="inputform">
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-md-4">
+        <label for="eventLocationBasis">{{"Event Location Basis"|appTranslate|async}}</label>
+        <select class="inputform" id="eventLocationBasis">
+          <option [value]="null"></option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="eventLocation">{{"Event Location"|appTranslate|async}}</label>
+        <input type="text" class="inputform">
+      </div>
+      <div class="col-md-4">
+        <label for="policyCurrency">{{"Policy Currency"|appTranslate|async}}</label>
+        <input type="text" class="inputform">
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-md-4">
+        <label for="estimatedPayout" class="text-primary">{{"Estimated Payout"|appTranslate|async}}</label>
+        <input type="text" class="inputform">
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-md-9">
+        <label for="narration">{{"Narration"|appTranslate|async}}</label>
+        <textarea id="narration" rows="3" class="inputform"></textarea>
+      </div>
+      <div class="col-md-3 d-flex align-items-center justify-content-center">
+        <button class="btn btn-primary px-5" (click)="nextTab()">Next&nbsp;<i class="fa fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,473 @@
+<loader [loading]="loading">
+
+  <div class="container-fluid mt-2" id="form-body">
+    <form [formGroup]="clientProviderFormGroup">
+      <div class="container">
+        <ul class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-clientInfoTab-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-clientInfoTab" type="button" role="tab" aria-controls="pills-clientInfoTab"
+              aria-selected="true">
+              {{"Client Information"|appTranslate|async}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-providerInfoTab-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-providerInfoTab" type="button" role="tab" aria-controls="pills-providerInfoTab"
+              aria-selected="false">
+              {{"Provider Information"|appTranslate|async}}
+          </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-paymentdetails-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-paymentdetails" type="button" role="tab" aria-controls="pills-paymentdetails"
+              aria-selected="false">
+              {{"Payment Details"|appTranslate|async}}
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-licenseTab-tab" data-bs-toggle="pill" data-bs-target="#pills-licenseTab"
+              type="button" role="tab" aria-controls="pills-licenseTab" aria-selected="false">
+              {{"License"|appTranslate|async}}
+            </button>
+          </li>
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-accountsTab-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-accountsTab" type="button" role="tab" aria-controls="pills-accountsTab"
+              aria-selected="false">
+              {{"Accounts"|appTranslate|async}}
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+          <!-- CLIENT INFORMATION -->
+          <div class="tab-pane fade show active" id="pills-clientInfoTab" role="tabpanel"
+            aria-labelledby="pills-clientInfoTab-tab">
+            <app-view-client-comp [clientNo]="clientNo"></app-view-client-comp> 
+          </div>
+          <!--// -->
+
+          <!-- Provider Information -->
+          <div class="tab-pane fade" id="pills-providerInfoTab" role="tabpanel"
+            aria-labelledby="pills-providerInfoTab-tab" [formGroup]="providerInformationForm">
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Provider Type"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" (change)="onProviderTypeChange($event)"
+                    formControlName="providerCategory">
+                    <option [value]="null"></option>
+                    <option *ngFor="let ot of providerTypeList" [value]="ot.code">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Sub Provider Type"|appTranslate|async}}</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="providerSubCategory">
+                      <option [value]="null"></option>
+                      <option *ngFor="let ot of providerSubCategoryList" [ngValue]="ot.code">
+                        {{ ot.code }} - {{ ot.title }}
+                      </option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingSubProviderType">
+                      <span class="fa fa-spinner fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-auto">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Status"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="status">
+                    <option [value]="null"></option>
+                    <option *ngFor="let ot of providerStatusList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Tariff Code"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="tariffCode">
+                    <option [value]="null"></option>
+                    <option *ngFor="let ot of tariffCodeList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Network "|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="network">
+                    <option [value]="null"></option>
+                    <option *ngFor="let ot of providerNetworkList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <ng-container formArrayName="disciplines">
+              <ng-container *ngFor="let subForm of disciplines?.controls; let k = index; let isLast= last"
+                [formGroupName]="k">
+                <div class="row align-items-end">
+                  <div class="col-lg ">
+                    <div class="row g-3 align-items-end">
+                      <div class="col-md">
+                        <div class="form-group">
+                          <label class="form-label text-primary">{{"Discipline Category"|appTranslate|async}}</label>
+                          <select class="form-control control-bg-gray" formControlName="discipline">
+                            <option [value]="null"></option>
+                            <option *ngFor="let ot of disciplineCatList" [ngValue]="ot.code">
+                              {{ ot.code }} - {{ ot.title }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <div class="form-group">
+                          <label class="form-label text-primary">{{"Disciplines"|appTranslate|async}}</label>
+                          <select class="form-control control-bg-gray" formControlName="discipline">
+                            <option [value]="null"></option>
+                            <option *ngFor="let ot of disciplineList" [ngValue]="ot.code">
+                              {{ ot.code }} - {{ ot.title }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-md">
+                        <div class="form-group">
+                          <label class="form-label text-primary">{{"Quantity Basis"|appTranslate|async}}</label>
+                          <select class="form-control control-bg-gray" formControlName="quantityBasis">
+                            <option [value]="null"></option>
+                            <option *ngFor="let ot of qtyBasisList" [ngValue]="ot.code">
+                              {{ ot.code }} - {{ ot.title }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md">
+                        <div class="form-group">
+                          <label class="form-label text-primary">{{"Quantity Available"|appTranslate|async}}</label>
+                          <input class="form-control control-bg-gray" type="number" min="0"
+                            formControlName="quantity" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-auto d-flex">
+                    <div class="me-2">
+                      <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removedisciplinesRow(k)"
+                        *ngIf="!isShow" [valid]="disciplines?.length>1">
+                      </app-btn>
+                    </div>
+                    <app-btn group="add" [iconBtn]="true" (mclick)="addNewdisciplinesRow(null,k+1)" *ngIf="!isShow ">
+                    </app-btn>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <hr>
+
+            <ng-container formArrayName="branches">
+              <ng-container *ngFor="let subForm of branches?.controls; let k = index; let isLast= last"
+                [formGroupName]="k">
+                <div class="row align-items-end">
+                  <div class="col-lg ">
+                    <div class="row g-3">
+                      <div class="col-7">
+                        <div class="form-group">
+                          <label class="form-label text-primary">{{"Branch Addresses"|appTranslate|async}}</label>
+                          <input class="form-control control-bg-gray" type="text" formControlName="branchAddress" />
+                        </div>
+                      </div>
+                      <div class="col-5">
+                        <div class="form-group">
+                          <label class="form-label text-primary">{{"Branch State"|appTranslate|async}}</label>
+                          <select class="form-control control-bg-gray" formControlName="branchState">
+                            <option [value]="null"></option>
+                            <option *ngFor="let state of statesList" [value]="state.code">{{state.description}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-auto d-flex">
+                    <div class="me-2">
+                      <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removebranchesRow(k)"
+                        *ngIf="!isShow" [valid]="branches?.length>1">
+                      </app-btn>
+                    </div>
+                    <app-btn group="add" [iconBtn]="true" (mclick)="addNewbranchesRow(null,k+1)" *ngIf="!isShow ">
+                    </app-btn>
+                  </div>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <hr>
+
+            <div class="row g-3 align-items-center">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Description of Facility"|appTranslate|async}}</label>
+                  <textarea name="" id="" cols="30" rows="5" class="form-control control-bg-gray"
+                    formControlName="facilityDescription"></textarea>
+
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <app-file-upload label="Upload Photos of Facility" accept="image" [(files)]="facilityPhotos" [multiple]="true"></app-file-upload>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <!--// -->
+
+          <!-- Payment Details -->
+          <div class="tab-pane fade" id="pills-paymentdetails" role="tabpanel"
+            aria-labelledby="pills-paymentdetails-tab">
+            <app-payment-info [paymentForm]="paymentInformationForm" paymentMethodField="paymentMethod"
+              frequencyField="frequencyOfPayment" [clientNo]="clientNo"></app-payment-info>
+          </div>
+          <!--// -->
+
+          <!-- License -->
+          <div class="tab-pane fade" id="pills-licenseTab" role="tabpanel" aria-labelledby="pills-licenseTab-tab"
+            [formGroup]="licenseForm">
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"License Type"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="licenceType">
+                    <option></option>
+                    <option *ngFor="let ot of licenseTypeList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"License Issue Date"|appTranslate|async}}</label>
+                  <input class="form-control control-bg-gray" type="date" formControlName="licenceStart" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"License Authority"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="licensedAuthority">
+                    <option></option>
+                    <option *ngFor="let ot of licenseAuthList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"License Expiry Date"|appTranslate|async}}</label>
+                  <input class="form-control control-bg-gray" type="date" formControlName="licenceExpiry" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"License Condition"|appTranslate|async}}</label>
+                  <textarea name="" id="" cols="30" rows="5" class="form-control control-bg-gray"
+                    formControlName="licensedCondition"></textarea>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="form-label text-primary">&nbsp;</label>
+                  <app-input-basic type="fileButton" [showLabel]="false" [form]="licenseForm" label="Upload License"
+                    (mchange)="extractLicenseFile($event)"></app-input-basic>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <!--// -->
+
+          <!-- Accounts -->
+          <div class="tab-pane fade" id="pills-accountsTab" role="tabpanel" aria-labelledby="pills-accountsTab-tab"
+            [formGroup]="accountsForm">
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Free Due To"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeDueTo">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ot.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Free Due From"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeDueFrom">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Premium Due To "|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeePremiumTo">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Premium Due To"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeePremiumFrom">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Claim Due To "|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeClaimTo">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Claim Due From"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeClaimFrom">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Medical UW Due To"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeMedicalUwTo">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Medical UW Due From"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeMedicalUwFrom">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Commissions Due To"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeCommissionTo">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group">
+                  <label class="form-label text-primary">{{"Coinsurance Commissions Due From"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="coinsuranceFeeCommissionFrom">
+                    <option></option>
+                    <option *ngFor="let ot of accountsList" [ngValue]="ot.code">
+                      {{ ot.code }} - {{ ot.description }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-end mt-5 ">
+
+              <div class="col-2">
+                <!-- [valid]="clientProviderFormGroup?.valid" -->
+                <app-btn type="secondary" icon="save" (mclick)="submit()">Submit</app-btn>
+
+              </div>
+
+            </div>
+          </div>
+          <!--// -->
+        </div>
+      </div>
+    </form>
+  </div>
+ 
+</loader>

@@ -1,0 +1,233 @@
+<div [formGroup]="form">
+  <div class="row gy-2">
+    <div class="col-lg" *ngIf="form.controls.code.value">
+      <app-input-basic label="Code" type="viewer" [form]="form" name="code" [stacked]="true" #codeTag>
+      </app-input-basic>
+      <app-validation-message [input]="codeTag"></app-validation-message>
+    </div>
+    <div class="col-lg">
+      <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true"
+        #descriptionTag>
+      </app-input-basic>
+      <app-validation-message [input]="descriptionTag"></app-validation-message>
+    </div>
+  </div>
+
+  <div class="row gy-2">
+    <div class="col-lg">
+      <app-input-basic label="Insurance Type" labelType="ct" valueField="code" type="select"
+        [options]="fpS.getInsuranceType|functionCaller1:'INS_TYPE'|async" [form]="form" name="insuranceType"
+        [stacked]="true" #insuranceTypeTag>
+      </app-input-basic>
+      <app-validation-message [input]="insuranceTypeTag"></app-validation-message>
+    </div>
+
+    <div class="col-lg">
+      <app-input-basic label="Issue Date Basis" labelType="ct" valueField="code" type="select"
+        [options]="fpS.getCodeLists|functionCaller1:'ISSUE_DATE_BASIS'|async" [form]="form" name="issueDateBasis"
+        [stacked]="true" #issueDateBasisTag>
+      </app-input-basic>
+      <app-validation-message [input]="issueDateBasisTag"></app-validation-message>
+    </div>
+  </div>
+
+  <div class="row gy-2">
+    <div class="col-lg">
+      <app-input-basic label="Product Class" labelType="ct" valueField="code" type="select"
+        [options]="fpS.getCodeList|functionCaller1:insuranceTypeTag.value|async" [form]="form" name="productClass"
+        [stacked]="true" #productClassTag>
+      </app-input-basic>
+      <app-validation-message [input]="productClassTag"></app-validation-message>
+    </div>
+    <div class="col-lg">
+      <app-input-basic label="Issue Date Factor" [disabled]="issueDateBasisTag.value!='SID'" type="number" [max]="31"
+        [min]="0" [form]="form" name="issueDateFactor" [stacked]="true" #issueDateFactorTag>
+      </app-input-basic>
+      <app-validation-message [input]="issueDateFactorTag"></app-validation-message>
+    </div>
+  </div>
+
+
+  <div class="row gy-2">
+    <div class="col-6">
+      <app-input-basic label="Debit Note Rule" labelType="ct" valueField="code" type="select"
+        [options]="fpS.getCodeLists|functionCaller1:'DEBIT_NOTE_RULE'|async" [form]="form" name="debitNoteRule"
+        [stacked]="true" #debitNoteRuleTag>
+      </app-input-basic>
+      <app-validation-message [input]="debitNoteRuleTag"></app-validation-message>
+    </div>
+    <div class="col-6">
+      <app-input-basic label="Quote Validity Basis" labelType="ct" valueField="code" type="select"
+        [options]="fpS.getCodeLists|functionCaller1:'QUOTE_VALIDITY_BASIS'|async" [form]="form"
+        name="quoteValidityBasis" [stacked]="true" #quoteValidityBasisTag>
+      </app-input-basic>
+      <app-validation-message [input]="quoteValidityBasisTag"></app-validation-message>
+    </div>
+  </div>
+
+  <div class="row gy-2">
+    <div class="col-lg">
+      <app-input-basic label="Policy Number Prefix" type="text" [form]="form" name="policyNumberPrefix" [stacked]="true"
+        #policyNumberPrefixTag>
+      </app-input-basic>
+      <app-validation-message [input]="policyNumberPrefixTag"></app-validation-message>
+    </div>
+    <div class="col-lg">
+      <app-input-basic label="Quote Validity Period" type="text" [form]="form" name="quoteValidityPeriod"
+        [stacked]="true" #quoteValidityPeriodTag>
+      </app-input-basic>
+      <app-validation-message [input]="quoteValidityPeriodTag"></app-validation-message>
+    </div>
+  </div>
+
+
+  <div class="row gy-2">
+    <div class="col-lg">
+      <app-input-basic label="Quotation Screen" labelType="cd" valueField="code" type="select"
+        [options]="fpS.getScreensList|functionCaller1:'QT'|async" [form]="form" name="quotationScreen" [stacked]="true"
+        #quotationScreenTag>
+      </app-input-basic>
+      <app-validation-message [input]="quotationScreenTag"></app-validation-message>
+    </div>
+    <div class="col-lg">
+      <app-input-basic label="Policy Screen" labelType="cd" valueField="code" type="select"
+        [options]="fpS.getScreensList|functionCaller1:'PO'|async" [form]="form" name="policyScreen" [stacked]="true"
+        #policyScreenTag>
+      </app-input-basic>
+      <app-validation-message [input]="policyScreenTag"></app-validation-message>
+    </div>
+  </div>
+
+  <div class="row gy-2">
+    <div class="col-lg">
+      <app-input-basic label="Upload File Basis - For Group Business" labelType="ct" valueField="code" type="select"
+        [options]="fpS.getUploadFileBasis|functionCaller|async" [form]="form" name="uploadFileBasis" [stacked]="true"
+        #uploadFileBasisTag>
+      </app-input-basic>
+      <app-validation-message [input]="uploadFileBasisTag"></app-validation-message>
+    </div>
+    <div class="col-lg">
+      <app-input-basic label="Premium Statement Screen" labelType="cd" valueField="code" type="select"
+        [options]="fpS.getScreensList|functionCaller1:'PR'|async" [form]="form" name="premiumStatementScreen"
+        [stacked]="true" #premiumStatementScreenTag>
+      </app-input-basic>
+      <app-validation-message [input]="premiumStatementScreenTag"></app-validation-message>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg">
+      <app-input-basic label="Quote Result Screen" labelType="cd" valueField="code" type="select" [form]="form"
+        [options]="fpS.getScreensList|functionCaller1:'QR'|async" name="quotationResultScreen" [stacked]="true"
+        #quotationResultScreenTag>
+      </app-input-basic>
+      <app-validation-message [input]="quotationResultScreenTag"></app-validation-message>
+    </div>
+    <div class="col-lg">
+      <app-input-basic label="Renewal Basis" labelType="ct" valueField="code" type="select" [form]="form"
+        [options]="fpS.getCodeLists|functionCaller1:'RENEWAL_BASIS'|async" name="renewalBasis" [stacked]="true"
+        #renewalBasisTag>
+      </app-input-basic>
+      <app-validation-message [input]="renewalBasisTag"></app-validation-message>
+    </div>
+  </div>
+  <div class="row text-center justify-content-between">
+    <div class="col-lg-auto">
+      <app-input-basic label="Group Business" type="checkbox" [form]="form" name="groupBusiness" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-auto" *ngIf="!(isCreate||isClone)">
+      <app-input-basic label="Close to New Business"   type="checkbox" [form]="form"
+        name="closedToNewBusiness" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-auto">
+      <app-input-basic label="Auto convert Quote" type="checkbox" [form]="form" name="autoConvertQuote"
+        [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-auto">
+      <app-input-basic label="Allow Credit Note" type="checkbox" [form]="form" name="allowCreditNote" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-auto">
+      <app-input-basic label="Auto Reconcile Suspense" type="checkbox" [form]="form" name="autoReconcileSuspense"
+        [stacked]="true">
+      </app-input-basic>
+    </div>
+
+  </div>
+
+
+  <div class="row gy-2">
+    <div class="col-lg-4 ">
+      <ng-container *ngFor="let subForm of currencyAllowed?.controls; let i = index;">
+        <div class="row align-items-end">
+          <div class="col">
+            <app-autocomplete label="Currency Allowed" labelType="cd" valueField="code" [options]="currenciesLists"
+              [form]="subForm" name="validCurrency" [required]="i==0" [stacked]="true" #validCurrencyTag></app-autocomplete>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="me-2">
+              <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeCurrencyAllowed(i)"
+                *ngIf="!isShow" [valid]="currencyAllowed?.length>1">
+              </app-btn>
+            </div>
+            <app-btn group="add" [iconBtn]="true" (mclick)="addNewCurrencyAllowed(null,i+1)" *ngIf="!isShow ">
+            </app-btn>
+          </div>
+          <div class="col-12">
+            <app-validation-message [input]="validCurrencyTag"></app-validation-message>
+          </div>
+        </div>
+      </ng-container>
+      <app-validation-message [control]="currencyAllowed" label="A currency"></app-validation-message>
+    </div>
+    <div class="col-lg-4">
+      <ng-container *ngFor="let subForm of companiesAllowed?.controls; let i = index;">
+        <div class="row align-items-end">
+          <div class="col">
+            <app-autocomplete label="Company Allowed" labelType="cd" valueField="code" [options]="companyLists"
+              [form]="subForm" name="companyCode" [required]="i==0" [stacked]="true" #companyCodeTag></app-autocomplete>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="me-2">
+              <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeCompaniesAllowed(i)"
+                *ngIf="!isShow" [valid]="companiesAllowed?.length>1">
+              </app-btn>
+            </div>
+            <app-btn group="add" [iconBtn]="true" (mclick)="addNewCompaniesAllowed(null,i+1)" *ngIf="!isShow ">
+            </app-btn>
+          </div>
+          <div class="col-12">
+            <app-validation-message [input]="companyCodeTag"></app-validation-message>
+          </div>
+        </div>
+      </ng-container>
+      <app-validation-message [control]="companiesAllowed" label="A company"></app-validation-message>
+    </div>
+    <div class="col-lg-4">
+      <ng-container *ngFor="let subForm of discountsAllowed?.controls; let i = index;">
+        <div class="row align-items-end">
+          <div class="col">
+            <app-autocomplete label="Discount Allowed" labelType="cd" valueField="code" [options]="discountLists"
+              [form]="subForm" name="code" [stacked]="true" (mchange)="patchDescription(i,$event)" #codeTag>
+            </app-autocomplete>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="me-2">
+              <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removediscountsAllowed(i)"
+                *ngIf="!isShow" [valid]="discountsAllowed?.length>1">
+              </app-btn>
+            </div>
+            <app-btn group="add" [iconBtn]="true" (mclick)="addNewdiscountsAllowed(null,i+1)" *ngIf="!isShow ">
+            </app-btn>
+          </div>
+          <div class="col-12">
+            <app-validation-message [input]="codeTag"></app-validation-message>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+</div>

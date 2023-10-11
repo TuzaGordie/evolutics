@@ -1,0 +1,506 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Account Ledger'"></app-form-navigation> -->
+<div class="container">
+  <div [formGroup]="form" class="row row-cols-5 g-2">
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Company"|appTranslate|async}}</div>
+            <select formControlName="company" name="" id="" class="form-control control-bg-gray" #company (change)="getBranch(company.value)">
+              <option [value]=""> </option>
+              <option *ngFor="let company of companies" [value]="company.code">{{company.code}} - {{company.description}}</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Branch"|appTranslate|async}}</div>
+            <select formControlName="branch" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="branch.code" *ngFor="let branch of branches">
+                {{branch.code}} - {{branch.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Account Line"|appTranslate|async}}</div>
+            <select formControlName="accLine" name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Treaty Group"|appTranslate|async}}</div>
+            <select formControlName="treatyGroup" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="group.code" *ngFor="let group of accountGroups">
+                {{group.code}} - {{group.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Account Code"|appTranslate|async}}</div>
+            <select formControlName="accCode" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="account.code" *ngFor="let account of accountCodes">
+                {{account.code}} - {{account.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Ledger Code"|appTranslate|async}}</div>
+            <select formControlName="ledgerCode" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="ledger.code" *ngFor="let ledger of ledgerCodes">
+                {{ledger.ledgerCode}} - {{ledger.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Agent No"|appTranslate|async}}</div>
+            <input formControlName="agentNo" name="" id="" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;" (click)="findAgent()">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Provider No"|appTranslate|async}}</div>
+            <input formControlName="providerNo" name="" id="" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem; opacity: .7; cursor: not-allowed" (click)="findProvider()">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Currency"|appTranslate|async}}</div>
+            <select formControlName="currency" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="currency.code" *ngFor="let currency of currencies">
+                {{currency.code}} - {{currency.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Product Class"|appTranslate|async}}</div>
+            <select formControlName="prodClass" name="" id="" class="form-control control-bg-gray" #productClass (change)="getProduct(productClass.value)">
+              <option [value]=""> </option>
+              <option  [value]="class.code" *ngFor="let class of productClasses">
+                {{class.code}} - {{class.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Product"|appTranslate|async}}</div>
+            <select formControlName="productCode" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="product.code" *ngFor="let product of products">
+                {{product.code}} - {{product.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Expense Code"|appTranslate|async}}</div>
+            <input formControlName="expCode" name="" id="" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+        <!-- <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div> -->
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Trans No"|appTranslate|async}}</div>
+            <input formControlName="transNo" name="" id="" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Loan No"|appTranslate|async}}</div>
+            <input formControlName="loanNo" name="" id="" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Policy No"|appTranslate|async}}</div>
+            <input formControlName="policyNo" name="" id="" class="form-control control-bg-gray" [(ngModel)]="PolicyNo" (blur)="getPolicyDetails(PolicyNo)"/>
+          </div>
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;" (click)="findPolicy()">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Policy Code"|appTranslate|async}}</div>
+            <select formControlName="policyCode" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""></option>
+              <option  [value]="code" *ngFor="let code of policyCodes">
+                {{code}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Policy No Suffix"|appTranslate|async}}</div>
+            <select formControlName="policyNoSuffix" name="" id="" class="form-control control-bg-gray">
+              <option [value]=""> </option>
+              <option  [value]="number" *ngFor="let number of policySuffixNumbers">
+                {{number}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Quote No"|appTranslate|async}}</div>
+            <input formControlName="quoteNo" name="" id="" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;" (click)="findQuote()">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Created From"|appTranslate|async}}</div>
+            <input formControlName="createdFrom" type="date" class="form-control control-bg-gray">
+          </div>
+          <div *ngIf="form.controls['createdFrom'].invalid && form.controls['createdFrom'].touched" class="text-danger">{{'Created From is required'|appTranslate|async}}</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Created To"|appTranslate|async}}</div>
+            <input formControlName="createdTo" type="date" class="form-control control-bg-gray">
+          </div>
+          <div *ngIf="form.controls['createdTo'].invalid && form.controls['createdTo'].touched" class="text-danger">{{'Created To is required'|appTranslate|async}}</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Narration"|appTranslate|async}}</div>
+            <input formControlName="narration" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"DN No"|appTranslate|async}}</div>
+            <input formControlName="dnNo" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Client No"|appTranslate|async}}</div>
+            <input formControlName="clientNo" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label"> &nbsp;</label> <br>
+          <a class="text-primary" style="font-size: 1.4rem;" (click)="findClient()">
+            <fa-icon [icon]="faSearch"></fa-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row g-2">
+        <div class="col">
+          <div class="form-group">
+            <div class="form-label text-primary">{{"Splice"|appTranslate|async}}</div>
+            <select formControlName="scheduled" type="text" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option *ngFor="let splice of splices" [value]="splice">{{splice | spliceName}}</option>
+            </select>
+          </div>
+          <div *ngIf="form.controls['scheduled'].invalid && form.controls['scheduled'].touched" class="text-danger">{{'Splice is required'|appTranslate|async}}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-md-auto">
+      <app-btn type="secondary" [customIcon]="isSearching ? 'fa fa-spinner fa-spin' : 'fa fa-search'" (click)="onSearch()">Result</app-btn>
+    </div>
+
+  </div>
+</div>
+<!--<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Company"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="company" [stacked]="true"
+                       [options]="accS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" #company>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Branch"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="branch" [stacked]="true"
+                       [options]="accS.getBranchCodeAndDescriptionByCompanyCode|functionCaller1:company?.value?.code|async"
+                       labelType="cd" #branch>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Account Line"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="accountLine" [stacked]="true"
+                       [options]="accS.getCodeSubGroup|functionCaller1:'ACCOUNT_LINE'|async" labelType="cd"
+                       #accountLine>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Account Group"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="accountGroup" [stacked]="true"
+                       [options]="accS.getCodeSubGroup|functionCaller1:'ACC_GROUP'|async" labelType="cd" #accountGroup>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Account Code"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="accountCode" [stacked]="true"
+                       [options]="accS.getCodeSubGroup|functionCaller1:'ACC_GROUP'|async" labelType="cd" #accountCode>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Ledger Code"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="ledgerCode" [stacked]="true"
+                       [options]="accS.getCodeSubGroup|functionCaller1:'ACC_GROUP'|async" labelType="cd" #ledgerCode>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Agent No"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="agentNo" [stacked]="true"
+                       [options]="accS.getAllAgentsNo|functionCaller|async" #agentNo>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Provider No"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="agentNo" [stacked]="true"
+                       [options]="accS.getAllAgentsNo|functionCaller|async" #agentNo>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Currency"|appTranslate|async}}</label>
+      <app-input-basic type="select" [form]="form" name="accountCode" [stacked]="true"
+                       [options]="accS.getCurrency|functionCaller|async" labelType="cd" #currency>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+
+  <div class="row mt-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+      <app-btn type="dark" icon="show" routerLink="../create">Show</app-btn>
+    </div>
+  </div>
+  <br><br><br><br>
+</div>-->

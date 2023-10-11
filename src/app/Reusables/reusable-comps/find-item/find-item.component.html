@@ -1,0 +1,49 @@
+<loader [loading]="loading">
+  <form>
+    <div class="row">
+
+      <ng-container *ngFor="let scheme of formSchema">
+        <div class="col-md-4 col-xxl-3">
+          <div class="row align-items-end">
+            <div class="col">
+              <app-input-basic #formField [name]="scheme.field" [form]="searchForm" [stacked]="true"
+                [type]="scheme.type" [valueField]="scheme.valueField" [labelType]="scheme.labelType" [showValidation]="scheme.standalone" [showValidationIcon]="scheme.standalone"
+                [labelField]="scheme.labelField" [optionFormatter]="scheme.optionFormatter"
+                [options]="(scheme.optionsFunc|functionCaller2:searchForm.value:scheme.field|async)||scheme.options"
+                [decimalPoints]="scheme.decimalPoints" [hint]="scheme.hint" [max]="scheme.max" [min]="scheme.min"
+                [placeholder]="scheme.placeholder" [label]="scheme.label"
+                [disabled]="scheme.disabledIf|functionCaller2:searchForm.value:scheme.field"></app-input-basic>
+            </div>
+            <div class="col-auto" *ngIf="scheme.standalone">
+              <app-btn group="show" [disabled]="formField.control?.invalid" (mclick)="scheme.action(searchForm?.value,formField.value)">
+              </app-btn>
+            </div>
+          </div>
+          <app-validation-message [input]="formField"></app-validation-message>
+        </div>
+      </ng-container>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-auto pt-3">
+        <app-btn [group]="'search'" text="Search" [disabled]="!searchFunction" (mclick)="search()"></app-btn>
+      </div>
+    </div>
+
+
+  </form>
+
+  <ng-container *ngIf="data">
+    <ng-container *ngIf="isTablePaginated; else elseTemplate">
+      <table-https [displayedColumns]="displayedColumns" [showExport]="showExport"
+        [observableFunc]="searchObservableFunc"
+        [pageSize]="pageSize" [orderField]="orderField" (rowClick)="rowClick($event)"></table-https>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <table-plain [distinct]="true" [showPager]="true" [pageSize]="pageSize" [showFilter]="showFilter"
+        [showExport]="showExport"
+        [data]="data" (rowClick)="rowClick($event)"
+        [displayedColumns]="displayedColumns"></table-plain>
+    </ng-template>
+  </ng-container>
+
+</loader>

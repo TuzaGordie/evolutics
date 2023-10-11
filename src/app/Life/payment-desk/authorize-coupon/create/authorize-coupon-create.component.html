@@ -1,0 +1,183 @@
+<div class="container">
+  <div class="form-group mt-2">
+
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'Coupon Number'|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" [value]="authorizeCoupons.no" type="text" disabled/>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Status'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" [value]="authorizeCoupons.status" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'Created User'|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" [value]="authorizeCoupons.createdBy" type="text" disabled/>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Created On'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" [value]="authorizeCoupons.authOn" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label text-primary">{{'Policy No'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" [value]="authorizeCoupons.policyNo" type="text"/>
+            </div>
+            <div class="col-6">
+              <label class="form-label text-primary">{{'Policy Code'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" [value]="authorizeCoupons.policyCode" type="text"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Effective Date'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" [value]="authorizeCoupons.effectiveDate | date" type="date"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" [value]="authorizeCoupons.currency" type="text"/>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Amount Received'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" [value]="authorizeCoupons.amountReceived" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'VAT Deducted at Source'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.vatDeductedAtSource"/>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'WHT Deducted at Source'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.whtDeductedAtSource"/>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'Commission Deducted at Source'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.commissionDeductedAtSource"/>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Colnsurance Fees Deducted at Source'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.coinsuranceFeeDeductedAtSource"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'Colnsurance Underwriting Expense Deducted at Source'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.coinsuranceUnderWritingDeductedAtSource"/>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Gross Amount'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.netAmount"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+        <div class="col-5">
+          <label class="form-label text-primary">{{'Narration'|appTranslate|async}}</label>
+
+          <textarea class="form-control  control-bg-gray" [value]="authorizeCoupons.narration"></textarea>
+        </div>
+        <div class="col-1 form-group mt-2 pt-2"></div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Debit Note/Invoice No'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" [value]="authorizeCoupons.debitNote"/>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-1 pt-1">
+        <div class="col-4">
+
+        </div>
+        <div class="col-6"></div>
+        <div class="col-2">
+          <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal">
+            <app-button [buttonType]="'action'"></app-button>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{'Action'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center">
+            <div class="col-10">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="" class="form-label text-primary">{{'User ID'|appTranslate|async}}</label>
+                    <input type="text" class="form-control control-bg-gray" value="J-Bond" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="" class="form-label text-primary">{{'Comment (Optional)'|appTranslate|async}}</label>
+                    <textarea name="" id="" cols="30" rows="5" class="form-control control-bg-gray"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">{{'Authorize'|appTranslate|async}}</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{'Decline'|appTranslate|async}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<app-form-navigation [title]="'Set Up / Address / State'"></app-form-navigation>
+<div class="container-sm mt-5 ">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <div class="form-group mt-2">
+          <label>{{'State Code'|appTranslate|async}}</label><br />
+          <input class="form-control form-control-sm control-bg-gray">
+
+        </div><br />
+        <div class="form-group mt-2">
+          <label>{{'Description'|appTranslate|async}}</label><br />
+          <input class="form-control form-control-sm control-bg-gray">
+        </div><br />
+        <div class="form-group mt-2">
+          <label>{{'Country'|appTranslate|async}} </label><br />
+          <select class="form-control form-control-sm control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div><br />
+        <div class="form-group mt-2">
+          <label>{{'Region'|appTranslate|async}}</label><br />
+          <select class="form-control form-control-sm control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end">
+      <div class="form-group mt-2">
+        <button type="button" class=" btn btn-secondary form-control btn-next" style="z-index: 900;"> {{'Save'|appTranslate|async}} </button>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,72 @@
+ <div class="d-flex h-50 flex-column justify-content-center">
+   <div class="row">
+     <div class="col-10 mx-auto my-5 align-middle">
+       <form> 
+         <div class="form-group mt-2">
+           <div class="row align-items-end">
+             <div class="col-md">
+               <app-input-basic label="Create New User" [form]="findClientForm" [showValidation]="true" [showValidationIcon]="true"
+                 name="clientNo"  [stacked]="true" placeholder="Enter Client Number for New User" #cn
+                  ></app-input-basic>
+             </div>
+             <div class="col-md" >
+               <input type="text" disabled [value]="fullName" name="fullName" class="control-bg-gray inputform  "> 
+             </div>
+             <div class="col-md-auto">
+               <app-btn type="secondary" text="Find Client" icon="search" (mclick)="clientService.openFindClientModal(cn.control)"></app-btn>
+             </div>
+             <div class="col-md-auto">
+               <app-btn type="outline" text="Create Client"  icon="add"
+                 [matMenuTriggerFor]="clientMenu"></app-btn>
+               <mat-menu #clientMenu="matMenu">
+                 <button mat-menu-item (click)="clientService.openCreateIndividualClientModal(cn.control)">
+                   {{'Individual Client'|appTranslate|async}}
+                 </button>
+                 <button mat-menu-item (click)="clientService.openCreateCorporateClientModal(cn.control)">
+                   {{'Corporate Client'|appTranslate|async}}
+                 </button>
+               </mat-menu>
+             </div>
+
+           </div>
+         </div>
+       </form>
+       <div class="row justify-content-between mt-3">
+         <div class="col-auto">
+           <div class="text-danger" *ngIf="message2">
+             {{message2}}
+           </div>
+
+         </div>
+         <div class="col-2">
+           <div class="form-group mt-2">
+             <app-btn type="secondary" icon="next" [valid]="findClientForm.valid" (click)="onNext()">Next</app-btn>
+             <!-- <app-button buttonType="next" [disabled]="disableNext == true" (click)='onNext()'></app-button> -->
+           </div>
+         </div>
+       </div>
+       <form> 
+         <div class="form-group mt-2">
+           <label class="mb-2 text-primary">&nbsp;</label>
+           <div class="row align-items-end">
+             <div class="col-md">
+                <app-input-basic label="Extend Module Access Of Existing User" [form]="findClientForm" [showValidation]="true" [showValidationIcon]="true"
+                  name="userCode"  [stacked]="true" type="select" [options]="[]"  #un
+                 ></app-input-basic> 
+             </div>
+             <div class="col-md"  >
+               <input type="text" disabled [value]="userName" name="fullName" class="control-bg-gray inputform "> 
+             </div>
+             <div class="col-md-auto">
+
+               <app-btn type="outline" text="Extend" icon="next" [matMenuTriggerFor]="clientMenu"></app-btn>
+             </div>
+
+           </div>
+         </div>
+       </form>
+     </div>
+   </div>
+
+
+ </div>

@@ -1,0 +1,40 @@
+<div class="" [formGroup]="form">
+  <div class="modal-header">
+    <h5 class="modal-title" id="LookupModalLabel">{{"Lookup"|appTranslate|async}}</h5>
+    <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md">
+          <app-input-basic [light]="true" label="Lookup Field" type="select" [options]="lookUpFieldlist" labelType="ct" valueField="code"
+            [form]="form" name="lookupValue" [stacked]="true" [showValidationIcon]="false"
+            [showValidation]="lookup.invalid" #lookup>
+          </app-input-basic>
+        </div>
+        <div class="col-md" *ngIf="false">
+          <app-input-basic [light]="true" label="Band Field (optional)" type="select" [options]="lookUpFieldlist2" valueField="code"
+            labelType="ct" [form]="form" name="bandParameter" [stacked]="true" [showValidationIcon]="false"
+            [showValidation]="band.invalid" [disabled]="true" #band>
+          </app-input-basic>
+        </div>
+        <div class="col-md" *ngIf="false">
+          <div class="form-group">
+            <label class="text-primary form-label ">{{"Filter (E.g No of Covers. No of Members)"|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray">
+              <option value="" disabled></option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer justify-content-between">
+
+    <div class="text-danger">
+      {{errorMsg}}
+    </div>
+    <app-btn type="primary" icon="save" [valid]="form?.valid" (mclick)="save()">Save Changes</app-btn>
+  </div>
+</div>

@@ -1,0 +1,314 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{'Edit KYC'|appTranslate|async}}</h5>
+  <button type="button" class="btn-close" (click)="onClose()"></button>
+</div>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-2">{{'Pencom No'|appTranslate|async}}</div>
+    <div class="col-2 text-primary">
+      {{
+        clientIdentificationForm.controls[0]?.get('pensionCommissionNumber')
+          ?.value
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">{{'NIN'|appTranslate|async}}</div>
+    <div class="col-2 text-primary">
+      {{
+        clientIdentificationForm.controls[0]?.get(
+          'nationalIdentificationNumber'
+        )?.value
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">{{'BVN'|appTranslate|async}}</div>
+    <div class="col-2 text-primary">
+      {{ clientIdentificationForm.controls[0]?.get('bvn')?.value }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">{{'TIN'|appTranslate|async}}</div>
+    <div class="col-2 text-primary">--</div>
+  </div>
+
+  <form>
+    <table class="table table-borderless table-striped my-5">
+      <thead>
+        <tr class="">
+          <th scope="col">{{'ID Type'|appTranslate|async}}</th>
+          <th scope="col">{{'Issue Date'|appTranslate|async}}</th>
+          <th scope="col">{{'Expiry Date'|appTranslate|async}}</th>
+          <th scope="col">{{'ID Number'|appTranslate|async}}</th>
+          <th scope="col">{{'Download'|appTranslate|async}}</th>
+          <th scope="col">{{'Upload'|appTranslate|async}}</th>
+          <th scope="col">{{'Expiry Warning sent'|appTranslate|async}}</th>
+          <th scope="col">{{'Active'|appTranslate|async}}</th>
+          <th><!--Edit--></th>
+          <th><!--Delete--></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let record of clientIdentificationForm.controls; index as i"
+        >
+          <ng-container [formGroup]="$any(record)">
+            <td>
+              <select
+                formControlName="idType"
+                class="form-control"
+                [ngClass]="
+                  isFieldInvalid(record, 'idType') && 'border border-danger'
+                "
+                [attr.disabled]="
+                  idRecordsStatus[record.value.id] != 'EDITING'
+                    ? 'disabled'
+                    : null
+                "
+              >
+                <option
+                  *ngFor="let idType of idTypesList"
+                  [value]="idType.code"
+                >
+                  {{ idType.title }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="date"
+                class="form-control"
+                [ngClass]="
+                  isFieldInvalid(record, 'idIssueDate') &&
+                  'border border-danger'
+                "
+                formControlName="idIssueDate"
+                [readonly]="idRecordsStatus[record.value.id] != 'EDITING'"
+              />
+            </td>
+            <td>
+              <input
+                type="date"
+                class="form-control"
+                [ngClass]="
+                  isFieldInvalid(record, 'idExpiryDate') &&
+                  'border border-danger'
+                "
+                formControlName="idExpiryDate"
+                [readonly]="idRecordsStatus[record.value.id] != 'EDITING'"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                [ngClass]="
+                  isFieldInvalid(record, 'idNumber') && 'border border-danger'
+                "
+                formControlName="idNumber"
+                [readonly]="idRecordsStatus[record.value.id] != 'EDITING'"
+              />
+            </td>
+            <td>
+              <button
+                class="btn btn-primary"
+                (click)="downloadDocument($event, record.value?.document)"
+              >
+                <i class="fas fa-download"></i> Download
+              </button>
+            </td>
+            <td>
+              <app-button
+                buttonType="upload"
+                text="Upload"
+                imageUpload
+                (extractedImg)="uploadDocument($event, 'ID')"
+              >
+              </app-button>
+            </td>
+            <td>-</td>
+            <td>-</td>
+            <td class="position-relative">
+              <app-button
+                *ngIf="
+                  !idRecordsStatus[record.value.id] ||
+                  idRecordsStatus[record.value.id] == 'VIEW'
+                "
+                buttonType="edit"
+                (click)="idRecordsStatus[record.value.id] = 'EDITING'"
+              ></app-button>
+              <app-button
+                *ngIf="idRecordsStatus[record.value.id] == 'EDITING'"
+                buttonType="custSave"
+                (click)="updateIdRecord(record)"
+              ></app-button>
+              <div
+                *ngIf="idRecordsStatus[record.value.id] == 'PENDING'"
+                class="position-absolute top-50 start-50 translate-middle"
+              >
+                <div class="fa fa-refresh fa-spin"></div>
+              </div>
+            </td>
+            <td class="position-relative">
+              <app-button
+                *ngIf="!isDeletingIdRecord[record.value.id]"
+                buttonType="delete"
+                (click)="deleteIdRecord(record, i)"
+              ></app-button>
+              <div
+                *ngIf="isDeletingIdRecord[record.value.id]"
+                class="position-absolute top-50 start-50 translate-middle"
+              >
+                <div class="fa fa-refresh fa-spin"></div>
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+        <tr *ngIf="showNewIdRow" [formGroup]="clientNewIdForm">
+          <td>
+            <select
+              formControlName="idType"
+              class="form-control"
+              [ngClass]="isFieldInvalid(clientNewIdForm, 'idType') && 'border border-danger'"
+            >
+              <option *ngFor="let idType of idTypesList" [value]="idType.code">
+                {{ idType.title }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="date"
+              class="form-control"
+              [ngClass]="isFieldInvalid(clientNewIdForm, 'idIssueDate') && 'border border-danger'"
+              formControlName="idIssueDate"
+            />
+          </td>
+          <td>
+            <input
+              type="date"
+              class="form-control"
+              [ngClass]="isFieldInvalid(clientNewIdForm, 'idExpiryDate') && 'border border-danger'"
+              formControlName="idExpiryDate"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              [ngClass]="isFieldInvalid(clientNewIdForm, 'idNumber') && 'border border-danger'"
+              formControlName="idNumber"
+            />
+          </td>
+          <td>
+            <button class="btn btn-primary" disabled>
+              <i class="fas fa-download"></i> Download
+            </button>
+          </td>
+          <td>
+            <app-button
+              buttonType="upload"
+              text="Upload"
+              imageUpload
+              (extractedImg)="uploadDocument($event, 'ID')"
+            >
+            </app-button>
+          </td>
+          <td>-</td>
+          <td>-</td>
+          <td class="position-relative" colspan="2">
+            <app-button
+              *ngIf="!isCreatingIdRecord"
+              buttonType="custSave"
+              (click)="createIdRecord()"
+            ></app-button>
+            <div
+              *ngIf="isCreatingIdRecord"
+              class="position-absolute top-50 start-50 translate-middle"
+            >
+              <div class="fa fa-refresh fa-spin"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <app-button
+        buttonType="add"
+        text="Add New Id"
+        (click)="showNewIdRow = true"
+      ></app-button>
+    </div>
+    <div class="col-2">
+      <app-button
+        buttonType="delete"
+        text="Add New Id"
+        (click)="showNewIdRow = false"
+      ></app-button>
+    </div>
+  </div>
+  <label class="form-label text-primary">{{'Other KYC'|appTranslate|async}}</label>
+  <div class="row">
+    <div class="col-6">
+      <table class="table table-borderless table-striped my-5">
+        <thead>
+          <tr class="text-primary">
+            <th scope="col">{{'Item'|appTranslate|async}}</th>
+            <th scope="col">{{'Uploaded'|appTranslate|async}}</th>
+            <th scope="col">{{'Action'|appTranslate|async}}</th>
+            <th scope="col">{{'Item'|appTranslate|async}}</th>
+            <th scope="col">{{'Uploaded'|appTranslate|async}}</th>
+            <th scope="col">{{'Action'|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a
+                href=""
+                (click)="downloadDocument($event, clientPictureDocument)"
+                title="download picture"
+                >Picture</a
+              >
+            </td>
+            <td>{{ clientPictureDocument?.createdOn | stripTime }}</td>
+            <td>
+              <app-button
+                [buttonType]="'upload'"
+                [text]="'Upload'"
+                imageUpload
+                (extractedImg)="uploadDocument($event, 'PP')"
+              ></app-button>
+            </td>
+            <td>
+              <a
+                href=""
+                (click)="downloadDocument($event, clientSignature)"
+                title="download signature"
+                >Signature</a
+              >
+            </td>
+            <td>{{ clientSignature?.createdOn | stripTime }}</td>
+            <td>
+              <app-button
+                [buttonType]="'upload'"
+                [text]="'Upload'"
+                imageUpload
+                (extractedImg)="uploadDocument($event, 'SI')"
+              ></app-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- TODO on saving identification remember to replace back idType codes to normal text -->
+  <!-- check component method getIdType for details -->
+  <app-button buttonType="save"></app-button>
+</mat-dialog-actions>

@@ -1,0 +1,75 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <p class="py-3"><b>{{"Agent Name"|appTranslate|async}}:</b> <span class="px-3">{{agentName}}</span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <!-- <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{"SLA Tracker"|appTranslate|async}}</th>
+            <th scope="col">{{"Task Code"|appTranslate|async}}</th>
+            <th scope="col">{{"Task"|appTranslate|async}}</th>
+            <th scope="col">{{"User Assigned"|appTranslate|async}}</th>
+            <th scope="col">{{"Group Assigned"|appTranslate|async}}</th>
+            <th scope="col">{{"Start"|appTranslate|async}}</th>
+            <th scope="col">{{"Due"|appTranslate|async}}</th>
+            <th scope="col" style="border-top-right-radius: 12px;">{{"Time Outside SLA"|appTranslate|async}}</th>
+          </tr> -->
+          <tr class="py-5">
+            <th scope="col">{{"Level"|appTranslate|async}}</th>
+            <th scope="col">{{"Workflow No"|appTranslate|async}}</th>
+            <th scope="col">{{"Task"|appTranslate|async}}</th>
+            <th scope="col">{{"Description"|appTranslate|async}}</th>
+            <th scope="col">{{"Ref Number"|appTranslate|async}}</th>
+            <th scope="col">{{"Start"|appTranslate|async}}</th>
+            <th scope="col">{{"Due"|appTranslate|async}}</th>
+            <th scope="col">{{"Time Outside SLA"|appTranslate|async}}</th>
+            <th scope="col">{{"Action"|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let item of webflowsList">
+            <th scope="row">
+              <div class="square red"></div>
+            </th>
+            <td>{{item.TASK_CODE}}</td>
+            <td>{{item.TASK_DESCRIPTION}}</td>
+            <td>{{item.ASSIGNED_TO}}</td>
+            <td>{{item.ASSIGNED_TO_GROUP}}</td>
+            <td>{{item.START_ON}}</td>
+            <td>{{item.DUE_ON}}</td>
+            <td>{{item.TIME_OS_SLA}}</td>
+          </tr> -->
+          <tr *ngFor="let task of webflowsList" [routerLink]="['../../workflow-desk/view/index']" [queryParams]="{wfNo: task.wfNo}">
+            <td>
+              <div class="square" [ngClass]=" task.slaLevel | slaLevelColour"></div>
+            </td>
+            <td>{{task.wfNo}}</td>
+            <td>{{task.code}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.refNo}}</td>
+            <td>{{task.startOn | date:'medium'}}</td>
+            <td>{{task.dueOn | date:'medium'}} </td>
+            <td>{{task.timeOsSla | formatMinutes}}</td>
+            <td>{{(task.maintainFunction | truncateTo:3) || 'null'}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="mt-5 row justify-content-between">
+      <div class="col-3 ">
+
+        <app-button buttonType="addCustom" text="Create New Task" [routerLink]="'../../workflow-desk/task'">
+        </app-button>
+
+      </div>
+      <div class="col-3 ">
+
+        <app-button buttonType="history"></app-button>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

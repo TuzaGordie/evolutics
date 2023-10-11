@@ -1,0 +1,9 @@
+<div class="{{stacked?'':'d-flex align-items-center'}} tc1 {{mclass}} ">
+  <div class="{{inverted?'val':lblClass}}  py-2 lbl" [ngClass]="{'fw-bold':!light,small,small1:xsmall}"
+    title="{{hint|appTranslate|async}}">
+    {{lbl|appTranslate|async}}
+  </div>
+  <div class="{{!inverted?'val':lblClass}} px-1 align-items-center d-flex justify-content-between">
+    <a [mrouterLink]="route">{{val||'-'}} <i *ngIf="icon" class="{{icon}} {{!inverted?'val':lblClass}} ml-2"></i></a>
+  </div>
+</div>

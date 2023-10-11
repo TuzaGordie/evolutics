@@ -1,0 +1,542 @@
+<div class="container ">
+  <loader [loading]="loading">
+
+    <form [formGroup]="viewAgentForm">
+      <div class="row justify-content-between mt-3">
+        <span class="col-2">{{"Agent No"|appTranslate|async}}:<span
+            class="text-primary text-uppercase">{{agentNo}}</span></span>
+        <!--<span class="col-2 row ps-0"><span class="col-auto">{{"Full Name"|appTranslate|async}}: </span><span
+        style="color: #514ef5" class="col-auto">{{findAgentService.agentInfo?.agent?.name}}</span></span>-->
+        <div class="col-2"> {{"Client Number"|appTranslate|async}}:
+          <a class="text-primary text-uppercase" [routerLink]="['../../client-desk/view-client']"
+            [queryParams]="{clientNo}">
+            {{clientNo}}
+          </a>
+        </div>
+        <div class="col"></div>
+        <div class="col-auto">
+          <app-button [buttonType]="'btnCustomNote'" [text]="'Note'" [routerLink]="['../agent-note']"
+            [queryParams]="{agentNo,clientNo}"></app-button>
+        </div>
+
+      </div>
+      <hr style="margin-top: 5px;">
+
+      <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+        <div class="d-block text-center mr-2 ">
+          <img src="{{passport || '/assets/img/avatar.png'}}" class="rounded-circle pp" width="100px" height="100px"
+            alt="">
+          <p class="pt-2">{{findAgentService.agentInfo?.agentInformation?.name}}</p>
+          <span [ngStyle]="{color: getStatusColour(viewAgentForm.value.statusCode)}" data-bs-toggle="modal"
+            data-bs-target="#changeStatusModal">{{getStatusText(viewAgentForm?.value?.statusCode) || 'unknown'}} <i
+              class="fas fa-pencil-alt"></i></span>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Agent Name"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="agentName" readonly class="inputform1 "></div>
+            </div>
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Agent Type"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="agentType" readonly class="inputform1 "></div>
+              <div class="col-3">
+                <a (click)="editAgentType()">
+                  <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Active Date"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <input type="text" formControlName="activeDate" readonly class="inputform1">
+              </div>
+              <div class="col-3">
+                <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('activeDate')">
+
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Product Class Permission"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="productClassPermission" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a (click)="editProductClassPermission()">
+                  <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Gender"|appTranslate|async}}</label>
+            <input type="text" formControlName="gender" readonly class="inputform1 " >
+            <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('gender')">Edit
+
+            </a>
+        </div> -->
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Phone Number 1"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <input type="text" formControlName="phoneNumber" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('phoneNumber')">
+
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Phone Number 2"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <input type="text" formControlName="alternativePhoneNumber" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                  (click)="onEdit('alternativePhoneNumber')">
+
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Email 1"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="email" readonly class="inputform1 "></div>
+              <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                  (click)="onEdit('email')">
+
+                </a></div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Email 2"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="alternativeEmail" readonly class="inputform1 "></div>
+              <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                  (click)="onEdit('alternativeEmail')">
+
+                </a></div>
+            </div>
+
+
+          </div>
+          <!-- <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Address"|appTranslate|async}}</label>
+            <input type="text" formControlName="address" readonly class="inputform1 " >
+            <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('address')">Edit
+
+            </a>
+                       </div> -->
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Branch"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="branch" readonly class="inputform1 "></div>
+              <div class="col-3">
+                <a (click)="editBranch()">
+                  <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Payment Method"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <div class="w-auto d-flex flex-column position-relative justify-content-start">
+                  <div class="row">
+                    <div class="col">
+                      <input type="text" formControlName="payoutMethod" readonly class="w-auto inputform1 ">
+                    </div>
+                    <div class="col-1">
+                      <a (click)="editAgentPaymentMethod()">
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i> </a>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('paymentMethod')">
+
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <!-- <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"KYC"|appTranslate|async}}</label>
+            <input type="text" formControlName="kyc" readonly class="inputform1 " >
+            <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('kyc')">Edit
+
+            </a>
+        </div> -->
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Hierachy Manager"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <input type="text" [value]="hierarchyAgentsCount" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a (click)="editAgentHierarchy()">
+                  <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"License Cert"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="w-auto d-flex flex-column position-relative justify-content-start">
+
+                <div class="row">
+                  <div class="col">
+                    <input type="text" formControlName="license" readonly class="inputform1 w-auto">
+                  </div>
+                  <div class="col">
+                    <div class="col-1">
+                      <a (click)="editLicenseCert()">
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i> </a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-auto"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                  (click)="onEdit('licenceCertificate')">
+
+                </a></div>
+            </div>
+
+
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <!-- <div class="mb-4 minh">
+          <label class="form-label text-primary">{{"Contact Person"|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="contactPerson" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('contactPerson')">
+              </a></div>
+          </div> 
+        </div> -->
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Agent CRM ID"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="crm" readonly class="inputform1 "></div>
+            </div>
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Min Comm Payable"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <!-- <input type="text" formControlName="minPayable" readonly class="inputform1 "> -->
+                <span class="inputform1">{{viewAgentForm.controls['minPayable'].value | number}}</span>
+              </div>
+              <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                  (click)="onEdit('minPayable')">
+
+                </a></div>
+            </div>
+
+
+          </div>
+          <!--  <div class="mb-4 minh">
+             <label class="form-label text-primary">{{"Date Created"|appTranslate|async}}</label>
+             <input type="text" formControlName="dateCreated" readonly class="inputform1" >
+             <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('dateCreated')">Edit
+             </a>
+         </div> -->
+          <!-- <div class="mb-4 minh">
+          <label class="form-label text-primary">{{"Language"|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="language" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('language')">
+              </a></div>
+          </div>
+        </div> -->
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Agent Salary Status"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <input type="text" formControlName="agentSalary" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a (click)="editAgentSalaryStatus()">
+                  <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="currency" readonly class="inputform1 "></div>
+              <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                  (click)="onEdit('currency')">
+
+                </a></div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Band"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">
+                <input type="text" formControlName="band" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('band')">
+
+                </a>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="mb-4 minh">
+            <label class="form-label text-primary">{{"Commission Rate Tax"|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col"><input type="text" formControlName="commissionRateTax" readonly class="inputform1 ">
+              </div>
+              <div class="col-3">
+                <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('commissionRateTax')">
+
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="d-block ml-2">
+          <div class="mb-4 minh">
+              <label class="form-label text-primary">{{"Provider Code"|appTranslate|async}}</label>
+              <input type="text" formControlName="providerCode" readonly class="inputform1 " >
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('providerCode')">Edit
+
+              </a>
+          </div>
+          <div class="mb-4 minh">
+              <label class="form-label text-primary">{{"Enrolee No"|appTranslate|async}}</label>
+              <input type="text" formControlName="enroleeNo" readonly class="inputform1 " >
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('enroleeNo')">Edit
+
+              </a>
+          </div>
+          <div class="mb-4 minh">
+              <label class="form-label text-primary">{{"Suffix"|appTranslate|async}}</label>
+              <input type="text" formControlName="suffix" readonly class="inputform1 " >
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('suffix')">Edit
+
+              </a>
+          </div>
+      </div> -->
+
+      </div>
+      <hr>
+      <div class="row justify-content-center my-4">
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'" [routerLink]="['../endorsements']"
+            [queryParams]="{clientNo}">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'" [routerLink]="['../documents']"
+            [queryParams]="{agentNo,clientNo:findAgentService.agentInfo?.agentInformation?.clientNo}">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Web log in'" [routerLink]="['../web-login']">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Agent Loan'" [routerLink]="['../agent-loan']"
+            [queryParams]="{agentNo, agentName}"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['../workflows']" [queryParams]="{agentNo}"
+            [text]="'Workflows'">
+          </app-button>
+        </div>
+
+        <!-- <div class="col-2">
+         <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['/life/underwritingevents']"
+                     [text]="'Underwriting Events'"></app-button>
+       </div>-->
+      </div>
+      <div class="  d-flex justify-content-around">
+        <app-btn-lg text="No of Policies" [value]="policyLength || 0" [routerLink]="['../agent-policies']"
+          [queryParams]="{agentNo, agentName}"></app-btn-lg>
+
+        <app-btn-lg text="Total Commission Paid" [value]="(totalCommissionPaid || 0) | number" [routerLink]="['../commission']"
+          [queryParams]="{agentNo, agentName}"></app-btn-lg>
+
+        <app-btn-lg text="Total Production" [value]="(totalProduction || 0) | number" [routerLink]="['../production']"
+          [queryParams]="{agentNo, agentName}"></app-btn-lg>
+
+        <app-btn-lg text="Credit Note Balance" [value]="(creditNoteBalance||0) | number" [routerLink]="['../credit-notes-balance']"
+          [queryParams]="{agentNo, agentName}"
+          subText="Exceed Validity" subValue="{{exceedValidity === true ? 'Yes' : (exceedValidity === false ? 'No' :
+          '--')}}"
+          ></app-btn-lg> 
+
+        <app-btn-lg text="Pending Quotes" [value]="quoteLength || 0" [routerLink]="['../pending-quote']"
+          [queryParams]="{agentNo}"></app-btn-lg>
+      </div>
+
+
+    </form>
+
+  </loader>
+
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="notemodel" tabindex="-1" aria-labelledby="notemodelLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notemodelLabel">{{"Modal title"|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="mb-4 minh">
+              <label class="form-label text-primary">{{"Note"|appTranslate|async}}</label>
+              <input type="textarea" formControlName="note"
+              class="inputform " >
+          </div>
+          <div class="mb-4 minh">
+              <label class="form-label text-primary">{{"Visible to All"|appTranslate|async}}</label>
+              <input type="checkbox" formControlName="visiblebox"  >
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{"Close"|appTranslate|async}}</button>
+        <button type="button" class="btn btn-primary">{{"Save changes"|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+  <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" [formGroup]="viewAgentForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{"Change Status"|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row px-3">
+            <label for="" class="form-label text-primary">{{"New Status"|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray" formControlName="statusCode">
+              <option value=""></option>
+              <option *ngFor="let code of statusCodesList" [value]="code.code">{{code.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="createNewbankModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{"New Account"|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group">
+              <label for="" class="form-label">{{"Banking Method"|appTranslate|async}}</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="" class="form-label">{{"Bank Name"|appTranslate|async}}</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label">{{"Sort Code"|appTranslate|async}}</label>
+                <select name="" id="" class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button buttonType="find"></app-button>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="" class="form-label">{{"Bank Branch"|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="" class="form-label">{{"Account No"|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,132 @@
+<div class="bg-light-gray-evolutics" style="min-height: 100vh">
+  <app-form-navigation [title]="'Activities Summary'"></app-form-navigation>
+
+  <div class="container">
+    <div class="row gap-3">
+      <div class="col-3 p-3 bg-danger text-white text-center">
+
+
+        <p>Lead Conversion Ratio</p>
+        <h1>17:1</h1>
+        <p class="small1">Unqualified leads turned into customers</p>
+
+
+      </div>
+      <div class="col bg-white p-5">
+      </div>
+    </div>
+
+    <div class="row gap-3 mt-3">
+      <div class="col-3">
+
+        <div class="row mb-3">
+          <div class="col p-3 bg-dark text-white text-center">
+            <div class="row justify-content-between">
+              <div class="col">Lead</div>
+              <div class="col"><b>2.13</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col p-3 bg-dark text-white text-center">
+            <div class="row justify-content-between">
+              <div class="col">Opportunities</div>
+              <div class="col"><b>64</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col p-3 bg-dark text-white text-center">
+            <div class="row justify-content-between">
+              <div class="col">Negotiation</div>
+              <div class="col"><b>50</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col p-3 bg-dark text-white text-center">
+            <div class="row justify-content-between">
+              <div class="col">Proposal</div>
+              <div class="col"><b>24</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col p-3 bg-dark text-white text-center">
+            <div class="row justify-content-between">
+              <div class="col">Win</div>
+              <div class="col"><b>13</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row gap-3">
+          <div class="col-3 ">
+            <div class="row mb-3 ">
+              <div class="col  bg-white">
+                <div class="chart-wrapper">
+                  <canvas baseChart class="mx-auto mt-4"
+                          [data]="pieChartData"
+                          [labels]="pieChartLabels"
+                          [chartType]="pieChartType"
+                          [options]="pieChartOptions"
+                          [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col  bg-white">
+                <div class="chart-wrapper">
+                  <canvas baseChart class="mx-auto mt-4"
+                          [data]="pieChartData"
+                          [labels]="pieChartLabels"
+                          [chartType]="pieChartType"
+                          [options]="pieChartOptions"
+                          [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col ">
+            <div class="row mb-3 ">
+              <div class="col bg-white">
+                <div class="chart-wrapper">
+                  <canvas baseChart
+                          [datasets]="lineChartData"
+                          [labels]="lineChartLabels"
+                          [options]="lineChartOptions"
+                          [colors]="lineChartColors"
+                          [legend]="lineChartLegend"
+                          [chartType]="'line'"
+                          [plugins]="lineChartPlugins">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col bg-white ">
+                <div class="chart-wrapper">
+                  <canvas baseChart
+                          [datasets]="lineChartData"
+                          [labels]="lineChartLabels"
+                          [options]="lineChartOptions"
+                          [colors]="lineChartColors"
+                          [legend]="lineChartLegend"
+                          [chartType]="'line'"
+                          [plugins]="lineChartPlugins">
+                  </canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

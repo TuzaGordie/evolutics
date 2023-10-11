@@ -1,0 +1,521 @@
+<app-form-navigation [cashtitle] = "'Admin/usergroup'"></app-form-navigation>
+
+<div *ngIf="operation === 'actions'" class="container-sm mt-5 vh-100 " id="form-body">
+  <div class="d-flex h-50 flex-column justify-content-center">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label>Select User Group</label>
+            <select class="form-control control-bg-gray" (change)="onSelectGroup(group.value)" [(ngModel)]="usergroup"
+              name="userGroup" type="text" #group>
+              <option *ngFor="let userGroup of userGroups" [value]="userGroup.group">{{userGroup.group}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group row my-3">
+            <div class="col-sm-4 d-grid gap-1">
+              <button type="button"  [routerLink]="['show']"
+                 class="btn show-button  px-4 py-2"> <i class="far fa-eye px-2"></i> Show
+              </button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <button type="button"  [routerLink]="['create']"
+              class="btn create-button px-4 py-2"> <i class="fas fa-plus px-2"></i> Create New</button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <button type="button"  [routerLink]="['clone']"
+                 class="btn clone-button px-4 py-2"> <i class="far fa-clone px-2"></i> Clone</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="operation === 'create' || operation === 'clone' || operation === 'show'">
+  <div class="form-body container-fluid mt-2">
+    <ul class="pills-tab" id="nav-tab" role="tablist" class="nav nav-pills nav-fill mb-3">
+      <li *ngFor="let menu of templateMenu" role="presentation" class="nav-item">
+        <button (click)="activate(menu.name)" class="nav-link" [ngClass]="{'active':menu.active}" id="pills-basic-tab"
+          data-bs-toggle="pill" data-bs-target="pills" type="button" role="tab" aria-selects="pills-basic">
+          {{menu.name}}
+        </button>
+      </li>
+    </ul>
+    <div *ngIf="tab === 'Basic'" class="tab-content" id="pills-tabContent">
+      <div class="container">
+        <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+          aria-labelledby="pills-basic-tab">
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label class="form-label">User Group</label>
+                <select class="form-control control-bg-gray" [(ngModel)]="createCrmUserGroup.crmUserGroup.group"
+                  name="userGroup" type="text">
+                  <option *ngFor="let userGroup of userGroups" [value]="userGroup.group">{{userGroup.group}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">Standard Break Duration (mins)</label>
+                <input class="form-control control-bg-gray"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.standBreakDuration" type="number">
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">Description</label>
+                <input class="form-control control-bg-gray" type="text"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.description">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">User Appraisal Level (can be overwritten at user level)</label>
+                <select class="form-control control-bg-gray" name="defaultAppraisalCode"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.defaultAppraisalCode">
+                  <option *ngFor="let appraisalCode of appraisalCodes; let i = index" [value]="appraisalCode.code">
+                    {{appraisalCode.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">Default Menu (can be overwritten at user level)</label>
+                <select class="form-control control-bg-gray" name="defaultMenu"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.defaultMenu">
+                <option *ngFor="let allUserMenu of allUserMenus; let i = index" [value]="allUserMenu.userMenu">
+                  {{allUserMenu.description}}
+                </option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">Direct Supervisor (can be overwritten at user level)</label>
+                <select class="form-control control-bg-gray" (change)="onSelectGroup(userid.value)"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.directSupervisor" name="userId" type="text" #userid>
+                  <option *ngFor="let userId of userIds" [value]="userId.userId">{{userId.userId}}</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">Authorisation Limit % on Commission Override at policy</label>
+                <input class="form-control control-bg-gray"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.authlimitCommOverride" type="number">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group  mt-2">
+                <label class="form-label">Authorisation Limit % on Premium Adjustments</label>
+                <input class="form-control control-bg-gray"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.authLimitPremAdjust" type="number">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center"> Allow Workflow Task Assignment</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.allowAssignWorkflow">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center"> Allow to Snooze Workflow</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.allowSnooze">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center"> Allow to link workflows</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.allowWfTaskLinking">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center"> Allow to Change Workflow Status to
+                  Cancel</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.allowWfCancelStatus">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center"> Allow to Unassign Workflow
+                  Tasks </label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+                  [(ngModel)]="createCrmUserGroup.crmUserGroup.allowUnassignWorkflow">
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <div *ngIf="tab === 'Batches'">
+      <div class="container">
+        <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+          aria-labelledby="pills-basic-tab">
+          <div class="col-6 mx-auto">
+            <h5 class="check-border pb-3">
+              Batches Group has access to
+            </h5>
+
+            <div *ngFor="let crmUserGroupBatches of createCrmUserGroup.crmUserGroupBatches; let i = index;"
+              class="mt-4 div-user-group form-group row">
+              <div class="col-9">
+                <div class="form-group mt-9">
+                  <select class="form-control control-bg-gray" [(ngModel)]="crmUserGroupBatches.batchesAllowed"
+                    name="batchAllowed_{{crmUserGroupBatches.id}}">
+                    <option *ngFor="let batchCode of batchCodes" [value]="batchCode.code">
+                      {{batchCode.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <button class="btn show-button w-100" (click)="removeBatches(i)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-2 row">
+              <div class="clear col-md-10"></div>
+              <div class="col-md-2">
+                <button class="btn create-button w-100" (click)="addBatches()">
+                  <i class="fa fa-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="tab === 'Limits'">
+      <div class="container">
+        <h6 class="mt-4">Payout Limits</h6>
+        <div *ngFor="let usersTiers of createCrmUserGroup.crmUserGroupPayout; let i = index;" class="row">
+          <div class="col-md-5 ">
+            <div class=" form-group">
+              <label for="" class="form-label">Currency</label>
+              <select class="form-control control-bg-gray" [(ngModel)]="usersTiers.currCode"
+                name="currCode_{{usersTiers.id}}">
+                <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-5 ">
+            <div class=" form-group">
+              <label for="" class="form-label">Amount</label>
+              <input class="form-control control-bg-gray" type="number" [(ngModel)]="usersTiers.payoutLimit"
+                name="payoutLimit_{{usersTiers.id}}">
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <button class="btn remove-button w-100" (click)="removePayoutLimits(i)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-end mb-5">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <button class="btn create-button w-100" (click)="addPayoutLimits()">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h6 class="mt-4"> Quotation Approval Limit </h6>
+        <div *ngFor="let usersTiers of createCrmUserGroup.crmUserGroupTiers; let i = index;">
+          <div *ngIf="usersTiers.tierCategory == 'QT'" class="row">
+            <div class="col ">
+              <div class=" form-group">
+                <label for="" class="form-label">Currency</label>
+                <select class="form-control control-bg-gray" [(ngModel)]="usersTiers.currCode"
+                  name="currCode_{{usersTiers.id}}">
+                  <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.description}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col ">
+              <div class=" form-group">
+                <label for="" class="form-label">Tier</label>
+                <select class="form-control control-bg-gray" name="tierCode_{{usersTiers.id}}"
+                  [(ngModel)]="usersTiers.tierCode">
+                  <option *ngFor="let tierCategory of tierCompanyAndCodesQT" [value]="tierCategory.code">
+                    {{tierCategory.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label">&nbsp;</label>
+                <button class="btn remove-button w-100" (click)="removeQuotationApprovalLimit(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-end mb-5">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <button class="btn create-button w-100" (click)="addQuotationApprovalLimit()">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h6 class="mt-4"> Payout Authorisation Limits</h6>
+        <div *ngFor="let usersTiers of createCrmUserGroup.crmUserGroupTiers; let i = index;">
+          <div *ngIf="usersTiers.tierCategory == 'PO'" class="row">
+            <div class="col">
+              <div class=" form-group">
+                <label for="" class="form-label">Currency</label>
+                <select class="form-control control-bg-gray" [(ngModel)]="usersTiers.currCode"
+                  name="currCode_{{usersTiers.id}}">
+                  <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.description}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col ">
+              <div class=" form-group">
+                <label for="" class="form-label">Tier</label>
+                <select class="form-control control-bg-gray" name="tierCode_{{usersTiers.id}}"
+                  [(ngModel)]="usersTiers.tierCode">
+                  <option *ngFor="let tierCategory of tierCompanyAndCodesPO" [value]="tierCategory.code">
+                    {{tierCategory.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label">&nbsp;</label>
+                <button class="btn remove-button w-100" (click)="removePayoutAuthorisationLimits(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-end mb-5">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <button class="btn create-button w-100" (click)="addPayoutAuthorisationLimits()">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h6 class="mt-4"> Discharge Voucher Authorization</h6>
+        <div *ngFor="let usersTiers of createCrmUserGroup.crmUserGroupTiers; let i = index;">
+          <div *ngIf="usersTiers.tierCategory == 'DV'" class="row">
+            <div class="col ">
+              <div class=" form-group">
+                <label for="" class="form-label">Currency</label>
+                <select class="form-control control-bg-gray" [(ngModel)]="usersTiers.currCode"
+                  name="currCode_{{usersTiers.id}}">
+                  <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.description}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class=" form-group">
+                <label for="" class="form-label">Tier</label>
+                <select class="form-control control-bg-gray" name="tierCode_{{usersTiers.id}}"
+                  [(ngModel)]="usersTiers.tierCode">
+                  <option *ngFor="let tierCategory of tierCompanyAndCodesDV" [value]="tierCategory.code">
+                    {{tierCategory.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label">&nbsp;</label>
+                <button class="btn remove-button w-100" (click)="removeDischargeVoucherAuthorization(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-end mb-5">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <button class="btn create-button w-100" (click)="addDischargeVoucherAuthorization()">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <h6 class="mt-4"> Policy Accounting & Comission Adjustment Authorization Limits</h6>
+        <div *ngFor="let usersTiers of createCrmUserGroup.crmUserGroupTiers; let i = index;">
+          <div *ngIf="usersTiers.tierCategory == 'PA'" class="row">
+            <div class="col ">
+              <div class=" form-group">
+                <label for="" class="form-label">Currency</label>
+                <select class="form-control control-bg-gray" [(ngModel)]="usersTiers.currCode"
+                  name="currCode_{{usersTiers.id}}">
+                  <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.description}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class=" form-group">
+                <label for="" class="form-label">Tier</label>
+                <select class="form-control control-bg-gray" name="tierCode_{{usersTiers.id}}"
+                  [(ngModel)]="usersTiers.tierCode">
+                  <option *ngFor="let tierCategory of tierCompanyAndCodesPA" [value]="tierCategory.code">
+                    {{tierCategory.code + "-" + tierCategory.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label">&nbsp;</label>
+                <button class="btn remove-button w-100" (click)="removePolicyAccounting(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-end mb-5">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">&nbsp;</label>
+              <button class="btn create-button w-100" (click)="addPolicyAccounting()">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-5 ">
+            <div class=" form-group">
+              <label for="" class="form-label"> Discount Limit (%)</label>
+              <input class="form-control control-bg-gray" type="number" name="discountLimit"
+                [(ngModel)]="createCrmUserGroup.crmUserGroup.discountLimit">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="tab === 'Documents'">
+      <div class="container">
+        <div class=" tab-pane fade show active mt-4" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+
+          <h5 class="check-border pb-3">
+            Batches Group has access to
+          </h5>
+          <div class="row">
+            <div class="col-6">
+              <h6 class="mt-4">
+                Category
+              </h6>
+            </div>
+            <div class="col-6">
+              <h6 class="mt-4">
+                Sensitivity
+              </h6>
+
+            </div>
+          </div>
+          <div *ngFor="let crmUserGroupDoc of createCrmUserGroup.crmUserGroupDoc; let i = index" class="row">
+            <div class="col-5">
+              <div class=" mt-2 div-user-group form-group">
+                <select class="form-control control-bg-gray" [(ngModel)]="crmUserGroupDoc.docCategory"
+                  name="docCategory_{{crmUserGroupDoc.id}}">
+                  <option *ngFor="let codes of documentCatCodes" [value]="codes.code">{{codes.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class=" mt-2 div-user-group form-group">
+                <select class="form-control control-bg-gray" [(ngModel)]="crmUserGroupDoc.sensitivity"
+                  name="sensitivity_{{crmUserGroupDoc.id}}">
+                  <option *ngFor="let codes of documentSentivityCodes" [value]="codes.code">{{codes.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class=" mt-2 div-user-group form-group">
+                <button class="btn remove-button w-100" (click)="removeDocs(i)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end mt-4">
+            <div class="col-md-2">
+              <button class="btn create-button w-100" (click)="addDocs()">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <div class="row justify-content-end">
+          <div class="col-md-3 w-30 align-items-center">
+            <button class="btn create-button w-100" (click)="createCrmUserGroupGroup()">
+              <i class="fa fa-plus"></i> Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

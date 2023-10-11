@@ -1,0 +1,32 @@
+  .checkmark{
+    position: absolute;
+    left: 75%;
+    top: 25%;
+    font-size: 25px;
+    color: green;
+    display: block !important;
+  }
+  .bordercheck {
+    border: 2px solid green;
+    outline: 0;
+}
+.borderuncheck {
+    border: 2px solid red;
+    outline: 0;
+}
+.uncheckmark{
+    position: absolute;
+    left: 75%;
+    top: 25%;
+    font-size: 25px;
+    color: red;
+    display: block !important;
+}
+ 
+
+.btn-primary1 {
+  color: #fff;
+  background-color: #db0041;
+  border-color: #db0041;
+
+}

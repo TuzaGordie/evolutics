@@ -1,0 +1,146 @@
+<!-- <app-form-navigation [title]="'Group Desk / Find Group'"></app-form-navigation> -->
+<div class="container mt-5">
+  <form [formGroup]="findGroupForm">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <div class="row my-2">
+          <div class="col-md-2">
+            <label class="py-2">{{'Group No'|appTranslate|async}}</label>
+          </div>
+          <div class="col-md" style="position: relative;">
+            <input type="text" formControlName="groupNo" class="form-control relative control-bg-gray"
+                   [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required
+                   (keyup)="setGroupList()">
+            <div style="position: absolute; top: 10%; right: 5%; transform: translateY(50%);">
+              <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i class="fa fa-check"></i>
+              </div>
+              <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"><i class="fa fa-times"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <app-btn icon="show" type="dark" [ngClass]="{changecolor: validResult == 'true'}"
+                     [disabled]="validResult != 'true'" (click)="onNext()">Show
+            </app-btn>
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2">
+            <label class="py-2">{{'Client Number'|appTranslate|async}}</label>
+          </div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required
+                   (keyup)="setGroupList()">
+            <!-- <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i class="fa fa-check"></i></div>
+            <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"><i class="fa fa-times"></i>
+            </div> -->
+          </div>
+          <div class="col-md-2">
+            <!-- <button type="submit" class="btn btn-lg py-2 btn-dark mx-2">Show
+            </button> -->
+          </div>
+        </div>
+
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Policy No'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Group Name'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Agent No'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Product Class'|appTranslate|async}} </label></div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Product Code'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Created By'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="text" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Created Date From'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="date" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">{{'Created Date To'|appTranslate|async}}</label></div>
+          <div class="col-md">
+            <input type="date" class="form-control  control-bg-gray" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 my-5">
+
+        <div class="row">
+          <div class="col-2">
+            <app-button buttonType="search" [routerLink]="['../group-search']"></app-button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- <div class=" my-5">
+          <div  style="float: right; margin-top: 10%;">
+
+            <button type="submit" [disabled]="validResult == 'false' || validResult == '' "
+            [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"
+            class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+          </div>
+      </div> -->
+    </div>
+
+  </form>
+
+</div>

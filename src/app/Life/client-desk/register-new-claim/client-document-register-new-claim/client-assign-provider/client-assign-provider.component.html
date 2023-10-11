@@ -1,0 +1,40 @@
+<div class="container p-3">
+  <h2 class="my-3" mat-dialog-title>{{"Assign Provider"|appTranslate|async}}</h2>
+  <mat-dialog-content>
+    <div>
+      <p class="me-5">{{"Claim No"|appTranslate|async}}:<span class="text-primary">5777*3</span></p>
+      <p>{{"Cover Name"|appTranslate|async}}:<span class="text-primary">{{"Death"|appTranslate|async}}</span></p>
+    </div>
+    <form>
+      <div class="row my-3">
+        <div class="col-md-5">
+          <label for="providerActionRequired">{{"Provider Action Required"|appTranslate|async}}</label>
+          <select id="providerActionRequired" class="inputform">
+            <option [value]="null"></option>
+          </select>
+        </div>
+      </div>
+      <div class="row my-3 align-items-end">
+        <div class="col-md-3">
+          <label for="providerNo">{{"Provider No"|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-outline-primary" (click)="openFindProviderModal()"><i class="fa fa-search"></i>&nbsp;Find</button>
+        </div>
+        <div class="col-md-6">
+          <input type="text" class="inputform">
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-12">
+          <label for="instructionToProvider">Instruction to Provider - <span class="text-secondary">{{"Optional"|appTranslate|async}}</span></label>
+          <textarea id="instructionToProvider" rows="5" class="inputform"></textarea>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end my-5">
+        <button class="btn btn-primary px-3" [mat-dialog-close]="'string returned from assign-provider'"><i class="fa fa-save"></i>&nbsp;Submit</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>

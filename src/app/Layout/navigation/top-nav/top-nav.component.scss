@@ -1,0 +1,43 @@
+.evoicon {
+  font-size: 15px;
+  margin-right: 4px;
+}
+.fa,
+.fas {
+  font-size: 15px;
+  margin-right: 4px;
+  //   font-weight: 600;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+// .nav-link.active {
+//     position: relative;
+//     &::after {
+//         left: 0;
+//         bottom: 0;
+//         border-radius: 11px 11px 0 0;
+//         content: '';
+//         position: absolute;
+//         z-index: -1;
+//         width: 100%;
+//         background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)); //
+//         height: 30px;
+
+//     }
+// }
+
+#navbarNav {
+  margin-right: 110px;
+}
+@media screen and (max-width: 1000px) {
+  #navbarNav {
+    margin-right: unset;
+    margin:auto
+  }
+}
+a[disabled] {
+  // display: none;
+}

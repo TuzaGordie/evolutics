@@ -1,0 +1,75 @@
+<div class=""> 
+  <form class="row justify-content-center align-items-end" [formGroup]="filterForm">
+    <div class="col-md-2">
+      <app-autocomplete label="User" [form]="filterForm" name="username"
+         [stacked]="true" [showValidation]="userTag.invalid"
+        [options]="users" labelType="uf" valueField="userName" #userTag>
+      </app-autocomplete>
+    </div>
+    <div class="col-md-2">
+      <app-input-basic label="Module" [form]="filterForm" [stacked]="true" [options]="modules" type="select" labelType="cd" valueField="code" name="module">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+      <app-input-basic label="Created From" [form]="filterForm" [stacked]="true" type="date" name="createdFrom"></app-input-basic>
+    </div>
+    <div class="col-md-2">
+      <app-input-basic label="Created To" [form]="filterForm" [stacked]="true" type="date" name="createdTo"></app-input-basic>
+    </div>
+    <div class="col-md-2">
+      <app-input-basic label="Actions" [form]="filterForm" [stacked]="true" [options]="actions" type="select" labelType="cd" valueField="code" name="action">
+      </app-input-basic>
+    </div>
+    <div class="col-auto d-flex ">
+      <app-btn type="primary" (mclick)="filter()" text="Filter" icon="filter"></app-btn>
+      <span class="mx-1"></span>
+      <app-btn type="secondary" (mclick)="clearFilters()" text="Clear" icon="close"></app-btn>
+    </div>
+  </form>
+  <div class="border">
+    <table class="table table-responsive mb-0 table-striped">
+      <thead class="py-3 theader">
+        <tr>
+          <th scope="col">Endorsements No</th>
+          <th scope="col">Endorsements Category</th>
+          <th scope="col">Type</th>
+          <th scope="col">Field Names</th>
+          <th scope="col">From</th>
+          <th scope="col">To</th>
+          <th scope="col">Created By</th>
+          <th scope="col">Auth By</th>
+          <th scope="col">Pending</th>
+          <th scope="col">Created On</th>
+          <th scope="col">Auth On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list">
+          <th scope="row">{{item.endorseNo}}</th>
+          <td>{{item.endorseCat}}</td>
+          <td>{{item.endorseType}}</td>
+          <td>{{item.fieldName}}</td>
+          <td></td>
+          <td></td>
+          <td>{{item.createdBy}}</td>
+          <td>{{item.authBy}}</td>
+          <td>{{item.pending}}</td>
+          <td>{{item.createdOn}}</td>
+          <td>{{item.authOn}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p *ngIf="!list" class="text-center">no endorsements found</p>
+  <!-- <div class="d-flex justify-content-between my-4">
+      <div class="col-md-3 mt-5">
+        <app-btn type="primary" icon='add' (mclick)="genProForma()">Generate Pro forma</app-btn>
+      </div>
+      <div class="col-md-3 mt-5">
+        <app-btn type="secondary" icon='add' (mclick)="add()">Add Endorsement</app-btn>
+      </div>
+    </div> -->
+  <!-- <div class="">
+        <img src="../../../../../assets/img/back-curved.svg" alt="" class="pointer" (click)="pdS.back()">
+      </div> -->
+</div>

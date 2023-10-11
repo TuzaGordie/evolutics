@@ -1,0 +1,63 @@
+<form [formGroup]="documentlist">
+<div class="container">
+  <div class="row">
+
+    <div class="d-block mx-2">
+      <div class="mt-4">
+        <label>{{'File'|appTranslate|async}}</label><br>
+        <input type="file" class="inputform " (change)="upload($event)" >
+      </div>
+      <div class="mt-4">
+        <label>{{'Title'|appTranslate|async}}</label><br>
+        <input type="text" class="inputform" formControlName="title">
+      </div>
+      <div class="mt-4">
+        <label>{{'Category'|appTranslate|async}}</label><br>
+        <select formControlName="category" class="form-control  control-bg-gray" #cate (change)="setDocumentSubCategory(cate.value)" required>
+          <option [value]="null">{{'Select Category'|appTranslate|async}}</option>
+          <option [value]="item.code" *ngFor="let item of category">
+            {{item.code}}-{{item.title}}
+          </option>
+        </select>
+      </div>
+      <div class="mt-4">
+        <label>{{'Sub Category'|appTranslate|async}}</label><br>
+        <select formControlName="subCategory" class="form-control  control-bg-gray" required>
+          <option [value]="null">{{'Select Sub Category'|appTranslate|async}}</option>
+          <option [value]="item.code" *ngFor="let item of subCategory">
+            {{item.code}}-{{item.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    
+    <div class="d-block mx-2">
+      <div class="mt-4">
+        <label>{{'Sensitivity'|appTranslate|async}}</label><br>
+        <select formControlName="sensitivity" class="form-control  control-bg-gray" required>
+          <option [value]="null">{{'Select Sensitivity'|appTranslate|async}}</option>
+          <option [value]="item.code" *ngFor="let item of sesitivity">{{item.code}}-{{item.title}}</option>
+        </select>
+      </div>
+      <div class="mt-4">
+        <label>{{'Branch'|appTranslate|async}}</label><br>
+        <select formControlName="branch" class="form-control  control-bg-gray" required>
+          <option [value]="null">{{'Select Branch'|appTranslate|async}}</option>
+          <option [value]="item.code" *ngFor="let item of branches">{{item.code}}-{{item.description}}</option>
+        </select>
+      </div>
+
+      <div class="mt-4">
+        <label>{{'Box No'|appTranslate|async}}</label><br>
+        <input type="text" class="inputform " formControlName="boxNo">
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end mt-5">
+    <div class="col-3">
+      <app-btn type="primary" icon="upload" (click)="onSubmit()"></app-btn>
+    </div>
+  </div>
+</div>
+</form>

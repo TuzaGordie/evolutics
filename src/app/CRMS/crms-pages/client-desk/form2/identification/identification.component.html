@@ -1,0 +1,90 @@
+<div class="container mt-5">
+  <form [formGroup]="identificationForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <div class="d-block">
+          <div class="mt-4">
+            <label class="form-label text-red">ID Type</label><br>
+            <input type="text" formControlName="idType" class="form-control control-bg-gray" required>
+            <div *ngIf="validation.idType.errors && (validation.idType.dirty || validation.idType.touched)">
+              <div class="text-danger" *ngIf="validation.idType?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Id Expiry date</label><br>
+            <input type="date" formControlName="idExpiryDate" class="form-control control-bg-gray" required>
+            <div
+              *ngIf="validation.idExpiryDate.errors && (validation.idExpiryDate.dirty || validation.idExpiryDate.touched)">
+              <div class="text-danger" *ngIf="validation.idExpiryDate?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <input type="file" id="filebtn" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+                   (change)="upload($event)">
+            <button for="filebtn" (click)="getImage()" type="button" class="btn btn-danger btn-lg w-100">
+              <fa-icon [icon]="faUpload"></fa-icon>
+              Upload passport photo
+            </button>
+            <p id="filenameifno" [innerHtml]="fileName"></p>
+          </div>
+          <div class="mt-4">
+            <input type="file" id="filebtn1" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+                   (change)="upload2($event)">
+            <button for="filebtn1" (click)="getImage2()" type="button" class="btn btn-danger btn-lg w-100">
+              <fa-icon [icon]="faUpload"></fa-icon>
+              Upload Identity card
+            </button>
+            <p id="filenameifno1" [innerHtml]="fileName2"></p>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">National Insurrance Number</label><br>
+            <input type="text" formControlName="nationalInsurranceNo" class="form-control control-bg-gray" required>
+            <div *ngIf="validation.nationalInsurranceNo.errors && validation.nationalInsurranceNo.dirty">
+              <div class="text-danger" *ngIf="validation.nationalInsurranceNo?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md position-relative">
+        <div class="mt-4">
+          <label class="form-label text-red">ID Number</label><br>
+          <input type="text" formControlName="idNumber" class="form-control control-bg-gray" required>
+          <div *ngIf="validation.idNumber.errors && (validation.idNumber.dirty || validation.idNumber.touched)">
+            <div class="text-danger" *ngIf="validation.idNumber?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Tax Identification Number</label><br>
+          <input type="text" formControlName="taxIdNo" class="form-control control-bg-gray" required>
+          <div *ngIf="validation.taxIdNo.errors && (validation.taxIdNo.dirty || validation.taxIdNo.touched)">
+            <div class="text-danger" *ngIf="validation.taxIdNo?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Bank Verification Number</label><br>
+          <input type="text" formControlName="bankVerifyNo" class="form-control control-bg-gray" required>
+          <div
+            *ngIf="validation.bankVerifyNo.errors && (validation.bankVerifyNo.dirty || validation.bankVerifyNo.touched)">
+            <div class="text-danger" *ngIf="validation.bankVerifyNo?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Pension Commission Number</label><br>
+          <input type="text" formControlName="pensionNo" class="form-control control-bg-gray" required>
+          <div *ngIf="validation.pensionNo.errors && (validation.pensionNo.dirty || validation.pensionNo.touched)">
+            <div class="text-danger" *ngIf="validation.pensionNo?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+</div>

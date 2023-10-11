@@ -1,0 +1,140 @@
+<div class="my-5 ">
+
+
+  <table class="table table-responsive  table-striped">
+    <thead class="py-3 theader">
+    <tr>
+      <th scope="col">{{'Assured'|appTranslate|async}}</th>
+      <th scope="col">{{'Age'|appTranslate|async}}</th>
+      <th scope="col">{{'Cover'|appTranslate|async}}</th>
+      <th scope="col">{{'UW Class'|appTranslate|async}}</th>
+      <th scope="col">{{'Status'|appTranslate|async}}</th>
+      <th scope="col">{{'Updated By'|appTranslate|async}}</th>
+      <th scope="col">{{'Updated On'|appTranslate|async}}</th>
+      <th scope="col">{{'Auth By'|appTranslate|async}}</th>
+      <th scope="col">{{'Auth On'|appTranslate|async}}</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>
+        <app-btn type="outline" icon="edit" data-bs-toggle="modal" data-bs-target="#editModal"></app-btn>
+
+      </td>
+      <td>
+        <app-btn type="outline" icon="lock" data-bs-toggle="modal" data-bs-target="#authorizeModal"></app-btn>
+
+      </td>
+
+
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Edit'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Assured'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Age'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Cover'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Classification'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Adjusted Loading %'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Reason'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Original Cover Premium'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Revised Cover Premium'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Original Total Premium'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col text-primary">{{'Revised Total Premium'|appTranslate|async}}</div>
+              <div class="col"> --</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="authorizeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Authorize'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="lock">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

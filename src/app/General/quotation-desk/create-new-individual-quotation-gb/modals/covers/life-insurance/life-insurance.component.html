@@ -1,0 +1,72 @@
+
+<div class="modal fade" id="lil_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="lifeForm" class="modal-body">
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            min: {{assured_min | number : '1.0-0' : 'en'}} - max: {{assured_max | number : '1.0-0' : 'en'}}
+            <label for="" class="form-label text-primary">
+              {{'Sum Assured'|appTranslate|async}}
+            </label>
+            <input formControlName="assured" [readonly]="assured_disabled" type="text" [value]="assured" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">
+              {{'Benefit Payment Term'|appTranslate|async}}
+            </label>
+            <input formControlName="term" type="text" class="form-control control-bg-gray" placeholder="Years">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">
+              &nbsp;
+            </label>
+            <input type="text" formControlName="months" class="form-control control-bg-gray" placeholder="Months">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">
+              &nbsp;
+            </label>
+            <input type="text" formControlName="days" class="form-control control-bg-gray" placeholder="Days">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">
+              {{'Benefit Payment Frequency'|appTranslate|async}}
+            </label>
+            <select formControlName="frequency" class="form-control control-bg-gray">
+              <option value=""></option>
+              <ng-container *ngFor="let b of benefitPaymentFreqOptions$">
+                <option [value]="b.paymentFrequency">{{b.paymentFrequency}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+
+      <app-button [buttonType]="'btnCustomCloneGB'" text="Medical Questionnaire" data-bs-dismiss="modal"
+        data-bs-target="#medicalmodal" data-bs-toggle="modal"></app-button>
+      <app-button (click)="stop" [buttonType]="'saveGB'" data-bs-dismiss="modal"></app-button>
+
+
+    </div>
+  </div>
+</div>
+</div>

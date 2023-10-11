@@ -1,0 +1,46 @@
+
+<div class="container-sm mt-5 ">
+  <div class="row">
+
+
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form >
+        <br /> <br /> <br />
+        <app-input-basic label="Select Workflow Group" type="select" [stacked]="true" [form]="taskSetupForm" name="workflowGroup"
+          [options]="workflowGroups"
+          valueField="code" labelType="ct" >
+        </app-input-basic> 
+ 
+        <div class="form-group mt-2">
+          <app-input-basic label="Select Task Code" type="select" [stacked]="true" [form]="taskSetupForm" name="taskCode"
+            [options]="taskSetupForm?.value?.workflowGroup?(tS.getTaskCodesByGroup|functionCaller1:workflowGroup|async):taskCodes"
+            valueField="code" labelType="cd" #taskCodeTag>
+          </app-input-basic> 
+          <app-validation-message [input]="taskCodeTag"></app-validation-message>
+        </div>
+
+        <br/>
+
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <!-- disable this link if no selections are made -->
+            <app-btn group="show" type="dark" (mclick)="show()" [form]="taskSetupForm" ></app-btn> 
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <a class="btn btn-outline-primary btn-lg" routerLink="../create">
+              <i class="fa fa-plus"></i> Create
+            </a>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn group="clone" (mclick)="clone()" [form]="taskSetupForm"></app-btn> 
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+</div>
+

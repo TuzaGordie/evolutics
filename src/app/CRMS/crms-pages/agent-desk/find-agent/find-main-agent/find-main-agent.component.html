@@ -1,0 +1,114 @@
+<div class="container mt-5">
+  <form [formGroup]="findAgentForm">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <div class="row my-2">
+          <div class="col-md-2">
+            <label class="py-2">Agent No</label>
+          </div>
+          <div class="col-md">
+            <input type="text" formControlName="clientNo" class="inputform mr-2"
+                   [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required
+                   (keyup)="setClientList()">
+            <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i class="fa fa-check"></i></div>
+            <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <app-button buttonType="show" (click)="onNext()"></app-button>
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Client Number</label></div>
+          <div class="col-md">
+            <input type="text" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+            <app-button buttonType="show" (click)="onNext()"></app-button>
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Name</label></div>
+          <div class="col-md">
+            <input type="text" formControlName="name" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Phone No</label></div>
+          <div class="col-md">
+            <input type="text" formControlName="phoneNo" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Email</label></div>
+          <div class="col-md">
+            <input type="text" formControlName="email" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Agent Type</label></div>
+          <div class="col-md">
+            <input type="text" formControlName="agentType" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Created By</label></div>
+          <div class="col-md">
+            <input type="text" formControlName="createdBy" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Created Date From</label></div>
+          <div class="col-md">
+            <input type="date" formControlName="createdDateFrom" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+        <div class="row my-2">
+          <div class="col-md-2"><label class="py-2">Created Date To</label></div>
+          <div class="col-md">
+            <input type="date" formControlName="createdDateTo" class="inputform mr-2" required>
+          </div>
+          <div class="col-md-2">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-2 my-5">
+        <app-button buttonType="searchRed" [routerLink]="['/crms/agent-desk/agent-search']"></app-button>
+      </div>
+
+      <!-- <div class=" my-5">
+          <div  style="float: right; margin-top: 10%;">
+
+            <button type="submit" [disabled]="validResult == 'false' || validResult == '' "
+            [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"
+            class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+          </div>
+      </div> -->
+    </div>
+
+  </form>
+
+</div>

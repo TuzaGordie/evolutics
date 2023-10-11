@@ -1,0 +1,91 @@
+<div class="row align-items-center" [formGroup]="form">
+  <app-input-label [colored]="colored" [form]="form" [hint]="hint" [id]="id" [invalidCheckbox]="invalidCheckbox"
+    [isRequired]="isRequired" [label]="label" [lblCl]="lblCl" [light]="light" [mini]="mini" [showLabel]="showLabel"
+    [small]="small" [stacked]="stacked" [theme]="theme" [xsmall]="xsmall"> 
+  </app-input-label>
+  <div class="{{ stacked ? 'col-12' : 'col-md' }} position-relative">
+    <ng-container [ngSwitch]="type">
+      <!-- CHECKBOX -->
+      <ng-container *ngSwitchCase="'checkbox'">
+        <input type="checkbox" id="{{ id }}" [formControlName]="name"
+          class="{{ inpCl }} d-inline-block form-control width-unset" placeholder="{{ placeholder }}"
+          [required]="required" [readonly]="readonly" (change)="change($event)" />
+      </ng-container>
+      <!-- FILE -->
+      <ng-container *ngSwitchCase="'file'">
+        <input type="file" id="{{ id }}" [class]="inpCl | inputClass: valid:invalid:showValidation"
+          (change)="upload($event)" [accept]="accept" [attr.multiple]="multiple" />
+      </ng-container>
+      <!-- FILE BUTTON-->
+      <ng-container *ngSwitchCase="'fileButton'">
+        <input type="file" id="{{ id }}" [class]="inpCl | inputClass: valid:invalid:showValidation"
+          (change)="upload($event)" [accept]="accept" [attr.multiple]="multiple" hidden #file />
+        <app-btn (mclick)="file.click()" icon="upload" [type]="files ? 'primary' : 'secondary'">{{ label || 'Upload' }}
+        </app-btn>
+      </ng-container>
+      <!-- SELECT -->
+      <ng-container *ngSwitchCase="'select'">
+        <!-- [attr.disabled]="disabled" -->
+        <select [formControlName]="name" id="{{ id }}" class="{{ cls }}  {{
+            inpCl | inputClass: valid:invalid:showValidation
+          }}" [required]="required"   (change)="change($event)">
+          <option *ngIf="showEmptyOption" selected value="">{{placeholder}}</option>
+          <option *ngFor="let item of options; trackBy: iS.trackByValue" [value]="item.value" #inp>
+            <!-- {{item|optionLabeller:optionFormatter:labelType:labelField}} -->
+            {{ item.label|appTranslate:translateOptions|async }}
+          </option>
+        </select>
+      </ng-container>
+      <!-- TEXTAREA -->
+      <ng-container *ngSwitchCase="'textarea'">
+        <textarea [formControlName]="name" id="{{ id }}" [class]="inpCl | inputClass: valid:invalid:showValidation"
+          [required]="required" [readonly]="readonly" (change)="change($event)"></textarea>
+      </ng-container>
+      <!-- Radio -->
+      <ng-container *ngSwitchCase="'radio'">
+        <input type="radio" formControlName="{{ name }}" id="{{ id }}" [readonly]="readonly" (change)="change($event)"
+          [value]="__value" [disabled]="disabled" />
+      </ng-container>
+      <!-- Viewer -->
+      <ng-container *ngSwitchCase="'viewer'">
+        <input type="text" id="{{ id }}" placeholder="{{ placeholder }}"
+          [class]="inpCl | inputClass: valid:invalid:showValidation" [readonly]="true" [value]="value" />
+      </ng-container>
+      <!-- PASSWORD -->
+      <ng-container *ngSwitchCase="'password'">
+        <input type="{{ showPassword?'text':'password' }}" [formControlName]="name" placeholder="{{ placeholder }}"
+          id="{{ id }}" [class]="inpCl | inputClass: valid:invalid:showValidation" [required]="required" [max]="max"
+          [min]="min" [readonly]="readonly||disabled" (change)="change($event)" value="{{ __value }}" />
+        <div class="password-icons pointer" (click)="showPassword=!showPassword">
+          <i class="fa fa-eye-slash" *ngIf="showPassword"></i>
+          <i class="fa fa-eye" *ngIf="!showPassword"></i>
+        </div>
+      </ng-container>
+      <!-- DEFAULT -->
+      <ng-container *ngSwitchDefault>
+        <input type="{{ type }}" [formControlName]="name" placeholder="{{ placeholder }}" id="{{ id }}"
+          [class]="inpCl | inputClass: valid:invalid:showValidation" [required]="required" [max]="max" [min]="min"
+          [readonly]="readonly||disabled"   (change)="change($event)" value="{{ __value }}" />
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="control?.dirty && showValidation && showValidationIcon">
+      <div [ngClass]="{ valid: control?.valid }" class="validity-icon">
+        <i class="fa fa-check"></i>
+      </div>
+      <div [ngClass]="{ pending: control?.pending }" class="validity-icon">
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
+      <div [ngClass]="{ invalid: control?.invalid }" class="validity-icon">
+        <i class="fa fa-times"></i>
+      </div>
+    </ng-container>
+    <!-- <mat-form-field class="input" appearance="fill">
+      <input type="{{inp.type}}" matInput [formControl]="inp.formControl">
+      <mat-error *ngFor="let validation of inp.vms">
+        <ng-container *ngIf="validation|validator:inp.formControl:inp.formControl?.value">
+          {{validation.message|validationMsg:inp.prefix:inp.suffix}}
+        </ng-container>
+      </mat-error>
+    </mat-form-field> -->
+  </div>
+</div>

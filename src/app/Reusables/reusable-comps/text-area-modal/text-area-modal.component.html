@@ -1,0 +1,11 @@
+<div class="">
+  <div class="d-flex justify-content-between mb-2 align-items-center"><label class="text-primary">{{_data?.label|appTranslate|async}}</label>
+    <app-btn text="Close" (mclick)="close()" type="danger-outline" icon="close"></app-btn>
+  </div>
+</div>
+<div class="">
+  <textarea class="control-bg-gray p-2" [(ngModel)]="_data.value"></textarea>
+</div>
+<div class="d-flex justify-content-end">
+  <app-btn text="Save" (mclick)="save()" type="secondary" icon="save"></app-btn>
+</div>

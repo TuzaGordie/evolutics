@@ -1,0 +1,33 @@
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <label>{{'Claim Status'|appTranslate|async}}</label>
+            <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-responsive table-striped">
+            <thead>
+            <tr class="">
+              <th scope="col">{{'Claim Number'|appTranslate|async}}</th>
+              <th scope="col">{{'Claim status'|appTranslate|async}}</th>
+              <th scope="col">{{'Claim status Date'|appTranslate|async}}</th>
+              <th scope="col">{{'Policy Number'|appTranslate|async}}</th>
+              <th scope="col">{{'Updated By'|appTranslate|async}}</th>
+              <th scope="col">{{'Updated On'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let status of claimStatus">
+                <td>{{status.claimNo}}</td>
+                <td>{{status.claimStatus}}</td>
+                <td>{{status.claimStatusDate}}</td>
+                <td>{{status.policyNo}}</td>
+                <td>{{status.updatedBy}}</td>
+                <td>{{status.updatedOn}}</td>                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>

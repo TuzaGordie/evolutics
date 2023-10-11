@@ -1,0 +1,359 @@
+<div>
+  <form [formGroup]="beneficiariesForm">
+    <div class="row" formArrayName="beneficiaries">
+      <div
+        class="beneficiary"
+        *ngFor="let b of beneficiaries.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Client Number' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="clientNo"
+                type="text"
+                class="form-control control-bg-gray"
+                (change)="findBeneficiary(i)"
+              />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <app-button [buttonType]="'showsmall'"></app-button>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <app-button [buttonType]="'findsmallGB'"></app-button>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <app-button
+                [buttonType]="'createCustom2smallGB'"
+                [text]="'New'"
+              ></app-button>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'First Name' | appTranslate | async
+              }}</label>
+              <input
+                [value]="bene[i].firstName"
+                formControlName="firstName"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Last Name' | appTranslate | async
+              }}</label>
+              <input
+                [value]="bene[i].surname"
+                formControlName="lastName"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Date of Birth' | appTranslate | async
+              }}</label>
+              <input
+                [value]="bene[i].dateOfBirth"
+                formControlName="dob"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Email' | appTranslate | async
+              }}</label>
+              <input
+                [value]="bene[i].email"
+                formControlName="email"
+                type="email"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Phone No' | appTranslate | async
+              }}</label>
+              <input
+                [value]="bene[i].phoneNumber"
+                formControlName="phoneNo"
+                type="tel"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Relationship' | appTranslate | async
+              }}</label>
+              <input
+                [value]="beneRel[i]"
+                formControlName="relationship"
+                type="email"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >{{ 'Share' | appTranslate | async }} (%)</label
+              >
+              <input
+                formControlName="share"
+                type="tel"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+
+    <div class="row" formGroupName="legalGuardian">
+      <div class="row">
+        <div class="col-10"></div>
+
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button
+              (click)="addBeneficiary()"
+              [buttonType]="'addCustomGB'"
+              [text]="'Add Beneficiary'"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+      <!-- Legal - minor -->
+      <div class="row">
+        <div class="col-12">
+          <h6 class="text-primary my-4">
+            {{
+              'Legal Guardian - for beneficiaries who are minors'
+                | appTranslate
+                | async
+            }}
+          </h6>
+          <hr />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Client Number' | appTranslate | async
+            }}</label>
+            <input
+              (change)="findLegal()"
+              formControlName="clientNo"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'showsmall'"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button
+              [buttonType]="'createCustom2smallGB'"
+              [text]="'New'"
+            ></app-button>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Relationship' | appTranslate | async
+            }}</label>
+            <input
+              [value]="legalRel"
+              formControlName="relationship"
+              type="tel"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Full Name' | appTranslate | async
+            }}</label>
+            <input
+              [value]="legal.fullName"
+              formControlName="fullName"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Phone No' | appTranslate | async
+            }}</label>
+            <input
+              [value]="legal.phoneNumber"
+              formControlName="phoneNo"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Email' | appTranslate | async
+            }}</label>
+            <input
+              [value]="legal.email"
+              formControlName="email"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" formGroupName="nextOfKin">
+      <!-- Next of Kin -->
+
+      <div class="row">
+        <h6 class="text-primary my-4">
+          {{ 'Next of Kin' | appTranslate | async }}
+        </h6>
+        <hr />
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Client Number' | appTranslate | async
+            }}</label>
+            <input
+              (change)="findNextOfKin()"
+              formControlName="clientNo"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'showsmall'"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button
+              [buttonType]="'createCustom2smallGB'"
+              [text]="'New'"
+            ></app-button>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Relationship' | appTranslate | async
+            }}</label>
+            <input
+              [value]="nokRel"
+              formControlName="relationship"
+              type="tel"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Full Name' | appTranslate | async
+            }}</label>
+            <input
+              [value]="nextOK.fullName"
+              formControlName="fullName"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Phone No' | appTranslate | async
+            }}</label>
+            <input
+              [value]="nextOK.phoneNumber"
+              formControlName="phoneNo"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Email' | appTranslate | async
+            }}</label>
+            <input
+              [value]="nextOK.email"
+              formControlName="email"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

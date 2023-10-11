@@ -1,0 +1,168 @@
+<div class="bg-light-gray-evolutics" style="min-height: 100vh">
+  <app-form-navigation [title]="'Activities Summary'"></app-form-navigation>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <div class="border bg-white p-5">
+              <h3 class="text-center">18.4 days</h3>
+              <p class="text-center">Average Sale Cycle Lengh</p>
+              <hr>
+              <div class="restrict-height m-4">
+                <canvas baseChart class="spacing mb-4 " [datasets]="barChartData1" [labels]="barChartLabels1"
+                        [options]="barChartOptions1" [legend]="barChartLegend" [chartType]="barChartType1">
+
+                </canvas>
+
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row mt-3 gx-3 ">
+            <div class="col">
+              <h5 class="mt-3">Sales Funnel</h5>
+              <div class="row py-1 px-3">
+                <div class="col bg-white text-end p-3">
+                  <p class="small2 m-0">Opportunities</p>
+                  <h4 class="p-0">1,475</h4>
+                </div>
+              </div>
+              <div class="row py-1 px-3">
+                <div class="col bg-white text-end p-3">
+                  <p class="small2 m-0">Proposal</p>
+                  <h4 class="p-0">459</h4>
+                </div>
+              </div>
+              <div class="row py-1 px-3">
+                <div class="col bg-white text-end p-3">
+                  <p class="small2 m-0">Opportunities</p>
+                  <h4 class="p-0">258</h4>
+                </div>
+              </div>
+              <div class="row py-1 px-3">
+                <div class="col bg-white text-end p-3">
+                  <p class="small2 m-0">Closing</p>
+                  <h4 class="p-0">212</h4>
+                </div>
+              </div>
+            </div>
+            <div class="col ">
+              <div class="row gx-4">
+                <div class="col bg-white py-2">
+                  <label for="" class="form-label small1">Average Length of Sales Stages</label>
+
+                  <div class="row p-3">
+                    <div class="col-1 bg-success"></div>
+                    <div class="col">
+                      <label for="" class="form-label small1 text-success">Opportunity</label>
+                      <p class="small2">30 days on average</p>
+                    </div>
+                  </div>
+                  <div class="row p-3">
+                    <div class="col-1 bg-danger"></div>
+                    <div class="col">
+                      <label for="" class="form-label small1 text-danger">Proposal</label>
+                      <p class="small2">30 days on average</p>
+                    </div>
+                  </div>
+                  <div class="row p-3">
+                    <div class="col-1 bg-warning"></div>
+                    <div class="col">
+                      <label for="" class="form-label small1 text-warning">Proposal</label>
+                      <p class="small2">30 days on average</p>
+                    </div>
+                  </div>
+                  <div class="row p-3">
+                    <div class="col-1 bg-blue"></div>
+                    <div class="col">
+                      <label for="" class="form-label small1 text-blue">Closing</label>
+                      <p class="small2 text-blue">30 days on average</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <div class="border bg-white p-5">
+              <div class="row justify-content-end">
+                <div class="col">
+                  <div class=" m-4">
+                    <canvas baseChart class="spacing mb-4 w-100 " [datasets]="barChartData2" [labels]="barChartLabels2"
+                            [options]="barChartOptions2" [legend]="barChartLegend" [chartType]="barChartType2">
+
+                    </canvas>
+                  </div>
+                </div>
+                <div class="col-3 text-end">
+                  <label for="" class="small2 mt-4">
+                    Williams
+                  </label>
+                  <h2>11%</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <div class="border bg-white p-5">
+              <div class="row justify-content-end">
+                <div class="col">
+                  <div class=" m-4">
+                    <canvas baseChart class="spacing mb-4 w-100 " [datasets]="barChartData2" [labels]="barChartLabels2"
+                            [options]="barChartOptions2" [legend]="barChartLegend" [chartType]="barChartType2">
+
+                    </canvas>
+                  </div>
+                </div>
+                <div class="col-3 text-end">
+                  <label for="" class="small2 mt-4">
+                    James
+                  </label>
+                  <h2>11%</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col">
+            <div class="border bg-white p-5">
+              <div class="row justify-content-end">
+                <div class="col">
+                  <div class=" m-4">
+                    <canvas baseChart class="spacing mb-4 w-100 " [datasets]="barChartData2" [labels]="barChartLabels2"
+                            [options]="barChartOptions2" [legend]="barChartLegend" [chartType]="barChartType2">
+
+                    </canvas>
+                  </div>
+                </div>
+                <div class="col-3 text-end">
+                  <label for="" class="small2 mt-4">
+                    Black
+                  </label>
+                  <h2>11%</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+

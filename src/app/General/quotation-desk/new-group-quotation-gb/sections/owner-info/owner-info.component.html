@@ -1,0 +1,624 @@
+<div>
+  <div class="container mt-2">
+    <form>
+      <div class="row justify-content-between mt-3">
+        <span class="col-2"
+          >{{ 'Client Class' | appTranslate | async }}:
+          <span class="text-primary">{{
+            'Group' | appTranslate | async
+          }}</span></span
+        >
+        <span class="col-2"
+          >{{ 'Client Number' | appTranslate | async }}:
+          <span class="text-primary">{{ ownerDetails.clientNo }}</span></span
+        >
+        <div class="col"></div>
+        <div class="col-2">
+          <app-button
+            [buttonType]="'btnCustomNoteGB'"
+            [text]="'Note'"
+            [routerLink]="['/life/agent-desk/agent-note']"
+          >
+          </app-button>
+        </div>
+      </div>
+      <hr style="margin-top: 5px" />
+
+      <div class="d-flex justify-content-around" style="font-size: 15px">
+        <div class="d-block text-center mr-2">
+          <img
+            src="https://ritecaremedicalofficepc.com/wp-content/uploads/2019/09/img_avatar.png"
+            class="rounded-circle"
+            width="100px"
+            alt=""
+          />
+          <p class="pt-2"></p>
+          <span style="color: #2ecc71">{{
+            'Active' | appTranslate | async
+          }}</span>
+        </div>
+
+        <div class="d-block mx-2 mt-1">
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Full Name' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.fullName"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Redg No' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.redgNo"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'No of Employees' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.noOfEmployee"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Financial Size Category' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.financialSizeCategory"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Sector' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.sector"
+            />
+          </div>
+        </div>
+
+        <div class="d-block mx-2 mt-1">
+          <div class="pb-4">
+            <label
+              class="form-label text-red m-0"
+              >{{Phone Number 1'|appTranslate|async}}</label
+            >
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.phoneNumber"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Phone Number 2' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.alternativePhoneNumber"
+            />
+            ''
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Email' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.email"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Website' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.website"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Address' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.address"
+            />
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'CRM ID' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.crmId"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Client Category' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.clientType"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Language' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.language"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Date Created' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              value="{{ ownerDetails?.dateCreated | date: 'mediumDate' }}"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'State' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.state"
+            />
+          </div>
+        </div>
+        <div class="d-block mx-2">
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Provider Type' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.providerCategory"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Band' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.band"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Bank No' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.bankNo"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'CLV' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.clv"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Communication' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.communication"
+            />
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Provider Code' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.providerCode"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'No of groups' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.noOfGroups"
+            />
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-red m-0">{{
+              'Social Media' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              readonly
+              class="inputform1"
+              [value]="ownerDetails?.socialMedia"
+            />
+          </div>
+        </div>
+      </div>
+      <hr class="" />
+      <div class="row justify-content-center my-4">
+        <div class="col-2">
+          <app-button
+            [buttonType]="'btnCustomCloneRaisedYellow'"
+            [text]="'Endorsements'"
+            [routerLink]="['/life/agent-desk/agent-endorsements']"
+          ></app-button>
+        </div>
+        <div class="col-2">
+          <app-button
+            [buttonType]="'btnCustomCloneRaisedYellow'"
+            [text]="'Documents'"
+            [routerLink]="['/life/agent-desk/agent-documents']"
+          ></app-button>
+        </div>
+        <div class="col-2">
+          <app-button
+            [buttonType]="'btnCustomCloneRaisedYellow'"
+            [text]="'Web log in'"
+            [routerLink]="['/life/agent-desk/agent-workflows']"
+          ></app-button>
+        </div>
+
+        <div class="col-2">
+          <app-button
+            [buttonType]="'btnCustomCloneRaisedYellow'"
+            [text]="'Agent Loan'"
+            [routerLink]="['/life/agent-desk/agent-loan']"
+          ></app-button>
+        </div>
+        <div class="col-2">
+          <app-button
+            [buttonType]="'btnCustomCloneRaisedYellow'"
+            [routerLink]="['/life/workflows']"
+            [text]="'Workflows'"
+          >
+          </app-button>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center section-cards card-yellow">
+        <div
+          class="card color1 shadow-sm mx-2"
+          [routerLink]="['/life/policies']"
+        >
+          <div class="card-body">
+            <h6 class="card-title">
+              {{ 'No of Policies' | appTranslate | async }}
+            </h6>
+            <p id="card-text">50</p>
+          </div>
+        </div>
+        <div
+          class="card color1 shadow-sm mx-2"
+          [routerLink]="['/life/relationships']"
+        >
+          <div class="card-body">
+            <h6 class="card-title">
+              {{ 'No of Relationships' | appTranslate | async }}
+            </h6>
+            <p id="card-text">10</p>
+          </div>
+        </div>
+        <div
+          class="card color1 shadow-sm mx-2"
+          [routerLink]="['/life/business']"
+        >
+          <div class="card-body">
+            <h6 class="card-title">
+              {{ 'Other Business' | appTranslate | async }}
+            </h6>
+            <p id="card-text">3</p>
+          </div>
+        </div>
+        <div
+          class="card color1 shadow-sm mx-2"
+          [routerLink]="['/life/pendingquotes']"
+        >
+          <div class="card-body">
+            <h6 class="card-title">
+              {{ 'Pending Quotes' | appTranslate | async }}
+            </h6>
+            <p id="card-text">3</p>
+          </div>
+        </div>
+        <div
+          class="card color1 shadow-sm mx-2"
+          [routerLink]="['/life/pendingpayments']"
+        >
+          <div class="card-body">
+            <h6 class="card-title">
+              {{ 'Pending Payments' | appTranslate | async }}
+            </h6>
+            <p id="card-text">3</p>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <form>
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                {{ 'Edit Owner Info' | appTranslate | async }}
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div
+                class="d-flex justify-content-around"
+                style="font-size: 15px"
+              >
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Full Name' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Redg No' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label
+                      class="form-label text-red m-0"
+                      >{{No. of Employees'|appTranslate|async}}</label
+                    >
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Financial Size Category' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Sector' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Phone Number 1' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Phone Number 2' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Email' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Website' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Address' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'CRM ID' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Client Category' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Language' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Date' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'State' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Provider Category' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Brand' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Bank No' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'CLV' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Communication' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Provider Sub Category' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'No of Groups' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Group No' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Social Media' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                </div>
+
+                <div class="d-block ml-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red m-0">{{
+                      'Provider Code' | appTranslate | async
+                    }}</label>
+                    <input type="text" class="inputform" />
+                  </div>
+                </div>
+              </div>
+
+              <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">update</button>
+             -->
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+              <button
+                type="submit"
+                data-bs-dismiss="modal"
+                class="border-0 next-blue"
+              >
+                {{ 'Save' | appTranslate | async }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

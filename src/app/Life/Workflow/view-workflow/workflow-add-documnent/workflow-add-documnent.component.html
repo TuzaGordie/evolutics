@@ -1,0 +1,72 @@
+<!-- Bootstrap modal -->
+
+<button #launchBtn type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" hidden
+    aria-hidden="true">
+    {{'launch'|appTranslate|async}}
+</button>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fs-2" id="staticBackdropLabel">{{'Add Document'|appTranslate|async}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="onCloseClick()" #closeBtn></button>
+            </div>
+            <div class="modal-body">
+                <div class="row align-items-end mb-5">
+                    <div class="col-4">
+                        <label class="mb-3">{{'File'|appTranslate|async}}</label>
+                        <app-button buttonType="default" text="Upload file"></app-button>
+                    </div>
+                    <div class="col-4">
+                        <label class="mb-3">{{'Title'|appTranslate|async}}</label>
+                        <input type="text" class="form-control control-bg-gray">
+                    </div>
+                    <div class="col-4">
+                        <label class="mb-3">{{'Category'|appTranslate|async}}</label>
+                        <select class="form-control control-bg-gray" (change)="onCategoryChange($event)">
+                            <option></option>
+                            <option *ngFor="let category of categories" [value]="category.code">
+                                {{category.code}}-{{category.title}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row align-items-end mb-5">
+                    <div class="col-4">
+                        <label class="mb-3">{{'Sub Category'|appTranslate|async}}</label>
+                        <select class="form-control control-bg-gray">
+                            <option [value]=""> </option>
+                            <option [value]="category.code" *ngFor="let category of subCategories">{{category.code}}-{{category.title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label class="mb-3">{{'Sensitivity'|appTranslate|async}}</label>
+                        <select class="form-control control-bg-gray">
+                            <option value=""></option>
+                            <option  [value]="sensitivity.code" *ngFor="let sensitivity of sensitivities">{{sensitivity.code}}-{{sensitivity.title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <label class="mb-3">{{'Branch'|appTranslate|async}} - <span class="fw-normal">{{'If Document is physical'|appTranslate|async}}</span></label>
+                        <select class="form-control control-bg-gray">
+                            <option [value]=""> </option>
+                            <option  [value]="branch.code" *ngFor="let branch of branches">{{branch.code}}-{{branch.description}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row align-items-end mb-5">
+                    <div class="col-4">
+                        <label class="mb-3">{{'Box No'|appTranslate|async}}- <span class="fw-normal">{{'If Document is physical'|appTranslate|async}}</span></label>
+                        <input type="text" class="form-control control-bg-gray">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <app-button buttonType="save" data-bs-dismiss="modal" (click)="onCloseClick()">
+                </app-button>
+            </div>
+        </div>
+    </div>
+</div>

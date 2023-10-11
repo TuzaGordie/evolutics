@@ -1,0 +1,348 @@
+<div class="row">
+  <div class="col-md-12 mx-auto d-flex justify-content-between">
+    <div class="page-head m-0">{{'Accounts'|appTranslate|async}}</div>
+
+  </div>
+  <div
+    class="row row-cols-1 row-cols-lg-6 row-cols-xl-6 row-cols-sm-1 row-cols-xs-1 my-3"
+  >
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Show All' | appTranslate | async
+              }}</label>
+            <input type="checkbox" class="form-control control-bg-gray"/>
+          </div>
+        </div>
+        <div class="col-7">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <br>
+          <label for="" class="form-label text-primary">
+            {{
+            'Currency : --' | appTranslate | async
+            }}</label>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Reversed' | appTranslate | async
+          }}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Account Code' | appTranslate | async
+          }}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Date From' | appTranslate | async
+          }}</label>
+        <input type="date" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Date To' | appTranslate | async
+          }}</label>
+        <input type="date" class="form-control control-bg-gray">
+      </div>
+    </div>
+
+    <div class="col">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <app-btn icon="download" type="secondary">{{
+        'Download' | appTranslate | async
+        }}</app-btn>
+    </div>
+  </div>
+  <div class="my-2">
+    <table class="table table-responsive table-striped text-center">
+      <thead class="py-3 theader">
+      <tr>
+
+        <th scope="col">{{ 'Trans Number' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Amount' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Account Code' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Ledger Code' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'Cover Code' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Bank Transaction' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Reversed' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Users' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'Details' | appTranslate | async }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        <td>
+          <input type="checkbox" class="form-control mx-auto">
+        </td>
+        <td>
+          <input type="checkbox" class="form-control mx-auto">
+        </td>
+
+
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="System  Created On:
+            Created On:
+             Effective On:
+              Reversed On:"
+          >
+            <i class="fas fa-calendar-alt"></i>
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="Created By:
+             Reversed By:
+          Controlled by:  "
+          >
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </button>
+        </td>
+
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="Narration:
+            Batch Number:
+             Account Type:
+             Loan Number:
+             Claim Number:
+             Receipt Number:
+             Reinsurance ID:
+             Payout ID:
+             "
+          >
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-5 row justify-content-between">
+    <div class="col-4 ">
+      <app-btn type="secondary">Reconcile Supense</app-btn>
+    </div>
+    <div class="col-4 ">
+      <app-btn icon='add' type="secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New Account
+        Transaction
+      </app-btn>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'New Account Transaction' | appTranslate | async }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="mb-5">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="" class="form-label text-primary">{{'Ref Category' | appTranslate | async }}</label>
+                    <input type="text" class="form-control control-bg-gray" disabled>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="" class="form-label text-primary">{{'Ref Number' | appTranslate | async }}</label>
+                    <input type="text" class="form-control control-bg-gray" disabled>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="" class="form-label text-primary">&nbsp;</label>
+                    <input name="" id="" class="form-control control-bg-gray" readonly>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col">
+                        <label for="" class="form-label text-primary"> <span
+                          class="small1">{{'Issued On' | appTranslate | async }}</span></label>
+                        <input class="form-control control-bg-gray" placeholder="mm/dd/yyyy" readonly>
+                      </div>
+                      <div class="col">
+                        <label for="" class="form-label text-primary"> <span
+                          class="small1">{{'Renewal Due On' | appTranslate | async }}</span></label>
+                        <input class="form-control control-bg-gray" placeholder="mm/dd/yyyy" readonly>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for=""
+                           class="text-primary form-label">{{'Transaction Reason' | appTranslate | async }}</label>
+                    <select name="" id="" class="form-control control-bg-gray" formControlName="transType">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Claim Type' | appTranslate | async }}</label>
+                    <select name="" id="" class="form-control control-bg-gray" formControlName="transType">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Currency' | appTranslate | async }}</label>
+                    <select name="" id="" class="form-control control-bg-gray" formControlName="currency">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col mt-3">
+
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Effective Date' | appTranslate | async }}</label>
+                    <input name="" id="" type="date" class="form-control control-bg-gray">
+
+                  </div>
+
+                </div>
+
+              </div>
+              <div class="row mt-5">
+                <div class="col mt-3">
+
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Debit / Credit' | appTranslate | async }}</label>
+                    <select name="" id="" type="text" class="form-control control-bg-gray">
+                      <option value=""></option>
+                    </select>
+
+                  </div>
+
+                </div>
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Account Code' | appTranslate | async }}</label>
+                    <select name="" id="" class="form-control control-bg-gray"></select>
+                  </div>
+                </div>
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Ledger' | appTranslate | async }}</label>
+                    <input class="form-control control-bg-gray">
+
+                  </div>
+                </div>
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Amount' | appTranslate | async }}</label>
+                    <input class="form-control control-bg-gray">
+
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="row justify-content-between mt-3">
+                <div class="col-2">
+                  <button class="btn btn-lg btn-primary w-100">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                    Add
+                  </button>
+                </div>
+                <div class="col-3">
+                  <app-btn type="secondary">{{'Check Standard Mapping' | appTranslate | async }}</app-btn>
+                </div>
+              </div>
+              <div class="row mt-5">
+
+                <div class="col  mt-3">
+                  <div class="form-group">
+                    <label for="" class="text-primary form-label">{{'Narration' | appTranslate | async }}</label>
+                    <textarea name="" id="" cols="30" rows="2" class="form-control control-bg-gray">
+
+            </textarea>
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-lg btn-outline-primary">
+          <fa-icon [icon]="faCheck"></fa-icon>
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

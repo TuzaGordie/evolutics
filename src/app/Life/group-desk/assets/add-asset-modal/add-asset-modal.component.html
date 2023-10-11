@@ -1,0 +1,87 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Add Asset</h5>
+  <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+</div>
+<form [formGroup]="assetForm">
+  <div class="row align-items-end gx-2" *ngFor="let i of memberCounter()">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Client Number</label>
+        <input type="text" formControlName="client_no" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-md-auto d-flex">
+      <div class="me-2">
+        <app-btn icon="search" type="secondary" [iconBtn]="true" hint="Find client"></app-btn>
+      </div>
+      <app-btn icon="add" type="outline" [iconBtn]="true" hint="Add new client"></app-btn>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Staff ID</label>
+        <input formControlName="staff_id" type="text"  class="form-control control-bg-gray">
+      </div>
+
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Rel Basis</label>
+        <select formControlName="rel_basis" class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Relationship</label>
+        <select formControlName="relationship" class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Related To</label>
+        <input formControlName="related_to" type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Member name</label>
+        <input formControlName="member_name" type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">Subgroup No</label>
+        <input formControlName="subgroup_no" type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-button buttonType="upload" text="Picture"></app-button>
+      </div>
+    </div>
+    <div class="col-md-auto d-flex">
+      <div class="me-2">
+        <app-btn icon="delete" type="danger" [iconBtn]="true" hint="Delete Member" (mclick)="memberInc(-1)"></app-btn>
+      </div>
+      <app-btn (mclick)="memberInc()" icon="add" type="outline" [iconBtn]="true" hint="Add another member"></app-btn>
+    </div>
+  </div>
+  <hr>
+  <div class="row justify-content-between mt-3">
+    <div class="col-md-auto d-flex">
+      <div class="me-2">
+        <app-btn icon="download" type="outline" (mclick)="downloadTemplate()">Download CSV Template</app-btn>
+      </div>
+      <app-button buttonType="upload" text="Upload Members"></app-button>
+      <input type="file" formControlName="upload_member" #uploadMembers (change)="onChange($event)" id="">
+    </div>
+    <div class="col-md-2">
+      <app-button [buttonType]="'save'" (click)="save(file)"></app-button>
+    </div>
+  </div>
+</form>
+

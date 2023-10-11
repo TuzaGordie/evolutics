@@ -1,0 +1,132 @@
+<div
+  class="modal fade"
+  id="tp_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <form [formGroup]="thirdPartyForm" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Limit' | appTranslate | async
+              }}</label
+              ><span
+                style="padding-left: 10px"
+                *ngIf="assured_min || assured_max"
+                >min: {{ assured_min | number: '1.0-0':'en' }} - max:
+                {{ assured_max | number: '1.0-0':'en' }}</span
+              >
+
+              <input
+                formControlName="slimit"
+                type="text"
+                class="form-control control-bg-gray"
+                [hidden]="assured_value_disabled"
+              />
+              <select
+                formControlName="limit"
+                id=""
+                class="form-control control-bg-gray"
+                [hidden]="!assured_value_disabled"
+              >
+                <ng-container *ngFor="let option of assured_options">
+                  <option [value]="option">
+                    {{ option }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Vehicle Value' | appTranslate | async
+              }}</label>
+              <input
+                readonly
+                [value]="mvAdj"
+                formControlName="value"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Excess' | appTranslate | async
+              }}</label>
+              <input
+                [readonly]="excess_disabled"
+                *ngIf="!excess_options?.length"
+                formControlName="excess"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+              <select
+                *ngIf="excess_options?.length"
+                formControlName="excess"
+                class="form-control control-bg-gray"
+              >
+                <option disabled>Select an option</option>
+                <ng-container *ngFor="let option of excess_options">
+                  <option [value]="option">{{ option }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Deductible' | appTranslate | async
+              }}</label>
+              <input
+                [readonly]="deductible_disabled"
+                *ngIf="!deductible_options?.length"
+                formControlName="deductible"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+              <select
+                *ngIf="deductible_options?.length"
+                formControlName="deductible"
+                class="form-control control-bg-gray"
+              >
+                <option disabled>Select an option</option>
+                <ng-container *ngFor="let option of deductible_options">
+                  <option [value]="option">{{ option }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button (click)="stop()" [buttonType]="'saveGB'"></app-button>
+        <!-- <div>
+        <button (click)="stop" class="btn btn-outline-primary btn-lg">
+          <fa-icon [icon]="faSave"></fa-icon>
+          Save
+        </button>
+      </div> -->
+      </div>
+    </form>
+  </div>
+</div>

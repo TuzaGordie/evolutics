@@ -1,0 +1,727 @@
+<loader [loading]="loading">
+  <div class=" ">
+    <form [formGroup]="viewClientForm">
+      <div class="row justify-content-between mt-3">
+        <span class="col-auto d-lg-flex">
+          <text-case-1 [inverted]="true" [light]="true" [stacked]="false" lbl="Client Class:" val="Corporate">
+          </text-case-1>
+          <span class="mx-1"></span>
+          <text-case-1 [inverted]="true" [light]="true" [stacked]="false" lbl="Client Number:"
+                       [val]="clientData?.clientNo">
+          </text-case-1>
+        </span>
+        <div class="col-auto d-lg-flex">
+          <app-btn [disabled]="!clientData?.providerNo?.length" type="secondary" icon="show" text="View Provider"
+                   [matMenuTriggerFor]="clientMenu">
+          </app-btn>
+          <mat-menu #clientMenu="matMenu">
+            <button mat-menu-item routerLink="../../client-desk/view-provider"
+                    [queryParams]="{providerNo}" *ngFor="let providerNo of clientData?.providerNo">
+              {{providerNo}}
+            </button>
+          </mat-menu>
+          <span class="mx-1"></span>
+          <app-button [buttonType]="'edit'" [text]="'Edit'" (click)="editClient()"></app-button>
+          <span class="mx-1"></span>
+          <app-button [buttonType]="'btnCustomNote'" [text]="'Note'" routerLink="../../client-desk/note"
+                      [queryParams]="{clientNo}">
+          </app-button>
+        </div>
+
+      </div>
+      <hr style="margin-top: 5px;">
+      <div class="row">
+        <div class="col-2">
+          <div class="d-block text-center mr-2">
+            <div>
+              <img imageUpload (extractedImg)="changePP($event)" src="{{pp||'/assets/img/avatar.png'}}"
+                   class="rounded-circle" width="100px" alt="image loading...">
+            </div>
+
+
+            <p class="pt-2">{{clientS.clientInfo?.Client.fullName}}</p>
+            <div class="pointer text-{{getStatusColour(clientStatus?.title)}}" data-bs-toggle="modal"
+                 data-bs-target="#changeStatusModal">{{clientStatus?.title || 'unknown'}} <i class="fas fa-pen"></i>
+            </div>
+            <div class="shadow-sm py-2 px-1">
+              <div class="row ">
+                <div class="col small2 text-start text-bold text-primary">{{'Client Status'|appTranslate|async}}</div>
+                <div class="col-5 small2 text-end">Alive <i class="fas fa-pen"></i></div>
+              </div>
+              <div class="row  ">
+                <div class="col small2 text-start text-bold text-primary">{{'Agent Status'|appTranslate|async}}</div>
+                <div class="col-5 small2 text-end"> Active <i class="fas fa-pen"></i></div>
+              </div>
+              <div class="row ">
+                <div class="col small2 text-start text-bold text-primary">{{'Provider Status'|appTranslate|async}}</div>
+                <div class="col-5 small2 text-end"> Active <i class="fas fa-pen"></i></div>
+              </div>
+              <div class="row ">
+                <div class="col small2 text-start text-bold text-primary">{{'User Status'|appTranslate|async}}</div>
+                <div class="col-5 small2 text-end"> Active <i class="fas fa-pen"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+
+            <div class="d-block mx-2">
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Full Name'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="fullName" readonly type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Redg No'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="redgNo" readonly type="text">
+              </div>
+
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'No of employee'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly formControlName="noOfEmployee" type="text">
+              </div>
+
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Segment'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="segment" readonly type="text">
+              </div>
+
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Sector'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly formControlName="sector" type="text">
+              </div>
+            </div>
+
+            <div class="d-block mx-2">
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Phone Number 1'|appTranslate|async}}</label>
+                <input [ngClass]="{higlightbox: checkHighlight('phoneNo')}" [readonly]="checkReadonly('phoneNo')"
+                       class="inputform1" formControlName="phoneNo" type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Phone Number 2'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="phoneNo2" readonly type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Email'|appTranslate|async}}</label>
+                <input [ngClass]="{higlightbox: checkHighlight('email')}" [readonly]="checkReadonly('email')"
+                       class="inputform1" formControlName="email" type="text">
+              </div>
+
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Website'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly formControlName="website" type="text">
+              </div>
+
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Address'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly formControlName="address" type="text">
+              </div>
+
+            </div>
+            <div class="d-block mx-2">
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'CRM ID'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="crmId" readonly type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Client Category'|appTranslate|async}}</label>
+                <input [ngClass]="{higlightbox: checkHighlight('category')}" [readonly]="checkReadonly('category')"
+                       class="inputform1" formControlName="category" type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Language'|appTranslate|async}}</label>
+                <input [ngClass]="{higlightbox: checkHighlight('language')}" [readonly]="checkReadonly('language')"
+                       class="inputform1" formControlName="language" type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Date Created'|appTranslate|async}}</label>
+                <div class="">
+                  {{clientData?.dateCreated|date}}
+                </div>
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'State'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly formControlName="state" type="text">
+              </div>
+            </div>
+
+            <div class="d-block mx-2">
+
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Band'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="band" readonly type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Bank No'|appTranslate|async}}</label>
+                <div class="row">
+                  <div class="col"><input class="inputform1 " formControlName="bankNo" readonly type="text"></div>
+                  <div class="col-3"><a><i aria-hidden="true" class="fas fa-pencil-alt ml-2" data-bs-toggle="modal"
+                                           data-bs-target="#editbank"></i> </a>
+                  </div>
+                </div>
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'CLV'|appTranslate|async}}</label>
+                <input [ngClass]="{higlightbox: checkHighlight('clv')}" [readonly]="checkReadonly('clv')"
+                       class="inputform1"
+                       formControlName="clv" type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Communication'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="communication" readonly type="text">
+              </div>
+            </div>
+
+            <div class="d-block mx-2">
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'No of Groups'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly formControlName="noOfGroups" type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Group No'|appTranslate|async}}</label>
+                <input class="inputform1 " readonly type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label text-danger">{{'Social Media'|appTranslate|async}}</label>
+                <input class="inputform1 " formControlName="socialmedia" readonly type="text">
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-2">
+      <div class="row justify-content-center my-4">
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'"
+                      [routerLink]="['../../client-desk/endorsements/' ]"
+                      [queryParams]="{clientNo:clientData?.clientNo}">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'"
+                      [routerLink]="['../../client-desk/documents/']" [queryParams]="{clientNo:clientData?.clientNo}">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Web log in'"
+                      [routerLink]="['../../client-desk/web-login/',clientData?.clientNo]"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Underwriting Events'"
+                      [routerLink]="['../../client-desk/underwritingevents/',clientData?.clientNo]"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'"
+                      [routerLink]="['../../client-desk/workflows/',clientData?.clientNo]"
+                      [text]="'Workflows'"></app-button>
+        </div>
+      </div>
+
+      <div id="section_cardsno" class="section-cards d-flex justify-content-around">
+        <div class="card color1 shadow-sm" routerLink="../../client-desk/policies/{{clientData?.clientNo}}/{{busline}}">
+          <div class="card-body">
+            <h6 class="card-title">{{'No of Policies'|appTranslate|async}}</h6>
+            <p id="card-text">{{policyLength || 0}}</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm" [routerLink]="['../../client-desk/relationships/',clientData?.clientNo]">
+          <div class="card-body">
+            <h6 class="card-title">{{'No Of Relationships'|appTranslate|async}}</h6>
+            <p id="card-text">{{relationshipLength || 0}}</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm" [routerLink]="['../../client-desk/business/',clientData?.clientNo,busline]">
+          <div class="card-body">
+            <h6 class="card-title">{{'Other Business'|appTranslate|async}}</h6>
+            <p id="card-text">{{policyLength || 0}}</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm"
+             [routerLink]="['../../client-desk/pendingquotes/',clientData?.clientNo,busline]">
+          <div class="card-body">
+            <h6 class="card-title">{{'Pending Quotes'|appTranslate|async}}</h6>
+            <p id="card-text">{{quoteList?.length || 0}}</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm"
+             [routerLink]="['../../client-desk/pendingpayments/',clientData?.clientNo,busline]">
+          <div class="card-body">
+            <h6 class="card-title">{{'Pending Payments'|appTranslate|async}}</h6>
+            <p id="card-text">{{paymentLength || 0}}</p>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <form [formGroup]="viewClientForm">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{'Edit Client Info'|appTranslate|async}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Full Name'|appTranslate|async}}</label>
+                    <input type="text" formControlName="fullName" [readonly]="checkReadonly('fullName')"
+                      [ngClass]="{higlightbox: checkHighlight('fullName')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Redg No'|appTranslate|async}}</label>
+                    <input type="text" formControlName="redgNo" [readonly]="checkReadonly('redgNo')"
+                      [ngClass]="{higlightbox: checkHighlight('redgNo')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">No. of Employees</label>
+                    <input type="text" formControlName="noOfEmployee" [readonly]="checkReadonly('noOfEmployee')"
+                      [ngClass]="{higlightbox: checkHighlight('noOfEmployee')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Segment'|appTranslate|async}}</label>
+                    <input type="text" formControlName="segment"
+                      [readonly]="checkReadonly('segment')"
+                      [ngClass]="{higlightbox: checkHighlight('segment')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Sector'|appTranslate|async}}</label>
+                    <input type="text" formControlName="sector" [readonly]="checkReadonly('sector')"
+                      [ngClass]="{higlightbox: checkHighlight('sector')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Gender'|appTranslate|async}}</label>
+                    <select type="text" formControlName="gender" [ngClass]="{higlightbox: checkHighlight('gender')}"
+                      class="inputform ">
+                      <option value="m">M</option>
+                      <option value="f">F</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Phone Number 1'|appTranslate|async}}</label>
+                    <input type="text" formControlName="phoneNo" [readonly]="checkReadonly('phoneNo')"
+                      [ngClass]="{higlightbox: checkHighlight('phoneNo')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Phone Number 2'|appTranslate|async}}</label>
+                    <input type="text" formControlName="phoneNo2" [readonly]="checkReadonly('phoneNo2')"
+                      [ngClass]="{higlightbox: checkHighlight('phoneNo2')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Email'|appTranslate|async}}</label>
+                    <input type="text" formControlName="email" [readonly]="checkReadonly('email')"
+                      [ngClass]="{higlightbox: checkHighlight('email')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Website'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('website')" type="text" formControlName="website"
+                      [ngClass]="{higlightbox: checkHighlight('website')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Address'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('address')" type="text" formControlName="address"
+                      [ngClass]="{higlightbox: checkHighlight('address')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'CRM ID'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('crmId')" type="text" formControlName="crmId"
+                      [ngClass]="{higlightbox: checkHighlight('crmId')}" class="inputform ">
+                  </div>
+
+                </div>
+
+                <div class="d-block mx-2">
+
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Date'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('dateOfBirth')" type="date" formControlName="dateOfBirth"
+                      [ngClass]="{higlightbox: checkHighlight('dateOfBirth')}" class="inputform ">
+
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'State'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('state')" type="text" formControlName="state"
+                      [ngClass]="{higlightbox: checkHighlight('state')}" class="inputform ">
+
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Provider Category'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('employer')" type="text" formControlName="employer"
+                      [ngClass]="{higlightbox: checkHighlight('employer')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Band'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('band')" type="text" formControlName="band"
+                      [ngClass]="{higlightbox: checkHighlight('band')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Bank'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('bankNo')" type="text" formControlName="bankNo"
+                      [ngClass]="{higlightbox: checkHighlight('bankNo')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'CLV'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('clv')" type="text" formControlName="clv"
+                      [ngClass]="{higlightbox: checkHighlight('clv')}" class="inputform ">
+                  </div>
+
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Communication'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('communication')" type="text" formControlName="communication"
+                      [ngClass]="{higlightbox: checkHighlight('communication')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Provider Sub Category'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('providerSubCategory')" type="text"
+                      formControlName="providerSubCategory"
+                      [ngClass]="{higlightbox: checkHighlight('providerSubCategory')}" class="inputform "> -->
+    <!-- <select class="inputform ">
+                      <option value=""></option>
+                      <option value=""></option>
+                    </select> -->
+    <!-- </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Provider Code '|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('providerCode')" type="text" formControlName="providerCode"
+                      [ngClass]="{higlightbox: checkHighlight('providerCode')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'No of Groups'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('noOfGroups')" type="text" formControlName="noOfGroups"
+                      [ngClass]="{higlightbox: checkHighlight('noOfGroups')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Group No'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('noOfGroups')" type="text" formControlName="noOfGroups"
+                      [ngClass]="{higlightbox: checkHighlight('noOfGroups')}" class="inputform ">
+                  </div>
+
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Social Media'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('socialmedia')" type="text" formControlName="socialmedia"
+                      [ngClass]="{higlightbox: checkHighlight('socialmedia')}" class="inputform ">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Client Category'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('category')" type="text" formControlName="category"
+                      [ngClass]="{higlightbox: checkHighlight('category')}" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Language'|appTranslate|async}}</label>
+                    <input [readonly]="checkReadonly('language')" type="text" formControlName="language"
+                      [ngClass]="{higlightbox: checkHighlight('language')}" class="inputform ">
+
+                  </div>
+                </div>
+
+
+              </div> -->
+
+    <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">{{'update'|appTranslate|async}}</button>
+               -->
+    <!-- </div>
+            <div class="modal-footer"> -->
+    <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">{{'Close'|appTranslate|async}}</button> -->
+    <!--
+              <app-button buttonType="save" (click)="onSubmit()" data-bs-dismiss="modal"></app-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div> -->
+
+  </div>
+
+
+  <div class="modal fade" id="editbank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{'Edit Bank No'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-borderless table-striped my-5">
+            <thead>
+            <tr class="">
+              <th scope="col">{{'Bank No'|appTranslate|async}}</th>
+              <th scope="col">{{'Account Name'|appTranslate|async}}</th>
+              <th scope="col">{{'Bank Method'|appTranslate|async}}</th>
+              <th scope="col">{{'Bank Name'|appTranslate|async}}</th>
+              <th scope="col">{{'Sort Code'|appTranslate|async}}</th>
+              <th scope="col">{{'Account No'|appTranslate|async}}</th>
+              <th scope="col">{{'Blocked'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>5667_1</td>
+              <td>{{'Ogene Obaseki'|appTranslate|async}}</td>
+              <td>{{'NG Banking'|appTranslate|async}}</td>
+              <td>{{'FBN'|appTranslate|async}}</td>
+              <td>{{'05677889'|appTranslate|async}}</td>
+              <td>{{'21923776'|appTranslate|async}}</td>
+              <td><select name="" id="">
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select></td>
+            </tr>
+            <tr>
+              <td>5667_1</td>
+              <td>{{'Ogene Obaseki'|appTranslate|async}}</td>
+              <td>{{'NG Banking'|appTranslate|async}}</td>
+              <td>{{'FBN'|appTranslate|async}}</td>
+              <td>{{'05677889'|appTranslate|async}}</td>
+              <td>{{'21923776'|appTranslate|async}}</td>
+              <td><select name="" id="">
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select></td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <app-button [buttonType]="'addCustom'" [text]="'Create new Account'" data-bs-dismiss="modal"></app-button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editkyc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{'Edit KYC'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-2">{{'Pencom No'|appTranslate|async}}</div>
+            <div class="col-2 text-primary">{{'286868675646'|appTranslate|async}}</div>
+          </div>
+          <div class="row">
+            <div class="col-2">{{'NIN'|appTranslate|async}}</div>
+            <div class="col-2 text-primary">{{'286868675646'|appTranslate|async}}</div>
+          </div>
+          <div class="row">
+            <div class="col-2">{{'BVN'|appTranslate|async}}</div>
+            <div class="col-2 text-primary">{{'286868675646'|appTranslate|async}}</div>
+          </div>
+          <div class="row">
+            <div class="col-2">{{'TIN'|appTranslate|async}}</div>
+            <div class="col-2 text-primary">{{'286868675646'|appTranslate|async}}</div>
+          </div>
+
+          <table class="table table-borderless table-striped my-5">
+            <thead>
+            <tr class="">
+              <th scope="col">{{'ID Type'|appTranslate|async}}</th>
+              <th scope="col">{{'Issue Date'|appTranslate|async}}</th>
+              <th scope="col">{{'Expiry Date'|appTranslate|async}}</th>
+              <th scope="col">{{'ID Number'|appTranslate|async}}</th>
+              <th scope="col">{{'Download'|appTranslate|async}}</th>
+              <th scope="col">{{'Upload'|appTranslate|async}}</th>
+              <th scope="col">{{'Expiry Warning sent'|appTranslate|async}}</th>
+              <th scope="col">{{'Active'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let i of idCounter()">
+              <td><select>
+                <option value="">{{'Diver License'|appTranslate|async}}</option>
+                <option value="">{{'Passport'|appTranslate|async}}</option>
+                <option value="">{{'ID Card'|appTranslate|async}}</option>
+              </select></td>
+              <td><input type="date" class="form-control " value="2018-07-22"></td>
+              <td><input type="date" class="form-control " value="2018-07-22"></td>
+              <td><input type="text" value="FKJ319BP"></td>
+              <td>
+                <button class="btn btn-primary"><i class="fas fa-download"></i>{{' Download'|appTranslate|async}}
+                </button>
+              </td>
+              <td>
+                <app-button buttonType="upload" text="Upload"></app-button>
+              </td>
+              <td>N</td>
+              <td>N</td>
+
+            </tr>
+
+
+            </tbody>
+          </table>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <app-button buttonType="addCustom" text="Add New Id" (click)="idInc()"></app-button>
+            </div>
+            <div class="col-2">
+              <app-button buttonType="delete" text="Add New Id" (click)="idDec()"></app-button>
+            </div>
+          </div>
+          <label class="form-label text-primary">{{'Other KYC'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col-6">
+              <table class="table table-borderless table-striped my-5">
+                <thead>
+                <tr class="">
+                  <th scope="col">{{'Item'|appTranslate|async}}</th>
+                  <th scope="col">{{'Uploaded'|appTranslate|async}}</th>
+                  <th scope="col">{{'Action'|appTranslate|async}}</th>
+                  <th scope="col">{{'Item'|appTranslate|async}}</th>
+                  <th scope="col">{{'Uploaded'|appTranslate|async}}</th>
+                  <th scope="col">{{'Action'|appTranslate|async}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>{{'Picture'|appTranslate|async}}</td>
+                  <td>01/Jan/2015</td>
+                  <td>
+                    <app-button [buttonType]="'upload'" [text]="'Upload'"></app-button>
+                  </td>
+                  <td>{{'Signature'|appTranslate|async}}</td>
+                  <td>01/Jan/2015</td>
+                  <td>
+                    <app-button [buttonType]="'upload'" [text]="'Upload'"></app-button>
+                  </td>
+                </tr>
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Change Status'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row px-3">
+            <label for="" class="form-label text-primary">{{'New Status'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="clientStatus">
+              <option value=""></option>
+              <option *ngFor="let code of statusCodesList" [ngValue]="code">{{code.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="employerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{'Employer'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">{{'Employer'|appTranslate|async}}</th>
+              <th scope="col">{{'Employment Start Date'|appTranslate|async}}</th>
+              <th scope="col">{{'Job Title'|appTranslate|async}}</th>
+              <th scope="col">{{'Cadre'|appTranslate|async}}</th>
+              <th scope="col">{{'Staff No'|appTranslate|async}}</th>
+              <th scope="col">{{'Annual Salary Band'|appTranslate|async}}</th>
+              <th scope="col">{{'Occupation'|appTranslate|async}}</th>
+              <th scope="col">{{'Active'|appTranslate|async}}</th>
+              <th scope="col">{{'Edit'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th>{{'KMC FARMS'|appTranslate|async}}</th>
+              <td>01-Feb-09</td>
+              <td>{{'Supervisor'|appTranslate|async}}</td>
+              <td>{{'Junior'|appTranslate|async}}</td>
+              <td>{{'1278'|appTranslate|async}}</td>
+              <td>1</td>
+              <td>{{'Accounting'|appTranslate|async}}</td>
+              <td>N</td>
+              <td>
+                <app-button buttonType="edit"></app-button>
+              </td>
+            </tr>
+            <tr>
+              <th>{{'Peacock'|appTranslate|async}}</th>
+              <td>01-Feb-09</td>
+              <td>{{'Administrator'|appTranslate|async}}</td>
+              <td>{{'Senior'|appTranslate|async}}</td>
+              <td>{{'6888'|appTranslate|async}}</td>
+              <td>Y</td>
+              <td>{{'Accounting'|appTranslate|async}}</td>
+              <td>Y</td>
+              <td>
+                <app-button buttonType="edit"></app-button>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <app-button buttonType="add"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Close'|appTranslate|async}}</button>
+          <button type="button" class="btn btn-primary">{{'Understood'|appTranslate|async}}</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</loader>

@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{'Find Quote' | appTranslate | async}}</h5>
+    <span class="fas fa-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content>
+  <div class="d-flex my-3 justify-content-center">
+    <div
+      class="form-group d-flex justify-content-center"
+      style="white-space: nowrap"
+    >
+      <input
+        type="text"
+        class="form-control control-bg-gray me-2"
+        [(ngModel)]="quoteName"
+        [disabled]="loading"
+        placeholder="{{'Enter name'|appTranslate|async}}"
+        #name="ngModel"
+        required
+        (keyup.enter)="findQuote()"
+      />
+      <button class="btn btn-outline-primary btn-lg" (click)="findQuote()">
+        <span class="fas fa-search" *ngIf="!loading"></span>
+        <span class="fas fa-sync fa-spin" *ngIf="loading"></span>
+        {{ (loading ? 'Searching...' : 'Search')|appTranslate|async }}
+      </button>
+    </div>
+  </div>
+  <p *ngIf="name.invalid && name.touched" class="text-danger small text-center">{{'Enter a name to search' | appTranslate | async}}</p>
+  <div class="table-responsive row my-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{'Quote No' | appTranslate | async}}</th>
+          <th>{{'Owner Name' | appTranslate | async}}</th>
+          <th>{{'Policy No' | appTranslate | async}}</th>
+          <th>{{'Policy Code' | appTranslate | async}}</th>
+          <th>{{'Policy No Suffix' | appTranslate | async}}</th>
+          <th><!--select--></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quote of quotes">
+          <td>{{ quote.quoteNo }}</td>
+          <td>{{ quote.ownerName }}</td>
+          <td>{{ quote.policyNo }}</td>
+          <td>{{ quote.policyCode }}</td>
+          <td>{{ quote.policyNoSuffix }}</td>
+          <td>
+            <button
+              (click)="onSelectQuote(quote)"
+              class="btn btn-outline-primary btn-lg"
+            >
+              {{'Select' | appTranslate | async}}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-center" *ngIf="!quotes.length">{{'No Quotes found' | appTranslate | async}}</p>
+  </div>
+</mat-dialog-content>

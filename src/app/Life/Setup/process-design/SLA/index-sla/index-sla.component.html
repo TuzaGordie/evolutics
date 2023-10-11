@@ -1,0 +1,54 @@
+<!-- <app-form-navigation [title]="'Set Up / Process Design / Process SLA'"></app-form-navigation> -->
+<div class="container-sm">
+  <div class="row">
+    <div class="col-md-6 mx-auto align-middle">
+      <br /><br />
+      <div class="form-group mt-2">
+        <label>{{ 'Select Company ' | appTranslate | async }}</label>
+        <select
+          [(ngModel)]="params.company"
+          class="form-control form-control-lg control-bg-gray"
+        >
+          <option></option>
+          <option>1</option>
+        </select>
+      </div>
+      <br />
+      <div class="form-group mt-2">
+        <label>{{ 'Select Process Group' | appTranslate | async }}</label>
+        <select
+          [(ngModel)]="params.group"
+          class="form-control form-control-lg control-bg-gray"
+        >
+          <option></option>
+          <option>1</option>
+        </select>
+      </div>
+      <br />
+      <!-- <div class="form-group mt-2">
+          <label>{{"Select Process Code"|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+          </select>
+        </div>
+        <br> -->
+    </div>
+  </div>
+  <div class="row my-3 justify-content-center">
+    <div class="col-md-2 my-1">
+      <app-button [buttonType]="'show'" (click)="show()"></app-button>
+    </div>
+    <div class="col-md-2 my-1">
+      <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+    </div>
+    <div class="col-md-2 my-1">
+      <app-button [buttonType]="'clone'" (click)="clone()"></app-button>
+    </div>
+  </div>
+</div>
+<!-- <div class="form-group mt-2">
+  <label>{{"All Events "|appTranslate|async}}</label>
+  <input class="form-control  control-bg-gray" type="checkbox">
+</div>
+<br/> -->

@@ -1,0 +1,44 @@
+<div class="container py-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <label>{{ 'Select Company Code ' | appTranslate | async }}</label>
+      <select
+        (change)="getStatusCodeByCompanyAndCat()"
+        [(ngModel)]="company"
+        class="form-control control-bg-gray"
+      >
+        <option value=""></option>
+        <option *ngFor="let item of companies" [value]="item.code">
+          {{ item.code }} - {{ item.description }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <br />
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <label>{{ 'Select Claim Status Code ' | appTranslate | async }}</label>
+      <select [(ngModel)]="code" class="form-control control-bg-gray">
+        <option value=""></option>
+        <option *ngFor="let item of statusCodes" [value]="item.code">
+          {{ item.code }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <br />
+  <div class="row justify-content-center">
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="dark" (click)="show()" icon="show">Show</app-btn>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" (click)="clone()" icon="clone">Clone </app-btn>
+    </div>
+  </div>
+</div>

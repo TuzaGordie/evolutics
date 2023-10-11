@@ -1,0 +1,172 @@
+<div class="container">
+  <form>
+    <div class="row g-3 my-4">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label text-primary">Task Code</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label text-primary">Source</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label text-primary">Status</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row g-3 my-3">
+      <div class="col-2">
+        <div class="form-group ">
+          <label class="form-label text-primary">Default Start Date</label>
+          <input class="form-control  control-bg-gray" type="text"/>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label class="form-label text-primary">Default Start Time</label>
+          <input class="form-control  control-bg-gray" type="text"/>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <label class="form-label text-primary">Default SLA (hours:min)</label>
+        <input class="form-control  control-bg-gray" type="text" placeholder="hours"/>
+      </div>
+      <div class="col-2">
+        <label class="form-label text-primary"> &nbsp;</label>
+        <input class="form-control  control-bg-gray" type="text" placeholder="mins"/>
+      </div>
+
+      <div class="col-2">
+        <label class="form-label text-primary">Override SLA (hours:min)</label>
+        <input class="form-control  control-bg-gray" type="text" placeholder="hours"/>
+      </div>
+      <div class="col-2">
+        <label class="form-label text-primary"> &nbsp;</label>
+        <input class="form-control  control-bg-gray" type="text" placeholder="mins"/>
+      </div>
+
+
+    </div>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label text-primary">Reason for Changes to Default SLA</label>
+          <input class="form-control  control-bg-gray" type="text"/>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">Assigned to User Group</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">Assigned to User</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 my-3">
+      <div class="col-4">
+
+        <div class="form-group">
+          <label for="1e" class="form-label text-primary">Ref Category</label>
+          <select id="1e" class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-4">
+        <label for="2e" class="form-label text-primary">Ref Number</label>
+        <input id="2e" class="form-control  control-bg-gray" type="text"/>
+      </div>
+      <div class="col-4">
+        <label class="form-label text-primary">&nbsp;</label>
+        <input class="form-control  control-bg-gray" type="text" placeholder="Ref Details"/>
+      </div>
+    </div>
+    <div class="row g-3 mt-2">
+      <div class="col-10 form-group "></div>
+      <div class="col-2 form-group">
+        <app-button [buttonType]="'addCustom'" [text]="'Add Ref'"></app-button>
+      </div>
+    </div>
+    <hr>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary form-label">Description</label>
+          <textarea class="form-control  control-bg-gray"></textarea>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row my-5 justify-content-between">
+      <div class="col-2">
+        <app-button [buttonType]="'document'" (click)="call_workflow_task_document_list()"></app-button>
+
+      </div>
+
+      <div class="col-2 d-grid gap-1">
+        <app-button [buttonType]="'submit'"></app-button>
+      </div>
+    </div>
+  </form>
+</div>
+

@@ -1,0 +1,288 @@
+<loader [loading]="loading">
+
+  <div class="">
+    <form [formGroup]="viewClientForm">
+
+      <div class="row justify-content-between my-3">
+        <span class="col-auto d-lg-flex">
+          <text-case-1 [inverted]="true" [light]="true" [stacked]="false" lbl="Client Class:" val="Individual">
+          </text-case-1>
+          <span class="mx-1"></span>
+          <text-case-1 [inverted]="true" [light]="true" [stacked]="false" lbl="Client Number:"
+                       [val]="clientData?.clientNo">
+          </text-case-1>
+        </span>
+        <div class="col-auto d-lg-flex">
+          <app-button [buttonType]="'edit'" [text]="'Edit'" (click)="onEditClient()"></app-button>
+          <span class="mx-1"></span>
+          <app-button [buttonType]="'btnCustomNote'" [text]="'Note'" routerLink="../../client-desk/note"
+                      [queryParams]="{clientNo}">
+          </app-button>
+        </div>
+
+      </div>
+      
+      <hr style="margin-top: 5px;">
+
+      <div class="row">
+        <div class="col-md-2 text-center ">
+          <div>
+            <img imageUpload (extractedImg)="changePP($event)" src="{{pp||'/assets/img/avatar.png'}}"
+                 class="rounded-circle pp" width="100px" alt="{{'img Loading...'|appTranslate|async}}">
+          </div>
+
+
+          <p class="pt-2">{{clientData?.fullName}}</p>
+          <div class="pointer text-{{getStatusColour(viewClientForm.value.statusCode)}}" data-bs-toggle="modal"
+               data-bs-target="#changeStatusModal">{{viewClientForm.value.statusCode | statusName}} <i
+            class="fas fa-pen"></i>
+          </div>
+
+
+          <div class="shadow-sm py-2 px-1">
+            <div class="row ">
+              <div class="col small2 text-start text-bold text-primary">{{'Client Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end">Alive <i class="fas fa-pen"></i></div>
+            </div>
+            <div class="row  ">
+              <div class="col small2 text-start text-bold text-primary">{{'Agent Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end"> Active <i class="fas fa-pen"></i></div>
+            </div>
+            <div class="row ">
+              <div class="col small2 text-start text-bold text-primary">{{'Provider Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end"> Active <i class="fas fa-pen"></i></div>
+            </div>
+            <div class="row ">
+              <div class="col small2 text-start text-bold text-primary">{{'User Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end"> Active <i class="fas fa-pen"></i></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col-md-3 col-xxl-2 mb-1" *ngFor="let item of lbls">
+              <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [action]="item.action"
+                                      [form]="viewClientForm" [label]="item.label" [name]="item.key" [coloredLbl]="true"
+                                      [coloredVal]="false"
+                                      [type]="item.inputType" [showEditing]="item.editable" [hint]="item.hint"
+                                      [light]="true"
+                                      [value]="item.value">
+              </app-editable-text-case>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-2">
+      <div class="row justify-content-center my-4">
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'"
+                      [routerLink]="['../../client-desk/endorsements/']"
+                      [queryParams]="{clientNo:clientData?.clientNo}">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'"
+                      [routerLink]="['../../client-desk/documents/']" [queryParams]="{clientNo:clientData?.clientNo}">
+          </app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Web log in'"
+                      [routerLink]="['../../client-desk/web-login/' ]" [queryParams]="{clientNo:clientData?.clientNo}">
+          </app-button>
+        </div>
+        <div class="col-auto">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Underwriting Events'"
+                      [routerLink]="['../../client-desk/underwritingevents/',clientData?.clientNo]"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['../../client-desk/workflows/' ]"
+                      [queryParams]="{clientNo:clientData?.clientNo}" text="Workflows"></app-button>
+
+        </div>
+      </div>
+      <div class="  d-flex justify-content-around">
+        <app-btn-lg text="No of Policies" [value]="policyLength || 0"
+                    routerLink="../../client-desk/policies/{{clientData?.clientNo}}/{{busline}}"></app-btn-lg>
+        <app-btn-lg text="No Of Relationships" [value]="relationshipLength || 0"
+                    [routerLink]="['../../client-desk/relationships/',clientData?.clientNo]"></app-btn-lg>
+        <app-btn-lg text="Other Business" [value]="businessLength || 0"
+                    [routerLink]="['../../client-desk/business/',clientData?.clientNo,busline]"></app-btn-lg>
+        <app-btn-lg text="Pending Quotes" [value]="quoteList?.length||0"
+                    [routerLink]="['../../client-desk/pendingquotes/',clientData?.clientNo,busline]"></app-btn-lg>
+        <app-btn-lg text="Pending Payments" [value]="paymentLength || 0"
+                    [routerLink]="['../../client-desk/pendingpayments/',clientData?.clientNo,busline]"></app-btn-lg>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Change Status'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row px-3">
+            <label for="" class="form-label text-primary">{{'New Status'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [value]="viewClientForm.value.statusCode"
+                    (change)="onChangeClientStatus($event)">
+              <option value=""></option>
+              <option *ngFor="let code of statusCodesList" [value]="code.code">{{code.title | appTranslate |async}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="employerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">{{'Employer'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th scope="col">{{'Employer'|appTranslate|async}}</th>
+              <th scope="col">{{'Employment Start Date'|appTranslate|async}}</th>
+              <th scope="col">{{'Job Title'|appTranslate|async}}</th>
+              <th scope="col">{{'Cadre'|appTranslate|async}}</th>
+              <th scope="col">{{'Staff No'|appTranslate|async}}</th>
+              <th scope="col">{{'Annual Salary Band'|appTranslate|async}}</th>
+              <th scope="col">{{'Occupation'|appTranslate|async}}</th>
+              <th scope="col">{{'Active'|appTranslate|async}}</th>
+              <th scope="col">{{'Edit'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let employment of clientEmploymentForm.controls">
+              <tr [formGroup]="$any(employment)">
+                <th>
+                  <input type="text" formControlName="employer" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'employer') && 'border border-danger'">
+                </th>
+                <td>
+                  <input type="text" formControlName="employmentDate" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'employmentDate') && 'border border-danger'">
+                </td>
+                <td>
+                  <input type="text" formControlName="jobTitle" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'jobTitle') && 'border border-danger'">
+                </td>
+                <td>
+                  <input type="text" formControlName="cadre" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'cadre') && 'border border-danger'">
+                </td>
+                <td>
+                  <input type="text" formControlName="staffNo" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'staffNo') && 'border border-danger'">
+                </td>
+                <td>
+                  <input type="text" formControlName="incomeBand" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'incomeBand') && 'border border-danger'">
+                </td>
+                <td>
+                  <input type="text" formControlName="occupation" class="form-control"
+                         [readonly]="editEmploymentStatus[employment.value.id] != 'EDITING'"
+                         [ngClass]="isFieldInvalid(employment, 'occupation') && 'border border-danger'">
+                </td>
+                <td>
+                  <select formControlName="active" class="form-control"
+                          [attr.disabled]="editEmploymentStatus[employment.value.id] != 'EDITING' ? 'disabled' : null"
+                          [ngClass]="isFieldInvalid(employment, 'active') && 'border border-danger'">
+                    <option [value]="true">{{'Yes'|appTranslate|async}}</option>
+                    <option [value]="false">{{'No'|appTranslate|async}}</option>
+                  </select>
+                </td>
+                <td class="position-relative">
+                  <app-button *ngIf="editEmploymentStatus[employment.value.id] == 'VIEW'" buttonType="edit"
+                              (click)="editEmploymentStatus[employment.value.id] = 'EDITING'"></app-button>
+                  <app-button *ngIf="editEmploymentStatus[employment.value.id] == 'EDITING'" buttonType="custSave"
+                              (click)="editEmployment(employment)"></app-button>
+                  <div *ngIf="editEmploymentStatus[employment.value.id] == 'PENDING'"
+                       class="position-absolute top-50 start-50 translate-middle">
+                    <div class="fa fa-refresh fa-spin"></div>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="showNewEmploymentForm" [formGroup]="newEmploymentForm">
+              <th>
+                <input type="text" formControlName="employer" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'employer') && 'border border-danger'">
+              </th>
+              <td>
+                <input type="text" formControlName="employmentDate" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'employmentDate') && 'border border-danger'">
+              </td>
+              <td>
+                <input type="text" formControlName="jobTitle" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'jobTitle') && 'border border-danger'">
+              </td>
+              <td>
+                <input type="text" formControlName="cadre" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'cadre') && 'border border-danger'">
+              </td>
+              <td>
+                <input type="text" formControlName="staffNo" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'staffNo') && 'border border-danger'">
+              </td>
+              <td>
+                <input type="text" formControlName="incomeBand" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'incomeBand') && 'border border-danger'">
+              </td>
+              <td>
+                <input type="text" formControlName="occupation" class="form-control"
+                       [ngClass]="isFieldInvalid(newEmploymentForm, 'occupation') && 'border border-danger'">
+              </td>
+              <td>
+                <select formControlName="active" class="form-control"
+                        [ngClass]="isFieldInvalid(newEmploymentForm, 'active') && 'border border-danger'">
+                  <option [value]="true">{{'Yes'|appTranslate|async}}</option>
+                  <option [value]="false">{{'No'|appTranslate|async}}</option>
+                </select>
+              </td>
+              <td class="position-relative">
+                <app-button *ngIf="!isCreatingEmployment" buttonType="custSave" (click)="createEmployment()">
+                </app-button>
+                <div *ngIf="isCreatingEmployment" class="position-absolute top-50 start-50 translate-middle">
+                  <div class="fa fa-refresh fa-spin"></div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <app-button buttonType="add" (click)="showNewEmploymentForm = true"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Close'|appTranslate|async}}</button>
+          <button type="button" class="btn btn-primary">{{'Understood'|appTranslate|async}}</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</loader>

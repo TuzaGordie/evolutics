@@ -1,0 +1,112 @@
+<!-- <app-form-navigation [title]="'Set Up / Process Design / Process SLA'"></app-form-navigation> -->
+
+<loader [loading]="loading">
+  <div class="container">
+    <form #f="ngForm">
+      <p class="mb-3 pb-5">
+        <b>{{ 'Process group' | appTranslate | async }}:</b> xxxxxx
+        &nbsp;&nbsp;&nbsp;&nbsp;<b
+          >{{ 'Process Code' | appTranslate | async }}:</b
+        >
+        xxxxxx &nbsp;&nbsp;&nbsp;&nbsp;
+        <b>{{ 'Process Description' | appTranslate | async }}:</b> xxxxxx
+        &nbsp;&nbsp;&nbsp;&nbsp;
+      </p>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">{{ 'Process Node' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Description' | appTranslate | async }}</th>
+              <th scope="col" width="10%">
+                {{ 'SLA (Mins)' | appTranslate | async }}
+              </th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="form-group">
+                  <input class="form-control control-bg-gray" type="text" />
+                </div>
+              </td>
+
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control control-bg-gray" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control control-bg-gray" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <app-button
+                    [disabled]="isShow"
+                    [buttonType]="'addCustom'"
+                  ></app-button>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <app-button
+                    [disabled]="isShow"
+                    [buttonType]="'delete'"
+                  ></app-button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row justify-content-end mb-3">
+        <div class="col-2">
+          <app-button [disabled]="isShow" [buttonType]="'add'"></app-button>
+        </div>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-2">
+          <label class="form-label text-primary">{{
+            'Total SLA Process Code' | appTranslate | async
+          }}</label>
+        </div>
+        <div class="col-1">
+          <input
+            class="form-control control-bg-gray"
+            type="text"
+            placeholder="days"
+          />
+        </div>
+        <div class="col-1">
+          <input
+            class="form-control control-bg-gray"
+            type="text"
+            placeholder="hours"
+          />
+        </div>
+        <div class="col-1">
+          <input
+            class="form-control control-bg-gray"
+            type="text"
+            placeholder="mins"
+          />
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <app-button [buttonType]="'save'"></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <br /><br /><br />
+</loader>

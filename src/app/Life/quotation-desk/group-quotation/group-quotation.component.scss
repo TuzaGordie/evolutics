@@ -1,0 +1,22 @@
+@mixin check(){
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 1em;
+  height: 100%;
+}
+
+.validating{
+  @include check();
+}
+
+.checkmark{
+  @include check();
+  color: green;
+}
+.uncheckmark{
+  @include check();
+  color: red;
+}

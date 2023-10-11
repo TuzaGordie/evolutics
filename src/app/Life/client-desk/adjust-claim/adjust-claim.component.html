@@ -1,0 +1,70 @@
+<div class="p-3">
+  <h2 mat-dialog-title>{{'Adjust Claim'|appTranslate|async}}</h2>
+  <mat-dialog-content>
+    <div>
+      <p>{{'Claim No'|appTranslate|async}}: <span class="text-primary">5777*3</span></p>
+      <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">Death</span></p>
+    </div>
+    <form>
+      <div class="row my-3">
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="currentClaimStatus">{{'Current Claim Status'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="lastAdjustmentMade">{{'Last Adjustment Made'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="lastAdjustmentDate">{{'Last Adjustment Date'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="currentEstimate">{{'Current Estimate'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="newAdjustment">{{'New Adjustment'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="Revised Claim Amount">{{'Revised Claim Amount'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="adjustmentReason">{{'Adjustment Reason'|appTranslate|async}}</label>
+          <select class="inputform">
+            <option value=""></option>
+          </select>
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="final">{{'Final'|appTranslate|async}}</label>
+          <input type="checkbox" class="form-control control-bg-gray align-self-start">
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="adjusterProviderNo">{{"Adjuster's Provider No"|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="AdjusterName">{{'Adjuster Name'|appTranslate|async}}</label>
+          <input type="text" class="inputform">
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-md-3 d-flex flex-column justify-content-between">
+          <label for="narration">{{'Narration'|appTranslate|async}}</label>
+        </div>
+        <div class="col-md-9">
+          <textarea rows="4" class="inputform"></textarea>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end my-3">
+        <button class="py-2 px-4 btn btn-primary" mat-dialog-close><i class="fa fa-save"></i>{{' Save'|appTranslate|async}}</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>

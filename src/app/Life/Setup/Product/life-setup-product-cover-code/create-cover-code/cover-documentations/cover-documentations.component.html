@@ -1,0 +1,162 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Documentation'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col">
+      <div class="row">
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Event Type'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Event'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Language'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Action'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Document Cat'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Document Code'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Condition'|appTranslate|async}}</label>
+          </div>
+        </div>
+            </div>
+      </div>
+    <div class="col-2" *ngIf="!coverService.isShow"></div>
+  </div>
+  <div class="row g-3" *ngFor="let item of createCoverCode.documentations; let i = index">
+    <ng-container>
+      <div class="col">
+      <div class="row">
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.eventType"
+              #type name="type_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of eventTypeList" [value]="ot.code" [selected]="ot.code == item.eventType">
+                {{ot.code}} - {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" 
+              class="form-control  control-bg-gray" [(ngModel)]="item.event" name="event_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of findProductService.getEventListByGroup|functionCaller1:type.value|async" [value]="ot.code">{{ot.code}} -
+                {{ot.description}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.language"
+              name="language_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of languagesList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.action"
+              name="action_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of actionsList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" (change)="getDocCodesByCat(i)" class="form-control  control-bg-gray"
+              [(ngModel)]="item.documentCategory" name="documentCategory_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of documentationCategoryList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.documentCode"
+              name="documentCode_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of docCodeList[i]" [value]="ot.code" [selected]="ot.code == item.documentCode">
+                {{ot.code}} - {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.condition"
+              name="condi_{{item.rowId}}">
+              <option></option>
+              <option *ngFor="let ot of conditionsList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="col-1" *ngIf="!coverService.isShow">
+        <div class="form-group mt-2">
+          <!-- <label class=" text-primary">&nbsp;<br /></label> -->
+
+          <app-button (click)="removeDocumentation(i)" [buttonType]="'delete'">
+          </app-button>
+        </div>
+      </div>
+      <div class="col-1" *ngIf="!coverService.isShow">
+        <div class="form-group mt-2">
+
+          <app-button (click)="addNewDocumentationRow(i+1)" [buttonType]="'addCustom'">
+          </app-button>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+  <div class="row g-3" *ngIf="!coverService.isShow">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveDocumentation()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

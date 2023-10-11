@@ -1,0 +1,34 @@
+<app-form-navigation [title] = "'View Client'"></app-form-navigation> 
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h1 class="my-5">Web Log In</h1>
+        <p class="py-3"><b>Client Name:</b> <span class="px-3">{{findClientService.clientInfo?.FIRST_NAME}}</span></p>
+            <table class="table">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">Web ID</th>
+                    <th scope="col">Account Name</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of webLoginList">
+                    <th scope="row">{{item.WEB_ID}}</th>
+                    <td>{{item.FIRSTNAME}}</td>
+                    <td>{{item.ACTIVE}}</td>
+                  </tr>
+                </tbody>
+              </table>
+    
+    </div>
+
+    <div class="col-md-12 mx-auto mt-5">
+        <button type="button"  class="btn-ir p-0 px-4 btn-radius" style="float: right;">
+            <span class="mx-3 my-auto">New Web Account</span></button>
+    </div>
+    </div>
+
+        </div>
+
+    

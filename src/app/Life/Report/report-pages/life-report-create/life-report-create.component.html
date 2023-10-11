@@ -1,0 +1,319 @@
+<loader [loading]="loading" class="vh-80">
+  <form [formGroup]="form" (submit)="generate()">
+    <div class=" ">
+      <div class="d-lg-flex justify-content-between align-items-center mb-2" *ngIf="isShow">
+        <div class="col-lg-auto">
+          <text-case-1 [val]="summary" lbl="Number of rows fetched" [stacked]="false" *ngIf="summary"></text-case-1>
+        </div>
+        <div class="row justify-content-end ">
+          <ng-container>
+            <div class="col-lg-auto ">
+              <app-btn type="secondary" icon="edit" (mclick)="edit()">Edit Report</app-btn>
+            </div>
+            <div class="col-lg-auto ">
+              <app-btn type="secondary" icon="clone" (mclick)="clone()">Clone Report</app-btn>
+            </div>
+            <div class="col-lg-auto ">
+              <app-btn type="secondary" icon="show" [valid]="reportFormData?.generateReport" (mclick)="screenView()">Screen View</app-btn>
+            </div>
+            <div class="col-lg-auto ">
+              <app-btn type="secondary" icon="show" [valid]="reportFormData?.generateReport" (mclick)="visualize()">Visualize Data</app-btn>
+            </div>
+            <div class="col-lg-auto ">
+              <app-btn type="primary" icon="download" [valid]="reportFormData?.generateReport" (mclick)="onDownload($event)">Download </app-btn>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="row align-items-end">
+        <div class="col-lg-4 my-2 my-lg-0" *ngIf="reportFormData?.code">
+          <app-input-basic label="Report Code" type="viewer" [form]="form" name="code" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-lg-4 my-2 my-lg-0">
+          <app-input-basic label="Report Group" type="select"
+            [options]="frS.getCodes|httpListCaller1:'REPORT_GROUP'|async" labelType="ct" valueField="code" [form]="form"
+            name="reportGroup" [stacked]="true" [showValidationIcon]="false" [showValidation]="group.invalid" #group>
+          </app-input-basic>
+        </div>
+        <div class="col-lg-4 my-2 my-lg-0">
+          <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true"
+            [showValidationIcon]="false" [showValidation]="desc.invalid" #desc>
+          </app-input-basic>
+        </div>
+        <div class="col-lg-4 my-2 my-lg-0">
+          <app-input-basic label="Table Group" type="select" [form]="form" name="tableGroup" [stacked]="true"
+            [options]="frS.getTableGroupList|httpListCaller|async" [showValidationIcon]="false"
+            [showValidation]="tableGroup.invalid" #tableGroup>
+          </app-input-basic>
+        </div>
+        <div class="col-lg-4 my-2 my-lg-0">
+          <app-input-basic label="Primary Table" type="select" [form]="form" name="primaryTable" [stacked]="true"
+            [options]="frS.getPrimaryTableList|httpListCaller1:tableGroup?.value|async"
+            [showValidationIcon]="false"
+            [showValidation]="primaryTable.invalid" #primaryTable>
+          </app-input-basic>
+        </div>
+        <div class="col-lg-4 my-2 my-lg-0">
+          <app-input-basic label="Report Header" type="text" [form]="form" name="reportHeader" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <!-- <div class="col-lg-4 my-2">
+          <app-input-basic [mini]="true" label="Do not repeat multiple fieldnames" type="checkbox" [form]="form"
+            name="repeatMultipleFieldNames" [stacked]="false">
+          </app-input-basic>
+        </div> -->
+      </div>
+
+
+
+      <!-- FILTERS -->
+      <div class="" *ngIf="filters?.controls?.length">
+        <hr>
+        <h6 class="mb-0  mt-3">{{'Filter Criteria'|appTranslate|async}}</h6>
+      </div>
+      <ng-container formArrayName="filters">
+        <ng-container *ngFor="let subForm of filters.controls; let k = index; let isLast= last" [formGroupName]="k">
+
+          <div class="row align-items-end">
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Type" type="select" [form]="subForm" name="fieldType" [stacked]="true"
+                valueField="code" [options]="fieldTypes" labelType="ct" #fieldType>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Name" type="select" [form]="subForm" name="fieldName" [stacked]="true"
+                valueField="columnName" [options]="fieldNames"
+                (mchange)="patchFilterDataType(  fieldName?.value,subForm)"
+                [contextData]="getFieldNameType|functionCaller2:fieldNames:fieldName?.value"
+                labelField="columnName" #fieldName>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Operator" valueField="code" type="select" [form]="subForm" name="operator"
+                [stacked]="true" [options]="filterOperators" labelType="ct" #operator>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Value" [type]="valueTyper|functionCaller1:fieldName?.contextData"
+                [form]="subForm" name="value" [stacked]="true" #value>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Connector" type="select" [options]="filterConnectors" labelType="ct"
+                 [showValidation]="connector.invalid" [showEmptyOption]="false" valueField="code"
+                [required]="k>0" [form]="subForm" name="connector" [stacked]="true" (mchange)="checkConnector(k)"
+                #connector>
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto d-flex"   *ngIf="!isShow">
+              <div class="me-2">
+                <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeFilterRow(k)"
+                [valid]="filters?.length>1">
+                </app-btn>
+              </div>
+              <app-btn group="add" [iconBtn]="true" (mclick)="addNewFilterRow(null,k+1)"  > </app-btn>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <!--// -->
+
+      <!-- SORTS -->
+      <div class="" *ngIf="sorts?.controls?.length">
+        <hr>
+        <h6 class="mb-0 mt-3 ">{{'Sort Criteria'|appTranslate|async}}</h6>
+      </div>
+      <ng-container formArrayName="sorts">
+        <ng-container *ngFor="let subForm of sorts.controls; let k = index;let isLast= last" [formGroupName]="k">
+          <div class="row align-items-end">
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Type" type="select" [form]="subForm" name="fieldType" [stacked]="true"
+                valueField="code" [options]="fieldTypes" labelType="ct" #fieldType>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Name" type="select" [form]="subForm" name="fieldName" [stacked]="true"
+                [options]="fieldNames" labelField="columnName" valueField="columnName" #fieldName>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Sort By" type="select" [form]="subForm" name="sortBy" [stacked]="true"
+                valueField="code" [options]="sortBys" labelType="ct" #sortBy>
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto d-flex">
+              <div class="me-2">
+                <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeSortRow(k)"
+                  *ngIf="!isShow" [valid]="sorts?.length>1">
+                </app-btn>
+              </div>
+              <app-btn group="add" [iconBtn]="true" (mclick)="addNewSortsRow(null,k+1)" *ngIf="!isShow"> </app-btn>
+
+            </div>
+            <div class="col-lg my-2 my-lg-0"></div>
+            <div class="col-lg my-2 my-lg-0"></div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <!--// -->
+
+      <!-- OUTPUTS -->
+      <div class="" *ngIf="outputs?.controls?.length">
+        <hr>
+        <h6 class="mb-0 mt-3 ">{{'Output Fields'|appTranslate|async}}</h6>
+        <app-input-ngmodel *ngIf="!isShow" [disabled]="!primaryTable?.value" [mini]="true"
+          (mchange)="selectAllOutputFields($event)" [light]="true" type="checkbox" label="All Fields">
+        </app-input-ngmodel>
+      </div>
+      <ng-container formArrayName="outputs">
+        <ng-container *ngFor="let subForm of outputs.controls; let k = index; let isLast= last" [formGroupName]="k">
+          <div class="row align-items-end">
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Type" type="select" [form]="subForm" name="fieldType" [stacked]="true"
+                valueField="code" [options]="fieldTypes" labelType="ct" #fieldType>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Name" type="select" [form]="subForm" name="fieldName" [stacked]="true"
+                valueField="columnName" [options]="fieldNames" labelField="columnName" #fieldName>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Format" type="select" [form]="subForm" name="format" [stacked]="true"
+                valueField="code" [options]="outputFieldFormats" labelType="ct" #format>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Truncate" type="number" [form]="subForm" name="truncate" [stacked]="true"
+                #truncate>
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto d-flex" *ngIf="!isShow">
+              <div class="d-flex mt-2">
+                <div class="me-2">
+                  <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeOutputRow(k)"
+                    [valid]="outputs?.length>1">
+                  </app-btn>
+                </div>
+                <app-btn group="add" [iconBtn]="true" (mclick)="addNewOutputsRow(null,k+1)"  ></app-btn>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <!--// -->
+
+      <!-- ADJOINING TABLES -->
+      <div class="" *ngIf="joiningTables?.controls?.length">
+        <hr>
+        <h6 class="mb-0 mt-3 ">{{'Additional Field From Adjoining Table'|appTranslate|async}}</h6>
+      </div>
+      <ng-container formArrayName="joiningTables">
+        <ng-container *ngFor="let subForm of joiningTables.controls; let k = index; let isLast= last"
+          [formGroupName]="k">
+          <div class="row align-items-end">
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Table Group" type="select" [form]="subForm" name="tableGroup" [stacked]="true"
+                [options]="frS.getTableGroupList|httpListCaller|async" #tableGroup2>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Table Name" type="select" [form]="subForm" name="tableName" [stacked]="true"
+                [options]="frS.getSecondaryTableName|httpListCaller1:tableGroup2.value|async" #tableName>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Table Link" type="select" [form]="subForm" name="tableLink" [stacked]="true"
+                [options]="frS.getSecondaryTableLink|httpListCaller2:primaryTable?.value:tableName?.value|async"
+                #tableLink>
+              </app-input-basic>
+            </div>
+            <div class="col-lg my-2 my-lg-0">
+              <app-input-basic label="Field Name" type="select" [form]="subForm" name="fieldName" [stacked]="true"
+                [options]="frS.getFieldNames|httpListCaller1:tableName?.value|async" valueField="columnName"
+                labelField="columnName" #fieldName>
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto d-flex" *ngIf="!isShow ">
+              <div class="me-2">
+                <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeJoiningTableRow(k)"
+                  [valid]="joiningTables?.length>1">
+                </app-btn>
+              </div>
+              <app-btn group="add" [iconBtn]="true" (mclick)="addNewJoiningTableRow(null,k+1)" >
+              </app-btn>
+
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <!--// -->
+
+      <hr>
+      <div class="row align-items-end">
+        <div class="col-lg-4 my-2 my-lg-0">
+          <app-input-basic label="Report Created By" type="viewer" [form]="form" name="createdBy" [stacked]="true"
+            [readonly]="true" #createdBy>
+          </app-input-basic>
+        </div>
+        <ng-container formArrayName="userGroup">
+          <ng-container *ngFor="let subForm of userGroup?.controls; let k = index " [formGroupName]="k">
+            <div class="col-lg-4 my-2 my-lg-0">
+              <div class="row d-flex align-items-end">
+                <div class="col">
+                  <app-input-basic label="User Groups Permitted" type="select" [form]="subForm" valueField="group"
+                    [optionFormatter]="userGroupLabelFormatter" name="group" [stacked]="true" [options]="userGroups">
+                  </app-input-basic>
+                </div>
+                <div class="col-auto d-flex" *ngIf="!isShow">
+                  <app-btn icon="delete" mclass="ms-2" [iconBtn]="true" type="danger-outline"
+                    [disabled]="userGroup?.length==1" (mclick)="removeUserGroup(k)"></app-btn>
+                  <span class="mx-1"></span>
+                  <app-btn group="add" [iconBtn]="true" (mclick)="addNewUserGroupRow(null,k+1)">
+                  </app-btn>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container formArrayName="webuserGroup">
+          <ng-container *ngFor="let subform of webuserGroup?.controls; let k = index " [formGroupName]="k">
+            <div class="col-lg-4 my-2 my-lg-0">
+              <div class="row d-flex align-items-end">
+                <div class="col">
+                  <app-input-basic label="Web User Groups Permitted" type="select" [form]="subform" valueField="group"
+                    [optionFormatter]="userGroupLabelFormatter" name="group" [stacked]="true" [options]="[]">
+                  </app-input-basic>
+                </div>
+                <div class="col-auto d-flex" *ngIf="!isShow">
+                  <app-btn icon="delete" mclass="ms-2" [iconBtn]="true" type="danger-outline"
+                    [disabled]="webuserGroup?.length==1" (mclick)="removeWebuserGroup(k)"></app-btn>
+                  <span class="mx-1"></span>
+                  <app-btn group="add" [iconBtn]="true" (mclick)="addNewWebuserGroupRow(null,k+1)">
+                  </app-btn>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="row d-flex justify-content-end mt-5 "   >
+        <ng-container *ngIf="!isShow">
+          <div class="col-lg-auto">
+            <app-btn type="secondary" icon="download" [valid]="form?.valid" [form]="form" (mclick)="run()">Run Report</app-btn>
+          </div>
+          <div class="col-lg-auto">
+            <app-btn type="secondary" icon="save" [valid]="form?.valid" [form]="form" (mclick)="save()">Save Report</app-btn>
+          </div>
+          <div class="col-lg-auto">
+            <app-btn type="primary" icon="save" [valid]="form?.valid" [form]="form" (mclick)="generate()">
+              Save & Run Report</app-btn>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </form>
+</loader>

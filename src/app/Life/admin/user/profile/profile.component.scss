@@ -1,0 +1,55 @@
+
+label{
+    color: #545454;
+    font-size: 22px;
+    font-weight: normal;
+}
+.inputform{
+    border-radius: 25px;
+}
+
+p{
+    width: 85px;
+    height: 30px;
+}
+.colorselect{
+    width: 30px;
+    position: absolute;
+    right: 0px;
+    top: -9px;
+    height: 32px;
+    border-radius: 0px !important;
+}
+.input {
+    height: 24px;
+    background-color: #F4F4F4;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  [type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+    display: none;
+    }
+    
+    [type="file"] + label {
+    width: 100%;
+    color: #514ef5;
+    background:#514ef52a;
+    border: 1px solid #514ef5;
+    padding: 10px 0;
+    text-align: center;
+    display: inline-block;
+    font-weight: 500;
+    outline: none;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  
+  [type="file"] + label:hover {
+      background:#514ef5;
+      color:#FFF;
+  }

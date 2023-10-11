@@ -1,0 +1,160 @@
+<div class="container">
+  <loader [loading]="loading">
+
+    <form [formGroup]="workflowTaskForm">
+      <div class="row gx-3 ">
+        <div class="col-md">
+          <app-autocomplete label="Task Code" [form]="workflowTaskForm" name="code" [stacked]="true"
+            (mchange)="getValues()" [showValidation]="codeTag.invalid" [options]="taskcode" labelType="cd"
+            valueField="code" #codeTag>
+          </app-autocomplete>
+          <app-validation-message [input]="codeTag"></app-validation-message>
+        </div>
+        <div class="col-md">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Source'|appTranslate|async}}</label>
+            <select formControlName="source" class="form-control  control-bg-gray" required>
+              <option [value]="null">{{'Select source'|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of source">{{item.code}} - {{item.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Status'|appTranslate|async}}</label>
+            <select formControlName="status" class="form-control  control-bg-gray" required>
+              <option [value]="null">{{'Select staus'|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of status">{{item.code}} - {{item.title}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-3 my-3">
+        <div class="col-md-4">
+          <div class="form-group ">
+            <label class=" text-primary">{{'Default Start Date'|appTranslate|async}}</label>
+            <input class="form-control  control-bg-gray" formControlName="startOn" type="datetime-local" #startOn />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class=" text-primary">{{'Default SLA (days:hours:min)'|appTranslate|async}}</label>
+          <div class="d-flex">
+            <app-day-hour-min-input [form]="workflowTaskForm" type="viewer" [stacked]="true" name="originalSla">
+            </app-day-hour-min-input>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label class=" text-primary">{{'Override SLA (days:hours:min)'|appTranslate|async}}</label>
+          <div class="d-flex">
+            <app-day-hour-min-input [form]="workflowTaskForm" [stacked]="true" name="revisedSla">
+            </app-day-hour-min-input>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div class="row g-3">
+        <div class="col-md">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Reason for Changes to Default SLA'|appTranslate|async}}</label>
+            <input class="form-control  control-bg-gray" formControlName="errorReason" type="text" />
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row g-3">
+        <div class="col-md mt-2">
+          <ng-container *ngIf="taskcodeUserGroup; else elseuserGroupTag">
+            <app-input-basic label="Assign to User Group" type="viewer" [form]="workflowTaskForm" name="assignedToGroup"
+              [stacked]="true" #userGroupTag>
+            </app-input-basic>
+            <app-validation-message [control]="userGroupTag.control"></app-validation-message>
+          </ng-container>
+          <ng-template #elseuserGroupTag>
+            <app-autocomplete label="Assign to User Group" [form]="workflowTaskForm" name="assignedToGroup"
+              [stacked]="true" [showValidation]="userGroupTag.invalid" [readonly]="readonlyassignedToGroup"
+              [disabled]="workflowTaskForm.value?.assignedTo" [options]="usersGroups" labelField="group"
+              valueField="group" #userGroupTag>
+            </app-autocomplete>
+            <app-validation-message [control]="userGroupTag.control"></app-validation-message>
+          </ng-template>
+        </div>
+        <div class="col-md mt-2">
+          <ng-container *ngIf="taskcodeUser; else elseuserTag">
+            <app-input-basic label="Assign to User" type="viewer" [form]="workflowTaskForm" name="assignedTo"
+              [stacked]="true" #userTag>
+            </app-input-basic>
+            <app-validation-message [control]="userTag.control"></app-validation-message>
+          </ng-container>
+          <ng-template #elseuserTag>
+            <app-autocomplete label="Assign to User" [form]="workflowTaskForm"
+              [disabled]="workflowTaskForm.value?.assignedToGroup" name="assignedTo" [stacked]="true"
+              [showValidation]="userTag.invalid" [options]="users" labelType="uf" valueField="userName"
+              [readonly]="readonlyassignedTo" #userTag>
+            </app-autocomplete>
+            <app-validation-message [control]="userTag.control"></app-validation-message>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="row g-3 ">
+        <!-- *ngFor="let i of refCounter()" -->
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="1e" class=" text-primary">{{'Ref Category'|appTranslate|async}}</label>
+            <select formControlName="refCat" class="form-control  control-bg-gray" required (change)="setRefNumber()">
+              <option [value]="null">{{'Select Ref Category'|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of reflist">{{item.code}} - {{item.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="2e" class=" text-primary">{{'Ref Number'|appTranslate|async}}</label>
+          <input id="2e" class="form-control  control-bg-gray" formControlName="refNo" (change)="setRefNumber()"
+            type="text" />
+        </div>
+        <div class="col-md-4">
+          <label class=" text-primary">&nbsp;</label>
+          <input class="form-control  control-bg-gray" type="text" formControlName="refDetails"
+            placeholder="Ref Details" readOnly />
+        </div>
+      </div>
+      <!-- <div class="row g-3 mt-2">
+      <div class="col-10 form-group "></div>
+      <div class="col-2 form-group">
+        <app-button [buttonType]="'addCustom'" (click)="incRef()" [text]="'Add Ref'"></app-button>
+      </div>
+    </div> -->
+      <hr>
+      <div class="row g-3">
+        <div class="col-md">
+          <div class="form-group mt-2">
+            <label class="text-primary">{{'Description'|appTranslate|async}}</label>
+            <textarea class="form-control  control-bg-gray" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row my-5 justify-content-between">
+        <div class="col-md-auto">
+          <app-btn [type]="workflowService.documentList?.value?'primary':'secondary'" icon="upload"
+            (mclick)="call_workflow_task_document_list()">Add Document
+          </app-btn>
+        </div>
+
+        <div class="col-md-auto d-grid gap-1">
+          <app-btn type="secondary" icon="save" [form]="workflowTaskForm" (mclick)="onSubmit()">Submit
+          </app-btn>
+        </div>
+      </div>
+    </form>
+
+  </loader>
+</div>

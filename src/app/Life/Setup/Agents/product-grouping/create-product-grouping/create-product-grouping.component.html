@@ -1,0 +1,67 @@
+<!-- <app-form-navigation [title]="'Set Up / Agent / Product Grouping   '"></app-form-navigation> -->
+
+<div class="container">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+      <label>{{"Agent Product Group"|appTranslate|async}}</label>
+      <input
+                class="form-control form-control-sm control-bg-gray"
+                type="text"
+              />
+
+    </div>
+
+  </div><br>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-8">
+      <label>{{"Description"|appTranslate|async}}</label>
+      <input
+                class="form-control form-control-sm control-bg-gray"
+                type="text"
+              />
+
+    </div>
+
+  </div>
+<br>
+  <div class="row">
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-6">
+      <label>{{"Products"|appTranslate|async}}</label>
+      <select class="form-control form-control-sm control-bg-gray">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+    </div>
+    
+      <div class="col-2  ">
+        
+        <label>&nbsp;</label>
+        <app-button [buttonType]="'add'"> </app-button>
+      </div>
+
+ 
+  </div>
+  <br />
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end">
+      <app-button [buttonType]="'save'"> </app-button>
+    </div>
+  </div>
+</div>

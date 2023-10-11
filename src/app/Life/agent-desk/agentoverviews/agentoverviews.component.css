@@ -1,0 +1,145 @@
+.spacing{
+    PADDING:30PX;
+    min-height:100%;
+    max-width: 100%;
+    margin:auto;
+    background-color: white;
+    border-bottom: none;
+    
+}
+.dosome{
+    display: flex; align-items: flex-end; justify-content: space-between;
+}
+.title{
+    padding: 0px;
+    padding-left: 30px; padding-top:10px;
+    margin: 0px;
+    background-color: white;
+    border-top-right-radius: 20px;
+}
+.restrict-height{
+
+    background-color: white;
+    
+ 
+}
+.largetext{
+    font-size: 1.5em;
+    width: 60%;
+    padding-bottom: 20px;;
+}
+.minh{
+    background-color: white;
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 70vh;
+    box-shadow: -2px 25px 30px 1px rgb(225, 225, 225);
+    
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.sec{
+    height: auto;
+    width:auto
+}
+.wos{
+    min-height: calc(0.4 * 100vh);
+    
+}
+.op{
+    opacity: 0.1; background-color: #000000;
+}
+.opabsolute{
+    background-color: transparent; display: flex;
+    justify-content: center; align-items: center;
+    width: 100vw; height: 100vh;
+}
+.close{
+    position: absolute;
+    top:10px;
+    right: 10px; width: 25px; height: 25px; background-color: black; color: white;
+    border-radius: 50%;
+}
+.bgcol{
+    background-color: #f0f0f0;
+    min-height: 70VH;
+}
+body{
+    background-color: #f0f0f0;
+
+}
+.isale{
+    max-width: 90%; margin: auto; max-height:90%;
+}
+.mainchart{
+    width:70%; margin: auto; height: 70vh; background-color: white; position: relative; 
+    border-bottom-left-radius: 20px; border-top-right-radius: 20px;  
+    box-shadow: -2px 25px 30px 1px rgb(225, 225, 225);
+}
+.close{
+    display: flex; justify-content: center; align-items: center;
+}
+.table thead tr{
+    background-color: #3335a4 !important
+
+}
+.table thead tr th{
+    color:white;
+}
+.table thead{
+    background-color: transparent !important;
+}
+.table thead tr th:first-child{
+    border-bottom-left-radius: 10px;
+}
+.table thead tr th:last-child{
+    border-top-right-radius: 10px;
+}
+.table thead{
+border-radius: 0 10px;
+}
+.toplayer{
+align-items: center;
+margin: 10px 25px
+}
+.flexBet{
+    display: flex; justify-content: space-between;
+}
+.rightflex{
+    display: flex; flex-direction: column;
+    align-items: flex-start;
+    
+}
+.leftflex{
+    display: flex; 
+    margin-right: 30px;
+}
+.leftblack{
+    width: 130px;
+    height: 60px;
+    padding: 10px;
+    margin-left:15px;
+    background-color: black;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.leftblack a {
+    display: block; text-decoration: none;
+    background-color: black; margin-bottom: 8px;
+    color:white; font-size: 12px;
+}
+.leftblack a:hover{
+    background-color: #616161;
+}
+.eleyi{
+    padding:20px;
+    height: auto; 
+}
+@media only screen and (min-width:1024px){
+   .spacing{ 
+       
+   }
+ 
+}

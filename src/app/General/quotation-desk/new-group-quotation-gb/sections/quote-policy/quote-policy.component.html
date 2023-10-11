@@ -1,0 +1,384 @@
+<div>
+  <br />
+  <div class="row mt-3 mb-4">
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Code' | appTranslate | async }}:
+        <a
+          routerLink="../../../setups/product/product-code/show"
+          [queryParams]="{ prodCode: product.code }"
+          class="text-primary"
+          >{{ product?.code }}</a
+        ></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Description' | appTranslate | async }}:
+        <span class="text-primary">{{ product.description }}</span></span
+      >
+    </div>
+    <!-- <div class="col-3">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">Cover type</label>
+      <select name="" id="" class="form-control control-bg-gray" [(ngModel)]='systemSelect'>
+        <option value="motor">Motor</option>
+        <option value="houseHolder">Householder</option>
+        <option value="travel">Travel</option>
+      </select>
+    </div>
+  </div> -->
+  </div>
+  <form [formGroup]="coverDetailsForm" (change)="changeFormValue()">
+    <div>
+      <div class="row">
+        <hr class="mt-4" />
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Application Date' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="applicationDate"
+              type="date"
+              class="form-control control-bg-gray"
+              (change)="changeDiscCode()"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Cover Start Date' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="commencementDate"
+              (change)="changeCommDate()"
+              type="date"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Cover End Date' | appTranslate | async
+            }}</label>
+            <input
+              type="date"
+              (change)="getDaysBetweenStartEndDate()"
+              [min]="startDate"
+              formControlName="endDate"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Cover Period' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              style="padding: 10px 0px 10px 12px"
+              formControlName="coverPeriod"
+              class="form-control control-bg-gray"
+              placeholder="Years"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              type="text"
+              style="padding: 10px 0px 10px 12px"
+              formControlName="coverMonths"
+              class="form-control control-bg-gray"
+              placeholder="Months"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              type="text"
+              style="padding: 10px 0px 10px 12px"
+              formControlName="coverDays"
+              class="form-control control-bg-gray"
+              placeholder="Days"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Currency' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="currency"
+              name=""
+              id=""
+              class="form-control control-bg-gray"
+            >
+              <option disabled>
+                {{ 'Select an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let currency of currencyOptions$ | async">
+                <option [value]="currency?.validCurrency">
+                  {{ currency?.validCurrency + ' - ' + currency?.description }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Premium Payment Term' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="premiumPaymentTermYears"
+              type="text"
+              class="form-control control-bg-gray"
+              [readonly]="premtermDisabled"
+              placeholder="Years"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              formControlName="premiumPaymentTermMonths"
+              type="text"
+              class="form-control control-bg-gray"
+              [readonly]="premtermDisabled"
+              placeholder="Months"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              formControlName="premiumPaymentTermDays"
+              type="text"
+              class="form-control control-bg-gray"
+              [readonly]="premtermDisabled"
+              placeholder="Days"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Premium payment Method' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="premiumPaymentMethod"
+              name=""
+              id=""
+              class="form-control control-bg-gray"
+            >
+              <option>{{ 'Select one option' | appTranslate | async }}</option>
+              <ng-container
+                *ngFor="let method of premiumPaymentMethodOptions$ | async"
+              >
+                <option [value]="method.code">
+                  {{ method.code }} - {{ method.description }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Premium Payment Frequency' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="premiumPayFreq"
+              id=""
+              class="form-control control-bg-gray"
+            >
+              <option disabled>
+                {{ 'Select one option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let freq of freq">
+                <option [value]="freq.premFreq">
+                  {{ freq.premFreq }} - {{ freq.description }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Discount Code' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="discountCode"
+              id=""
+              class="form-control control-bg-gray"
+              (change)="changeDiscCode()"
+            >
+              <option selected disabled>
+                {{ 'Select an Options' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let dc of discountCodeOptions$ | async">
+                <option [value]="dc.code">
+                  {{ dc.code }} - {{ dc.description }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Discount rate' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="discountRate"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="findModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{ 'Find Provider' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          #closeModal
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="providerForm">
+        <div class="modal-body">
+          <div class="row mt-2">
+            <div class="col-md-2 d-flex align-items-center">
+              <label>{{ 'Provider Name' | appTranslate | async }}</label>
+            </div>
+            <div class="col-md-8">
+              <input
+                type="text"
+                formControlName="providerName"
+                class="form-control control-bg-gray mr-2"
+                (keyup)="getProviderValues()"
+                [ngClass]="{
+                  bordercheck: validResult == 'true',
+                  borderuncheck: validResult == 'false'
+                }"
+                required
+              />
+              <div
+                style="display: none"
+                [ngClass]="{ checkmark: validResult == 'true' }"
+              >
+                <i class="fa fa-check"></i>
+              </div>
+              <div
+                style="display: none"
+                [ngClass]="{ uncheckmark: validResult == 'false' }"
+              >
+                <i class="fa fa-times"></i>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <app-button
+                [buttonType]="'search'"
+                (click)="getProviderValues()"
+              ></app-button>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="justify-content: flex-start">
+            <app-btn
+              buttonType="search"
+              data-bs-toggle="modal"
+              id="closeModal"
+              data-bs-target="#searchResultModal"
+              >{{ 'List All Coinsurers' | appTranslate | async }}</app-btn
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="searchResultModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-responsive table-striped">
+            <thead class="py-3 theader">
+              <tr>
+                <th scope="col">{{ 'Provider No' | appTranslate | async }}</th>
+                <th scope="col">
+                  {{ 'Provider Name' | appTranslate | async }}
+                </th>
+                <th scope="col">{{ 'SubCategory' | appTranslate | async }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of providerResult">
+                <th>{{ item?.no }}</th>
+                <td>{{ item?.fullname }}</td>
+                <td>{{ item?.providerSubCategory }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary">Save changes</button>
+       </div>-->
+      </div>
+    </div>
+  </div>
+</div>

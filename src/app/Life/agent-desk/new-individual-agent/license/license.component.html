@@ -1,0 +1,72 @@
+ <form [formGroup]="licenseForm">
+   <div class="row">
+     <div class="col-md">
+       <div class="d-block">
+         <div class="mt-4">
+           <label class="form-label text-primary">{{"Certificate Number"|appTranslate|async}}</label><br>
+           <input type="text" formControlName="certificateNumber" class="control-bg-gray form-control" required>
+           <!-- <div
+              *ngIf="validation.certificateNumber.errors && (validation.certificateNumber.dirty || validation.certificateNumber.touched)">
+              <div class="text-danger" *ngIf="validation.certificateNumber?.errors?.required ">Field is invalid!
+              </div>
+            </div> -->
+         </div>
+         <div class="mt-4">
+           <label class="form-label text-primary">{{"License Authourity"|appTranslate|async}}</label><br>
+           <select formControlName="licenseAuthority" class="control-bg-gray form-control" required>
+             <option [value]="null">{{"Select License Authourity"|appTranslate|async}}</option>
+             <option [value]="item.code" *ngFor="let item of licenseAuthorityList">{{item.title}}</option>
+           </select>
+           <!-- <div
+              *ngIf="validation.licenseAuthourity.errors && (validation.licenseAuthourity.dirty || validation.licenseAuthourity.touched)">
+              <div class="text-danger" *ngIf="validation.licenseAuthourity?.errors?.required ">Field is invalid!
+              </div>
+            </div> -->
+         </div>
+         <!--  <div class="mt-4">
+               <input type="file" id="filebtn" accept=".png,.jpg,.docx,.pdf" >
+               <button for="filebtn" type="button" class="btn py-2 btnmoney w-100">{{"Upload passport photo"|appTranslate|async}}</button>
+           </div>
+           <div class="mt-4">
+               <input type="file" id="filebtn" accept=".png,.jpg,.docx,.pdf" >
+               <button for="filebtn" type="button" class="btn py-2 btnmoney w-100">{{"Upload Identity card"|appTranslate|async}}</button>
+           </div> -->
+         <div class="mt-4">
+           <label class="form-label text-primary">{{"Expiry Date"|appTranslate|async}}</label><br>
+           <input type="date" formControlName="expiryDate" class="control-bg-gray form-control" required>
+           <!-- <div *ngIf="validation.expiryDate.errors && validation.expiryDate.dirty">
+              <div class="text-danger" *ngIf="validation.expiryDate?.errors?.required ">Field is invalid!
+              </div>
+            </div> -->
+         </div>
+       </div>
+     </div>
+     <div class="col-md position-relative">
+       <div class="mt-4">
+         <label class="form-label text-primary">{{"License Type"|appTranslate|async}}</label><br>
+         <select formControlName="licenceType" class="control-bg-gray form-control" required>
+           <option [value]="null">{{"Select License Type"|appTranslate|async}}</option>
+           <option [value]="item.code" *ngFor="let item of licenseTypeList">{{item.code}} - {{item.title}}</option>
+         </select>
+         <!-- <div
+            *ngIf="validation.licensetype.errors && (validation.licensetype.dirty || validation.licensetype.touched)">
+            <div class="text-danger" *ngIf="validation.licensetype?.errors?.required ">Field is invalid!
+            </div>
+          </div> -->
+       </div>
+       <div class="mt-4">
+         <label class="form-label text-primary">{{"Issue Date"|appTranslate|async}}</label><br>
+         <input type="date" formControlName="issueDate" class="control-bg-gray form-control" required>
+         <!-- <div *ngIf="validation.issueDate.errors && (validation.issueDate.dirty || validation.issueDate.touched)">
+            <div class="text-danger" *ngIf="validation.issueDate?.errors?.required ">Field is invalid!
+            </div>
+          </div> -->
+       </div>
+       <div class="mt-4">
+         <app-file-upload label="Upload License" accept="image" [(file)]="file"></app-file-upload>
+       </div>
+     </div>
+   </div>
+
+
+ </form>

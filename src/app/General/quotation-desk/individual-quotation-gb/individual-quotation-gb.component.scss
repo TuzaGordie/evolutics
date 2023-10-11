@@ -1,0 +1,10 @@
+.checkmark {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 1.4em;
+    height: 100%;
+    color: green;
+}

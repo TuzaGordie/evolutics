@@ -1,0 +1,133 @@
+<!-- <app-form-navigation [title]="'Sales/Create Lead'"></app-form-navigation> -->
+<div class="container mt-5">
+  <form [formGroup]="findCRMClientForm">
+    <div class="row" >
+      <div class="row my-2" *ngIf="showEnroleeNoField">
+        <div class="col-md-2"><label class="py-2">Enrolee No</label></div>
+        <div class="col-md" style="position: relative;">
+          <input type="text" formControlName="enrolee" class="inputform mr-2"
+            [ngClass]="{bordercheck: validResult2 == 'true' , borderuncheck: validResult2 == 'false'}" required
+            (keyup)="setEnroleeList()">
+          <div style="display: none;" [ngClass]="{checkmark: validResult2 == 'true'}"><i class="fa fa-check"></i>
+          </div>
+          <div style="display: none;" [ngClass]="{uncheckmark: validResult2 == 'false'}"><i class="fa fa-times"></i>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-dark btn-lg  mx-2" [ngClass]="{changecolor: validResult2 == 'true'}"
+            [disabled]="validResult2 == 'false' || validResult2 == '' " (click)="onNext()">
+            <fa-icon [icon]="faEye"></fa-icon>
+            Show
+          </button>
+        </div>
+      </div>
+
+      <div class="row my-2" *ngIf="showNameField">
+        <div class="col-md-2"><label class="py-2">Name</label></div>
+        <div class="col-md">
+          <input type="text" formControlName="name" class="inputform mr-2" required>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <div class="row my-2" *ngIf="showProviderNoField">
+        <div class="col-md-2"><label class="py-2">Provider No</label></div>
+        <div class="col-md" style="position: relative;">
+          <input type="text" formControlName="providerNo" class="inputform mr-2"
+            [ngClass]="{bordercheck: validResult3 == 'true' , borderuncheck: validResult3 == 'false'}" required
+            (keyup)="setProviderList()">
+          <div style="display: none;" [ngClass]="{checkmark: validResult3 == 'true'}"><i class="fa fa-check"></i>
+          </div>
+          <div style="display: none;" [ngClass]="{uncheckmark: validResult3 == 'false'}"><i class="fa fa-times"></i>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-dark btn-lg mx-2" [ngClass]="{changecolor: validResult3 == 'true'}"
+            [disabled]="validResult3 == 'false' || validResult3 == '' " (click)="onNext()">
+            <fa-icon [icon]="faEye"></fa-icon>
+            Show
+          </button>
+        </div>
+      </div>
+
+      <div class="row my-2" *ngIf="showPhoneNoField">
+        <div class="col-md-2"><label class="py-2">Phone No</label></div>
+        <div class="col-md">
+          <input type="text" formControlName="phoneNo" class="inputform mr-2" required>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <div class="row my-2" *ngIf="showEmailField">
+        <div class="col-md-2"><label class="py-2">Email</label></div>
+        <div class="col-md">
+          <input type="text" formControlName="email" class="inputform mr-2" required>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <div class="row my-2" *ngIf="showEnternalRef">
+        <div class="col-md-2"><label class="py-2">External Ref</label></div>
+        <div class="col-md">
+          <input type="text" formControlName="externalRef" class="inputform mr-2" required>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <!-- <div class="row my-2">
+        <div class="col-md-2"><label class="py-2">Created By</label></div>
+        <div class="col-md">
+          <select formControlName="createdBy" class="inputform mr-2" required>
+            <option *ngFor="let user of usersList" [value]="user.id">{{user.fullName}}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div> -->
+
+      <div class="row my-2" *ngIf="showCreatedDateFrom">
+        <div class="col-md-2"><label class="py-2">Created Date From</label></div>
+        <div class="col-md">
+          <input type="date" formControlName="createdDateFrom" class="inputform mr-2" required>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+      <div class="row my-2" *ngIf="showCreatedDateTo">
+        <div class="col-md-2"><label class="py-2">Created Date To</label></div>
+        <div class="col-md">
+          <input type="date" formControlName="createdDateTo" class="inputform mr-2" required>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-2 pt-3">
+          <app-button buttonType="searchRed" (click)="onSearch()"></app-button>
+        </div>
+        <div class="col-md-10 text-danger" *ngIf="attemptedEmptySearch">Please fill in at least one field in order to
+          search!</div>
+      </div>
+
+      <!-- <div class=" my-5">
+          <div  style="float: right; margin-top: 10%;">
+
+            <button type="submit" [disabled]="validResult == 'false' || validResult == '' "
+            [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"
+            class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+          </div>
+      </div> -->
+    </div>
+    <br>
+
+  </form>
+
+</div>

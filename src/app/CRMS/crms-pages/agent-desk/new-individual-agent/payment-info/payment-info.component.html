@@ -1,0 +1,167 @@
+<div class="container mt-5">
+  <form [formGroup]="newPaymentForm" (ngSubmit)="onSubmit()">
+    <div class="row my-5">
+      <div class="col-md">
+        <div>
+          <label class="py-2 form-label text-red">Country</label><br>
+          <select formControlName="country" class="form-control control-bg-gray" (change)="setBanknameList()">
+            <option [value]="null">Select Country</option>
+            <option [value]="item.CODE" *ngFor="let item of countryList">{{item.DESCRIPTION}}</option>
+          </select>
+        </div>
+        <div *ngIf="validation.country.errors && (validation.country.dirty || validation.country.touched)">
+          <div class="text-danger" *ngIf="validation.country?.errors?.required">Field is invalid!
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md">
+        <label class="py-2 form-label text-red">Account Type</label><br>
+        <div class="d-flex justify-content-between">
+          <button class=" py-2   w-100 mx-1 border-0" type="button" (click)="showBankModel()"
+                  [ngClass]="bankModel? 'btn-dark' : 'btnmoney'"
+          >
+            Bank
+          </button>
+          <button type="button" class="py-2 btn w-100 mx-1 border-0 "
+                  [ngClass]="mobileModel? 'btn-dark' : 'btnmoney'"
+                  (click)="showMobileModel()">Mobile Money
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <ng-container *ngIf="bankModel == true">
+      <div class="row mt-4">
+
+        <div class="col-md">
+          <div>
+            <label class="py-2 form-label text-red">Bank Name</label><br>
+            <select formControlName="bankName" class="form-control control-bg-gray" (change)="setSortcodeList()">
+              <option [value]="null">Select Bank Name</option>
+              <option [value]="item.BANK_CODE" *ngFor="let item of banknameList">{{item.description}}</option>
+            </select>
+          </div>
+          <!-- <div *ngIf="validation.bankName.errors && (validation.bankName.dirty || validation.bankName.touched)">
+              <div class="text-danger" *ngIf="validation.bankName?.errors?.required">Field is invalid!
+              </div>
+          </div> -->
+        </div>
+
+
+        <div class="col-md-1"></div>
+        <div class="col-md">
+
+          <label class="py-2 form-label text-red">Sort Code</label>
+          <div class="d-flex">
+            <div class="row w-100 g-1">
+              <div class="col-8">
+                <input type="text" [ngModel]="sortCode" formControlName="sortCode"
+                       class="form-control control-bg-gray">
+              </div>
+              <div class="col mt-2">
+                <app-button buttonType="findRed"></app-button>
+              </div>
+            </div>
+
+
+            <!-- <option [value]="null">Select Provider</option>
+                <option [value]="item.BANK_CODE" *ngFor="let item of providerList">{{item.SORT_CODE}}</option> -->
+          </div>
+          <!-- <div *ngIf="validation.sortCode.errors && (validation.sortCode.dirty || validation.sortCode.touched)">
+              <div class="text-danger" *ngIf="validation.sortCode?.errors?.required">Field is invalid!
+              </div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md">
+          <div class="mt-4">
+            <label class="py-2 form-label text-red">Account No</label><br>
+            <input type="text" formControlName="accountNo" class="form-control control-bg-gray">
+          </div>
+          <!-- <div *ngIf="validation.accountNo.errors && (validation.accountNo.dirty || validation.accountNo.touched)">
+              <div class="text-danger" *ngIf="validation.accountNo?.errors?.required">Field is invalid!
+              </div>
+          </div> -->
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md">
+          <div class="mt-4">
+            <label class="py-2 form-label text-red">Bank Branch</label><br>
+            <input type="text" formControlName="bankBranch" class="form-control control-bg-gray">
+            <!-- <div *ngIf="validation.bankBranch.errors && (validation.bankBranch.dirty || validation.bankBranch.touched)">
+                <div class="text-danger" *ngIf="validation.bankBranch?.errors?.required">Field is invalid!
+                </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <div class="mt-4">
+            <label class="py-2 form-label text-red">Account Name</label><br>
+            <input type="text" formControlName="accountName" class="form-control control-bg-gray">
+            <!-- <div *ngIf="validation.accountName.errors && (validation.accountName.dirty || validation.accountName.touched)">
+                <div class="text-danger" *ngIf="validation.accountName?.errors?.required">Field is invalid!
+                </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md"></div>
+
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <div class="mt-5">
+            <input type="file" id="filebtn" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+                   (change)="upload($event)">
+            <button for="filebtn" (click)="getImage()" type="button" class="btn btn-danger btn-lg">
+              <fa-icon [icon]="faUpload"></fa-icon>
+              Upload proof
+              of account
+            </button>
+          </div>
+          <p id="filenameifno" [innerHtml]="fileName"></p>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="mobileModel == true">
+      <div class="row mt-4">
+        <div class="col-md">
+          <div class="mt-4">
+            <label class="py-2 form-label text-red">Provider</label><br>
+            <select formControlName="provider" class="form-control control-bg-gray">
+              <option [value]="null">Select Provider</option>
+              <option [value]="item.code" *ngFor="let item of providerList">{{item.CODE_TITLE}}</option>
+            </select>
+          </div>
+          <!-- <div *ngIf="validation.accountNo.errors && (validation.accountNo.dirty || validation.accountNo.touched)">
+              <div class="text-danger" *ngIf="validation.accountNo?.errors?.required">Field is invalid!
+              </div>
+          </div> -->
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md">
+          <div class="mt-4">
+            <label class="py-2 form-label text-red">Account No</label><br>
+            <input type="text" formControlName="accountNo" class="form-control control-bg-gray">
+          </div>
+          <!--  <div *ngIf="validation.accountNo.errors && (validation.accountNo.dirty || validation.accountNo.touched)">
+               <div class="text-danger" *ngIf="validation.accountNo?.errors?.required">Field is invalid!
+               </div>
+           </div> -->
+        </div>
+      </div>
+    </ng-container>
+
+
+  </form>
+</div>

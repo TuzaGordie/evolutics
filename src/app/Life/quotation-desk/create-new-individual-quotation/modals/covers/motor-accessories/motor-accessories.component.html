@@ -1,0 +1,144 @@
+<div class="modal fade" id="acc_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="accessoriesForm" class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Accessory Category</label>
+              <select name="" formControlName="category" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <ng-container *ngFor="let cat of (accessCatOptions$ | async)">
+                  <option [value]="cat.code">{{cat.title}}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Description</label>
+              <input formControlName="description" name="" id="" class="form-control control-bg-gray" />
+
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Model</label>
+              <input formControlName="model" name="" id="" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Item Count</label>
+              <input formControlName="count" name="" id="" class="form-control control-bg-gray" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Total Purchase Value</label>
+              <input formControlName="purValue" name="" id="" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Total Market Value</label>
+              <input formControlName="marValue" name="" id="" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Identication No</label>
+              <input formControlName="id" name="" id="" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Year Fitted</label>
+              <input formControlName="year" name="" id="" class="form-control control-bg-gray" />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-3">
+            <app-button buttonType="createCustom" text="Add Accessory"></app-button>
+          </div>
+
+        </div>
+        <div class="row mt-3">
+          <ng-container [ngSwitch]="excess_type">
+            <div class="col" *ngSwitchCase="'number'">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Excess</label>
+                <span style="padding-left: 10px;" *ngIf="excess_min || excess_max">min: {{excess_min}} - max: {{excess_max}}</span>
+                <input class="form-control control-bg-gray" [value]="excessAmount" (change)="setField($event, 'excessAmount', excessField)" [readonly]="excess_disabled" #excessField type="number" [min]="excess_min" [max]="excess_max">
+              </div>
+            </div>
+            <div class="col" *ngSwitchCase="'text'">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Excess</label>
+                <input class="form-control control-bg-gray" [value]="excess_display" [readonly]="excess_disabled" type="text">
+              </div>
+            </div>
+            <div class="col" *ngSwitchCase="'select'">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Excess Option Rate</label>
+                <select formControlName="excessOptRate" class="form-control control-bg-gray">
+                  <option *ngFor="let option of excess_options" [value]="option.excessOptRate">{{option.excessOptRate}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Excess Option Amount</label>
+                <select formControlName="excessOptAmount" class="form-control control-bg-gray">
+                  <option *ngFor="let option of excess_options" [value]="option.excessOptAmount">{{option.excessOptAmount}}</option>
+                </select>
+              </div>
+            </div>
+          </ng-container>
+  
+          
+          <ng-container [ngSwitch]="deductible_type">
+            <div class="col" *ngSwitchCase="'number'">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Deductible</label>
+                <span style="padding-left: 10px;" *ngIf="deductible_min || deductible_max">min: {{deductible_min}} - max: {{deductible_max}}</span>
+                <input class="form-control control-bg-gray" [value]="deductibleAmount" (change)="setField($event, 'deductibleAmount', deductibleField)" #deductibleField type="number" [readonly]="deductible_disabled" [min]="deductible_min" [max]="deductible_max">
+              </div>
+            </div>
+            <div class="col" *ngSwitchCase="'text'">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Deductible</label>
+                <input class="form-control control-bg-gray" [value]="deductible_display" [readonly]="deductible_disabled" type="text">
+              </div>
+            </div>
+            <div class="col" *ngSwitchCase="'select'">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Deductible Option Rate</label>
+                <select formControlName="deductibleOptRate" class="form-control control-bg-gray">
+                  <option *ngFor="let option of deductible_options" [value]="option.deductibleOptRate">{{option.deductibleOptRate}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="" class="form-label text-primary">Deductible Option Amount</label>
+                <select formControlName="deductibleOptAmount" class="form-control control-bg-gray">
+                  <option *ngFor="let option of deductible_options" [value]="option.deductibleOptAmount">{{option.deductibleOptAmount}}</option>
+                </select>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <app-button (click)="stop()" [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+        
+
+      </div>
+    </div>
+  </div>
+</div>

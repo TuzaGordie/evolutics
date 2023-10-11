@@ -1,0 +1,16 @@
+.card{
+    border: none;
+width: 100%;
+       form{
+            width: 90%;
+            margin: auto;
+          }
+}
+@media (min-width:1024px) {
+    .card{
+        width: 50%;
+        form{
+            width: 80%;
+        }
+    }
+}

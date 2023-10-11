@@ -1,0 +1,140 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?sdmwhv');
+  src:  url('#{$icomoon-font-path}/#{$icomoon-font-family}.eot?sdmwhv#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?sdmwhv') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?sdmwhv') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?sdmwhv##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.evoicon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.evo-setting {
+  &:before {
+    content: $evo-setting; 
+  }
+}
+.evo-agent {
+  &:before {
+    content: $evo-agent; 
+  }
+}
+.evo-angledown {
+  &:before {
+    content: $evo-angledown; 
+  }
+}
+.evo-blankdoc {
+  &:before {
+    content: $evo-blankdoc; 
+  }
+}
+.evo-debitcards {
+  &:before {
+    content: $evo-debitcards; 
+  }
+}
+.evo-find {
+  &:before {
+    content: $evo-find; 
+  }
+}
+.evo-folder {
+  &:before {
+    content: $evo-folder; 
+  }
+}
+.evo-uptrend {
+  &:before {
+    content: $evo-uptrend; 
+  }
+}
+.evo-cards {
+  &:before {
+    content: $evo-cards; 
+  }
+}
+.evo-heart {
+  &:before {
+    content: $evo-heart; 
+  }
+}
+.evo-integral {
+  &:before {
+    content: $evo-integral; 
+  }
+}
+.evo-linegraph {
+  &:before {
+    content: $evo-linegraph; 
+  }
+}
+.evo-menu {
+  &:before {
+    content: $evo-menu; 
+  }
+}
+.evo-multidoc {
+  &:before {
+    content: $evo-multidoc; 
+  }
+}
+.evo-piechart {
+  &:before {
+    content: $evo-piechart; 
+  }
+}
+.evo-profile {
+  &:before {
+    content: $evo-profile; 
+  }
+}
+.evo-user {
+  &:before {
+    content: $evo-user; 
+  }
+}
+.evo-admin {
+  &:before {
+    content: $evo-admin; 
+  }
+}
+.evo-pulse {
+  &:before {
+    content: $evo-pulse; 
+  }
+}
+.evo-receipt {
+  &:before {
+    content: $evo-receipt; 
+  }
+}
+.evo-truck {
+  &:before {
+    content: $evo-truck; 
+  }
+}
+.evo-wallet {
+  &:before {
+    content: $evo-wallet; 
+  }
+}
+

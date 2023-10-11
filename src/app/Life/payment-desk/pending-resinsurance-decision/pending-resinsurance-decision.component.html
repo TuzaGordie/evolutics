@@ -1,0 +1,237 @@
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <label for="" class="form-label text-primary">{{'Show All'|appTranslate|async}}</label>
+      <input type="checkbox" class="form-control control-bg-gray">
+    </div>
+
+    <div class="col">
+      <label for="" class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray"></select>
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray"></select>
+    </div>
+  </div>
+  <div class="items-per-page mt-2">
+    <div class="left">
+      <div class="row" *ngIf="checkedList2.length">
+        <div class="col">
+          <!-- <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizePaymentModal">Authorize</span> -->
+          <span class="badge bg-primary" (click)="openAuthorizeDialog()">{{'Authorize'|appTranslate|async}}</span>
+        </div>
+        <div class="col">
+          <!-- <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declinePaymentModal">Decline</span> -->
+          <span class="badge bg-danger" (click)="openDeclineDialog()">{{'Decline'|appTranslate|async}}</span>
+
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col">{{'Treaty'|appTranslate|async}}</th>
+          <th scope="col">{{'Ref Number'|appTranslate|async}}</th>
+          <th scope="col">{{'Cover Code'|appTranslate|async}}</th>
+          <th scope="col">{{'Client SAR'|appTranslate|async}}</th>
+          <th scope="col">{{'Cover SAR'|appTranslate|async}}</th>
+          <th scope="col">{{'Created On'|appTranslate|async}}</th>
+          <th scope="col">{{'Uncovered SAR'|appTranslate|async}}</th>
+
+          <th scope="col">{{'Company'|appTranslate|async}}</th>
+          <th scope="col">{{'Currency'|appTranslate|async}}</th>
+          <th scope="col"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <app-btn type="dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Decision</app-btn>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-sm-1">
+          <div class="col">
+            <button class="btn  w-100 {{isCede === true ? 'btn-primary' : 'btn-outline-primary'}}"
+                    (click)="toggleCedeTreaty()">{{'Cede to treaty'|appTranslate|async}}</button>
+          </div>
+          <div class="col">
+            <button class="btn  w-100 {{isFacultative === true ? 'btn-primary' : 'btn-outline-primary'}}"
+                    (click)="toggleFacultative()">{{'Facultative'|appTranslate|async}}</button>
+          </div>
+          <div class="col">
+            <button class="btn  w-100 {{isRejectRisk === true ? 'btn-primary' : 'btn-outline-primary'}}"
+                    (click)="toggleRejectRisk()">{{'Reject Risk'|appTranslate|async}}</button>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="isCede">
+          <div class="col">
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3 theader">
+              <tr>
+                <th scope="col">Cover</th>
+                <th scope="col">Treaty</th>
+                <th scope="col">Retention</th>
+                <th scope="col">Amount Ceded</th>
+                <th></th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <app-btn type="secondary" icon="edit"></app-btn>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="row">
+              <div class="col">
+                <p>Total Ceded: --- </p>
+              </div>
+              <div class="col">
+                <p>Treaty Capacity: --- </p>
+              </div>
+              <div class="col">
+                <p>Uncovered SAR: --- </p>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <label for="" class="form-label text-primary">Narration</label>
+              <textarea name="" id="" cols="30" rows="1" class="form-control control-bg-gray"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isFacultative">
+          <div class="col">
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3 theader">
+              <tr>
+                <th scope="col">Cover</th>
+                <th scope="col">Coinsurer</th>
+                <th scope="col">Reinsurer</th>
+                <th scope="col">Amount Ceded</th>
+                <th scope="col">Broker</th>
+                <th scope="col">Commission Rate (%)</th>
+                <th scope="col">Premium Rate Basis</th>
+                <th scope="col">Premium Rate (%)</th>
+                <th scope="col">Premium Rate Table</th>
+                <th></th>
+                <th></th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let i of idCounter()">
+                <td><input type="text" class="form-control"></td>
+                <td><select name="" id="" class="form-control"></select></td>
+                <td><select name="" id="" class="form-control"></select></td>
+                <td><input type="text" class="form-control"></td>
+                <td><select name="" id="" class="form-control"></select></td>
+                <td><input type="text" class="form-control"></td>
+                <td><select name="" id="" class="form-control"></select></td>
+                <td><input type="text" class="form-control"></td>
+                <td><select name="" id="" class="form-control"></select></td>
+
+                <td>
+                  <app-btn type="secondary" icon="edit"></app-btn>
+                </td>
+                <td>
+                  <app-btn type="dark" icon="add" (click)="idInc()"></app-btn>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div class="row">
+              <div class="col">
+                <p>Total Ceded: --- </p>
+              </div>
+              <div class="col">
+                <p>Treaty Capacity: --- </p>
+              </div>
+              <div class="col">
+                <p>Uncovered SAR: --- </p>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <label for="" class="form-label text-primary">Narration</label>
+              <textarea name="" id="" cols="30" rows="1" class="form-control control-bg-gray"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="isRejectRisk">
+          <div class="col">
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3 theader">
+              <tr>
+                <th scope="col">Reason</th>
+
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let i of idCounter()">
+
+                <td><select name="" id="" class="form-control"></select></td>
+
+              </tr>
+              </tbody>
+            </table>
+
+
+            <div class="row mt-2">
+              <label for="" class="form-label text-primary">Narration</label>
+              <textarea name="" id="" cols="30" rows="1" class="form-control control-bg-gray"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-btn type="secondary" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

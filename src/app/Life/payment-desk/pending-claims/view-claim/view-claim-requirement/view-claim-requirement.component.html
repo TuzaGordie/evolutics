@@ -1,0 +1,80 @@
+<div class="row justify-content-end">
+  <div class="col-2">
+    <app-btn type="primary" icon="add" data-bs-toggle="modal"
+             data-bs-target="#exampleModal">{{'Add Requirement'|appTranslate|async}}</app-btn>
+  </div>
+</div>
+<table class="table table-responsive  table-striped text-center">
+  <thead class="py-3">
+  <tr>
+    <th scope="col">{{'Requirement'|appTranslate|async}}</th>
+    <th scope="col">{{'Received'|appTranslate|async}}</th>
+    <th scope="col">{{'Received By'|appTranslate|async}}</th>
+    <th scope="col">{{'Received On'|appTranslate|async}}</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>xx</td>
+    <td class="justify-content-center"><input type="checkbox" class="form-control control-bg-gray mx-auto"></td>
+    <td>xx</td>
+    <td>xx</td>
+    <td>
+      <app-btn type="secondary" icon="upload"></app-btn>
+    </td>
+    <td>
+      <app-btn type="secondary" icon="edit"></app-btn>
+    </td>
+  </tr>
+  </tbody>
+  <!-- <tbody>
+<tr *ngFor="let item of quotationInfoList" (click)="viewInfo(item.QUOTE_NO)">
+  <th scope="row">{{item.QUOTE_NO}}</th>
+  <td>{{item.OWNER_NAME}}</td>
+  <td>{{item.INDIVIDUAL}}</td>
+  <td>{{item.PRODUCT_CLASS}}</td>
+  <td>{{item.PRODUCT_CODE}}</td>
+  <td>{{item.LAST_UPDATE}}</td>
+  <td>{{item.REFERRER_NO}}</td>
+  <td>{{item.AGENT_NO}}</td>
+  <td>{{item.ITERATIONS}}</td>
+  <td>{{item.TOTAL_PREMIUMS}}</td>
+  <td>{{item.DAYS_TO_SLA}}</td>
+</tr>
+</tbody> -->
+</table>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Add Requirement'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label">{{'Requirement'|appTranslate|async}}</label>
+            <select name="" id="" class="control-bg-gray form-control"></select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label">{{'Reason'|appTranslate|async}}</label>
+            <select name="" id="" class="control-bg-gray form-control"></select>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

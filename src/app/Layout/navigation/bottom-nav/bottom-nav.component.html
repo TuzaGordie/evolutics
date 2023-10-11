@@ -1,0 +1,43 @@
+<div class="menu  bg-dark {{appS.system}}">
+  <div class="row m-0 align-items-center">
+    <div class="col overflow-x-auto">
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+
+        <div class="navbar-collapse  navbars" id="navbar1">
+
+          <ul class="navbar-nav justify-content-around mx-auto" *ngIf="!system"> 
+            <li class="{{item.hasSub?'dropdown':''}} nav-item mx-1 "
+              *ngFor="let item of appS.bottomMenu; trackBy:tractById">
+              <app-menu-item [menuItem]="item"></app-menu-item>  
+            </li>
+          </ul>
+
+        </div>
+
+      </nav>
+    </div>
+    <div class="col-auto">
+      <ul class="align-items-center d-flex m-0 p-0 py-2 extra-menu">
+        <li class="nav-item dropdown mx-1">
+          <a aria-expanded="false" class="nav-link dropdown-toggle p-0 px-md-0 px-lg-0 px-sm-0 px-xl-1"
+            data-bs-toggle="dropdown" href="#" role="button">
+            <img alt="Avatar" class="avatar" imageType="pp" [imageLoader]=" user?.users?.imageUrl ">
+            <b class="caret"></b></a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+
+            <!-- <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li> -->
+            <li><a class="dropdown-item underline" routerLink="profile">{{'Profile'|appTranslate|async}}</a></li>
+            <li><a (click)="signOut()" class="dropdown-item underline">{{'Sign out'|appTranslate|async}}</a></li>
+            <li><a class="dropdown-item" href="{{helpLink}}" target="_blank">{{'Help'|appTranslate|async}}</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown mx-1" *ngIf="!uS.isMobile">
+          <app-navbar-search #search></app-navbar-search>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

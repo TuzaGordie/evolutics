@@ -1,0 +1,66 @@
+<app-form-navigation [title]="'Overview'"></app-form-navigation>
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <div class="form-group mt-2">
+          <label>{{'Select Code Group'|appTranslate|async}}</label>
+          <div class="position-relative">
+            <select class="form-control form-control-md control-bg-gray" (change)="onGroupChange()" [(ngModel)]="codeGroup" name="codeGroup">
+              <option></option>
+              <option *ngFor="let group of codeGroupsList" [value]="group?.group">
+                {{group?.description}}
+              </option>
+            </select>
+            <span class="position-absolute top-50 start-100 translate-middle-y ms-1" *ngIf="loadingGroup">
+              <span class="fa fa-sync fa-spin"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{'Select Code Sub Group'|appTranslate|async}}</label>
+          <div class="position-relative">
+            <select class="form-control form-control-md control-bg-gray" (change)="onSubGroupChange()" [(ngModel)]="codeSubgroup" name="codeSubgroup">
+              <option></option>
+              <option *ngFor="let subgroup of codeSubgroupsList" [value]="subgroup">
+                {{subgroup}}
+              </option>
+            </select>
+            <span class="position-absolute top-50 start-100 translate-middle-y ms-1" *ngIf="refreshingSubgroup">
+              <span class="fa fa-sync fa-spin"></span>
+            </span>
+          </div>
+          <span class="text-danger" *ngIf="message.error">{{'Kindly select a code group and a code sub group.'|appTranslate|async}}</span>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{'Select code'|appTranslate|async}}</label>
+          <div class="position-relative">
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="code" name="code">
+              <option></option>
+              <option *ngFor="let code of codesList" [value]="code.code">
+                {{code.title}}
+              </option>
+            </select>
+            <span class="position-absolute top-50 start-100 translate-middle-y ms-1" *ngIf="refreshingCode">
+              <span class="fa fa-sync fa-spin"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row my-3">
+          <div class="col d-grid gap-1">
+            <app-button [buttonType]="'show'" routerLink="../parameters/show" [queryParams]="{codeGroup, codeSubgroup, code}"></app-button>
+          </div>
+          <div class="col d-grid gap-1">
+            <app-button [buttonType]="'create-red'" routerLink="../parameters/start"></app-button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

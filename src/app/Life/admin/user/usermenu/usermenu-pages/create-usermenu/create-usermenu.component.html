@@ -1,0 +1,98 @@
+<loader [loading]="loading">
+  <div class="mt-0">
+    <div class="row justify-content-end" *ngIf="isShow ">
+      <div class="col-auto my-2">
+        <app-btn type="secondary" icon="edit" routerLink="../edit" [queryParams]="{code}">Edit</app-btn>
+      </div>
+      <div class="col-auto my-2">
+        <app-btn type="secondary" icon="clone" routerLink="../clone" [queryParams]="{code}">Clone</app-btn>
+      </div>
+    </div>
+    <form>
+      <div class="row">
+        <div class="col-lg-6" *ngIf="code">
+          <app-input-basic label="User Menu Code" type="viewer" [form]="form" name="userMenu" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-lg">
+          <app-input-basic label="Description" type="text" [form]="form" name="description" [showValidationIcon]="false"
+            [showValidation]="desc.invalid" #desc [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-12">
+          <hr>
+          <h6 class="">
+            {{'Menu Configurations'|appTranslate|async}}
+          </h6>
+        </div>
+        <div class="col-12">
+          <div class="">
+            <div class="row ">
+              <div class="col-lg-auto cage">
+                <div class="my-2 row" *ngFor="let module of modules;let i = index;trackBy:uS.trackByID">
+                  <div class="col">
+                    <app-btn (mclick)="openModule(i)" [disabled]="module.disabled" customIcon="{{module.icon}}"
+                      [type]="module.id==selectedModule?.id?'primary':'outline'">{{module.label}}</app-btn>
+                  </div>
+                  <div class="col-auto">
+                    <app-input-ngmodel [disabled]="module.disabled||isShow" type="checkbox" [mini]="true"  
+                      hint="Allow All Pages for {{module?.label}}?" [showLabel]="false" [(model)]="module.allowed"
+                      (mchange)="toggleModuleMenuSubPages(module.id)" (click)="openModule(i)">
+                    </app-input-ngmodel>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-auto border-start cage" [hidden]="!selectedModule.subs?.length">
+                <div class="my-2 row" *ngFor="let menu of selectedModule.subs;let i = index;trackBy:uS.trackByID">
+                  <div class="col">
+                    <app-btn (mclick)="openMenu(i)" [disabled]="menu.disabled" customIcon="{{menu.icon}}"
+                      [type]="menu.id==selectedMenu?.id?'primary':'outline'">{{menu.label}}</app-btn>
+                  </div>
+                  <div class="col-auto">
+                    <app-input-ngmodel [disabled]="menu.disabled||isShow" type="checkbox" [mini]="true" 
+                      hint="Allow All Pages for {{menu?.label}}?" [showLabel]="false" [(model)]="menu.allowed"
+                      (mchange)="toggleMainMenuSubPages(menu.id)" (click)="openMenu(i)">
+                    </app-input-ngmodel>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg   border-start" [hidden]="!selectedMenu?.subs?.length">
+                <div class="cage">
+                  <div class="">
+                    <ng-container *ngFor="let item of selectedMenu?.subs;trackBy:uS.trackByID">
+                      <um-menu-item-box [menuItem]="item"  [readonly]="isShow"></um-menu-item-box>
+                    </ng-container>
+                    <!-- <div class="row ">
+                      <div class="col-lg-4 col-xxl-3 my-2 text-center"
+                        *ngFor="let item of selectedMenu.subs;trackBy:uS.trackByID">
+                        <div class="menu-option-case">
+                          <app-input-ngmodel [colored]="false" #subPages type="checkbox" lblCl="" [stacked]="true"
+                            label="Allow {{item?.label}}?" [(model)]="item.allowed" (mchange)="item.toggle()">
+                          </app-input-ngmodel>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="!isShow">
+          <hr>
+          <div class="row justify-content-end">
+            <div class="col-auto">
+              <app-btn icon="save" (mclick)="submit()" [disabled]="form?.invalid" type="secondary">Submit</app-btn>
+            </div>
+          </div>
+        </div>
+        <!-- <ng-container formArrayName="config">
+          <ng-container *ngFor="let subform of config.controls; let k = index; let isLast = last" [formGroupName]="k">
+
+          </ng-container>
+        </ng-container> -->
+      </div>
+    </form>
+
+  </div>
+</loader>

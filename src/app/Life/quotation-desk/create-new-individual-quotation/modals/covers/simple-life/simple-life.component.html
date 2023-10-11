@@ -1,0 +1,50 @@
+
+<div class="modal fade" id="sl_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="lifeForm" class="modal-body">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Enter Sum Assured</label>
+            <input formControlName="assured" type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Select Sum Assured Option</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option selected disabled>Choose an option</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Annual Income of Owner</label>
+            <input formControlName="assured" type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Sum Assured Multiple</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option selected disabled>Choose an option</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+          <app-btn type="outline" icon="save" (mclick)="stop()">Save</app-btn>
+    </div>
+  </div>
+</div>
+</div>
+

@@ -1,0 +1,385 @@
+<app-form-navigation [title]="'View Policy'"></app-form-navigation>
+<div class="container my-5">
+    <form [formGroup]="viewPolicyForm">
+        <div class="d-flex justify-content-around">
+            <span class="p-2">Policy No: <span style="color: #514ef5">{{findPolicyService.policyInfo?.CLIENT_NO}}</span></span>
+            <span class="p-2">Owner Client Number: <span style="color: #514ef5">{{findPolicyService.policyInfo?.OWNER_CLIENT_NO}}</span></span>
+            <span class="p-2">Joint Owner Client Number: <span style="color: #514ef5">{{findPolicyService.policyInfo?.JOINT_OWNER_NO}}</span></span>
+            <span class="p-2">External Ref: <span style="color: #514ef5">{{findPolicyService.policyInfo?.REFERRER_NO}}</span></span>
+            <span class="p-2">Agent: <span style="color: #514ef5">{{findPolicyService.policyInfo?.AGENT_NAME}}</span></span>
+            <span class="p-2">Referrer: <span style="color: #514ef5">{{findPolicyService.policyInfo?.REFERRER_NAME}}</span></span>
+
+
+
+        </div>
+
+
+
+
+        <hr style="margin-top: 5px;">
+
+        <div class="row g-3">
+            <div class="row d-flex flex-row justify-content-around mt-2">
+
+                <div class="col-1 d-flex flex-row justify-content-around">
+                    
+                    <span class="p-2"style="color: #514ef5">{{findPolicyService.policyInfo?.OWNER_NAME}}</span>
+                </div>
+
+                <div class="col-2 d-flex flex-row justify-content-between">
+                    <button type="button" [routerLink]="['/life/policynote']" routerLinkActive="router-link-active"
+                        class="btn-ir p-0 px-2 " >
+                        <span class="mx-3 my-auto">New</span></button>
+                </div>
+
+                               <div class="col-2 d-flex flex-row justify-content-end">
+                    <button type="button" [routerLink]="['/life/policynote']" routerLinkActive="router-link-active"
+                        class="btn-ir p-0 px-2 " style="float: right;" >
+                        <span class="mx-3 my-auto">Note</span></button>
+                </div>
+            </div>
+        </div>
+
+        <hr style="margin-top: 5px;">
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Owner Full Name</label><br>
+                    <input type="text" formControlName="fullName" readonly class="inputform1 ">
+
+
+                </div>
+                <div class="mt-4">
+                    <label>Deposit Balance</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+
+
+                </div>
+                <div class="mt-4">
+                    <label>Non Medical Limit</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+
+
+                </div>
+
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Joint Owner Full Name</label><br>
+                    <input type="text" formControlName="fullName" readonly class="inputform1 ">
+
+
+                </div>
+                <div class="mt-4">
+                    <label>Annualised Premium</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+
+
+                </div>
+
+                <div class="mt-4">
+                    <label>Total Model Premium</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+
+
+                </div>
+
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Policy Matures</label><br>
+                    <input type="text" formControlName="createdDateTo" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Premium Payment Term</label><br>
+                    <input type="text" formControlName="premTermPayment" readonly class="inputform1 ">
+
+                </div>
+
+                <div class="mt-4">
+                    <label>Nil -UWR Limit</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+
+
+                </div>
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Policy Issue Date</label><br>
+                    <input type="text" formControlName="expiryDate" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Policy Term</label><br>
+                    <input type="text" formControlName="policyTerm" readonly class="inputform1 ">
+
+                </div>
+
+                <div class="mt-4">
+                    <label>Interests (%)</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+
+
+                </div>
+
+            </div>
+
+          
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Policy Status</label><br>
+                    <input type="text" formControlName="quoteStatus" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Premium Payment</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Currency</label><br>
+                    <input type="text" formControlName="currencyType" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Payee Account</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Outstanding Premiums</label><br>
+                    <input type="text" formControlName="quoteValidity" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Payment Outwards Account</label><br>
+                    <input type="text" formControlName="livesCovered" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Oustanding Target Contribuition</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Benefits Assigned To</label><br>
+                    <input type="text" formControlName="createdBy" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Total Sum at Risk</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Branch</label><br>
+                    <input type="text" formControlName="branch" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>No of covers</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+
+                </div>
+                <div class="mt-4">
+                    <label>Owner Prop</label><br>
+                    <input type="text" formControlName="branch" readonly class="inputform1 ">
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <br>
+        <div class="col-md-12 mx-auto">
+
+            <table class="table">
+                <thead class="py-3">
+                    <tr>
+                        <th scope="col">Cover Code</th>
+                        <th scope="col">Cover Name</th>
+                        <th scope="col">Life Assured</th>
+                        <th scope="col">Issue Age</th>
+                        <th scope="col">Current Age</th>
+                        <th scope="col">Prem Freq/Method</th>
+                        <th scope="col">Periodic Premium</th>
+                        <th scope="col">Sum Assured</th>
+                        <th scope="col">Issue Dt</th>
+                        <th scope="col">Next Prem Dt Age</th>
+
+
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr >
+                        <th scope="row">{{findPolicyService.policyInfo?.CLIENT_NO}}</th>
+                        <td>{{findPolicyService.policyInfo?.OWNER_NAME}}</td>
+                        <td>{{findPolicyService.policyInfo?.NO_OF_LIVES_COVERED}}</td>
+                        <td>{{findPolicyService.policyInfo?.POLICY_TERM}}</td>
+                        <td>{{findPolicyService.policyInfo?.PREM_PAYMENT_TERM}}</td>
+                        <td>{{findPolicyService.policyInfo?.TOTAL_PREMIUMS}}</td>
+                        <td>{{findPolicyService.policyInfo?.UNCOVERED_EXPOSURE}}</td>
+                        <td>{{findPolicyService.policyInfo?.TOTAL_SUM_AT_RISK}}</td>
+                        <td>{{findPolicyService.policyInfo?.CREATED_DATE_FROM}}</td>
+                        <td>{{findPolicyService.policyInfo?.CREATED_DATE_TO}}</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+       
+        <div class="d-flex justify-content-around  ">
+            <button type="button" class="btn-ir py-0 px-4 "
+                [routerLink]="['/life/documents']">
+                <span class="mx-4 my-auto">Documents</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Modify</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Endorsement</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Reinsurance</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-1 my-auto">Pricing</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Add_Rider</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">underwriting</span></button>
+
+                <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                    <span class="mx-4 my-auto">Commissions</span></button>
+
+                    <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                        <span class="mx-4 my-auto">Future_Actions </span></button>
+
+                        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                            <span class="mx-4 my-auto">Perils</span></button>
+
+        </div>
+
+        <br>
+
+        <div id="section_cardsno" class="section-cards d-flex justify-content-around">
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Total Payments Received</h6>
+                    <p id="card-text">{{findPolicyService.policyInfo?.TOTAL_PREMIUMS}}</p>
+                </div>
+
+            </div>
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Relationships</h6>
+                    <p id="card-text">{{findPolicyService.policyInfo?.DAYS_TO_SLA}}</p>
+                </div>
+
+            </div>
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Accounts</h6>
+                    <p id="card-text">{{findPolicyService.policyInfo?.ITERATIONS}}</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Annual Payments</h6>
+                    <p id="card-text">{{findPolicyService.policyInfo?.ANNUALISED_PAYMENTS}}</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Uncovered SAR</h6>
+                    <p id="card-text">{{findPolicyService.policyInfo?.UNCOVERED_EXPOSURE}}</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Create Note</h6>
+                    <p id="card-text">{{findPolicyService.policyInfo?.INIT_QUOTE_VALIDITY}}</p>
+                </div>
+
+            </div>
+
+          
+
+        </div>
+
+    </form>
+
+
+
+
+</div>
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="notemodel" tabindex="-1" aria-labelledby="notemodelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notemodelLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-4">
+                <label>Note</label><br>
+                <input type="textarea" formControlName="note" 
+                class="inputform " >
+            </div>
+            <div class="mt-4">
+                <label>Visible to All</label>
+                <input type="checkbox" formControlName="visiblebox"  >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

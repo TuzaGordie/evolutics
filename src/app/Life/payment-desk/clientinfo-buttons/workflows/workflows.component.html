@@ -1,0 +1,54 @@
+<app-form-navigation [title]="'View Client'"></app-form-navigation>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{'Workflows'|appTranslate|async}}</h1>
+      <p class="py-3"><b>{{'Client Name'|appTranslate|async}}:</b> <span
+          class="px-3">{{findClientService.clientInfo?.FIRST_NAME}}</span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{'SLA Tracker'|appTranslate|async}}</th>
+            <th scope="col">{{'Task Code'|appTranslate|async}}</th>
+            <th scope="col">{{'Task'|appTranslate|async}}</th>
+            <th scope="col">{{'User Assigned'|appTranslate|async}}</th>
+            <th scope="col">{{'Group Assigned'|appTranslate|async}}</th>
+            <th scope="col">{{'Start'|appTranslate|async}}</th>
+            <th scope="col">{{'Due'|appTranslate|async}}</th>
+            <th scope="col" style="border-top-right-radius: 12px;">{{'Time Outside SLA'|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of webflowsList">
+            <th scope="row">
+              <div class="square red"></div>
+            </th>
+            <td>{{item.TASK_CODE}}</td>
+            <td>{{item.TASK_DESCRIPTION}}</td>
+            <td>{{item.ASSIGNED_TO}}</td>
+            <td>{{item.ASSIGNED_TO_GROUP}}</td>
+            <td>{{item.START_ON}}</td>
+            <td>{{item.DUE_ON}}</td>
+            <td>{{item.TIME_OS_SLA}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="mt-5 row justify-content-between">
+      <div class="col-3 ">
+
+        <app-button buttonType="addCustom" text="Create New Task" [routerLink]="'../../workflow/workflow-task'">
+        </app-button>
+
+      </div>
+      <div class="col-3 ">
+
+        <app-button buttonType="history"></app-button>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

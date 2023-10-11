@@ -1,0 +1,103 @@
+<div
+  class="modal fade"
+  id="bl_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="buildingForm" class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Limit' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="limit"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Value of Building' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="value"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Monthly Rental' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="rental"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <app-excess
+            class="col"
+            [excessMax]="excess_max"
+            [excessMin]="excess_min"
+            [excessType]="excess_type"
+            [excessDisplay]="excess_display"
+            [excessDisabled]="excess_disabled"
+            [excessOptions]="excess_options"
+            [excessAmount]="excessAmount"
+            [excessRate]="excessRate"
+            (excessAmountChange)="onExcessAmountChange($event)"
+            (excessRateChange)="onExcessRateChange($event)"
+          ></app-excess>
+
+          <app-deductible
+            class="col"
+            [deductibleMax]="deductible_max"
+            [deductibleMin]="deductible_min"
+            [deductibleType]="deductible_type"
+            [deductibleDisplay]="deductible_display"
+            [deductibleDisabled]="deductible_disabled"
+            [deductibleOptions]="deductible_options"
+            [deductibleAmount]="deductibleAmount"
+            [deductibleRate]="deductibleRate"
+            (deductibleAmountChange)="onDeductibleAmountChange($event)"
+            (deductibleRateChange)="onDeductibleRateChange($event)"
+          ></app-deductible>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <app-button
+          buttonType="btnCustomCloneGB"
+          text="Risk Questionnaire"
+        ></app-button>
+        <app-button
+          (click)="stop()"
+          [buttonType]="'saveGB'"
+          data-bs-dismiss="modal"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

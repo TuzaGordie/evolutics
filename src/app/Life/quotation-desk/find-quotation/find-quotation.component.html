@@ -1,0 +1,185 @@
+<div class="container">
+  <form [formGroup]="findQuotationForm">
+    <!-- <div class="row mt-2">
+    <div class="col-md-2 d-flex align-items-center">
+      <label>Quote No</label>
+    </div>
+    <div class="col-md-8">
+      <input type="text" class="form-control control-bg-gray mr-2" formControlName="quoteNo"
+        (keyup)="getQuoteNoValidity(quoteNo)"
+        [ngClass]="{valid: isQuoteNoValid === 'true', invalid: isQuoteNoInvalid === 'true'}">
+    </div>
+   <app-input-basic [form]="findQuotationForm" [showValidation]="true" [showValidationIcon]="true" [showLabel]="false" name="clientNo" [loading]="validatingClientNo">
+    </app-input-basic>
+    <div class="col-md-2">
+      <app-btn (click)="onNext()" [disabled]="!isQuoteNo" icon="show" type="dark">Show</app-btn>
+    </div>
+  </div> -->
+    <div class="row my-2">
+      <div class="col-md-2">
+        <label class="py-2">{{'Quote No'|appTranslate|async}}</label>
+      </div>
+      <div class="col-md">
+        <app-input-basic name="quoteNo" [showLabel]="false" [form]="findQuotationForm" [showValidation]="true"
+          [showValidationIcon]="true" #quoteNoTag>
+        </app-input-basic>
+
+      </div>
+      <div class="col-md-2">
+        <app-btn icon="show" type="dark" [disabled]="quoteNoTag.invalid" (click)="onNext()">Show
+        </app-btn>
+      </div>
+    </div>
+
+
+
+
+    <div class="row my-2">
+      <div class="col-md-2">
+        <label class="py-2">{{'Client Number'|appTranslate|async}}</label>
+      </div>
+      <div class="col-md" style="position: relative;">
+        <input type="text" formControlName="clientNo" class="form-control relative control-bg-gray"
+          [ngClass]="{bordercheck: validResult1 == 'true' , borderuncheck: validResult1 == 'false'}" required
+          (keyup)="validateClientNo()">
+        <div style="position: absolute; top: 10%; right: 5%; transform: translateY(50%);">
+          <div style="display: none;" [ngClass]="{checkmark: validResult1 == 'true'}"><i class="fa fa-check"></i>
+          </div>
+          <div style="display: none;" [ngClass]="{uncheckmark: validResult1 == 'false'}"><i class="fa fa-times"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <!-- <button type="submit" class="btn btn-lg py-2 btn-dark mx-2">Show
+      </button> -->
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Agent No'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="agentNo" class="form-control control-bg-gray mr-2">
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Owner Name'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="ownerName" class="form-control control-bg-gray mr-2">
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Property ID'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="propertyId" class="form-control control-bg-gray mr-2">
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Insurance Type'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select formControlName="insuranceType" class="form-control control-bg-gray mr-2" #type
+          (change)="getProductClass(type.value)">
+          <option [value]="" selected></option>
+          <option [value]="type.code" *ngFor="let type of insurances">{{type.code}}-{{type.title}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Grouped'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select formControlName="grouped" class="form-control control-bg-gray mr-2">
+          <option [value]=""></option>
+          <option [value]="'Grouped'">Grouped</option>
+          <option [value]="'Individual'">Individual</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Status'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select formControlName="status" class="form-control control-bg-gray mr-2">
+          <option [value]="" selected>Select Status</option>
+          <option [value]="status.code" *ngFor="let status of quoteStatus">{{status.code}}-{{status.title}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row  mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Product Class'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select formControlName="productClass" class="form-control control-bg-gray mr-2" #productclass
+          (change)="getProductCodes(productclass.value)">
+          <option [value]="" selected>{{'Select Product Class'|appTranslate|async}}</option>
+          <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}}-{{class.title}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Product Code'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select formControlName="productCode" class="form-control control-bg-gray mr-2">
+          <option [value]="" selected>Select Product Code</option>
+          <option *ngFor="let code of productCodes">{{code.code}}-{{code.description}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Created By'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select class="form-control control-bg-gray mr-2" formControlName="createdBy">
+          <option [value]=""></option>
+          <option *ngFor="let name of createdBys">{{name.fullName}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Created Date From'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="date" formControlName="createdDateFrom" class="form-control control-bg-gray mr-2">
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Created Date To'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="date" formControlName="createdDateTo" class="form-control control-bg-gray mr-2">
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2 pt-3 form-group mt-2">
+        <app-button [buttonType]="'search'" (click)="search()"></app-button>
+      </div>
+    </div>
+  </form>
+</div>

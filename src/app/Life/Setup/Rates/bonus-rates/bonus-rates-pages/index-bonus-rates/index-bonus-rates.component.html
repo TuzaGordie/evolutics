@@ -1,0 +1,25 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <app-input-basic label="Select Bonus Group" type="select" [form]="form" name="group" valueField="code"
+        [stacked]="true" labelType="ct" [options]="rS.getRateListGroups|httpListCaller|async" #group>
+      </app-input-basic>
+      <app-input-basic label="Select Bonus Rate" type="select" [form]="form" name="code" valueField="code"
+        [stacked]="true" labelType="cd" [options]="getBonus|httpListCaller1:group.value|async" #code>
+      </app-input-basic>
+
+      <div class="form-group row my-3">
+        <div class="col-sm-4 d-grid gap-1">
+          <app-btn [valid]="form?.valid" routerLink="show/{{rateCode}}" icon="show" type="dark">Show</app-btn>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-btn routerLink="create" icon="add" type="outline-nm">Create new</app-btn>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-btn [valid]="form?.valid" routerLink="clone/{{rateCode}}" icon="file" type="secondary">Clone</app-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

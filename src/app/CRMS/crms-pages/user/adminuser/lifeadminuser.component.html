@@ -1,0 +1,413 @@
+<app-form-navigation [title] = "'Admin User'"></app-form-navigation> 
+<div *ngIf="operation === 'actions'" class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+        <div class="form-group mt-2">
+          <label>Select User Group</label>
+          <select class="form-select form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Select User</label>
+          <select class="form-select form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Created By</label>
+          <input type="text" class="form-control form-control-lg control-bg-gray">
+        </div>
+        <div class="form-group mt-2">
+          <label>Created Time</label>
+          <input type="text" class="form-control form-control-lg control-bg-gray">
+        </div>
+        <div class="form-group mt-2">
+          <label>Status</label>
+          <select class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [routerLink]="['Show']" [buttonType]="'show-red'"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [routerLink]="['create']" [buttonType]="'create-red'"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [routerLink]="['clone']" [buttonType]="'clone-red'"></app-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="operation === 'create' || operation === 'clone' " class="container-sm vh-100" id="form-body">
+  <div class="d-flex h-50 flex-column justify-content-center">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label class="mb-2"><b>Enter Client Number for New User</b></label>
+            <div class="row">
+              <div class="col-md-8">
+                <input type="text" class="form-control form-control-lg control-bg-gray">
+              </div>
+              <div class="col-md-4">
+                <app-button [routerLink]="['../show']" [buttonType]="'create-red'"></app-button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="operation === 'show'" class="container-sm mt-5 " id="form-body">
+  <div class="form-body container-fluid mt-2">
+    <ul class="pills-tab" role="tablist" class="nav nav-pills nav-fill mb-3">
+      <li *ngFor="let menu of templateMenu" role="presentation" class="nav-item">
+        <button (click)="activate(menu.name)" class="nav-link" [ngClass]="{'active':menu.active}" id="pills-basic-tab"
+          data-bs-toggle="pill" data-bs-target="pills" type="button" role="tab" aria-controls="pills-basic">
+          {{menu.name}}
+        </button>
+      </li>
+    </ul>
+    <div *ngIf="tab === 'Basics'" class="tab-content" id="pills-tabContent">
+      <div class="container">
+        <div class="row tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label for="">User ID</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Client Number of User</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Full Name</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Office Email</label>
+              <input class="form-control  control-bg-gray " type="text">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Appraisal Level Code</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Appraisal Company Code</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Division Code</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Sub Division Code</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Team Code</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Individual Level Code</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label for="">User Menu</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+            <div class="row">
+              <div class=" col-md-8 mt-4  form-group">
+                <label for="">Company Data Allowed Access</label>
+                <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+              <div class=" col-md-4   mt-4">
+                <label for="">&nbsp;</label>
+                <button type="button" class="btn btn-outline-secondry form-control">Add</button>
+              </div>
+              <div class=" col-md-8 mt-4  form-group">
+                <label for="">Branches Data Allowed Access To</label>
+                <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+              <div class=" col-md-4    mt-4">
+                <label for="">&nbsp;</label>
+                <button type="button" class="btn btn-outline-secondry form-control">Add</button>
+              </div>
+            </div>
+
+            <div class="form-check mt-4">
+              <label class="form-check-label"> Allow Access through web service</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="form-check mt-3">
+              <label class="form-check-label"> User Allowed to snooze tasks</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="form-check mt-3">
+              <label class="form-check-label"> On break</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="form-check mt-3">
+              <label class="form-check-label"> Out of Office</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Out of Office From </label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Out of Office To </label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class=" form-group mt-4">
+              <label for="">Current Box No</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class=" form-group mt-4">
+              <label for="">Access Expiry Date</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label for="">Direct supervisor </label>
+              <select class="form-select control-bg-gray " name="" id=""></select>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Default User for pending tasks when out of office</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+
+            <div class="form-group mt-4">
+              <label for="">Send notification email on workflow issuance</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+
+            <div class="form-group mt-4">
+              <label for="">User Group</label>
+              <select class="form-select control-bg-gray" name="" id=""></select>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">Part Time Workflo Weighting (%)</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="mt-2">
+              <label for="">&nbsp;</label>
+              <button type="button" class="btn btn-outline-secondry form-control">Upload Passport Photo</button>
+            </div>
+            <div class="form-group mt-4">
+              <label for="">User Job Role</label>
+              <input class="form-control control-bg-gray" type="text">
+            </div>
+            <div class="form-check mt-4">
+              <label class="form-check-label"> Relationship Manager</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="form-check mt-4">
+              <label class="form-check-label"> Sub Relationship Manager</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+            <div class="form-check mt-4">
+              <label class="form-check-label"> Tele-Marketer</label>
+              <input class="form-check-input" type="checkbox">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="tab === 'Limits'">
+          <h5 class="title-border pb-1" >Limits &nbsp;&nbsp; <span class="grey">(Can be written at User Level)</span></h5>
+          <h6 class="mt-4">Payout Limits</h6>
+      <div class="row">
+          <div class="col-md-5 ">
+              <div class=" form-group">
+                  <label for="">Currency</label>
+                  <select class="form-select control-bg-gray " name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-5 ">
+              <div class=" form-group">
+                  <label for="">Amount</label>
+                  <input class="form-control control-bg-gray" type="text">
+              </div>
+          </div>
+          <div class="col-md-2 d-flex flex-column justify-content-end">
+             <button class="btn btn-outline-secondry w-100"> add </button>
+          </div>
+      </div>
+
+      <h6 class="mt-4">
+          Quotation Approval Limit
+      </h6>
+      <div class="row">
+          <div class="col-md-5 ">
+              <div class=" form-group">
+                  <label for="">Currency</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-5 ">
+              <div class=" form-group">
+                  <label for="">Tier</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-2 d-flex flex-column justify-content-end">
+            <button class="btn btn-outline-secondry"> add </button>
+          </div>
+      </div>
+      <h6 class="mt-4"> Payout Authorisation Limits</h6>
+      <div class="row">
+          <div class="col-md-2 ">
+              <div class=" form-group">
+                  <label for="">Currency</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-4 ">
+              <div class=" form-group">
+                  <label for="">Tier</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-4 ">
+              <div class=" form-group">
+                  <label for="">Tier</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-2 d-flex flex-column justify-content-end">
+            <button class="btn btn-outline-secondry"> add </button>
+          </div>
+      </div>
+      <h6 class="mt-4"> Discharge Voucher Authorization</h6>
+      <div class="row">
+          <div class="col-md-2 ">
+              <div class=" form-group">
+                  <label for="">Currency</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-4 ">
+              <div class=" form-group">
+                  <label for="">Amount</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-4 ">
+              <div class=" form-group">
+                  <label for="">Amount</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-2 d-flex flex-column justify-content-end">
+            <button class="btn btn-outline-secondry"> add </button>
+          </div>
+      </div>
+      <h6 class="mt-4"> Policy Accounting & Comission Adjustment Authorization Limits</h6>
+      <div class="row">
+          <div class="col-md-2 ">
+              <div class=" form-group">
+                  <label for="">Currency</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-4 ">
+              <div class=" form-group">
+                  <label for="">Amount</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-4 ">
+              <div class=" form-group">
+                  <label for="">Amount</label>
+                  <select class="form-select control-bg-gray" name="" id=""></select>
+              </div>
+          </div>
+          <div class="col-md-2 d-flex flex-column justify-content-end">
+            <button class="btn btn-outline-secondry"> add </button>
+          </div>
+      </div>
+
+      <h6 class="mt-4">
+          Discount Limit (%)
+      </h6>
+
+      <div class="row">
+          <div class="col-md-2 ">
+              <div class=" form-group">
+                  <input class="form-control control-bg-gray" type="text">
+              </div>
+          </div>
+      </div>
+  </div>
+  <div *ngIf="tab === 'Office Schedule'">
+      <h5 class="title-border mt-4 pb-2">
+          In-Office Schedule
+      </h5>
+      <div class=" row mt-5">
+          <div class="col-md-4 ">
+              <h5 class="heading-color-primary">Day</h5>
+          </div>
+          <div class="col-md-4 ">
+              <h5 class="heading-color-primary">From</h5>
+          </div>
+          <div class="col-md-4 ">
+              <h5 class="heading-color-primary" >To</h5>
+          </div>
+      </div>
+      <div class="mt-4 pd-2 row" *ngFor="let day of weekday">
+          <div class="col-md-4 ">
+              <h5>{{day}}</h5>
+          </div>
+          <div class="col-md-4 ">
+              <div class="w-100 form-group">
+                  <input class="form-control control-bg-gray" type="text">
+              </div>
+          </div>
+          <div class=" col-md-4 ">
+              <div class="  w-100 form-group">
+                  <input class="form-control control-bg-gray " type="text">
+              </div>
+          </div>
+      </div>
+  </div>
+
+  </div>
+</div>
+
+<div *ngIf="tab === 'Office Schedule'" class=" row mt-5 flew-row justify-content-end">
+
+  <div class="col-md-3 w-30 align-items-center" >
+      <button class="btn btn-secondary save" > Save</button>
+  </div>
+
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="col-6 mx-auto">
+    <div class="row mt-5 px-2">
+      <label class="">{{"Select Company"|appTranslate|async}}</label>
+      <select [(ngModel)]="companyValue" name="type" class="form-control form-control-sm control-bg-gray"
+        #company="ngModel" required class="form-control control-bg-gray">
+        <option value=""></option>
+        <option *ngFor="let item of companyArray" value="{{ item?.code }}">
+          {{ item?.code }} - {{ item?.description }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="company.errors && (company.dirty || company.touched)">
+        <p *ngIf="company.errors.required">{{"Company is required"|appTranslate|async}}</p>
+      </div>
+    </div>
+    <div class="row mt-2 px-2">
+      <label class="">{{"Select Requirement type"|appTranslate|async}}</label>
+
+      <select [disabled]="!companyValue" (change)="onChangeReqType(reqType.value)" [(ngModel)]="reqTypeValue"
+        name="type" class="form-control form-control-sm control-bg-gray" #reqType="ngModel" required
+        class="form-control control-bg-gray">
+        <option value=""></option>
+        <option *ngFor="let item of reqTypeArray" value="{{ item.code }}">
+          {{ item.code }} - {{ item.title }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="reqType.errors && (reqType.dirty || reqType.touched)">
+        <p *ngIf="reqType.errors.required">{{"Requirement Type is required"|appTranslate|async}}</p>
+      </div>
+    </div>
+    <div class="row mt-2 px-2">
+      <label class="">{{"Select Requirement"|appTranslate|async}}</label>
+
+      <select [disabled]="!reqTypeValue" [(ngModel)]="requirementValue" name="type"
+        class="form-control form-control-sm control-bg-gray" #requirement="ngModel" required
+        class="form-control control-bg-gray">
+        <option value=""></option>
+        <option *ngFor="let item of requirementArray" value="{{ item?.code }}">
+          {{ item.code }} - {{ item.description }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="requirement.errors && (requirement.dirty || requirement.touched)">
+        <p *ngIf="requirement.errors.required">{{"Requirement is required"|appTranslate|async}}</p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        <button [class.disabled]="!requirementValue" class="btn btn-dark btn-lg w-100" (click)="show()">
+          <span class="fa fa-eye"></span>
+          Show
+        </button>
+      </div>
+      <div class="col">
+        <app-button buttonType="create" routerLink="../Requirements-create"></app-button>
+      </div>
+      <div class="col">
+        <button [class.disabled]="!requirementValue" class="btn btn btn-outline-primary btn-lg btn-clone w-100" (click)="clone()">
+          <span class="fa fa-clone"></span>
+          Clone
+        </button>      
+      </div>
+    </div>
+  </div>
+</div>

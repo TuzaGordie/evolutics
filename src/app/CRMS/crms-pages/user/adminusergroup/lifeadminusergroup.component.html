@@ -1,0 +1,347 @@
+<app-form-navigation [title] = "'Admin User Group'"></app-form-navigation> 
+<div *ngIf="operation === 'actions'" class="container-sm mt-5 vh-100 " id="form-body">
+    <div class="d-flex h-50 flex-column justify-content-center">
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5 align-middle">
+                <form>
+                    <div class="form-group mt-2">
+                        <label>Select User Group</label>
+                        <select class="form-select form-select-lg control-bg-gray">
+                            <option></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group row my-3">
+                        <div class="col-sm-4 d-grid gap-1">
+                            <app-button [routerLink]="['Show']" [buttonType]="'show-red'"></app-button>
+                        </div>
+                        <div class="col-sm-4 d-grid gap-1">
+                            <app-button [routerLink]="['create']" [buttonType]="'create-red'"></app-button>
+                        </div>
+                        <div class="col-sm-4 d-grid gap-1">
+                            <app-button [routerLink]="['clone']" [buttonType]="'clone-red'"></app-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="operation === 'create' || operation === 'clone' " class="container-sm vh-100" id="form-body">
+    <div class="d-flex h-50 flex-column justify-content-center">
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5 align-middle">
+                <form>
+                    <div class="form-group mt-2">
+                        <label class="mb-2"><b>Enter Code for New Group</b></label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-select form-select-lg control-bg-gray">
+                            </div>
+                            <div class="col-md-4">
+                                <app-button [routerLink]="['../show']" [buttonType]="'create-red'"></app-button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="operation === 'show'">
+    <div class="form-body container-fluid mt-2">
+        <ul class="pills-tab" role="tablist" class="nav nav-pills nav-fill mb-3">
+            <li *ngFor="let menu of templateMenu" role="presentation" class="nav-item">
+                <button (click)="activate(menu.name)" class="nav-link" [ngClass]="{'active':menu.active}"
+                    id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="pills" type="button" role="tab"
+                    aria-selects="pills-basic">
+                    {{menu.name}}
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="tab === 'Basic'" class="tab-content" id="pills-tabContent">
+            <div class="container">
+                <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+                    aria-labelledby="pills-basic-tab">
+                    <div class="col-md-6 mt-4">
+                        <div class="form-group mt-2">
+                            <label for="">User Group</label>
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">Description</label>
+                            <input class="form-control control-bg-gray" type="text">
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">Default Menu (can be overwritten at user level)</label>
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">Authorisation Limit % on Commission Override at policy</label>
+                            <input class="form-control control-bg-gray" type="text">
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">Authorisation Limit % on Premium Adjustments</label>
+                            <input class="form-control control-bg-gray" type="text">
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">Standard Break Duration (hours;min)</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-control control-bg-gray" type="text">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control control-bg-gray" type="text">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6  mt-4">
+                        <div class="form-group  mt-2">
+                            <label for="">Team Code (Can be overwritten at user level)</label>
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">User Appraisal Level (can be overwritten at user level)</label>
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                        <div class="form-group  mt-2">
+                            <label for="">Direct Supervisor (can be overwritten at user level)</label>
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="form-check mt-4 check-border">
+                            <label class="form-check-label  ml-3 "> Allow Workflow Task Assignment</label>
+                            <input class="form-check-input " type="checkbox">
+                        </div>
+
+                        <div class="form-check mt-4 check-border pb-1">
+                            <label class="form-check-label  ml-3 "> Allow to Snooze Workflow</label>
+                            <input class="form-check-input" type="checkbox">
+                        </div>
+
+                        <div class="form-check mt-4 check-border pb-1">
+                            <label class="form-check-label  ml-3"> Allow to link workflows</label>
+                            <input class="form-check-input" type="checkbox">
+                        </div>
+
+                        <div class="form-check mt-4 check-border pb-1">
+                            <label class="form-check-label  ml-3"> Allow to Change Workflow Status to Cancel</label>
+                            <input class="form-check-input" type="checkbox">
+                        </div>
+
+                        <div class="form-check mt-4 check-border pb-1">
+                            <label class="form-check-label  ml-3"> Allow to Unassign Workflow Tasks </label>
+                            <input class="form-check-input" type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="tab === 'Batches'">
+            <div class="container">
+                <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+                    aria-labelledby="pills-basic-tab">
+                    <div class="col-6 mx-auto">
+                        <h5 class="check-border pb-3">
+                            Batches Group has access to
+                        </h5>
+
+                        <div class=" mt-4 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class=" mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                        <div class="mt-2 row">
+                            <div class="clear col-md-10"></div>
+                            <div class="col-md-2"> <button class=" w-100 btn btn-dark">Add</button> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="tab === 'Limits'">
+            <div class="container">
+                <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+                    aria-labelledby="pills-basic-tab">
+                    <h5 class="check-border pb-1">Limits &nbsp;&nbsp; <span class="grey">(Can be written at User
+                            Level)</span></h5>
+                    <h6 class="mt-4 heading-color-primary">  Discharge Voucher Authorisation Limit </h6>
+                    <div class="row">
+                        <div class="col-md-5 ">
+                            <div class=" form-group">
+                                <label for="">Currency</label>
+                                <select class="form-select control-bg-gray " name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-5 ">
+                            <div class=" form-group">
+                                <label for="">Amount</label>
+                                <input class="form-control control-bg-gray" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex flex-column justify-content-end">
+                            <button class="btn btn-outline-secondry w-100"> add </button>
+                        </div>
+                    </div>
+
+                    <h6 class="mt-4 heading-color-primary">
+                        Quotation Approval Limit
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-5 ">
+                            <div class=" form-group">
+                                <label for="">Currency</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-5 ">
+                            <div class=" form-group">
+                                <label for="">Tier</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex flex-column justify-content-end">
+                            <button class="btn btn-outline-secondry"> add </button>
+                        </div>
+                    </div>
+                    <h6 class="mt-4 heading-color-primary"> Payout Authorisation Limits</h6>
+                    <div class="row">
+                        <div class="col-md-2 ">
+                            <div class=" form-group">
+                                <label for="">Currency</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class=" form-group">
+                                <label for="">Tier</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class=" form-group">
+                                <label for="">Tier</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex flex-column justify-content-end">
+                            <button class="btn btn-outline-secondry"> add </button>
+                        </div>
+                    </div>
+                    <h6 class="mt-4 heading-color-primary"> Payout Limits</h6>
+                    <div class="row">
+                        <div class="col-md-2 ">
+                            <div class=" form-group">
+                                <label for="">Currency</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class=" form-group">
+                                <label for="">Amount</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class=" form-group">
+                                <label for="">Amount</label>
+                                <select class="form-select control-bg-gray" name="" id=""></select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex flex-column justify-content-end">
+                            <button class="btn btn-outline-secondry"> add </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="tab === 'Documents'">
+            <div class="container">
+                <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+                    aria-labelledby="pills-basic-tab">
+                    <h5 class="check-border pb-3">
+                        Batches Group has access to
+                    </h5>
+                    <div class="col-6 mx-auto">
+                        <h6 class="mt-4">
+                           Category
+                        </h6>
+                        <div class=" mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class=" mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                    </div>
+                    <div class="col-6 mx-auto">
+                        <h6 class="mt-4">
+                            Sensitivity
+                         </h6>
+
+                        <div class=" mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class=" mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+
+                        <div class="mt-2 div-user-group form-group">
+                            <select class="form-select control-bg-gray" name="" id=""></select>
+                        </div>
+                        <div class="mt-4 row">
+                            <div class="clear col-md-10"></div>
+                            <div class="col-md-2"> <button class=" w-100 btn btn-dark">Add</button> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

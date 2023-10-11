@@ -1,0 +1,17 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Currency / Rate /'"></app-form-navigation> -->
+<div class="container-fluid">
+  <div class="row">
+    <form [formGroup]="form" class="col-md-8 mx-auto mt-5">
+      <div class="row mt-5">
+        <div class="col-md-8">
+          <app-input-basic type="text" label='Enter Date for New Rate' [colored]='false' [options]="" labelType="cd"
+            valueField="code" [form]="form" name='create' [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="btn col-md-4">
+          <app-button buttonType="create" routerLink="../start"></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class=""> 
+    <div class="row justify-content-between">
+      <div class="col-lg-3 mb-3">
+        <app-input [input]="input" [stacked]="false" lblCl="auto"></app-input>
+      </div>
+      <div class="col-lg-auto mb-3">
+        <text-case-1 lbl="Benefit Calculation Basis:" [val]="name" [stacked]="false"></text-case-1>
+      </div>
+    </div>
+    <div class=" mb-3">
+      <div class="text-end">
+      </div>
+      <div class="col-lg-3">
+      </div>
+    </div>
+    <div class="">
+      <table-plain [data]="list" [displayedColumns]="dCols"></table-plain>
+    </div>
+  </div>
+  

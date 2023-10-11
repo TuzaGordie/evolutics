@@ -1,0 +1,50 @@
+<app-form-navigation></app-form-navigation>
+<div class="container mt-5">
+  <div class="row my-4">
+    <div class="col-md-4 mt-3">
+      <h4>Policy Valued Data Summary</h4>
+    </div>
+  </div>
+  <div class="">
+    <div class="">
+      <label class="small1">
+        Product Class:
+        <span class="text-primary">
+                {{prodClass}}
+            </span>
+      </label>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 mt-3" *ngIf="statusCond">
+        <label for="prod" class="form-label text-primary">Product</label>
+        <input class="ms-2" [value]='savingsProd' class='form-control control-bg-gray' disabled>
+      </div>
+      <div class="col-md-4 mt-3" *ngIf="statusCond">
+        <label for="status" class="form-label text-primary">Status</label>
+        <select name="" id="" class="form-control control-bg-gray">
+          <option value="">tb1</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <th>Product</th>
+      <th>Status</th>
+      <th>Count</th>
+      <th>Liability</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let product of productClass">
+        <td><a (click)='check(product.product)'>{{product.product}}</a></td>
+        <td>{{product.status}}</td>
+        <td>{{product.count}}</td>
+        <td>{{product.liability}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,362 @@
+<!-- <app-form-navigation-yellow [title]="'Asset Desk / View Motor Asset'"></app-form-navigation-yellow> -->
+<ng-container *ngIf="editMode">
+  <!-- Edit modal outlet -->
+  <!--<app-view-asset-edit [property]="editType" (doneEditing)="onDoneEditing()"></app-view-asset-edit>-->
+</ng-container>
+<div class="container-fluid px-4">
+  <div class="row justify-content-end mb-2">
+    <div class="col-2">
+      <app-button buttonType="edit" text="Edit"></app-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-auto mb-2">
+      <div class="rounded-circle mb-3 mx-auto overflow-hidden"
+           style="height: 128px; width: 129px; background-color: #FEC55F;">
+        <img alt=" " src="" style="width: 100%; height: 100%">
+      </div>
+
+      <div class="w-100 text-center">
+        <label class="text-green">Active <i class="fas fa-pencil-alt" data-bs-toggle="modal" data-bs-target="#changeStatusModal"></i></label>
+      </div>
+
+    </div>
+    <div class="col-10">
+      <div class="row mb-4">
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Asset ID</span>
+                        <br> {{asset?.id}} </span>
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Asset Type</span>
+                        <br> {{asset?.type}}</span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Asset Type')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                <span>
+                    <span class="fw-bold  small1">Asset Class</span>
+                    <br> --
+                </span>
+          <br>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Asset Class')">Edit</button>     -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Veh Type</span>
+                        <br> {{asset?.vehicleType}}
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Vehicle Type')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Brand/Make/Model</span>
+                        <br> {{asset?.vehicleBrand}}-{{asset?.vehicleMake}}-{{asset?.vehicleModel}}
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Brand/Make/Model')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Manufacturing Year</span>
+                        <br> {{asset?.yrManuf}}
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Manufacturing Year')">Edit</button> -->
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Vehicule Genre</span>
+                        <br>
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Manufacturing Year')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Asset Age</span>
+                        <br>
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Manufacturing Year')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Category</span>
+                        <br> {{asset?.category}} </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Category')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Usage</span>
+                        <br> {{asset?.propertyUsage}} </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Usage')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">No Of Seats</span>
+                        <br> --</span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Displacement</span>
+                        <br> --</span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-2 small1">
+                <span>
+                    <span class="fw-bold  small1">Fuel Type</span>
+                    <br> --
+                </span>
+          <br>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Fuel Type')">Edit</button>     -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Tonnage</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('Tonnage')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">No of Authorised driver</span>
+                        <br> {{asset?.authDrvNo}}
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Horse Power</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Address</span>
+                        <br> {{asset?.location}} </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Geolocation</span>
+                        <br> {{asset?.geolocation}}
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-2 small1">
+                <span>
+                    <span class="fw-bold  small1">Transmission</span>
+                    <br> --
+                </span>
+          <br>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button>     -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Nature of goods transported</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Estimated Value by Client</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Adjusted Value</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Reg No</span>
+                        <br> {{asset?.registrationNo}} </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span><span class="fw-bold  small1">Chassis No</span>
+                        <br> {{asset?.chasisNo}} </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Currency</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Purchase Value</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Insured Value</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Market Value</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                <span>
+                    <span class="fw-bold  small1">Engine Number</span>
+                    <br> {{asset?.engineNo}}
+                </span>
+          <br>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button>     -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Tracked</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Trailer</span>
+                        <br> {{asset?.trailer}}
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Dual Control</span>
+                        <br> --
+                    </span>
+          <!-- <button class="btn btn-link edit-btn" (click)="openEdit('')">Edit</button> -->
+        </div>
+        <div class="col-2 small1">
+                <span>
+                    <span class="fw-bold  small1">Created By</span>
+                    <br> {{asset?.ownerName}}
+                </span>
+          <br>
+        </div>
+        <div class="col-2 small1">
+                    <span>
+                        <span class="fw-bold  small1">Created On</span>
+                        <br> {{asset?.yrConstr}}
+                    </span>
+        </div>
+      </div>
+
+      <div class="gx-2 my-5 row">
+
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Create Quotation'" routerLink="/general/quotation-desk/create-individual-quotation"></app-button>
+        </div>
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Tracker'"
+                      routerLink="../tracker"></app-button>
+        </div>
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Risk Information'"
+                      routerLink="../risk-info"></app-button>
+        </div>
+
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Partners'"
+                      routerLink="../partners"></app-button>
+        </div>
+
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Workflows'"
+                      routerLink="../workflows"></app-button>
+        </div>
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Endorsement'"
+                      routerLink="../../endorsements"  [queryParams]="{clientNo:asset?.ownerClientNo,assetNo:asset?.assetNo}"></app-button>
+        </div>
+
+
+      </div>
+      <div class="d-flex justify-content-around section-cards-2 card-yellow">
+
+        <div class="card color1 shadow-sm" routerLink="../pending-claims">
+          <div class="card-body">
+            <h6 class="card-title">Pending Claims</h6>
+            <p class="card-sm-num ">123,000</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm"  routerLink="../policy-rel" >
+          <div class="card-body">
+            <h6 class="card-title">Policy Relationships</h6>
+            <p class="card-sm-num">1</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm" routerLink="../client-relationships">
+          <div class="card-body">
+            <h6 class="card-title">Client Relationships</h6>
+            <p class="card-sm-num ">2</p>
+
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm"  routerLink="../../documents" >
+          <div class="card-body">
+            <h6 class="card-title">Documents</h6>
+            <p class="card-sm-num ">2</p>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row px-3">
+          <label  class="form-label text-primary">New Status</label>
+          <select class="form-control control-bg-gray" >
+            <option value=""></option>
+            <option ></option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

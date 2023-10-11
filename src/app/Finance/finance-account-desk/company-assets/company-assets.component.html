@@ -1,0 +1,224 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="col-lg-2 col-sm-12">
+      <app-btn icon="add" data-bs-toggle="modal" data-bs-target="#addNewModal">{{'Add New Record'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-4">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Asset Category'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Asset Status'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn icon="show" type="dark">{{'Show'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 mt-5 justify-content-end">
+    <div class="col">
+      <app-btn icon="download" type="secondary">{{'Download'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col">
+      <app-btn icon="upload" type="secondary">{{'Upload'|appTranslate|async}}</app-btn>
+    </div>
+
+  </div>
+  <table class="table table-responsive border table-striped mt-2">
+    <thead class="py-3 theader">
+    <tr>
+      <th scope="col">{{'Asset ID'|appTranslate|async}}</th>
+      <th scope="col">{{'External Ref'|appTranslate|async}}</th>
+      <th scope="col">{{'Asset Cat'|appTranslate|async}}</th>
+      <th scope="col">{{'Status'|appTranslate|async}}</th>
+
+
+      <th scope="col">{{'Description'|appTranslate|async}}</th>
+      <th scope="col">{{'Branch'|appTranslate|async}}</th>
+      <th scope="col">{{'Location'|appTranslate|async}}</th>
+      <th scope="col">{{'Condition'|appTranslate|async}}</th>
+      <th scope="col">{{'Expense Code'|appTranslate|async}}</th>
+      <th scope="col">{{'Users'|appTranslate|async}}</th>
+      <th scope="col">{{'Dates'|appTranslate|async}}</th>
+
+      <th scope="col"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <button class="btn btn-dark" data-bs-toggle="tooltip" data-bs-html="true" trigger="hover focus" delay="0"
+                title="Created By: --  Updated By: --  Auth By: --  "><i class="fa fa-users" aria-hidden="true"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-dark" data-bs-toggle="tooltip" data-bs-html="true" trigger="hover focus" delay="0"
+                title="Created On: --  Purchased On: --  Updated On: --  Auth On: -- "><i
+          class="fas fa-calendar-alt"></i></button>
+      </td>
+      <td>
+        <app-btn icon="edit" type="outline"></app-btn>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addNewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Create New Asset'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row row-cols-2">
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'Asset No'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+              <div class="col-2">
+                <label for="" class="form-label text-primary">&nbsp;</label>
+                <app-btn type="secondary" icon="search"></app-btn>
+              </div>
+              <div class="col-2">
+                <label for="" class="form-label text-primary">&nbsp;</label>
+                <app-btn type="secondary" icon="add"></app-btn>
+              </div>
+            </div>
+
+          </div>
+          <div class="col mt-3">
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'Asset Cat'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                ---
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'Location'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                ---
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'Purchased On'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                ---
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'Purchase Value'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                ---
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">External Ref</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Condition'|appTranslate|async}}</label>
+            <select  class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">Company</label>
+            <select  class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Branch'|appTranslate|async}}</label>
+            <select  class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-btn icon="save" type="primary">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="usersModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Users'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Created by'|appTranslate|async}}</label>
+          </div>
+          <div class="col">--</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Auth by'|appTranslate|async}}</label>
+          </div>
+          <div class="col">--</div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Updated by'|appTranslate|async}}</label>
+          </div>
+          <div class="col">--</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

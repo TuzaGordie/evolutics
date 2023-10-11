@@ -1,0 +1,110 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="d-flex">
+        <p class="py-3 mx-3"><b>{{"Client Name"|appTranslate|async}}:</b> <span class="px-3">{{clientFullName}}</span>
+        </p>
+        <p class="py-3 mx-3"><b>{{"Family size"|appTranslate|async}}:</b> <span class="px-3">{{clientRelationshipsForm.value.length}}</span></p>
+      </div>
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <!-- <th scope="col" style="border-bottom-left-radius: 12px;">{{"Client Number"|appTranslate|async}}</th> -->
+          <!-- <th scope="col">{{"Is"|appTranslate|async}}</th> -->
+          <!-- <th scope="col">{{"Connector"|appTranslate|async}}</th> -->
+          <th scope="col">{{"Full Name"|appTranslate|async}}</th>
+          <th scope="col">{{"Rel"|appTranslate|async}}</th>
+          <th scope="col">{{"Email"|appTranslate|async}}</th>
+          <th scope="col">{{"Client Number"|appTranslate|async}}</th>
+          <th scope="col">{{"Client Status"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;">{{"Rel Date"|appTranslate|async}}</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let relation of clientRelationshipsForm.controls; index as i">
+          <tr [formGroup]="$any(relation)">
+            <!-- <th scope="row"><input formControlName="clientNo" readonly></th> -->
+            <td>
+              <input formControlName="fullName" class="form-control" [readonly]="relationEditStatus[relation.value.id] !='EDITING'"
+               [ngClass]="isFieldInvalid(relation, 'fullName') && 'border border-danger'">
+              </td>
+            <td>
+              <select  class="form-control" formControlName="relationship" [attr.disabled]="relationEditStatus[relation.value.id] != 'EDITING' ? 'disabled' : null"
+                [ngClass]="isFieldInvalid(relation, 'relationship') && 'border border-danger'">
+                <option *ngFor="let type of RELATIONSHIP_TYPES" [value]="type.code">{{type.code}} - {{type.description}}</option>
+              </select>
+            </td>
+            <td>
+              <input class="form-control" formControlName="email" [readonly]="relationEditStatus[relation.value.id] !='EDITING'"  type="email"
+                [ngClass]="isFieldInvalid(relation, 'email') && 'border border-danger'">
+            </td>
+            <td>
+              <input class="form-control" formControlName="relClientNo" [readonly]="relationEditStatus[relation.value.id] !='EDITING'"
+                [ngClass]="isFieldInvalid(relation, 'relClientNo') && 'border border-danger'">
+            </td>
+            <td>
+              <input class="form-control" formControlName="clientStatus" [readonly]="relationEditStatus[relation.value.id] !='EDITING'"
+                [ngClass]="isFieldInvalid(relation, 'clientStatus') && 'border border-danger'">
+            </td>
+            <td>
+              <input class="form-control" formControlName="relDt" [readonly]="relationEditStatus[relation.value.id] !='EDITING'"  type="date"
+                [ngClass]="isFieldInvalid(relation, 'relDt') && 'border border-danger'">
+            </td>
+            <td class="position-relative">
+              <app-button *ngIf="relationEditStatus[relation.value.id] == 'VIEW'" buttonType="edit" (click)="relationEditStatus[relation.value.id] = 'EDITING'"></app-button>
+              <app-button *ngIf="relationEditStatus[relation.value.id] == 'EDITING'" buttonType="custSave" (click)="updateRelation($any(relation))"></app-button>
+              <div *ngIf="relationEditStatus[relation.value.id] == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                <div class="fa fa-refresh fa-spin"></div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <tr *ngIf="showNewRelationForm" [formGroup]="newRelationForm">
+          <!-- <th scope="row">
+            <input formControlName="clientNo" readonly>
+          </th> -->
+          <td>
+            <input formControlName="fullName" class="form-control" [ngClass]="isFieldInvalid(newRelationForm, 'fullName') && 'border border-danger'">
+          </td>
+          <td>
+            <select formControlName="relationship" class="form-control" [ngClass]="isFieldInvalid(newRelationForm, 'relationship') && 'border border-danger'">
+              <option *ngFor="let type of RELATIONSHIP_TYPES" [value]="type.code">{{type.code}} - {{type.description}}</option>
+            </select>
+          </td>
+          <td>
+            <input type="email" formControlName="email" class="form-control" [ngClass]="isFieldInvalid(newRelationForm, 'email') && 'border border-danger'">
+          </td>
+          <td>
+            <input formControlName="relClientNo" class="form-control" [ngClass]="isFieldInvalid(newRelationForm, 'relClientNo') && 'border border-danger'">
+          </td>
+          <td>
+            <input formControlName="clientStatus" class="form-control" [ngClass]="isFieldInvalid(newRelationForm, 'clientStatus') && 'border border-danger'">
+          </td>
+          <td>
+            <input formControlName="relDt" class="form-control" type="date" [ngClass]="isFieldInvalid(newRelationForm, 'relDt') && 'border border-danger'">
+          </td>
+          <td class="position-relative">
+            <app-button *ngIf="!isCreatingNewRelation" buttonType="custSave" (click)="onSaveNewRelation()"></app-button>
+            <div *ngIf="isCreatingNewRelation" class="position-absolute top-50 start-50 translate-middle">
+              <div class="fa fa-refresh fa-spin"></div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <p *ngIf="newRelationForm.invalid && newRelationForm.touched" class="text-center text-danger">{{"Fill in all required fields"|appTranslate|async}}</p>
+
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-3">
+        <app-button [buttonType]="'addCustom'" [text]="'Set New Relationship'" (click)="showNewRelationForm = true"
+        ></app-button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,126 @@
+<div matDialogTitle class="d-flex justify-content-between">
+  <h5 class="modal-title" >{{'Edit Client'|appTranslate|async}}</h5>
+  <app-btn text="Close" type="close" (mclick)="close()"></app-btn>
+</div>
+<mat-dialog-content>
+    <form [formGroup]="viewClientForm">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+           
+            <div class="modal-body">
+              <div class="d-flex justify-content-around" style="font-size: 15px;">
+    
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Full Name'|appTranslate|async}}</label>
+                    <input type="text" [value]="fullName"
+                      [ngClass]="" class="inputform " readonly="true" style="cursor: not-allowed">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'First Name'|appTranslate|async}}</label>
+                    <input type="text" formControlName="firstName"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Middle Name'|appTranslate|async}}</label>
+                    <input type="text" formControlName="middleName"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Surname'|appTranslate|async}}</label>
+                    <input type="text" formControlName="surname"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Gender'|appTranslate|async}}</label>
+                    <select type="text" formControlName="gender" [ngClass]=""
+                      class="inputform ">
+                      <option *ngFor="let gender of gendersList" [value]="gender.code">{{gender.title}}</option>
+                    </select>
+                  </div>
+                </div>
+    
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Phone Number 1'|appTranslate|async}}</label>
+                    <input type="text" formControlName="phoneNumber"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Phone Number 2'|appTranslate|async}}</label>
+                    <input type="text" formControlName="alternativePhoneNumber"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Email'|appTranslate|async}}</label>
+                    <input type="text" formControlName="email"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Email 2'|appTranslate|async}}</label>
+                    <input type="text" formControlName="alternativeEmail"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Address'|appTranslate|async}}</label>
+                    <input type="text" formControlName="address"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                </div>
+    
+                <div class="d-block mx-2">
+                  <!--  <div class="pb-4">
+                       <label class="form-label text-primary">{{'KYC'|appTranslate|async}}</label>
+                       <input type="text" formControlName="language"
+                       [ngClass]="                      class="inputform " >
+                   </div> -->
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Language'|appTranslate|async}}</label>
+                    <select formControlName="language" class="inputform" [ngClass]=""
+                      >
+                      <option *ngFor="let language of languagesList" [value]="language.code">{{language.code}} -  {{language.title}}</option>
+                    </select>
+    
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Title'|appTranslate|async}}</label>
+                    
+                    <select formControlName="title" class="inputform ">
+                      <option *ngFor="let title of titlesList" [value]="title.code">{{title.title}}</option>
+                    </select>
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'CRM ID'|appTranslate|async}}</label>
+                    <input type="text" formControlName="crm"
+                      [ngClass]="" class="inputform ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Communication'|appTranslate|async}}</label>
+                     <select type="text" formControlName="communication"
+                       [ngClass]="" class="inputform ">
+                       <option [value]="true">{{'True'|appTranslate|async}}</option>
+                       <option [value]="false">{{'False'|appTranslate|async}}</option>
+                     </select>
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary">{{'Marital Status'|appTranslate|async}}</label>
+                     <select type="text" formControlName="maritalStatus"
+                       [ngClass]="" class="inputform ">
+                       <option *ngFor="let maritalStatus of maritalStatusList" [value]="maritalStatus.code">{{maritalStatus.title}}</option>
+                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+    <div class="position-relative">
+        <app-button *ngIf="!isUpdating" buttonType="save" (click)="onSubmit()" ></app-button>
+        <button *ngIf="isUpdating" class="btn btn-outline-primary btn-lg mr-3">
+            <span class="fa fa-refresh fa-spin text-primary"></span> {{'Saving...'|appTranslate|async}}
+        </button>
+    </div>
+</mat-dialog-actions>

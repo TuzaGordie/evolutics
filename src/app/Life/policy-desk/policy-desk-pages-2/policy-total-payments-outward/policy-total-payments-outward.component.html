@@ -1,0 +1,205 @@
+<div class="">
+  <div class="page-head">
+    {{'Total Payment Outward'|appTranslate|async}}
+  </div>
+  <div class="d-flex justify-content-end mb-2">
+    <div class="">
+      <text-case-1 lbl="Client Name:" [val]="clientName" [stacked]="false"></text-case-1>
+    </div>
+  </div>
+  <div class="my-3">
+    <div class="row justify-content-between">
+      <div class="col-lg-auto" *ngFor="let item of lbls">
+        <text-case-1 [lbl]="item.key" [val]="item.value" [stacked]="true"></text-case-1>
+      </div>
+    </div>
+  </div>
+  <div class="my-5">
+    <div class="row justify-content-end ">
+      <div class="col-lg-{{item.cls}} my-2" *ngFor="let item of btns;">
+        <app-btn [type]="item.type" (mclick)="item.action()" [icon]="item.icon">{{item.value}}</app-btn>
+      </div>
+      <div class="col-2 my-2">
+        <app-btn type="secondary" data-bs-toggle="modal"
+                 data-bs-target="#createPaymentOutwardModal">Claim History
+        </app-btn>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mx-auto table-responsive">
+      <h5 class="text-primary">{{'Pending Claims'|appTranslate |async}}</h5>
+      <table class="table table-striped form-group mt-5 pt-2">
+        <thead class="py-3">
+        <tr>
+          <th scope="col">{{"Claim No"|appTranslate|async}}</th>
+          <th scope="col">{{"Created On"|appTranslate|async}}</th>
+          <th scope="col">{{"Created By"|appTranslate|async}}</th>
+          <th scope="col">{{"Initial Estimate"|appTranslate|async}}</th>
+          <th scope="col">{{"Adjustments"|appTranslate|async}}</th>
+          <th scope="col">{{"Current Estimate"|appTranslate|async}}</th>
+          <th scope="col">{{"Days to SLA"|appTranslate|async}}</th>
+          <th scope="col">{{"Valid"|appTranslate|async}}</th>
+          <th scope="col">{{"Claim Status"|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let claim of pendingClaims" style="white-space: nowrap;">
+          <td><a [routerLink]="['../../payment-desk/view-claim/']"
+                 [queryParams]="{claimNo:claim?.claimNo}">{{claim.claimNo}}</a></td>
+          <td>{{claim.createdOn | date}}</td>
+          <td>{{claim.createdBy}}</td>
+          <td>{{claim.initialEstimate | number}}</td>
+          <td>{{claim.adjustments | number}}</td>
+          <td>{{claim.currentEstimate | number}}</td>
+          <td>{{claim.dayToSla}}</td>
+          <td>
+            {{claim.valid}}
+          </td>
+          <td>{{claim.status}} <a (click)="openStatusModal()"><i class="fas fa-pen"></i></a></td>
+          <td>
+            <app-btn icon="edit" type="outline" (mclick)="openChangeStatusModal()"></app-btn>
+          </td>
+          <td>
+            <app-btn icon="cogs" type="outline"></app-btn>
+          </td>
+          <td><a (click)="openAdjustModal()">
+
+            <app-btn icon="adjust" type="outline"></app-btn>
+          </a></td>
+          <td><a (click)="openHistoryModal()">
+            <app-btn icon="history" type="outline"></app-btn>
+          </a>
+          </td>
+          <td><a>
+            <app-btn icon="cash" (mclick)="openSetPayeeModal()" type="outline">
+            </app-btn>
+          </a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12 mx-auto table-responsive">
+      <h5 class="my-5 text-primary">{{"Pending Payments"|appTranslate|async}}</h5>
+
+      <table class="table table-striped" style="font-size: 14px;">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">{{"Payment ID"|appTranslate|async}}</th>
+          <th scope="col">{{"Initial Amount"|appTranslate|async}}</th>
+          <th scope="col">{{"Adjustments"|appTranslate|async}}</th>
+          <th scope="col">{{"Net Amount"|appTranslate|async}}</th>
+          <th scope="col">{{"Created On"|appTranslate|async}}</th>
+          <th scope="col">{{"Created By"|appTranslate|async}}</th>
+          <th scope="col">{{"SLA Level"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;">{{"Payment Status"|appTranslate|async}}</th>
+          <th>{{"Complete Rate"|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of pendingPayments">
+          <th><a [routerLink]="['../../payment-desk/view-payout/']" [queryParams]="{slug:item?.id}">{{item.id}}</a></th>
+          <td>{{item.initialAmount | number}}</td>
+          <td>{{item.adjAmt | number}}</td>
+          <td>{{item.netAmt | number}}</td>
+          <td>{{item.createdOn | date}}</td>
+          <td>{{item.createdBy}}</td>
+          <td>{{item.slaLevel}}</td>
+          <td>{{item.status}}</td>
+          <td>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                   [style.width]="item.completeRate + '%'"
+                   [attr.aria-valuenow]="item.completeRate" aria-valuemin="0" aria-valuemax="100">{{item.completeRate}}%
+              </div>
+            </div>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- <div class="my-2">
+    <table-plain [nowrap]="true" [data]="list" [displayedColumns]="dCols"></table-plain>
+  </div> -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="createPaymentOutwardModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Claim History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped form-group mt-5 pt-2">
+          <thead class="py-3">
+          <tr>
+            <th scope="col">{{"Claim No"|appTranslate|async}}</th>
+            <th scope="col">{{"Created On"|appTranslate|async}}</th>
+            <th scope="col">{{"Created By"|appTranslate|async}}</th>
+            <th scope="col">{{"Initial Estimate"|appTranslate|async}}</th>
+            <th scope="col">{{"Adjustments"|appTranslate|async}}</th>
+            <th scope="col">{{"Current Estimate"|appTranslate|async}}</th>
+            <th scope="col">{{"Days to SLA"|appTranslate|async}}</th>
+            <th scope="col">{{"Valid"|appTranslate|async}}</th>
+            <th scope="col">{{"Claim Status"|appTranslate|async}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let claim of pendingClaims" style="white-space: nowrap;">
+            <td><a [routerLink]="['../../payment-desk/view-claim/']"
+                   [queryParams]="{claimNo:claim?.claimNo}">{{claim.claimNo}}</a></td>
+            <td>{{claim.createdOn | date}}</td>
+            <td>{{claim.createdBy}}</td>
+            <td>{{claim.initialEstimate | number}}</td>
+            <td>{{claim.adjustments | number}}</td>
+            <td>{{claim.currentEstimate | number}}</td>
+            <td>{{claim.dayToSla}}</td>
+            <td>
+              {{claim.valid}}
+            </td>
+            <td>{{claim.status}} <a (click)="openStatusModal()"><i class="fas fa-pen"></i></a></td>
+            <td>
+              <app-btn icon="edit" type="outline" (mclick)="openChangeStatusModal()"></app-btn>
+            </td>
+            <td>
+              <app-btn icon="cogs" type="outline"></app-btn>
+            </td>
+            <td><a (click)="openAdjustModal()">
+
+              <app-btn icon="adjust" type="outline"></app-btn>
+            </a></td>
+            <td><a (click)="openHistoryModal()">
+              <app-btn icon="history" type="outline"></app-btn>
+            </a>
+            </td>
+            <td><a>
+              <app-btn icon="cash" (mclick)="openSetPayeeModal()" type="outline">
+              </app-btn>
+            </a>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="submit" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

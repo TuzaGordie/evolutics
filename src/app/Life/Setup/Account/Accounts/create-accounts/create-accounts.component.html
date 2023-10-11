@@ -1,0 +1,119 @@
+<!-- <app-form-navigation [title]="'Set Up / Account / Accounts '"></app-form-navigation> -->
+<loader [loading]="loading" [text]="loadingText" class="vh-80">
+  <form novalidate #f="ngForm">
+    <div class="container py-4">
+      <ng-container>
+        <br>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{"Account Code"|appTranslate|async}}</label>
+            <input type="text" disabled class="form-control control-bg-gray" disabled
+              [(ngModel)]="createAccCode.accCode.code" name="code" />
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{"description"|appTranslate|async}}</label>
+            <input type="text" class="form-control  control-bg-gray" [(ngModel)]="createAccCode.accCode.description"
+              name="description">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{"Account Type"|appTranslate|async}}</label>
+            <select [(ngModel)]="createAccCode.accCode.accountType" name="accountType"
+              class="form-control  control-bg-gray">
+              <option *ngFor="let item of accountTypes" [value]="item.code">
+                {{item.code}} - {{item.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{"Account Group"|appTranslate|async}}</label>
+            <select [(ngModel)]="createAccCode.accCode.accountGroup" name="accountGroup"
+              class="form-control  control-bg-gray">
+              <option *ngFor="let item of accountGroups" [value]="item.code">
+                {{item.code}} - {{item.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{"Transaction Reason Code"|appTranslate|async}}</label>
+            <select [(ngModel)]="createAccCode.accCode.reasonCode" name="reasonCode"
+              class="form-control  control-bg-gray">
+              <option *ngFor="let item of transReasons" [value]="item.code">
+                {{item.code}} - {{item.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </ng-container>
+      <hr>
+      <ng-container>
+        <div class="row mx-auto my-auto">
+          <div class="col-10">
+            <div *ngFor="let itemLedgerForm of createAccCode.accCodeMapping; let k = index">
+              <div class="col-md-12">
+                <div class="row mb-3">
+                  <div class="col-5">
+                    <label class="form-label text-primary">{{"Company"|appTranslate|async}}</label>
+                    <select (change)="checkCompany(k)" name="company_{{itemLedgerForm.rowId}}"
+                      [(ngModel)]="itemLedgerForm.companyCode" class="form-control control-bg-gray">
+                      <option *ngFor="let item of companies" [value]="item.code">
+                        {{item.code}} - {{item.description}}
+                      </option>
+                    </select>
+                    <span class="text-danger">{{errorMessage[k]}}</span>
+                  </div>
+                  <div class="col-5">
+                    <label class="form-label text-primary">{{"Ledger Code"|appTranslate|async}}</label>
+                    <input type="text" name="ledger_{{itemLedgerForm.rowId}}" class="form-control  control-bg-gray"
+                      [(ngModel)]="itemLedgerForm.ledgerCode" name="ledgerCode" />
+                  </div>
+                  <div class="col-2">
+                    <label class="form-label text-primary">&nbsp;</label>
+                    <app-btn [disabled]="isShow" icon="delete" mclass="ms-2" type="danger"
+                      (mclick)="removeCompanyLedgerGroup(k)">Delete
+                    </app-btn>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-button [hidden]="isShow" [buttonType]="'addCustom'" [text]="'Add'" (click)="addCompanyLedgerGroup()">
+            </app-button>
+          </div>
+        </div>
+      </ng-container>
+      <div class="row" *ngIf="!isShow">
+        <div class="row d-flex flex-row justify-content-end mt-5">
+          <div class="col-4 d-flex flex-row justify-content-end">
+            <app-button [buttonType]="'save'" [text]="'Save'" (click)="onSubmit()"></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="d-lg-flex mt-2" *ngIf="isShow">
+        <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+        </app-btn>
+        <span class="mx-1"></span>
+        <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+        </app-btn>
+      </div>
+    </div>
+  </form>
+</loader>

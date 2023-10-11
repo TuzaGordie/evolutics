@@ -1,0 +1,39 @@
+<app-form-navigation [title]="'Setup / Code / Client Data Score'"></app-form-navigation>
+
+
+
+<div class="container">
+  <div class="row">
+    <form [formGroup]="form">
+      <div class="col-4 mx-auto mt-5">
+        <div class="row mb-3">
+          <div class="form-group">
+            <div class="col-md-12">
+              <!-- <label>{{"Client Data Score"|appTranslate|async}}</label>
+              <select formControlName="dataScore" #dataScore class="form-control form-control-md control-bg-gray">
+                <option value="{{ item?.clientDataScore }}" *ngFor="let item of clientDataScoreArray">
+                  {{ item?.clientDataScore }}
+                </option>
+              </select> -->
+              <app-input-basic label="Client Data Score" [form]="form" type="select" name="clientScoreData" [stacked]="true"
+              [options]="clientDataScoreArray" valueField="clientDataScore" labelField="clientDataScore"
+              #dataScore>
+            </app-input-basic>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col">
+            <app-btn icon="show" (mclick)="show(dataScore?.value)">Show</app-btn>
+          </div>
+          <div class="col">
+            <app-button buttonType="create" routerLink="../client-data-score"></app-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</div>

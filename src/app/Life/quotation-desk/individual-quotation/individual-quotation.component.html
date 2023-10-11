@@ -1,0 +1,138 @@
+<div class="container mt-5 pt-5">
+  <form [formGroup]="findIndividualQuotationForm">
+    <div class="row justify-content-center">
+      <div class="col-2 align-items-center">
+        <label class="py-2">{{ 'Client Number' | appTranslate | async }}</label>
+      </div>
+      <div class="col-md-2 position-relative">
+        <app-input-basic
+          [form]="findIndividualQuotationForm"
+          name="clientNo"
+          type="text"
+          [stacked]="false"
+          [showLabel]="false"
+          label="Client Number"
+          [loading]="validatingClientNo"
+          [showValidation]="true"
+          [showValidationIcon]="true"
+          [colored]="false"
+          [light]="false"
+        >
+        </app-input-basic>
+      </div>
+      <div class="col-2">
+        <app-button
+          [buttonType]="'search'"
+          routerLink="../../../client-desk/find/"
+        ></app-button>
+      </div>
+      <div class="col-2">
+        <app-button
+          [buttonType]="'createGB'"
+          [text]="'Create New Client'"
+          routerLink="../../../client-desk/create/individual"
+        ></app-button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 text-end">
+        <div class="row justify-content-end mt-3" *ngIf="!client?.notFound">
+          <span style="text-decoration: none; list-style: none">{{
+            client?.fullName
+          }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-2 align-items-center">
+        <label class="py-2">{{
+          'Select Insurance Type' | appTranslate | async
+        }}</label>
+      </div>
+      <div class="col-6">
+        <select
+          formControlName="insuranceType"
+          (change)="onInsuranceTypeSelection($event)"
+          class="form-control control-bg-gray mr-2"
+          required
+        >
+          <option [value]="item.code" *ngFor="let item of insuranceTypesList">
+            {{ item.code }} - {{ item.title }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+      <div class="col-2 align-items-center">
+        <label class="py-2">{{
+          'Select Product Class' | appTranslate | async
+        }}</label>
+      </div>
+      <div class="col-6">
+        <select
+          formControlName="productClass"
+          (change)="onProductClassSelection($event)"
+          class="form-control control-bg-gray mr-2 position-relative"
+          required
+        >
+          <option></option>
+          <option [value]="item.code" *ngFor="let item of productClassesList">
+            {{ item.code }} - {{ item.title }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+      <div class="col-2 align-items-center">
+        <label class="py-2">{{
+          'Select Product' | appTranslate | async
+        }}</label>
+      </div>
+      <div class="col-6">
+        <select
+          formControlName="productCode"
+          (change)="onChange()"
+          class="form-control control-bg-gray mr-2"
+          required
+        >
+          <option></option>
+          <ng-container *ngFor="let p of productOptions$ | async">
+            <option [ngValue]="p">{{ p.code }} - {{ p.description }}</option>
+          </ng-container>
+          <!-- <option value="">Life risk</option>
+          <option value="">Endowments</option>
+          <option value="">Savings</option>
+          <option value="">Life Annuities</option>
+          <option value="">Annuity Certain </option>
+          <option value="">Funeral </option> -->
+        </select>
+      </div>
+    </div>
+
+    <!-- <div class=" my-5">
+    <div  style="float: right; margin-top: 10%;">
+
+      <button type="submit" [disabled]="clientNoIsInvalid"
+      [ngClass]="{diablecolor: clientNoIsInvalid}"
+      class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+          <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+    </div>
+</div> -->
+
+    <div class="row mt-5">
+      <div class="col-4"></div>
+      <div class="col-2">
+        <app-btn
+          [icon]="'next'"
+          type="secondary"
+          [text]="'Next'"
+          (click)="onNext()"
+          [disabled]="hideNext"
+        ></app-btn>
+      </div>
+    </div>
+  </form>
+</div>

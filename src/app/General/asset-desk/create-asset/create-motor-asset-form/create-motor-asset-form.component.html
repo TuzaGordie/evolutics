@@ -1,0 +1,213 @@
+ <div class="  mt-4">
+   <div class="row align-items-end">
+
+    <div class="col-md-3">
+      <label class="m-0 text-primary">
+        {{'Owner Client Number'|appTranslate|async}}
+      </label>
+      <div class="row align-items-end">
+        <div class="col-5">
+          <app-input-basic type="text" [showLabel]="false" [form]="caS.clientRelatedAsset" name='clientNo' #clientNo
+            [showValidation]="clientNo.invalid" [showValidationIcon]="true" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col ps-0">
+          <app-input-ngmodel type="text" [showLabel]="false" [readonly]="true" label=''
+            [model]="caS.clientRelatedAsset?.value?.fullName" name='clientNo' [stacked]="true">
+          </app-input-ngmodel>
+        </div>
+      </div>
+      <app-validation-message [control]="clientNo.control" label="Client Number">
+      </app-validation-message>
+    </div>
+     <div class="col-md-3">
+       <app-input-basic type="select" label='Vehicle Type' [options]="VehicleTypeData" labelType="ct" valueField="code"
+         [form]="caS.asset" name='vehicleType' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-autocomplete label="Brand" [form]="caS.asset" name="vehicleBrand" [stacked]="true"
+         [showValidation]="vehicleBrand.invalid" [showValidationIcon]="false" [options]="brandData" labelType="cd"
+         valueField="code" #vehicleBrand>
+       </app-autocomplete>
+      <app-validation-message></app-validation-message> </div>
+     <div class="col-md-3">
+       <app-autocomplete label="Make" [form]="caS.asset" name="vehicleMake" [stacked]="true"
+         [showValidation]="vehicleMake.invalid" [showValidationIcon]="false"
+         [options]="aS.getMake|functionCaller1:vehicleBrand.value|async" labelType="cd" valueField="code" #vehicleMake>
+       </app-autocomplete>
+      <app-validation-message></app-validation-message> </div>
+     <div class="col-md-3">
+       <app-autocomplete label="Model" [form]="caS.asset" name="vehicleModel" [stacked]="true"
+         (mchange)="caS.patchByModel($event)" [showValidation]="vehicleModel.invalid" [showValidationIcon]="false"
+         [options]="aS.getModel|functionCaller1:vehicleMake.value|async" labelType="cd" valueField="code" #vehicleModel>
+       </app-autocomplete>
+      <app-validation-message></app-validation-message> </div>
+     <div class="col-md-3">
+       <app-input-basic type="date" label='Manufacture Year' [form]="caS.asset" name='yrManuf' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="select" label='Usage' [options]="UsageData" labelType="ct" valueField="code"
+         [form]="caS.asset" name='vehicleUsage' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="text" label='Category' [form]="caS.asset" name='category' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="select" label='Fuel Type' [options]="FuelTypeData" labelType="ct" valueField="code"
+         [form]="caS.assetSpecification" name='fuelType' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [decimalPoints]="0" label='Tonnage' [form]="caS.assetSpecification" name='tonnage'
+         [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [decimalPoints]="1" label='HorsePower' [form]="caS.assetSpecification"
+         name='horsePower' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="text" label='Driver Relationship to Owner' [form]="caS.asset" name='relationship'
+         [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [decimalPoints]="0" label='No of Seats' [form]="caS.assetSpecification"
+         name='noSeat' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [decimalPoints]="0" label='No of Authorised Drivers' [form]="caS.asset"
+         name='authDrvNo' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message [validationKey]="caS.eValidationType.unique" [control]="caS.asset.controls.authDrvNo">
+       </app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [decimalPoints]="0" label='Displacement' [form]="caS.assetSpecification"
+         name='displacement' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message [validationKey]="caS.eValidationType.unique" [control]="caS.asset.controls.displacement">
+       </app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="select" label='Nature of Goods Transported' [options]="NatureofgoodstransportedData"
+         labelType="ct" valueField="code" [form]="caS.asset" name='natureGoods' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message [validationKey]="caS.eValidationType.unique" [control]="caS.asset.controls.natureGoods">
+       </app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="text" label='Registration No' [form]="caS.asset" name='registrationNo' [stacked]="true"
+         #registrationNo>
+       </app-input-basic>
+       <app-validation-message [validationKey]="caS.eValidationType.unique" [control]="registrationNo.control">
+       </app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="text" label='Chasis Number' [form]="caS.asset" name='chasisNo' [stacked]="true" #chasisNo>
+       </app-input-basic>
+       <app-validation-message [validationKey]="caS.eValidationType.unique" [control]="chasisNo.control">
+       </app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="text" label='Engine Number' [form]="caS.asset" name='engineNo' [stacked]="true" #engineNo>
+       </app-input-basic>
+       <app-validation-message [validationKey]="caS.eValidationType.unique" [control]="engineNo.control">
+       </app-validation-message>
+     </div>
+
+     <div class="col-md-3">
+       <app-autocomplete label="Currency" [form]="caS.assetValue" name="ccy" [stacked]="true"
+         [showValidation]="currencyTag.invalid" [showValidationIcon]="false" [options]="CurrencyData" labelType="cd"
+         valueField="code" #currencyTag>
+       </app-autocomplete>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [disabled]="!caS.hasCurrency" label='Estimated Value by Client'
+         [decimalPoints]="0" [form]="caS.assetValue" name='estimatedValueByclient' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" label='Estimated Value by System' [form]="caS.assetValue"
+         name='estimatedValueBySystem' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic type="number" [decimalPoints]="0" label='Adjusted Value by System' [form]="caS.assetValue"
+         name='adjValue' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+
+
+     <!-- LOCATION -->
+     <div class="col-md-3">
+       <app-input-basic type="text" label='Address' [form]="caS.asset" name='location' [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-autocomplete [disabled]="!caS.asset?.value?.location" label="Country" [form]="caS.asset" name="country"
+         [stacked]="true" [showValidation]="countryTag.invalid" [showValidationIcon]="false"
+         [options]="lS.getCountries|functionCaller|async" labelType="cd" valueField="code" #countryTag>
+       </app-autocomplete>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-autocomplete [disabled]="!caS.hasCountry" label="Region" [form]="caS.asset" name="locationRegion"
+         [stacked]="true" [showValidation]="locationRegion.invalid" [showValidationIcon]="false"
+         [options]="lS.getRegion|functionCaller1:countryTag.value|async" labelType="cd" valueField="code"
+         #locationRegion>
+       </app-autocomplete>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-autocomplete [disabled]="!caS.hasRegion" label="State" [form]="caS.asset" name="state" [stacked]="true"
+         [showValidation]="state.invalid" [showValidationIcon]="false"
+         [options]="lS.getStates|functionCaller1:locationRegion.value|async" labelType="cd" valueField="code" #state>
+       </app-autocomplete>
+       <app-validation-message></app-validation-message>
+     </div>
+     <div class="col-md-3">
+       <app-input-basic   type="text" label='Geolocation' [form]="caS.asset" name='geolocation'
+         [stacked]="true">
+       </app-input-basic>
+       <app-validation-message></app-validation-message>
+     </div>
+     <!--// -->
+
+     <div class="col-md-2 col-auto">
+      <app-input-basic type="checkbox" label='Tracked' [form]="caS.assetTracker" name='tracked' [stacked]="false"
+        [mini]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2 col-auto">
+      <app-input-basic type="checkbox" label='Trailer' [form]="caS.asset" name='trailer' [stacked]="false"
+        [mini]="true">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2 col-auto">
+      <app-input-basic type="checkbox" label='Dual Control' [form]="caS.assetSpecification" name='dualControl'
+        [stacked]="false" [mini]="true">
+      </app-input-basic>
+    </div>
+   </div>
+ </div>

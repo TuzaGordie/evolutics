@@ -1,0 +1,103 @@
+<div class="container mt-5">
+  <form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+    <div class="row">
+
+      <div *ngFor="let data of allContact.controls; let i = index" class="col-md-4" formArrayName="contactDetails">
+        <ng-container [formGroupName]="i">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex"><h2 class="py-4 ">Contact Info {{1 + i}}</h2></div>
+            <div class="d-flex">
+              <div class="d-flex"><i (click)="onDeleteContact(i)" class="fas fa-trash my-auto"></i></div>
+            </div>
+          </div>
+
+
+          <hr style="width: 65%; height: 2px;">
+
+          <!--  <div class="mt-4 " >
+
+               <label class="form-label text-red">Client Number</label><br>
+               <div class="d-flex">
+               <input type="text" style="width: 40%;" formControlName="clientNo" class="form-control control-bg-gray">
+               <button class="py-auto btn-dark mx-1 px-4 border-0 ">Find</button>
+               <button class="py-auto createbtn px-4 ">Create New</button>
+           </div>
+           </div> -->
+          <div class="mt-4">
+
+            <div class="row">
+              <div class="col">
+                <label class="form-label text-red">Client Number</label><br>
+                <input class="form-control control-bg-gray" formControlName="name" required type="text">
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">&nbsp;</label>
+                  <app-button [buttonType]="'findsmallred'"></app-button>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">&nbsp;</label>
+                  <app-button [buttonType]="'createCustom2smallRed'" [text]="'New'"></app-button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Full Name</label><br>
+            <input class="form-control control-bg-gray" formControlName="name" required type="text">
+            <div *ngIf="validation.name.errors && (validation.name.dirty || validation.name.touched)">
+              <div *ngIf="validation.name?.errors?.required" class="text-danger">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Relationship</label><br>
+            <!-- <input type="text" formControlName="relationship" class="form-control control-bg-gray" required> -->
+            <select class="form-control control-bg-gray" formControlName="relationship" required>
+              <option [value]="null">Select Relationship</option>
+              <option *ngFor="let item of relationList" [value]="item.CODE">{{item.CODE_TITLE}}</option>
+            </select>
+            <div
+              *ngIf="validation.relationship.errors && (validation.relationship.dirty || validation.relationship.touched)">
+              <div *ngIf="validation.relationship?.errors?.required" class="text-danger">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Phone number</label><br>
+            <input class="form-control control-bg-gray" formControlName="phoneNo" required type="number">
+            <div *ngIf="validation.phoneNo.errors && (validation.phoneNo.dirty || validation.phoneNo.touched)">
+              <div *ngIf="validation.phoneNo?.errors?.required" class="text-danger">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Email</label><br>
+            <input class="form-control control-bg-gray" formControlName="email" required type="email">
+            <div *ngIf="validation.email.errors && (validation.email.dirty || validation.email.touched)">
+              <div *ngIf="validation.email?.errors?.required || validation.email?.errors?.pattern" class="text-danger">
+                Field is invalid!
+              </div>
+            </div>
+          </div>
+
+        </ng-container>
+
+      </div>
+
+
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-3">
+        <button (click)="onContactInfo()" class="btn btn-outline-danger px-5" type="button">Add Contact</button>
+      </div>
+
+    </div>
+
+
+  </form>
+</div>

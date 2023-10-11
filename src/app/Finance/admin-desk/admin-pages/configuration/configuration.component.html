@@ -1,0 +1,63 @@
+<div class="">
+  <div class="row ">
+    <div class="col-md-6">
+      <app-input-basic label="Company Code" [stacked]="true" [colored]="true" [form]="form" name="test" type="select"
+        [options]="[]"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="3rd Party finance system notification URL" [stacked]="true" [colored]="true" [form]="form"
+        name="test"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="3rd Party receipt no generator URL" [stacked]="true" [colored]="true" [form]="form"
+        name="test"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Force password change after (days)" [stacked]="true" [colored]="true" [form]="form"
+        name="test" type="number"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Minimum Password Length" [stacked]="true" [colored]="true" [form]="form" name="test">
+      </app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Time Out After (minutes)" [stacked]="true" [colored]="true" [form]="form" name="test"
+        type="number"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Maximum Login Attempts" [stacked]="true" [colored]="true" [form]="form" name="test">
+      </app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Default Screen Color" [stacked]="true" [colored]="true" [form]="form" name="test"
+        type="select" [options]="[]"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Control posting before they get committed" [stacked]="false" [colored]="true" [form]="form"
+        name="test" type="checkbox" [mini]="true"></app-input-basic>
+      <app-input-basic label="Password is case sensitive" [stacked]="false" [colored]="true" [form]="form" name="test"
+        type="checkbox" [mini]="true"></app-input-basic>
+    </div>
+    <div class="col-md-6">
+      <div class="row align-items-end" *ngFor="let i of languageCounter()">
+        <div class="col">
+          <app-input-basic label="Allowed Languages" [stacked]="true" [colored]="true" [form]="form" name="test"
+            type="select" [options]="[]"></app-input-basic>
+        </div>
+        <div class="col-auto d-flex">
+          <div class="me-2">
+            <app-btn [iconBtn]="true" icon="delete" type="danger-outline" (mclick)="removeLanguage()"></app-btn>
+          </div>
+          <app-btn [iconBtn]="true" icon="add" type="outline" (mclick)="languageIncrement()"></app-btn>
+        </div>
+      </div>
+    </div> 
+  </div> 
+
+  <div class="row mb-4">
+    <div class="col-10"></div>
+    <div class="col-2  mt-4">
+      <app-btn type="secondary" icon="save">Save</app-btn>
+    </div>
+  </div>
+</div>

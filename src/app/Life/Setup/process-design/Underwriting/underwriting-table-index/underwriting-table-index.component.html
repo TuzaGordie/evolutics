@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="col-6 mx-auto">
+    <div class="row mt-5 px-2">
+      <label class="">{{"Select Table group"|appTranslate|async}}</label>
+
+      <select [(ngModel)]="tableGroupValue" name="tableGroup" (ngModelChange)="onChangeTable()"
+        class="form-control form-control-sm control-bg-gray" #tableGroup="ngModel" required
+        class="form-control control-bg-gray">
+        <option></option>
+        <option *ngFor="let item of tableGroupArray" value="{{ item.code }}">
+          {{ item.code }} - {{ item.title }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="tableGroup.errors && (tableGroup.dirty || tableGroup.touched)">
+        <p *ngIf="tableGroup.errors.required">{{"Table Group is required"|appTranslate|async}}</p>
+      </div>
+    </div>
+    <div class="row mt-2 px-2">
+      <label class="disabled">{{"Select Table"|appTranslate|async}}</label>
+
+      <select [disabled]="!tableGroupValue" [(ngModel)]="tableValue" name="table"
+        class="form-control form-control-sm control-bg-gray" #table="ngModel"
+        required class="form-control control-bg-gray">
+        <option></option>
+        <option *ngFor="let item of tableArray" value="{{ item.uwrTable }}">
+          {{ item.uwrTable }} - {{ item.description }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="table.errors && (table.dirty || table.touched)">
+        <p *ngIf="table.errors.required">{{"Table is required"|appTranslate|async}}</p>
+      </div>
+    </div>
+    <div class="row mt-2 px-2">
+      <label class="">{{"Select Currency"|appTranslate|async}}</label>
+
+      <app-autocomplete-ng-model
+        [options]="currencyArray"
+        [showLabel]="false"
+        [valueField]="'code'"
+        [labelType]="'cd'"
+        [stacked]="false"
+        [(model)]="currencyValue"
+        name="currency"
+        [required]="true"
+      ></app-autocomplete-ng-model>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <button [class.disabled]="!currencyValue" class="btn btn-dark btn-lg w-100" (click)="show()">
+          <span class="fa fa-eye"></span>
+          {{'Show'|appTranslate|async}}
+        </button>
+      </div>
+      <div class="col">
+        <app-button buttonType="create" routerLink="../Table-create"></app-button>
+      </div>
+      <div class="col">
+        <button [class.disabled]="!currencyValue" class="btn btn btn-outline-primary btn-lg btn-clone w-100"
+          (click)="clone()">
+          <span class="fa fa-clone"></span>
+          {{'Clone'|appTranslate|async}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

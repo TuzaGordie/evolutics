@@ -1,0 +1,55 @@
+<!-- <app-form-navigation [title] = "'Set Up / Tariff'"></app-form-navigation> -->
+<div class="container-sm mt-5 ">
+  <div class="row">
+
+
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <br /> <br /> <br />
+      <div class="form-group mt-2">
+        <label>{{"Select Tariff Group "|appTranslate|async}}</label>
+        <select (change)="selectTariffByGroup()" [(ngModel)]="group"
+          class="form-control form-control-lg control-bg-gray">
+          <option>---</option>
+          <option *ngFor="let item of groups" [value]="item.code">
+            {{item.code}} - {{item.title}}
+          </option>
+        </select>
+      </div>
+
+      <br />
+      <div class="form-group mt-2">
+        <label>{{"Select Tariff "|appTranslate|async}}</label>
+        <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="code">
+          <option *ngFor="let item of tariffs" [value]="item.code">
+            {{item.code}} - {{item.description}}
+          </option>
+        </select>
+      </div>
+
+      <br />
+
+      <div class="form-group row my-3">
+        <div class="col-sm-4 d-grid gap-1">
+          <button [class.disabled]="!code" class="btn btn-dark btn-lg w-100" (click)="show()">
+            <span class="fa fa-eye"></span>
+            Show
+          </button>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-button [buttonType]="'create'" routerLink="../create-tariff"></app-button>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <button [class.disabled]="!code" class="btn btn btn-outline-primary btn-lg btn-clone w-100" (click)="clone()">
+            <span class="fa fa-clone"></span>
+            Clone
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>

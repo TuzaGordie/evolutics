@@ -1,0 +1,16 @@
+<div class="">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h4 class="mb-0">{{"Underwriting Table Entry"|appTranslate|async}}</h4>
+    <app-btn type="danger-outline" (mclick)="close()" >Close</app-btn>
+  </div>
+  <loader [loading]="!list?.length" class="vh-30" text="Obtaining Covers">
+    <div class="cage border rounded">
+      <table-plain [pageSize]="10" (listMutated)="patchList($event)" [showPager]="false"
+        [nowrap]="true" [data]="list" [displayedColumns]="dCols">
+      </table-plain>
+    </div>
+    <div class="d-lg-flex justify-content-end mt-2">
+      <app-btn type="primary" (mclick)="save()">Use Entry</app-btn>
+    </div>
+  </loader>
+</div>

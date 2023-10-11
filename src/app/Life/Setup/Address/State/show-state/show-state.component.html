@@ -1,0 +1,51 @@
+<!-- <app-form-navigation [title]="'Set Up / Address / State'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container-sm mt-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"State Code"|appTranslate|async}}</label><br />
+            <input [(ngModel)]="stateCode" name="stateCode" required type="text" class="form-control control-bg-gray" />
+          </div>
+          <br />
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label><br />
+            <input [(ngModel)]="description" name="description" required type="text"
+              class="form-control control-bg-gray" />
+          </div>
+          <br />
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"Country "|appTranslate|async}}</label><br />
+
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="countryGroup" name="countryGroup"
+              required type="text" class="form-control control-bg-gray" (change)="getCountryRegion(country.value)"
+              #country>
+              <option value="{{ item.code }}" *ngFor="let item of countries">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"Region"|appTranslate|async}}</label><br />
+
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="region" name="region" required
+              type="text" class="form-control control-bg-gray">
+              <option value="{{ item.code }}" *ngFor="let item of regions">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <div class="form-group mt-2">
+          <app-button (click)="createNewState()" buttonType="save"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

@@ -1,0 +1,236 @@
+<div>
+  <div class="row g-2">
+    <div class="col-4"><label for="" class="text-primary form-label">Select Cover</label></div>
+    <div class="col-2"><label for="" class="text-primary form-label">Assured</label></div>
+    <div class="col-2"><label for="" class="text-primary form-label">Assured Name</label></div>
+    <div class="col-1"><label for="" class="text-primary form-label">&nbsp;</label></div>
+    <div class="col-2"><label for="" class="text-primary form-label">Assured Relationship to Owner</label></div>
+    <div class="col-1"><label for="" class="text-primary form-label text-center w-100">Details</label></div>
+
+  </div>
+  <div class="row g-2 mb-2 align-items-center">
+    <div class="col ">
+      <div class="form-group">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-2 "><input class="form-control control-bg-gray" type="checkbox"></div>
+          <div class="col"><label for="" class="text-black-50 form-label small1"> RPI_1 - Life Annuity</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="outline-nm" icon="add" routerLink="../../client-desk/create/individual">Assured</app-btn>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-1 ">
+      <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp1Modal()" data-bs-toggle="tooltip"
+        data-bs-placement="top" data-bs-dismiss="modal" title="
+    Target Basis: 0,
+    Target Amount: 0,
+    Source of Annuity:0 ,
+    Annuity Frequency : 0,
+    Guarantee Period (Months) : 0
+    Guarantee Period (Months) : 0
+    Spouse Revisionay Proportion : 0
+    Source : 0
+    Pension Fund Administrator : 0
+    Annuity Annual Escalation Basis : 9
+    Annuity Annual Escalation Value : 5" [(ngModel)]="isRp1Check" type="checkbox">
+    </div>
+
+  </div>
+  <div class="row g-2 mb-2 align-items-center">
+    <div class="col">
+      <div class="form-group">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+          <div class="col"><label for="" class="text-black-50  form-label small1"> RPI_2 - Annuity
+              Certain</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-auto">
+
+      <app-btn type="outline-nm" icon="add" routerLink="../../client-desk/create/individual">Assured</app-btn>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-1 ">
+      <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp2Modal()" type="checkbox"
+        data-bs-dismiss="modal">
+    </div>
+
+
+  </div>
+  <div class="row g-2 mb-2 align-items-center">
+    <div class="col">
+      <div class="form-group">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+          <div class="col"><label for="" class="text-black-50  form-label small1"> RPI_3 - Individual Life
+              Risk</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="outline-nm" icon="add" routerLink="../../client-desk/create/individual">Assured</app-btn>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-1 ">
+      <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp3Modal()" type="checkbox"
+        data-bs-dismiss="modal">
+    </div>
+
+
+  </div>
+  <div class="row g-2 mb-2 align-items-center">
+    <div class="col">
+      <div class="form-group">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+          <div class="col"><label for="" class="text-black-50 form-label small1"> RPI_4 - Individual Credit
+              Life</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="outline-nm" icon="add" routerLink="../../client-desk/create/individual">Assured</app-btn>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-1 ">
+      <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp4Modal()" type="checkbox"
+        data-bs-dismiss="modal">
+    </div>
+
+
+  </div>
+  <div class="row g-2 mb-2 align-items-center">
+    <div class="col">
+      <div class="form-group">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+          <div class="col"><label for="" class="text-black-50  form-label small1"> RPI_5 - Savings</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="outline-nm" icon="add" routerLink="../../client-desk/create/individual">Assured</app-btn>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-1 ">
+      <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp5Modal()" type="checkbox"
+        data-bs-dismiss="modal">
+    </div>
+
+  </div>
+  <div class="row g-2 mb-2 align-items-center">
+    <div class="col">
+      <div class="form-group">
+        <div class="row d-flex align-items-center">
+
+          <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+          <div class="col"><label for="" class="text-black-50  form-label small1"> RPI_6 - Endowment</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="outline-nm" icon="add" routerLink="../../client-desk/create/individual">Assured</app-btn>
+    </div>
+    <div class="col-2">
+      <div class="form-group">
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col-1 ">
+      <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp6Modal()" type="checkbox"
+        data-bs-dismiss="modal">
+    </div>
+
+  </div>
+</div>

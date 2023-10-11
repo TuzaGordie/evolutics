@@ -1,0 +1,99 @@
+@import "../../../../../sass/_variables.scss";
+.label {
+  font-size: 12px;
+  color: #5914c9;
+}
+.info-data {
+  font-weight: normal;
+}
+.action-btns button {
+  color: #2c29bb;
+  background-color: #f4ebff;
+  padding: 5px;
+  height: 52px;
+  width: 100%;
+  border: 1px solid #7775ff;
+}
+
+.large-card {
+  position: relative;
+  background-color: #504DF5;
+  padding: 18px 35px 25px 20px;
+  height: 180px;
+  transition-duration: 250ms;
+  border-radius: 20px;
+
+  .text-end {
+    font-size: 72px;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    cursor: pointer;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #00000038;
+    width: 90px;
+    height: 70px;
+    border-top-right-radius: 5rem;
+    border-bottom-left-radius: 20px;
+  }
+}
+
+.inputform1 {
+  background-color: transparent;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.7rem;
+  font-weight: normal;
+}
+
+.life {
+  .label {
+    color: $primary;
+  }
+  .action-btns button {
+    color: $primary;
+    border: 1px solid $primary;
+  }
+
+  .large-card {
+    background-color: $primary;
+
+    &::after {
+      background: $primary;
+    }
+  }
+}
+
+.life {
+  .label {
+    color: $primary;
+  }
+  .action-btns button {
+    color: $primary;
+    border: 1px solid $primary;
+  }
+  .large-card {
+    background-color: $primary; 
+  }
+}
+
+.general {
+  .label {
+    color: $general_color;
+  }
+  .action-btns button {
+    color: $general_color;
+    border: 1px solid $general_color;
+  }
+  .large-card {
+    background-color: $general_color; 
+  }
+}

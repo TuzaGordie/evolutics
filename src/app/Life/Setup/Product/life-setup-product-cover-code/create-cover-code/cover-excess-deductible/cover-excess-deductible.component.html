@@ -1,0 +1,319 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Excess / Deductible'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <text-case-1 lbl="Excess"
+        [val]="'Policyholders bears the excess amount, while insurer bears only amounts in excess'" [stacked]="false">
+      </text-case-1> 
+    </div>
+    <div class="col-6">
+      <text-case-1 lbl="Deductible"
+        [val]="'Policyholders bears the full amount, when loss is within deductible. If loss exceeds deductible insurer bears full amount.'"
+        [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Min Excess'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.excessDeductible.excess.minExcess"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Max Excess'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.excessDeductible.excess.maxExcess"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-10">
+          <div class="row" *ngFor="let excessOpts of createCoverCode.excessDeductible.excessOpts; let i = index">
+            <div class="col-5">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Fixed Excess option Amount'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" name="amount_{{excessOpts.rowId}}"
+                  [(ngModel)]="excessOpts.fixedExcessOptionAmount" type="number" />
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Fixed Excess option rate (%)'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" name="rate_{{excessOpts.rowId}}"
+                  [(ngModel)]="excessOpts.excessOptRate" type="number" />
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group mt-2">
+                <label class=" text-primary">&nbsp;<br /></label>
+                <app-button (click)="removeExcessOpts(i)" [buttonType]="'delete'">
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addExcessOpts()" [buttonType]="'addCustom'"></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+      </div>
+
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Default Excess'|appTranslate|async}} <span class="text-normal">{{'(% of sum assured)'|appTranslate|async}}</span></label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.defaultExcessRate" type="number" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Default Excess'|appTranslate|async}} <span class="text-normal">{{'(Amount)'|appTranslate|async}}</span></label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.defaultExcessAmount" type="number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Total loss Excess Amount'|appTranslate|async}} <span class="text-normal"></span></label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.totalLossExcessAmount" type="number" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Total loss Excess Rate (%)'|appTranslate|async}}<span class="text-normal"></span></label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.totalLossExcessRate" type="number" />
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Excess Calc Basis -'|appTranslate|async}} <span class="text-normal">{{'If auto calculation is required'|appTranslate|async}}</span></label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.excessCalcBasis">
+              <option></option>
+              <option *ngFor="let ot of excessCalcList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Excess Table -'|appTranslate|async}} <span class="text-normal">{{'In conjuction with excess calc basis'|appTranslate|async}}</span></label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.excessTable">
+              <option></option>
+              <option *ngFor="let ot of excessTableList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Excess BuyBack Premium Rate'|appTranslate|async}} <span class="text-normal">{{'(% sum assured)'|appTranslate|async}}</span></label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.excess.excessBuyBackPremiumRate" type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Min Deductible'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.minDeductible" type="number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Max Deductible'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.maxDeductible" type="number" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-10">
+          <div class="row"
+            *ngFor="let deductibleOpt of createCoverCode.excessDeductible.coversDeductibleOpt; let i = index">
+            <div class="col-5">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Fixed Deductible option Amount'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" name="amount_{{deductibleOpt.rowId}}"
+                  [(ngModel)]="deductibleOpt.deductOptamount" type="number" />
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Fixed Deductible option rate (%)'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" name="rate_{{deductibleOpt.rowId}}"
+                  [(ngModel)]="deductibleOpt.deductOptRate" type="number" />
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group mt-2">
+                <label class=" text-primary">&nbsp;<br /></label>
+                <app-button (click)="removeDeductibleOpt(i)" [buttonType]="'delete'">
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addDeductibleOpt()" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Default Deductible'|appTranslate|async}} <span class="text-normal">{{'(% of sum assured)'|appTranslate|async}}</span></label>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Default Deductible'|appTranslate|async}} <span class="text-normal">{{'(Amount)'|appTranslate|async}}</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.defaultDeductibleRate" type="number" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.defaultDeductibleAmount" type="number" />
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Deductible Calc Basis -'|appTranslate|async}} <span class="text-normal">{{'If auto calculation is required'|appTranslate|async}}</span></label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.deductibleCalcBasis">
+              <option></option>
+              <option *ngFor="let ot of deductibleCalcList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Deductible Table -'|appTranslate|async}} <span class="text-normal">{{'In conjuction  with Deductible calc basis'|appTranslate|async}}</span></label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.deductibleTable">
+              <option></option>
+              <option *ngFor="let ot of deductibleList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Deductible BuyBack Premium Rate'|appTranslate|async}} <span class="text-normal">{{'(% sum assured)'|appTranslate|async}}</span></label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.excessDeductible.deductible.deductibleBuybackPremiumRate" type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{'Excess BuyBack Allowed'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.excessDeductible.excess.excessBuyBackAllowed" type="checkbox" />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{'Deductible BuyBack Allowed'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.excessDeductible.deductible.deductibleBuybackAllowed" type="checkbox" />
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row"  >
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveExceDeductable()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

@@ -1,0 +1,321 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class="row mb-2 justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Terms'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{'Maturity Basis'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.terms.coversTerms.maturityBasis">
+          <option></option>
+          <option *ngFor="let ot of maturityBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{'Age Calculation Basis'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.terms.coversTerms.ageCalculationBasis">
+          <option></option>
+          <option *ngFor="let ot of ageCalcBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class=" text-primary">{{'Fixed Premium Payment Term (If blank will be defined at quotation)'|appTranslate|async}}</label>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.fixedPremiumPaymentTermYears" placeholder="Years"
+              type="number" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.fixedPremiumPaymentTermMonths" placeholder="Months"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{'Minimum Entry Age'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.terms.coversTerms.minimumEntryAge"
+          placeholder="Years" type="number" />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class=" text-primary">{{'Minimum Premium Payment Term'|appTranslate|async}}</label>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.minimumPremiumPayTermYears" placeholder="Years"
+              type="number" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.minimumPremiumPayTermMonths" placeholder="Months"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{'Maximum Entry Age'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.terms.coversTerms.maximumEntryAge"
+          placeholder="Years" type="number" />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class=" text-primary">{{'Maximum Premium Payment Term'|appTranslate|async}}</label>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.maximumPremiumPayTermYears" placeholder="Years"
+              type="number" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.maximumPremiumPayTermMonths" placeholder="Months"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{'Max Age at Policy Maturity'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.terms.coversTerms.maximumAgePolicyMaturityYears" placeholder="Years"
+          type="number" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class=" text-primary">{{'Fixed Policy Term'|appTranslate|async}}</label>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.fixedPolicyTermYears" placeholder="Years" type="number" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.fixedPolicyTermMonths" placeholder="Months"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{'Cooling Off Period (Overwrite company setting)'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.terms.coversTerms.coolingOffPeriod"
+          placeholder="Days" type="number" />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class=" text-primary">{{'Minimum Policy Term'|appTranslate|async}}</label>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.minimumPolicyTermYears" placeholder="Years"
+              type="number" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.minimumPolicyTermMonths" placeholder="Months"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class=" text-primary text-center">{{'Do not Mature Until Benefit is Paid Out'|appTranslate|async}}
+          <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+            [(ngModel)]="createCoverCode.terms.coversTerms.doNotMatureUntilBenefitIsPaidOut" type="checkbox" /></label>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <label class=" text-primary">{{'Maximum Policy Term'|appTranslate|async}}</label>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.maximumPolicyTermYears" placeholder="Years"
+              type="number" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mt-2">
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.terms.coversTerms.maximumPolicyTermMonths" placeholder="Months"
+              type="number" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <br />
+  <div class="row mb-2">
+    <div class="col-md-4">
+      <div class="row mb-2 mb-2" *ngFor="let item of createCoverCode.terms.coversTermsOpts; let i = index">
+        <div class="col">
+          <label class=" text-primary">{{'Cover Term Options'|appTranslate|async}}</label>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group mt-2">
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.years" placeholder="Years" type="number"
+                  name="years_{{item.rowId}}" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mt-2">
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.months" placeholder="Months"
+                  name="month_{{item.rowId}}" type="number" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-auto d-flex" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2 me-2">
+            <label class=" text-primary">&nbsp;</label>
+            <app-btn (mclick)="removeTermOpt(i)" [disabled]="createCoverCode?.terms?.coversTermsOpts?.length==1" [group]="'delete'">
+            </app-btn>
+          </div>
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="addTermOpt()" [group]="'add'"></app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row mb-2 mb-2" *ngFor="let item of createCoverCode.terms.coversBenTermOpt; let i = index">
+        <div class="col">
+          <label class=" text-primary">{{'Benefit Term Options'|appTranslate|async}}</label>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group mt-2">
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.years" placeholder="Years" type="number"
+                  name="years_{{item.rowId}}" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mt-2">
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.months" placeholder="Months"
+                  name="month_{{item.rowId}}" type="number" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto d-flex" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2 me-2">
+            <label class=" text-primary">&nbsp;</label>
+            <app-btn (mclick)="removeBenTermOpt(i)" [disabled]="createCoverCode?.terms?.coversBenTermOpt?.length==1"
+              [group]="'delete'"></app-btn>
+          </div>
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="addBenTermOpt()" [group]="'add'"></app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row mb-2" *ngFor="let item of createCoverCode.terms.coversPremTermOpt; let i = index">
+        <div class="col-md">
+          <label class=" text-primary">{{'Premium Term Options'|appTranslate|async}}</label>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group mt-2">
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.years" placeholder="Years" type="number"
+                  name="years_{{item.rowId}}" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mt-2">
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.months" placeholder="Months"
+                  name="month_{{item.rowId}}" type="number" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-auto d-flex" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2 me-2">
+            <label class=" text-primary">&nbsp;</label>
+            <app-btn (mclick)="removePremTermOpt(i)" [disabled]="createCoverCode?.terms?.coversPremTermOpt?.length==1"
+              [group]="'delete'"></app-btn>
+          </div>
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="addPremTermOpt()" [group]="'add'"></app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveTerms()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

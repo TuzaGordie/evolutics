@@ -1,0 +1,100 @@
+<div class="container mt-5">
+  <form [formGroup]="findGroupQuotationForm">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="row">
+          <div class="col form-group d-flex flex-column justify-content-between">
+            <app-input-basic [form]="findGroupQuotationForm" name="clientNo" type="text" [stacked]="true"
+              label="Group Owner Client Number" [loading]="validatingClientNo" [showValidation]="true" [showValidationIcon]="true" [colored]="false"
+              [light]="false"></app-input-basic>
+            <!-- <label for="" class="">
+              Group Owner Client Number
+            </label>
+            <div class="position-relative">
+              <input type="text" formControlName="clientNo" class="form-control control-bg-gray" [ngClass]="{bordercheck: clientNoIsValid, borderuncheck: clientNoIsInvalid}" required>
+              <div style="display: none;" [ngClass]="{checkmark: clientNoIsValid}"><i
+                class="fa fa-check"></i></div>
+              <div style="display: none;" [ngClass]="{validating: validatingClientNo}"><i
+                class="fa fa-spinner fa-spin"></i></div>
+              <div style="display: none;" [ngClass]="{uncheckmark: clientNoIsInvalid}"><i
+                class="fa fa-times"></i></div>
+            </div> -->
+          </div>
+          <div class="col form-group d-flex flex-column justify-content-between">
+            <label for="" class="">
+              &nbsp;
+            </label>
+            <button class="btn btn-outline-primary btn-clone btn-lg"  routerLink="../../../client-desk/find"
+              [disabled]="findGroupQuotationForm.value.clientNo">
+              <i class="fa fa-search"></i>
+              {{'Find'|appTranslate|async}}
+            </button>
+          </div>
+          <div class="col form-group d-flex flex-column justify-content-between">
+            <label for="" class="">
+              &nbsp;
+            </label>
+            <app-button buttonType="create"  routerLink="../../../client-desk/create/individual"></app-button>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-12 my-2">
+            {{createQuotationService.clientInfo?.fullName}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="">
+               {{'Select Insurance Type'|appTranslate|async}}
+              </label>
+              <select formControlName="insuranceType" (change)="onInsuranceTypeSelection($event)"
+                class="form-control control-bg-gray mr-2" required>
+                <option [value]="item.code" *ngFor="let item of insuranceTypesList">{{item.code}} - {{item.title}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="">
+                {{'Select Product Class'|appTranslate|async}}
+              </label>
+              <select formControlName="productClass" (change)="onProductClassSelection($event)"
+                class="form-control control-bg-gray mr-2 position-relative" required #productClass>
+                <option></option>
+                <option [value]="item.code" *ngFor="let item of productClassesList">{{item.code}} - {{item.title}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="">
+                {{'Select Product'|appTranslate|async}}
+              </label>
+              <select formControlName="productCode" class="form-control control-bg-gray mr-2" required>
+                <option></option>
+                <option [value]="item.code" *ngFor="let item of productsList">{{item.code}} - {{item.description}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-4" >
+            <!-- <app-button buttonType="nextGB" (click)="onNext()"></app-button> -->
+            <app-btn [disabled]="hideNext" icon="next" type="secondary" (mclick)="onNext()">Next</app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+</div>

@@ -1,0 +1,608 @@
+<app-form-navigation [title] = "'Document / User'"></app-form-navigation>
+
+<div *ngIf="operation === 'actions'" class="container-sm" id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+        <div class="form-group">
+          <label>Select User Group</label>
+          <select class="form-control mt-2 form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Select User</label>
+          <select class="form-control mt-2 form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>Created By</label>
+          <input type="text" class="form-control mt-2 form-control-lg control-bg-gray">
+        </div>
+        <div class="form-group mt-2">
+          <label>Created From</label>
+          <input type="date" class="form-control mt-2 form-control-lg control-bg-gray">
+        </div>
+        <div class="form-group mt-2">
+          <label>Created To</label>
+          <input type="date" class="form-control mt-2 form-control-lg control-bg-gray">
+        </div>
+        <div class="form-group mt-2">
+          <label>Status</label>
+          <select class="form-control form-control-lg mt-2 control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <!-- <app-button [routerLink]="['show']" class="show-button" [buttonType]="'show'"></app-button> -->
+            <button [routerLink]="['show']" class="btn btn-lg show-button">
+              <i class="fa fa-eye"></i> Show
+            </button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <button class="btn btn-lg create-button" [routerLink]="['create']">
+              <i class="fa fa-plus"></i> Create new
+            </button>
+            <!-- <app-button [routerLink]="['create']" class="create-button" [buttonType]="'create'"></app-button> -->
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <button class="btn btn-lg clone-button" [routerLink]="['clone']">
+              <i class="fa fa-clone"></i> Clone
+            </button>
+            <!-- <app-button [routerLink]="['clone']" class="clone-button" [buttonType]="'clone'"></app-button> -->
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="operation === 'create' || operation === 'clone' " class="container-sm vh-100" id="form-body">
+  <div class="d-flex h-50 flex-column justify-content-center">
+    <div class="row">
+      <div class="col-10 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label class="mb-2">Enter Client Number for New User</label>
+            <div class="row mt-4">
+              <div class="col-md-4">
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+              <div class="col-md-2 d-grid gap-1">
+                <button class="btn btn-lg clone-button">
+                  <i class="fa fa-search"></i> Show
+                </button>
+              </div>
+              <div class="col-md-3 d-grid gap-1">
+                <button class="btn btn-lg create-button">
+                  <i class="fa fa-plus"></i> Create new
+                </button>
+              </div>
+              <div class="col-md-3">
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="operation === 'show'" class="container-sm mt-5 mb-5" id="form-body">
+  <div class="form-body container-fluid mt-2">
+    <ul class="pills-tab" role="tablist" class="nav nav-pills nav-fill mb-3">
+      <li *ngFor="let menu of templateMenu" role="presentation" class="nav-item">
+        <button (click)="activate(menu.name)" class="nav-link tab-pane" [ngClass]="{'active':menu.active}" id="pills-basic-tab"
+                data-bs-toggle="pill" data-bs-target="pills" type="button" role="tab" aria-controls="pills-basic">
+          {{menu.name}}
+        </button>
+      </li>
+    </ul>
+    <div *ngIf="tab === 'Basics'" class="tab-content" id="pills-tabContent">
+      <div class="container">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label for="" class="form-label">User ID</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-2">
+                <label for="" class="form-label">User Menu</label>
+                <select class="form-control control-bg-gray" name="" id=""></select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-2">
+                <label for="" class="form-label">User Group</label>
+                <select class="form-control control-bg-gray" name="" id=""></select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Client Number of User</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Full Name</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Default User for pending tasks when out of office</label>
+                <select class="form-control control-bg-gray" name="" id=""></select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Office Email</label>
+                <input class="form-control  control-bg-gray " type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Direct supervisor </label>
+                <select class="form-control control-bg-gray " name="" id=""></select>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Part Time Workflow Weighting (%)</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Appraisal Level Code</label>
+                <select class="form-control control-bg-gray" name="" id=""></select>
+
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Appraisal Company Code</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Appraisal Division Code</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+
+          </div>
+          <div class="row g-3">
+
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Appraisal Sub Division Code</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">Appraisal Team Code</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label">User Job Role</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+
+            <div class="col">
+              <div class=" form-group mt-4">
+                <label for="" class="form-label">Access Expiry Date</label>
+                <input class="form-control control-bg-gray" type="date">
+              </div>
+            </div>
+            <div class="col">
+              <div class=" form-group mt-4">
+                <label for="" class="form-label">Current Box No</label>
+                <input class="form-control control-bg-gray" type="text">
+              </div>
+            </div>
+            <div class="col-4"></div>
+          </div>
+          <div class="row g-3">
+            <div class="col  d-grid gap-1">
+              <div class="mt-2">
+                <label for="" class="form-label">&nbsp;</label>
+                <button class="btn btn-lg show-button">
+                  <i class="fa fa-eye"></i> Upload Passport Photo
+                </button>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center"> Allow Access through web
+                  service</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">User Allowed to snooze tasks</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">Send notification email on workflow
+                  issuance</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">On break</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">Out of Office</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">Relationship Manager</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">Sub Relationship Manager</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group mt-4">
+                <label for="" class="form-label w-100 text-center">Tele-Marketer</label>
+                <input type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <div class="row" *ngFor="let i of apprCounter()">
+                    <div class="mt-4  form-group">
+                      <label for="" class="form-label">Company Data Allowed Access</label>
+                      <select class="form-control control-bg-gray" name="" id=""></select>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col mt-4 d-grid gap-1">
+                  <label for="" class="form-label">&nbsp;</label>
+                  <button class="btn btn-lg create-button" (click)="apprInc()">
+                    <i class="fa fa-plus"></i> Add
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="col">
+              <div class="row">
+
+                <div class=" col mt-4  form-group">
+                  <div class="row" *ngFor="let i of bdCounter()">
+                    <label for="" class="form-label">Branches Data Allowed Access To</label>
+                    <select class="form-control control-bg-gray" name="" id=""></select>
+                  </div>
+
+                </div>
+                <div class="col mt-4 d-grid gap-1">
+                  <label for="" class="form-label">&nbsp;</label>
+                  <button class="btn btn-lg create-button" (click)="bdInc()">
+                    <i class="fa fa-plus"></i> Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="tab === 'Limits'">
+
+      <h6 class="mt-4">Payout Limits</h6>
+      <div class="row" *ngFor="let i of plCounter()">
+        <div class="col-md-5 ">
+          <div class=" form-group">
+            <label for="" class="form-label">Currency</label>
+            <select class="form-control control-bg-gray " name="" id=""></select>
+          </div>
+        </div>
+        <div class="col-md-5 ">
+          <div class=" form-group">
+            <label for="" class="form-label">Amount</label>
+            <input class="form-control control-bg-gray" type="text">
+          </div>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+            <button class="btn btn-lg create-button" (click)="plInc()">
+              <i class="fa fa-plus"></i> Add
+            </button>
+        </div>
+      </div>
+
+      <h6 class="mt-4">
+        Quotation Approval Limit
+      </h6>
+      <div class="row" *ngFor="let i of qalCounter()">
+        <div class="col ">
+          <div class=" form-group">
+            <label for="" class="form-label">Currency</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col ">
+          <div class=" form-group">
+            <label for="" class="form-label">Tier</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+          <button class="btn btn-lg create-button" (click)="qalInc()">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+      <h6 class="mt-4"> Payout Authorisation Limits</h6>
+      <div class="row" *ngFor="let i of palCounter()">
+        <div class="col">
+          <div class=" form-group">
+            <label for="" class="form-label">Currency</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col ">
+          <div class=" form-group">
+            <label for="" class="form-label">Tier</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+          <button class="btn btn-lg create-button" (click)="palInc()">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+      <h6 class="mt-4"> Discharge Voucher Authorization</h6>
+      <div class="row" *ngFor="let i of dvaCounter()">
+        <div class="col ">
+          <div class=" form-group">
+            <label for="" class="form-label">Currency</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col">
+          <div class=" form-group">
+            <label for="" class="form-label">Tier</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+          <button class="btn btn-lg create-button" (click)="dvaInc()">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+      <h6 class="mt-4"> Policy Accounting & Comission Adjustment Authorization Limits</h6>
+      <div class="row" *ngFor="let i of pacCounter()">
+        <div class="col ">
+          <div class=" form-group">
+            <label for="" class="form-label">Currency</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col">
+          <div class=" form-group">
+            <label for="" class="form-label">Tier</label>
+            <select class="form-control control-bg-gray" name="" id=""></select>
+          </div>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+          <button class="btn btn-lg create-button" (click)="pacInc()">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
+        <div class="col-5 ">
+          <div class=" form-group">
+            <label for="" class="form-label"> Discount Limit (%)</label>
+            <input class="form-control control-bg-gray" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="tab === 'Office Schedule'">
+      <h5 class="title-border mt-4 pb-2">
+        In-Office Schedule
+      </h5>
+      <div class=" row mt-5 mb-5">
+        <div class="col-md-4 ">
+          <h5 class="heading-color-primary">Day</h5>
+        </div>
+        <div class="col-md-4 ">
+          <h5 class="heading-color-primary">From</h5>
+        </div>
+        <div class="col-md-4 ">
+          <h5 class="heading-color-primary">To</h5>
+        </div>
+      </div>
+      <div class="mt-4 pd-2 row" *ngFor="let day of weekday">
+        <div class="col-md-4 ">
+          <h5>{{day}}</h5>
+        </div>
+        <div class="col-md-4 ">
+          <div class="w-100 form-group">
+            <input class="form-control control-bg-gray" type="time">
+          </div>
+        </div>
+        <div class=" col-md-4 ">
+          <div class="  w-100 form-group">
+            <input class="form-control control-bg-gray " type="time">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="tab === 'Office Schedule'">
+
+  <div class="container mt-5 mb-5">
+    <div class="row justify-content-end">
+      <div class="col-md-3 w-30  d-grid gap-1 align-items-center">
+        <button class="btn btn-lg create-button">
+          <i class="fa fa-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="container-sm" id="form-body">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-2 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label>Select User Group</label>
+            <select class="form-control form-control-lg control-bg-gray mt-2">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label>Select User</label>
+            <select class="form-control form-control-lg control-bg-gray mt-2">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label>Created By</label>
+            <input type="text" class="form-control form-control-lg control-bg-gray mt-2">
+          </div>
+          <div class="form-group mt-2">
+            <label>Created From</label>
+            <input type="date" class="form-control form-control-lg control-bg-gray mt-2">
+          </div>
+          <div class="form-group mt-2">
+            <label>Created To</label>
+            <input type="date" class="form-control form-control-lg control-bg-gray mt-2">
+          </div>
+          <div class="form-group mt-2">
+            <label>Status</label>
+            <select class="form-control form-control-lg control-bg-gray mt-2">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="form-group row my-3">
+            <div class="col-sm-4 d-grid gap-1">
+                <button class="btn btn-lg show-button">
+                  <i class="fa fa-eye"></i> Show
+                </button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <button class="btn btn-lg create-button">
+                <i class="fa fa-plus"></i> Create new
+              </button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+                <button class="btn btn-lg clone-button">
+                    <i class="fa fa-clone"></i> Clone
+                </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+</div> -->

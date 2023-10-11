@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12 mx-auto"> 
+        <p class="py-3"><b>Client Name:</b> <span class="px-3">{{clientFullName}}</span></p>
+        <table class="table table-responsive  table-striped">
+          <thead class="py-3 theader">
+            <tr>
+              <th scope="col" style="border-bottom-left-radius: 12px;">Web ID</th>
+              <th scope="col">Account Name</th>
+              <th scope="col" style="border-top-right-radius: 12px;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of webLoginList">
+              <th scope="row">{{item.webId}}</th>
+              <td>{{item.firstname}}</td>
+              <td>{{item.active}}</td>
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+  
+      <div class="col-md-3 mt-5">
+        <app-button [buttonType]="'btnCustomClone'" [text]="'New Web Account'" data-bs-toggle="modal"
+          data-bs-target="#webLoginModal"></app-button>
+      </div>
+    </div>
+  
+  </div>
+  
+  <div class="modal fade" id="webLoginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content p-5">
+        <div class="d-flex justify-content-between">
+          <h3 class="">Web Log In</h3>
+          <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <form [formGroup]="webLoginForm">
+          <div class="row my-3">
+            <label for="userName" class="col-md-2">User Name</label>
+            <input type="text" id="userName" formControlName="userName" class="col-md inputform">
+          </div>
+          <div class="row my-3">
+            <label for="status" class="col-md-2">Status</label>
+            <select id="status" class="col-md inputform" formControlName="status">
+              <option [value]="null"></option>
+            </select>
+          </div>
+          <div class="row my-3">
+            <label for="language" class="col-md-2">Language</label>
+            <select id="language" class="col-md inputform" formControlName="language">
+              <option [value]="null"></option>
+            </select>
+          </div>
+          <div class="row my-3">
+            <label for="webAccess" class="col-md-2">Web Access</label>
+            <select id="webAccess" class="col-md inputform" formControlName="webAccess">
+              <option [value]="null"></option>
+            </select>
+          </div>
+  
+          <p class="mt-3 text-primary">Functions Allowed</p>
+          <div class="d-flex mb-3">
+            <div class="mr-3">
+              <label>Documents</label>
+              <input type="checkbox" class="form-control d-inline-block control-bg-gray mx-2">
+            </div>
+            <div class="mr-3">
+              <label>View Policies</label>
+              <input type="checkbox" class="form-control d-inline-block control-bg-gray mx-2">
+            </div>
+            <div class="mr-3">
+              <label>Quotations</label>
+              <input type="checkbox" class="form-control d-inline-block control-bg-gray mx-2">
+            </div>
+          </div>
+  
+          <div class="row justify-content-between mt-5">
+            <button class="btn btn-outline-primary m-auto w-auto px-5">Password</button>
+            <button class="btn btn-primary m-auto w-auto px-5" (click)="onSave()">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

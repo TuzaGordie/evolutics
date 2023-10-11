@@ -1,0 +1,114 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Paid Up'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row align-items-end">
+
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Month Before Paid Up Is Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.monthBeforePaidUpAllowed"
+          type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label
+          class=" text-primary">{{"Minimum Policy Value before Paid Up Is Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.minPolicyBeforePaidUpAllowed"
+          type="number" />
+      </div>
+    </div> 
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Benefit Recalculation Basis"|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.benefitRecalcBasis">
+          <option></option>
+          <option *ngFor="let ot of benefitRecalcBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Benefit Recalculation Table"|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.benefitRecalcTable">
+          <option></option>
+          <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div> 
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Paid Up Charges Table"|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.paidupChargeTable">
+          <option></option>
+          <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Paid Up Table"|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.paidUpTable">
+          <option></option>
+          <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Reinstatement Calc Basis"|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.paidUp.reinstatementCalcBasis">
+          <option></option>
+          <option *ngFor="let ot of reinstCalcBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-input-td-rf #inp label="Days Paid Up Before Reinstatement Charges" hint="Days"
+        [(model)]="createCoverCode.paidUp.daysReinstChargeFree" type="number" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Allow Reinstatement from Paid Up"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray"
+          [(ngModel)]="createCoverCode.paidUp.allowReinstatementPaidup" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Paid Up Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray" [(ngModel)]="createCoverCode.paidUp.paidUpAllowed"
+          type="checkbox" />
+      </div>
+    </div>
+  </div> 
+
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="savePaidUp()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

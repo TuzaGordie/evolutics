@@ -1,0 +1,88 @@
+<div class="container-fluid mt-2 " id="form-body">
+
+  <div class="tab-content" id="pills-tabContent">
+    <div class="container">
+      <form [formGroup]="CreateIntRateForm" (submit)="onSubmit()">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Interest Rate Code'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="code" />
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-2">
+
+                <label>{{'Description'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="description" />
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Interest Rate Group'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray" formControlName="interestGroup">
+                  <option></option>
+                  <option *ngFor="let ot of intRateGroup" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Table Format'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray" formControlName="tableFormat">
+                  <option></option>
+                  <option *ngFor="let ot of tableFormatList" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Table'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray" formControlName="table">
+                  <option *ngFor="let ot of tableDataList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Date From'|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="date" formControlName="dateFrom" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group mt-2">
+                <label>{{'Rate '|appTranslate|async}}(%)</label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="rate" />
+              </div>
+            </div>
+          </div>
+
+
+
+          <br />
+        </div>
+        <div class="row g-3">
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="border-0 next ml-3 primarybtn px-3 py-2">{{'Add'|appTranslate|async}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

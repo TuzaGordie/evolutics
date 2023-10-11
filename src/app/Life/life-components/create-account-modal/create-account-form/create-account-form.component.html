@@ -1,0 +1,103 @@
+<loader [loading]="loading">
+
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-md text-center">
+        <label class="text-primary py-2">{{'Account Type'|appTranslate|async}}</label><br>
+        <div class="row align-items-center">
+          <div class="col">
+            <app-btn (click)="showBankModel()" [type]="bankModel?'primary':'outline'">Bank</app-btn>
+          </div>
+          <div class="col-auto">
+            {{'OR'|appTranslate|async}}
+          </div>
+          <div class="col">
+            <app-btn (click)="showMobileModel()" [type]="mobileModel?'primary':'outline'">Mobile Money</app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row align-items-end">
+      <div class="col-md-6">
+        <app-autocomplete label="Bank Country" [stacked]="true" [form]="form" [options]="countries" labelType="cd"
+          name="country" valueField="code" [showValidation]="country.invalid" #country>
+        </app-autocomplete>
+        <app-validation-message [control]="form.controls.country" label="Bank country"></app-validation-message>
+      </div>
+
+      <ng-container *ngIf="bankModel">
+        <div class="col-md-6">
+          <app-input-basic label="Bank Name" [form]="form" name="bankName" type="select" [stacked]="true"
+            valueField="code" labelType="cd" [options]="bankS.getBanksByCountry|httpListCaller1:country?.value|async"
+            [disabled]="!country.value"></app-input-basic>
+          <app-validation-message></app-validation-message>
+        </div>
+
+        <div class="col-md-6">
+          <div class="row align-items-center">
+            <div class="col">
+              <label class="text-primary ">{{'Sort Code'|appTranslate|async}}</label>
+              <input type="text" [value]="sortCode" class="form-control  control-bg-gray" readonly>
+            </div>
+            <div class="col-auto">
+              <label class="text-primary ">&nbsp;</label>
+              <app-button [buttonType]="'find'" [text]="'Find Sort Code'" (click)="openSortCodeModal()"></app-button>
+            </div>
+          </div>
+          <app-validation-message></app-validation-message>
+        </div>
+
+        <div class="col-md-6">
+          <label class="text-primary py-2">{{'Bank Branch'|appTranslate|async}}</label><br>
+          <input type="text" [value]="bankBranch||''" readonly class="form-control  control-bg-gray"
+            [disabled]="!country.value">
+          <app-validation-message></app-validation-message>
+        </div>
+
+        <div class="col-md-6">
+          <app-input-basic label="Account No" [form]="form" name="accountNo" type="text" [stacked]="true"
+            [disabled]="!country.value" #accountNo></app-input-basic>
+          <app-validation-message [control]="accountNo.control" label="Account number" [maxLength]="+countryData?.bankAccountMaxLength"
+            [minLength]="+countryData?.bankAccountMinLength">
+          </app-validation-message>
+        </div>
+
+        <div class="col-md-6">
+          <app-input-basic label="Account Name" [form]="form" name="accountName" type="text" [stacked]="true"
+            [disabled]="!country.value" #accountName></app-input-basic>
+          <app-validation-message [control]="accountName.control" label="Account name"></app-validation-message>
+        </div>
+
+        <div class="col-md-6">
+          <app-file-upload label="Upload Proof of Account" accept="image" [(file)]="accProofFile"
+            [disabled]="!country.value"></app-file-upload>
+          <app-validation-message></app-validation-message>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="mobileModel">
+        <div class="col-md-6">
+          <app-input-basic label="Provider" [form]="form" name="bankName" type="select" [stacked]="true"
+            valueField="code" labelType="ct" [options]="accS.getProviderList|functionCaller|async"
+            [disabled]="!country.value" #bankName></app-input-basic> 
+          <app-validation-message [control]="bankName.control" label="Provider"></app-validation-message>
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="Account No" [form]="form" name="accountNo" type="text" [stacked]="true"
+            [disabled]="!country.value" #accountNo></app-input-basic>
+          <app-validation-message [control]="accountNo.control" label="Account number" [maxLength]="countryData?.bankAccountMaxLength|toAny"
+            [minLength]="countryData?.bankAccountMinLength|toAny">
+          </app-validation-message>
+        </div>
+      </ng-container>
+    </div>
+    <div class="d-lg-flex justify-content-between my-5" *ngIf="showSubmissionBtn">
+      <div class="text-danger">
+        {{message}}
+      </div>
+      <app-btn (mclick)="submit()" icon="save" type="secondary">Save</app-btn>
+    </div>
+  </form>
+</loader>

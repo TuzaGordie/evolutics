@@ -1,0 +1,133 @@
+<div class="container-fluid bgcol bggrey row dosome">
+  <div class="col-12 col-xl-8 h-100 mt-4">      
+    <div class="title">{{"Agent Performance YTD"|appTranslate|async}}</div>    
+    <canvas baseChart class="spacing mb-4" style="height: 100%;" 
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [colors] = "chartColors"
+    [chartType]="barChartType">
+    </canvas>
+  </div>
+  <div class="col-12 col-xl-4 h-100">
+    <div class="title largetext" >{{"Agent Count Summary"|appTranslate|async}}</div>
+    <canvas baseChart class="spacing mb-4 "
+    [datasets]="barChartData1"
+    [labels]="barChartLabels1"
+    [options]="barChartOptions1"
+    [legend]="barChartLegend"
+    [colors] = "chartColors1"  
+    [chartType]="barChartType1">
+    </canvas>
+  </div>
+</div>
+<div class="overlay container-fluid position-fixed top-0 start-0 op w-100 h-100" *ngIf="largearray.firstLayer">   </div>
+  <div class="overlay container-fluid position-absolute top-0 start-0 opabsolute" *ngIf="largearray.firstLayer">
+    <div class="mainchart">
+      <div class="close" (click)="open('firstLayer')">  <i class="fas fa-times"></i> </div>
+      <canvas baseChart class="spacing mb-4 isale "
+        [datasets]="barChartData2"
+        [labels]="barChartLabels2"
+        [options]="barChartOptions2"
+        [legend]="barChartLegend" 
+        [colors] = "chartColors2"
+        
+        [chartType]="barChartType1">
+      </canvas>
+    </div>
+  </div>
+    
+  <div class="overlay container-fluid position-fixed top-0 start-0 op w-100 h-100" *ngIf="largearray.secondLayer"></div>
+  <div class="overlay container-fluid position-absolute top-0 start-0 opabsolute" *ngIf="largearray.secondLayer">
+    <div class="mainchart eleyi" >
+      <div class="toplayer flexBet" >
+        <div class="rightflex">
+          <h2>{{"Agent Count Summary"|appTranslate|async}}</h2>
+          <div class="below">
+              {{"First 10 records displayed. For full record. Click export to Excel"|appTranslate|async}}
+          </div>
+        </div>
+        <div class="leftflex">
+          <div class="summ">{{"Summarize By"|appTranslate|async}}: </div>
+          <div class="leftblack">
+              <a href="" class="hoverchange">{{"Edit Output Fields"|appTranslate|async}}</a>
+              <a href="" class="hoverchange">{{"Export to Excel"|appTranslate|async}}</a>
+          </div>
+        </div>
+    
+      </div>
+      <div class="close" (click)="open('secondLayer')">  <i class="fas fa-time"></i> </div>
+      <table class="table table-responsive  ">
+        <thead class="py-3 theader bg-primary text-light">
+          <tr>
+            <th scope="col" >{{"Agent No"|appTranslate|async}}</th>
+            <th scope="col" >{{"Agent Name"|appTranslate|async}}</th>
+            <th scope="col" >{{"No of Policies activated in a month"|appTranslate|async}}</th>
+            <th scope="col" >{{"Status"|appTranslate|async}}</th>
+            <th scope="col" >{{"Corporate"|appTranslate|async}}</th>
+            <th scope="col" >{{"Heirarchy"|appTranslate|async}}</th>
+            <th scope="col" >{{"Agent type"|appTranslate|async}}</th>
+            <th scope="col" >{{"Band"|appTranslate|async}}</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1343</td>
+            <td>{{"James Bond"|appTranslate|async}}</td>
+            <td>20</td>
+            <td>A</td>
+            <td>N</td>
+            <td>{{"IND"|appTranslate|async}}</td>
+            <td>A</td>  
+          </tr> 
+          <tr>
+            <td>1343</td>
+            <td>{{"James Bond"|appTranslate|async}}</td>
+            <td>20</td>
+            <td>A</td>
+            <td>N</td>
+            <td>{{"IND"|appTranslate|async}}</td>
+            <td>A</td>
+          </tr> 
+          <tr>
+            <td>1343</td>
+            <td>{{"James Bond"|appTranslate|async}}</td>
+            <td>20</td>
+            <td>A</td>
+            <td>N</td>
+            <td>{{"IND"|appTranslate|async}}</td>
+            <td>A</td>
+          </tr> 
+          <tr>
+            <td>1343</td>
+            <td>{{"James Bond"|appTranslate|async}}</td>
+            <td>20</td>
+            <td>A</td>
+            <td>N</td>
+            <td>{{"IND"|appTranslate|async}}</td>
+            <td>A</td>
+          </tr> 
+          <tr>        
+            <td>1343</td>
+            <td>{{"James Bond"|appTranslate|async}}</td>
+            <td>20</td>
+            <td>A</td>
+            <td>N</td>
+            <td>{{"IND"|appTranslate|async}}</td>
+            <td>A</td>
+          </tr> 
+          <tr>
+            <td>1343</td>
+            <td>{{"James Bond"|appTranslate|async}}</td>
+            <td>20</td>
+            <td>A</td>
+            <td>N</td>
+            <td>{{"IND"|appTranslate|async}}</td>
+            <td>A</td>
+          </tr> 
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between mt-5 mb-3 "></div>       
+    </div>
+  </div>

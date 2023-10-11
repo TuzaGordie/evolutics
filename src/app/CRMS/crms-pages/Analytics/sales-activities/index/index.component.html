@@ -1,0 +1,142 @@
+<div class="bg-light-gray-evolutics" style="min-height: 100vh">
+  <app-form-navigation [title]="'Activities Summary'"></app-form-navigation>
+  <div class="container">
+    <div id="section_home">
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label">Team Category</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label">Team</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label">Agent</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="section_cardsno" class="section-cards"  class="row justify-content-around">
+        <div class="row row-cols-1 row-cols-md-2 g-4 ">
+          <div class="col-md-4">
+            <div class="card color1 ">
+              <div class="card-body">
+                <p class="text-right">Total Prospects</p>
+                <h5 class="card-title">29,000</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card color2 ">
+              <div class="card-body">
+                <p class="text-right">Opportunities</p>
+                <h5 class="card-title">12,000</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card color3 ">
+              <div class="card-body">
+                <p class="text-right">Total Policy Conversion</p>
+                <h5 class="card-title">1,200</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-4  ">
+          <div class="col-md-4">
+            <div class="card" style="height: 100%;">
+              <div class="card-body">
+                <h5 class="">Conversion Rate</h5>
+                <p>Lead Conversion Ratio: <strong>17:1</strong></p>
+
+                <circle-progress
+                  [percent]="80"
+                  [radius]="100"
+                  [outerStrokeWidth]="23"
+                  [innerStrokeWidth]="8"
+                  [outerStrokeColor]="'#DB0041'"
+                  [innerStrokeColor]="'#fff'"
+                  [animation]="true"
+                  [animationDuration]="300"
+
+                ></circle-progress>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row mb-4">
+              <div class="col">
+                <div class="card  ">
+                  <div class="card-body">
+                    <p>Jane</p>
+                    <h5 class="card-title">3%</h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="card ">
+                  <div class="card-body">
+                    <p>Williams</p>
+                    <h5 class="card-title">11%</h5>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="height: 100%;">
+              <div class="card-body">
+                <p>Activity This Week</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-center w-100 mt-4 ">
+          <button class="btn btn-dark" routerLink="/crms/sales-cycle-report">Sales Cycle Report</button>
+
+
+          <button class="btn btn-dark" routerLink="/crms/sales-conversion-report">Sales Conversion Report</button>
+
+
+          <button class="btn btn-dark" routerLink="/crms/sales-conversion-report">Sales/Settled Transaction</button>
+
+
+          <button class="btn btn-dark" routerLink="/crms/sales-report">Sales Report</button>
+
+
+          <button class="btn btn-dark" routerLink="/crms/lead-conversion-rate">Lead Conversion Rate</button>
+
+
+          <button class="btn btn-dark" routerLink="/crms/lead-opportunity-rate">Lead Opportunity Rate</button>
+
+
+          <button class="btn btn-dark" routerLink="/crms/opportunity-to-win-ratio">Opportunity To Win Ratio</button>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+

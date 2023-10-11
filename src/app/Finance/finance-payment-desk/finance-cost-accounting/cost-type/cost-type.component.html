@@ -1,0 +1,84 @@
+
+<div class="container-fluid">
+    <div class="">
+        <form>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="mt-3">
+                    <label for="">Batch Name:</label>
+                <select name="" id="" class="form-control">
+                    <option value=""></option>
+                </select>
+                  </div>
+            </div>           
+    </div>
+        <div class="table-responsive mt-5">
+            <table class="table table-striped">
+                <thead class="text-success">
+                    <ng-container *ngFor="let item of thead">
+                        <th scope="col">{{item}}</th>
+                    </ng-container>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of tdata">
+                        <td>{{item.No}}</td>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.totalling}}</td>
+                        <td>{{item.costClass}}</td>
+                        <td>{{item.accountRange}}</td>
+                        <td>{{item.nextChange}}</td>
+                        <td>{{item.costCenter}}</td>
+                        <td>{{item.costObject}}</td>
+                        <td>{{item.combineEntries}}</td>
+                        <td>{{item.budjetAmount}}</td>
+                        <td>{{item.block}}</td>
+                        <td>{{item.newPage}}</td>
+                        <td>{{item.blankLine}}</td>
+                        <td>{{item.balanceToAllocate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-5">
+            <button class="btn btn-lg btn-outline-success" routerLink="/finance/payment/cost-accounting/add-cost-type" >
+                Add New Cost Type
+             </button>
+            <button class="btn btn-lg btn-outline-success ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Get Cost Type From Chart of Accounts
+             </button>
+        </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="row py-5">
+                <div class="col-md-2 d-flex justify-content-center">
+                    <fa-icon [icon]='faQuestionCircle' size="3x"></fa-icon>
+                </div>
+                <div class="col-md-10">
+                    <div>
+                        <p>
+                            This function transfer all income statement accounts from the Charts of Accounts to the Chart of Cost Type. 
+                        </p>
+                        <p>
+                            All types include Heading, Begin-Total and End-total are transferred.
+                        </p>
+                        <p>
+                            General Ledger Accounts that have the same number as an existing cost type are not transferred.
+                        </p>
+                        <span>
+                            Do you wish to continue ?
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="btn btn-md btn-outline-success">Yes</button>
+                    <button class="btn btn-md btn-outline-success ms-2">No</button>
+                </div>
+          </div>
+        </div>
+     </div>     
+</div>

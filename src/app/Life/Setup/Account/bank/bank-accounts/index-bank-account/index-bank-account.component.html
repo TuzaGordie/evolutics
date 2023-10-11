@@ -1,0 +1,49 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Bank/ Bank Accounts'"></app-form-navigation> -->
+<div class="container">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Select Company" type="select" [form]="form" name="company" [stacked]="true"
+      [options]="aeS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" #company>
+    </app-input-basic>
+
+    </div>
+
+  </div>
+  <!-- <br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Select Bank" type="select" [form]="form" name="bank" [stacked]="true"
+        [options]="aeS.getBankByCompany|functionCaller1:company?.value?.code|async" labelType="cd" #bank>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>  -->
+
+
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="dark" icon="show" (mclick)="show(company.value)">Show</app-btn>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'create'" routerLink="../create-bank-account"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" icon="clone" (mclick)="clone(company.value)">Clone</app-btn>
+    </div>
+
+  </div>
+
+</div>

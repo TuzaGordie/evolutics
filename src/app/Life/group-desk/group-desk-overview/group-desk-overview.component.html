@@ -1,0 +1,28 @@
+<!-- <app-form-navigation [title] = "'Group-Overview'"></app-form-navigation>  -->
+
+<div class="container-fluid bgcol">
+    <div class="row bggrey">
+        <div class="col-12 col-lg-8 mx-auto">
+          <div class="row bgcol d-flex">
+            <div class="restrict-height m-4" class="bgwhite">
+              <p matDialogTitle>{{'Group Summary By Status Code'|appTranslate|async}}</p>
+              <canvas baseChart class="spacing mb-4 " [datasets]="barChartData" [labels]="barChartLabels"
+                [options]="barChartOptions" [legend]="barChartLegend" [colors]="chartColors" [chartType]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row bggrey">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="row bgcol d-flex">
+        <div class="restrict-height m-4" class="bgwhite">
+          <p matDialogTitle>{{'Group Summary by Product class'|appTranslate|async}}</p>
+          <canvas baseChart class="spacing mb-4 " [datasets]="barChartData2" [labels]="barChartLabels2"
+            [options]="barChartOptions2" [legend]="barChartLegend2" [colors]="chartColors2" [chartType]="barChartType2">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

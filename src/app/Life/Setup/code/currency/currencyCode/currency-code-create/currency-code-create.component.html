@@ -1,0 +1,65 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Currency / Code'"></app-form-navigation> -->
+<form #f="ngForm" novalidate>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label text-primary">{{"Currency Code"|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray" [attr.disabled]="disableCode === true ? '' : null" required name="code" [(ngModel)]="currency.code">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray" required name="description"
+              [(ngModel)]="currency.description">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label text-primary">{{"No of Decimals"|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray" required name="noOfDecimals"
+              [(ngModel)]="currency.noOfDecimals">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label text-primary">{{"Number Basis"|appTranslate|async}}</label>
+            <select type="text" class="form-control control-bg-gray" required name="numberBasis"
+              [(ngModel)]="currency.numberBasis">
+              <option *ngFor="let number of numberBasis" [value]="number.code">
+                {{number.title}}
+              </option>
+            </select>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label text-primary">{{"NL Currency Code"|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray" required name="nlCurrCode"
+              [(ngModel)]="currency.nlCurrCode">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="form-label text-primary">{{"ISO Numeric Code"|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray" required name="isoNumericCode"
+              [(ngModel)]="currency.isoNumericCode">
+          </div>
+
+        </div>
+        <div class="row justify-content-end mt-4">
+          <div class="col-4">
+            <app-button buttonType="save" (click)="createCurrency()"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

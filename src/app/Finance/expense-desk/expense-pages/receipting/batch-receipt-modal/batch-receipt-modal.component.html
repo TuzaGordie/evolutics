@@ -1,0 +1,160 @@
+<div class="d-flex justify-content-between">
+  <h2 mat-dialog-title>{{ 'Batch Receipt Upload' | appTranslate | async }}</h2>
+  <button class="btn-close" mat-dialog-close></button>
+</div>
+<mat-dialog-content style="overflow: scroll">
+  <table
+    class="table table-borderless"
+    style="
+      width: 100%;
+      table-layout: fixed;
+      word-wrap: break-word;
+      overflow: hidden;
+    "
+  >
+    <thead>
+      <tr>
+        <th scope="col">{{ 'S/N' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Policy No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Policy Code' | appTranslate | async }}</th>
+        <th scope="col">
+          {{
+            'Narration (if different from general narration)'
+              | appTranslate
+              | async
+          }}
+        </th>
+        <th scope="col">{{ 'Client Name' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Amount' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Reason Code' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Ref No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Action' | appTranslate | async }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of createBatchReceipt.receiptBatches; let i = index">
+        <td class="table-td">{{ i + 1 }}</td>
+        <td class="table-td">
+          <input
+            type="text"
+            (blur)="setPolicyCodes(item)"
+            [(ngModel)]="item.policyNo"
+            class="inputform"
+          />
+        </td>
+        <td class="table-td">
+          <input
+            type="text"
+            (blur)="getClientName(i)"
+            [(ngModel)]="item.policyCode"
+            class="inputform"
+            list="policyCodesList"
+          />
+          <datalist id="policyCodesList">
+            <option *ngFor="let policyCode of policyCodes[item.policyNo]">
+              {{ policyCode.policyCode }}
+            </option>
+          </datalist>
+        </td>
+        <td class="table-td">
+          <!-- if no description, default to the narration field on create-new component -->
+          <input
+            type="text"
+            [(ngModel)]="item.description || receipt.description"
+            class="inputform"
+          />
+        </td>
+        <td class="table-td">
+          <input type="text" [(ngModel)]="item.clientName" class="inputform" />
+        </td>
+        <td class="table-td">
+          <input
+            type="number"
+            [(ngModel)]="item.amount"
+            class="inputform"
+            appCommafyNumber
+          />
+        </td>
+        <td class="table-td">
+          <input type="text" [(ngModel)]="item.reason" class="inputform" />
+        </td>
+        <td class="table-td">
+          <!-- default to the refNo from the create-new screen -->
+          <input
+            type="text"
+            [(ngModel)]="item.transRefNo || receipt.transRefNo"
+            class="inputform"
+          />
+        </td>
+        <td class="table-td">
+          <div
+            *ngIf="mode == 'UPLOAD'"
+            class="form-group"
+            style="margin-top: -20px"
+          >
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="delete" (click)="removeReceiptBatch(i)">
+            </app-button>
+          </div>
+          <div *ngIf="mode == 'MANUAL'" class="d-flex">
+            <div class="me-2">
+              <app-btn
+                type="danger-outline"
+                [iconBtn]="true"
+                icon="delete"
+                (mclick)="removeReceiptBatch(i)"
+              >
+              </app-btn>
+            </div>
+            <app-btn
+              type="outline"
+              [iconBtn]="true"
+              icon="add"
+              (mclick)="addReceiptBatch()"
+            ></app-btn>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td"></td>
+        <td class="table-td">
+          <app-button
+            buttonType="addCustom"
+            (click)="addReceiptBatch()"
+          ></app-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-between">
+    <div class="row flex-grow-1">
+      <div class="col-md-3">
+        {{'Amount Received'|appTranslate|async}}: <b>{{ +receipt.amount || 0 | number }}</b>
+      </div>
+      <div class="col-md-3">
+        {{'Total Amount entered'|appTranslate|async}}: <b>{{ totalAmountEntered | number }}</b>
+      </div>
+      <div class="col-md-3">
+        <!-- remaning is difference between receipt.amount and entered amount -->
+        {{'Remaining'|appTranslate|async}}:
+        <b>{{
+          (+receipt.amount || 0) - totalAmountEntered | number
+        }}</b>
+      </div>
+    </div>
+  <button
+    class="btn btn-outline-primary align-self-end"
+    mat-dialog-close
+    [disabled]="+totalAmountEntered != +receipt.amount"
+  >
+    <i class="fas fa-save px-2"></i> {{ 'Save' | appTranslate | async }}
+  </button>
+</mat-dialog-actions>

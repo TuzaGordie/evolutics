@@ -1,0 +1,72 @@
+<div class="row align-items-center">
+  <div class="col text-primary fw-bold">
+    {{'Add Document'|appTranslate|async}}
+  </div>
+  <div class="col-auto">
+    <app-btn type="danger-outline" (mclick)="close()">Close</app-btn>
+  </div>
+</div>
+<form [formGroup]="form">
+  <div class="container">
+    <div class="row">
+
+      <div class="d-block mx-2">
+        <div class="mt-2">
+          <div class="meta form-label mb-2">
+            <div class="row align-items-start mb-1" *ngIf="file">
+              <div class="col">
+                <div class="hide-scroll file-name text-primary">
+                  {{file?.name}}
+                </div>
+              </div>
+              <div class="col-auto text-end" *ngIf="file">
+                <span class="text-danger pointer p-1" (click)="removeFile()">x</span>
+              </div>
+            </div>
+          </div>
+          <input type="file" class="inputform " hidden (change)="upload($event)" #inputFile>
+          <app-btn icon="upload" (mclick)="inputFile.click()" [type]="file?'primary':'secondary'">
+            Select File
+          </app-btn>
+        </div>
+        <div class="mt-2">
+          <app-input-basic label="Title" type="text" name="title" [form]="form" [stacked]="true"></app-input-basic>
+        </div>
+        <div class="mt-2">
+          <app-input-basic label="Category" type="select" name="category" [form]="form" [stacked]="true"
+            [options]="docS.getCategoryList|functionCaller|async" labelType="ct" valueField="code"
+            [showValidation]="cat.invalid" [showValidationIcon]="false" #cat></app-input-basic>
+        </div>
+        <div class="mt-2">
+          <app-input-basic label="Sub Category" type="select" name="subCategory" [form]="form" [stacked]="true"
+            [options]="docS.getSubCategoryList|functionCaller1:cat.value|async" labelType="ct" valueField="code"
+            [showValidation]="subCat.invalid" [showValidationIcon]="false" #subCat></app-input-basic>
+        </div>
+        <div class="mt-2">
+          <label class="text-primary">Sensitivity</label><br>
+          <!-- <input type="text" class="inputform" [value]="sensitivity"  > -->
+          <select class="form-control  control-bg-gray" [value]="sensitivity" disabled>
+            <option [value]="null"></option>
+            <option [value]="item.code" *ngFor="let item of sesitivity">{{item.code}} - {{item.title}}</option>
+          </select>
+        </div>
+        <!-- <div class="mt-2">
+          <label>Branch</label><br>
+          <select formControlName="branch" class="form-control  control-bg-gray" required>
+            <option [value]="null">Select Branch</option>
+            <option [value]="item.code" *ngFor="let item of branches">{{item.code}} - {{item.description}}</option>
+          </select>
+        </div> -->
+
+        <div class="mt-2">
+          <app-input-basic label="Box No" type="text" name="boxNo" [form]="form" [stacked]="true"></app-input-basic>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-end mt-5">
+      <div class="col-3">
+        <app-btn type="primary" icon="upload" [valid]="form?.valid && !!this.file" (mclick)="onSubmit()"></app-btn>
+      </div>
+    </div>
+  </div>
+</form>

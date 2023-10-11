@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{"Edit License Cert"|appTranslate|async}}</h5>
+  <button mat-dialog-close class="btn-close"></button>
+</div>
+<mat-dialog-content>
+  <table class="table table-striped my-5">
+      <thead>
+          <tr>
+              <th>{{"Certificate No"|appTranslate|async}}</th>
+              <th>{{"License Type"|appTranslate|async}}</th>
+              <th>{{"License Country"|appTranslate|async}}</th>
+              <th>{{"License Authority"|appTranslate|async}}</th>
+              <th>{{"Valid"|appTranslate|async}}</th>
+              <th>{{"Issue Date"|appTranslate|async}}</th>
+              <th>{{"Expiry"|appTranslate|async}}</th>
+              <th>{{"Updated By"|appTranslate|async}}</th>
+              <th><!--Edit--></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr [formGroup]="licenseCertForm">
+            <td>
+                <input type="text" formControlName="certificateNumber" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="Certificate No" [ngClass]="isFieldInvalid('certificateNumber') && 'border border-danger'">
+            </td>
+            <td>
+                <select formControlName="licenceType" class="form-control" [attr.disabled]="recordStatus != 'EDITING' ? 'disabled' : null" [ngClass]="isFieldInvalid('licenceType') && 'border border-danger'">
+                    <option value=""></option>
+                    <option *ngFor="let type of licenseTypesList" [value]="type.code">{{type.code}} - {{type.title}}</option>
+                </select>
+            </td>
+            <td>
+                <select formControlName="licensedCountry" class="form-control" [attr.disabled]="recordStatus != 'EDITING' ? 'disabled' : null" [ngClass]="isFieldInvalid('licensedCountry') && 'border border-danger'">
+                    <option value=""></option>
+                    <option *ngFor="let country of countriesList" [value]="country.code">{{country.code}} - {{country.description}}</option>
+                </select>
+            </td>
+            <td>
+                <select formControlName="licenseAuthority" class="form-control" [attr.disabled]="recordStatus != 'EDITING' ? 'disabled' : null" [ngClass]="isFieldInvalid('licenseAuthority') && 'border border-danger'">
+                    <option value=""></option>
+                    <option *ngFor="let authority of licenseAuthoritiesList" [value]="authority.code">{{authority.code}} - {{authority.title}}</option>
+                </select>
+            </td>
+            <td>
+                <select formControlName="active" class="form-control" [attr.disabled]="recordStatus != 'EDITING' ? 'disabled' : null" [ngClass]="isFieldInvalid('active') && 'border border-danger'">
+                    <option [value]="true">{{"Yes"|appTranslate|async}}</option>
+                    <option [value]="false">{{"No"|appTranslate|async}}</option>
+                </select>
+            </td>
+            <td>
+              <input type="date" formControlName="issueDate" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="Issue Date" [ngClass]="isFieldInvalid('issueDate') && 'border border-danger'">
+            </td>
+            <td>
+              <input type="date" formControlName="expiryDate" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="Expiry" [ngClass]="isFieldInvalid('expiryDate') && 'border border-danger'">
+            </td>
+            <td>
+              <input type="text" formControlName="updatedBy" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="Updated By" [ngClass]="isFieldInvalid('updatedBy') && 'border border-danger'">
+            </td>
+            <td class="position-relative">
+                <app-button *ngIf="!recordStatus || recordStatus == 'VIEW'" buttonType="edit" (click)="recordStatus = 'EDITING'"></app-button>
+                <app-button *ngIf="recordStatus == 'EDITING'" buttonType="custSave" (click)="onSave()"></app-button>
+                <div *ngIf="recordStatus == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                    <div class="fa fa-refresh fa-spin"></div>
+                </div>
+            </td>
+        </tr>
+      </tbody>
+  </table>
+</mat-dialog-content>

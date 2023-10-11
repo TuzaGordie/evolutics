@@ -1,0 +1,21 @@
+<loader [loading]="loading">
+  <!-- <app-form-navigation [title] = "'View Client / Policies'"></app-form-navigation> -->
+  <div class=" mt-5">
+    <div class="row">
+      <div class="col-md-auto">
+        <text-case-1 lbl="Client Name" [val]="clientName"></text-case-1>
+      </div>
+      <div class="col-md-auto">
+        <text-case-1 lbl="Total Premium Received"
+          [val]="totalPremiumReceived?(totalPremiumReceived | currency:'NGN':'symbol-narrow'):'-'"></text-case-1>
+      </div>
+      <div class="col-md-auto">
+        <text-case-1 lbl="Aggregate Loss Ratio" [val]="aggregateLossRatio"></text-case-1>
+      </div>
+    </div>
+    <table-plain [pageSize]="20" [showPager]="true" [distinct]="true" [centerCells]="true" [nowrap]="true"
+      noItemTxt="There are no policies to display" [data]="policyList" [displayedColumns]="dCols"
+      label="Client {{clientNo}} Policies" [showExport]="true" [showFilter]="true">
+    </table-plain>
+  </div>
+</loader>

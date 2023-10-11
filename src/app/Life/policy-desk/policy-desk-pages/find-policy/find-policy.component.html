@@ -1,0 +1,167 @@
+<loader [loading]="connection.searching">
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Policy Number'|appTranslate|async}}</label>
+  </div>
+  <div class="col p-0">
+    <app-input-basic [form]="form" name="policyNo" type="text" [stacked]="false" [showLabel]="false"
+      [loading]="verifyingPolicyNo" [showValidation]="true" [showValidationIcon]="true" [colored]="false" [light]="false"  ></app-input-basic> 
+    <!-- <input class="form-control control-bg-gray ht-41" [(ngModel)]="policyNo" name="policyNo" type="text"
+      [ngClass]="{valid: isPolicyNoValid === 'true', invalid: isPolicyNoInValid === 'true'}"
+      (change)="validatePolicyNo(policyNo)" /> -->
+  </div>
+  <div class="col-2">
+    <app-btn icon="show" type="dark" [valid]="form?.controls?.policyNo?.valid" (mclick)="startLoader()">
+      Show
+    </app-btn>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Quote Number'|appTranslate|async}}</label>
+  </div>
+  <div class="col p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="quoteNo" name="quoteNo" type="text"
+      [ngClass]="{valid: isQuoteNoValid === 'true', invalid: isQuoteNoInvalid === 'true'}"
+      (change)="checkQuoteNo(quoteNo)" />
+  </div>
+  <div class="col-2">
+    <app-btn icon="show" type="dark" [disabled]="!isQuoteNo">Show</app-btn>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Client Number'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41"
+      [ngClass]="{valid: isClientNoValid === 'true', invalid: isClientNoInValid === 'true'}" [(ngModel)]="clientNo"
+      name="clientNo" type="text" (change)="validateClientNo(clientNo)" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Enrolee Number'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="enroleeNo" name="enroleeNo" type="text"
+      [ngClass]="{valid: isEnroleeNoValid === 'true', invalid: isEnroleeNoInvalid === 'true'}"
+      (change)="checkEnroleeNo(enroleeNo)" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Owner Name'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="ownerName" name="ownerName" type="text" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Property ID'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="propertyId" name="propertyId" type="text" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Agent Number'|appTranslate|async}}</label>
+
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="agentNo" name="agentNo" type="text" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Insurance Type'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <select class="form-control control-bg-gray ht-41" name="insuranceType" #insurancetype [(ngModel)]="insuranceType"
+      (change)="getProductClass(insurancetype.value)">
+      <option [value]=""></option>
+      <option *ngFor="let type of insurances" [value]="type.code">{{type.code}}-{{type.title}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Product Class'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <select class="form-control control-bg-gray ht-41" name="productClass" #productclass [(ngModel)]="productClass"
+      (change)="getProductCode(productclass.value)">
+      <option [value]=""></option>
+      <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}}-{{class.title}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Product Code'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <select class="form-control control-bg-gray ht-41" name="productCode" [(ngModel)]="productCode">
+      <option [value]=""></option>
+      <option *ngFor="let code of productCodes">{{code.code}}-{{code.description}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Status'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <select class="form-control control-bg-gray ht-41" name="status" [(ngModel)]="status">
+      <option [value]=""></option>
+      <option *ngFor="let code of codes">{{code.policyStatus}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Created Date From'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="startDate" name="startDate" type="date" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'Created Date To'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="endDate" name="endDate" type="date" />
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col-2">
+    <label>{{'External Ref'|appTranslate|async}}</label>
+  </div>
+  <div class="col-8 p-0">
+    <input class="form-control control-bg-gray ht-41" [(ngModel)]="externalRef" name="externalRef" type="text" />
+  </div>
+</div>
+
+<div class="col-lg-10 mt-2 p-0">
+  <div class="col-lg-2 ">
+    <app-btn icon="search" type="secondary" (click)="search()">Search</app-btn>
+  </div>
+</div>
+</loader>

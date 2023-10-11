@@ -1,0 +1,130 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>
+    {{ 'Create New Document workflowCategory' | appTranslate | async }}
+  </h5>
+  <span class="fas fa-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content [formGroup]="form">
+  <div class="row my-2">
+    <div class="form-group col-md-6">
+      <label for="category">{{
+        'Document Category' | appTranslate | async
+      }}</label>
+      <div class="position-relative">
+        <select
+          class="form-control form-bg-gray"
+          formControlName="docCat"
+          (change)="onCategoryChange()"
+        >
+          <option *ngFor="let category of categories" [value]="category.code">
+            {{ category.code }} - {{ category.title }}
+          </option>
+        </select>
+        <div
+          *ngIf="isLoadingCategories"
+          class="position-absolute start-50 top-50 translate-middle"
+        >
+          <span class="spinner-border spinner-border-sm text-primary"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="subCategory">{{
+        'Document SubCategory' | appTranslate | async
+      }}</label>
+      <div class="position-relative">
+        <select
+          class="form-control form-bg-gray"
+          formControlName="docSubCat"
+        >
+          <option
+            *ngFor="let category of subCategories"
+            [value]="category.code"
+          >
+            {{ category.code }} - {{ category.title }}
+          </option>
+        </select>
+        <div
+          *ngIf="isLoadingSubCategories"
+          class="position-absolute start-50 top-50 translate-middle"
+        >
+          <span class="spinner-border spinner-border-sm text-primary"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="form-group col-md-4">
+      <label for="">{{ 'Company Code' | appTranslate | async }}</label>
+      <div class="position-relative">
+        <select class="form-control form-bg-gray" formControlName="company">
+          <option *ngFor="let company of companies" [value]="company.code">
+            {{ company.code }} - {{ company.description }}
+          </option>
+        </select>
+        <div
+          *ngIf="isLoadingCompanies"
+          class="position-absolute start-50 top-50 translate-middle"
+        >
+          <span class="spinner-border spinner-border-sm text-primary"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="">{{ 'Workflow Category' | appTranslate | async }}</label>
+      <div class="position-relative">
+        <select
+          class="form-control form-bg-gray"
+          formControlName="wfCat"
+          (change)="onWorkflowCategoryChange()"
+        >
+          <option
+            *ngFor="let workflowCategory of workflowCategories"
+            [value]="workflowCategory.code"
+            [value]="workflowCategory.code"
+          >
+            {{ workflowCategory.code }} - {{ workflowCategory.title }}
+          </option>
+        </select>
+        <div
+          *ngIf="isLoadingWorkflowCategories"
+          class="position-absolute start-50 top-50 translate-middle"
+        >
+          <span class="spinner-border spinner-border-sm text-primary"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="">{{ 'Workflow' | appTranslate | async }}</label>
+      <div class="position-relative">
+        <select class="form-control form-bg-gray" formControlName="taskCode">
+          <option
+            *ngFor="let workflow of workflows"
+            [value]="workflow.code"
+            [value]="workflow.code"
+          >
+            {{ workflow.code }} - {{ workflow.description }}
+          </option>
+        </select>
+        <div
+          *ngIf="isLoadingWorkflows"
+          class="position-absolute start-50 top-50 translate-middle"
+        >
+          <span class="spinner-border spinner-border-sm text-primary"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end my-2">
+    <button
+      class="btn btn-primary btn-lg"
+      (click)="onSave()"
+      [disabled]="isSaving"
+    >
+      <span *ngIf="!isSaving" class="fas fa-save"></span>
+      <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+      {{ (isSaving ? 'Saving...' : 'Save') | appTranslate | async }}
+    </button>
+  </div>
+</mat-dialog-content>

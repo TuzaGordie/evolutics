@@ -1,0 +1,18 @@
+<loader [loading]="loading">
+
+  <div class="mt-5 pt-5  col-6 mx-auto">
+  <div class="row justify-content-end">
+    <div class="col-12">
+      <label>{{'Select Asset Class'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray" [(ngModel)]="cls">
+        <option></option>
+        <option [value]="item.code" *ngFor="let item of options" [disabled]="!item.active">{{item.title}}</option>
+      </select>
+    </div>
+    <div class="col-md-auto mt-2">
+      <app-btn type="secondary" icon="add" [disabled]="!cls" (mclick)="onCreateClick()">Create New</app-btn>
+    </div>
+  </div>
+  <br>
+</div>
+</loader>

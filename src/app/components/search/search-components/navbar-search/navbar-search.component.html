@@ -1,0 +1,78 @@
+ <span id="searchView">
+   <a class="nav-link px-md-0 px-lg-0 px-sm-0 px-xl-2 pointer" [ngClass]="{active:showSearch}" (click)="toggleSearch()">
+     <i class="fa fa-search text-{{showSearch?'primary':'light'}} search-icon"></i>
+     <!-- <i class="fa fa-{{showSearch?'close':'search'}} text-light"
+       matTooltip="{{showSearch?'Close search results':'Click to search the system'}}"></i> -->
+     <!-- <i class="fa fa-search"></i>  -->
+   </a>
+   <div class="search-view glass" [hidden]="!showSearch" #searchView>
+     <div class=" container py-2">
+       <div class="row justify-content-center">
+         <div class="col-lg mb-3">
+           <div class="search-box d-flex align-items-center">
+             <i class="fa fa-search"></i> <input type="search" class="" placeholder="Search" [formControl]="query">
+           </div>
+           <div class="search-description" *ngIf="resultLength">
+             {{resultLength}} {{(resultLength|i18nPlural:resultLengthMap)|appTranslate|async}}
+             {{'found.'|appTranslate|async}}
+           </div>
+         </div>
+       </div>
+       <div class=" result-list" #resultList>
+         <div class="row justify-content-center">
+           <ng-container *ngIf="results?.length; else elseNoResultTemplate">
+             <div class="col-lg" *ngFor="let type of results">
+               <!-- <h6 class="mb-0">{{type?.type}}</h6>
+               <hr> -->
+               <div class="">
+                 <div class="search-result-case" *ngFor="let item of type?.menuItems" [searchCase]="item">
+                   <div class="breadcrumb-case">
+                     <span *ngFor="let bc of item.breadcrumbs;let isLast = last">{{bc.key}}{{isLast?'':' \\ '}}</span>
+                   </div>
+                   <div>
+                     <a routerLink="{{item.system|systemLink:item.link}}" class="link" (click)="openLink()"
+                       [ngStyle]="{color:item.system|systemColourCode}">
+                       <div class="align-items-center d-flex">
+
+                         <span class="system"><i class="{{item.systemIcon}} me-2"></i> <span>{{item.label}}</span>
+                         </span>
+                       </div>
+                     </a>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </ng-container>
+           <ng-template #elseNoResultTemplate>
+             <div class="search-description   col-lg-12 text-center">
+               <ng-container *ngIf="query?.value; else elseHasNoQueryTemplate">
+                 {{'Sorry, your search returned no results...'|appTranslate|async}}
+               </ng-container>
+               <ng-template #elseHasNoQueryTemplate>
+                 {{'Please type you query in the box.'|appTranslate|async}}
+               </ng-template>
+             </div>
+           </ng-template>
+           <div class="col-12">
+             <div class="search-result-case">
+               <div class="breadcrumb-case">
+                 {{'For Additional Resources'|appTranslate|async}}
+               </div>
+               <div>
+                 <a href="{{helpLink}}" target="_blank" class="link">
+                   <div class="align-items-center d-flex">
+                     <i class="fa fa-info-circle me-2"></i>
+                     <span class="system"> {{"Help"|appTranslate|async}} </span>
+                   </div>
+                 </a>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <!-- <div class="close-btn pointer" (click)="toggleSearch()">
+       Close
+     </div> -->
+   </div>
+ </span>

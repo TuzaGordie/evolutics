@@ -1,0 +1,34 @@
+<div class="table-responsive">
+  <div *ngIf="isChecked" class="row justify-content-end">
+    <div class="col-1">
+      <app-btn type="primary">Authorize</app-btn>
+    </div>
+    <div class="col-1">
+      <app-btn type="danger">Decline</app-btn>
+    </div>
+  </div>
+  <table class="table  table-striped">
+    <thead class="py-3">
+    <tr>
+      <th scope="col">{{'Snooze On'|appTranslate|async}}</th>
+      <th scope="col">{{'Snooze By'|appTranslate|async}}</th>
+      <th scope="col">{{'Snooze Duration'|appTranslate|async}}</th>
+      <th scope="col">{{'Reason'|appTranslate|async}}</th>
+      <th scope="col">{{'Comment'|appTranslate|async}}</th>
+      <th scope="col">{{'Action'|appTranslate|async}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th></th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><input type="checkbox" class="mx-auto form-control" (change)="isChecked = !isChecked" ></td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+

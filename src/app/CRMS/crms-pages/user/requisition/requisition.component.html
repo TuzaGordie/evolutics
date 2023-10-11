@@ -1,0 +1,65 @@
+<app-form-navigation [title]="'Requisition'"></app-form-navigation>
+<div class=" form-body container-fluid mt-2">
+  <div class=" row container mx-auto  pt-2">
+    <div class="col-md-12 p-5">
+      <div class=" form-group mt-4">
+        <label class="form-label text-red">Company</label>
+        <input class="form-control control-bg-gray " type="text">
+      </div>
+      <div class=" form-group mt-4">
+        <label class="form-label text-red">Campaign Code</label>
+        <input class="form-control control-bg-gray " type="text">
+      </div>
+      <div class=" form-group mt-4">
+        <label class="form-label text-red ">Requisition Item</label>
+        <select class="form-control control-bg-gray" name="" id="">
+          <option></option>
+        </select>
+      </div>
+      <div class=" form-group mt-4">
+        <label class="form-label text-red">No of Units</label>
+        <input class="form-control control-bg-gray " type="text">
+      </div>
+      <div class=" form-group mt-4">
+        <label class="form-label text-red ">Cost</label>
+        <input class="form-control control-bg-gray " type="text">
+      </div>
+      <div class=" form-group mt-4">
+        <label class="form-label text-red ">Cost Centre</label>
+        <select class="form-control control-bg-gray ">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class=" form-group mt-4">
+        <label class="form-label text-red ">Currency</label>
+        <select class="form-control control-bg-gray" name="" id="">
+          <option></option>
+        </select>
+      </div>
+
+
+
+      <div class=" form-group mt-4">
+        <label class="form-label text-red " for="">Narration</label>
+        <textarea class="form-control control-bg-gray"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <div class=" form-group mt-4">
+            <label class="form-label text-red" for="">Upload Documents</label>
+            <app-button buttonType="uploadRed"></app-button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row d-flex flex-row justify-content-end mb-4 ">
+      <div class="col-2 ">
+        <app-button [buttonType]="'submitRed'" [text]="'Submit'"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

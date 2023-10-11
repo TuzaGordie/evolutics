@@ -1,0 +1,45 @@
+<app-form-navigation [title] = "'View Client'"></app-form-navigation>
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h1 class="my-5">Workflows</h1>
+        <p class="py-3"><b>Client Name:</b> <span class="px-3">{{findClientService.clientInfo?.FIRST_NAME}}</span></p>
+            <table class="table table-responsive  table-striped">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                    <th scope="col">Task Code</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">User Assigned</th>
+                    <th scope="col">Group Assigned</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">Due</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">Time Outside SLA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of webflowsList">
+                    <th scope="row">
+                      <p class="colorplate btn-radius mx-auto" [ngStyle]="{'background-color': item.STATUS }"></p>
+                    </th>
+                    <td>{{item.TASK_CODE}}</td>
+                    <td>{{item.TASK_DESCRIPTION}}</td>
+                    <td>{{item.ASSIGNED_TO}}</td>
+                    <td>{{item.ASSIGNED_TO_GROUP}}</td>
+                    <td>{{item.START_ON}}</td>
+                    <td>{{item.DUE_ON}}</td>
+                    <td>{{item.TIME_OS_SLA}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+    </div>
+
+    <div class="col-md-12 mx-auto mt-5">
+        <button type="button"  class="btn-i p-0 px-4 btn-radius" >
+            <span class="mx-3 my-auto">Create New Task</span></button>
+    </div>
+    </div>
+
+        </div>
+

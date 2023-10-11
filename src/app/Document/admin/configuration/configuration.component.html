@@ -1,0 +1,123 @@
+<app-form-navigation [title] = "'Document / Configuration'"></app-form-navigation>
+
+<div class=" form-body container mt-2">
+  <div class="col-6 mx-auto">
+    <div class="row g-1">
+      <div class="col-7">
+        <div class="form-group">
+          <label class="form-label">Company</label>
+          <select type="text" class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label class="form-label w-100 text-center">Details</label>
+          <input type="checkbox" class="form-control control-bg-gray mx-auto" data-bs-toggle="modal"
+                 data-bs-target="#detailModal"/>
+          </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label">&nbsp;</label>
+          <button class="btn save-button px-4 mt-4">
+            <i class="fa fa-plus"></i> Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Configuration</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row container mx-auto pt-2">
+          <div class="col-md-6 p-5">
+              <div class="form-group mt-4">
+                  <label class="form-label">Document Printer Option</label>
+                  <select class="form-control mt-2 control-bg-gray " name="" id=""></select>
+              </div>
+              <div class="form-group mt-4">
+                  <label class="form-label">Max Login Attempts</label>
+                  <input class="form-control mt-2 control-bg-gray " type="text">
+              </div>
+              <div class="form-group mt-4">
+                  <label class="form-label">Languages Allowed</label>
+                  <select class="form-control mt-2 control-bg-gray " name="" id=""></select>
+                  <div class="row mt-3">
+                      <div class="col-md-8"></div>
+                      <div class="col-md-4">
+                        <button class="btn save-button px-4 float-right">
+                            <i class="fa fa-plus"></i> Add
+                        </button>
+                      </div>
+                  </div>
+              </div>
+              <div class=" form-group mt-4">
+                  <label class="form-label">Currency Converter url</label>
+                  <select class="form-control mt-2 control-bg-gray " name="" id=""></select>
+              </div>
+              <div class="form-check mt-4">
+                  <label class="form-check-label" for="">Password is Case Sensitive</label>
+                  <input class="form-check-input" type="checkbox">
+              </div>
+              <div class="row mt-4">
+                  <div class="col-md-6">
+                      <button class="btn show-button w-100">Email EvoBot Configuration</button>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 p-5">
+              <div class="form-group mt-4">
+                  <label class="form-label">Minimum Password Length</label>
+                  <input class="form-control mt-2 control-bg-gray" type="text">
+              </div>
+              <div class=" row  form-group mt-4">
+                  <div class=" col-md-9 ">
+                      <label class="form-label">Force Password Change After</label>
+                      <input class="form-control mt-2 control-bg-gray" type="text">
+                  </div>
+                  <div class="col-md-3 d-flex justify-content-end flex-column">
+                      <span>Days</span>
+                  </div>
+              </div>
+              <div class=" row  form-group mt-4">
+                  <div class="col-md-9 ">
+                      <label class="form-label">Time Out After</label>
+                      <input class="form-control mt-2 control-bg-gray" type="text">
+                  </div>
+                  <div class=" col-md-3 d-flex justify-content-end flex-column">
+                      <span>Min</span>
+                  </div>
+              </div>
+              <div class=" form-group mt-4">
+                  <label class="form-label">Default Screen Color</label>
+                  <select class="form-control mt-2 control-bg-gray" name="" id=""></select>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-8"></div>
+                  <div class="col-4">
+                      <button class="btn save-button">
+                           Code Logic
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn save-button px-4 float-right" data-bs-dismiss="modal">
+          <i class="fa fa-save"></i> Save
+      </button>
+      </div>
+    </div>
+  </div>
+</div>

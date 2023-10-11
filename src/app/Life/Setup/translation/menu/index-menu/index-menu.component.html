@@ -1,0 +1,48 @@
+<!-- <app-form-navigation [title] = "'Set Up / Translations / Menu'"></app-form-navigation> --> 
+
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <label>{{"Select Menu Group"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+
+        </div>
+
+    </div><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-4">
+            <label>{{"Select Menu "|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <app-button [buttonType]="'translate'" routerLink="../create-menu"></app-button>
+        </div>
+
+    </div>  
+
+</div>
+
+

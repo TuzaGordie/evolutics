@@ -1,0 +1,32 @@
+<loader [loading]="loading" [text]="loadingText">
+<table class="table table-borderless my-5">
+  <thead>
+    <tr>
+      <th scope="col">{{'Seq No'|appTranslate|async}}</th>
+      <th scope="col">{{'Create On'|appTranslate|async}}</th>
+      <th scope="col">{{'Client Name'|appTranslate|async}}</th>
+      <th scope="col">{{'Policy No'|appTranslate|async}}</th>
+      <th scope="col">{{'Created By'|appTranslate|async}}</th>
+      <th scope="col">{{'Ref No'|appTranslate|async}}</th>
+      <th scope="col">{{'Cheque No'|appTranslate|async}}</th>
+      <th scope="col">{{'Amount'|appTranslate|async}}</th>
+      <th scope="col">{{'Currency'|appTranslate|async}}</th>
+      <th scope="col">{{'Bank'|appTranslate|async}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let unPosted of unPostedData; let i = index">
+      <td><a [routerLink]="['/finance/receipting-desk/create-new']" [queryParams]="{id: unPosted.id, action: 'unposted'}">{{unPosted.id}}</a></td>
+      <td>{{unPosted.createdOn | date:'medium'}}</td>
+      <td>{{unPosted.clientName}}</td>
+      <td>{{unPosted.policyNo}}</td>
+      <td>{{unPosted.createdBy}}</td>
+      <td>{{unPosted.refNo}}</td>
+      <td>{{unPosted.chequeNo}}</td>
+      <td>{{unPosted.amount}}</td>
+      <td>{{unPosted.currency}}</td>
+      <td>{{unPosted.bankCode}}</td>
+    </tr>
+  </tbody>
+</table>
+</loader>

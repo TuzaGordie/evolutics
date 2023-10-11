@@ -1,0 +1,87 @@
+<app-form-navigation [title]="'Set Up / Address / Country'"></app-form-navigation>
+<div class="container-sm mt-5 ">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <div class="form-group mt-2">
+          <label>{{'Select Country Group'|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>{{'Select Country Code'|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'show'" routerLink=""></app-button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <app-button buttonType="next"  (click)='onNext()' ></app-button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- <div class="container ">
+    <div class="row">
+        <div class="col-md-6 ">
+            <label>Select Country Group </label>
+            <select class="form-control form-control-lg control-bg-gray">
+    <option></option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-md-4  ">
+            <label>Select Country Group </label>
+            <select class="form-control form-control-lg control-bg-gray">
+    <option></option>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+        </div>
+        <div class="col-2">
+            <br />
+                <app-button [buttonType]="'show'" routerLink=""></app-button>
+
+        </div>
+
+    </div>
+
+</div> -->

@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="form">
+    <div class="col-4 mx-auto mt-5">
+      <div class="row mb-3">
+        <div class="form-group">
+          <app-input-basic label="Company Code" [form]="form" type="select" name="companyCode" [stacked]="true"
+          [options]="setS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd"
+          #companyCode>
+        </app-input-basic>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="form-group">
+          <app-input-basic label="Team Category" [form]="form" type="select" name="teamCategory" (mchange)="getTeams(teamCategory?.value?.code)" [stacked]="true"
+          [options]="setS.getCodeSubGroup|functionCaller1:'TEAM_CATEGORY'|async" labelType="ct"
+          #teamCategory>
+        </app-input-basic>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="form-group">
+        <app-input-basic label="Team" [form]="form" type="select" name="teams" [stacked]="true"
+        [options]="teamsList" valueField="code" labelField="code"
+        #teams>
+      </app-input-basic>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col">
+          <app-btn icon="show" [valid]="form?.valid"  (mclick)="show()">Show</app-btn>
+        </div>
+        <div class="col">
+          <app-button buttonType="create" routerLink="../teams"></app-button>
+        </div>
+      </div>
+
+
+    </div>
+    </form>
+  </div>
+
+
+</div>

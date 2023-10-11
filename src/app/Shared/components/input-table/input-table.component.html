@@ -1,0 +1,70 @@
+<div class="row justify-content-end align-items-end">
+  <div class="col-md d-flex  mb-4">
+    <app-file-upload (fileChange)="parseUpload($event)" label="Upload From CSV"
+      help=" Already uploaded file will be overwritten "></app-file-upload>
+  </div>
+  <div class="col-md-auto  mb-4">
+
+    <app-btn text="Download To CSV" icon="download" (mclick)="downloadCSV()" type="secondary"></app-btn>
+  </div>
+  <div class="col-md-auto  mb-4">
+    <app-btn text="Download CSV Template" icon="download" (mclick)="downloadTemplate()" type="secondary"></app-btn>
+
+  </div>
+</div>
+<div [ngClass]="{ border: true }" (click)="uS.logForm(form)">
+  <div class="overflow-auto">
+    <table matSort (matSortChange)="sortData($event)" class="w-100 d-table  table-bordered mb-0">
+      <thead>
+        <tr>
+          <th *ngIf="showSN">{{'S/N'|appTranslate|async}}</th>
+          <th mat-sort-header="{{ item.t }}" *ngFor="let item of schemas">
+            {{ item.t|appTranslate|async }}
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="
+            let subForm of form.controls;
+            trackBy: subFormTrackBy;
+            let si = index
+          ">
+          <td *ngIf="showSN">{{(si+1)|appTranslate|async}}</td>
+          <td *ngFor="let scheme of schemas; let ci = index" class="content-cell">
+            <ng-container [ngSwitch]="true">
+              <ng-container *ngSwitchCase="scheme.type=='tel'">
+                <app-phone-number [form]="subForm" [name]="scheme.t" [label]="scheme.t" [showLabel]="false"
+                  [stacked]="true" #inputTag>
+                </app-phone-number>
+                <app-validation-message [input]="inputTag"></app-validation-message>
+              </ng-container>
+              <ng-container *ngSwitchCase="">
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <app-input-basic #inputTag [showLabel]="false" [name]="scheme.t" [form]="subForm" [type]="scheme.type"
+                  [valueField]="scheme.valueField" [labelType]="scheme.labelType" [labelField]="scheme.labelField"
+                  [optionFormatter]="scheme.optionFormatter"
+                  [options]="(scheme.optionsFunc|functionCaller2:subForm.value:scheme.t|async)||scheme.options"
+                  [decimalPoints]="scheme.decimalPoints" [hint]="scheme.hint" [max]="scheme.max" [min]="scheme.min"
+                  [placeholder]="scheme.placeholder" [label]="scheme.t"
+                  [disabled]="scheme.disabledIf|functionCaller2:subForm.value:scheme.t"></app-input-basic>
+                <app-validation-message [input]="inputTag"></app-validation-message>
+              </ng-container>
+            </ng-container>
+          </td>
+          <td>
+            <div class="d-flex">
+              <app-btn group="delete" (mclick)="removeRow(si)"></app-btn>
+              <span class="mx-1"></span>
+              <app-btn group="add" (mclick)="addRow(si+1)"></app-btn>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <mat-paginator  [length]="thi" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"
+    showFirstLastButtons>
+  </mat-paginator> -->
+</div>

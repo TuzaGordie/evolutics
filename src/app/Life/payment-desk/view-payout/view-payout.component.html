@@ -1,0 +1,1133 @@
+<loader [loading]="loading">
+  <div class="">
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">{{'Basic Details'|appTranslate|async}}</h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center">
+          <div class="mx-1 col-md mb-3 lbl1" *ngFor="let item of lbls1 ">
+            <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [mini]="true" [form]="form"
+                                    [label]="item.label" [name]="item.key" [coloredLbl]="false" [coloredVal]="true"
+                                    [showEditing]="item.editable" [hint]="item.hint" [light]="true" [route]="item.route"
+                                    [value]="item.value">
+            </app-editable-text-case>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">{{'Payout Details'|appTranslate|async}}</h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center py-2">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-4 ">
+                <app-editable-text-case [formatter]="payoutStatus.formatter" [stacked]="false" [mini]="true"
+                                        [form]="form"
+                                        [label]="payoutStatus.label" [name]="payoutStatus.key" [coloredLbl]="true"
+                                        [coloredVal]="false"
+                                        [showEditing]="payoutStatus.editable" [hint]="payoutStatus.hint" [light]="true"
+                                        [value]="payoutStatus.value" [action]="openStatusDialog">
+                </app-editable-text-case>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto">
+            <div class="row">
+              <div class="col-md-auto my-2 my-lg-0">
+              </div>
+              <div class="col-md-auto my-2 my-lg-0">
+                <app-btn icon="edit" (click)="onEditClient()" type="secondary">Edit</app-btn>
+              </div>
+              <div class="col-md-auto my-2 my-lg-0">
+                <app-btn type="secondary" icon="edit" routerLink="../notes"
+                         [queryParams]="{policyNo:payout.policyNo,policyCode:payout.policyCode,policyNoSuffix:payout.policyNoSuffix,clientNo:payout?.clientNo}">
+                  Note
+                </app-btn>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-top pt-2">
+          <div class="row">
+            <div class="col-md-2 col-xxl-2 mb-3" *ngFor="let item of lbls2">
+              <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [action]="item.action" [form]="form"
+                                      [label]="item.label" [name]="item.key" [coloredLbl]="true" [coloredVal]="false"
+                                      [type]="item.inputType"
+                                      [showEditing]="item.editable" [hint]="item.hint" [light]="true"
+                                      [value]="item.value">
+              </app-editable-text-case>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center my-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'" routerLink="documents"
+                  [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col-md-4">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Workflows'" routerLink="workflows"
+                  [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <hr>
+
+  <div class="d-flex justify-content-around section-cards-2 card-blue">
+    <div class="card color2 shadow-sm" data-bs-toggle="modal" data-bs-target="#lossRatioModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Loss Ratios'|appTranslate|async}}</h6>
+        <p class="card-subtitle text-end mt-4 text-bold">{{'Client'|appTranslate|async}} -
+          {{clientLossRatio[0]?.lossRatio}}%</p>
+        <p class="card-subtitle text-end text-bold mt-2">{{'Policy'|appTranslate|async}} -
+          {{policyLossRatio[0]?.lossRatio}}%</p>
+      </div>
+
+    </div>
+
+    <div class="card color1 shadow-sm" data-bs-toggle="modal" data-bs-target="#setPayeeModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Payee'|appTranslate|async}}</h6>
+        <p class="card-number">{{payee?.length| number:''}}</p>
+      </div>
+    </div>
+
+    <div class="card color1 shadow-sm" data-bs-toggle="modal" data-bs-target="#AuthorizationModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Payment Auth History'|appTranslate|async}}</h6>
+      </div>
+    </div>
+
+    <div class="card color2 shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">{{'Time Outside SLA'|appTranslate|async}}</h6>
+        <p class="card-number">10Hr:15mn</p>
+      </div>
+    </div>
+
+    <div class="card shadow-sm color1">
+      <div class="card-body">
+        <h6 class="card-title">{{'Initial Amount'|appTranslate|async}}</h6>
+        <p class="card-number">{{payout?.initialAmount | number:''}}</p>
+      </div>
+    </div>
+    <!-- data-bs-toggle="modal" data-bs-target="#adjustmentsModal" -->
+    <div class="card shadow-sm color1">
+      <div class="card-body">
+        <h6 class="card-title">{{'Adjustments'|appTranslate|async}}</h6>
+        <p class="card-number">{{payout?.adjAmt | number:''}}</p>
+      </div>
+    </div>
+
+
+    <div class="card color2 shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">{{'Net Amount'|appTranslate|async}}</h6>
+        <p class="card-number">{{payout?.netAmt|number:''}}</p>
+      </div>
+    </div>
+  </div>
+
+</loader>
+
+
+<!-- <loader [loading]="loading">
+
+  <div class="row align-items-center">
+    <div class="mx-1 col-xxl-2 col-lg-3 col-md-4 my-1 lbl1" *ngFor="let item of lbls1 ">
+      <app-editable-text-case [formatter]="item.formatter" [stacked]="false" [mini]="true" [form]="form"
+        [label]="item.label" [name]="item.key" [coloredLbl]="true" [showEditing]="item.editable" [hint]="item.hint"
+        [light]="true" [value]="item.value">
+      </app-editable-text-case>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col-2">
+          <span
+            class="text-primary text-bold">{{'Renewals'|appTranslate|async}}:</span>
+        </div>
+        <div class="col-1">
+          1
+        </div>
+        <div class="col-1">
+          2
+        </div>
+        <div class="col-1">
+          3
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="secondary" icon="edit" routerLink="../note" [queryParams]="{clientNo:payout?.clientNo,paymentNo }">
+        Note</app-btn>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Owner Full Name'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Joint Owner Full Name'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Matures'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Issue Date'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Status'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Currency'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Outstanding premiums'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Outstanding target contributions'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Total Sum at Risk'|appTranslate|async}}</label></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>James Bond</p>
+    </div>
+    <div class="col">
+      <p>Ogbene Tchokubu</p>
+    </div>
+    <div class="col">
+      <p>31/oct/2024</p>
+    </div>
+    <div class="col">
+      <p>12/oct/2023</p>
+    </div>
+    <div class="col">
+      <p>23/oct/1975</p>
+    </div>
+    <div class="col">
+      <p>NGN</p>
+    </div>
+    <div class="col">
+      <p>23,000</p>
+    </div>
+    <div class="col">
+      <p>20,000</p>
+    </div>
+    <div class="col">
+      <p>2,000,000</p>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Deposit Balance'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Annualised Premium'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Premium Payment Term'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Term'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Premium Payment Method'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Payee Account'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Payment Outwards Accounts'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'Benefits Assigned To'|appTranslate|async}}</label></div>
+    <div class="col"><label for="" class="form-label text-primary small1">{{'LA01'|appTranslate|async}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>405,000</p>
+    </div>
+    <div class="col">
+      <p>230,000</p>
+    </div>
+    <div class="col">
+      <p>0 yr 6 mo</p>
+    </div>
+    <div class="col">
+      <p>0 yr 6 mo</p>
+    </div>
+    <div class="col">
+      <p>Direct Debits</p>
+    </div>
+    <div class="col">
+      <p>xxx_1</p>
+    </div>
+    <div class="col">
+      <p>xxx_1</p>
+    </div>
+    <div class="col">
+      <p>3432-James Bond</p>
+    </div>
+    <div class="col">
+      <p>LA01</p>
+    </div>
+
+  </div>
+
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th scope="col">{{'Cover Code'|appTranslate|async}}</th>
+        <th scope="col">{{'Cover Name'|appTranslate|async}}</th>
+        <th scope="col">{{'Life Assured'|appTranslate|async}}</th>
+        <th scope="col">{{'Issued Age'|appTranslate|async}}</th>
+        <th scope="col">{{'Current Age'|appTranslate|async}}</th>
+        <th scope="col">{{'Prem Freq/Method'|appTranslate|async}}</th>
+        <th scope="col">{{'Periodic Premium'|appTranslate|async}}</th>
+        <th scope="col">{{'Sum Assured'|appTranslate|async}}</th>
+        <th scope="col">{{'Issue Dt'|appTranslate|async}}</th>
+        <th scope="col">{{'Next Prem Due Date'|appTranslate|async}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">LRT</th>
+        <td>Retirement Savings</td>
+        <td>4587</td>
+        <td>6777</td>
+        <td>---</td>
+        <td>MD</td>
+        <td>25,000</td>
+        <td>500,000</td>
+        <td>01/jan/2022</td>
+        <td>23/Oct/2020</td>
+      </tr>
+      <tr>
+        <th scope="row">LRT</th>
+        <td>Retirement Savings</td>
+        <td>4587</td>
+        <td>6777</td>
+        <td>---</td>
+        <td>MD</td>
+        <td>25,000</td>
+        <td>500,000</td>
+        <td>01/jan/2022</td>
+        <td>23/Oct/2020</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="row justify-content-center my-4">
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'" routerLink="documents"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Workflows'" routerLink="workflows"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'" routerLink="endorsements"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Reinsurance'" routerLink="reinsurances"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Pricing'" routerLink="pricings"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Underwriting'" routerLink="underwritings"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Commissions'" routerLink="commissions"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Future Actions'" routerLink="future-actions"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+    <div class="col">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Perils'" routerLink="perils"
+        [queryParams]="{paymentNo,clientNo}"></app-button>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-around section-cards-2 card-blue">
+    <div class="card color2 shadow-sm" data-bs-toggle="modal" data-bs-target="#lossRatioModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Loss Ratios'|appTranslate|async}}</h6>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">{{'Loss Details'|appTranslate|async}}</h6>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm" data-bs-toggle="modal" data-bs-target="#setPayeeModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Payee'|appTranslate|async}}</h6>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm" data-bs-toggle="modal" data-bs-target="#adjustmentsModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Claim Adjustment'|appTranslate|async}}</h6>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">{{'Loss Parties'|appTranslate|async}}</h6>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm" data-bs-toggle="modal" data-bs-target="#AuthorizationModal">
+      <div class="card-body">
+        <h6 class="card-title">{{'Payment Auth History'|appTranslate|async}}</h6>
+      </div>
+
+    </div>
+    <div class="card color2 shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">{{'Time Outside SLA'|appTranslate|async}}</h6>
+        <p class="card-number">10Hr:15mn</p>
+      </div>
+    </div>
+
+  </div>
+
+</loader> -->
+
+
+<div class="modal fade" id="lossRatioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Loss Ratios'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label">{{'Policy No'|appTranslate|async}}: <span
+              class="text-primary">{{payout?.policyNo}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Owner'|appTranslate|async}} : <span
+              class="text-primary">{{clientName}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Initial Estimate'|appTranslate|async}} : <span
+              class="text-primary">{{payout?.initialAmount}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Adjustments'|appTranslate|async}} : <span
+              class="text-primary">{{payout?.adjAmt}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Final Amount'|appTranslate|async}} : <span
+              class="text-primary">{{payout?.amount}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Payment Type'|appTranslate|async}}: <span
+              class="text-primary">{{payout?.claimType}}</span></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label">{{'Cover Name'|appTranslate|async}}: <span
+              class="text-primary">{{payout?.coverCode}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Policy Code Claimed On'|appTranslate|async}} : <span
+              class="text-primary">{{payout?.policyCode}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Sector'|appTranslate|async}} : <span class="text-primary">M -
+              {{'-'}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">{{'Client Band'|appTranslate|async}} : <span
+              class="text-primary">{{payout?.policyNo}}</span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label"> <span class="text-primary"></span></label>
+          </div>
+          <div class="col">
+            <label for="" class="form-label"><span class="text-primary"></span></label>
+          </div>
+        </div>
+        <div class="row">
+          <hr>
+        </div>
+
+        <div class="row">
+          <table class="table table-responsive table-striped">
+            <thead>
+            <tr class="">
+              <th scope="col">{{'Aggregate Loss Ratio Client'|appTranslate|async}}</th>
+              <th scope="col">{{'Aggregate Loss Ratio Policy No'|appTranslate|async}}</th>
+              <th scope="col">{{'Aggregate Loss Ratio Policy Code'|appTranslate|async}}</th>
+              <th scope="col">{{'Aggregate Loss Ratio Sector'|appTranslate|async}}</th>
+              <th scope="col">{{'Aggregate Loss Ratio Segment'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>97%</td>
+              <td>97%</td>
+              <td>97%</td>
+              <td>97%</td>
+              <td>97%</td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">
+                {{'Sort Filter'|appTranslate|async}}
+              </label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <table class="table table-responsive table-striped">
+          <thead>
+          <tr class="">
+            <th scope="col">{{'Year'|appTranslate|async}}</th>
+            <th scope="col">{{'Client Number'|appTranslate|async}}</th>
+            <th scope="col">{{'Policy Number'|appTranslate|async}}</th>
+            <th scope="col">{{'Policy Code'|appTranslate|async}}</th>
+            <th scope="col">{{'Total Premium'|appTranslate|async}}</th>
+            <th scope="col">{{'Total Claims'|appTranslate|async}}</th>
+            <th scope="col">{{'Loss Ratio Policy'|appTranslate|async}}</th>
+            <th scope="col">{{'Loss Ratio Sector'|appTranslate|async}}</th>
+            <th scope="col">{{'Loss Ratio Band'|appTranslate|async}}</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of policyLossRatio">
+            <td>{{item.year}}</td>
+            <td>{{item.clientNo}}</td>
+            <td>{{item.policyNo}}</td>
+            <td>{{item.policyCode}}</td>
+            <td>{{item.premium}}</td>
+            <td>{{item.claim}}</td>
+            <td>{{item.lossRatio}}%</td>
+            <td>{{item.lossRatio}}%</td>
+            <td>{{item.lossRatio}}%</td>
+          </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="setPayeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>{{'Payee'|appTranslate|async}}</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-md-3">
+            <button class=" btn w-100 "
+                    [ngClass]="{'btn-primary' : !isSetPayeeHidden,'btn-outline-primary btn-clone' : isSetPayeeHidden}"
+                    (click)="setPayee()">
+              <i class="fas fa-user-alt"></i> Set Payee
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button class="btn w-100 "
+                    [ngClass]="{'btn-primary' : !isCreatePaymentOutwardHidden,'btn-outline-primary btn-clone' : isCreatePaymentOutwardHidden}"
+                    (click)="createPaymentOutward()">
+              <i class="fas fa-money-bill-alt"></i> Create Payment Outward
+            </button>
+          </div>
+        </div>
+
+
+        <div [hidden]="isSetPayeeHidden">
+          <div class="row mt-4">
+            <table class="table table-responsive table-striped">
+              <thead>
+              <tr class="">
+                <th scope="col" class="small1" style="width: 8%">{{'Pay To'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 8%">{{'Payee No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 8%">{{'Policy No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 30%">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 30%">{{'Bank No'|appTranslate|async}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                  </select>
+                </td>
+                <td>
+                  <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                  </select>
+                </td>
+                <td>
+                  <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                  <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+
+                <td>
+                  <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                  </select>
+                </td>
+
+
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+          <div class="row mt-4 justify-content-end">
+            <div class="col-2">
+              <app-btn type="secondary" icon="checked">Submit</app-btn>
+            </div>
+          </div>
+        </div>
+
+
+        <div [hidden]="isCreatePaymentOutwardHidden">
+          <div class="row mt-3">
+            <div class="col">
+              <label for="" class="form-label small1">{{'Policy No'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.policyNo}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Owner'|appTranslate|async}}: <span
+                class="text-primary">{{clientName}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Initial Estimate'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.initialAmount}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Adjustment'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.adjAmt}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Final Amount'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.amount}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Claim Type'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.claimType}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Cover Name'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.coverCode}}</span></label>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <label for="" class="form-label small1">{{'Currency'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.currency}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Claim Type'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.claimType}}</span>x</label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Claim Status'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.status}}</span></label>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+
+          <div class="row mt-4">
+            <table class="table table-responsive table-striped">
+              <thead>
+              <tr class="">
+                <th scope="col" class="small1" style="width: 10%">{{'Pay To'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 7%">{{'Proportion (%)'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 8%">{{'Amount'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 7%">{{'Payee No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 10%">{{'Policy No'|appTranslate|async}}</th>
+                <th scope="col" class="small1">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="small1">{{'Payment Method'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 15%">{{'Bank No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 7%">{{'Payee Relationship'|appTranslate|async}}
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of payee">
+                <td>
+                  <label>{{item.treatBankAccount}}</label>
+                </td>
+                <td>
+                  <label>{{item.proportion}}</label>
+                </td>
+                <td>
+                  <label>{{item.netAmt}}</label>
+                </td>
+                <td>
+                  <label>{{item.payeeNo}}</label>
+                </td>
+                <td>
+                  <label>{{item.payeePolicyNo}}</label>
+                </td>
+                <td>
+                  <label>{{item.payeeName}}</label>
+                <td>
+                  <label>{{item.paymentMethod}}</label>
+                </td>
+                <td>
+                  <label>{{item.bankNo}}</label>
+                </td>
+                <td>
+                  <label>{{item.payeeRel}}</label>
+                </td>
+
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="row mt-3">
+            <div class="col-1">
+              <label for="" class="form-label text-primary">Narration :</label>
+            </div>
+            <div class="col">
+              <textarea name="" id="" rows="5" class="form-control control-bg-gray"></textarea>
+            </div>
+          </div>
+          <div class="row mt-4 justify-content-end">
+            <div class="col-2">
+              <app-btn type="secondary" icon="checked">Submit</app-btn>
+            </div>
+          </div> -->
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="AuthorizationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>{{'Payee'|appTranslate|async}}</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="container">
+          <div class="row mt-3">
+            <div class="col">
+              <label for="" class="form-label small1">{{'Policy No'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.policyNo}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Owner'|appTranslate|async}}: <span
+                class="text-primary">{{clientName}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Initial Estimate'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.initialAmount}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Adjustment'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.adjAmt}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Final Amount'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.amount}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Claim Type'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.claimType}}</span></label>
+            </div>
+
+          </div>
+          <div class="row mt-3">
+
+            <div class="col">
+              <label for="" class="form-label small1">{{'Cover Name'|appTranslate|async}}: <span
+                class="text-primary">{{'Savings'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Policy Code Claimed On'|appTranslate|async}}: <span
+                class="text-primary">{{payout?.policyCode}}</span></label>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <hr>
+          </div>
+          <div class="row">
+            <table class="table table-responsive mt-2 table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col">{{'Completed'|appTranslate|async}}</th>
+                <th scope="col">{{'Declined'|appTranslate|async}}</th>
+                <th scope="col">{{'Next Tier'|appTranslate|async}}</th>
+                <th scope="col">{{'Final Tier'|appTranslate|async}}</th>
+                <th scope="col">{{'Users'|appTranslate|async}}</th>
+                <th scope="col">{{'Dates'|appTranslate|async}}</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr >
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <button class="btn btn-dark" type="button" data-bs-toggle="tooltip" data-bs-html="true"
+                          trigger="hover focus" delay="0"
+                          title="Created By: --  Auth 1 By: --  Auth 2 By: --  Auth 3 By: -- Auth 4 By: -- Declined By: -- "><i
+                    class="fa fa-users" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-dark" type="button" data-bs-toggle="tooltip" data-bs-html="true"
+                          trigger="hover focus" delay="0"
+                          title="Created On: --  Auth 1 On: --  Auth 2 On: --  Auth 3 On: -- Auth 4 On: --  Declined On: --  "><i
+                    class="fa fa-calendar-alt" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngFor="let item of paymentHistory">
+                <td>{{item.nextAuthTier}}</td>
+                <td>{{item.auth2By}}</td>
+                <td>{{item.auth2On}}</td>
+                <td>{{item.claimNo}}</td>
+                <td>
+                  <button class="btn btn-dark" type="button" data-bs-toggle="tooltip" data-bs-html="true"
+                          trigger="hover focus" delay="0"
+                          title="Created By: --  Reconciled By: --  Canceled By: --  Controlled by: --  "><i
+                    class="fa fa-users" aria-hidden="true"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-dark" type="button" data-bs-toggle="tooltip" data-bs-html="true"
+                          trigger="hover focus" delay="0"
+                          title="Created By: --  Reconciled By: --  Canceled By: --  Controlled by: --  "><i
+                    class="fa fa-calendar-alt" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createAdjustmentsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>{{'Adjust'|appTranslate|async}}</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+
+
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="form" name="test"
+                                     [stacked]="true"></app-input-basic>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="form" name="test"
+                                     [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <app-btn icon="search" type="secondary">
+                      Find
+                    </app-btn>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+
+              <div class="row g-3 form-group mt-2 pt-2">
+                <div class="col">
+                  <app-input-basic label="Narration" type="textarea" [form]="form" name="test" [stacked]="true">
+                  </app-input-basic>
+                </div>
+
+              </div>
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1 justify-content-end">
+                  <div class="col-lg-2">
+                    <app-btn icon="save" type="secondary">
+                      Submit
+                    </app-btn>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="d-flex justify-content-between section-cards card-blue mt-3">
+              <div class="card  bg-card shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title">{{'Initial Estimate'|appTranslate|async}}</h6>
+                  <p class="card-number">345,000</p>
+                </div>
+
+              </div>
+              <div class="card  bg-card shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title">{{'Prior Estimate'|appTranslate|async}}</h6>
+                  <p class="card-number">345,000</p>
+                </div>
+
+              </div>
+              <div class="card  shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title">{{'Total Adjustments'|appTranslate|async}}</h6>
+                  <p class="card-number">5</p>
+                </div>
+
+              </div>
+              <div class="card  shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title">{{'Updated Amount'|appTranslate|async}}</h6>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adjustmentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>{{'Adjustments'|appTranslate|async}}</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row mt-3">
+            <div class="col">
+              <label for="" class="form-label small1">{{'Policy No'|appTranslate|async}}: <span
+                class="text-primary">{{'LRT21000899'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Owner'|appTranslate|async}}: <span
+                class="text-primary">{{clientName}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Initial Estimate'|appTranslate|async}}: <span
+                class="text-primary">{{'970,000'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Adjustment'|appTranslate|async}}: <span
+                class="text-primary">{{'80,000'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Final Amount'|appTranslate|async}}: <span
+                class="text-primary">{{'180,000'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Claim Type'|appTranslate|async}}: <span
+                class="text-primary">{{'Surrender'|appTranslate|async}}</span></label>
+            </div>
+
+          </div>
+          <div class="row mt-3">
+
+            <div class="col">
+              <label for="" class="form-label small1">{{'Currency'|appTranslate|async}}: <span
+                class="text-primary">{{'NGN'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Cover Name'|appTranslate|async}}: <span
+                class="text-primary">{{'Savings'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col">
+              <label for="" class="form-label small1">{{'Policy Code Claimed On'|appTranslate|async}}: <span
+                class="text-primary">{{'3'|appTranslate|async}}</span></label>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+
+          </div>
+          <div class="row mt-4">
+            <table class="table table-responsive table-striped">
+              <thead>
+              <tr class="">
+                <th scope="col">{{'Claim No'|appTranslate|async}}</th>
+                <th scope="col">{{'Initial Estimate'|appTranslate|async}}</th>
+                <th scope="col">{{'Adjustment'|appTranslate|async}}</th>
+                <th scope="col">{{'Revised Estimate'|appTranslate|async}}</th>
+                <th scope="col">{{'Adj Reason'|appTranslate|async}}</th>
+                <th scope="col">{{'Currency'|appTranslate|async}}</th>
+                <th scope="col">{{'Created By'|appTranslate|async}}</th>
+                <th scope="col">{{'Created On'|appTranslate|async}}</th>
+                <th scope="col">{{'Adj Auth Use'|appTranslate|async}}r</th>
+                <th scope="col">{{'Adj Auth At'|appTranslate|async}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>143</td>
+                <td>50,000</td>
+                <td>--</td>
+                <td>50,000</td>
+                <td>--</td>
+                <td>NGN</td>
+                <td>J-Bond</td>
+                <td>10/07/2022 - 12:06</td>
+                <td>P-PARKER</td>
+                <td>10/07/2022 - 12:06</td>
+              </tr>
+              <tr>
+                <td>143</td>
+                <td>50,000</td>
+                <td>--</td>
+                <td>50,000</td>
+                <td>--</td>
+                <td>NGN</td>
+                <td>J-Bond</td>
+                <td>10/07/2022 - 12:06</td>
+                <td>P-PARKER</td>
+                <td>10/07/2022 - 12:06</td>
+              </tr>
+              <tr>
+                <td>143</td>
+                <td>50,000</td>
+                <td>--</td>
+                <td>50,000</td>
+                <td>--</td>
+                <td>NGN</td>
+                <td>J-Bond</td>
+                <td>10/07/2022 - 12:06</td>
+                <td>P-PARKER</td>
+                <td>10/07/2022 - 12:06</td>
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{'Narrations'|appTranslate|async}} </label>
+                <textarea name="" id="" rows="6" class="form-control control-bg-gray"></textarea>
+              </div>
+            </div>
+
+          </div>
+          <div class="row mt-3 justify-content-end">
+            <div class="col-3">
+              <app-button buttonType="createCustom" data-bs-dismiss="modal" text="Create Adjustment"
+                          data-bs-toggle="modal" data-bs-target="#createAdjustmentsModal"></app-button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

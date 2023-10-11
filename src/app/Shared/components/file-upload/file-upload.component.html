@@ -1,0 +1,28 @@
+
+<div class="meta form-label mb-2 hide-scroll">
+  <div class="row align-items-start mb-1" *ngFor="let item of files;let i = index">
+    <div class="col">
+      <div class="hide-scroll file-name">
+        {{item?.name}}
+      </div>
+    </div>
+    <div class="col-auto text-end">
+      <span class="text-danger pointer p-1" (click)="removeFile(i)">x</span>
+    </div>
+  </div>
+  <div class="row align-items-start mb-1" *ngFor="let item of fileMetadatas;let i = index">
+    <div class="col">
+      <div class="hide-scroll file-name">
+        {{item?.metadata?.title}}
+      </div>
+    </div>
+    <div class="col-auto text-end">
+      <span class="text-danger pointer p-1" (click)="removeFileMetadata(i)">x</span>
+    </div>
+  </div>
+</div>
+<input type="file"  style="display: none;" accept="{{accept}}" (change)="onUpload($event)" #uploadInput [multiple]="multiple">
+<app-btn icon="upload" (mclick)="openDialog()" [type]="file||fileMetadata?.file?'primary':'secondary'"
+  [disabled]="disabled" [help]="help">
+  {{label}}
+</app-btn>

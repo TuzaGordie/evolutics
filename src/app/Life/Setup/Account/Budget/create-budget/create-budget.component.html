@@ -1,0 +1,185 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Budget'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <form novalidate #f="ngForm">
+    <div class="container">
+      <br/>
+      <div class="row">
+        <div class="col-md-2">
+          <p class="">
+            <label class="text-primary form-label">
+              {{ 'Company' | appTranslate | async }} </label>
+
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p class="">
+            <label class="text-primary form-label">
+              {{ 'Version Number' | appTranslate | async }} </label><br/>
+            <input type="text" class="form-control control-bg-gray">
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p class="">
+            <label class="text-primary form-label">
+              {{ 'Version Date' | appTranslate | async }} </label><br/>
+            <input type="date" class="form-control control-bg-gray">
+          </p>
+        </div>
+        <div class="col-md-2">
+          <p class="">
+            <label class="text-primary form-label">
+              {{ 'Base Currency' | appTranslate | async }} </label><br/>
+            <select class="form-control control-bg-gray">{{ 'XOF' | appTranslate | async }}</select>
+          </p>
+        </div>
+      </div>
+      <br/><br/>
+      <div class="row">
+        <div class="col-md-2 mr-3">
+          <label class="text-primary form-label">{{
+            'Budget Basis' | appTranslate | async
+            }}</label>
+          <select class="form-control form-control-md control-bg-gray">
+            <option></option>
+            <option>1</option>
+          </select>
+        </div>
+        <div class="col-md-2 mr-3">
+          <label class="text-primary form-label">{{
+            'Date From' | appTranslate | async
+            }}</label>
+          <input type="date" class="form-control form-control-md control-bg-gray"/>
+        </div>
+        <div class="col-md-2 mr-3">
+          <label class="text-primary form-label">{{
+            'Date To' | appTranslate | async
+            }}</label>
+          <input type="date" class="form-control form-control-md control-bg-gray"/>
+        </div>
+      </div>
+      <hr/>
+
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <app-btn type="secondary" icon="add" data-bs-toggle="modal"
+                   data-bs-target="#exampleModal">{{'Add New Record' | appTranslate | async}}</app-btn>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-responsive  table-striped">
+            <thead class="py-3 theader">
+            <tr>
+              <th scope="col">{{'Account Line' | appTranslate | async}}</th>
+              <th scope="col">{{'Last Period Amount' | appTranslate | async}}</th>
+              <th scope="col">{{'Budget' | appTranslate | async}}</th>
+              <th></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><input type="text" class="form-control"></td>
+              <td><input type="text" class="form-control"></td>
+              <td><input type="text" class="form-control"></td>
+              <td>
+                <app-btn type="dark" icon="edit"></app-btn>
+              </td>
+              <td>
+                <app-btn type="secondary" icon="delete"></app-btn>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <label class="text-primary form-label">{{
+              'PBT for Last Period' | appTranslate | async
+              }}</label>
+            <input class="form-control form-control-md control-bg-gray"/>
+          </div>
+          <div class="col-md-3">
+            <label class="text-primary form-label">{{
+              'Budget PBT' | appTranslate | async
+              }}</label>
+            <input class="form-control form-control-md control-bg-gray"/>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <label class="text-primary form-label">{{
+              'PAT for Last Period' | appTranslate | async
+              }}</label>
+            <input class="form-control form-control-md control-bg-gray"/>
+          </div>
+          <div class="col-md-3">
+            <label class="text-primary form-label">{{
+              'Budget PAT' | appTranslate | async
+              }}</label>
+            <input class="form-control form-control-md control-bg-gray"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-end">
+        <div *ngIf="!isShow" class="col-md-2">
+          <app-button buttonType="save" text="Save"></app-button>
+        </div>
+      </div>
+      <div class="d-lg-flex mt-2" *ngIf="isShow">
+        <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+        </app-btn>
+        <span class="mx-1"></span>
+        <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+        </app-btn>
+      </div>
+      <br/><br/><br/>
+    </div>
+  </form>
+</loader>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{
+          'Add New Record' | appTranslate | async
+          }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Account Line' | appTranslate | async
+              }}</label>
+            <select name="" id="" class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Budget' | appTranslate | async
+              }}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-btn type="secondary" icon="save">{{
+          'Save' | appTranslate | async
+          }}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

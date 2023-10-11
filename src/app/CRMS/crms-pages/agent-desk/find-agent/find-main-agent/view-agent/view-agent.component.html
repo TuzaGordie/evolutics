@@ -1,0 +1,670 @@
+<div class="container ">
+  <form [formGroup]="viewAgentForm">
+    <div class="row justify-content-between mt-3">
+      <span class="col-2">Agent No:<span style="color: #514ef5">{{findAgentService.agentInfo?.AGENT_NO}}</span></span>
+      <span class="col-2">Full Name: <span style="color: #514ef5">{{findAgentService.agentInfo?.NAME}}</span></span>
+      <div class="col-2"> Client Number: <span style="color: #514ef5">{{findAgentService.agentInfo?.CLIENT_NO}}</span></div>
+      <div class="col-2">
+        <app-button [buttonType]="'editRed'" data-bs-target="#exampleModal" [text]="'Edit'" data-bs-toggle="modal"
+          (click)="onEdit('surname')"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomNoteRed'" [text]="'Note'" [routerLink]="['/crms/agent-desk/agent-note']">
+        </app-button>
+      </div>
+
+    </div>
+    <hr style="margin-top: 5px;">
+
+    <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+      <div class="d-block text-center mr-2 ">
+        <img src="https://ritecaremedicalofficepc.com/wp-content/uploads/2019/09/img_avatar.png" class="rounded-circle"
+          width="100px" alt="">
+        <p class="pt-2">{{findAgentService.agentInfo?.NAME}}</p>
+        <span style="color:#2ecc71">Active</span>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Agent Type</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="agenttype" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('agenttype')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Active Date</label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="activedate" readonly class="inputform1">
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('activedate')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Product Class Permission</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="pcp" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('pcp')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Agent Salary Status</label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="agentsalary" readonly class="inputform1 ">
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('agentsalary')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <div class="pb-4">
+            <label class="form-label text-red">Gender</label>
+            <input type="text" formControlName="gender" readonly class="inputform1 " >
+            <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('gender')">Edit
+
+            </a>
+        </div> -->
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Phone Number 1</label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="phoneNo" readonly class="inputform1 ">
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('phoneNo')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Phone Number 2</label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="phoneNo2" readonly class="inputform1 ">
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('phoneNo2')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Email</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="email" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('email')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Email 2</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="email2" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('email2')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <!-- <div class="pb-4">
+            <label class="form-label text-red">Address</label>
+            <input type="text" formControlName="address" readonly class="inputform1 " >
+            <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('address')">Edit
+
+            </a>
+                       </div> -->
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Branch</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="Branch" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('Branch')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Payment Method &nbsp;<a data-bs-toggle="modal"
+              data-bs-target="#editPayment"><i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i> </a></label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="paymentmethod" readonly class="inputform1 ">
+              <div class="col-3"></div>
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('paymentmethod')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <div class="pb-4">
+            <label class="form-label text-red">KYC</label>
+            <input type="text" formControlName="kyc" readonly class="inputform1 " >
+            <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('kyc')">Edit
+
+            </a>
+        </div> -->
+        <div class="pb-4">
+          <label class="form-label text-red">Hierachy Manager</label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="hmanager" readonly class="inputform1 ">
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('hmanager')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">License Cert &nbsp;<a data-bs-toggle="modal" data-bs-target="#editLicense">
+              <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+            </a></label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="license" readonly class="inputform1 "></div>
+            <div class="col-3"></div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Contact Person</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="contactperson" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('contactperson')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Agent CRM ID</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="crm" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('crm')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Min Comm Payable</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="minpayable" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('minpayable')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <!--  <div class="pb-4">
+             <label class="form-label text-red">Date Created</label>
+             <input type="text" formControlName="dateCreated" readonly class="inputform1" >
+             <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('dateCreated')">Edit
+
+             </a>
+         </div> -->
+        <div class="pb-4">
+          <label class="form-label text-red">Language</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="language" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('language')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Currency</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="currency" readonly class="inputform1 "></div>
+            <div class="col-3"><a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal"
+                (click)="onEdit('currency')">
+
+              </a></div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Band</label>
+          <div class="row">
+            <div class="col">
+              <input type="text" formControlName="band" readonly class="inputform1 ">
+            </div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('band')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Commission Rate Tax</label>
+          <div class="row">
+            <div class="col"><input type="text" formControlName="crt" readonly class="inputform1 "></div>
+            <div class="col-3">
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('crt')">
+
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <!-- <div class="d-block ml-2">
+          <div class="pb-4">
+              <label class="form-label text-red">Provider Code</label>
+              <input type="text" formControlName="providerCode" readonly class="inputform1 " >
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('providerCode')">Edit
+
+              </a>
+          </div>
+          <div class="pb-4">
+              <label class="form-label text-red">Enrolee No</label>
+              <input type="text" formControlName="enroleeNo" readonly class="inputform1 " >
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('enroleeNo')">Edit
+
+              </a>
+          </div>
+          <div class="pb-4">
+              <label class="form-label text-red">Suffix</label>
+              <input type="text" formControlName="suffix" readonly class="inputform1 " >
+              <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('suffix')">Edit
+
+              </a>
+          </div>
+      </div> -->
+
+    </div>
+    <hr>
+    <div class="row justify-content-center my-4">
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Endorsements'"
+          [routerLink]="['/crms/agent-desk/view-agent-endorsement']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Documents'"
+          [routerLink]="['/crms/agent-desk/view-agent-document']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Web log in'"
+          [routerLink]="['/crms/agent-desk/view-agent-weblogin']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Agent Loan'"
+          [routerLink]="['/crms/agent-desk/view-agent-underwriting-event']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [routerLink]="['/crms/agent-desk/view-agent-workflows']"
+          [text]="'Workflows'"></app-button>
+      </div>
+
+      <!-- <div class="col-2">
+         <app-button [buttonType]="'btnCustomCloneRaisedRed'" [routerLink]="['/life/underwritingevents']"
+                     [text]="'Underwriting Events'"></app-button>
+       </div>-->
+    </div>
+    <div class="d-flex justify-content-around section-cards card-red">
+      <div class="card color1 shadow-sm" [routerLink]="['/crms/agent-desk/view-agent-no-of-policies']">
+        <div class="card-body">
+          <h6 class="card-title">No of Policies</h6>
+          <p class="card-number">55</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/crms/agent-desk/view-agent-total-commission-paid']">
+        <div class="card-body">
+          <h6 class="card-title">Total Commission Paid</h6>
+          <p class="card-number">12</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/crms/agent-desk/view-agent-total-production']">
+        <div class="card-body">
+          <h6 class="card-title">Total Production</h6>
+          <p class="card-number">43</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/crms/agent-desk/view-agent-credit-note-balance']">
+        <div class="card-body">
+          <h6 class="card-title">Credit Note Balance</h6>
+          <p class="card-number">22</p>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form [formGroup]="viewAgentForm">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Client Info</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+
+            <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-red">Agent Type</label>
+                  <input type="text" formControlName="agenttype" [readonly]="checkReadonly('agenttype')"
+                    [ngClass]="{higlightbox: checkHighlight('agenttype')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Active Date</label>
+                  <input type="text" formControlName="activedate" [readonly]="checkReadonly('activedate')"
+                    [ngClass]="{higlightbox: checkHighlight('activedate')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Product Class Permission</label>
+                  <input type="text" formControlName="pcp" [readonly]="checkReadonly('pcp')"
+                    [ngClass]="{higlightbox: checkHighlight('pcp')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Agent Salary Status</label>
+                  <input type="text" formControlName="agentsalary" [readonly]="checkReadonly('agentsalary')"
+                    [ngClass]="{higlightbox: checkHighlight('agentsalary')}" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-red">Phone Number 1</label>
+                  <input type="text" formControlName="phoneNo" [readonly]="checkReadonly('phoneNo')"
+                    [ngClass]="{higlightbox: checkHighlight('phoneNo')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Phone Number 2</label>
+                  <input type="text" formControlName="phoneNo2" [readonly]="checkReadonly('phoneNo2')"
+                    [ngClass]="{higlightbox: checkHighlight('phoneNo2')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Email</label>
+                  <input type="text" formControlName="email" [readonly]="checkReadonly('email')"
+                    [ngClass]="{higlightbox: checkHighlight('email')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Email 2</label>
+                  <input [readonly]="checkReadonly('email2')" type="text" formControlName="email2"
+                    [ngClass]="{higlightbox: checkHighlight('email2')}" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-red">Branch</label>
+                  <input [readonly]="checkReadonly('Branch')" type="text" formControlName="Branch"
+                    [ngClass]="{higlightbox: checkHighlight('Branch')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Payment Method</label>
+                  <input [readonly]="checkReadonly('paymentmethod')" type="text" formControlName="paymentmethod"
+                    [ngClass]="{higlightbox: checkHighlight('paymentmethod')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Hierachy Manager</label>
+                  <input [readonly]="checkReadonly('hmanager')" type="text" formControlName="hmanager"
+                    [ngClass]="{higlightbox: checkHighlight('hmanager')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">License Cert</label>
+                  <input [readonly]="checkReadonly('license')" type="text" formControlName="license"
+                    [ngClass]="{higlightbox: checkHighlight('license')}" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-red">Contact Person</label>
+                  <input [readonly]="checkReadonly('contactperson')" type="text" formControlName="contactperson"
+                    [ngClass]="{higlightbox: checkHighlight('contactperson')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Agent CRM ID</label>
+                  <input [readonly]="checkReadonly('crm')" type="text" formControlName="crm"
+                    [ngClass]="{higlightbox: checkHighlight('crm')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Min Comm Payable</label>
+                  <input [readonly]="checkReadonly('minpayable')" type="text" formControlName="minpayable"
+                    [ngClass]="{higlightbox: checkHighlight('minpayable')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Language</label>
+                  <input [readonly]="checkReadonly('language')" type="text" formControlName="language"
+                    [ngClass]="{higlightbox: checkHighlight('language')}" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-red">Currency</label>
+                  <input [readonly]="checkReadonly('currency')" type="text" formControlName="currency"
+                    [ngClass]="{higlightbox: checkHighlight('currency')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Band</label>
+                  <input [readonly]="checkReadonly('band')" type="text" formControlName="band"
+                    [ngClass]="{higlightbox: checkHighlight('band')}" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-red">Commission Rate Tax</label>
+                  <input [readonly]="checkReadonly('crt')" type="text" formControlName="crt"
+                    [ngClass]="{higlightbox: checkHighlight('crt')}" class="inputform ">
+                </div>
+
+              </div>
+
+
+            </div>
+
+            <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">update</button>
+             -->
+
+
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+            <app-button buttonType="save-red" (click)="onSubmit()"></app-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="editPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+            <tr class="">
+              <th scope="col">Bank No</th>
+              <th scope="col">Account Name</th>
+              <th scope="col">Bank Method</th>
+              <th scope="col">Bank Name</th>
+              <th scope="col">Sort Code</th>
+              <th scope="col">Account No</th>
+              <th scope="col">Blocked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5667_1</td>
+              <td>Ogene Obaseki</td>
+              <td>NG Banking</td>
+              <td>FBN</td>
+              <td>05677889</td>
+              <td>21923776</td>
+              <td>Y</td>
+            </tr>
+            <tr>
+              <td>5667_1</td>
+              <td>Ogene Obaseki</td>
+              <td>NG Banking</td>
+              <td>FBN</td>
+              <td>05677889</td>
+              <td>21923776</td>
+              <td>N</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'addCustom-red'" [text]="'Create new Account'" data-bs-dismiss="modal"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editLicense" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit License Cert</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+            <tr class="">
+              <th scope="col">License Issue Date</th>
+              <th scope="col">License Expiry Date</th>
+              <th scope="col">Certificate No</th>
+              <th scope="col">License Authority</th>
+              <th scope="col">Date Last Check</th>
+              <th scope="col">License Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01/Jan/2010</td>
+              <td>01/Jan/2010</td>
+              <td>7686755</td>
+              <td>CIIN</td>
+              <td>01/Jan/2010</td>
+              <td>NG</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'addCustom-red'" [text]="'Add new '" data-bs-dismiss="modal"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<!-- <div class="modal fade" id="notemodel" tabindex="-1" aria-labelledby="notemodelLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notemodelLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="pb-4">
+              <label class="form-label text-red">Note</label>
+              <input type="textarea" formControlName="note"
+              class="inputform " >
+          </div>
+          <div class="pb-4">
+              <label class="form-label text-red">Visible to All</label>
+              <input type="checkbox" formControlName="visiblebox"  >
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->

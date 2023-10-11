@@ -1,0 +1,91 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Bank / Sort Code'"></app-form-navigation> -->
+<loader [loading]="loading" class="vh-80">
+  <form *ngIf="!asTable" [formGroup]="form" (submit)="onSubmit()">
+    <div class="container">
+      <br>
+      <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="Sort Code" type="text" [form]="form" name="sortCode" [stacked]="true">
+          </app-input-basic>
+        </div>
+
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="Select Bank" type="select" [form]="form" name="bank" [stacked]="true"
+            [options]="aeS.getBanks|functionCaller|async" labelType="cd" #bank>
+          </app-input-basic>
+        </div>
+
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="Address State" type="select" [form]="form" name="stateAddress" [stacked]="true"
+            [options]="aeS.getCity|functionCaller|async" labelType="cd" #stateAddress>
+          </app-input-basic>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="Address" type="text" [form]="form" name="address" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="Branch Name" type="text" [form]="form" name="branchName" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-2">
+          <app-input-basic label="Head Office" type="checkbox" [form]="form" name="isHeadOffice" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-md-2">
+          <app-btn type="secondary" icon="save" (mclick)="onSubmit()">Save</app-btn>
+        </div>
+      </div>
+      <br><br>
+    </div>
+  </form>
+  <div class="table-responsive mx-5">
+    <table *ngIf="asTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{'Sort Code'|appTranslate|async}}</th>
+          <th>{{'Bank'|appTranslate|async}}</th>
+          <th>{{'Country'|appTranslate|async}}</th>
+          <th>{{'State'|appTranslate|async}}</th>
+          <th>{{'Town'|appTranslate|async}}</th>
+          <th>{{'Branch'|appTranslate|async}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{form.controls['sortCode'].value}}</td>
+          <td>{{form.controls['bank'].value}}</td>
+          <td>{{form.controls['country'].value}}</td>
+          <td>{{form.controls['stateAddress'].value}}</td>
+          <td>{{form.controls['townAddress'].value}}</td>
+          <td>{{form.controls['branchName'].value}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</loader>

@@ -1,0 +1,94 @@
+<app-form-navigation [title]="'Find Client'"></app-form-navigation>
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label>{{'Code'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="quotationValidityPeriod" />
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label>{{'Description'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="quotationValidityPeriod" />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label>{{'System / User Defined'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="quotationValidityPeriod" />
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label> {{'Language'|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray" formControlName="bonusVersionNo">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+  <hr>
+  <div class="row bg-secondary color-white rowshape pd-top-10 pd-bottom-10 ">
+    <div class="col-4">
+      <label>{{'Value'|appTranslate|async}}</label>
+    </div>
+    <div class="col-4">
+      <label>{{'Description'|appTranslate|async}}</label>
+    </div>
+    <div class="col-4">
+      <label>{{'Translation'|appTranslate|async}}</label>
+    </div>
+  </div>
+  <div class="row g-3">
+    <div class="col-4">
+      <div class="form-group mt-2">
+        <input class="form-control  control-bg-gray" type="text" formControlName="quotationValidityPeriod" />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group mt-2">
+        <input class="form-control  control-bg-gray" type="text" formControlName="quotationValidityPeriod" />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group mt-2">
+        <input class="form-control  control-bg-gray" type="text" formControlName="quotationValidityPeriod" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <button class=" btn btn-outline-secondry btn-secondary-shape form-control">{{'+Add'|appTranslate|async}} </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row g-3">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <button type="submit" class=" btn btn-secondary bg-secondary btn-secondary-shape btn-next form-control">
+          {{Submit'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+
+</div>

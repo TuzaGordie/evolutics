@@ -1,0 +1,32 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <app-input-basic label="Select Report Group" type="select" [form]="form" name="reportGroupCode" [stacked]="true" valueField="code"
+          [options]="frS.getReportGroupCodes|functionCaller|async" labelType="ct" #reportGroupCode>
+        </app-input-basic>
+        
+        <app-input-basic label="Select Report" type="select" [form]="form" name="report" [stacked]="true" valueField="code"
+          [options]="frS.getReportGroupReportList|functionCaller1:reportGroupCode.value|async" labelType="cd"
+          #report>
+        </app-input-basic>
+
+        <div class="form-group row my-3">
+          <div class="col-sm d-grid gap-1">
+            <app-btn type="primary" icon="download" [valid]="form?.valid" (mclick)="run()">Run </app-btn>
+          </div>
+          <div class="col-sm d-grid gap-1">
+            <app-btn type="dark" icon="show" [valid]="form?.valid" (mclick)="edit()">Edit </app-btn>
+          </div>
+          <div class="col-sm d-grid gap-1">
+            <app-btn type="outline" icon="add" routerLink="../create">Create New</app-btn>
+          </div>
+          <div class="col-sm d-grid gap-1">
+            <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="clone()">Clone </app-btn>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

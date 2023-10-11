@@ -1,0 +1,202 @@
+<!-- <app-form-navigation [title]="'Set Up / Appraisal / Criteria'"></app-form-navigation> -->
+<div class="container-sm mt-5 ">
+
+  <div class="row">
+    <div class="col-5">
+      <label class="form-label text-primary">{{"Company Code"|appTranslate|async}}</label>
+      <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="companyCode" #companySelector>
+        <option value=""></option>
+        <option [value]="company.code" *ngFor="let company of companies">{{company.code}}-{{company.description}}</option>
+      </select>
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label"> &nbsp;</label>
+      <app-btn
+        type="dark"
+        [disabled]="!companySelector.value"
+        [ngClass]="{disabled: !companySelector.value}"
+        [customIcon]="connection.criteria1 ? 'fa fa-spinner fa-spin': 'fa fa-eye'"
+        (mclick)="onCompanyChange()"
+      >Show</app-btn>
+    </div>
+
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Escalation"|appTranslate|async}}</label>
+      <p>{{'1st Order Escalation'|appTranslate|async}}</p>
+    </div>
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Charge (-ve value %) "|appTranslate|async}}</label>
+      <input class="form-control form-control-sm control-bg-gray" type="number" name="firstOrderExcalation" [(ngModel)]="firstOrderExcalation" appNegativeNumberOnly>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-5">
+      <p>{{'2nd Order Escalation'|appTranslate|async}}</p>
+    </div>
+    <div class="col-md-5">
+      <input class="form-control form-control-sm control-bg-gray" type="number" name="secondOrderExcalation" [(ngModel)]="secondOrderExcalation" appNegativeNumberOnly>
+    </div>
+  </div>
+  <hr>
+  <br/>
+  <div class="row">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Error Level"|appTranslate|async}}</label>
+      <p>{{"Minor"|appTranslate|async}}</p>
+    </div>
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Charge (-ve value %)"|appTranslate|async}}</label>
+      <input class="form-control form-control-sm control-bg-gray" type="number" name="minorError" [(ngModel)]="minorError" appNegativeNumberOnly>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-5">
+
+      <p>{{"Intermediate"|appTranslate|async}}</p>
+    </div>
+    <div class="col-md-5">
+
+      <input class="form-control form-control-sm control-bg-gray" type="number" name="intermediateError" [(ngModel)]="intermediateError" appNegativeNumberOnly>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-5">
+
+      <p>{{"Grave"|appTranslate|async}}</p>
+    </div>
+    <div class="col-md-5">
+
+      <input class="form-control form-control-sm control-bg-gray" type="number" name="graveError" [(ngModel)]="graveError " appNegativeNumberOnly>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row mb-3">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+      <p>1</p>
+    </div>
+    <div class="col-md-5 mb-2">
+      <label class="form-label text-primary">{{"Criteria"|appTranslate|async}}</label>
+      <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="criteria1">
+        <option value=""></option>
+        <option [value]="criteria.code" *ngFor="let criteria of criterias">{{criteria.code}} - {{criteria.title}}</option>
+      </select>
+    </div>  
+    <div class="row">
+      <div class="col-10">
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-button (click)="showCriteria2()" *ngIf="!hideButton1" [buttonType]="'add'"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mb-3" *ngIf="isCriteria2">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+      <p>2</p>
+    </div>
+    <div class="col-md-5 mb-2">
+      <label class="form-label text-primary">{{"Criteria"|appTranslate|async}}</label>
+      <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="criteria2">
+        <option value=""></option>
+        <option [value]="criteria.code" *ngFor="let criteria of criterias">{{criteria.code}}-{{criteria.title}}</option>
+      </select>
+    </div>  
+    <div class="row">
+      <div class="col-10">
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-button (click)="showCriteria3()" *ngIf="!hideButton2" [buttonType]="'add'"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mb-3" *ngIf="isCriteria3">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+      <p>3</p>
+    </div>
+    <div class="col-md-5 mb-2">
+      <label class="form-label text-primary">{{"Criteria"|appTranslate|async}}</label>
+      <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="criteria3">
+        <option value=""></option>
+        <option [value]="criteria.code" *ngFor="let criteria of criterias">{{criteria.code}}-{{criteria.title}}</option>
+      </select>
+    </div>  
+    <div class="row">
+      <div class="col-10">
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-button (click)="showCriteria4()" *ngIf="!hideButton3" [buttonType]="'add'"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3" *ngIf="isCriteria4">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+      <p>4</p>
+    </div>
+    <div class="col-md-5 mb-2">
+      <label class="form-label text-primary">{{"Criteria"|appTranslate|async}}</label>
+      <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="criteria4">
+        <option value=""></option>
+        <option [value]="criteria.code" *ngFor="let criteria of criterias">{{criteria.code}}-{{criteria.title}}</option>
+      </select>
+    </div>  
+    <div class="row">
+      <div class="col-10">
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-button (click)="showCriteria5()" *ngIf="!hideButton4" [buttonType]="'add'"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3" *ngIf="isCriteria5">
+    <div class="col-md-5">
+      <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+      <p>5</p>
+    </div>
+    <div class="col-md-5 mb-2">
+      <label class="form-label text-primary">{{"Criteria"|appTranslate|async}}</label>
+      <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="criteria5">
+        <option value=""></option>
+        <option [value]="criteria.code" *ngFor="let criteria of criterias">{{criteria.code}}-{{criteria.title}}</option>
+      </select>
+    </div>  
+  </div>
+
+  <br/>
+  <br/>
+
+  <div class="row justify-content-end mb-5">
+    <div class="col-2">
+
+      <app-button [buttonType]="'save'" (click)="createCriteria()"></app-button>
+
+    </div>
+
+  </div>
+
+</div>
+

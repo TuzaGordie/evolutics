@@ -1,0 +1,65 @@
+<loader [loading]="loading" class="vh-80">
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="container">
+      <br />
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <app-input-basic label="Bank Code" type="text" [form]="form" name="code" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <app-input-basic label="Select Country" type="select" [form]="form" name="country" [stacked]="true"
+            [options]="aeS.getCountry | functionCaller | async" labelType="cd" valueField="code" #country>
+          </app-input-basic>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <app-input-basic label="Head Quarter Address" type="text" [form]="form" name="hqAddress" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <app-input-basic label="Head Quarter City" type="select" [form]="form" name="hqCity" [stacked]="true"
+            [options]="aeS.getCity | functionCaller | async" labelType="cd" valueField="code" #hqCity>
+          </app-input-basic>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <app-input-basic label="Head Quarter Sort Code" type="select" [form]="form" name="hqSortCode" [stacked]="true"
+            [options]="aeS.getSortCode | functionCaller | async" valueField="code" labelField="code" #hqSortCode>
+          </app-input-basic>
+        </div>
+      </div>
+      <br /><br />
+
+      <div class="row justify-content-end">
+        <div class="col-md-2">
+          <app-btn type="secondary" icon="save" [valid]="form?.valid" (mclick)="onSubmit()">Save</app-btn>
+        </div>
+      </div>
+      <br /><br />
+    </div>
+  </form>
+</loader>

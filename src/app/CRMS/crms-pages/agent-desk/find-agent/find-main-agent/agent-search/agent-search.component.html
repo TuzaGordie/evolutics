@@ -1,0 +1,32 @@
+
+<div class="container mt-5" >
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <h1 class="my-5">Agent Search List</h1>
+
+        <table class="table">
+            <thead class="py-3 theader">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Agent No</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Agent Type</th>
+                <th scope="col">Hierachy</th>
+                <th scope="col">Created By</th>
+                <th scope="col" style="border-top-right-radius: 12px;">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of agentInfoList" (click)="viewInfo(item.AGENT_NO)">
+                <th scope="row">{{item.AGENT_NO}}</th>
+                <td>{{item.NAME}}</td>
+                <td>{{item.Agenttype}}</td>
+                <td>{{item.HierachyManager}}</td>
+                <td>{{item.CREATED_BY}}</td>
+                <td>{{item.Email}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+</div>
+</div>
+    </div>

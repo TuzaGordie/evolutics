@@ -1,0 +1,430 @@
+<form [formGroup]="newClaimForm">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="" class="form-label text-primary required">{{'Policy Number'|appTranslate|async}}</label>
+        <!-- if this component was opened with a specific policyNo -->
+        <input
+          *ngIf="policyNo"
+          type="text"
+          class="form-control control-bg-gray"
+          formControlName="policyNo"
+          [ngClass]="isInvalidField(newClaimForm, 'policyNo') && 'border border-danger'"
+          readonly
+        >
+        <!-- else -->
+        <div *ngIf="!policyNo" class="position-relative">
+          <select
+            class="form-control control-bg-gray"
+            (change)="onPolicyNoChange()"
+            formControlName="policyNo"
+            [ngClass]="isInvalidField(newClaimForm, 'policyNo') && 'border border-danger'"
+            >
+            <option value=""></option>
+            <option *ngFor="let policy of policiesList">
+              {{ policy.policyNo }}
+            </option>
+          </select>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingPolicyNos"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="" class="form-label text-primary required">{{'Policy Code'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <select
+            class="form-control control-bg-gray"
+            type="text"
+            (change)="onPolicyCodeChange()"
+            formControlName="policyCode"
+            [ngClass]="isInvalidField(newClaimForm, 'policyCode') && 'border border-danger'"
+            >
+            <option value=""></option>
+            <option *ngFor="let record of policyCodesList">
+              {{ record.policyCode }}
+            </option>
+          </select>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingPolicyCodes"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Policy Number Suffix'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <select
+            class="form-control control-bg-gray"
+            type="text"
+            formControlName="policyNoSuffix"
+          >
+            <option value=""></option>
+            <option *ngFor="let record of policyNoSuffixesList">
+              {{ record.policyNoSuffix }}
+            </option>
+          </select>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingPolicyNoSuffixes"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Cover Period'|appTranslate|async}} <span class="small text-dark">{{'(Issued On - Renewal Due On)'|appTranslate|async}}</span></label>
+        <div class="d-flex">
+          <div class="position-relative">
+            <input type="date" class="form-control control-bg-gray pe-0" formControlName="issuedOn">
+            <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPolicyCoverPeriod">
+              <span class="fa fa-sync fa-spin"></span>
+            </span>
+          </div>
+          <span class="mx-3">-</span>
+          <div class="position-relative">
+            <input type="date" class="form-control control-bg-gray pe-0" formControlName="renewalDueOn">
+            <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPolicyCoverPeriod">
+              <span class="fa fa-sync fa-spin"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Policy Currency'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <input
+            class="form-control control-bg-gray"
+            type="text"
+            formControlName="currency"
+          />
+          <div
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingPolicyCurrency"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary required">{{'Cover'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <select
+            class="form-control control-bg-gray"
+            formControlName="coverCode"
+            (change)="onCoverChange()"
+            [ngClass]="isInvalidField(newClaimForm, 'coverCode') && 'border border-danger'"
+            >
+            <option value=""></option>
+            <option *ngFor="let cover of policyCoversList" [value]="cover.code">
+              {{ cover.code }} - {{ cover.description }}
+            </option>
+          </select>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingCovers"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary required">{{'Claim Type'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <select
+            class="form-control control-bg-gray"
+            formControlName="claimType"
+            (change)="onClaimTypeChange()"
+            [ngClass]="isInvalidField(newClaimForm, 'claimType') && 'border border-danger'"
+            >
+            <option></option>
+            <option
+              *ngFor="let claimType of claimTypesList"
+              [value]="claimType.type"
+            >
+              {{ claimType.type }} - {{ getClaimTypeTitle(claimType.type) }}
+            </option>
+          </select>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingClaimTypes"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Peril'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <select
+            class="form-control control-bg-gray"
+            formControlName="perilCode"
+            (change)="onPerilChange()"
+          >
+            <option></option>
+            <option *ngFor="let peril of perilsList" [value]="peril.perilCode">
+              {{ peril.perilCode }} - {{ getPerilTitle(peril.perilCode) }}
+            </option>
+          </select>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingPerils"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{'Proximate Cause'|appTranslate|async}}</label>
+      <div class="position-relative">
+        <select
+          class="form-control control-bg-gray"
+          formControlName="proxCause"
+        >
+          <option></option>
+          <option
+            *ngFor="let proxCause of proximateCausesAllowedList"
+            [value]="proxCause.proximateCauseAllowed"
+          >
+            {{ proxCause.proximateCauseAllowed }} - {{ getProximateCauseTitle(proxCause.proximateCauseAllowed) }}
+          </option>
+        </select>
+        <span
+          class="position-absolute top-50 start-50 translate-middle"
+          *ngIf="loadingProximateCauses"
+        >
+          <span class="fa fa-sync fa-spin"></span>
+        </span>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary required">{{'Report Date Time'|appTranslate|async}}</label>
+        <input
+          class="form-control control-bg-gray"
+          type="datetime-local"
+          formControlName="reportOn"
+          [ngClass]="isInvalidField(newClaimForm, 'reportOn') && 'border border-danger'"
+          />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event Date Time'|appTranslate|async}}</label>
+        <input
+          class="form-control control-bg-gray"
+          type="datetime-local"
+          formControlName="eventOn"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event Country'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <app-autocomplete
+            [showLabel]="false"
+            [form]="newClaimForm"
+            name="locationCountry"
+            [stacked]="true"
+            (mchange)="setRegionsList()"
+            [options]="countriesList"
+            [showValidation]="countryTag.invalid"
+            [showValidationIcon]="false"
+            labelType="cd"
+            valueField="code"
+            #countryTag
+          >
+          </app-autocomplete>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingCountries"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event Region'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <app-autocomplete
+            [disabled]="!countryTag.hasValue"
+            [showLabel]="false"
+            [form]="newClaimForm"
+            name="locationRegion"
+            [stacked]="true"
+            [showValidation]="regionTag.invalid"
+            [showValidationIcon]="false"
+            (mchange)="setStatesList()"
+            [options]="regionsList"
+            labelType="cd"
+            valueField="code"
+            #regionTag
+          >
+          </app-autocomplete>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingRegions"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event State'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <app-autocomplete
+            [disabled]="!regionTag.hasValue"
+            [showLabel]="false"
+            [form]="newClaimForm"
+            name="locationState"
+            [stacked]="true"
+            [showValidation]="stateTag.invalid"
+            [showValidationIcon]="false"
+            [options]="statesList"
+            labelType="cd"
+            valueField="code"
+            (mchange)="setTownsList()"
+            #stateTag
+          >
+          </app-autocomplete>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingStates"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event Town'|appTranslate|async}}</label>
+        <div class="position-relative">
+          <app-autocomplete
+            [disabled]="!stateTag.hasValue"
+            [showLabel]="false"
+            [form]="newClaimForm"
+            name="locationTown"
+            [showValidation]="townTag.invalid"
+            [showValidationIcon]="false"
+            [stacked]="true"
+            [options]="townsList"
+            labelType="cd"
+            valueField="code"
+            #townTag
+          >
+          </app-autocomplete>
+          <span
+            class="position-absolute top-50 start-50 translate-middle"
+            *ngIf="loadingTowns"
+          >
+            <span class="fa fa-sync fa-spin"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event Address'|appTranslate|async}}</label>
+        <input
+          class="form-control control-bg-gray"
+          type="text"
+          formControlName="locationAddress"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Event Geo Location'|appTranslate|async}}</label>
+        <input
+          class="form-control control-bg-gray"
+          type="text"
+          formControlName="geolocation"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div
+        class="form-group"
+        title="Optional. Only relevant for variable benefit policies"
+      >
+        <label for="" class="form-label text-primary">
+          {{'Client Loss Estimate'|appTranslate|async}}
+          </label
+        >
+        <input
+          class="form-control control-bg-gray"
+          type="text"
+          formControlName="initialEstimate"
+        />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Severity Level'|appTranslate|async}}</label>
+        <input
+          class="form-control control-bg-gray"
+          type="text"
+          formControlName="severityLevel"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Narration'|appTranslate|async}}</label>
+        <textarea
+          class="form-control control-bg-gray"
+          formControlName="narration"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <button
+    [attr.disabled]="isCreatingClaim ? 'disabled' : null"
+    class="btn btn-outline-primary btn-lg d-block ms-auto"
+    (click)="onSaveNewClaim()"
+  >
+    <i *ngIf="!isCreatingClaim" class="fas fa-save"></i>
+    <i *ngIf="isCreatingClaim" class="fas fa-sync fa-spin"></i>
+    {{ isCreatingClaim ? 'Saving...' : 'Save'|appTranslate|async}}
+  </button>
+</form>

@@ -1,0 +1,304 @@
+<loader [loading]="loading" text="{{loadingText}}">
+  <form #f="ngForm" novalidate>
+    <ng-container *ngIf="isIndex; else elseNotIndexTemplate">
+      <div class=" mt-5 vh-100 " id="form-body">
+        <div class="d-flex h-50 flex-column justify-content-center">
+          <div class="row">
+            <div class="col-md-6 mx-auto my-5 align-middle">
+              <form>
+                <div class="form-group mt-2">
+                  <label>{{'Select User Group'|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" (change)="onSelectGroup(group.value)" required
+                    [(ngModel)]="usergroup" name="userGroup" type="text" #group>
+                    <option></option>
+                    <option *ngFor="let allUserGroup of userGroups" [value]="allUserGroup?.group">
+                      {{allUserGroup?.group}}
+                    </option>
+                  </select>
+
+                  <span class="text-danger" *ngIf="message.error">{{'Field cannot be blank'|appTranslate|async}}</span>
+                </div>
+                <div class="form-group row my-3">
+                  <div class="col-sm-4 d-grid gap-1">
+                    <app-button (click)="show()" [buttonType]="'show'"></app-button>
+                  </div>
+                  <div class="col-sm-4 d-grid gap-1">
+                    <app-button [routerLink]="['create']" [buttonType]="'create'"></app-button>
+                  </div>
+                  <div class="col-sm-4 d-grid gap-1">
+                    <app-button (click)="clone()" [buttonType]="'clone'"></app-button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elseNotIndexTemplate>
+      <div class="form-body  mt-2">
+        <ul id="nav-tab" role="tablist" class="nav nav-pills nav-fill mb-3">
+          <li *ngFor="let menu of templateMenu" role="presentation" class="nav-item">
+            <button (click)="activate(menu.name)" class="nav-link" [ngClass]="{'active':menu.active}"
+              id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="pills" type="button" role="tab"
+              aria-selects="pills-basic">
+              {{menu.name|appTranslate|async}}
+            </button>
+          </li>
+        </ul>
+        <div [hidden]="tab !== 'Basic'" class="tab-content" id="pills-tabContent">
+          <div class="">
+            <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+              aria-labelledby="pills-basic-tab">
+
+              <div class="row">
+                <div class="col-md">
+                  <div class="form-group mt-2">
+                    <label class="form-label text-primary">{{'User Group'|appTranslate|async}}</label>
+                    <input class="form-control control-bg-gray" required [attr.disabled]="disableGroup ? '' : null"
+                      [value]="usergroup" type="text" name="group" />
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label
+                      class="form-label text-primary">{{'Standard Break Duration (mins)'|appTranslate|async}}</label>
+                    <input class="form-control control-bg-gray" required name="standBreakDuration"
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.standBreakDuration" type="number">
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+                    <input class="form-control control-bg-gray" type="text" name="description" required
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.description">
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label
+                      class="form-label text-primary">{{"User Appraisal Level (can be overwritten at user level)"|appTranslate|async}}</label>
+                    <select class="form-control control-bg-gray" name="defaultAppraisalCode" required
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.defaultAppraisalCode">
+                      <option *ngFor="let appraisalCode of appraisalCodes; let i = index" [value]="appraisalCode.code">
+                        {{appraisalCode.description}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label
+                      class="form-label text-primary">{{'Default Menu (can be overwritten at user level)'|appTranslate|async}}</label>
+                    <select class="form-control control-bg-gray" name="defaultMenu" required
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.defaultMenu">
+                      <option *ngFor="let allUserMenu of allUserMenus; let i = index" [value]="allUserMenu.userMenu">
+                        {{allUserMenu.userMenu}} - {{allUserMenu.description}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label
+                      class="form-label text-primary">{{'Direct Supervisor (can be overwritten at user level)'|appTranslate|async}}</label>
+                    <select class="form-control control-bg-gray" (change)="onSelectGroup(userid.value)"
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.directSupervisor" name="userId" type="text" #userid>
+                      <option *ngFor="let allUserId of userIds" [value]="allUserId?.id">{{allUserId?.fullName}}</option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label
+                      class="form-label text-primary">{{'Authorisation Limit % on Commission Override at policy'|appTranslate|async}}</label>
+                    <input class="form-control control-bg-gray" required name="authLimitCommOverride"
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.authLimitCommOverride" type="number">
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-group  mt-2">
+                    <label
+                      class="form-label text-primary">{{'Authorisation Limit % on Premium Adjustments'|appTranslate|async}}</label>
+                    <input class="form-control control-bg-gray" required name="authLimitPremAdjust"
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.authLimitPremAdjust" type="number">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group  mt-2">
+                    <label class="form-label text-primary">{{'Primary Company'|appTranslate|async}}</label>
+                    <select class="form-control control-bg-gray" name="authLimitCommOverride"
+                      [(ngModel)]="createCrmUserGroup.crmUserGroup.authLimitCommOverride">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6 ">
+                  <div class=" form-group">
+                    <label for="" class="form-label text-primary">{{'Discount Limit'|appTranslate|async}} (%)</label>
+                    <input class="form-control control-bg-gray" type="number" value="0" name="discountLimit" required
+                      name="discountLimit" [(ngModel)]="createCrmUserGroup.crmUserGroup.discountLimit">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-auto">
+                  <app-btn type="secondary" icon="guard" (mclick)="openAccess()" text="Access">
+                  </app-btn>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+        <div [hidden]="tab !== 'Batches'">
+          <div class="">
+            <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+              aria-labelledby="pills-basic-tab">
+              <div class="col-md-6 mx-auto">
+                <div *ngFor="let crmUserGroupBatches of createCrmUserGroup.crmUserGroupBatches; let i = index;">
+                  <div class="mt-4 div-user-group form-group row" *ngIf="crmUserGroupBatches.deleted != true">
+                    <div class="col-9">
+                      <div class="form-group mt-9">
+                        <select class="form-control control-bg-gray" required
+                          [(ngModel)]="crmUserGroupBatches.batchesAllowed"
+                          name="batchAllowed_{{crmUserGroupBatches.rowId}}">
+                          <option *ngFor="let batchCode of batchCodes" [value]="batchCode.code">
+                            {{batchCode.code}} - {{batchCode.description}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-auto d-flex">
+                      <div class="  me-2">
+                        <app-btn type="danger-outline" [iconBtn]="true" icon="delete" (mclick)="removeBatches(i)">
+                        </app-btn>
+                      </div>
+                      <div class=" ">
+                        <app-btn type="outline" [iconBtn]="true" icon="add" (mclick)="addBatches( i+1)">
+                        </app-btn>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div [hidden]="tab !== 'Limits'">
+          <div class=" ">
+
+            <div *ngFor="let usersTiers of createCrmUserGroup.crmUserGroupTiers; let i = index;">
+              <div *ngIf="usersTiers.deleted != true" class="row">
+                <div class="col-md">
+                  <div class=" form-group">
+                    <label for="" class="form-label text-primary">{{'Tier Category'|appTranslate|async}} </label>
+                    <select class="form-control control-bg-gray" name="tierCategory_{{usersTiers.rowId}}"
+                      [(ngModel)]="usersTiers.tierCategory">
+                      <option></option>
+                      <option *ngFor="let tierCategory of tierCategories" [value]="tierCategory.code">
+                        {{tierCategory.code}} - {{tierCategory.title}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col ">
+                  <div class=" form-group">
+                    <label for="" class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+                    <select class="form-control control-bg-gray" required [(ngModel)]="usersTiers.currCode"
+                    name="currCode_{{usersTiers.rowId}}">
+                    <option></option>
+                      <option *ngFor="let currency of currencies" [value]="currency.code">{{currency.code}} -
+                        {{currency.description}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col ">
+                  <div class=" form-group">
+                    <label for="" class="form-label text-primary">{{'Tier'|appTranslate|async}}</label>
+                    <select class="form-control control-bg-gray" name="tierCode_{{usersTiers.rowId}}"
+                      [(ngModel)]="usersTiers.tierCode">
+                      <option *ngFor="let tier of tiers" [value]="tier.code">
+                        {{tier.code}} - {{tier.title}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-auto d-flex">
+                  <div class="form-group me-2">
+                    <label for="" class="form-label text-primary">&nbsp;</label>
+                    <app-btn type="danger-outline" [iconBtn]="true" icon="delete" (mclick)="removeTiers(i)">
+                    </app-btn>
+                  </div>
+                  <div class="form-group">
+                    <label for="" class="form-label text-primary">&nbsp;</label>
+                    <app-btn type="outline" [iconBtn]="true" icon="add" (mclick)="addTiers(null,i+1)">
+                    </app-btn>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [hidden]="tab !== 'Documents'">
+          <div class="">
+            <div class=" tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+              aria-labelledby="pills-basic-tab">
+              <div class="row">
+                <div class="col-5">
+                  <label class="mt-4 form-label text-primary">
+                    {{'Sensitivity'|appTranslate|async}}
+                  </label>
+                  <div *ngFor="let crmUserGroupDoc of createCrmUserGroup.crmUserGroupDoc; let i = index">
+                    <select class="form-control control-bg-gray" required [(ngModel)]="crmUserGroupDoc.sensitivity"
+                      name="sensitivity_{{crmUserGroupDoc.rowId}}">
+                      <option *ngFor="let codes of documentSentivityCodes" [value]="codes.code">
+                        {{codes.code}} - {{codes.title}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class=" mt-5" *ngIf="!isShow">
+            <div class="row justify-content-end">
+              <div class="col-md-2 w-30 align-items-center">
+                <app-button [buttonType]="'custSave'" (click)="createCrmUserGroupGroup()" [text]="'Save'"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-lg-flex mt-5" *ngIf="isShow">
+
+          <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+          </app-btn>
+          <span class="mx-1"></span>
+          <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+          </app-btn>
+
+        </div>
+      </div>
+    </ng-template>
+  </form>
+
+
+</loader>

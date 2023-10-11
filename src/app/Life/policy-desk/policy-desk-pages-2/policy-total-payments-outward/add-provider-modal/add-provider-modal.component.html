@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{'Assign Provider'|appTranslate|async}}</h5>
+  <span
+    class="btn-close"
+    mat-dialog-close
+    aria-label="Close"
+  ></span>
+</div>
+<hr>
+<mat-dialog-content>
+  <div class="container p-3">
+    <div>
+      <p class="me-5">
+        {{'Claim Number'|appTranslate|async}}: <span class="text-primary">{{ claimNo }}</span>
+      </p>
+      <p>
+        {{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{ coverName }}</span>
+      </p>
+    </div>
+    <form [formGroup]="addProviderForm">
+      <div class="row my-3">
+        <div class="col-md-5">
+          <label for="providerActionRequired" class="fw-normal small text-primary">
+            {{'Provider Action Required'|appTranslate|async}}
+          </label>
+          <select
+            id="providerActionRequired"
+            class="inputform"
+            formControlName="providerAction"
+          >
+            <option
+              [value]="action.code"
+              *ngFor="let action of providerActions"
+            >
+              {{ action.code }} - {{ action.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row my-3 align-items-end">
+        <div class="col-md-3">
+          <label for="providerNo" class="fw-normal small text-primary">
+            {{'Provider Number'|appTranslate|async}}
+            </label>
+          <input type="text" class="inputform" formControlName="providerNo" (change)="onProviderNo()" />
+        </div>
+        <div class="col-md-3">
+          <button
+            class="btn btn-outline-primary w-100"
+            style="white-space: nowrap"
+            (click)="openFindProviderModal()"
+          >
+            <i class="fa fa-search"></i> Find
+          </button>
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            class="inputform"
+            readonly
+            formControlName="providerName"
+          />
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col-12">
+          <label
+            for="instructionToProvider"
+            class="fw-normal small text-primary"
+            >{{'Instruction to Provider'|appTranslate|async}} -
+            <span class="text-secondary">{{'Optional'|appTranslate|async}}</span></label
+          >
+          <textarea
+            id="instructionToProvider"
+            rows="5"
+            class="inputform"
+            formControlName="instructionToProvider"
+          ></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button class="btn btn-primary px-3" (click)="onSubmit()">
+    <i *ngIf="!isSubmitting" class="fa fa-save"></i>
+    <i *ngIf="isSubmitting" class="fa fa-sync fa-spin"></i>
+    {{ isSubmitting ? 'Submitting...' : 'Submit' |appTranslate|async}}
+  </button>
+</mat-dialog-actions>

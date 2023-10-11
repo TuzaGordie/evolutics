@@ -1,0 +1,10 @@
+<div class="menu-item-case p-2 px-4 border rounded w-100 mt-2"  >
+  <app-input-ngmodel [colored]="false" #subPages type="checkbox" [mini]="true" lblPosition="right" [disabled]="readonly" [stacked]="false"
+    label="Allow {{menuItem?.label}}?" [(model)]="menuItem.allowed" (mchange)="menuItem.toggle()">
+  </app-input-ngmodel>
+  <ng-container *ngIf="menuItem?.hasSub">
+    <ng-container *ngFor="let item of menuItem.subs">
+      <um-menu-item-box [menuItem]="item" [readonly]="readonly"></um-menu-item-box>
+    </ng-container>
+  </ng-container>
+</div>

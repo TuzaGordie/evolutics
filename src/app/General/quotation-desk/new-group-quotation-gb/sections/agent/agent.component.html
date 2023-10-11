@@ -1,0 +1,257 @@
+<div>
+  <br />
+  <div class="row mt-3 mb-4">
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Code' | appTranslate | async }}:
+        <a
+          routerLink="../../../setups/product/product-code/show"
+          [queryParams]="{ prodCode: product.code }"
+          class="text-primary"
+          >{{ product?.code }}</a
+        ></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Description' | appTranslate | async }}:
+        <span class="text-primary">{{ product.description }}</span></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span *ngIf="quoteNo"
+        >{{ 'Quote No' | appTranslate | async }}:
+        <span class="text-primary">{{ quoteNo }}</span></span
+      >
+    </div>
+  </div>
+  <form [formGroup]="agentForm">
+    <div formArrayName="agents">
+      <div
+        *ngFor="let a of agents.controls; let i = index"
+        [formGroupName]="i"
+        class="row mt-3 gx-2 align-items-end"
+      >
+        <div class="col-1">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Agent No' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="agentNo"
+              type="text"
+              class="form-control control-bg-gray"
+              (keyup)="findAgent(a)"
+              [disabled]="agentDisabled"
+            />
+          </div>
+        </div>
+        <!-- <div class="col-md-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'showsmall'"></app-button>
+          </div>
+        </div> -->
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button
+              [buttonType]="'findsmallGB'"
+              (click)="openFindAgentModal(a)"
+            ></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button
+              [buttonType]="'createCustom2smallGB'"
+              [text]="'New'"
+            ></app-button>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input
+              readonly
+              formControlName="agentName"
+              class="control-bg-gray form-control"
+            />
+          </div>
+        </div>
+        <div class="ps-5 col-5">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Proportion' | appTranslate | async
+            }}</label>
+            <input
+              type="text"
+              formControlName="proportion"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col-md-auto d-flex align-items-end">
+          <div class="form-group me-3">
+            <label for="" class="form-label text-primary">{{
+              'Primary' | appTranslate | async
+            }}</label>
+            <input
+              type="checkbox"
+              (click)="checkPrimary($event, i)"
+              [checked]="isPrimary[i]"
+              class="form-control control-bg-gray"
+            />
+          </div>
+          <div class="me-2">
+            <app-btn
+              icon="delete"
+              type="danger"
+              [iconBtn]="true"
+              hint="Delete Member"
+              (click)="removeAgent(i)"
+            ></app-btn>
+          </div>
+          <app-btn
+            (mclick)="agentInc()"
+            icon="add"
+            type="outline"
+            [iconBtn]="true"
+            hint="Add another member"
+          ></app-btn>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3 gx-2">
+      <div class="col-md-1">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Referrer Code' | appTranslate | async
+          }}</label>
+          <input
+            type="text"
+            formControlName="referrerCode"
+            class="form-control control-bg-gray"
+            [disabled]="referrerDisabled"
+          />
+        </div>
+      </div>
+      <!-- <div class="col-md-1">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button [buttonType]="'showsmall'"></app-button>
+        </div>
+      </div> -->
+      <div class="col-1">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button
+            [buttonType]="'findsmall'"
+            (click)="openFindClientModal()"
+          ></app-button>
+        </div>
+      </div>
+      <div class="col-1">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button
+            [buttonType]="'createCustom2smallGB'"
+            [text]="'New'"
+          ></app-button>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <input
+            readonly
+            [value]="referrerNameFromCheck"
+            class="control-bg-gray form-control"
+          />
+        </div>
+      </div>
+      <div class="ps-5 col-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'External Reference' | appTranslate | async
+          }}</label>
+          <input
+            type="text"
+            class="form-control control-bg-gray"
+            formControlName="externalRef"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3 gx-2">
+      <div class="col-5">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Branch Code' | appTranslate | async
+          }}</label>
+          <input
+            type="text"
+            class="form-control control-bg-gray"
+            formControlName="branchCode"
+          />
+        </div>
+      </div>
+      <!-- <div class="col-1">
+
+      </div> -->
+      <div class="ps-5 col-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Relationship Manager' | appTranslate | async
+          }}</label>
+          <select
+            formControlName="relManager"
+            name=""
+            id=""
+            class="form-control control-bg-gray"
+          >
+            <option></option>
+            <ng-container *ngFor="let rm of relationshipmanagerList">
+              <option [value]="rm?.userName">
+                {{ rm?.userName + ' - ' + rm?.fullName }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3 align-items-end gx-2">
+      <div class="col-5">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Sub-Relationship Manager' | appTranslate | async
+          }}</label>
+          <select
+            formControlName="subRelManager"
+            name=""
+            id=""
+            class="form-control control-bg-gray"
+          >
+            <option></option>
+            <ng-container *ngFor="let rm of subRelationshipmanagerList">
+              <option [value]="rm?.userName">
+                {{ rm?.userName + ' - ' + rm?.fullName }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+
+      <div class="ps-5 col-6">
+        <input id="myInput" type="file" style="visibility: hidden" />
+        <app-button
+          [buttonType]="'uploadGB'"
+          onclick="$('#myInput').click();"
+          [text]="'Upload Document'"
+        ></app-button>
+      </div>
+    </div>
+  </form>
+</div>

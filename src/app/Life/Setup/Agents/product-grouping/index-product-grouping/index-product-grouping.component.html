@@ -1,0 +1,45 @@
+<!-- <app-form-navigation [title] = "'Set Up / Agent / Product Grouping'"></app-form-navigation> --> 
+<div class="container-sm mt-5 " >
+    <div class="row">
+
+
+        <div class="col-md-6 mx-auto my-5 align-middle">
+            <form>
+                <br />   <br />   <br />
+                <div class="form-group mt-2">
+                    <label>{{"Select Product Group "|appTranslate|async}}</label>
+                    <select class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+                </div>
+               
+                <br />
+               
+               
+               
+                <div class="form-group row my-3">
+                    <div class="col-sm-4 d-grid gap-1">
+                        <app-button [buttonType]="'show'" routerLink="../create-product-grouping"></app-button>
+                    </div>
+                    <div class="col-sm-4 d-grid gap-1">
+                        <app-button [buttonType]="'create'" routerLink="../start-product-grouping"></app-button>
+                    </div>
+                    <div class="col-sm-4 d-grid gap-1">
+                        <app-button [buttonType]="'clone'" routerLink="../start-product-grouping"></app-button>
+                     </div> 
+                   
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    
+  
+
+</div>
+

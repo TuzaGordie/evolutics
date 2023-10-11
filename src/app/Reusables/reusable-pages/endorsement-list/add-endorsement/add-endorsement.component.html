@@ -1,0 +1,40 @@
+<div class="">
+  <div class="row">
+    <div class="col-lg-11 ">
+      <div class="row">
+        <div class="col-lg-4 py-1" *ngFor="let item of pols">
+          <text-case-1 [lbl]="item.key" [val]="item.value" [stacked]="false"></text-case-1>
+        </div>
+        <div class="col-lg-4 ">
+          <h5>Endorsement</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <app-btn (mclick)="close()" type="danger-outline" >Close</app-btn>
+      <!-- <img src="../../../../assets/img/close.svg" alt="" class="pointer" (click)="close()"> -->
+    </div>
+  </div>
+  <div class=" py-3">
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let item of inputs1">
+        <app-input [input]="item" [stacked]="true"></app-input>
+      </div>
+      <div class="col-lg-12">
+        <hr>
+      </div>
+      <div class="col-lg-4" *ngFor="let item of inputs2">
+        <app-input [input]="item" [stacked]="true"></app-input>
+      </div>
+      <div class="col-lg-12">
+        <hr>
+      </div>
+      <div class="col-lg-4" *ngFor="let item of inputs3">
+        <app-input [input]="item" [stacked]="true"></app-input>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end ">
+      <app-btn type="dark" (mclick)="save()">Save</app-btn>
+    </div>
+  </div>

@@ -1,0 +1,254 @@
+<div class="{{ !showUpload && !showAddManually ? '' : '' }}">
+  <div class="row mt-3 mb-3 {{ !showUpload && !showAddManually ? '' : '' }}">
+    <div class="col-md{{ showUpload ? '-8' : '' }} my-2">
+      <app-btn
+        icon="upload"
+        type="secondary"
+        text="Upload Assets"
+        (mclick)="import()"
+      ></app-btn>
+    </div>
+    <div class="col-md{{ showAddManually ? '-8' : '' }} my-2">
+      <app-button
+        buttonType="btnCustomClone"
+        text="Add Asset Manually"
+        (click)="openAddAsset()"
+      ></app-button>
+    </div>
+  </div>
+  <ng-container *ngIf="showAddManually">
+    <hr />
+    <form [formGroup]="manualAssetForm">
+      <div formArrayName="manualAssetFormArray">
+        <div
+          class="row align-items-end gx-2"
+          *ngFor="let c of manualAssetFormArray.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="col-md">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Asset No' | appTranslate | async
+              }}</label>
+              <input
+                type="text"
+                formControlName="assetNo"
+                class="form-control control-bg-gray"
+                (keyup)="validateAssetId(i)"
+              />
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Asset Redg No' | appTranslate | async
+              }}</label>
+              <input
+                type="text"
+                formControlName="assetRedgNo"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-md-auto d-flex">
+            <div class="me-2">
+              <app-btn
+                icon="search"
+                type="secondary"
+                [iconBtn]="true"
+                hint="Find Asset"
+                (click)="findAsset(i)"
+              ></app-btn>
+            </div>
+            <app-btn
+              icon="add"
+              type="outline"
+              [iconBtn]="true"
+              hint="Add New Asset"
+              (click)="createAsset(i)"
+            ></app-btn>
+          </div>
+
+          <div class="col-md">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Assured' | appTranslate | async
+              }}</label>
+              <input
+                type="text"
+                formControlName="assured"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Cover Value' | appTranslate | async
+              }}</label>
+              <input
+                type="text"
+                formControlName="coverValue"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Sub Group' | appTranslate | async
+              }}</label>
+              <select
+                formControlName="subGroup"
+                class="form-control control-bg-gray"
+              >
+                <ng-container *ngIf="subGroups.length">
+                  <option value="" selected></option>
+                  <option [value]="group" *ngFor="let group of subGroups">
+                    {{ group }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Join Date' | appTranslate | async
+              }}</label>
+              <input
+                type="date"
+                formControlName="joinDate"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <!-- <div class="col-md">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">&nbsp;</label>
+                <app-button buttonType="upload" text="Picture"></app-button>
+              </div>
+            </div> -->
+          <div class="col-md-auto d-flex">
+            <div class="me-2">
+              <app-btn
+                icon="delete"
+                type="danger"
+                [iconBtn]="true"
+                hint="Delete Asset"
+                (mclick)="removeAsset(i)"
+              ></app-btn>
+            </div>
+            <app-btn
+              (mclick)="assetInc()"
+              icon="add"
+              type="outline"
+              [iconBtn]="true"
+              hint="Add another Asset"
+            ></app-btn>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-3">
+        <div class="col-md-2">
+          <app-button (click)="save()" [buttonType]="'save'"></app-button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</div>
+
+<hr />
+<div class="row mt-2">
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Show All Assets' | appTranslate | async
+      }}</label>
+      <input type="checkbox" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Status' | appTranslate | async
+      }}</label>
+      <select name="" id="" class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Description' | appTranslate | async
+      }}</label>
+      <input type="text" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Asset No' | appTranslate | async
+      }}</label>
+      <input type="text" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Enrolee No' | appTranslate | async
+      }}</label>
+      <input type="text" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col-1">
+    <label for="" class="form-label">&nbsp;</label>
+    <app-button buttonType="searchCustom"></app-button>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <table class="table table-responsive table-striped">
+    <thead class="py-3 theader">
+      <tr>
+        <th scope="col">{{ 'No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Asset No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Description' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Asset Value' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Assured' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Sum Assured' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Premium' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Enrollee No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Status' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Join Date' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Paid to Date' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Leave Date' | appTranslate | async }}</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th></th>
+        <th></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <div class="row">
+            <div class="col">
+              <app-button buttonType="delete"></app-button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

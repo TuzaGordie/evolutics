@@ -1,0 +1,2964 @@
+<div class="container-fluid mt-2 " id="form-body">
+  <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+        type="button" role="tab" aria-controls="pills-basic" aria-selected="true">{{'Basic'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-dependent-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+        type="button" role="tab" aria-controls="pills-profile" aria-selected="false">{{'Dependent
+        Covers'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-benefit-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+        type="button" role="tab" aria-controls="pills-contact" aria-selected="false">{{'Benefits'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-premium-tab" data-bs-toggle="pill" data-bs-target="#pills-premium"
+        type="button" role="tab" aria-controls="pills-premium" aria-selected="false">{{'Premium'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-commission-tab" data-bs-toggle="pill" data-bs-target="#pills-commission"
+        type="button" role="tab" aria-controls="pills-commission"
+        aria-selected="false">{{'Commissions'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-term-tab" data-bs-toggle="pill" data-bs-target="#pills-term" type="button"
+        role="tab" aria-controls="pills-term" aria-selected="false">{{'Terms'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-endorsements-tab" data-bs-toggle="pill" data-bs-target="#pills-endorsements"
+        type="button" role="tab" aria-controls="pills-endorsements"
+        aria-selected="false">{{'Endorsement'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-underwriting-tab" data-bs-toggle="pill" data-bs-target="#pills-underwriting"
+        type="button" role="tab" aria-controls="pills-underwriting"
+        aria-selected="false">{{'Underwriting'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-surrender-tab" data-bs-toggle="pill" data-bs-target="#pills-surrender"
+        type="button" role="tab" aria-controls="pills-surrender"
+        aria-selected="false">{{'Surrenders'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-loan-tab" data-bs-toggle="pill" data-bs-target="#pills-loan" type="button"
+        role="tab" aria-controls="pills-loan" aria-selected="false">{{'Loan'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-annuities-tab" data-bs-toggle="pill" data-bs-target="#pills-annuities"
+        type="button" role="tab" aria-controls="pills-annuities"
+        aria-selected="false">{{'Annuities'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-lapse-tab" data-bs-toggle="pill" data-bs-target="#pills-lapse" type="button"
+        role="tab" aria-controls="pills-lapse" aria-selected="false">{{'Lapse'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-perils-tab" data-bs-toggle="pill" data-bs-target="#pills-perils" type="button"
+        role="tab" aria-controls="pills-perils" aria-selected="false">{{'Perils'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-paidup-tab" data-bs-toggle="pill" data-bs-target="#pills-paidup" type="button"
+        role="tab" aria-controls="pills-paidup" aria-selected="false">{{'Paid up'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-Bonuses-tab" data-bs-toggle="pill" data-bs-target="#pills-Bonuses"
+        type="button" role="tab" aria-controls="pills-Bonuses" aria-selected="false">{{'Bonuses'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-acc-reins-tab" data-bs-toggle="pill" data-bs-target="#pills-acc-reins"
+        type="button" role="tab" aria-controls="pills-acc-reins" aria-selected="false">{{'Acc /
+        Reins'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-taxes-tab" data-bs-toggle="pill" data-bs-target="#pills-taxes" type="button"
+        role="tab" aria-controls="pills-taxes" aria-selected="false">{{'Taxes / Levels'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-documentation-tab" data-bs-toggle="pill" data-bs-target="#pills-documentation"
+        type="button" role="tab" aria-controls="pills-documentation"
+        aria-selected="false">{{'Documentation'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-excess-tab" data-bs-toggle="pill" data-bs-target="#pills-excess" type="button"
+        role="tab" aria-controls="pills-excess"
+        aria-selected="false">{{'Excess'|appTranslate|async}}/{{'deductible'|appTranslate|async}}
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="container">
+      <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Cover code'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Description'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Product class'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Insurance type'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of insuranceTypeList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col py-4">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label" for="flexSwitchCheckDefault2">{{'Closed to new
+                business'|appTranslate|async}}</label>
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2">
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3">
+              <label class="form-check-label" for="flexSwitchCheckDefault3">{{'Group
+                prcessing'|appTranslate|async}}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault4">
+              <label class="form-check-label" for="flexSwitchCheckDefault4">{{'Include in
+                SAR'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Company Allowed ( if different from product setup )'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of companiesList" [ngValue]="ot.COMPANY_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+
+          <div class="col-5">
+            <div class="form-group mt-2">
+              <label>{{'Currency Allowed ( if different from product setup )'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of currenciesList" [ngValue]="ot.CURR_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-outline-secondry form-control">{{'add'|appTranslate|async}}</button>
+            </div>
+          </div>
+          <div class="col-6 py-2">
+            <p class="text-center"><label>{{'Do not mature until :'|appTranslate|async}}</label> </p>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault5">
+              <label class="form-check-label" for="flexSwitchCheckDefault5">{{'Deposit
+                Administration'|appTranslate|async}}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault6">
+              <label class="form-check-label" for="flexSwitchCheckDefault6">{{'Benefit is Paid
+                Out'|appTranslate|async}}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault7">
+              <label class="form-check-label" for="flexSwitchCheckDefault7">{{'Defined
+                Benefit'|appTranslate|async}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{Interest Basis'|appTranslate|async}} - <span class="text-normal">{{'( For deposit
+                  administration)'|appTranslate|async}}</span></label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of interestCalBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Quote Validity Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of quoteValidityBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Interest Rate table'|appTranslate|async}} - <span class="text-normal">{{'( For deposit
+                  administration)'|appTranslate|async}}</span></label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of interestTableList" [ngValue]="ot.CODE">{{ot.RATE}}</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Quote Validity Period (Days)'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Issue Date Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Payment Out Methods Allowed'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of paymentMethodsList" [ngValue]="ot.PAYOUT_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Issue Date Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Min No of Member|appTranslate|async}} - <span class="text-normal">{{'Group
+                  Only'|appTranslate|async}}</span></label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Provider Category'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of providerCategoryList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Provider Code'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-outline-secondry form-control">{{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button"
+                class=" btn btn-outline-secondry form-control">{{'Find'|appTranslate|async}}</button>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-dependent-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Add Dependent Covers'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">Bat
+                  Insurance|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row g-3">
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Business Line'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Cover'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of coversList" [ngValue]="ot.COVER_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Mandatory'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Available Post Issue'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control">
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Max No'|appTranslate|async}}</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Age Assured Limit'|appTranslate|async}}</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Funding Option'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of fundingOptionsList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Sum Assured equal Base Cover Sum Assured'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control">
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Blank Sum Assured'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-10"></div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class="btn bg-dark form-control btn-next">{{'Add
+                Covers'|appTranslate|async}}</button>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-benefit-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Benefits'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Payment Trigger Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of paymentTriggerList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'No of Payments'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'No of Payments Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of paymentTableList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Min Assured|appTranslate'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Enter Schedule of Payments'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Max Assured'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Frequency of payments'|appTranslate|async}} <span class="text-normal">({{'Only applicable if no
+                  of payments exceeds 1'|appTranslate|async}})</span></label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of frequencyTableList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-5">
+            <div class="form-group mt-2">
+              <label>{{'Sum Assured Options'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-outline-secondry form-control">
+                {{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Waiting Period'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Sum Assured Calc Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of sumAssuredCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Automatically Decrease Sum Assured when above
+                    Max'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Deduct Outstanding Premiums from Benefit'|appTranslate|async}}</label>
+                </div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-5">
+            <div class="form-group mt-2">
+              <label>{{'Low Interest Rate Options'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-outline-secondry form-control">{{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Status Code when all annuity payments are finished'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of statusCodeList" [ngValue]="ot.STATUS_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Benefit Payment Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of paymentTriggerList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Max No of Claims in 1 year'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-5">
+            <div class="form-group mt-2">
+              <label>{{'Covers Waived'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-outline-secondry form-control">
+                {{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Max No of Claims in Policy Life'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Covers on which Sum Assured Depends'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of coversList" [ngValue]="ot.COVER_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Sum Assured Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class="form-group mt-2">
+              <label>{{'Sum Assured Escalation Options'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-outline-secondry form-control">
+                {{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-premium" role="tabpanel" aria-labelledby="pills-premium-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Premium'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code:'|appTranslate|async}} <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name:'|appTranslate|async}} <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Frequency'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of frequencyTableList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Method'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of paymentInMethodsList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button"
+                class=" btn btn-secondary bg-dark btn-next form-control">{{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Premium Calculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of premiumCalcBasisList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Fixed Premium Amount'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Rate Calculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of rateCalcBasisList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+            <div class="row g-3">
+              <div class="col-7">
+                <div class="form-group mt-2">
+                  <label>{{'Fixed Rate Basis'|appTranslate|async}}</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let ot of fixedRateCalcBasisList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-group mt-2">
+                  <label>{{'Fixed Rate'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <label>{{'Primary Premium Rate Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Secondary Premium Rate Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group mt-2">
+              <label>{{'Short Term Rate Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Policy Fee Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of policyFeeBasisList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+
+            <div class="form-group mt-2">
+              <label>{{'Policy Fee Fixed Amount'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Policy Fee Amount Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Premium Rounding Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of premiumRoundingBasisList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Premium Rounding Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+
+          <div class="col">
+
+            <div class="row g-3">
+              <div class="col-9">
+                <div class="form-group mt-2">
+                  <label>{{'Discount Codes Allowed'|appTranslate|async}}</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group mt-2">
+                  <label>&nbsp;<br /></label>
+                  <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mt-2">
+              <label>{{'Fixed Smoker Age Adjustment'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+
+            <div class="form-group mt-2">
+              <label>{{'Fixed Female Age Adjustment'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-commission" role="tabpanel" aria-labelledby="pills-commission-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Commissions'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}:<span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Version No'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Version Date From'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-primary btn-next form-control">
+                {{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Fixed Commission Amount'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Comission Code'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of commissionCodesList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Comission Earning Basis'|appTranslate|async}}<span class="text-normal">({{'Overwrite Agent Type
+                  Setting'|appTranslate|async}})</span></label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of commissionEarningList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Comission Earning Period'|appTranslate|async}}<span
+                  class="text-normal">({{'Months'|appTranslate|async}})</span></label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+        <hr>
+
+
+        <div class="row g-3">
+          <a class="text-primary text-underline">{{'Fixed Commission Table'|appTranslate|async}} - {{'On every premium
+            paid'|appTranslate|async}}</a>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Agent Type'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of agentTypeList" [ngValue]="ot.ID">{{ot.AGENT_NO}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Writing Comission'|appTranslate|async}} %</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Hierarchy Comission'|appTranslate|async}} (%)</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-primary btn-next form-control">
+                {{'Add'|appTranslate|async}}</button>
+            </div>
+          </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row g-3">
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Referral Payment Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of referralPaymentBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Telemarketer Rem Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of telemarketerRemBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Agent Clawback Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of clawbackBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Clawback Spread Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of clawbackSpreadBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Referral Payment Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of referralPaymentTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'TM Rem Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of tmRemTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Clawback Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of clawbackTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Clawback Spread Period'}} - <span
+                  class="text-normal">{{'months'|appTranslate|async}}</span></label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Referral Payment Rate'|appTranslate|async}} % </label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'TM Rem Rate'|appTranslate|async}}%</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label>{{'Clawback on Lapse'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-term" role="tabpanel" aria-labelledby="pills-term-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Terms'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Maturity Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of maturityBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Age Calculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of ageCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <label>({{'Fixed Premium Payment Term If blank will be defined at quotation'|appTranslate|async}})</label>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Months" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Minimum Entry Age'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <label>{{'Minimum Premium Payment Term'|appTranslate|async}}</label>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Months" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Maximum Entry Age'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <label>{{'Maximum Premium Payment Term'|appTranslate|async}}</label>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Months" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Max Age at Policy Maturity'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <label>({{'Fixed Policy Term'|appTranslate|async}})</label>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Months" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Cooling Off Period'|appTranslate|async}} ({{'Overwrite company
+                setting'|appTranslate|async}})</label>
+              <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <label>{{'Minimum Policy Term'|appTranslate|async}}</label>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Months" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Do not Mature Until Benefit is Paid Out'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <label>{{'Maximum Policy Term'|appTranslate|async}}</label>
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Years" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Months" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-endorsements" role="tabpanel" aria-labelledby="pills-endorsements-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Endorsements'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'}}: <span class="text-primary">{{'Bat Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Beneficiary'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Bank Details'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Cover Term'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Owner'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Life Assured'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Premium Payment Term'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Benefit Payment Term'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Benefit Escalation Rate'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Add Rider'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Sum Assured'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Payment Method'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+            <div class="form-group mt-2">
+              &nbsp;
+            </div>
+            <div class="form-group mt-2">
+              &nbsp;
+            </div>
+            <div class="form-group mt-2">
+              &nbsp;
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Screen'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Endorsement Calculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of endorsementCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+            <div class="form-group mt-2">
+              <label>{{'Endorsement Calculation Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of endorsementCalcTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-underwriting" role="tabpanel" aria-labelledby="pills-underwriting-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Underwriting'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Medical Underwriting Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of endorsementCalcTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Financial Underwriting Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of endorsementCalcTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'EvoBOT'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'FCL Calculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of fclCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'FCL Calculation Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <div class="row g-3">
+                <div class="col-9"><label>{{'Load Only Above FCL'|appTranslate|async}}</label></div>
+                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="pills-surrender" role="tabpanel" aria-labelledby="pills-surrender-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Surrenders'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Partial Surrender Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Months to Partial Surrender'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Months to Partial Surrender Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} -
+                  {{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Max Partial Surrender Calc Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of maxPartialSurrenderBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Max Partial Surrender Calc Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Partial Surrender Penalty'|appTranslate|async}} (%)</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Partial Surrender Penalty Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} -
+                  {{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Full Surrender Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Months to Full Surrender'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Months to Full Surrender Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} -
+                  {{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Full Surrender Value Penalty Rate'|appTranslate|async}} (%)</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Surrender Value Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of surrenderPayBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Zero Surrender Fee on Surrender after PU status'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Full Surrender Value Penalty Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} -
+                  {{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-loan" role="tabpanel" aria-labelledby="pills-loan-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Loan'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Premium Loan Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Loan on Policy Value Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Premium Loan Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of premiumLoanBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'No of Months before policy loan is allowed'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Premium Loan Fee'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Policy Loan Interest Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of policyLoanInterestTableList" [ngValue]="ot.RATE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Days before creating auto premium loan'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Max Loan Calculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of maxLoanCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Premium Loan Interest Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of interestTableList" [ngValue]="ot.RATE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Max Loan Calc Factor'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Minimum Policy Loan Amount'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-annuities" role="tabpanel" aria-labelledby="pills-annuities-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Annuities'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="row g-3">
+              <div class="col-9">
+                <div class="form-group mt-2">
+                  <label>{{'Annuity Guarantee Period Options'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Month" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group mt-2">
+                  <label>&nbsp;<br /></label>
+                  <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="row g-3">
+              <div class="col-9">
+                <div class="form-group mt-2">
+                  <label>{{'Annuity Reversionary Rate Options'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Percent" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group mt-2">
+                  <label>&nbsp;<br /></label>
+                  <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="row g-3">
+              <div class="col-9">
+                <div class="form-group mt-2">
+                  <label>{{'Annuity Escalation Rate Options'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" placeholder="Percent" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group mt-2">
+                  <label>&nbsp;<br /></label>
+                  <button type="button" class=" btn btn-secondary bg-dark btn-next form-control">
+                    {{'Add'|appTranslate|async}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-lapse" role="tabpanel" aria-labelledby="pills-lapse-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Lapse'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Lapse Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Lapse Value Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of lapseValueTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Days of Grace'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Reinstatement Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'No of Lapses Allowed'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Reinstatement Charge Amount Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of reinstatementChargeAmountTableList" [ngValue]="ot.RATE_CODE">
+                  {{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Convert to Paid Up Instead of Lapsing'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Reinstatement Fixed Charge Amount'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Lapse Value Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of lapseValueBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Reinstatement Interest Rate Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of policyLoanInterestTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-perils" role="tabpanel" aria-labelledby="pills-perils-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Perils'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>{{'Claim Types Allowed'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of claimTypesList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row g-3">
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Peril'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Waiting Period months (Overwriting settings in benefit'|appTranslate|async}})</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Benefit % of sum assured'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Full Benefit on Death before U/W completion'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Severity Level'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Proximate Causes Allowed'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Peril Min Period (months)'|appTranslate|async}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of perilList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of proximateCausesList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-9">
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-paidup" role="tabpanel" aria-labelledby="pills-paidup-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Paid Up'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Paid Up Allowed'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Month Before Paid Up Is Allowed'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Benefit Recalculation Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of benefitRecalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Minimum Policy Value before Paid Up Is Allowed'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Benefit Recalculation Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Allow Reinstatement from Paid Up'|appTranslate|async}}</label>
+              <input class="form-control width-unset control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Paid Up Charges Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Paid Up Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Reinstatement Calc Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of reinstCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-Bonuses" role="tabpanel" aria-labelledby="pills-Bonuses-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Bonuses'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>Cover Code: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat
+                  Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Version No'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Version Date'|appTranslate|async}}</label>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-10">
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Promo Bonus Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of bonusBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Promo Bonus Rate'|appTranslate|async}} (%)</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Promo Bonus Rate Table'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of bonusRateBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Annual Bonus Basis</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of bonusBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Annual Bonus Rate (%)</label>
+              <input class="form-control  control-bg-gray" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Annual Bonus Table</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of bonusRateBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-acc-reins" role="tabpanel" aria-labelledby="pills-acc-reins-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">Account/Reinsurance</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>Cover Code: <span class="text-primary">BRC</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label>Accrual Accounting</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-5">
+            <div class="form-group mt-2">
+              <label>Reinsurance Treaty</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of reinsuranceTreatyList" [ngValue]="ot.WEB_ID">{{ot.FIRSTNAME}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-7">
+            <div class="form-group mt-2">
+              <label>Quotes with uncovered SAR should not return reults until treated for Reinsurance</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <input class="form-control  control-bg-gray" type="checkbox" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tab-pane fade" id="pills-taxes" role="tabpanel" aria-labelledby="pills-taxes-tab">
+        <p class="text-primary">If different from company level settings on Taxes/Levies</p>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">Taxes/Levies</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>Cover Code: <span class="text-primary">BRC</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Premium Tax Basis</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of premiumTaxesBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Surrender Benefit Tax Basis</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of surrenderTaxesBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Maturity Benefit Tax Basis</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of maturityTaxesBenefitBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Death Benefit Tax Basis</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of deathTaxesBenefitBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>Stamp Duty</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of stampDutyBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-3"></div>
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <label>{{'Interest Earned Tax Basis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of interestTaxesBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-documentation" role="tabpanel" aria-labelledby="pills-documentation-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Documentation'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+            <p>{{'Cover Name:'|appTranslate|async}} <span class="text-primary">{{'Bat Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="row g-3">
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Event Type'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Event'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>{{'Language'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Action'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Document Cat'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Document Code'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <label>{{'Condition'|appTranslate|async}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of languagesList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of actionsList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of documentationCategoryList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of docCategoryList" [ngValue]="ot.DOC_CAT">{{ot.TITLE}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <select class="form-control  control-bg-gray">
+                <option></option>
+                <option *ngFor="let ot of conditionsList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <hr>
+        <div class="row g-3">
+          <div class="col-9">
+          </div>
+          <div class="col-1">
+            <div class="form-group mt-2">
+              <label>&nbsp;<br /></label>
+              <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-excess" role="tabpanel" aria-labelledby="pills-excess-tab">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="form-group mt-2">
+              <p class="text-primary">{{'Excess/Deductible'|appTranslate|async}}</p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Code'|appTranslate|async}}: <span class="text-primary">{{'BRC'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">{{'Bat Insurance'|appTranslate|async}}</span></p>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row g-3">
+          <div class="col-6"><span class="text-normal text-black">{{'Excess - Policyholders bears the excess amount, while
+              insurer bears only amounts in excess'|appTranslate|async}}</span></div>
+          <div class="col-6"><span class="text-normal text-black">{{'Deductible - Policyholders bears the full less amount,
+              when loss is within deductible. If loss exceeds deductible insurer bears full amount.'|appTranslate|async}}</span></div>
+        </div>
+        <div class="row g-3">
+
+          <div class="col-6">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Min Excess'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Max Excess'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Fixed Excess option Amount'|appTranslate|async}}</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Fixed Excess option rate'|appTranslate|async}} (%)</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-5">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group mt-2">
+                  <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> Add</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Default Excess'|appTranslate|async}} <span class="text-normal">(% {{'of sum assured'|appTranslate|async}})</span></label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Default Excess'|appTranslate|async}} <span class="text-normal">({{'Amount'|appTranslate|async}})</span></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Excess Calc Basis'|appTranslate|async}} - <span class="text-normal">{{'If auto calculation is required'|appTranslate|async}}</span></label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let ot of excessCalcList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Excess Table'|appTranslate|async}} - <span class="text-normal">{{'In conjuction with excess calc basis'|appTranslate|async}}</span></label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let ot of excessTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <div class="row g-3">
+                    <div class="col-9"><label>{{'Excess BuyBack Allowed'|appTranslate|async}}</label></div>
+                    <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Excess BuyBack Premium Rate'|appTranslate|async}} <span class="text-normal">(% {{'sum assured'|appTranslate|async}})</span></label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-6">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Min Deductible'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Max Deductible'|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Fixed Deductible option Amount'|appTranslate|async}}</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Fixed Deductible option rate'|appTranslate|async}} (%)</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-5">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group mt-2">
+                  <button type="button" class=" btn btn-secondary bg-dark btn-next form-control"> {{'Add'|appTranslate|async}}</button>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Default Deductible'|appTranslate|async}} <span class="text-normal">(% {{'of sum assured'|appTranslate|async}})</span></label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label>{{'Default Deductible'|appTranslate|async}} <span class="text-normal">({{'Amount'|appTranslate|async}})</span></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Deductible Calc Basis'|appTranslate|async}} - <span class="text-normal">{{'If auto calculation is
+                      required'|appTranslate|async}}</span></label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let ot of deductibleCalcList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Deductible Table'|appTranslate|async}} - <span class="text-normal">{{'In conjuction with Deductible calc
+                      basis'|appTranslate|async}}</span></label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <div class="row g-3">
+                    <div class="col-9"><label>{{'Deductible BuyBack Allowed'|appTranslate|async}}</label></div>
+                    <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group mt-2">
+                  <label>{{'Deductible BuyBack Premium Rate'|appTranslate|async}} <span class="text-normal">(% {{'sum assured'|appTranslate|async}})</span></label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-10"></div>
+          <div class="col-2">
+            <div class="form-group mt-2">
+              <button type="button" class=" btn btn-secondary btn-next form-control"> {{'Save'|appTranslate|async}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-2 footer-btn-left">
+          <div class="row g-3">
+            <div class="col-4">
+              <div class="form-group mt-2">
+                <button type="button" class=" btn btn-dark form-control btn-next"> <i class="fa fa-arrow-left"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group mt-3">{{'Prev'|appTranslate|async}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-8"></div>
+        <div class="col-2 footer-btn-right">
+          <div class="form-group mt-2">
+            <button type="button" class=" btn btn-secondary form-control btn-next"> {{'Next'|appTranslate|async}} <i
+                class="fa fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

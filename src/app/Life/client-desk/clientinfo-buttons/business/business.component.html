@@ -1,0 +1,51 @@
+<!-- <app-form-navigation [title]="'View Client'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{"Business line"|appTranslate|async}}</th>
+            <th scope="col">{{"Product Class"|appTranslate|async}}</th>
+            <th scope="col">{{"Policy No"|appTranslate|async}}</th>
+            <th scope="col">{{"Policy Status"|appTranslate|async}}</th>
+            <th scope="col">{{"Issue Date"|appTranslate|async}}</th>
+            <th scope="col">Policy Term (days)</th>
+            <th scope="col">{{"Annualised Premium"|appTranslate|async}}</th>
+            <th scope="col">{{"Sum At Risk"|appTranslate|async}}</th>
+            <!-- the following no dey the returned data from the endpoint -->
+            <!-- <th scope="col">{{"Aggregate Loss Ratio"|appTranslate|async}}</th>
+            <th scope="col">No. Of Renewals</th>
+            <th scope="col" style="border-top-right-radius: 12px;">{{"Aggregate VNB"|appTranslate|async}}</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of businessList">
+            <th scope="row">{{item.busLine}}</th>
+            <td>{{item.productClass}}</td>
+            <td>{{item.policyNo}}</td>
+            <td>{{item.policyStatus}}</td>
+            <td>{{item.issuedOn}}</td>
+            <td>{{item.policyTermDays}}</td>
+            <td>{{item.annualisedPremium}}</td>
+            <td>{{item.sumAtRisk}}</td>
+            <!-- the following no dey the data from the endpoint -->
+            <!-- <td>{{item.alr}}</td>
+            <td>{{item.noRenewal}}</td>
+            <td>{{item.aggVnb}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="row justify-content-end">
+      <div class="col-md-3">
+
+        <app-button [buttonType]="'btnCustomClone'" [text]="'Opportunities'"></app-button>
+      </div>
+    </div>
+  </div>
+
+</div>

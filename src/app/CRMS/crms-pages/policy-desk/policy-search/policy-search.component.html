@@ -1,0 +1,43 @@
+<app-form-navigation [title] = "'Search Policy'"></app-form-navigation> 
+<div class="container mt-5" >
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <h1 class="my-5">Policy Search List</h1>
+
+        <table class="table">
+            <thead class="py-3">
+              <tr>
+                <th scope="col" >Policy No</th>
+                <th scope="col" >Client Number</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Status Code</th>
+                <th scope="col">Class Code</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Individual</th>
+                <th scope="col">Annualised PR</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Sum at risk</th>
+                
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of policyInfoList">
+                <th scope="row">{{item.QUOTE_NO}}</th>
+                <td>{{item.CLIENT_NO}}</td>
+                <td>{{item.OWNER_NAME}}</td>
+                <td>{{item.STATUS}}</td>
+                <td>{{item.PRODUCT_CLASS}}</td>
+                <td>{{item.PRODUCT_CODE}}</td>
+                <td>{{item.INDIVIDUAL}}</td>
+                <td>{{item.ANNUALISED_PAYMENTS}}</td>
+                <td>{{item.CREATED_DATE_FROM}}</td>
+                <td>{{item.TOTAL_SUM_AT_RISK}}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+
+</div>
+</div>
+    </div>

@@ -1,0 +1,247 @@
+<loader [loading]="loading">
+  <div class="container">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-md my-1 lbl1" *ngFor="let item of lbls1">
+        <app-editable-text-case
+          [formatter]="item.formatter"
+          [stacked]="true"
+          [mini]="true"
+          [form]="form"
+          [label]="item.label"
+          [name]="item.key"
+          [coloredLbl]="true"
+          [coloredVal]="false"
+          [showEditing]="item.editable"
+          [hint]="item.hint"
+          [light]="true"
+          [value]="item.value"
+          [action]="item.action"
+        >
+        </app-editable-text-case>
+      </div>
+    </div>
+    <hr />
+    <div class="row justify-content-between">
+      <div class="col">
+        <div class="row">
+          <div class="col-auto" *ngFor="let item of lbls3">
+            <app-editable-text-case
+              [formatter]="item.formatter"
+              [stacked]="false"
+              [mini]="true"
+              [form]="form"
+              [label]="item.label"
+              [name]="item.key"
+              [coloredLbl]="true"
+              [coloredVal]="false"
+              [showEditing]="item.editable"
+              [hint]="item.hint"
+              [light]="true"
+              [value]="item.value"
+              [action]="item.action"
+            >
+            </app-editable-text-case>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto">
+        <app-btn
+          routerLink="../../group-desk/notes"
+          [queryParams]="{groupNo,clientNo}"
+          type="secondary"
+          icon="pen"
+          >Notes
+        </app-btn>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div
+        class="col-xxl-2 col-lg-3 col-md-4 col-sm-6 my-1"
+        *ngFor="let item of lbls2"
+      >
+        <app-editable-text-case
+          [formatter]="item.formatter"
+          [stacked]="true"
+          [action]="item.action"
+          [form]="form"
+          [label]="item.label"
+          [name]="item.key"
+          [coloredLbl]="true"
+          [coloredVal]="false"
+          [type]="item.inputType"
+          [showEditing]="item.editable"
+          [hint]="item.hint"
+          [light]="true"
+          [value]="item.value"
+        >
+        </app-editable-text-case>
+      </div>
+    </div>
+    <hr />
+    <div class="row mb-2">
+      <div class="col-auto">
+        <app-input-basic
+          placeholder="All"
+          [form]="subGroupsForm"
+          name="value"
+          label="SubGroups"
+          [stacked]="false"
+          [mini]="true"
+          type="select"
+          [options]="subGroups"
+          (change)="filterCoversTable()"
+        ></app-input-basic>
+      </div>
+    </div>
+    <div class="">
+      <loader [loading]="tableLoading" class="vh-30" text="Obtaining Covers">
+        <table-plain
+          [pageSize]="tableLimit"
+          [showPager]="showPager"
+          [distinct]="true"
+          [nowrap]="true"
+          noItemTxt="There are no covers"
+          [data]="covers"
+          [displayedColumns]="dCols"
+        >
+        </table-plain>
+      </loader>
+    </div>
+
+    <div class="row justify-content-center my-4">
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          routerLink="../documents"
+          [queryParams]="{groupNo,clientNo}"
+          [text]="'Documents'"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          routerLink="../workflows"
+          [text]="'Workflows'"
+          [queryParams]="{groupNo,clientNo}"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Endorsements'"
+          routerLink="../endorsements"
+          [queryParams]="{groupNo,clientNo}"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Reinsurance'"
+          routerLink="../reinsurances"
+          [queryParams]="{groupNo,clientNo}"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Pricing'"
+          routerLink="../pricing"
+          [queryParams]="{groupNo,clientNo}"
+        ></app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Underwriting'"
+          routerLink="../underwriting"
+          [queryParams]="{groupNo,clientNo}"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Commissions'"
+          routerLink="../commissions"
+          [queryParams]="{groupNo,clientNo}"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Future Actions'"
+          routerLink="../future-actions"
+          [queryParams]="{groupNo,clientNo}"
+        >
+        </app-button>
+      </div>
+      <div class="col">
+        <app-button
+          [buttonType]="'btnCustomCloneRaised'"
+          [text]="'Calc. Premium'"
+          routerLink="../peril"
+          [queryParams]="{groupNo,clientNo}"
+        ></app-button>
+      </div>
+    </div>
+
+    <div class="d-lg-flex justify-content-around section-cards-2 card-blue">
+      <div class="card color1 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title">Credit Note Balance</h6>
+          <p class="card-sm-num">345,000</p>
+        </div>
+      </div>
+      <div class="card color1 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title">Total Payment Recieved</h6>
+          <p class="card-sm-num">345,000</p>
+        </div>
+      </div>
+
+      <div class="card color1 shadow-sm" routerLink="../payments-outward">
+        <div class="card-body">
+          <h6 class="card-title">Payments Outward</h6>
+          <p class="card-sm-num">Paid - 234,100 Renewal - 100,000</p>
+        </div>
+      </div>
+      <div class="card color1 shadow-sm" routerLink="../members">
+        <div class="card-body">
+          <h6 class="card-title">Members</h6>
+          <p class="card-sm-num">5</p>
+        </div>
+      </div>
+      <div class="card color1 shadow-sm" (click)="assetClicked()">
+        <div class="card-body">
+          <h6 class="card-title">Assets</h6>
+          <p class="card-sm-num">6</p>
+        </div>
+      </div>
+      <div class="card color2 shadow-sm" routerLink="../undercover-sar">
+        <div class="card-body">
+          <h6 class="card-title">Uncovered SAR</h6>
+          <p class="card-sm-num">2,000,000</p>
+        </div>
+      </div>
+      <div class="card color1 shadow-sm" routerLink="../accounts">
+        <div class="card-body">
+          <h6 class="card-title">Accounts</h6>
+          <p class="card-sm-num">Suspense - 23,100</p>
+        </div>
+      </div>
+
+      <div class="card color2 shadow-sm" routerLink="../credit-note">
+        <div class="card-body">
+          <h6 class="card-title">Renewal</h6>
+          <p class="card-sm-num">0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

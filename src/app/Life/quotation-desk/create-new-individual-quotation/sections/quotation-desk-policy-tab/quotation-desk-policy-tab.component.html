@@ -1,0 +1,353 @@
+<div>
+  <br />
+  <div class="row mt-3 mb-4">
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Code' | appTranslate | async }}:
+        <a
+          routerLink="../../../setups/product/product-code/show"
+          [queryParams]="{ prodCode: product.code }"
+          class="text-primary"
+          >{{ product?.code }}</a
+        ></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Description' | appTranslate | async }}:
+        <span class="text-primary">{{ product?.description }}</span></span
+      >
+    </div>
+  </div>
+  <form [formGroup]="policyForm">
+    <div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Application Date *' | appTranslate | async
+            }}</label>
+            <input
+              type="date"
+              [min]="todate"
+              (change)="changeDiscCode()"
+              formControlName="applicationDate"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Commencement Date *' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="commencementDate"
+              type="date"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary"
+              >{{ 'Policy Term *' | appTranslate | async }}
+              <span class="px-3" *ngIf="maxPolicyYear"
+                >{{ 'max:' | appTranslate | async }}{{ ' '
+                }}{{ maxPolicyYear }}</span
+              >
+              <span class="px-3" *ngIf="minPolicyYear"
+                >{{ 'max:' | appTranslate | async }}{{ ' '
+                }}{{ minPolicyYear }}</span
+              >
+            </label>
+            <input
+              formControlName="policyTermYears"
+              type="number"
+              [max]="maxPolicyYear"
+              [min]="minPolicyYear"
+              class="form-control control-bg-gray"
+              [readonly]="termDisabled"
+              [hidden]="termList"
+              placeholder="Years"
+            />
+            <select
+              formControlName="policyTermYears"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!termList"
+            >
+              <option selected disabled>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let year of allowedPolicyTermYears">
+                <option [value]="year">{{ year }}{{ ' ' }}{{ 'years' }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary"
+              >&nbsp;
+              <span class="px-3" *ngIf="maxPolicyMonth"
+                >{{ 'max:' | appTranslate | async }}{{ ' '
+                }}{{ maxPolicyMonth }}</span
+              >
+              <span class="px-3" *ngIf="minPolicyMonth"
+                >{{ 'min:' | appTranslate | async }}{{ ' '
+                }}{{ minPolicyMonth }}</span
+              >
+            </label>
+            <input
+              formControlName="policyTermMonths"
+              type="number"
+              [max]="maxPolicyMonth"
+              [min]="minPolicyMonth"
+              class="form-control control-bg-gray"
+              [readonly]="termDisabled"
+              [hidden]="termList"
+              placeholder="Months"
+            />
+            <select
+              formControlName="policyTermMonths"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!termList"
+            >
+              <option selected disabled>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let year of allowedPolicyTermMonths">
+                <option [value]="year">
+                  {{ year }}{{ ' ' }}{{ 'months' }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              formControlName="policyTermDays"
+              type="text"
+              class="form-control control-bg-gray"
+              [readonly]="termDisabled"
+              [hidden]="termList"
+              placeholder="Days"
+            />
+            <select
+              formControlName="policyTermDays"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!termList"
+            >
+              <option selected disabled>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-end">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Currency *' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="currency"
+              name=""
+              id=""
+              class="form-control control-bg-gray"
+            >
+              <option selected disabled>
+                {{ 'Select an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let currency of currencyOptions$">
+                <option [value]="currency?.validCurrency">
+                  {{ currency?.validCurrency }} -
+                  {{ currency?.description || 'null' }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Premium Payment Term' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="premiumPaymentTermYears"
+              type="text"
+              class="form-control control-bg-gray"
+              [readonly]="premtermDisabled"
+              [hidden]="premtermList"
+              placeholder="Years"
+            />
+            <select
+              formControlName="premiumPaymentTermYears"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!premtermList"
+            >
+              <option selected disabled>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let year of allowedPremPayTermYears">
+                <option [value]="year">{{ year }}{{ ' ' }}{{ 'years' }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              formControlName="premiumPaymentTermMonths"
+              type="text"
+              class="form-control control-bg-gray"
+              [readonly]="premtermDisabled"
+              [hidden]="premtermList"
+              placeholder="Months"
+            />
+            <select
+              formControlName="premiumPaymentTermMonths"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!premtermList"
+            >
+              <option selected disabled>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let year of allowedPremPayTermMonths">
+                <option [value]="year">
+                  {{ year }}{{ ' ' }}{{ 'months' }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label class="form-label text-primary">&nbsp;</label>
+            <input
+              formControlName="premiumPaymentTermDays"
+              type="text"
+              class="form-control control-bg-gray"
+              [hidden]="premtermList"
+              placeholder="Days"
+              [readonly]="premtermDisabled"
+            />
+            <select
+              formControlName="premiumPaymentTermDays"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!premtermList"
+            >
+              <option selected disabled>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Premium payment Method *' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="premiumPaymentMethod"
+              name=""
+              id=""
+              class="form-control control-bg-gray"
+            >
+              <option selected disabled>
+                {{ 'Select one option' | appTranslate | async }}
+              </option>
+              <ng-container
+                *ngFor="let method of premiumPaymentMethodOptions$ | async"
+              >
+                <option [value]="method.code">
+                  {{ method.code }} - {{ method.description }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Premium Payment Frequency *' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="premiumPayFreq"
+              type="text"
+              class="form-control control-bg-gray"
+              [hidden]="freqList"
+              placeholder=""
+              [readonly]="premfreqDisabled"
+            />
+            <select
+              formControlName="premiumPayFreq"
+              id=""
+              class="form-control control-bg-gray"
+              [hidden]="!freqList"
+            >
+              <option disabled>
+                {{ 'Select one' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let freq of freq">
+                <option [value]="freq.freq">
+                  {{ freq.freq }} - {{ freq.desc }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Discount Code' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="discountCode"
+              name=""
+              id=""
+              (change)="changeDiscCode()"
+              class="form-control control-bg-gray"
+            >
+              <option selected>
+                {{ 'Choose an option' | appTranslate | async }}
+              </option>
+              <ng-container *ngFor="let dc of discountCodeOptions$ | async">
+                <option [value]="dc.code">
+                  {{ dc.code }} - {{ dc.description }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label class="form-label text-primary">{{
+              'Discount rate' | appTranslate | async
+            }}</label>
+            <input
+              readonly
+              formControlName="discountRate"
+              type="text"
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

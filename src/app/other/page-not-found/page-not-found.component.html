@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center align-items-center" id="main" style="height: 80vh">
+  <div class="text-center">
+    <div class="d-md-flex justify-content-center align-items-center">
+      <h1 class="m-3 p-3 align-top border-right inline-block align-content-center" style="border-right: 1px solid gray"
+        *ngIf="!uS.isMobile">
+        {{(config?.status||'404')|appTranslate|async}}
+      </h1>
+      <h1 class="m-3 p-3 align-top border-right inline-block align-content-center"  *ngIf="uS.isMobile">
+        {{(config?.status||'404')|appTranslate|async}}
+      </h1>
+      <div class="inline-block align-middle">
+        <h2 class="font-weight-normal lead" id="desc">
+          {{(config?.message||'The page you requested was not found.')|appTranslate|async}}</h2>
+      </div>
+    </div>
+    <div class="d-flex mt-2 p-2 justify-content-center">
+      <app-btn text="Go Back" (mclick)="back()" type="dark-outline" icon="previous"></app-btn>
+      <span class="mx-1"></span>
+      <app-btn text="Home" routerLink="/" type="dark" icon="home"></app-btn>
+    </div>
+  </div>
+</div>

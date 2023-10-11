@@ -1,0 +1,106 @@
+
+<div class="modal fade" id="end_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="endowmentForm" class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Pricing Basis</label>
+            <select formControlName="basis" id="" class="form-control control-bg-gray">
+              <option selected disabled>Choose an Option</option>
+              <ng-container *ngFor="let option of basis_options">
+                <option [value]="option.code">
+                  {{option.code}} - {{option.title}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Target</label><span style="padding-left: 10px;" *ngIf="assured_min || assured_max">min: {{assured_min | number : '1.0-0' : 'en'}} - max: {{assured_max | number : '1.0-0' : 'en'}}</span>
+            <input formControlName="target" type="text" class="form-control control-bg-gray" [hidden]="assured_value_disabled">
+            <select formControlName="target" id="" class="form-control control-bg-gray" [hidden]="!assured_value_disabled">
+              <ng-container *ngFor="let option of assured_options">
+                <option [value]="option">
+                  {{option}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Premium Payment Term</label>
+            <input formControlName="premTerm" type="text" placeholder="Years" class="form-control control-bg-gray" [readonly]="termDisabled" [hidden]="termList">
+            <select formControlName="premTerm" id="" class="form-control control-bg-gray" [hidden]="!termList">
+              <option selected disabled>Choose an option</option>
+              <ng-container *ngFor="let year of allowedPremPayTermYears">
+                <option [value]="year">
+                  {{year}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="premMonths" type="text" placeholder="months" class="form-control control-bg-gray" [readonly]="termDisabled" [hidden]="termList">
+            <select formControlName="premMonths" id="" class="form-control control-bg-gray" [hidden]="!termList">
+              <option selected disabled>Choose an option</option>
+              <ng-container *ngFor="let year of allowedPremPayTermMonths">
+                <option [value]="year">
+                  {{year}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Benefit Payment Term</label>
+            <input formControlName="benTerm" type="text" placeholder="Years" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="benMonths" type="text" placeholder="months" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row">
+        <div class="col-3">
+          <div class="from-group">
+            <label for="" class="form-label">Payment Method</label>
+            <select formControlName="method" id="" class="form-control  control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="from-group">
+            <label for="" class="form-label">Payee Name</label>
+            <input formControlName="payee" type="text" class="form-control  control-bg-gray">
+          </div>
+        </div>
+      </div> -->
+    </form>
+    <div class="modal-footer">
+      <app-btn type="outline" icon="save" (mclick)="stop()">Save</app-btn>
+    </div>
+  </div>
+</div>
+</div>
+

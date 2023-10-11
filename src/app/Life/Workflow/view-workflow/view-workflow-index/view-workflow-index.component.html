@@ -1,0 +1,251 @@
+<loader [loading]="loading">
+
+  <div class="container-fluid px-2 {{appS.system}} " style="max-width: 1300px;">
+    <div class="d-flex">
+      <div class="flex-column align-items-center border-end text-center pe-5" style="width: fit-content">
+        <div class="rounded-circle mb-2" [ngStyle]="{backgroundColor: getSLAColour(wfData?.slaLevel)}"
+          style="width: 129px; height: 128px; overflow: hidden;">
+          <!-- <img src="" alt=""> -->
+        </div>
+        <span class=" my-3" [ngStyle]="{color: getStatusColour(status)}" data-bs-toggle="modal"
+          data-bs-target="#changeStatusModal">{{status || 'unknown'}} <i class="fas fa-pencil-alt pointer"></i></span>
+
+        <div class="mb-3">
+          <span class="" style="font-size: 12px;">{{'Time to SLA Deadline'|appTranslate|async}}</span>
+          <br>
+
+          <span class="text-bold"><span *ngIf="this.wfData?.timeToSla < 0">-</span>{{TimeOtDays}}:{{TimeOtHours}}:{{TimeOtMins}}</span>
+
+        </div>
+        <div>
+          <span class="" style="font-size: 12px;">{{'Time Outside SLA'|appTranslate|async}}</span>
+          <br>
+          <span class="text-danger text-bold"><span *ngIf="this.wfData?.timeOsSla < 0">-</span>{{TimeOsDays}}:{{TimeOsHours}}:{{TimeOsMins}}</span>
+        </div>
+      </div>
+      <div class="col-11 gx-2 pt-4 pb-2 px-5 fw-bold text-break">
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-btn type="secondary" icon="edit" routerLink="../note"
+              [queryParams]="{clientNo:wfData?.clientNo, workflowNo:wfData?.wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}">
+              Note</app-btn>
+          </div>
+        </div>
+        <br><br>
+        <div class="row">
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Workflow Number'|appTranslate|async}}</span><br>
+
+            <span class="inputform1">{{wfNo}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Task Code'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.code || '--'}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Assigned To'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.assignedTo || '--'}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Ref Category'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.refCat || '--'}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Ref Number'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.refNo || '--'}} </span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Ref Number 2'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.externalRef || '--'}}</span>
+
+          </div>
+
+        </div>
+        <br>
+        <div class="row">
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Created On'|appTranslate|async}}</span><br>
+
+            <span class="inputform1">{{ wfCreated }}</span>
+          </div>
+          <div class="col mb-2">
+            <div class="row">
+              <div class="col"><span class="form-label text-primary">{{'SLA (mins)'|appTranslate|async}}</span><br></div>
+              <div class="col"><i (click)="unreset()" class="ps-1 pointer fas fa-pencil-alt text-primary"></i></div>
+            </div>
+            <span class="inputform1">{{ wfData?.revisedSla || '--'}} </span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Assigned to Group'|appTranslate|async}}</span><br>
+
+            <span class="inputform1">{{ wfData?.assignedToGroup || '--'}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Updated On'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfUpdated }}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Schedule'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.schedule || '--'}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Schedule End Date'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfEndDate }}</span>
+          </div>
+
+
+        </div>
+        <br>
+        <div class="row">
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Assigned By'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.assignedBy || '--'}}</span>
+
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Finish On'|appTranslate|async}}</span><br>
+
+            <span class="inputform1">{{ wfEnd }}</span>
+          </div>
+
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Schedule Next Date'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ '' || '--'}}</span>
+          </div>
+
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'SLA Defined by'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{'' || '--'}}</span>
+
+          </div>
+
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Last Updated By'|appTranslate|async}}</span><br>
+
+            <span class="inputform1">{{ wfData?.modifiedUser || '--'}}</span>
+          </div>
+          <div class="col mb-2">
+            <span class="form-label text-primary">Schedule Freq</span><br>
+            <span class="inputform1">{{ '' || '--'}}</span>
+          </div>
+
+        </div>
+        <br>
+        <div class="row">
+          <div class="col mb-2">
+            <span class="form-label text-primary">{{'Linked Workflow'|appTranslate|async}}</span><br>
+            <span class="inputform1">{{ wfData?.linkedWorkflow || '--'}}</span>
+
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <div class="row mt-4 mb-3">
+      <h5 class="text-primary mb-3">{{'Workflow Description'|appTranslate|async}}</h5>
+
+      <textarea name="" id="" cols="30" rows="4"
+        class="control-bg-gray form-control">{{ wfData?.description}}</textarea>
+    </div>
+
+    <div class="row gx-5 action-btns mb-4 justify-content-center">
+      <div class="col-2 text-primary">
+
+        <app-button buttonType="btnCustomCloneRaised" text="History" routerLink="../history"
+          [queryParams]="{wfNo: wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}"
+          queryParamsHandling="merge">
+        </app-button>
+
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaised" text="Escalate" (click)="escalate()"
+          [queryParams]="{wfNo: wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}"
+          routerLink="../escalate" queryParamsHandling="merge">
+        </app-button>
+
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaised" text="Error" (click)="error()"
+          [queryParams]="{wfNo: wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}" routerLink="../error"
+          queryParamsHandling="merge">
+        </app-button>
+
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaised" text="Checklist"
+          [queryParams]="{wfNo: wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}"
+          routerLink="../checklist" queryParamsHandling="merge">
+        </app-button>
+
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaised" text="Authorize" (click)="authorize()"
+          [queryParams]="{wfNo: wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}"
+          queryParamsHandling="merge" routerLink="../authorize">
+        </app-button>
+
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaised" text="Reassign" (click)="authorize()"
+          [queryParams]="{wfNo: wfNo, tcd: wfData?.code, rct: wfData?.refCat, rno: wfData?.refNo}"
+          queryParamsHandling="merge" routerLink="../reassign">
+        </app-button>
+
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-3">
+        <div class="large-card text-white" routerLink="../documents"
+          [queryParams]="{workflowNo:wfNo,clientNo:wfData?.clientNo}">
+          <p>{{'Number of Documents'|appTranslate|async}}</p>
+          <p class="fw-bold text-end">
+            {{documentLength || 0}}
+          </p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="large-card text-white" routerLink="../snooze-history" queryParamsHandling="merge">
+          <p>{{'Outstanding Snooze Duration'|appTranslate|async}}</p>
+          <p class="fw-bold text-end">
+            {{snoozeDuration || 0}}
+          </p>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="large-card text-white" routerLink="../related-active-tasks" queryParamsHandling="merge">
+          <p>{{'Related Active Tasks'|appTranslate|async}}</p>
+          <p class="fw-bold text-end">
+            0
+          </p>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+
+    <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{'Change Status'|appTranslate|async}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="row px-3">
+              <label for="" class="form-label text-primary">{{'New Status'|appTranslate|async}}</label>
+              <select name="" id="" class="form-control control-bg-gray" [(ngModel)]="workflowStatus">
+                <option value=""></option>
+                <option *ngFor="let code of statusCodesList">{{code.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

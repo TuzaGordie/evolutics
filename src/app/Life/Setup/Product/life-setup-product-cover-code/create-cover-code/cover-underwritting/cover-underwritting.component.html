@@ -1,0 +1,172 @@
+<loader [loading]="loading" [text]="loadingText" [height]="container.offsetHeight">
+  <div class="" #container>
+    <div class="row justify-content-between align-items-center mt-2 ">
+      <div class="col-md-6 mb-2">
+        <h5 class="text-primary">Underwriting</h5>
+      </div>
+      <div class="col-auto mb-2">
+        <text-case-1 lbl="Cover"
+          [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+        </text-case-1>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"Underwriting Question Set"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.underwritingQuestionSet">
+            <option></option>
+            <option *ngFor="let ot of underwritingQuestionSet" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group mt-2 justify-content-center">
+          <label class="text-primary w-100 text-center">{{"Load Only Above FCL"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control control-bg-gray mx-auto"
+            [(ngModel)]="createCoverCode.underwriting.loadOnlyAboveFcl" type="checkbox" />
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div class="form-group mt-2 justify-content-center">
+          <label class="text-primary w-100 text-center">{{"EvoBOT"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control control-bg-gray mx-auto"
+            [(ngModel)]="createCoverCode.underwriting.evobot" type="checkbox" />
+        </div>
+      </div>
+    </div>
+    <div class="row g-3">
+
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"Risk Survey Question Set"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.riskSurveyQuestionSet">
+            <option *ngFor="let ot of riskSurveyQuestionList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"Financial Underwriting Question"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.financialUnderwritingTable">
+            <option></option>
+            <option *ngFor="let ot of financialUnderwritingQuestion" [ngValue]="ot.code">{{ot.code}} -
+              {{ot.description}}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row g-3">
+
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"Medical Underwriting Test Table"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.medicalUnderwritingTestTable">
+            <option></option>
+            <option *ngFor="let ot of medicalUnderwritingTestTableList" [ngValue]="ot.code">{{ot.code}} -
+              {{ot.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"Medical Underwriting Result Table"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.medicalUnderwritingResultTable">
+            <option></option>
+            <option *ngFor="let ot of medicalUnderwritingResultTable" [ngValue]="ot.code">{{ot.code}}
+              - {{ot.description}}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row g-3">
+
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"Non Medical Limit"|appTranslate|async}}</label>
+          <input #inp="ngModel" type="number" class="form-control control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.nonMedicalLimit">
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"FCL Calculation Basis"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.fclCalcBasis">
+            <option></option>
+            <option *ngFor="let ot of fclCalcBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{"FCL Calculation Factor"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control control-bg-gray"
+            [(ngModel)]="createCoverCode.underwriting.fclCalcFactor" type="number" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-6">
+        <div class="row">
+          <div class="col">
+            <div class="row"
+              *ngFor="let item of createCoverCode.underwriting.quotationFormsToBeAttached; let i = index">
+              <div class="form-group mt-2 col-10">
+                <label class="text-primary">{{"Quotation Forms to be attached"|appTranslate|async}}</label>
+                <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.attachForm">
+                  <option *ngFor="let ot of underwritingFormAttached" [ngValue]="ot.code">{{ot.code}} -
+                    {{ot.description}}</option>
+                </select>
+              </div>
+              <div class="col-2">
+                <div class="form-group mt-2">
+                  <label class=" text-primary">&nbsp;</label>
+                  <app-button [buttonType]="'delete'" (click)="removeQuotationFormAttached(i)">
+                  </app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;</label>
+              <app-button [buttonType]="'addCustom'" (click)="addQuotationFormsAttached()">
+              </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row g-3">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class=" text-primary">&nbsp;<br /></label>
+          <app-button (click)="saveUnderwriting()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

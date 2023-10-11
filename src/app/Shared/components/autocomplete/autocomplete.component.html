@@ -1,0 +1,23 @@
+<div class="row align-items-center">
+  <app-input-label [colored]="colored" [form]="form" [hint]="hint" [id]="id" [invalidCheckbox]="invalidCheckbox"
+    [isRequired]="isRequired" [label]="label" [lblCl]="lblCl" [light]="light" [mini]="mini" [showLabel]="showLabel"
+    [small]="small" [stacked]="stacked" [theme]="theme" [xsmall]="xsmall">
+  </app-input-label>
+  <div class="{{stacked?'col-12':'col-md'}} position-relative">
+    <form  [formGroup]="form">
+      <input type="text"  [formControlName]="name" placeholder="{{placeholder}}" id="{{id}}"
+        [class]="inpCl|inputClass:valid:invalid:showValidation" [required]="required" [readonly]="readonly"
+        value="{{__value}}" [matAutocomplete]="auto" >
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayWith">
+        <mat-option *ngFor="let item of filteredOptions ; trackBy:iS.trackByValue" [value]="item.value">
+          {{item.label}}
+        </mat-option>
+      </mat-autocomplete>
+      <ng-container *ngIf="control?.dirty && showValidation && showValidationIcon ">
+        <div [ngClass]="{valid:control?.valid}" class=" validity-icon"><i class="fa fa-check"></i></div>
+        <div [ngClass]="{pending:control?.pending}" class=" validity-icon"><i class="fa fa-spinner fa-spin"></i></div>
+        <div [ngClass]="{invalid:control?.invalid}" class=" validity-icon"><i class="fa fa-times"></i></div>
+      </ng-container>
+    </form>
+  </div>
+</div>

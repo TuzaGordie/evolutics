@@ -1,0 +1,781 @@
+<!-- <app-form-navigation [title]="'Set Up / Organization / Company'"></app-form-navigation> -->
+<loader [loading]="loading" [text]="loadingText">
+  <div class="container-fluid mt-2" id="form-body">
+    <div class="d-flex justify-content-end my-3" *ngIf="pageMode != 'CREATE'">
+      <app-btn [type]="editMode ? 'primary': 'outline'" (mclick)="editMode = !editMode" icon="edit">
+        Edit
+      </app-btn>
+    </div>
+    <hr *ngIf="pageMode != 'CREATE'">
+    
+    <ul class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+          type="button" role="tab" aria-controls="pills-basic" aria-selected="true">
+          {{'Basic' | appTranslate | async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-tiers-tab" data-bs-toggle="pill" data-bs-target="#pills-tiers" type="button"
+          role="tab" aria-controls="pills-tiers" aria-selected="false">
+          {{'Tiers' | appTranslate | async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-rates-tab" data-bs-toggle="pill" data-bs-target="#pills-rates" type="button"
+          role="tab" aria-controls="pills-rates" aria-selected="false">
+          {{'Rates' | appTranslate | async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-fileLocations-tab" data-bs-toggle="pill"
+          data-bs-target="#pills-fileLocations" type="button" role="tab" aria-controls="pills-fileLocations"
+          aria-selected="false">
+          {{'Files' | appTranslate | async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-emailGateway-tab" data-bs-toggle="pill" data-bs-target="#pills-emailGateway"
+          type="button" role="tab" aria-controls="pills-emailGateway" aria-selected="false">
+          {{'Email Gateway' | appTranslate | async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-smsGateway-tab" data-bs-toggle="pill" data-bs-target="#pills-smsGateway"
+          type="button" role="tab" aria-controls="pills-smsGateway" aria-selected="false">
+          {{'SMS Gateway' | appTranslate | async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-accountsTab-tab" data-bs-toggle="pill" data-bs-target="#pills-accountsTab"
+          type="button" role="tab" aria-controls="pills-accountsTab" aria-selected="false">
+          {{'Accounts' | appTranslate | async}}
+        </button>
+      </li>
+    </ul>
+    <form #f="ngForm" novalidate>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Company Code' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" readonly
+                  [(ngModel)]="createCompany.companyInfo.code" name="code"/>
+              </div>
+              <div class="col-md-8">
+                <label class="form-label text-primary">{{'Company Name' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.description" name="name" [required]="pageMode == 'CREATE'"/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Head Office Address' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.hqAddress" name="hqAddress"  [required]="pageMode == 'CREATE'"/>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Country' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" (change)="getCities()" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.hqCountry" [required]="pageMode == 'CREATE'" name="country">
+                  <option></option>
+                  <option *ngFor="let country of countries" [value]="country.code">
+                    {{country.code}} - {{country.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Head Office City' | appTranslate | async}}</label>
+                <div class="position-relative">
+                  <select class="form-control  control-bg-gray" [(ngModel)]="createCompany.companyInfo.hqCity"
+                    name="hqCity" [disabled]="pageMode != 'CREATE' && !editMode">
+                    <option></option>
+                    <option *ngFor="let city of cities" [value]="city.code">
+                      {{city.code}} - {{city.description}}
+                    </option>
+                  </select>
+                  <div *ngIf="loadingCities" class="position-absolute top-50 start-50 translate-middle">
+                    <span class="spinner-border spinner-border-sm text-primary"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Company Year End Month' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" type="text" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.yearEndMo" name="yearEndMo">
+                  <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="i">{{i}}</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Registration Number' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.redgNo" name="redgNo" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Standard Work Hours' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="number" appIntegerOnly [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.standardWorkHours" name="standardWorkHours" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Next Policy Number' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" [style.cursor]="pageMode == 'CREATE' && 'not-allowed'" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.nextPolicyNo" name="nextPolicyNo" [readonly]="pageMode == 'CREATE'"/>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Default Direct Agent No' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" [required]="pageMode == 'CREATE'"
+                  [(ngModel)]="createCompany.companyInfo.directAgentNo" name="directAgentNo" [disabled]="pageMode != 'CREATE' && !editMode"/>
+              </div>
+              <!-- <div class="col-md-4">
+              <label class="form-label text-primary">{{'Payment Outward Basis' | appTranslate | async}}</label>
+              <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                [(ngModel)]="createCompany.companyInfo.paymentOutwardCode" name="paymentOutwardCode">
+                <option></option>
+                <option *ngFor="let code of payinMathodCodes" [value]='code.code'>
+                  {{code.description}}
+                </option>
+              </select>
+            </div> -->
+              <div class="col-md-4">
+                <label class="form-label text-primary w-100">
+                  {{'Comm due to resigned and terminated Agents?' | appTranslate | async}}
+                </label>
+                <!-- <select [(ngModel)]="createCompany.companyInfo.commDueTermAgent" name="commDueTermAgent" id="tester"
+                  class="form-control control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode">
+                  <option *ngFor="let tier of commDueTermAgents" [value]="tier.code">
+                    {{tier.title}}
+                  </option>
+                </select> -->
+                <input type="checkbox" [(ngModel)]="createCompany.companyInfo.commDueTermAgent" [disabled]="pageMode != 'CREATE' && !editMode"
+                 name="commDueTermAgent" id="tester" class="form-control control-bg-gray">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Cooling Off Period (Days)' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="number"  appIntegerOnly [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.coolOffPeriod" name="coolOffPeriod" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Default Currency' | appTranslate | async}}</label>
+                <app-autocomplete-ng-model
+                  [options]="currencies"
+                  [showLabel]="false"
+                  [valueField]="'code'"
+                  [labelType]="'cd'"
+                  [stacked]="false"
+                  [(model)]="createCompany.companyInfo.defaultCurrency"
+                  name="defaultCurrency"
+                  [required]="pageMode == 'CREATE'"
+                  [disabled]="pageMode != 'CREATE' && !editMode"
+                ></app-autocomplete-ng-model>
+
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Group Conversion Currency' | appTranslate | async}}</label>
+                <app-autocomplete-ng-model
+                  [options]="currencies"
+                  [showLabel]="false"
+                  [valueField]="'code'"
+                  [labelType]="'cd'"
+                  [stacked]="false"
+                  [(model)]="createCompany.companyInfo.groupConvCurr"
+                  name="groupConversionCurrency"
+                  [required]="pageMode == 'CREATE'"
+                  [disabled]="pageMode != 'CREATE' && !editMode"
+                ></app-autocomplete-ng-model>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Default Language' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [required]="pageMode == 'CREATE'" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.defaultLanguage" name="defaultLanguage">
+                  <option></option>
+                  <option *ngFor="let code of languages" [value]="code.code">
+                    {{code.code}} - {{code.title}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Active Directory URL' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="text" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.ad" name="activeDirectoryUrl" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Business Line' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [(ngModel)]="createCompany.companyInfo.busLine"
+                  name="businessLine" [required]="pageMode == 'CREATE'" [disabled]="pageMode != 'CREATE' && !editMode">
+                  <option></option>
+                  <option *ngFor="let code of busLines" [value]="code.code">
+                    {{code.code}} - {{code.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Underwriting Validity Period (Months)' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="number" min="0" (input)="convertToInteger($event)" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.uwValidilityPeriodMo" name="uwValidilityPeriodMo" appIntegerOnly/>
+              </div>
+              <!-- <div class="col-md-4">
+              <label class="form-label text-primary">{{'Client Uniqueness Basis' | appTranslate | async}}</label>
+              <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                [(ngModel)]="createCompany.companyInfo.clientUniqueBasis" name="clientUniqueBasis">
+                <option></option>
+                <option *ngFor="let clientBasis of clientUniqueBasis" [value]="clientBasis.code">
+                  {{clientBasis.title}}
+                </option>
+              </select>
+            </div> -->
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Co-Insurance Identity' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" id="tester" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyInfo.coInsuranceIdentity" name="coInsuranceIdentity" [required]="pageMode == 'CREATE'">
+                  <option></option>
+                  <option *ngFor="let coInsurance of coInsuranceIdenities" [value]="coInsurance.no">
+                    {{coInsurance.no}} - {{coInsurance.fullName}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Parent Company' | appTranslate | async}}</label>
+                <input type="checkbox" class="form-control control-bg-gray" name="parent"
+                  [(ngModel)]="createCompany.companyInfo.parent" [disabled]="pageMode != 'CREATE' && !editMode">
+              </div>
+
+            </div>
+            <hr />
+            <h6>{{'Payment Outward Methods' | appTranslate | async}}</h6>
+            <div *ngFor="let companyPayout of createCompany.companyPayoutMethods; let i = index">
+              <div class="row mt-2" *ngIf="companyPayout.deleted != true">
+                <div class="col-md-offset-3 col-md-4">
+                  <select class="form-control  control-bg-gray" name="payoutMethod_{{companyPayout.rowId}}" 
+                    [(ngModel)]="companyPayout.payoutMethod" [disabled]="pageMode != 'CREATE' && !editMode">
+                    <option *ngFor="let code of payinMathodCodes" [value]='code.code'>
+                      {{code.code}} - {{code.description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <app-button [buttonType]="'delete'" (click)="removePayout(i)"></app-button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <label>&nbsp;</label>
+                <app-button [buttonType]="'add'" (click)="addPayout()"></app-button>
+              </div>
+            </div>
+            <hr />
+
+            <p>{{'Basis for comm calc on new sale on Policies of existing Agents' | appTranslate | async}}</p>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <label class="form-label text-primary"> {{'Factor % of original Commission' | appTranslate | async}}</label>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary"> {{'Existing Agent' | appTranslate | async}}</label>
+              </div>
+              <div class="col-md-4">
+                <input class="form-control  control-bg-gray" [(ngModel)]="createCompany.companyInfo.existAgentRate"
+                  name="existAgentRate" type="number" [disabled]="pageMode != 'CREATE' && !editMode"/>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary"> {{'New Agent' | appTranslate | async}}</label>
+              </div>
+              <div class="col-md-4">
+                <input class="form-control  control-bg-gray" [(ngModel)]="createCompany.companyInfo.newAgentRate"
+                  name="newAgentRate" type="number" [disabled]="pageMode != 'CREATE' && !editMode"/>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary"> {{'Tele Marketer' | appTranslate | async}}</label>
+              </div>
+              <div class="col-md-4">
+                <input class="form-control  control-bg-gray" [(ngModel)]="createCompany.companyInfo.tmRate"
+                  name="tmRate" type="number" [disabled]="pageMode != 'CREATE' && !editMode"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-tiers" role="tabpanel" aria-labelledby="pills-tiers-tab">
+          <div class="container justify-content-between">
+            <!-- <h6>{{'Payment Authorization Tiers' | appTranslate | async}}</h6> -->
+            <div class="row">
+              <div class="col">
+                <label class="form-label text-primary">{{'Tier Category' | appTranslate | async}}</label>
+              </div>
+              <div class="col">
+                <label class="form-label text-primary">{{'Currency' | appTranslate | async}}</label>
+              </div>
+              <div class="col"><label class="form-label text-primary">{{'Tier 1' | appTranslate | async}}</label></div>
+              <!-- <div class="col-md-1">
+              <label class="form-label text-primary">{{'Currency' | appTranslate | async}}</label>
+            </div> -->
+              <div class="col"><label class="form-label text-primary">{{'Tier 2' | appTranslate | async}}</label></div>
+              <!-- <div class="col-md-1">
+              <label class="form-label text-primary">{{'Currency' | appTranslate | async}}</label>
+            </div> -->
+              <div class="col"><label class="form-label text-primary">{{'Tier 3' | appTranslate | async}}</label></div>
+              <!-- <div class="col-md-1">
+              <label class="form-label text-primary">{{'Currency' | appTranslate | async}}</label>
+            </div> -->
+              <div class="col"><label class="form-label text-primary">{{'Tier 4' | appTranslate | async}}</label></div>
+              <div class="col"><label class="form-label text-primary">&nbsp;</label></div>
+            </div>
+            <div class="row mt-2" *ngFor="let companyTiersCode of fakeCompanyTiersArr; let i = index">
+              <ng-container *ngIf="companyTiersCode.deleted != true">
+                <div class="col">
+                  <select  [(ngModel)]="companyTiersCode.tierCat" name="tierCat_{{companyTiersCode.rowId}}"
+                    id="" class="form-control control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode">
+                    <option *ngFor="let code of tierCategories" [value]="code.code">
+                      {{code.code}} - {{code.title}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <app-autocomplete-ng-model
+                    [options]="currencies"
+                    [showLabel]="false"
+                    [valueField]="'code'"
+                    labelType="cd"
+                    [stacked]="false"
+                    [(model)]="companyTiersCode.currency1"
+                    name="currency1_{{companyTiersCode.rowId}}"
+                    [disabled]="pageMode != 'CREATE' && !editMode"
+                  ></app-autocomplete-ng-model>
+                </div>
+                <div class="col">
+
+                  <input type="number" [(ngModel)]="companyTiersCode.limit1" name="tier1_{{companyTiersCode.rowId}}"
+                    class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode" appCommafyNumber/>
+                  <!-- <select  [(ngModel)]="companyTiersCode.tier1" name="tier1_{{companyTiersCode.rowId}}" id=""
+                  class="form-control control-bg-gray">
+                  <option *ngFor="let tier of tiersCodes" [value]="tier.code">
+                    {{tier.title}}
+                  </option>
+                </select> -->
+                </div>
+                <div class="col">
+                  <input type="number" [(ngModel)]="companyTiersCode.limit2" name="tier2_{{companyTiersCode.rowId}}"
+                    class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode" appCommafyNumber/>
+                  <!-- <select [(ngModel)]="companyTiersCode.tier2" name="tier2_{{companyTiersCode.rowId}}" id=""
+                  class="form-control control-bg-gray">
+                  <option *ngFor="let tier of tiersCodes" [value]="tier.code">
+                    {{tier.title}}
+                  </option>
+                </select> -->
+                </div>
+                <div class="col">
+                  <input type="number" [(ngModel)]="companyTiersCode.limit3" name="tier3_{{companyTiersCode.rowId}}"
+                    class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode" appCommafyNumber/>
+                  <!-- <select [(ngModel)]="companyTiersCode.tier3" name="tier3_{{companyTiersCode.rowId}}" id=""
+                  class="form-control control-bg-gray">
+                  <option *ngFor="let tier of tiersCodes" [value]="tier.code">
+                    {{tier.title}}
+                  </option>
+                </select> -->
+                </div>
+                <div class="col">
+                  <input type="number" [(ngModel)]="companyTiersCode.limit4" name="tier4_{{companyTiersCode.rowId}}"
+                    class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode" appCommafyNumber/>
+                  <!-- <select [(ngModel)]="companyTiersCode.tier4" name="tier4_{{companyTiersCode.rowId}}" id=""
+                  class="form-control control-bg-gray">
+                  <option *ngFor="let tier of tiersCodes" [value]="tier.code">
+                    {{tier.title}}
+                  </option>
+                </select> -->
+                </div>
+                <div class="col">
+                  <app-button [buttonType]="'delete'" (click)="removeTiers(i)"></app-button>
+                </div>
+              </ng-container>
+            </div>
+            <div class="row mt-2 justify-content-end">
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col"></div>
+              <div class="col">
+                <app-button [buttonType]="'add'" (click)="addTiers()"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-rates" role="tabpanel" aria-labelledby="pills-rates-tab">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Premium Tax Basis' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.premTaxBasis" name="premTaxBasis">
+                  <option></option>
+                  <option *ngFor="let code of premTaxBasis" [value]="code.code">
+                    {{code.code}} - {{code.title}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Regulatory Levy Basis' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" id="tester" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.regLevyBasis" name="regLevyBasis">
+                  <option></option>
+                  <option *ngFor="let code of regLevyBasis" [value]="code.code">
+                    {{code.code}} - {{code.title}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Stamp Duty Basis' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" id="tester" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.stampDutyBasis" name="stampDutyBasis">
+                  <option></option>
+                  <option *ngFor="let code of stampDutyBasis" [value]="code.code">
+                    {{code.code}} - {{code.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Premium Tax Table' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.premTaxTable" name="premTaxTable">
+                  <option></option>
+                  <option *ngFor="let taxRate of taxRates" [value]="taxRate.code">
+                    {{taxRate.code}} - {{taxRate.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Regulatory Levy Table' | appTranslate | async}}</label>
+                <select type="number" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.regLevyTable" name="regLevyTable">
+                  <option value=""></option>
+                  <option *ngFor="let taxRate of taxRates" [value]="taxRate.code">
+                    {{taxRate.code}} - {{taxRate.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Stamp Duty Table' | appTranslate | async}}</label>
+                <select type="number" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.stampDutyTable" name="stampDutyTable">
+                  <option value=""></option>
+                  <option *ngFor="let taxRate of taxRates" [value]="taxRate.code">
+                    {{taxRate.code}} - {{taxRate.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Tax on Surrender Basis' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" id="tester" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.surrTaxBasis" name="surrTaxBasis">
+                  <option></option>
+                  <option *ngFor="let code of surrTaxBasis" [value]="code.code">
+                    {{code.code}} - {{code.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Tax on Maturity Basis' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" id="tester" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.matTaxBasis" name="matTaxBasis">
+                  <option></option>
+                  <option *ngFor="let code of matTaxBasis" [value]="code.code">
+                    {{code.code}} - {{code.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Tax on Surrender Table' | appTranslate | async}}</label>
+                <select type="number" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.surrTaxTable" name="surrTaxTable" >
+                  <option value=""></option>
+                  <option *ngFor="let taxRate of taxRates" [value]="taxRate.code">
+                    {{taxRate.code}} - {{taxRate.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Tax on Maturity Table' | appTranslate | async}}</label>
+                <select type="number" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyRates.matTaxTable" name="matTaxTable">
+                  <option value=""></option>
+                  <option *ngFor="let taxRate of taxRates" [value]="taxRate.code">
+                    {{taxRate.code}} - {{taxRate.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-fileLocations" role="tabpanel" aria-labelledby="pills-fileLocations-tab">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Cheque File Format' | appTranslate | async}}</label>
+                <input type="text" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyFileLocation.chequeFilePath" name="chequeFilePath" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Direct Credit File Format' | appTranslate | async}}</label>
+                <input type="text" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyFileLocation.directCreditFilePath" name="directCreditFilePath" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Mobile Money File Format' | appTranslate | async}}</label>
+                <input type="text" class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyFileLocation.mmFilePath" name="mmFilePath" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-emailGateway" role="tabpanel" aria-labelledby="pills-emailGateway-tab">
+          <div class="container">
+            <h6>{{'Email Out' | appTranslate | async}}</h6>
+            <div class="row mt-2" *ngFor="let companyEmailGatewayOut of createCompany.companyEmailGatewayOut; let i = index">
+              <div class="col-md-1 d-flex flex-column justify-content-end">
+                <label class="form-label text-primary small1">{{'Active' | appTranslate | async}}</label>
+                <div>
+                  <input class="form-control  control-bg-gray" type="checkbox" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="companyEmailGatewayOut.active" name="active_email_{{companyEmailGatewayOut.rowId}}" />
+                </div>
+              </div>
+              <div class="col-md-10 d-flex flex-column justify-content-end">
+                <label class="form-label text-primary small1">{{'Email Gateway' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [(ngModel)]="companyEmailGatewayOut.gatewayCode"
+                  name="gatewayCode_{{companyEmailGatewayOut.rowId}}" [disabled]="pageMode != 'CREATE' && !editMode">
+                  <option></option>
+                  <option *ngFor="let emailOut of emailGatewaysOut" [value]="emailOut.id">
+                    {{emailOut.senderEmail}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-1 d-flex flex-column justify-content-end">
+                <label class="form-label text-primary small1 text-center w-100">{{'Internal use only' | appTranslate | async}}</label>
+                <div>
+                  <input class="form-control  control-bg-gray mx-auto" type="checkbox" (change)="onInternalUseChange(i)"
+                  [(ngModel)]="companyEmailGatewayOut.internal" name="internal_{{companyEmailGatewayOut.rowId}}" [disabled]="pageMode != 'CREATE' && !editMode"/>
+                </div>
+              </div>
+
+            </div>
+
+            <h6 class="mt-3">{{'Email In' | appTranslate | async}}</h6>
+            <div class="row mt-2">
+              <div class="col-md-1">
+                <label class="form-label text-primary small1">{{'Active' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="checkbox" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyEmailGatewayIn.active" name="active_email" />
+              </div>
+              <div class="col">
+                <label class="form-label text-primary small1">{{'Email Gateway' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyEmailGatewayIn.gatewayCode" name="gatewayCodeEmailIn">
+                  <option></option>
+                  <option *ngFor="let emailIn of emailGatewaysIn" [value]="emailIn.id">
+                    {{emailIn.senderEmail}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-smsGateway" role="tabpanel" aria-labelledby="pills-smsGateway-tab">
+          <div class="container">
+            <br />
+            <div class="row">
+              <div class="col-md-1">
+                <label class="form-label text-primary">{{'Active' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="checkbox" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companySmsGateway.active" name="active_gateway" />
+              </div>
+              <div class="col">
+                <label class="form-label text-primary">{{'SMS Gateway' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companySmsGateway.gatewayCode" name="gateWayCode">
+                  <option *ngFor="let smsIdAndUrl of smsIdAndUrls" [value]="smsIdAndUrl.id">
+                    {{smsIdAndUrl.smsUrl}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1">
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-accountsTab" role="tabpanel" aria-labelledby="pills-accountsTab-tab">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <label class="form-label text-primary">{{'InterCompany Account Payable' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyPayable" name="interCoyPayable">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <label class="form-label text-primary">{{'InterCompany Claims Recoverable' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyClaimRec" name="interCoyClaimRec">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label class="form-label text-primary">{{'InterCompany Commission Account ' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyComm" name="interCoyComm">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col">
+                <label class="form-label text-primary">{{'InterCompany Balance Account' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyBal" name="interCoyBal">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label text-primary">{{'InterCompany Premiums Paid ' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyPremium" name="interCoyPremium">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-primary">{{'InterCompany Claims Recovered Account ' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyClaimRec" name="interCoyClaimRecAcc">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <label class="form-label text-primary">{{'InterCompany Claims Writeoff/Account' | appTranslate | async}}</label>
+                <select class="form-control  control-bg-gray" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.interCoyClaimWriteOff" name="interCoyClaimWriteOff">
+                  <option></option>
+                  <option *ngFor="let code of accCodes" [value]="code.code">
+                    {{code.description}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-primary">{{'Credit Note Valid Period (Days) ' | appTranslate | async}}</label>
+                <input class="form-control  control-bg-gray" type="number" [disabled]="pageMode != 'CREATE' && !editMode"
+                  [(ngModel)]="createCompany.companyAccount.cnValidDays" name="cnValidDays" />
+              </div>
+            </div>
+
+            <hr />
+
+            <div *ngFor=" let companyTolerance of createCompany.companyTolerance; let i = index">
+              <div class="row">
+                <div class="col-md-5">
+                  <label class="form-label text-primary">{{'Currency ' | appTranslate | async}}</label>
+                  <app-autocomplete-ng-model
+                    [options]="currencies"
+                    [showLabel]="false"
+                    [valueField]="'code'"
+                    labelType="cd"
+                    [stacked]="false"
+                    [(model)]="companyTolerance.currCode"
+                    name="currCode_{{companyTolerance.rowId}}"
+                    [required]="pageMode == 'CREATE'"
+                    [disabled]="pageMode != 'CREATE' && !editMode"
+                  ></app-autocomplete-ng-model>
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label text-primary">{{'Tolerance ' | appTranslate | async}}</label>
+                  <input class="form-control  control-bg-gray" type="number" [disabled]="pageMode != 'CREATE' && !editMode"
+                    [(ngModel)]="companyTolerance.tolerance" name="active_tolerance_{{companyTolerance.rowId}}" />
+                </div>
+                <div class="col-md-2 mt-2">
+                  <label>&nbsp;</label>
+                  <app-button [buttonType]="'delete'" (click)="removeTolerance(i)"></app-button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2 justify-content-end">
+              <div class="col-md-2">
+                <app-button [buttonType]="'add'" (click)="addTolerance()"></app-button>
+              </div>
+            </div>
+            <div class="row mt-5 justify-content-end">
+              <div class="col-md-2">
+                <app-button [buttonType]="'save'" (click)="createNewCompany()"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+</loader>

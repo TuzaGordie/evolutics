@@ -1,0 +1,42 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Premium Frequencies '"></app-form-navigation> -->
+<div class="d-flex justify-content-end my-3" *ngIf="showEditButton">
+  <button class="btn btn-lg" [ngClass]="editMode ? 'btn-primary' : 'btn-outline-primary'"
+    (click)="editMode = !editMode">
+    <span class="fa fa-edit"></span> {{'Edit'|appTranslate|async}}
+  </button>
+</div>
+<hr *ngIf="showEditButton">
+<form #f="ngForm" novalidate>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="row justify-content-center">
+          <div class="col-md-12">
+            <label class="form-label text-primary">{{"Premium Frequency Code"|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="premFreq.premFreq" required name="premFreq" [disabled]="!editMode">
+              <option *ngFor="let premFreq of premFreqs" [value]="premFreq.code">
+                {{premFreq.code}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray" [(ngModel)]="premFreq.description" required name="description"  [disabled]="!editMode">
+          </div>
+          <div class="col-md-12">
+            <label class="form-label text-primary">{{"No of Payments in a Year"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray" type="number" [(ngModel)]="premFreq.noPayYear" required
+              name="noPayYear" [disabled]="!editMode">
+          </div>
+        </div>
+
+        <div class="row mt-5 justify-content-end">
+          <div class="col-2 ">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'save'" (click)="createPremFreq()"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,24 @@
+ <app-form-navigation [title]="'Find Provider'"></app-form-navigation>
+<div class="container mt-5">
+  <form [formGroup]="findProviderForm">
+    <div class="row">
+      <div class="row my-2">
+        <div class="col-md-2">
+          <label class="py-2">{{'Provider Name'|appTranslate|async}}</label>
+        </div>
+        <div class="col-md-8">
+          <app-input-basic [form]="findProviderForm" [showLabel]="false" name="providerName" >
+          </app-input-basic>
+        </div>
+        <div class="col-md-auto">
+          <app-btn type="dark" icon="search" (mclick)="onSearch()">Search</app-btn>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 text-danger" *ngIf="attemptedEmptySearch">{{'Please fill in at least one field in order to search!'|appTranslate|async}}</div>
+      </div>
+    </div>
+
+  </form>
+
+</div>

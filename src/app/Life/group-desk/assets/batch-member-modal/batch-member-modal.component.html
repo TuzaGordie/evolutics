@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-between">
+  <h2 mat-dialog-title>{{ 'Batch Member Upload' | appTranslate | async }}</h2>
+  <button class="btn-close" mat-dialog-close></button>
+</div>
+<mat-dialog-content style="overflow: scroll">
+  <loader [loading]="loading">
+    <app-input-table [schemas]="schemas" [label]="title"></app-input-table>
+  </loader>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-between">
+  <!-- <div class="row flex-grow-1">
+    <div class="col-md-3">
+      {{ 'Amount Received' | appTranslate | async }}:
+      <b>{{ +receipt.amount || 0 | number }}</b>
+    </div>
+    <div class="col-md-3">
+      {{ 'Total Amount entered' | appTranslate | async }}:
+      <b>{{ totalAmountEntered | number }}</b>
+    </div>
+    <div class="col-md-3">
+      remaning is difference between receipt.amount and entered amount
+      {{ 'Remaining' | appTranslate | async }}:
+      <b>{{ (+receipt.amount || 0) - totalAmountEntered | number }}</b>
+    </div>
+  </div> -->
+  <button class="btn btn-outline-primary align-self-end" mat-dialog-close>
+    <!-- [disabled]="+totalAmountEntered != +receipt.amount" -->
+    <i class="fas fa-save px-2"></i> {{ 'Save' | appTranslate | async }}
+  </button>
+</mat-dialog-actions>

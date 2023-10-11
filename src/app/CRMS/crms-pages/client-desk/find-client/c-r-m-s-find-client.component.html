@@ -1,0 +1,277 @@
+<app-form-navigation [title]="'Find Client'"></app-form-navigation>
+<div class="container mt-5">
+  <form [formGroup]="findCRMClientForm">
+    <div class="row">
+      <div class="col-md-1">
+        <label class="py-2"> </label>
+      </div>
+      <div class="col" style="position: relative;">
+        <input type="text" formControlName="clientNo" placeholder="Client Number" class="form-control control-bg-gray "
+               [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required
+               (keyup)="setClientList()" [(ngModel)]="clientNo">
+        <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i class="fa fa-check"></i></div>
+        <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"><i class="fa fa-times"></i>
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-dark btn-lg mx-2" [ngClass]="{changecolor: validResult == 'true'}"
+                [disabled]="validResult == 'false' || validResult == '' " (click)="onNext()">
+          <fa-icon [icon]="faEye"></fa-icon>
+          Show
+        </button>
+      </div>
+      <div class="col position-relative">
+        <input type="text" formControlName="enrolee" class="form-control control-bg-gray " placeholder="Enrolee No"
+               [ngClass]="{bordercheck: validResult2 == 'true' , borderuncheck: validResult2 == 'false'}" required
+               (keyup)="setEnroleeList()">
+        <div style="display: none;" [ngClass]="{checkmark: validResult2 == 'true'}"><i class="fa fa-check"></i>
+        </div>
+        <div style="display: none;" [ngClass]="{uncheckmark: validResult2 == 'false'}"><i class="fa fa-times"></i>
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-dark btn-lg  mx-2" [ngClass]="{changecolor: validResult2 == 'true'}"
+                [disabled]="validResult2 == 'false' || validResult2 == '' " (click)="onNext()">
+          <fa-icon [icon]="faEye"></fa-icon>
+          Show
+        </button>
+      </div>
+      <div class="col" style="position: relative;">
+        <input type="text" formControlName="providerNo" class="form-control control-bg-gray " placeholder="Provider No"
+               [ngClass]="{bordercheck: validResult3 == 'true' , borderuncheck: validResult3 == 'false'}" required
+               (keyup)="setProviderList()">
+        <div style="display: none;" [ngClass]="{checkmark: validResult3 == 'true'}"><i class="fa fa-check"></i>
+        </div>
+        <div style="display: none;" [ngClass]="{uncheckmark: validResult3 == 'false'}"><i class="fa fa-times"></i>
+        </div>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-dark btn-lg " [ngClass]="{changecolor: validResult3 == 'true'}"
+                [disabled]="validResult3 == 'false' || validResult3 == '' " (click)="onNext()">
+          <fa-icon [icon]="faEye"></fa-icon>
+          Show
+        </button>
+      </div>
+
+
+
+    </div>
+    <br>
+
+  </form>
+  <div class="flex-lg-1 h-screen overflow-y-lg-auto">
+    <header>
+      <div class="container">
+        <div class="border-bottom pt-6">
+          <div class="row  mb-3 align-items-center justify-content-around">
+            <div class="col-sm " style="margin-right: 97px;">
+              <p>{{clientList.length || 0}} Record{{clientList.length == 1 ? '' : 's'}}</p>
+              <!-- <p  style="margin-top: -14px;font-size: 13px;margin-left: 5px;"></p> -->
+            </div>
+            <div class="col-2 justify-content-end">
+
+
+
+            </div>
+          </div>
+          <ul class="nav nav-tabs overflow-x border-0">
+            <li class="nav-item"><a class="nav-link"></a></li>
+            <li class="nav-item"><a class="nav-link "></a></li>
+            <li class="nav-item"><a class="nav-link "></a></li>
+          </ul>
+
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto search-bar" [formGroup]="searchForm">
+              <div class="nav me-1">
+                <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                  <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+                <div class="input-group rounded">
+
+                  <input formControlName="name" type="text" class="form-control " placeholder="Search Name">
+                </div>
+              </div>
+              <div class="nav me-1">
+                <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                  <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+                <div class="input-group rounded">
+
+                  <input formControlName="phoneNo" type="text" class="form-control " placeholder="Search Phone">
+                </div>
+              </div>
+              <div class="nav me-1">
+                <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                  <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+                <div class="input-group rounded">
+
+                  <input formControlName="email" type="text" class="form-control " placeholder="Search Email">
+                </div>
+              </div>
+              <div class="nav me-1">
+                <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                  <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+                <div class="input-group rounded">
+
+                  <input formControlName="externalRef" type="text" class="form-control " placeholder="Search Ref">
+                </div>
+              </div>
+              <div class="nav me-1">
+                <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                  <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+                <div class="input-group rounded">
+
+                  <input formControlName="createdBy" type="text" class="form-control " placeholder="Search Created By">
+                </div>
+              </div>
+
+              <!--
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                              Action
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Action</a></li>
+                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                          </div> -->
+              <li class="nav-item dropdown text-primary">
+                <a class="nav-link dropdown-toggle text-primary" id="navbarDropdown" role="button"
+                   data-bs-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                  <span>Created Date</span>
+                </a>
+                <span class="created-date">{{createdDateName(createdDate)}}</span>
+                <div class="dropdown-menu" style="margin:0;padding:0;" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" style="margin:0;padding:0;">
+
+                  </a>
+                  <div class="submenu-bar-dropdown">
+                    <a class="dropdown-item" [ngClass]="createdDate == 'TODAY' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('TODAY')">
+                      <h6>Today</h6>
+                      <label>Today from midnight until the current time</label>
+                    </a>
+                    <a class="dropdown-item" [ngClass]="createdDate == 'YESTERDAY' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('YESTERDAY')">
+                      <h6>Yesterday</h6>
+                    </a>
+                    <a class="dropdown-item" [ngClass]="createdDate == 'LAST_WEEK' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('LAST_WEEK')">
+                      <h6>Last week</h6>
+                    </a>
+                    <a class="dropdown-item" [ngClass]="createdDate == 'LAST_MONTH' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('LAST_MONTH')">
+                      <h6>Last Month</h6>
+                    </a>
+                    <a class="dropdown-item" [ngClass]="createdDate == 'LAST_3_MONTHS' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('LAST_3_MONTHS')">
+                      <h6>Last 3 Months</h6>
+                    </a>
+                    <a class="dropdown-item" [ngClass]="createdDate == 'LAST_6_MONTHS' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('LAST_6_MONTHS')">
+                      <h6>Last 6 Months</h6>
+                    </a>
+                    <a class="dropdown-item" [ngClass]="createdDate == 'LAST_YEAR' && 'active'" style="margin:0;padding:4px;" (click)="setCreatedDate('LAST_YEAR')">
+                      <h6>Last Year</h6>
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <div class="nav">
+                <!-- <button type="button" class="btn btn-sm top-btn btn-outline-primary mr-auto">
+                  <i class="fa fa-save" style="margin-right: 4px;"></i>Save View</button> -->
+
+                <div class="input-group rounded">
+
+                  <button *ngIf="!isSearching" class="btn btn-outline-primary" id="search-addon" (click)="onSearch()">
+                    <i class="fas fa-search"></i>
+                  </button>
+                  <button *ngIf="isSearching" class="btn btn-outline-primary">
+                    <i class="fa fa-refresh fa-spin"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- <li class="nav-item">
+                <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" aria-expanded="false">
+                  <i class="fa fa-sliders" style="margin-left: 2px;"></i> More Filters
+                </a>
+              </li> -->
+            </ul>
+            <!-- <div> -->
+            <div class="nav" style="margin-right: 8px;margin-left: auto;">
+              <!-- <button type="button" class="btn btn-primary top-btn navbar-btn mr-auto">
+                Table Actions
+                <i class="fab fa-arrow-alt-down"></i>
+              </button> -->
+              <app-btn icon="download" type="outline" (click)="downloadClientsList()">Download</app-btn>
+            </div>
+
+
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="py-6 bg-surface-secondary">
+      <div class="container-fluid">
+        <div class="">
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table  table-bordered table-hover" id="clientsList">
+                <thead class="thead-light table-light">
+                <tr>
+                  <!-- <th class="table-head text-start" scope="col">NAME</th>
+                  <th class="table-head text-start"scope="col">EMAIL</th>
+                  <th class="table-head text-start" scope="col">PHONE NUMBER</th>
+                  <th class="table-head text-start" scope="col">CONTACT OWNER</th>
+                  <th class="table-head text-start" scope="col">PRIMARY CONTACT</th> -->
+                  <th class="table-head text-center" scope="col">Client Number</th>
+                  <th class="table-head text-center" scope="col">Title</th>
+                  <th class="table-head text-center" scope="col">Name</th>
+                  <th class="table-head text-center" scope="col">Gender</th>
+                  <th class="table-head text-center" scope="col">Type</th>
+                  <th class="table-head text-center" scope="col">Created On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let record of clientList">
+                  <td><a routerLink="../view-client" [queryParams]="{clientNo: record.clientNo}">{{record.clientNo}}</a></td>
+                  <td>{{record.title}}</td>
+                  <td><a routerLink="../view-client" [queryParams]="{clientNo: record.clientNo}">{{getName(record)}}</a></td>
+                  <td>{{record.gender}}</td>
+                  <td>{{record.type}}</td>
+                  <td>{{record.createdOn | date}}</td>
+                </tr>
+                </tbody>
+              </table>
+              <p *ngIf="!clientList.length" class="text-center">enter search parameter(s) to see records</p>
+            </div>
+            <div class="card-footer border-0 py-5">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <!-- <li class="page-item disabled"> -->
+                  <a class="page-link" tabindex="-1">prev</a>
+                  <!-- </li> -->
+                  <li class="page-item"><a class="page-link">1</a></li>
+                  <!-- <li class="page-item"> -->
+                  <a class="page-link">next</a>
+                  <!-- </li> -->
+                </ul>
+              </nav>
+              <label></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</div>

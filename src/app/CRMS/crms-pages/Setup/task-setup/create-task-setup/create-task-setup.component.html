@@ -1,0 +1,399 @@
+<app-form-navigation [title]="'Set Up / Task Setup  '"></app-form-navigation>
+
+<div class="container">
+
+  <div class="row mt-2">
+    <div class="col-md-2">
+      <label class="text-red form-label">{{'Task Code'|appTranslate|async}}</label>
+      <input class="form-control  control-bg-gray">
+    </div>
+    <div class="col-md-4">
+      <label class="text-red form-label">{{'Task Name'|appTranslate|async}}</label>
+      <input class="form-control  control-bg-gray">
+    </div>
+
+    <div class="col">
+      <label class="text-red form-label">{{'On Completion Trigger'|appTranslate|async}}</label>
+      <select class="form-control  control-bg-gray">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+
+
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-6">
+      <label class="text-red form-label">{{'Workflow Group'|appTranslate|async}}</label>
+      <select class="form-control  control-bg-gray">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+
+    </div>
+    <div class="col">
+      <label class="form-label text-red small1">&nbsp;</label>
+      <input class="form-control  control-bg-gray" placeholder="days">
+
+    </div>  <div class="col">
+    <label class="text-red form-label">&nbsp;</label>
+    <input class="form-control  control-bg-gray" placeholder="hours">
+
+  </div>
+    <div class="col">
+      <label class="text-red form-label">&nbsp;</label>
+      <input class="form-control  control-bg-gray" placeholder="mins">
+
+    </div>
+    <div class="col-3">
+      <label class="text-red form-label">&nbsp;{{'after event'|appTranslate|async}}</label>
+      <select class="form-control  control-bg-gray">
+        <option></option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-6">
+
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="row mt-2">
+        <div class="col-4">
+          <label class="text-red form-label">{{'SLA'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" placeholder="days">
+
+        </div>
+
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="hours">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="mins">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" style="background-color: red;">
+
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label class="text-red form-label">{{'SLA Warning'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" placeholder="days">
+
+        </div>
+
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="hours">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="mins">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" style="background-color: rgb(207, 182, 37);">
+
+        </div>
+
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label class="text-red form-label">{{'1st Order Escalate After'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" placeholder="days">
+
+        </div>
+
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="hours">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="mins">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" style="background-color: rgb(0, 0, 0);">
+
+        </div>
+
+      </div>
+      <div class="row mt-2">
+        <div class="col-4">
+          <label class="text-red form-label">{{'2nd Order Escalate After'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" placeholder="days">
+
+        </div>
+
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="hours">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="mins">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" style="background-color: rgb(0, 0, 0);">
+
+        </div>
+
+
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label class="text-red form-label">{{'If unclosed After'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" placeholder="days">
+
+        </div>
+
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <input class="form-control  control-bg-gray" placeholder="hours">
+
+        </div>
+        <div class="col">
+          <label class="text-red form-label">{{'Action'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+
+        </div>
+
+
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label class="text-red form-label">{{'Task Instructions'|appTranslate|async}}</label>
+          <textarea name="" id="" cols="30" rows="3" class="form-control  control-bg-gray"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <label class="text-red form-label">{{'Default User'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="text-red form-label">{{'Event On Creation'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray">
+        </div>
+
+
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <label class="text-red form-label">{{'Default User Group'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="text-red form-label">{{'Event On Assignment'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray">
+        </div>
+
+
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <label class="text-red form-label">{{'Maintenance Function Link'|appTranslate|async}}</label>
+          <select name="" id="" class="form-control  control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="text-red form-label">{{'Event On Completion'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray">
+        </div>
+
+
+      </div>
+      <div class="row mt-2" *ngFor="let i of catCounter()">
+        <div class="col">
+          <label class="text-red form-label">{{'Companies Allowed'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col">
+          <label class="text-red form-label">&nbsp;</label>
+          <app-button [buttonType]="'addred'" (click)="catInc()"></app-button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Hide from manual selection'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Unique Policy'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Auto Assign to user who create
+          policy'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Random Assign'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Prevent Manual closure'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Client Not Mandatory'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-red w-100 text-center small1">{{'Check-list'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray mx-auto" data-bs-toggle="modal"
+               data-bs-target="#itemsModal">
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-12 d-flex justify-content-end">
+      <app-button [buttonType]="'save-red'" ></app-button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal  fade" id="itemsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Items'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label">
+                {{'Checklist category'|appTranslate|async}}
+              </label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngFor="let i of itemsCounter()">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label">
+                {{'Item'|appTranslate|async}}
+              </label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <label for="" class="form-label w-100 text-center">{{'Mandatory'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control control-bg-gray mx-auto">
+            </div>
+          </div>
+
+        </div>
+        <div class="row justify-content-end mt-3">
+          <div class="col-3">
+            <div class="form-group">
+              <app-button buttonType="addred" (click)="itemsInc()"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save-red" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

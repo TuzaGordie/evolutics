@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="mb-5">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Ref Category' | appTranslate | async }}</label>
+            <select name="" id="" class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Ref Number' | appTranslate | async }}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input name="" id="" class="form-control control-bg-gray" readonly>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary"> <span
+                  class="small1">{{'Issued On' | appTranslate | async }}</span></label>
+                <input class="form-control control-bg-gray" placeholder="mm/dd/yyyy" readonly>
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-primary"> <span
+                  class="small1">{{'Renewal Due On' | appTranslate | async }}</span></label>
+                <input class="form-control control-bg-gray" placeholder="mm/dd/yyyy" readonly>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Transaction Reason' | appTranslate | async }}</label>
+            <select name="" id="" class="form-control control-bg-gray" formControlName="transType">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Claim Type' | appTranslate | async }}</label>
+            <select name="" id="" class="form-control control-bg-gray" formControlName="transType">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Currency' | appTranslate | async }}</label>
+            <select name="" id="" class="form-control control-bg-gray" formControlName="currency">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col mt-3">
+
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Effective Date' | appTranslate | async }}</label>
+            <input name="" id="" type="date" class="form-control control-bg-gray">
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row mt-5" *ngFor="let i of accCounter()">
+        <div class="col mt-3">
+
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Debit / Credit' | appTranslate | async }}</label>
+            <select name="" id="" type="text" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+
+          </div>
+
+        </div>
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Account Code' | appTranslate | async }}</label>
+            <select name="" id="" class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Ledger' | appTranslate | async }}</label>
+            <input class="form-control control-bg-gray">
+
+          </div>
+        </div>
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Amount' | appTranslate | async }}</label>
+            <input class="form-control control-bg-gray">
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="row justify-content-between mt-3">
+        <div class="col-2">
+          <button class="btn btn-lg btn-primary w-100" (click)="accInc()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Add
+          </button>
+        </div>
+        <div class="col-3">
+          <app-btn type="secondary">{{'Check Standard Mapping' | appTranslate | async }}</app-btn>
+        </div>
+      </div>
+      <div class="row mt-5">
+
+        <div class="col  mt-3">
+          <div class="form-group">
+            <label for="" class="text-primary form-label">{{'Narration' | appTranslate | async }}</label>
+            <textarea name="" id="" cols="30" rows="2" class="form-control control-bg-gray">
+
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-end mt-3">
+        <div class="col-3">
+          <button class="btn btn-lg btn-outline-primary w-100">
+            <fa-icon [icon]="faCheck"></fa-icon>
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

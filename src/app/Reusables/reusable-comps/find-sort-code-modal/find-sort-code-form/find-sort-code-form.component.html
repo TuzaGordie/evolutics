@@ -1,0 +1,82 @@
+ <loader [loading]="loading">
+
+   <div>
+     <div class="row align-items-end justify-content-center">
+       <div class="col-md-3">
+         <app-input-basic label="Select Country" type="select" [form]="form" name="country" [stacked]="true"
+           [options]="aeS.getCountry|functionCaller|async" labelType="cd" valueField="code" #country>
+         </app-input-basic>
+       </div>
+
+       <div class="col-md-3">
+         <app-input-basic label="Select Region" type="select" [form]="form" name="region" [stacked]="true"
+           [options]="aeS.getRegion|functionCaller1:country?.value|async" labelType="cd" valueField="code" #region>
+         </app-input-basic>
+       </div>
+
+       <div class="col-md-3">
+         <app-input-basic label="Select State" type="select" [form]="form" name="city" [stacked]="true"
+           [options]="aeS.getCitiesByRegion|functionCaller1:region?.value|async" labelType="cd" valueField="code" #state>
+         </app-input-basic>
+       </div>
+
+       <div class="col-md-3">
+         <app-input-basic label="Select Town" type="select" [form]="form" name="town" [stacked]="true"
+           [options]="aeS.getTownByCity|functionCaller1:state?.value|async" labelType="cd" valueField="code" #town>
+         </app-input-basic>
+       </div>
+
+       <div class="col-md-3">
+         <app-input-basic label="Select Bank" type="select" [form]="form" name="bankName" [stacked]="true"
+           [options]="aeS.getBanks|functionCaller|async" labelType="cd" valueField="code" #bank>
+         </app-input-basic>
+       </div> 
+
+       <div class="col-md-3">
+         <app-input-basic label="Sort Code" type="text" [form]="form" name="sortCode" [stacked]="true"
+            >
+         </app-input-basic>
+       </div> 
+
+       <!-- <div class="col-md-3">
+         <app-input-basic label="Select Branch" type="select" [form]="form" name="branch" [stacked]="true"
+           [options]="aeS.getBranchTitleByBankCode|functionCaller1:bank?.value?.code|async" labelType="cd" labelType="cd" #branch>
+         </app-input-basic>
+       </div> -->
+
+       <div class="col-auto mt-4" *ngIf="showShowBtn">
+         <app-btn type="dark" icon="search" (mclick)="search()"> Search</app-btn>
+       </div>
+
+     </div>
+
+     <div class="cage mt-2" *ngIf="result">
+       <table class="table border table-striped">
+         <thead>
+           <tr>
+             <th>Code</th>
+             <th>Sort Code</th>
+             <th>Title</th>
+             <th>HQ</th>
+             <th></th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let item of result?.page?.content;let i = index">
+             <td>{{item.code}} </td>
+             <td>{{item.sortCode}} </td>
+             <td>{{item.title}} </td>
+             <td>{{item.hq?'Yes':'No'}}</td>
+             <td>
+               <app-btn type="outline-nm" (mclick)="select(i)"> Select</app-btn>
+             </td>
+           </tr>
+         </tbody>
+       </table>
+       <div class="vh-20 center" *ngIf="result?.page?.empty">
+         There were no results found
+       </div>
+     </div>
+   </div>
+
+ </loader>

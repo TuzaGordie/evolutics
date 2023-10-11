@@ -1,0 +1,404 @@
+<div class="container pt-5">
+  <div class="row justify-content-center">
+    <form [formGroup]="chartForm">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-3">
+        <app-input-basic label="Select Company Code" type="select" [form]="chartForm" name="companyChartCode" [stacked]="true"
+          [options]="veS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" #companyCode>
+        </app-input-basic>
+      </div>
+      <div class="col-3">
+        <app-input-basic label="Select Branch" type="select" [form]="chartForm" name="branch" [stacked]="true"
+          [options]="veS.getBranchCodeAndDescByCompanyCode|functionCaller1:companyCode?.value?.code|async" labelType="cd" #branch>
+        </app-input-basic>
+      </div>
+      <div class="col-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-3">
+        <app-input-basic type="select" [colored]="true" label=" Select Certificate Category" [form]="chartForm" name="certCat" [stacked]="true"
+        [options]="veS.getCodeSubGroup|functionCaller1:'CERT_CAT'|async" (mchange)="populateField('chart',companyCode?.value?.code,certCat?.value.code)" labelType="ct" #certCat>
+      </app-input-basic>
+      </div>
+      <div class="col-3">
+        <app-input-basic label="Select Agent" type="select" [form]="chartForm" name="agent" [stacked]="true"
+        [options]="veS.getAllAgentsNo|functionCaller|async" valueField="no" labelField="no" #agent>
+      </app-input-basic>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </form>
+  <div class="col-md-5 shadow-sm d-flex justify-content-center align-items-center" id="performance_indicator">
+    <div class="chart-wrapper w-100">
+      <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+        [plugins]="lineChartPlugins">
+      </canvas>
+    </div>
+  </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-2 d-flex align-items-center">
+      <label for="" class="form-label ">{{'Register New Certificates'|appTranslate|async}}</label>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="form-control control-bg-gray" data-bs-toggle="modal" data-bs-target="#RNCModal">
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2 d-flex align-items-center">
+      <label for="" class="form-label ">{{'Issue Certificates'|appTranslate|async}}</label>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="form-control control-bg-gray" data-bs-toggle="modal" data-bs-target="#ICModal">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-2 d-flex align-items-center">
+      <label for="" class="form-label ">{{'Pre-Order'|appTranslate|async}}</label>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="form-control control-bg-gray" data-bs-toggle="modal" data-bs-target="#POCModal">
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2 d-flex align-items-center">
+      <label for="" class="form-label ">{{'Setup'|appTranslate|async}}</label>
+    </div>
+    <div class="col-2">
+      <input type="checkbox" class="form-control control-bg-gray" data-bs-toggle="modal" data-bs-target="#SetupModal">
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="RNCModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="registerNew" (submit)="onSubmit('register-new')">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Register New Certificates'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <app-input-basic type="select" label="Company" [colored]="true" [form]="registerNew" name="companyCode" [stacked]="true"
+                [options]="veS.getCompanyCodeAndDesc|functionCaller|async" (mchange)="populateField('register-new')"
+                labelType="cd" #companyCode>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-input-basic type="select" [colored]="true" label="Certificate Category" [form]="registerNew" name="certCat" [stacked]="true"
+                [options]="veS.getCodeSubGroup|functionCaller1:'CERT_CAT'|async" labelType="ct" #certCat>
+              </app-input-basic>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <app-input-basic type="text" [colored]="true" label="Certificate From Range" [form]="registerNew" name="fromRange" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-input-basic type="text" [colored]="true" label="Certificate To Range" [form]="registerNew" name="toRange" [stacked]="true">
+              </app-input-basic>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <app-input-basic type="text" [colored]="true" label="No of Certificates" [form]="registerNew" name="noCert" [stacked]="true">
+              </app-input-basic>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-btn type="primary" icon="save" data-bs-dismiss="modal" [valid]="registerNew?.valid"
+            (mclick)="onSubmit('register-new')">
+            Save</app-btn>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<div class="modal fade" id="SetupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="setUpform" (submit)="onSubmit('setup')">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Setup'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-6 mx-auto">
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label "> {{'Company'|appTranslate|async}}</label>
+                <app-input-basic type="select" [form]="setUpform" name="companyCode" [stacked]="true"
+                  [options]="veS.getCompanyCodeAndDesc|functionCaller|async" (mchange)="populateField('setup')"
+                  labelType="cd" #companyCode>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label ">{{'Certificate Category'|appTranslate|async}}</label>
+                <app-input-basic type="select" [form]="setUpform" name="certCat" [stacked]="true"
+                  [options]="veS.getCodeSubGroup|functionCaller1:'CERT_CAT'|async" labelType="ct" #certCat>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label ">{{'Reorder Level'|appTranslate|async}}</label>
+                <app-input-basic type="text" [form]="setUpform" name="reOrderLevel" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label ">{{'Currency'|appTranslate|async}}</label>
+                <app-input-basic type="select" [form]="setUpform" name="currency" [stacked]="true"
+                  [options]="veS.getCurrency|functionCaller|async" labelType="cd" #currency>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label ">{{'Cost Per Certificate'|appTranslate|async}}</label>
+                <app-input-basic type="text" [form]="setUpform" name="costPerCert" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <app-btn type="primary" icon="save" data-bs-dismiss="modal" [valid]="setUpform?.valid"
+            (mclick)="onSubmit('setup')">
+            Save</app-btn>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="POCModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="preOrderForm" (submit)="onSubmit('pre-order')">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Pre-Order Certificates'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label ">{{'Certificate Company'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="preOrderForm" name="companyCode" [stacked]="true"
+                [options]="veS.getCompanyCodeAndDesc|functionCaller|async" (mchange)="populateField('pre-order')"
+                labelType="cd" #companyCode>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'No Of Certificates UnIssued'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="certUnIssue" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'No Of Certificates UnConverted'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="certUnConvert" [stacked]="true">
+              </app-input-basic>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label ">{{'Reorder Level'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="reOrderLevel" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Reorder Required'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="reOrderRequired" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Total Amount'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="totalAmount" [stacked]="true">
+              </app-input-basic>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <label for="" class="">{{'Payment Outward'|appTranslate|async}}</label>
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <label for="" class="form-label ">{{'Type'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="preOrderForm" name="type" [stacked]="true"
+                [options]="veS.getAllPayoutCodeAndDescription|functionCaller|async" labelType="cd" #type>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Currency'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="preOrderForm" name="currency" [stacked]="true"
+                [options]="veS.getCurrency|functionCaller|async" labelType="cd" #currency>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'changes'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="changes" [stacked]="true">
+              </app-input-basic>
+
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Payee No'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="payeeNo" [stacked]="true">
+              </app-input-basic>
+
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Payee Name'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="preOrderForm" name="payeeName" [stacked]="true">
+              </app-input-basic>
+
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Bank Account'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="preOrderForm" name="bankAccount" [stacked]="true"
+                [options]="veS.getBankAccount|functionCaller|async" labelType="cd" #bankAccount>
+              </app-input-basic>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label ">{{'Narration'|appTranslate|async}}</label>
+              <app-input-basic type="textarea" [form]="preOrderForm" name="narration" [stacked]="true">
+              </app-input-basic>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <app-btn type="primary" icon="save" data-bs-dismiss="modal" [valid]="preOrderForm?.valid"
+            (mclick)="onSubmit('pre-order')">
+            Save</app-btn>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<div class="modal fade" id="ICModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <form [formGroup]="issueCertForm" (submit)="onSubmit('issue-cert')">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'Issue Certificates'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label ">{{'Issue From'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="issueCertForm" name="issueFrom" [stacked]="true"
+                [options]="veS.getCodeSubGroup|functionCaller1:'ISSUE_FROM'|async" labelType="ct" #issueFrom>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Code'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="issueCertForm" name="code" [stacked]="true"
+                [options]="veS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd"
+                (mchange)="populateField('issue-from')" #code>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Certificate Category'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="issueCertForm" name="certCat" [stacked]="true"
+                [options]="veS.getCodeSubGroup|functionCaller1:'CERT_CAT'|async" labelType="ct" #certCat>
+              </app-input-basic>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <label for="" class="form-label ">{{'Agent No'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="issueCertForm" name="agentNo" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-2">
+              <label for="" class="form-label ">&nbsp;</label>
+              <app-button (click)="search('agent')" buttonType="findGB"></app-button>
+            </div>
+            <div class="col-2">
+              <label for="" class="form-label mb-2">&nbsp;</label>
+              <p>{{agentName}}</p>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <label for="" class="form-label ">{{'Branch'|appTranslate|async}}</label>
+              <app-input-basic type="select" [form]="issueCertForm" name="branchCode" [stacked]="true"
+                [options]="veS.getBranchCodeAndDescByCompanyCode|functionCaller1:code?.value?.code|async" labelType="cd"
+                #branch>
+              </app-input-basic>
+            </div>
+            <!-- <div class="col-2">
+              <label for="" class="form-label ">&nbsp;</label>
+              <app-button (mclick)="search('office')" buttonType="findGB"></app-button>
+            </div>
+            <div class="col-2">
+              <label for="" class="form-label mb-2">&nbsp;</label>
+              <p>{{coporateOfficeName}}</p>
+            </div> -->
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label ">{{'No of Certificates UnConverted'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="issueCertForm" name="certUnConvert" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'No of Certificates To Be Used'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="issueCertForm" name="cumCertIssue" [stacked]="true">
+              </app-input-basic>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label ">{{'Certificate From Range'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="issueCertForm" name="fromRange" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <label for="" class="form-label ">{{'Certificate To Range'|appTranslate|async}}</label>
+              <app-input-basic type="text" [form]="issueCertForm" name="toRange" [stacked]="true">
+              </app-input-basic>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <app-btn type="primary" icon="save" data-bs-dismiss="modal" [valid]="issueCertForm?.valid"
+            (mclick)="onSubmit('issue-cert')">
+            Save</app-btn>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

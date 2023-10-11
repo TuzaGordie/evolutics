@@ -1,0 +1,120 @@
+
+<div class="modal fade" id="questionnaire" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Motor Risk Questionnaire</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <label for="" class="w-100">3rd Party
+          <hr>
+        </label>
+        <div class="row">
+          <div class="col">
+            <label for="">In what year did you start driving ?</label>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <label for="" class="form-label ">Have you or any other person who will be authorized to drive this vehicule,
+          been involved in a motor accident before?</label>
+        <div class="row my-3">
+          <div class="col">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Yes
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                No
+              </label>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-warning">If yes, please provide details</label>
+            <input class="form-control control-bg-gray">
+          </div>
+        </div>
+        <Label class="mt-2 w-100">
+          <hr>
+          Other Motor Risks
+          <hr>
+        </Label>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label mt-2">Where is the vehicule usually parked at night?</label>
+          </div>
+          <div class="col-8">
+            <div class="row my-2">
+              <div class="col">
+                <input class="form-check-input  mx-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+
+                <label class="form-check-label " for="flexRadioDefault1">
+                  Parked in the open in the sheet
+                </label>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col">
+                <input class="form-check-input mx-2" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Parked within a fenced compound
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <label for="">Is the vehicule equiped with an anti-theft ?</label>
+          </div>
+          <div class="col-8">
+            <div class="form-check form-check-inline mx-2">
+              <input class="form-check-input " type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Yes
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                No
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <label for="" class="form-label text-warning">If Yes, give details</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col">
+            <label for="">How many persons are authorised to drive the vehicle ?</label>
+          </div>
+          <div class="col-3">
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+
+      <app-button [buttonType]="'saveGB'" data-bs-dismiss="modal"></app-button>
+
+
+    </div>
+  </div>
+</div>
+</div>

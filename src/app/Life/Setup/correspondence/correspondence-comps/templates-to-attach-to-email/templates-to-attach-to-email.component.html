@@ -1,0 +1,29 @@
+ <div class="mt-3">
+   <h6>
+     {{ 'Templates to Attach' | appTranslate | async }}
+   </h6>
+   <div class="row align-items-end" *ngFor="let item of createCorrespondence.correspondenceTemplates;let i = index">
+     <div class="col-md">
+       <div class="row">
+         <div class="col-md">
+           <app-input-td-rf label="Template Category" [(model)]="item.templateCat" type="select" [stacked]="true"
+             [options]="codeService.getCodesByCodeSubGroup
+                              | functionCaller1: 'TEMPLATE_CAT'
+                              | async" [clearOnDisable]="false" [disabled]="isShow" valueField="code" labelType="ct" #templateCatTag></app-input-td-rf>
+         </div>
+         <div class="col-md">
+           <app-input-td-rf label="Template to Attach to Email" [(model)]="item.templateCode" type="select"
+             [stacked]="true" [options]="templateService.getTemplateCodeAndDescByTemplateCat
+                        | functionCaller1: templateCatTag.value
+                        | async" [clearOnDisable]="false" [disabled]="isShow" valueField="code" labelType="cd" #templateCatTag></app-input-td-rf>
+         </div>
+       </div>
+     </div>
+     <div class="col-md-auto d-flex" *ngIf="!isShow">
+       <app-btn group="delete" [disabled]="createCorrespondence.correspondenceTemplates?.length==1"
+         (mclick)="removeTemplate(i)"></app-btn>
+       <span class="mx-1"></span>
+       <app-btn group="add" (mclick)="addTemplate(i+1)"></app-btn>
+     </div>
+   </div>
+ </div>

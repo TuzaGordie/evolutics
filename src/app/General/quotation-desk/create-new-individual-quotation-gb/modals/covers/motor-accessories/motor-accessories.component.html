@@ -1,0 +1,182 @@
+<div
+  class="modal fade"
+  id="acc_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="accessoriesForm" class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Accessory Category' | appTranslate | async
+              }}</label>
+              <select
+                name=""
+                formControlName="category"
+                id=""
+                class="form-control control-bg-gray"
+              >
+                <option value=""></option>
+                <ng-container *ngFor="let cat of accessCatOptions$ | async">
+                  <option [value]="cat.code">{{ cat.title }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Description' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="description"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Model' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="model"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Item Count' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="count"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Total Purchase Value' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="purValue"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Total Market Value' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="marValue"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Identication No' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="id"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Year Fitted' | appTranslate | async
+              }}</label>
+              <input
+                formControlName="year"
+                name=""
+                id=""
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-3">
+            <app-button
+              buttonType="createCustomGB"
+              text="Add Accessory"
+            ></app-button>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <app-excess
+            class="col"
+            [excessMax]="excess_max"
+            [excessMin]="excess_min"
+            [excessType]="excess_type"
+            [excessDisplay]="excess_display"
+            [excessDisabled]="excess_disabled"
+            [excessOptions]="excess_options"
+            [excessAmount]="excessAmount"
+            [excessRate]="excessRate"
+            (excessAmountChange)="onExcessAmountChange($event)"
+            (excessRateChange)="onExcessRateChange($event)"
+          ></app-excess>
+
+          <app-deductible
+            class="col"
+            [deductibleMax]="deductible_max"
+            [deductibleMin]="deductible_min"
+            [deductibleType]="deductible_type"
+            [deductibleDisplay]="deductible_display"
+            [deductibleDisabled]="deductible_disabled"
+            [deductibleOptions]="deductible_options"
+            [deductibleAmount]="deductibleAmount"
+            [deductibleRate]="deductibleRate"
+            (deductibleAmountChange)="onDeductibleAmountChange($event)"
+            (deductibleRateChange)="onDeductibleRateChange($event)"
+          ></app-deductible>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <app-button
+          (click)="stop()"
+          [buttonType]="'saveGB'"
+          data-bs-dismiss="modal"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

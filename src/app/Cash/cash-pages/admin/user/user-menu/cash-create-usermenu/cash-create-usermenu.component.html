@@ -1,0 +1,51 @@
+<app-form-navigation [cashtitle] = "'Admin / User Menu'"></app-form-navigation> 
+<div  class="container-sm " id="form-body">
+    <div class="d-flex h-50 flex-column justify-content-center">
+      <div class="row" >
+        <div class="col-md-8 mx-auto my-5 align-middle">
+            <ul class="nav nav-tabs d-flex justify-content-around border-0" id="myTab" role="tablist" style="margin-bottom: 50px;">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active border-0" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" (click)="showSetup('Receipting')"
+                   type="button" role="tab" aria-controls="home" aria-selected="true">Receipting</button>
+                </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link border-0" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" (click)="showSetup('Report')"
+                    type="button" role="tab" aria-controls="profile" aria-selected="false">Report</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                  <button class="nav-link border-0" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" (click)="showSetup('Workflows')"
+                  type="button" role="tab" aria-controls="contact" aria-selected="false">Workflows</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link border-0" id="setup-tab" data-bs-toggle="tab" data-bs-target="#setup" (click)="showSetup('Setup')"
+                    type="button" role="tab" aria-controls="contact" aria-selected="false">Setup</button>
+                  </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <app-tabs [title] = "'Receipting'"></app-tabs> 
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <app-tabs [title] = "'Report'"></app-tabs> 
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <app-tabs [title] = "'Workflows'"></app-tabs> 
+                </div>
+                <div class="tab-pane fade" id="setup" role="tabpanel" aria-labelledby="setup-tab" >
+                    <app-tabs [title] = "'Setup'"></app-tabs> 
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row my-3 mx-3" *ngIf="data == 'Setup'">
+    <div class="col-8"></div>
+    <div class="col-2">
+      <button type="button" style="width:100%" class="btn save-button"><i class="far fa-save px-2 "></i> save</button>
+    </div>
+    <div class="col-2"></div>
+  </div>

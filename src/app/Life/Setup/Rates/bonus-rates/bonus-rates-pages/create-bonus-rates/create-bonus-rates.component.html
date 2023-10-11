@@ -1,0 +1,132 @@
+<div class="container-fluid mt-2 " id="form-body">
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="container">
+        <div aria-labelledby="pills-basic-tab" class="tab-pane fade show active" id="pills-basic" role="tabpanel">
+
+          <form [formGroup]="form">
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">{{"Bonus Code"|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" disabled name="code" value="{{code}}"/>  
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+                  <input class="form-control  control-bg-gray" type="text" name="description" formControlName="description"/>
+                </div>
+              </div>
+            </div>
+    
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">{{"Bonus Group"|appTranslate|async}}</label>
+                  <select class="form-control  control-bg-gray" formControlName="bonusRateGroup">
+                    <option value=""></option>
+                    <option *ngFor="let bonus of bonusRates" [value]="bonus.code">{{bonus.code}}-{{bonus.title}}</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">{{"Bonus Calc Basis"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="bonusCalcBasis">
+                    <option value=""></option>
+                    <option *ngFor="let basis of bonusCalcBasis" [value]="basis.code">{{basis.code}}-{{basis.title}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">{{"Table Format"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" #tableFormat (change)="checkFormatCode(tableFormat.value)">
+                    <option value=""></option>
+                    <option [value]="format.code" *ngFor="let format of tableDataList">{{format.code}}-{{format.title}}</option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="disable.table" class="col-6">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">{{"Bonus Table"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" formControlName="table">
+                    <option value=""></option>
+                    <option *ngFor="let bonus of bonusTables" [value]="bonus.code">{{bonus.code}}-{{bonus.description}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+    
+            <br>
+            <div *ngIf="disable.rate">
+              <ng-container formArrayName="bonusRateValuesList">
+                <ng-container *ngFor="let subForm of versions?.controls; let i = index;" [formGroupName]="i">
+                  <div class="row g-3">
+                    <div class="col">
+                      <div class="form-group mt-3">
+                        <label class="form-label text-primary">{{"Date From"|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="date" name="dateFrom" formControlName="dateFrom"/>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group mt-3">
+                        <label class="form-label text-primary">{{"Date to"|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="date" name="dateTo" formControlName="dateTo"/>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group mt-3">
+                        <label class="form-label text-primary">{{"Fixed Rate"|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="number" name="fixedRate" formControlName="fixedRate"/>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group mt-3">
+                        <label class="form-label text-primary">{{"Max Rate"|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="number" name="maxRate" formControlName="maxRate"/>
+                      </div>
+                    </div>
+                    <div class="col-auto d-flex align-items-end">
+                      <div class="form-group mt-2">
+                        <app-btn icon="delete" type="danger-outline" [iconBtn]="true" [disabled]="versions?.length==1" (mclick)="removeVersionRow(i)">
+                        </app-btn>
+                      </div>
+                    </div>
+                    <div class="col-auto d-flex align-items-end">
+                      <div class="from-group mt-2">
+                        <app-btn icon="add" type="outline" [iconBtn]="true" (mclick)="addVersionRow(null,i+1)">
+                        </app-btn>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </div>
+          </form>
+  
+          
+          <div *ngIf="isCreated" class="row g-3 d-flex justify-content-end mt-4">
+            <div class="col-2">
+              <app-button [buttonType]="'create'" [text]="'Add'" (click)="createNew()"></app-button>
+            </div>
+          </div>
+          
+          <div *ngIf="!isCreated" class="row g-3 d-flex justify-content-end mt-4">
+            <div *ngIf="!isShow" class="col-2">
+              <app-button [buttonType]="'save'" [text]="'Add'" (click)="submit()"></app-button>
+            </div>
+          </div>
+
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>
+  

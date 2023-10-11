@@ -1,0 +1,129 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <label class="form-label text-primary">{{"InterCompany Account Payable"|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label text-primary">{{"InterCompany Claims Recoverable"|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label text-primary">{{"InterCompany Commission Account "|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label text-primary">{{"InterCompany Balance Account"|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label class="form-label text-primary">{{"InterCompany Premiums Paid "|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <label class="form-label text-primary">{{"InterCompany Claims Recovered Account "|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <label class="form-label text-primary">{{"InterCompany Claims Writeoff/Account"|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-6">
+        <label class="form-label text-primary">{{"Credit Note Valid Period (Days) "|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+    </div>
+    <hr />
+
+    <div class="row" *ngFor=" let i of toleranceCounter()">
+      <div class="col-6">
+        <label class="form-label text-primary">{{"Currency "|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option></option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <label class="form-label text-primary">{{"Tolerance "|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" />
+      </div>
+    </div>
+
+    <div class="row mt-2 justify-content-end">
+      <div class="col-2">
+           <!--  -->
+        <app-button [buttonType]="'add'" (click)="toleranceInc()"></app-button>
+      </div>
+    </div>
+    <div class="row mt-5 justify-content-end">
+      <div class="col-2">
+        <app-button [buttonType]="'save'"></app-button>
+      </div>
+    </div>
+  </div>

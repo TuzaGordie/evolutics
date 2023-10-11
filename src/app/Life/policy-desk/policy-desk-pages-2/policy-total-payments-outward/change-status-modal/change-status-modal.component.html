@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-between">
+  <h2 mat-dialog-title>{{'Change Status'|appTranslate|async}}</h2>
+  <span class="btn btn-close" mat-dialog-close></span>
+</div>
+<hr>
+<mat-dialog-content>
+  <form [formGroup]="changeStatusForm">
+    <div class="row my-3">
+      <div class="col-md-6">
+        <label for="cover">Cover</label>
+        <input type="text" class="inputform" formControlName="cover" />
+      </div>
+      <div class="col-md-6">
+        <label for="premiumPaidToDate">{{'Premium Paid to Date'|appTranslate|async}}</label>
+        <input
+          type="text"
+          class="inputform"
+          formControlName="premiumPaidToDate"
+        />
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col-md-6">
+        <label for="currentStatus">{{'Current Status'|appTranslate|async}}</label>
+        <input type="text" class="inputform" formControlName="currentStatus" />
+      </div>
+      <div class="col-md-6">
+        <label for="newStatus">{{'New Status'|appTranslate|async}}</label>
+        <select class="inputform" formControlName="newStatus">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="row my-3 align-items-center">
+      <div class="col-md-2">
+        <label for="narration">
+          {{'Narration'|appTranslate|async}} - 
+          <span class="opacity-50 d-block">{{'optional'|appTranslate|async}}</span>
+        </label>
+      </div>
+      <div class="col-md-10">
+        <textarea
+          rows="4"
+          class="inputform"
+          formControlName="narration"
+        ></textarea>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-primary py-3 px-5" (click)="onSubmit()">
+        <i *ngIf="!isSubmitting" class="fa fa-save"></i>
+        <i *ngIf="isSubmitting" class="fa fa-sync fa-spin"></i>
+        {{ isSubmitting ? 'Submitting...' : 'Submit' |appTranslate|async }}
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

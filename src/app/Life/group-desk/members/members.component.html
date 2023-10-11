@@ -1,0 +1,228 @@
+<div
+  class="{{
+    !showUpload && !showAddManually
+      ? 'justify-content-center'
+      : 'justify-content-center'
+  }}"
+>
+  <div class="row mt-3 mb-3 {{ !showUpload && !showAddManually ? '' : '' }}">
+    <div class="col-6 my-2">
+      <app-btn
+        icon="upload"
+        type="secondary"
+        text="Upload Members"
+        (mclick)="import()"
+      ></app-btn>
+    </div>
+    <div class="col-6 my-2">
+      <app-button
+        buttonType="btnCustomClone"
+        text="Add Member Manually"
+        (click)="openAddMember()"
+      ></app-button>
+    </div>
+  </div>
+  <ng-container *ngIf="showAddManually">
+    <hr />
+    <div class="row align-items-end gx-2" *ngFor="let i of memberCounter()">
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Client Number' | appTranslate | async
+          }}</label>
+          <input type="text" class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <div class="col-md-auto d-flex">
+        <div class="me-2">
+          <app-btn
+            icon="search"
+            type="secondary"
+            [iconBtn]="true"
+            hint="Find client"
+          ></app-btn>
+        </div>
+        <app-btn
+          icon="add"
+          type="outline"
+          [iconBtn]="true"
+          hint="Add new client"
+        ></app-btn>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Staff ID' | appTranslate | async
+          }}</label>
+          <input type="text" class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Rel Basis' | appTranslate | async
+          }}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Relationship' | appTranslate | async
+          }}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Related To' | appTranslate | async
+          }}</label>
+          <input type="text" class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Member name' | appTranslate | async
+          }}</label>
+          <input type="text" class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Subgroup No' | appTranslate | async
+          }}</label>
+          <input type="text" class="form-control control-bg-gray" />
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button buttonType="upload" text="Picture"></app-button>
+        </div>
+      </div>
+      <div class="col-md-auto d-flex">
+        <div class="me-2">
+          <app-btn
+            icon="delete"
+            type="danger"
+            [iconBtn]="true"
+            hint="Delete Member"
+            (mclick)="memberInc(-1)"
+          ></app-btn>
+        </div>
+        <app-btn
+          (mclick)="memberInc()"
+          icon="add"
+          type="outline"
+          [iconBtn]="true"
+          hint="Add another member"
+        ></app-btn>
+      </div>
+    </div>
+    <div class="row justify-content-end mt-3">
+      <div class="col-md-2">
+        <app-button [buttonType]="'save'"></app-button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<hr />
+<div class="row mt-2">
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Show All Members' | appTranslate | async
+      }}</label>
+      <input type="checkbox" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Member Status' | appTranslate | async
+      }}</label>
+      <select name="" id="" class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Member Name' | appTranslate | async
+      }}</label>
+      <input type="text" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Member Unique ID No' | appTranslate | async
+      }}</label>
+      <input type="text" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Enrolee No' | appTranslate | async
+      }}</label>
+      <input type="text" class="form-control control-bg-gray" />
+    </div>
+  </div>
+  <div class="col-1">
+    <label for="" class="form-label">&nbsp;</label>
+    <app-button buttonType="searchCustom"></app-button>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <table class="table table-responsive table-striped">
+    <thead class="py-3 theader">
+      <tr>
+        <th scope="col">{{ 'No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'FullName' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Birth Date' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Age At Issue' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Sum Assured' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Premium' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Enrollee No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Status' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Join Date' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Paid to Date' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Leave Date' | appTranslate | async }}</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <div class="row">
+            <div class="col">
+              <app-button buttonType="delete"></app-button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

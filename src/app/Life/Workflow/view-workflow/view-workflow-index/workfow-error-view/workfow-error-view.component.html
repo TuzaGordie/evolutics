@@ -1,0 +1,117 @@
+<div class="container">
+
+  <div class="row justify-content-center mb-4">
+    <div class="col">
+      <label for="" class="small1">{{'WF Number'|appTranslate|async}} : <span class="text-primary">{{wfNo}}</span></label>
+    </div>
+    <div class="col">
+      <label for="" class="small1">{{'Task Code'|appTranslate|async}} : <span class="text-primary">tcd</span></label>
+    </div>
+    <div class="col">
+      <label for="" class="small1">{{'Ref Cat'|appTranslate|async}} : <span class="text-primary">{{rct}}</span></label>
+    </div>
+    <div class="col">
+      <label for="" class="small1">{{'Ref No'|appTranslate|async}} : <span class="text-primary">{{rno}}</span></label>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-responsive table-striped">
+      <thead>
+      <tr class="">
+        <th scope="col">{{'Error'|appTranslate|async}}</th>
+        <th scope="col">{{'Reason'|appTranslate|async}}</th>
+        <th scope="col">{{'Severity'|appTranslate|async}}</th>
+        <th scope="col">{{'Comment'|appTranslate|async}}</th>
+        <th scope="col" style="width: 10%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <app-button buttonType="btnCustomClone" text="Unset" data-bs-toggle="modal" data-bs-target="#reasonModal"></app-button>
+        </td>
+      </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6 mx-auto" [formGroup]="errorForm">
+
+    <div class="row">
+      <div class="col">
+        <label for="" class="form-label text-primary">{{'Reason'|appTranslate|async}}: </label>
+        <select name="" id="" class="form-control control-bg-gray" [ngClass]="{'border border-danger': isInvalid('errorReason')}" formControlName="errorReason">
+          <option value=""></option>
+          <option *ngFor="let reason of errorReasonsList" [value]="reason.code">{{reason.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="" class="form-label text-primary">{{'Severity'|appTranslate|async}}: </label>
+        <select name="" id="" class="form-control control-bg-gray" [ngClass]="{'border border-danger': isInvalid('errorLevel')}" formControlName="errorLevel">
+          <option value=""></option>
+          <option *ngFor="let severity of errorSeveritiesList" [value]="severity.code">{{severity.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="" class="form-label text-primary">{{'Additional Comment'|appTranslate|async}}: </label>
+        <textarea name="" id="" class="form-control control-bg-gray" rows="4" [ngClass]="{'border border-danger': isInvalid('narration')}" formControlName="narration"></textarea>
+      </div>
+    </div>
+    <div class="row mt-4 justify-content-end">
+      <div class="col-3">
+        <app-button *ngIf="!isSettingError" buttonType="submit" (click)="onSetError()"></app-button>
+        <button class="btn btn-outline-primary btn-lg" *ngIf="isSettingError">
+          <span class="fa fa-spinner fa-spin"></span>
+          {{'Submitting'|appTranslate|async}}...
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="reasonModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Reason'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{'Reason'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                  <option *ngFor="let reason of errorReasonsList" [value]="reason.code">{{reason.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button *ngIf="!isUnsettingError" buttonType="submit" data-bs-dismiss="modal" (click)="onUnsetError()"></app-button>
+        <button *ngIf="isUnsettingError" class="btn btn-outline-primary btn-lg">
+          <span class="fa fa-spinner fa-spin"></span>
+          {{'Submitting'|appTranslate|async}}...
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

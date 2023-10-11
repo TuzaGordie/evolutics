@@ -1,0 +1,57 @@
+<div [formGroup]="clientNoForm">
+  <div class="container d-flex align-items-center w-100" style="position: relative; min-height:400px">
+    <div class="w-100">
+
+
+      <div class="row justify-content-center align-items-center ">
+        <div class="col-lg-auto  my-1">
+          <label class="mb-0">{{"Client Number "|appTranslate|async}}:</label>
+        </div>
+        <div class="col-lg-2 my-1">
+          <app-input-basic [form]="clientNoForm" name="clientNo" [showValidation]="true" [showValidationIcon]="true"
+            [showLabel]="false" #clientNo>
+          </app-input-basic>
+
+        </div>
+        <div class="col-lg-auto  my-1" *ngIf="clientName">
+          <div class="text-primary">{{clientName}} </div>
+        </div>
+        <div class="col-lg-12 my-1"></div>
+        <div class="col-lg-auto text-danger" *ngIf="message">
+          {{message}}
+        </div>
+        <div class="col-lg-12 my-1"></div>
+        <div class="col-lg-2 my-1">
+          <app-button [text]="'Find Agent'" [buttonType]="'find'"
+            (click)="clientService.openFindClientModal(clientNo.control)"></app-button>
+        </div>
+        <div class="col-lg-auto my-1">
+          <app-button [text]="'Create New Client'" [buttonType]="'createCustom'" [matMenuTriggerFor]="clientMenu"></app-button>
+          <mat-menu #clientMenu="matMenu">
+            <button mat-menu-item (click)="clientService.openCreateIndividualClientModal(clientNo.control)">
+              {{'Individual Client'|appTranslate|async}}
+            </button>
+            <button mat-menu-item (click)="clientService.openCreateCorporateClientModal(clientNo.control)">
+              {{'Corporate Client'|appTranslate|async}}
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class=" mt-4">
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class=" col-lg-2 my-5 " style="min-height: 100px">
+        <app-btn icon="next" type="secondary" [valid]="clientNoForm.valid" (mclick)="onNext();changeTab('ownerInfo')">
+          Next
+        </app-btn>
+      </div>
+    </div>
+  </div>
+
+</div>

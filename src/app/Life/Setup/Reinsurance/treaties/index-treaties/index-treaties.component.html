@@ -1,0 +1,60 @@
+<!-- <app-form-navigation [title]="'Set Up / Reinsurance / Treaty'"></app-form-navigation> -->
+<loader [loading]="loading" text="{{loadingText}}">
+<div class="container-sm mt-5">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+
+      <br />
+
+      <br />
+      <div class="form-group mt-2">
+        <label>{{"Select Treaty Category "|appTranslate|async}}</label>
+        <select class="form-control form-control-lg control-bg-gray" (change)="getCompanyCodeByCat()"
+          [(ngModel)]="treatyCategory">
+          <option *ngFor="let item of treatyCategories" value="{{ item.code }}">
+            {{ item.title }}
+          </option>
+        </select>
+      </div>
+
+      <br />
+      <div class="form-group mt-2">
+        <label>{{"Select Company "|appTranslate|async}}</label>
+        <select class="form-control form-control-lg control-bg-gray" (change)="getTreatiesByCompany()"
+          [(ngModel)]="company">
+          <option value="{{ item }}" *ngFor="let item of companyCodeAndDes">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+
+
+      <br />
+      <div class="form-group mt-2">
+        <label>{{"Select Treaty "|appTranslate|async}}</label>
+        <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="treaty">
+          <option value="{{ item?.code }}" *ngFor="let item of treaties">
+            {{ item?.code }} - {{ item?.description }}
+          </option>
+        </select>
+
+        <span class="text-danger" *ngIf="message.error">{{"Select a Treaty to continue"|appTranslate|async}}</span>
+      </div>
+
+      <br />
+
+      <div class="form-group row my-3">
+        <div class="col-sm-4 d-grid gap-1">
+          <app-button [buttonType]="'show'" (click)="show()"></app-button>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-button [buttonType]="'create'" routerLink="../create-treaties"></app-button>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-button [buttonType]="'clone'" (click)="clone()"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</loader>

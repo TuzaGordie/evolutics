@@ -1,0 +1,559 @@
+<div class="container my-5">
+  <form [formGroup]="">
+
+    <div class="row justify-content-between mt-3">
+      <span class="col-2">Client Class: <span class="text-red">Individual</span></span>
+      <span class="col-2">Client Number: <span
+        style="color: #514ef5"></span></span>
+      <div class="col"></div>
+      <div class="col-2">
+        <app-button [buttonType]="'editRed'" [text]="'Edit'" data-bs-target="#exampleModal"
+                    data-bs-toggle="modal"></app-button>
+      </div>
+
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRed'" [text]="'Provider View'"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomNoteRed'" [routerLink]="['/life/agent-desk/agent-note']"
+                    [text]="'Note'"></app-button>
+      </div>
+
+    </div>
+    <hr style="margin-top: 5px;">
+
+    <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+      <div class="d-block text-center mr-2">
+        <img alt="" class="rounded-circle"
+             src="https://ritecaremedicalofficepc.com/wp-content/uploads/2019/09/img_avatar.png" width="100px">
+        <p class="pt-2"></p>
+        <span style="color:#2ecc71">Active</span>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Title</label>
+          <input class="inputform1" type="text" readonly>
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Phone Number 1</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Category</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">CLV</label>
+          <input
+            class="inputform1"
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Occupation Group</label>
+          <input class="inputform1" type="text">
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Full Name</label>
+          <input class="inputform1 ">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Phone Number 2</label>
+          <input class="inputform1 ">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">KYC</label>
+
+
+          <div class="row">
+            <div class="col"><input class="inputform1 "></div>
+            <div class="col-3"><a><i aria-hidden="true" class="fas fa-pencil-alt ml-2"></i> </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Band</label>
+          <input class="inputform1 ">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Social Media</label>
+          <input class="inputform1 ">
+        </div>
+
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">First Name</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Email</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">ID Number</label>
+          <input
+            class="inputform1 "
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Bank No</label>
+          <div class="row">
+            <div class="col"><input class="inputform1 "></div>
+            <div class="col-3"><a><i aria-hidden="true" class="fas fa-pencil-alt ml-2"></i> </a>
+            </div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Enrolee No</label>
+          <input class="inputform1 ">
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Middle Name</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Email 2</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Language</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Date Created</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label control-bg-gray">Suffix</label>
+          <input
+            class="inputform1"
+
+            type="text">
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Surname</label>
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Address</label>
+
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Employer</label>
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Communication</label>
+
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Created On</label>
+          <input
+            class="inputform1"
+
+            type="text" readonly>
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-red">Gender</label>
+
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Date of Birth</label>
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">CRM ID</label>
+          <input class="inputform1 ">
+
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-red">Marital Status</label>
+
+          <input class="inputform1 ">
+
+
+        </div>
+      </div>
+
+    </div>
+    <hr class="my-2">
+    <div class="row justify-content-center my-4">
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Endorsements'"
+                    [routerLink]="['/life/endorsements']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Documents'"
+                    [routerLink]="['/life/documents']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Web log in'"
+                    [routerLink]="['/life/web-login']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [text]="'Underwriting Events'"
+                    [routerLink]="['/life/underwritingevents']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaisedRed'" [routerLink]="['/life/workflows']"
+                    [text]="'Workflows'"></app-button>
+      </div>
+
+      <!-- <div class="col-2">
+         <app-button [buttonType]="'btnCustomCloneRaisedRed'" [routerLink]="['/life/underwritingevents']"
+                     [text]="'Underwriting Events'"></app-button>
+       </div>-->
+    </div>
+    <div class="d-flex justify-content-around section-cards card-red">
+      <div class="card color1 shadow-sm" [routerLink]="['/life/policies']">
+        <div class="card-body">
+          <h6 class="card-title">No of Policies</h6>
+          <p class="card-number">55</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/relationships']">
+        <div class="card-body">
+          <h6 class="card-title">No Of Relationships</h6>
+          <p class="card-number">12</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/business']">
+        <div class="card-body">
+          <h6 class="card-title">Other Business</h6>
+          <p class="card-number">43</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/pendingquotes']">
+        <div class="card-body">
+          <h6 class="card-title">Pending Quotes</h6>
+          <p class="card-number">12</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/pendingpayments']">
+        <div class="card-body">
+          <h6 class="card-title">Pending Payments</h6>
+          <p class="card-number">22</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+      <form>
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Client Info</h5>
+              <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+
+
+              <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red">Full Name</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">First Name</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Middle Name</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Surname</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Gender</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red">Phone Number 1</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Phone Number 2</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Email</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Email 2</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Address</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red">Date of Birth</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Category</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <!--  <div class="pb-4">
+                       <label class="form-label text-red">KYC</label>
+                       <input  type="text"
+
+                       class="inputform " >
+                   </div> -->
+                  <div class="pb-4">
+                    <label class="form-label text-red">ID Number</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Language</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Title</label>
+                    <input class="inputform "
+                           type="text">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red">Employer</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">CRM ID</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <!-- <div class="pb-4">
+                      <label class="form-label text-red">Bank No</label>
+                      <input  type="text"
+
+                      class="inputform " >
+                               </div> -->
+                  <div class="pb-4">
+                    <label class="form-label text-red">Date Created</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Communication</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Occupation Group</label>
+                    <input class="inputform "
+                           type="text">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red">Marital Status</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Band</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Group No</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">CLV</label>
+                    <input
+                      class="inputform"
+
+                      type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-red">Social Media</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+                </div>
+
+                <div class="d-block ml-2">
+                  <div class="pb-4">
+                    <label class="form-label text-red">Provider Code</label>
+                    <input
+                      class="inputform "
+
+                      type="text">
+                  </div>
+
+                  <div class="d-block ml-2">
+                    <div class="pb-4">
+                      <label class="form-label text-red">Enrolee No</label>
+                      <input
+                        class="inputform "
+
+                        type="text">
+                    </div>
+                  </div>
+                  <div class="d-block ml-2">
+                    <div class="pb-4">
+                      <label class="form-label control-bg-gray">Suffix</label>
+                      <input
+                        class="inputform "
+
+                        type="text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--        <button type="submit"  data-bs-dismiss="modal" class="btn btn-primary">update</button>
+               -->
+
+
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+              <button class="border-0 next-blue" data-bs-dismiss="modal" type="submit">Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+  </form>
+</div>

@@ -1,0 +1,49 @@
+<div [formGroup]="clientNoForm">
+  <div class="container d-flex align-items-center w-100" style="position: relative; min-height:400px">
+    <div class="w-100">
+
+
+      <div class="row justify-content-center ">
+        <div class="col-1 d-flex align-items-center">
+          <label>Client Number :</label><br>
+        </div>
+
+        <div class="col-4">
+          <!--   <div class="inputbox" style="position: relative;"> -->
+          <input type="text" formControlName="clientNo" class="form-control control-bg-gray mr-2"
+                 [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required
+                 (keyup)="setClientList()">
+
+        </div>
+      </div>
+      <div class="row justify-content-center mt-4">
+        <div class="col-1"></div>
+        <div class="col-2">
+          <app-button [text]="'Find Agent'" [buttonType]="'find'" (click)="setClientList()"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [text]="'Create New Client'"
+                      [routerLink]="['../create-agent']"
+                      routerLinkActive="router-link-active"
+                      [buttonType]="'createCustom'"
+                      (click)="setClientList()"></app-button>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class=" col-2 my-5 " style="min-height: 100px">
+        <app-button [text]="'Next'" [buttonType]="'next'"
+                    [hidden]="validResult == 'false' || validResult == '' "
+                    [routerLink]="['/life/agent-desk/individual-agent']" routerLinkActive="router-link-active"
+                    [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"
+                    (click)="onNext()" (click)="changeTab('ownerInfo')"></app-button>
+      </div>
+    </div>
+  </div>
+
+</div>

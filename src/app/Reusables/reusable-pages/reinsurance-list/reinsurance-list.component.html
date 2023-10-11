@@ -1,0 +1,228 @@
+<div class="">
+
+  <div class="row py-1 ">
+    <div class="col " *ngFor="let item of heads">
+      <text-case-1 lbl="{{item.key}}:" lblClass="lbl" [val]="item.value" [stacked]="false"></text-case-1>
+    </div>
+  </div>
+
+
+  <!-- <div class="">
+        <img src="../../../../../assets/img/back-curved.svg" alt="" class="pointer" (click)="pdS.back()">
+      </div> -->
+</div>
+<div class="">
+
+  <div
+    class="row my-3"
+  >
+
+
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Show All' | appTranslate | async
+          }}</label>
+        <input type="checkbox" class="form-control control-bg-gray"/>
+      </div>
+    </div>
+
+    <div class="col">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <br>
+      <label for="" class="form-label text-primary">
+        {{
+        'Total Paid : --' | appTranslate | async
+        }}</label>
+
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <br>
+      <label for="" class="form-label text-primary">
+        {{
+        'Total Pending : --' | appTranslate | async
+        }}</label>
+
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Reinsurer' | appTranslate | async
+          }}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Treaty' | appTranslate | async
+          }}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Cover Code' | appTranslate | async
+          }}</label>
+        <select class="form-control control-bg-gray">
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="col">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <app-btn icon="download" type="secondary">{{
+        'Download' | appTranslate | async
+        }}</app-btn>
+    </div>
+  </div>
+  <div class="my-2">
+    <table class="table table-responsive table-striped text-center">
+      <thead class="py-3 theader">
+      <tr>
+
+        <th scope="col">{{ 'Cover Code' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Treaty' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Reinsurer' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Reinsurer SAR' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'Claim' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Ceeded' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Statement No' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Processed' | appTranslate | async }}</th>
+
+        <th scope="col">{{ 'User' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+        <th scope="col">{{ 'Details' | appTranslate | async }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td><p data-bs-toggle="tooltip"
+               data-bs-html="true"
+               trigger="hover focus"
+               delay="0"
+               title="
+               Category:
+               Date From:
+               Date To:
+               Description:
+
+             ">--</p></td>
+        <td></td>
+
+
+        <td></td>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+
+          <input type="checkbox" class="form-control mx-auto">
+        </td>
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="Created By:
+          Controlled by:
+          Processed by:
+
+"
+          >
+            <i class="fa fa-users" aria-hidden="true"></i>
+          </button>
+        </td>
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="
+            Created On:
+             Processed On:
+              Controlled On:"
+          >
+            <i class="fas fa-calendar-alt"></i>
+          </button>
+        </td>
+
+
+        <td>
+          <button
+            class="btn btn-dark"
+            type="button"
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="
+            Reinsurance Premium:
+            Reinsurance Commission:
+            Adjustment:
+
+
+             "
+          >
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="HCModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hold Commission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="col">
+            <label for="" class="form-label text-primary">Reason</label>
+            <select class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-btn type="danger">Unhold</app-btn>
+        <app-btn type="primary">Hold</app-btn>
+
+
+      </div>
+    </div>
+  </div>
+</div>

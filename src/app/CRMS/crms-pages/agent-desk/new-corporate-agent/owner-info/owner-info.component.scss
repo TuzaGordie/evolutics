@@ -1,0 +1,44 @@
+
+
+.btn-ir{
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    border-radius: 0px;
+}
+#section_cards .color1:after {
+    content: "";
+    background: #21A980;
+    width: 80px;
+    height: 60px;
+    border-top-right-radius: 5rem;
+    border-bottom-left-radius: 20px;
+}
+.card{
+    width: 21rem;
+    height: 10rem;
+    background: #1B1A50;
+    color: white;
+}
+label{
+    font-size: 12px !important;
+}
+.inputform1{
+    background-color: transparent;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+.inputform1:focus {
+    color: #212529;
+    background-color: transparent;
+    border-color: none;
+    outline: 0;
+}
+
+a {
+    font-size: 12px;
+}
+
+.higlightbox{
+    border: 2px solid blue !important;
+}

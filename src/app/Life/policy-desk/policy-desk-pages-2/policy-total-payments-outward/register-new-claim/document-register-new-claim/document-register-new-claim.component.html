@@ -1,0 +1,109 @@
+<div class="row">
+  <h3 class="text-center text-primary my-5">{{'Claim Requirements'|appTranslate|async}}</h3>
+</div>
+<div class="table-responsive px-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>{{'Document Name'|appTranslate|async}}</th>
+        <th>{{'Action'|appTranslate|async}}</th>
+        <th>{{'Received ?'|appTranslate|async}}</th>
+        <th>{{'Received By'|appTranslate|async}}</th>
+        <th>{{'Received On'|appTranslate|async}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let requirement of claimRequirementsForm.controls">
+        <tr [formGroup]="$any(requirement)">
+          <td>
+            <input
+              type="text"
+              class="inputform"
+              placeholder="Document Name"
+              formControlName="description"
+            />
+          </td>
+          <td>
+            <app-btn *ngIf="!isSubmitting[requirement.value.id]" icon="upload" type="primary" (click)="onSubmit(requirement)"></app-btn>
+            <span *ngIf="isSubmitting[requirement.value.id]" class="fa fa-sync fa-spin"></span>
+          </td>
+          <td>
+            <input
+              class="form-control control-bg-gray"
+              type="checkbox"
+              formControlName="received"
+              (change)="onReceivedChange(requirement)"
+            />
+          </td>
+          <td>
+            <input
+              class="inputform"
+              formControlName="receivedBy"
+              placeholder="Received By"
+            />
+          </td>
+          <td>
+            <input
+              type="date"
+              class="inputform"
+              formControlName="receivedOn"
+              placeholder="Received On"
+            />
+          </td>
+        </tr>
+      </ng-container>
+      <tr
+        [formGroup]="newRequirementForm"
+        *ngIf="showNewRequirementForm"
+        style="border-top-width: 2px; border-top-color: black"
+      >
+        <td>
+          <input
+            type="text"
+            class="inputform"
+            placeholder="Document Name"
+            formControlName="description"
+          />
+        </td>
+        <td>
+          <app-button *ngIf="!isSubmitting['new']" buttonType="upload" (click)="onSubmit(newRequirementForm, true)"></app-button>
+          <span *ngIf="isSubmitting['new']" class="fa fa-sync fa-spin"></span>
+        </td>
+        <td>
+          <input
+            class="form-control control-bg-gray"
+            type="checkbox"
+            formControlName="received"
+            (change)="onReceivedChange(newRequirementForm)"
+          />
+        </td>
+        <td>
+          <input
+            class="inputform"
+            formControlName="receivedBy"
+            placeholder="Received By"
+          />
+        </td>
+        <td>
+          <input
+            type="date"
+            class="inputform"
+            formControlName="receivedOn"
+            placeholder="Received On"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-center">
+  <div class="col-3">
+    <div class="form-group">
+      <label for="" class="form-label text-primary text-center">&nbsp;</label>
+      <app-button
+        buttonType="addCustom"
+        (click)="showNewRequirementForm = true"
+      ></app-button>
+    </div>
+  </div>
+</div>

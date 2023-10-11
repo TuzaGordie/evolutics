@@ -1,0 +1,113 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="mt-4 col-lg-6">
+      <app-input-basic type="text" label='Name' [required]="true"  [form]="form" name='fullName' [stacked]="true" #addressTag>
+      </app-input-basic> 
+    </div>
+    <div class="mt-4 col-lg-6">
+      <label class="text-primary">{{"Company redg no"|appTranslate|async}}</label><br>
+      <input type="text" formControlName="companyRedgNo" class="form-control  control-bg-gray" >
+      <div
+        *ngIf="validation.companyRedgNo.errors && (validation.companyRedgNo.dirty || validation.companyRedgNo.touched)">
+        <div class="text-danger" *ngIf="validation.companyRedgNo?.errors?.required">{{"Field is invalid"|appTranslate|async}}!
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 col-lg-6">
+      <label class="text-primary">{{"Country of Registration"|appTranslate|async}}</label><br>
+      <select formControlName="country" (change)="setRegionList()" class="form-control  control-bg-gray" >
+        <option [value]="null">{{"Select Country"|appTranslate|async}}</option>
+        <option [value]="item.code" *ngFor="let item of countryList">{{item.code}} - {{item.description}}</option>
+      </select>
+      <div *ngIf="validation.country.errors && (validation.country.dirty || validation.country.touched)">
+        <div class="text-danger" *ngIf="validation.country?.errors?.required">{{"Field is invalid"|appTranslate|async}}!
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 col-lg-6">
+      <label class="text-primary">{{"Segment"|appTranslate|async}}</label><br>
+      <select formControlName="segment" class="form-control  control-bg-gray" >
+        <option [value]="null">{{"Select Sector"|appTranslate|async}}</option>
+        <option [value]="item.code" *ngFor="let item of segmentList">{{item.code}} - {{item.title}} </option>
+      </select>
+      <div *ngIf="validation.segment.errors && (validation.segment.dirty || validation.segment.touched)">
+        <div class="text-danger" *ngIf="validation.segment?.errors?.required">{{"Field is invalid"|appTranslate|async}}!
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 col-lg-6">
+      <label class="text-primary">{{"Email"|appTranslate|async}}</label><br>
+      <input type="email" formControlName="email" class="form-control  control-bg-gray" >
+      <app-validation-message [validationKey]="eValidationType.email" [control]="validation?.email">
+      </app-validation-message>
+    </div>
+    <div class="mt-4 col-lg-6">
+      <label class="text-primary">{{"Website"|appTranslate|async}}</label><br>
+      <input type="text" formControlName="website" class="form-control  control-bg-gray" placeholder="www.example.com"
+        >
+      <div *ngIf="validation.website.errors && (validation.website.dirty || validation.website.touched)">
+        <div class="text-danger" *ngIf="validation.website?.errors?.required || validation.website?.errors?.pattern">
+          {{"Field is invalid"|appTranslate|async}}!
+        </div>
+      </div>
+    </div>
+    <div class=" col-lg-6">
+      <label class="text-primary">{{"Sector"|appTranslate|async}}</label><br>
+      <select formControlName="sector" class="form-control  control-bg-gray" >
+        <option [value]="null">{{"Select Sector"|appTranslate|async}}</option>
+        <option [value]="item.code" *ngFor="let item of sectorList">{{item.code}} - {{item.title}}</option>
+      </select>
+      <div *ngIf="validation.sector.errors && (validation.sector.dirty || validation.sector.touched)">
+        <div class="text-danger" *ngIf="validation.sector?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <app-input-basic type="text" label='Address' [placeholder]="uS.config.FormPresets.addressPlaceholder" [form]="form" name='address' [stacked]="true" #addressTag>
+      </app-input-basic>
+      <app-validation-message></app-validation-message>
+    </div>
+    <div class="col-md-6">
+      <app-autocomplete  label="Address Country" [form]="form" name="addressCountry" [stacked]="true"
+        [showValidation]="countryTag.invalid" [showValidationIcon]="false" (mchange)="setRegionList()"
+        [options]="countryList" labelType="cd" valueField="code" #countryTag>
+      </app-autocomplete>
+      <app-validation-message></app-validation-message>
+    </div>
+    <div class="col-md-6">
+      <app-autocomplete [disabled]="!countryTag.hasValue" label="Address Region" [form]="form" name="addressRegion" [stacked]="true" (mchange)="setStateList()"
+        [showValidation]="locationRegion.invalid" [showValidationIcon]="false"
+        [options]="regionList" labelType="cd" valueField="code"
+        #locationRegion>
+      </app-autocomplete>
+      <app-validation-message></app-validation-message>
+    </div>
+    <div class="col-md-6">
+      <app-autocomplete [disabled]="!locationRegion.hasValue" label="Address State" [form]="form" name="addressState" [stacked]="true" (mchange)="setTownList()"
+        [showValidation]="stateTag.invalid" [showValidationIcon]="false"
+        [options]="stateList" labelType="cd" valueField="code" #stateTag>
+      </app-autocomplete>
+      <app-validation-message></app-validation-message>
+    </div>
+    <div class="col-md-6">
+      <app-autocomplete [disabled]="!stateTag.hasValue" label="Address Town" [form]="form" name="addressTown" [stacked]="true"
+        [showValidation]="townTag.invalid" [showValidationIcon]="false"
+        [options]="townList" labelType="cd" valueField="code" #townTag>
+      </app-autocomplete>
+      <app-validation-message></app-validation-message>
+    </div> 
+    <div class="col-lg-6">
+      <label class="text-primary">{{"Phone Number"|appTranslate|async}}</label><br>
+      <app-phone-number [form]="form" name="phoneNumber" [showLabel]="false" [countryCode3]="countryTag.value"
+        [showValidation]="pn.invalid" [showValidationIcon]="false" #pn>
+      </app-phone-number>
+      <app-validation-message [validationKey]="eValidationType.mobile" [control]="validation?.phoneNumber">
+      </app-validation-message>
+    </div> 
+
+
+
+  </div>
+
+
+</form>

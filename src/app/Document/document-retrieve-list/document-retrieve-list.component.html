@@ -1,0 +1,58 @@
+<app-form-navigation [title]="'Document / Retrieve List'"></app-form-navigation>
+<div class="container mt-2">
+  <div id="table"></div>
+<div class="px-3 mb-3">
+    <div class="row mb-4">
+      <div class="col-10">
+    
+      </div>
+      <div class="col-2">
+          <app-btn type="primary" class="excel-button" (click)="exportToExcel()">
+              Export as Excel
+          </app-btn>
+      </div>
+    </div>
+    
+    <div class="table-responsive-lg">
+        <table class="table table-responsive table-striped" id="excel-table">
+            <thead>
+              <tr>
+                <th class="p-3" scope="col">{{'Ref Number'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Ref Category'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'File Name'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Title'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Company'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Created By'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Created On'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Revised SLA'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Box Number'|appTranslate|async}}</th>
+                <th class="p-3" scope="col">{{'Business Line'|appTranslate|async}}</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let document of documents">
+                  <td>{{document.refNo}}</td>
+                  <td>{{document.refCat}}</td>
+                  <td>{{document.fileName}}</td>
+                  <td>{{document.title}}</td>
+                  <td>{{document.company}}</td>
+                  <td>{{document.createdBy}}</td>
+                  <td>{{document.createdOn}}</td>
+                  <td>{{document.revisedSla}}</td>
+                  <td>{{document.docBox}}</td>
+                  <td>{{document.busLine}}</td>
+              </tr>
+              <tr *ngIf="documents.length === 0">
+                  <td colspan="10">
+                      <span class="text-primary">
+                          {{'No records were found'|appTranslate|async}}
+                      </span>
+                  </td>
+              </tr>    
+            </tbody>
+          </table>
+    </div>
+</div>    
+</div>
+

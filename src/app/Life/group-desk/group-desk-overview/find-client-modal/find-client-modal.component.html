@@ -1,0 +1,52 @@
+<div class="container">
+  <button iconType="close" class="close" (click)="closeModal()">X</button>
+  <h4>{{'Policy Record'|appTranslate|async}}</h4>
+  <div class="row">
+    <div class="col-6"></div>
+    <div class="col-6">
+      <div class="row" style="margin-right: 25px;">
+        <div class="col-6">
+          <span>{{'Summarize by'|appTranslate|async}}:</span>
+        </div>
+        <div class="col-6 excel">
+          <span style="font-size:12px;">{{'Edit Output fields'|appTranslate|async}}</span>
+          <br>
+          <span style="font-size: 12px;">{{'Export to Excel'|appTranslate|async}}</span>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+  <p>{{'First 10 Records displayed, for Full records, click export to Excel'|appTranslate|async}}</p>
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{'Client Number'|appTranslate|async}}</th>
+            <th scope="col">{{'Full Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Gender'|appTranslate|async}}</th>
+            <th scope="col">{{'Created Date'|appTranslate|async}}</th>
+            <th scope="col">{{'Segment'|appTranslate|async}}</th>
+            <th scope="col">{{'Policy Ownership Count'|appTranslate|async}}</th>
+            <th scope="col" style="border-top-right-radius: 12px;">{{'Created By'|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of clientInfoList" (click)="viewInfo(item)">
+            <th scope="row">{{item.clientNo}}</th>
+            <td>{{item.fullName}}</td>
+            <td>{{item.gender}}</td>
+            <td>{{item.createdDate}}</td>
+            <td>{{item.segment}}</td>
+            <td>{{item.policyOwnershipCount}}</td>
+            <td>{{item.createdBy}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

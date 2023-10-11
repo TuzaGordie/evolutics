@@ -1,0 +1,101 @@
+.card.shadow-sm {
+  margin: 0 5px
+}
+
+.section-cards.card-blue .card .card-number {
+  position: absolute;
+  bottom: 0px;
+  right: 20px;
+  font-size: 20px;
+}
+
+.card-blue .card {
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  max-width: 12rem;
+}
+
+.card-header {
+  font-size: 24px;
+}
+
+.small1 {
+  font-size: 14px;
+}
+
+.small2 {
+  font-size: 16px;
+}
+
+.btn-workflow {
+  border: 1px solid #EB7F51;
+  border-radius: 5px;
+  &:hover {
+    background-color: #EB7F51;
+  }
+}
+
+.btn-endorement {
+  border: 1px solid #3E9E3D;
+  border-radius: 5px;
+  &:hover {
+    background-color: #3E9E3D;
+  }
+}
+
+.btn-reinsurance {
+  border: 1px solid #0082BA;
+  border-radius: 5px;
+  &:hover {
+    background-color: #0082BA;
+  }
+}
+
+.btn-generate-dv {
+  border: 1px solid #8607C2;
+  border-radius: 5px;
+  &:hover {
+    background-color: #8607C2;
+  }
+}
+
+.btn-relationship {
+  border: 1px solid #BF0230;
+  border-radius: 5px;
+  &:hover {
+    background-color: #BF0230;
+  }
+}
+
+.btn-partners {
+  border: 1px solid #3E9E3D;
+  border-radius: 5px;
+  &:hover {
+    background-color: #3E9E3D;
+  }
+}
+
+.btn-premiums {
+  border: 1px solid #01A9B4;
+  border-radius: 5px;
+  &:hover {
+    background-color: #01A9B4;
+  }
+}
+
+.btn-authorization {
+  border: 1px solid #ED8E00;
+  border-radius: 5px;
+  &:hover {
+    background-color: #ED8E00;
+  }
+}
+
+.btn-payee {
+  border: 1px solid rgba(176, 22, 115, 0.9);
+  border-radius: 5px;
+  &:hover {
+    background-color: rgba(176, 22, 115, 0.9);
+  }
+}

@@ -1,0 +1,127 @@
+<!-- <app-form-navigation [title]="'View Client'"></app-form-navigation> -->
+<loader [loading]="loading">
+
+<div class=" mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="row">
+        <div class="col-6">
+          <h5 class="text-primary">{{"Pending Claims"|appTranslate|async}}</h5>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-3">
+          <app-button [buttonType]="'addCustom'" [text]="'Register New Claim'" (click)="openRegisterClaimModal()">
+          </app-button>
+        </div>
+      </div>
+
+      <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+        <thead class="py-3">
+        <tr>
+
+          <th scope="col">{{"Claim No"|appTranslate|async}}</th>
+          <th scope="col">{{"Created On"|appTranslate|async}}</th>
+          <th scope="col">{{"Created By"|appTranslate|async}}</th>
+          <th scope="col">{{"Initial Estimate"|appTranslate|async}}</th>
+          <th scope="col">{{"Adjustments"|appTranslate|async}}</th>
+          <th scope="col">{{"Current Estimate"|appTranslate|async}}</th>
+          <th scope="col">{{"Days to SLA"|appTranslate|async}}</th>
+          <th scope="col">{{"Valid"|appTranslate|async}}</th>
+          <th scope="col">{{"Claim Status"|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let claim of pendingClaims" style="white-space: nowrap;">
+          <td><a [routerLink]="['../../../../payment-desk/view-claim/']" [queryParams]="{claimNo:claim?.claimNo}">{{claim.claimNo}}</a></td>
+          <td>{{claim.createdOn | date}}</td>
+          <td>{{claim.createdBy}}</td>
+          <td>{{claim.initialEstimate | number}}</td>
+          <td>{{claim.adjustments | number}}</td>
+          <td>{{claim.currentEstimate | number}}</td>
+          <td>{{claim.dayToSla}}</td>
+          <td>
+            {{claim.valid}}
+          </td>
+          <td>{{claim.status}} <a (click)="openStatusModal()"><i class="fas fa-pen"></i></a></td>
+          <td>
+            <app-btn icon="edit" type="outline" (mclick)="openChangeStatusModal()">Update</app-btn>
+          </td>
+          <td>
+            <app-button [buttonType]="'generate'" (mclick)="client_view()" [text]="'Generate DV'"></app-button>
+          </td>
+          <td><a (click)="openAdjustModal()">
+            <app-button [buttonType]="'adjust'" [text]="'Adjust'"></app-button>
+          </a></td>
+          <td><a (click)="openHistoryModal()">
+            <app-button [buttonType]="'history'" [text]="'History'"></app-button>
+          </a>
+          </td>
+          <td><a>
+            <app-btn icon="cash" (mclick)="openSetPayeeModal()" type="outline">Payout
+            </app-btn>
+          </a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="form-group mt-2">
+        <div class="row g-3 form-group mt-1 pt-1">
+          <div class="col-10"></div>
+          <div class="col-2">
+
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h5 class="my-5 text-primary">{{"Pending Payments"|appTranslate|async}}</h5>
+
+      <table class="table table-responsive  table-striped" style="font-size: 14px;">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">{{"Payment ID"|appTranslate|async}}</th>
+          <th scope="col">{{"Initial Amount"|appTranslate|async}}</th>
+          <th scope="col">{{"Adjustments"|appTranslate|async}}</th>
+          <th scope="col">{{"Net Amount"|appTranslate|async}}</th>
+          <th scope="col">{{"Created On"|appTranslate|async}}</th>
+          <th scope="col">{{"Created By"|appTranslate|async}}</th>
+          <th scope="col">{{"SLA Level"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;">{{"Payment Status"|appTranslate|async}}</th>
+          <th>{{"Complete Rate"|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of paymentList">
+          <th><a [routerLink]="['../../../../payment-desk/view-payout/']" [queryParams]="{slug:item?.id}">{{item.id}}</a></th>
+          <td>{{item.initialAmount | number}}</td>
+          <td>{{item.adjAmt | number}}</td>
+          <td>{{item.netAmt | number}}</td>
+          <td>{{item.createdOn | date}}</td>
+          <td>{{item.createdBy}}</td>
+          <td>{{item.slaLevel}}</td>
+          <td>{{item.status}}</td>
+          <td>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="item.completeRate + '%'"
+                   [attr.aria-valuenow]="item.completeRate" aria-valuemin="0" aria-valuemax="100">{{item.completeRate}}%
+              </div>
+            </div>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+
+</div>
+</loader>

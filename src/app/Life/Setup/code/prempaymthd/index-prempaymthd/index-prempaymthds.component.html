@@ -1,0 +1,48 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Premium Payment Method'"></app-form-navigation> -->
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <label>{{"Select Premium Payment Method"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" [(ngModel)]="code">
+                <option></option>
+                <option *ngFor="let payin of payinMethods" [value]="payin.code">
+                    {{payin.description}}
+                </option>
+            </select>
+
+            <span class="text-danger" *ngIf="message.error">{{"Select a Premium Payment Method to continue"|appTranslate|async}}</span>
+        </div>
+
+    </div><br>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <button class="btn btn-dark btn-lg w-100" (click)="show()" [class.disabled]="!code">
+                <span class="fas fa-eye"></span>
+                {{'Show' | appTranslate |async}}
+            </button>
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <app-button [buttonType]="'create'" routerLink="../create-prempaymthd"></app-button>
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <button class="btn btn-outline-primary btn-lg btn-clone w-100" (click)="clone()" [class.disabled]="!code">
+                <span class="fas fa-clone"></span>
+                {{'Clone'|appTranslate|async}}
+            </button>
+        </div>
+
+    </div>
+
+</div>

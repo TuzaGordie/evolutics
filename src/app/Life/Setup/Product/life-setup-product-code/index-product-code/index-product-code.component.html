@@ -1,0 +1,33 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <app-input-basic label="Select Insurance Type" labelType="ct" valueField="code" type="select"
+          [options]="insuranceTypes" [form]="form" name="insuranceType" [stacked]="true" #insuranceTypeTag>
+        </app-input-basic>
+        <app-input-basic label="Select Product Class" labelType="ct" valueField="code" type="select"
+          [options]="productS.getCodeList|functionCaller1:insuranceTypeTag.value|async" [form]="form" name="prodClass" [stacked]="true" #prodClassTag>
+        </app-input-basic>
+        <app-input-basic label="Select Product" labelType="cd" valueField="code" type="select"
+          [options]="productS.getProductByProdClass|functionCaller1:prodClassTag.value|async" [form]="form" name="prod" [stacked]="true" #insuranceTypeTag>
+        </app-input-basic> 
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn icon="show" type="dark" routerLink="../show" [queryParams]="{prodCode: selectedProdCode}"
+              [disabled]="form.invalid">Show</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn icon="clone" type="secondary" routerLink="../clone" [queryParams]="{prodCode: selectedProdCode}"
+              [disabled]="form.invalid">Clone</app-btn>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,26 @@
+<app-form-navigation [title] = "'Overview'"></app-form-navigation> 
+<div class="container-sm mt-5 " id="form-body">
+    <div class="row">
+        <div class="col-md-9 mx-auto my-5 align-middle">
+            <form>                
+                <div class="form-group mt-2">
+                    <div class="row">
+                        <div class="col-md-9">
+                    <label>Enter Code for New Code</label>
+                    <select class="form-control form-control-lg control-bg-gray">
+                        <option></option>
+                        <option *ngFor="let ot of reportList" [ngValue]="ot.CODE">{{ot.CODE_TITLE}} </option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                        <label>&nbsp;</label>
+                    <app-button [buttonType]="'create-red'" routerLink="../create"></app-button>
+                </div>
+                </div>
+                </div>
+                               
+            </form>
+        </div>
+        
+    </div>
+</div>

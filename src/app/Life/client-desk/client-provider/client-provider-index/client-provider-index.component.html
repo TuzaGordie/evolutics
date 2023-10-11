@@ -1,0 +1,76 @@
+<div class="container mt-5">
+  <form>
+    <div class="col-7 mx-auto">
+      <label for="" class="text-primary">{{"Clone An Existing Provider"|appTranslate|async}}</label>
+      <div class="row justify-content-center mt-5 align-items-end">
+        <div class="col">
+          <div class="form-group"> 
+            <input type="text" class="form-control control-bg-gray"
+              placeholder="{{'Enter Provider No'|appTranslate|async}}" [(ngModel)]="providerNo" name="providerNo">
+          </div>
+        </div>
+        <div class="col d-flex align-items-center" *ngIf="providerNo == '1'">
+          <label for="" class="text-primary"> {{"Sinaly Diarassouba"|appTranslate|async}} <span class="text-success">&check; </span></label>
+        </div>
+        <div class="col-3"> 
+          <app-button buttonType="findsmall" (click)="clientS.openFindProviderModal(null,providerNo)"></app-button>
+        </div>
+        <div class="col-3">
+          <div class="form-group"> 
+            <app-button buttonType="clone"></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-5 mb-5 align-items-end">
+        <label for="" class="text-primary">{{"Create From Scratch"|appTranslate|async}}</label>
+        <div class="col">
+          <app-input-basic [form]="findClientIndexProviderForm" name="clientNo" placeholder="Enter Client Number" [showLabel]="false" [stacked]="true"
+        [showValidation]="true" [showValidationIcon]="true"  #clientNo></app-input-basic>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-button buttonType="findsmall" (click)="clientS.openFindClientModal(clientNo.control)"></app-button>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-button buttonType="create"   [matMenuTriggerFor]="clientMenu"></app-button>
+              <mat-menu #clientMenu="matMenu">
+                <button mat-menu-item (click)="clientS.openCreateIndividualClientModal(clientNo.control)">
+                  {{'Individual Client'|appTranslate|async}}
+                </button>
+                <button mat-menu-item (click)="clientS.openCreateCorporateClientModal(clientNo.control)">
+                  {{'Corporate Client'|appTranslate|async}}
+                </button>
+              </mat-menu> </div>
+        </div>
+        <div class="col-12 d-flex align-items-center mt-2" *ngIf="clientName">
+          <label for="" class="text-primary"> {{clientName}} </label>
+        </div>
+        <div class="col-12">
+          <app-validation-message label="Client number" [control]="clientNo?.control">
+          </app-validation-message>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-5">
+
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn type="secondary" icon="next"
+              [disabled]="!findClientIndexProviderForm?.controls?.clientNo?.valid "
+              (mclick)="showCreateProvider()">Next
+            </app-btn>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </form>
+
+</div>

@@ -1,0 +1,253 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Bank/Bank Accounts'"></app-form-navigation> -->
+<loader [loading]="loading" [text]="loadingText">
+  <div class="container">
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6 mb-3">
+          <div class="row">
+            <!-- <div class="col-md-3"></div> -->
+            <div class="col-md-6">
+              <select [(ngModel)]="company" class="form-control control-bg-gray" #bankCode name="company">
+                <option [value]="null">
+                  {{ 'Company' | appTranslate | async }}
+                </option>
+                <option value="{{ item?.code }}" *ngFor="let item of companyArray">
+                  {{ item?.code }} -
+                  {{ item?.description }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            <thead>
+              <tr class="text-bold">
+                <th scope="col" class="text-primary">
+                  {{ 'Bank Code' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-primary">
+                  {{ 'Account No' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-primary"></th>
+                <th scope="col" class="text-primary">
+                  {{ 'Bank Sort Code' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-primary"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container>
+                <tr *ngFor="let bankAccount of bankAccounts; let i = index">
+                  <ng-container>
+                    <td>
+                      <select [(ngModel)]="bankAccount.bankCode" class="form-control control-bg-gray" #bankCode
+                        name="bankCode">
+                        <option [value]="null">
+                          {{ 'Select Bank' | appTranslate | async }}
+                        </option>
+                        <option value="{{ item?.code }}" *ngFor="let item of bankCodeArray">
+                          {{ item?.code }} -
+                          {{ item?.description }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <input type="text" class="form-control control-bg-gray" [(ngModel)]="bankAccount.accountNo"
+                        #accountNo name="accountNo" />
+                    </td>
+                    <td>
+                      <app-button buttonType="searchCustom" text="Find Sort Code" (click)="findSortCode(i)">
+                        <!-- data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" -->
+                        Find Sort Code
+                      </app-button>
+                    </td>
+                    <div class="modal fade" id="exampleModal__{{ i }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              {{ 'Find Sort Code' | appTranslate | async }}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                              attr.aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+                            <div class="container">
+                              <div class="col-6 mx-auto">
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="" class="form-label text-primary">{{
+                                        'Select Country'
+                                        | appTranslate
+                                        | async
+                                        }}
+                                      </label>
+
+                                      <select class="form-control control-bg-gray" #selectedCountry name="country"
+                                        [(ngModel)]="country" (change)="
+                                            onCountryChange(selectedCountry.value)
+                                          ">
+                                        <option value="">
+                                          {{
+                                          'Select Country'
+                                          | appTranslate
+                                          | async
+                                          }}
+                                        </option>
+                                        <option value="{{ item?.code }}" *ngFor="let item of countryArray">
+                                          {{ item?.code }} -
+                                          {{ item?.description }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="" class="form-label text-primary">{{
+                                        'Select Bank' | appTranslate | async
+                                        }}</label>
+
+                                      <select [(ngModel)]="bankName" class="form-control control-bg-gray"
+                                        name="bankName" #bank>
+                                        <option value="">
+                                          {{
+                                          'Select Bank' | appTranslate | async
+                                          }}
+                                        </option>
+                                        <option value="{{ item?.description }}" *ngFor="let item of bankArray">
+                                          {{ item?.code }} -
+                                          {{ item?.description }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="" class="form-label text-primary text-center">{{
+                                        'Select State' | appTranslate | async
+                                        }}</label>
+
+                                      <select class="form-control control-bg-gray" [(ngModel)]="city" name="city"
+                                        (change)="onChangeCity(state.value)" #state>
+                                        <option value="">
+                                          {{
+                                          'Select State'
+                                          | appTranslate
+                                          | async
+                                          }}
+                                        </option>
+                                        <option value="{{ item?.code }}" *ngFor="let item of stateArray">
+                                          {{ item?.code }} -
+                                          {{ item?.description }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col">
+                                      <div class="form-group">
+                                        <label for="" class="form-label text-primary">{{
+                                          'Select Branch' | appTranslate | async
+                                          }}</label>
+                                        <select [(ngModel)]="branch" class="form-control control-bg-gray">
+                                          <option [value]="null">
+                                            {{
+                                            'Select Branch'
+                                            | appTranslate
+                                            | async
+                                            }}
+                                          </option>
+                                          <option value="{{ item?.code }}" *ngFor="let item of branchArray">
+                                            {{ item?.code }} -
+                                            {{ item?.description }}
+                                          </option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div> -->
+
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label for="" class="form-label text-primary">{{
+                                        'Select Town' | appTranslate | async
+                                        }}</label>
+
+                                      <select [(ngModel)]="town" class="form-control control-bg-gray" name="town">
+                                        <option value="">
+                                          {{
+                                          'Select Town' | appTranslate | async
+                                          }}
+                                        </option>
+                                        <option value="{{ item?.code }}" *ngFor="let item of townArray">
+                                          {{ item?.code }} -
+                                          {{ item?.description }}
+                                        </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row mt-3">
+                                  <app-btn (click)="showBankSortCode(i)" type="dark" icon="show">
+                                    Find</app-btn>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <td>
+                      <select class="form-control control-bg-gray" #sortCode [(ngModel)]="bankAccount.sortCode"
+                        name="sortCode">
+                        <option value="{{ item?.code }}" *ngFor="let item of bankAccount.bankSortCode">
+                          {{ item?.code }} - {{ item?.title }}
+                        </option>
+                      </select>
+                    </td>
+
+                    <div class="row mt-2">
+                      <app-btn type="dark" (click)="deleteBankAccount(i)" icon="delete">
+                        Delete
+                      </app-btn>
+                    </div>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-start mt-5">
+      <div class="col-md-2">
+        <app-btn type="dark" (click)="addBankAccount()" icon="add">
+          Add</app-btn>
+      </div>
+    </div>
+
+    <div class="row justify-content-end mt-5">
+      <div class="col-md-2">
+        <app-button [buttonType]="'save'" (click)="createBankAccount()" [text]="'Save'"></app-button>
+      </div>
+    </div>
+
+    <br /><br />
+  </div>
+</loader>
+
+<!-- Modal -->

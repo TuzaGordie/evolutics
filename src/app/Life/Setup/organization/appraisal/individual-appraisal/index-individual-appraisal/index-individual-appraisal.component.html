@@ -1,0 +1,41 @@
+<!-- <app-form-navigation [title]="'Set Up / Appraisal / Individual'"></app-form-navigation> -->
+<div class="container-sm mt-5 ">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Company "|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray" #companyCode [(ngModel)]="company" (click)="getDivisionAppraisalCode()">
+            <option *ngFor="let company of companies" value="{{company.code}}">
+              {{company.code}}-{{company.description}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Individual Appraisal Code"|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="individualAppraisalCode" name="individualAppraisalCode" #individualAppraisal>
+            <option *ngFor="let code of individualAppraisalCodes">{{code.code}}-{{code.description}}</option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="dark" icon="show" (mclick)="onShow(individualAppraisal.value)" [disabled]="!individualAppraisal.value">Show</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../create-individual-appraisal"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="outline" icon="clone" mclass="btn-clone" (mclick)="onClone(individualAppraisal.value)" [disabled]="!individualAppraisal.value">Clone</app-btn>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+</div>
+

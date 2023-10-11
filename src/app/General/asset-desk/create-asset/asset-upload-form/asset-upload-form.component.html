@@ -1,0 +1,22 @@
+ <div class=" ">
+
+   <div class="row ">
+       <!-- <div class="col-12">
+        <h6 class="m-0">Files</h6>
+       </div> -->
+     <div class="col-md-4 mt-2">
+       <app-file-upload (fileChange)="upload($event)" label="Upload Ownership Certificate" accept="image">
+       </app-file-upload>
+     </div>
+     <div class="col-md-4 mt-2">
+       <app-file-upload (filesChange)="upload2($event)" label="Upload Pictures" accept="image" [multiple]="true">
+       </app-file-upload>
+     </div>
+     <div class="col-md-4 mt-2">
+        <app-file-upload (fileMetadataChange)="upload3($event)" label="Other Upload" accept="image" [useDocumentModal]="true">
+        </app-file-upload>
+     </div>
+   </div>
+
+
+ </div>

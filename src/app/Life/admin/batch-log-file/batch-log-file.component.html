@@ -1,0 +1,186 @@
+<div class="container">
+
+  <div class="row mb-4">
+    <div class="col">
+      <div class="">
+        <label class="text-primary">{{'File Name'|appTranslate|async}}</label>
+        <input type="text" class="form-control ht-50" placeholder="file name" name="fileName" [(ngModel)]="fileName">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="">
+        <label class="text-primary">{{'Batch Code'|appTranslate|async}}</label>
+        <input type="text" class="form-control ht-50" placeholder="batch code" name="batchCode" [(ngModel)]="batchCode">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="">
+        <label class="text-primary">{{'Process Code'|appTranslate|async}}</label>
+        <input type="text" class="form-control ht-50" placeholder="process code" name="processCode" [(ngModel)]="processCode">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="">
+        <label class="text-primary" for="inputGroupSelect02">{{'Start Date'|appTranslate|async}}</label>
+        <input type="date" class="form-control ht-50" name="startDate" [(ngModel)]="startDate">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="">
+        <label class="text-primary" for="inputGroupSelect03">{{'End Date'|appTranslate|async}}</label>
+        <input type="date" class="form-control ht-50" name="endDate" [(ngModel)]="endDate">
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="">
+        <label class="text-primary" for="inputGroupSelect03">{{'Sort by'|appTranslate|async}}</label>
+        <select class="form-select ht-50" [(ngModel)]="sortBy">
+          <option *ngFor="let value of sortParmeters" [value]="value.item">{{value.item}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="">
+        <label class="text-primary">.</label>
+        <button type="submit" style="width: 100%" class="btn btn-primary ht-50" (click)="newSearch()">{{'Search'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="items-per-page">
+    <div class="left pt-3">
+      <i *ngIf="checkedDocumentList2.length" class="fa fa-trash" data-bs-toggle="modal"
+         data-bs-target="#deleteModal"></i>
+    </div>
+    <div class="right">
+      <div>
+        <select class="form-select" [(ngModel)]="pageSize" #select (change)="fetchAllRecords()">
+          <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+
+  <table class="table table-striped mt-4">
+    <thead>
+    <tr>
+      <th style="width: 10px">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="isMasterSel" name="select" value=""
+                 (change)="checkUncheckAll()">
+        </div>
+      </th>
+      <th scope="col">{{'File Name'|appTranslate|async}}</th>
+      <th scope="col">{{'Batch Code'|appTranslate|async}}</th>
+      <th scope="col">{{'Company Code'|appTranslate|async}}</th>
+      <th scope="col">{{'Process Code'|appTranslate|async}}</th>
+      <th scope="col">Created On
+        <i (click)="onSortClick($event)" class="fa fa-angle-double-up" style="margin-left: 10px;"></i>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let item of documentList; let i = index">
+      <td style="width: 10px">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="select" value="" id="flexCheckDefault"
+                 [(ngModel)]="item.selected" value="{{item.id}}" (change)="isAllSelected()">
+        </div>
+      </td>
+      <td>{{item.fileName}}</td>
+      <td>{{item.batchCode}}</td>
+      <td>{{item.companyCode}}</td>
+      <td>{{item.processCode}}</td>
+      <td>{{item.createdOn | date: 'dd-MMM-yyyy hh:mm a'}}</td>
+      <td> <button class="btn btn-primary" (click)=" viewFile(item.docKey, item.fileName)">{{'View file'|appTranslate|async}}</button> </td>
+    </tr>
+
+    <tr *ngIf="connection.searching">
+      <td colspan="12">
+        <span class="text-primary">{{'Fetching records '|appTranslate|async}}</span>
+        <div class="spinner-border spinner-border-sm text-primary" role="status">
+          <span class="visually-hidden">{{'Loading...'|appTranslate|async}}</span>
+        </div>
+      </td>
+    </tr>
+
+    <tr *ngIf="connection.error">
+      <td colspan="12">
+        <span class="text-danger">{{'something went wrong. '|appTranslate|async}}</span>
+        <span class="text-danger underline" style="cursor:pointer" (click)="fetchAllRecords()">retry?</span>
+      </td>
+    </tr>
+
+
+    <tr *ngIf="dataRetrieved === true && documentList.length === 0">
+      <td colspan="12">
+        <span class="text-primary">{{'No records found.'|appTranslate|async}}</span>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <div class="row" *ngIf="totalPages > 1">
+    <div class="col-6">
+      <p>showing page {{pageNumber}} of {{totalPages}}</p>
+    </div>
+    <div class="col-6">
+      <nav class="float-right" aria-label="...">
+        <ul class="pagination">
+
+          <li [ngClass]="{nodisplay:pageNumber <=1}" class="page-item first-item">
+            <a href="javascript:void(0)" (click)="first()" class="page-link">{{'First page'|appTranslate|async}}</a>
+          </li>
+
+          <li [ngClass]="{nodisplay:pageNumber <= 1}" class="page-item previous-item">
+            <a href="javascript:void(0)" (click)="previous()" class="page-link"><i class="fa fa-long-arrow-alt-left"></i></a>
+          </li>
+
+          <li *ngFor="let page of pages" [ngClass]="{active:pageNumber === page}" class="page-item number-item">
+            <a href="javascript:void(0)" (click)="toPageNumber(page)" class="page-link">{{page}}</a>
+          </li>
+
+          <li [ngClass]="{nodisplay:pageNumber >= totalPages}" class="page-item next-item">
+            <a href="javascript:void(0)" (click)="next()" class="page-link"><i class="fa fa-long-arrow-alt-right"></i></a>
+          </li>
+
+          <li [ngClass]="{nodisplay:pageNumber >= totalPages}" class="page-item last-item">
+            <a href="javascript:void(0)" (click)="last()" class="page-link">{{'Last page'|appTranslate|async}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel"><i class="fa fa-exclamation-triangle"></i>{{"WARNING"|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>{{"Are you sure you want to delete"|appTranslate|async}} <span *ngIf="checkedDocumentList2.length === 1">{{"this document"|appTranslate|async}}</span> <span
+          *ngIf="checkedDocumentList2.length > 1"> {{"these documents"|appTranslate|async}}</span>?</b></p>
+        <span *ngFor="let item of checkedDocumentList2">
+          <p class="text-primary"><b>{{item.fileName}}</b></p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary px-5" (click)="delete()">{{'YES'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>

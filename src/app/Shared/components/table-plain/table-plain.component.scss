@@ -1,0 +1,61 @@
+:host ::ng-deep {
+  .colour {
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    border-radius: 5px;
+  }
+  .mat-sort-header-container {
+    justify-content: center;
+  }
+  .default.colour {
+    background-color: #545454;
+  }
+}
+.mat-header-cell {
+  color: #1b1a50;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+.smallerFonts {
+  td,
+  th {
+    font-size: 0.7rem;
+  }
+}
+.nowrap {
+  td,
+  th {
+    white-space: nowrap;
+    text-align: left;
+    padding: 0 5px;
+  }
+}
+:host ::ng-deep input[type='checkbox'] {
+  border: 1px solid #504ef54d;
+}
+
+.table tr td {
+  &:hover {
+    color: unset !important;
+    text-decoration: unset;
+    cursor: unset;
+  }
+}
+tr .mat-header-row {
+  height: 2rem;
+}
+// :host ::ng-deep thead {
+//   height: 30px;
+//   min-height: 30px;
+// }
+tr.mat-header-row {
+  height: auto;
+}
+.centerCells{
+  td{
+    text-align: center;
+  }
+}

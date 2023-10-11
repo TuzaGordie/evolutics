@@ -1,0 +1,614 @@
+<div *ngIf="buttonType === 'show'">
+  <div matRipple class="btn btn-dark btn-lg">
+    <fa-icon [icon]="faEye"></fa-icon>
+    {{'Show'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'showCustom'">
+  <div matRipple class="btn btn-dark btn-lg">
+    <fa-icon [icon]="faEye"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'showsmall'">
+  <div matRipple class="btn btn-dark btn-lg">
+    <span class="small1">
+      <fa-icon [icon]="faEye"></fa-icon>
+      {{'Show'|appTranslate|async}}
+    </span>
+
+  </div>
+</div>
+<div *ngIf="buttonType === 'create'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Create New'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'createGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Create New'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustom'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustomRed'">
+  <div matRipple class="btn btn-outline-danger btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustomGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustom2'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+
+    <span class="small1">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      {{text|appTranslate|async}}
+    </span>
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustom2GB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+
+    <span class="small1">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      {{text|appTranslate|async}}
+    </span>
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustom2small'">
+  <div matRipple class="btn btn-outline-primary btn-lg ">
+
+    <span class="small1">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      {{text|appTranslate|async}}
+    </span>
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustom2smallRed'">
+  <div matRipple class="btn btn-outline-danger btn-lg ">
+
+    <span class="small1">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      {{text|appTranslate|async}}
+    </span>
+  </div>
+</div>
+<div *ngIf="buttonType === 'createCustom2smallGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg ">
+
+    <span class="small1">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      {{text|appTranslate|async}}
+    </span>
+  </div>
+</div>
+<div *ngIf="buttonType === 'clone'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon [icon]="faClone"></fa-icon>
+    {{'Clone'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'clone-red'">
+  <div matRipple class="btn btn btn-outline-danger btn-lg btn-clone">
+    <fa-icon [icon]="faClone"></fa-icon>
+    {{'Clone'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'search'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Search'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'searchRed'">
+  <div matRipple class="btn btn btn-outline-danger btn-lg btn-clone">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Search'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'searchGB'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Search'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'searchCustom'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'searchCustomGB'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'searchGb'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Search'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'default'">
+  <div matRipple class="btn btn btn-outline-primary btn-lg btn-clone">
+    <fa-icon></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'createclone'">
+  <div matRipple class="btn btn-outline-primary">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Create New'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'add'">
+  <div matRipple class="btn btn-outline-primary">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Add'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'addred'">
+  <div matRipple class="btn btn-outline-danger">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Add'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'addYellow'">
+  <div matRipple class="btn btn-outline-primary">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Add'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'add-red'">
+  <div matRipple class="btn btn-outline-secondry">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Add'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'edit'">
+  <div matRipple class="btn btn-outline-primary">
+    <fa-icon [icon]="faEdit"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'editGB'">
+  <div matRipple class="btn btn-outline-primary">
+    <fa-icon [icon]="faEdit"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'editRed'">
+  <div matRipple class="btn btn-outline-danger">
+    <fa-icon [icon]="faEdit"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'addCustom'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'addCustomGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+
+
+<div *ngIf="buttonType === 'addCustom-red'">
+  <div matRipple class="btn btn-outline-danger  btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'editCustom'">
+  <div matRipple class="btn btn-outline-primary btn-clone p-0">
+    <fa-icon [icon]="faEdit"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'editCustomGB'">
+  <div matRipple class="btn btn-outline-primary btn-clone p-0">
+    <fa-icon [icon]="faEdit"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'submit'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faCheck"></fa-icon>
+    {{'Submit'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'submitRed'">
+  <div matRipple class="btn btn-outline-danger btn-lg">
+    <fa-icon [icon]="faCheck"></fa-icon>
+    {{'Submit'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'update'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faCheck"></fa-icon>
+    {{'Update'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'history'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faHistory"></fa-icon>
+    {{'History'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'historyGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faHistory"></fa-icon>
+    {{'History'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'adjust'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faSlidersH"></fa-icon>
+    {{'Adjust'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'adjustGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faSlidersH"></fa-icon>
+    {{'Adjust'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'generate'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faCogs"></fa-icon>
+    {{'Generate'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'generateGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faCogs"></fa-icon>
+    {{'Generate'|appTranslate|async}}
+  </div>
+</div>
+
+
+
+
+<div *ngIf="buttonType === 'document'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    <fa-icon [icon]="faFile"></fa-icon>
+    {{'Document'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'find'"  >
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Find'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'findRed'">
+  <div matRipple class="btn btn-outline-danger btn-clone btn-lg">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Find'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'Find Policy'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+
+    {{'Find Policy'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'action'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Action'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'Authorise'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Authorise'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'Decline'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Decline'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'changestatus'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Status'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'generates'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Generate'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'adjusts'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Adjust'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'historys'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'History'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'register'">
+  <div matRipple class="btn btn-primary">
+    {{'Register New Claim'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'submits'">
+  <div matRipple class="btn btn-primary">
+    {{'Submit'|appTranslate|async}}
+  </div>
+</div>
+
+
+<div *ngIf="buttonType === 'findGB'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Find'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'find-red'">
+  <div matRipple class="btn btn-outline-danger btn-clone-red btn-lg">
+    <fa-icon [icon]="faSearch"></fa-icon>
+    {{'Find'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'findsmall'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    <span class="small1">
+      <fa-icon [icon]="faSearch"></fa-icon>
+      {{'Find'|appTranslate|async}}
+    </span>
+
+  </div>
+</div>
+<div *ngIf="buttonType === 'findsmallred'">
+  <div matRipple class="btn btn-outline-danger btn-clone btn-lg">
+    <span class="small1">
+      <fa-icon [icon]="faSearch"></fa-icon>
+      {{'Find'|appTranslate|async}}
+    </span>
+
+  </div>
+</div>
+<div *ngIf="buttonType === 'findsmallGB'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    <span class="small1">
+      <fa-icon [icon]="faSearch"></fa-icon>
+      {{'Find'|appTranslate|async}}
+    </span>
+
+  </div>
+</div>
+<div *ngIf="buttonType === 'save'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{'Save'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'saveGB'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{'Save'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'save-red'">
+  <div matRipple class="btn btn-outline-danger btn-lg">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{'Save'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'saverun-red'">
+  <div matRipple class="btn btn-outline-danger btn-lg">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{'Save & Run'|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'custSave'">
+  <div matRipple class="btn btn-outline-primary btn-lg">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'upload'">
+  <div matRipple class="btn btn-primary btn-lg">
+    <fa-icon [icon]="faUpload"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'uploadRed'">
+  <div matRipple class="btn btn-danger btn-lg">
+    <fa-icon [icon]="faUpload"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'uploadGB'">
+  <div matRipple class="btn btn-primary btn-lg">
+    <fa-icon [icon]="faUpload"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'custSave2'">
+  <div matRipple class="btn btn-outline-primary ">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'btnCustomClone'">
+  <div matRipple class="btn btn-outline-primary btn-clone">
+    {{text|appTranslate|async}}</div>
+</div>
+<div *ngIf="buttonType === 'btnCustomCloneRed'">
+  <div matRipple class="btn btn-outline-danger btn-clone">
+    {{text|appTranslate|async}}</div>
+</div>
+
+<div *ngIf="buttonType === 'btnCustomCloneGB'">
+  <div matRipple class="btn btn-outline-primary btn-clone">
+    {{text|appTranslate|async}}</div>
+</div>
+
+<div *ngIf="buttonType === 'create-red'">
+  <div matRipple class="btn btn-outline-danger btn-lg">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    {{'Create New'|appTranslate|async}}
+  </div>
+</div>
+
+
+<div *ngIf="buttonType === 'show-red'">
+  <div matRipple class="btn btn-secondry bg-dark color-white btn-lg">
+    <fa-icon [icon]="faEye"></fa-icon>
+    {{'Show'|appTranslate|async}}
+  </div>
+</div>
+
+
+<div *ngIf="buttonType === 'custSave-red'">
+  <div matRipple class="btn btn-outline-secondry btn-lg">
+    <fa-icon [icon]="faSave"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'btnCustomNote'">
+  <div matRipple class="btn btn-outline-primary btn-clone">
+    <fa-icon [icon]="faPen"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'btnCustomNoteRed'">
+  <div matRipple class="btn btn-outline-danger btn-clone">
+    <fa-icon [icon]="faPen"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'btnCustomNoteGB'">
+  <div matRipple class="btn btn-outline-primary btn-clone">
+    <fa-icon [icon]="faPen"></fa-icon>
+    {{text|appTranslate|async}}
+  </div>
+</div>
+<div *ngIf="buttonType === 'btnCustomCloneRaised'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-raised">
+    {{text|appTranslate|async}}</div>
+</div>
+<div *ngIf="buttonType === 'btnCustomCloneRaisedRed'">
+  <div matRipple class="btn btn-outline-danger btn-clone-red btn-raised">
+    {{text|appTranslate|async}}</div>
+</div>
+<div *ngIf="buttonType === 'btnCustomCloneRaisedYellow'">
+  <div matRipple class="btn btn-outline-primary btn-clone-yellow btn-raised">
+    {{text|appTranslate|async}}</div>
+</div>
+<div *ngIf="buttonType === 'run'">
+  <div matRipple class="btn btn-primary btn-lg">
+    <fa-icon [icon]="faPlay"></fa-icon>
+    {{'Run'|appTranslate|async}}
+
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'insert'">
+  <div matRipple class="btn btn-outline-primary">
+
+    {{'Insert'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'delete'">
+  <div matRipple class="btn btn-outline-danger btn-lg">
+
+    <fa-icon [icon]="faTrash"></fa-icon>
+
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'translate'">
+  <div matRipple class="btn btn-dark btn-lg">
+    {{'Translate'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'next'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Next'|appTranslate|async}}
+    <fa-icon [icon]="faArrowRight"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'nextRed'">
+  <div matRipple class="btn btn-outline-danger btn-clone btn-lg">
+    {{'Next'|appTranslate|async}}
+    <fa-icon [icon]="faArrowRight"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'nextGB'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    {{'Next'|appTranslate|async}}
+    <fa-icon [icon]="faArrowRight"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'next-red'">
+  <div matRipple class="btn btn-outline-danger btn-clone-red btn-lg">
+    {{'Next'|appTranslate|async}}
+    <fa-icon [icon]="faArrowRight"></fa-icon>
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'addFilter'">
+  <div matRipple class="btn btn-dark btn-lg">
+
+    {{'Add Filter'|appTranslate|async}}
+  </div>
+</div>
+
+<div *ngIf="buttonType === 'prev'">
+  <div matRipple class="btn btn-outline-primary btn-clone btn-lg">
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+    {{'Prev'|appTranslate|async}}
+  </div>
+</div>
+
+
+
+<div *ngIf="buttonType === 'uploadLg'">
+  <div matRipple class="btn btn-primary btn-lg">
+    <fa-icon [icon]="faUpload"></fa-icon>
+    {{'Upload'|appTranslate|async}}
+  </div>
+</div>
+<!-- -->

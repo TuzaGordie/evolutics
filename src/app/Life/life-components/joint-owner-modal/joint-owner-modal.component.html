@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <h4>{{'Joint Owner'|appTranslate|async}}</h4>
+      </div>
+      <div class="col-auto">
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+
+      </div>
+    </div>
+  
+    <loader [loading]="loading">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <ng-container *ngIf="bankModel">
+          <div class="row align-items-end">
+            <div class="col-md-6 row align-items-end">
+              <div class="col-4">
+                <label class="form-label text-primary py-2">{{'Joint Owner Client Number'|appTranslate|async}}</label><br>
+                <input type="text" class="form-control  control-bg-gray" name="" id="">
+              </div>
+              <div class="col-4">
+                <app-button [text]="'Find'" [buttonType]="'find'"></app-button>
+              </div>
+              <div class="col-4">
+                <app-button [text]="'Create New Client'" [buttonType]="'createCustom'"></app-button>
+              </div>
+              
+            </div>
+  
+            <div class="col-md-6">
+              <div class="row align-items-center">
+                <label class="form-label text-primary ">{{'Relationship to Owner'|appTranslate|async}}</label>
+                <input type="text" formControlName="sortCode" class="form-control  control-bg-gray">
+              </div>
+            </div>
+  
+            <div class="col-md-6">
+              <label class="form-label text-primary py-2">{{'Owner\'s portion of the Risk'|appTranslate|async}}</label><br>
+              <input type="text" formControlName="accountNo" class="form-control  control-bg-gray">
+            </div>
+  
+            <div class="col-md-6">
+              <label class="form-label text-primary py-2">{{'Joint Owner\'s portion of Risk'|appTranslate|async}}</label><br>
+              <input type="text" formControlName="bankBranch" class="form-control  control-bg-gray">
+            </div>
+          </div>
+        </ng-container>
+        <div class="d-flex justify-content-end my-5">
+          <app-btn (mclick)="submit()" icon="save" type="secondary">Add</app-btn>
+        </div>
+      </form>
+    </loader>
+  </div>

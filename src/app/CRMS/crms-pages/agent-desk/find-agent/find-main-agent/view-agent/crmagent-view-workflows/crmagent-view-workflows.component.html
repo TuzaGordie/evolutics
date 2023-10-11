@@ -1,0 +1,257 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">Workflows</h1>
+      <p class="py-3"><b>Agent Name:</b> <span class="px-3">{{findClientService.clientInfo?.FIRST_NAME}}</span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+            <th scope="col">Task Code</th>
+            <th scope="col">Task</th>
+            <th scope="col">User Assigned</th>
+            <th scope="col">Group Assigned</th>
+            <th scope="col">Start</th>
+            <th scope="col">Due</th>
+            <th scope="col" style="border-top-right-radius: 12px;">Time Outside SLA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of webflowsList">
+            <th scope="row">
+              <div class="square red"></div>
+            </th>
+            <td>{{item.TASK_CODE}}</td>
+            <td>{{item.TASK_DESCRIPTION}}</td>
+            <td>{{item.ASSIGNED_TO}}</td>
+            <td>{{item.ASSIGNED_TO_GROUP}}</td>
+            <td>{{item.START_ON}}</td>
+            <td>{{item.DUE_ON}}</td>
+            <td>{{item.TIME_OS_SLA}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="mt-5 row justify-content-between">
+      <div class="col-3 ">
+
+        <!--<app-button buttonType="addCustom" text="Create New Task"
+                    [routerLink]="'/life/workflow/workflow-task'"></app-button>-->
+
+
+      </div>
+      <div class="col-3 ">
+
+        <!-- <app-button buttonType="history"
+         ></app-button>-->
+
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+            class="fas fa-plus"></i> Create New Task
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Workflow Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <form>
+            <div class="row g-3 my-4">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-danger">Task Code</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-danger">Source</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-danger">Status</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row g-3 my-3">
+              <div class="col-2">
+                <div class="form-group ">
+                  <label class="form-label text-danger">Default Start Date</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label class="form-label text-danger">Default Start Time</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+
+              <div class="col-2">
+                <label class="form-label text-danger">Default SLA (hours:min)</label>
+                <input class="form-control  control-bg-gray" type="text" placeholder="hours" />
+              </div>
+              <div class="col-2">
+                <label class="form-label text-danger"> &nbsp;</label>
+                <input class="form-control  control-bg-gray" type="text" placeholder="mins" />
+              </div>
+
+              <div class="col-2">
+                <label class="form-label text-danger">Override SLA (hours:min)</label>
+                <input class="form-control  control-bg-gray" type="text" placeholder="hours" />
+              </div>
+              <div class="col-2">
+                <label class="form-label text-danger"> &nbsp;</label>
+                <input class="form-control  control-bg-gray" type="text" placeholder="mins" />
+              </div>
+
+
+            </div>
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-danger">Reason for Changes to Default SLA</label>
+                  <input class="form-control  control-bg-gray" type="text" />
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="text-danger form-label">Assigned to User Group</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="text-danger form-label">Assigned to User</label>
+                  <select class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 my-3">
+              <div class="col-4">
+
+                <div class="form-group">
+                  <label for="1e" class="form-label text-danger">Ref Category</label>
+                  <select id="1e" class="form-control  control-bg-gray">
+                    <option></option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-4">
+                <label for="2e" class="form-label text-danger">Ref Number</label>
+                <input id="2e" class="form-control  control-bg-gray" type="text" />
+              </div>
+              <div class="col-4">
+                <label class="form-label text-danger">&nbsp;</label>
+                <input class="form-control  control-bg-gray" type="text" placeholder="Ref Details" />
+              </div>
+            </div>
+            <div class="row g-3 mt-2">
+              <div class="col-10 form-group "></div>
+              <div class="col-2 form-group">
+                <!--                <app-button [buttonType]="'addCustom'" [text]="'Add Ref'"></app-button>-->
+                <button class="btn btn-danger w-100"><i class="fas fa-plus"></i> Add Ref</button>
+              </div>
+            </div>
+            <hr>
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="text-danger form-label">Description</label>
+                  <textarea class="form-control  control-bg-gray"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row my-5 justify-content-between">
+              <div class="col-2">
+                <!--                <app-button [buttonType]="'document'" (click)="call_workflow_task_document_list()"></app-button>-->
+                <button class="btn btn-outline-danger w-100"> Document</button>
+
+              </div>
+
+              <div class="col-2 d-grid gap-1">
+                <!--                <app-button [buttonType]="'submit'"></app-button>-->
+
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-danger "> <i class="fas fa-check"></i> Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<div *ngIf="title === 'Receipting'">
+  <div class="row">
+      <div class="col-8">
+          <div class="col">
+              <label>Overview</label>
+              <input type="checkbox" class="form-check-label">
+          </div>
+          <div class="col">
+              <label>Unposted</label>
+              <input type="checkbox" class="form-check-label">
+          </div>
+          <div class="col">
+              <label>Create New</label>
+              <input type="checkbox" class="form-check-label">
+          </div>
+          <div class="col">
+              <label>Unreconciled</label>
+              <input type="checkbox" class="form-check-label">
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div *ngIf="title === 'Report'">
+  <div class="row">
+      <div class="col-8">
+          <div class="d-flex justify-content-between">
+              <label>Overview</label>
+              <input type="checkbox">
+          </div>
+          <div class="d-flex justify-content-between">
+              <label>Unreconciled/Transaction</label>
+              <input type="checkbox">
+          </div>
+          <div class="d-flex justify-content-between">
+              <label>Create Report</label>
+              <input type="checkbox">
+          </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="title === 'Workflows'">
+  <div class="row">
+      <div class="col-8">
+          <div class="d-flex justify-content-between">
+              <label>Overview</label>
+              <input type="checkbox">
+          </div>
+          <div class="d-flex justify-content-between">
+              <label>Find Workflow Task</label>
+              <input type="checkbox">
+          </div>
+          <div class="d-flex justify-content-between">
+              <label>Create New</label>
+              <input type="checkbox">
+          </div>
+      </div>
+  </div>
+</div>
+
+<div *ngIf="title === 'Setup'">
+  <div class="row">
+    <div class="col-8">
+        <div class="d-flex justify-content-between">
+            <label>Code</label>
+            <input type="checkbox">
+        </div>
+        <div class="d-flex justify-content-between">
+            <label>Task Setup</label>
+            <input type="checkbox">
+        </div>
+        <div class="d-flex justify-content-between">
+            <label>Process Design</label>
+            <input type="checkbox">
+        </div>
+    </div>
+  </div>
+</div>

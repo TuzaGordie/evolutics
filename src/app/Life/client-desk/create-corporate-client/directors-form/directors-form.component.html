@@ -1,0 +1,72 @@
+    <form>
+      <div class="  mt-2">
+        <div class="  " *ngFor="let data of form.controls; let i = index">
+          <ng-container [formGroup]="data|toAny">
+            <div class="row  align-items-end">
+              <div class="  col-md-3">
+
+                <div class="row align-items-end">
+                  <div class="col">
+                    <app-input-basic [form]="data" name="relClientNo" label="Client Number" [stacked]="true"
+                      [showValidation]="rcn.invalid" [showValidationIcon]="true" #rcn></app-input-basic>
+                  </div>
+                  <div class="col-auto d-flex">
+                    <app-btn type="secondary" help="Search for Client" [showHelpIcon]="false" [iconBtn]="true"
+                      icon="search" (mclick)="clientS.openFindClientModal(rcn.control)"></app-btn>
+                    <div class=" me-2"> </div>
+                    <app-btn type="outline" help="Create a new Client"  [showHelpIcon]="false" [iconBtn]="true" icon="add"  [matMenuTriggerFor]="clientMenu"></app-btn>
+                    <mat-menu #clientMenu="matMenu">
+                      <button mat-menu-item (click)="clientS.openCreateIndividualClientModal(rcn.control)">
+                        {{'Individual Client'|appTranslate|async}}
+                      </button>
+                      <button mat-menu-item (click)="clientS.openCreateCorporateClientModal(rcn.control)">
+                        {{'Corporate Client'|appTranslate|async}}
+                      </button>
+                    </mat-menu>
+                  </div>
+                  <div class="col-12">
+                    <app-validation-message label="Client number" [control]="rcn?.control">
+                    </app-validation-message>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md">
+                <app-input-basic [form]="data" name="fullName" label="Full Name" type="viewer" [stacked]="true">
+                </app-input-basic>
+                <app-validation-message> </app-validation-message>
+              </div>
+              <div class="col-md">
+                <app-input-basic [form]="data" name="relationship" label="Relationship" type="select" labelType="ct"
+                  valueField="code" [stacked]="true" [options]="relationList" #relationship>
+                </app-input-basic>
+                <app-validation-message> </app-validation-message>
+              </div>
+              <div class="col-md">
+                <app-input-basic [form]="data" name="phoneNumber" label="Phone Number" type="viewer" [stacked]="true">
+                </app-input-basic>
+                <app-validation-message> </app-validation-message>
+              </div>
+              <div class="col-md">
+                <app-input-basic [form]="data" name="email" label="Email" type="viewer" [stacked]="true">
+                </app-input-basic>
+                <app-validation-message> </app-validation-message>
+              </div>
+              <div class="col-md">
+                <app-input-basic [form]="data" name="dob" label="DOB" type="viewer" [stacked]="true">
+                </app-input-basic>
+                <app-validation-message> </app-validation-message>
+              </div>
+              <div class="col-md-auto ">
+                <div class=" d-flex">
+                  <app-btn type="danger-outline" [iconBtn]="true" icon="delete" (mclick)="onDeleteContact(i)"></app-btn>
+                  <div class=" me-2"> </div>
+                  <app-btn type="outline" [iconBtn]="true" icon="add" (mclick)="onContactInfo(i+1)"></app-btn>
+                </div>
+                <app-validation-message> </app-validation-message>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </form>

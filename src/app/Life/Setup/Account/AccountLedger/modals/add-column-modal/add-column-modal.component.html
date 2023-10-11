@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>
+    {{ 'Select Extra Columns To Display' | appTranslate | async }}
+  </h5>
+  <button type="button" class="btn-close" mat-dialog-close attr.aria-label="Close"></button>
+</div>
+<mat-dialog-content>
+  <!-- <div class="row my-2">
+    <div class="col-6">
+      <input
+        type="text"
+        class="form-control control-bg-gray"
+        placeholder="{{'Quick Search'|appTranslate|async}}"
+      />
+    </div>
+  </div> -->
+  <div *ngFor="let column of columns" class="row my-2">
+      <input [(ngModel)]="column.display" type="checkbox" class="form-control control-bg-gray col-md-1" />
+      <label class="col-md-auto">{{column.title|appTranslate|async}}</label>
+  </div>
+</mat-dialog-content>

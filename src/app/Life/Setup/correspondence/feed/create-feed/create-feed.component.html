@@ -1,0 +1,164 @@
+<loader [text]="loadingText" [loading]="loading">
+  <!-- <app-form-navigation [title]="'Set Up / Correspondence / Print '"></app-form-navigation> -->
+  <form (ngSubmit)="createCorrespondencePrint()" novalidate #f="ngForm">
+    <div class=" mt-2 " id="form-body">
+      <ul class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+            type="button" role="tab" aria-controls="pills-basic" aria-selected="true">Basic
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-fields-tab" data-bs-toggle="pill" data-bs-target="#pills-fields"
+            type="button" role="tab" aria-controls="pills-fields" aria-selected="false">Fields
+          </button>
+
+        </li>
+
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="">
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{"Document Code"|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" name="code" disabled
+                  [(ngModel)]="createCorrespondence.correspondence.code">
+              </div> 
+
+ 
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" name="description"
+                  [(ngModel)]="createCorrespondence.correspondence.description" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{"Category"|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray" name="docCategory"
+                  [attr.disabled]="createCorrespondence.correspondence.code != null ? '' : null"
+                  [(ngModel)]="createCorrespondence.correspondence.docCategory">
+                  <option></option>
+                  <option *ngFor="let category of categoryCodes" [ngValue]="category?.code">{{category?.code}} -
+                    {{category?.title}}</option>
+                </select>
+              </div> 
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Table Group'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray" name="tableGroup" (change)="getPrimaryTable()"
+                  [(ngModel)]="createCorrespondence.correspondence.tableGroup">
+                  <option></option>
+                  <option *ngFor="let tableGroupName of tableGroups" [ngValue]="tableGroupName || ''">{{tableGroupName ||
+                  ""}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{'Table Name'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray" name="tableName" #table (change)="onSelectPrimaryTable()"
+                  [(ngModel)]="createCorrespondence.correspondence.tableName">
+                  <option></option>
+                  <option *ngFor="let tableName of tableNames" [ngValue]="tableName || ''">{{tableName || ""}}
+                  </option>
+                </select>
+              </div> 
+            </div>
+   
+
+          </div>
+          <br><br><br>
+
+
+        </div>
+        <div class="tab-pane fade" id="pills-fields" role="tabpanel" aria-labelledby="pills-fields-tab">
+          <div class="">
+          <app-correspondence-fields-tab [correspondence]="createCorrespondence" [isShow]="isShow"
+            [connectors]="connectors" [tableColumns]="tableColumns">
+          </app-correspondence-fields-tab>
+
+            <div class=" mt-5 row justify-content-end" *ngIf="!isShow">
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">&nbsp;</label>
+                  <app-button [buttonType]="'submit'" (click)="createCorrespondencePrint()"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="modal fade" id="addFilterModal" aria-hidden="true" aria-labelledby="addFilterModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">{{"Add Filter"|appTranslate|async}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="let correspondenceFilterList of createCorrespondence.correspondenceFilterList; let i = index">
+              <div class="row">
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{"Filter"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" name="filter_{{correspondenceFilterList.rowId}}"
+                    [(ngModel)]="correspondenceFilterList.filter">
+                    <option *ngFor="let filtersCode of filtersCodes" [ngValue]="filtersCode?.code">
+                      {{filtersCode?.code}} - {{filtersCode?.title}}</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{"Operator"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" name="operator_{{correspondenceFilterList.rowId}}"
+                    [(ngModel)]="correspondenceFilterList.operator">
+                    <option *ngFor="let operatorCode of operatorCodes" [ngValue]="operatorCode?.code">
+                      {{operatorCode?.code}} - {{operatorCode?.title}}</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+                  <input type="number" class="form-control control-bg-gray"
+                    name="value_{{correspondenceFilterList.rowId}}" [(ngModel)]="correspondenceFilterList.value">
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{"And/Or"|appTranslate|async}}</label>
+                  <select class="form-control control-bg-gray" name="connector_{{correspondenceFilterList.rowId}}"
+                    [(ngModel)]="correspondenceFilterList.connector">
+                    <option *ngFor="let connectorCode of connectorCodes" [ngValue]="connectorCode?.code">
+                      {{connectorCode?.code}} - {{connectorCode?.title}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">&nbsp;</label>
+                  <app-button buttonType="delete" (click)="removeCorrespondenceFilter(i)"></app-button>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-4">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <app-button buttonType="add" (click)="addCorrespondenceFilter()"></app-button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-primary btn" data-bs-dismiss="modal">
+              <i class="fa fa-clipboard"></i>
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="d-lg-flex mt-2" *ngIf="isShow">
+
+    <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary"></app-btn>
+    <span class="mx-1"></span>
+    <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+    </app-btn>
+
+  </div>
+
+</loader>

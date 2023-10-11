@@ -1,0 +1,33 @@
+// table thead {
+//   background-color:#3735a5 ;
+//   color: white;
+// }
+
+table th:first-child{
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+}
+  
+table th:last-child{
+  border-top-right-radius: 10px;
+}
+
+table th:last-child{
+  border-top-right-radius: 10px;
+}
+
+thead > tr > th {
+  color: #1B1A50 !important;
+}
+
+// truncates text
+.name:link {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.name:hover {
+  overflow: visible !important;
+}

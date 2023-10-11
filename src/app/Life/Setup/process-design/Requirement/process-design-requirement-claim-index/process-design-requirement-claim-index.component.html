@@ -1,0 +1,49 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+        <div class="form-group mt-2">
+          <label>{{"Select Company"|appTranslate|async}}</label>
+          <select (change)="getClaimTypes()" [(ngModel)]="company" class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option *ngFor="let item of companies" [value]="item?.code">
+              {{item?.code}} - {{item?.description}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Claim Type"|appTranslate|async}}</label>
+          <select (change)="getProcessCodes()" [(ngModel)]="claimType" class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option *ngFor="let item of claimTypes" [value]="item.code">
+              {{item.code}} - {{item.title}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Process Code"|appTranslate|async}}</label>
+          <select [(ngModel)]="processCode" class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option *ngFor="let item of processCodes" [value]="item?.code">
+              {{item?.code}}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [class.disabled]="!processCode" [buttonType]="'show'" (click)="show()"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [class.disabled]="!processCode" [buttonType]="'clone'" (click)="clone()"></app-button>
+          </div>
+
+        </div>
+    </div>
+  </div>
+
+</div>

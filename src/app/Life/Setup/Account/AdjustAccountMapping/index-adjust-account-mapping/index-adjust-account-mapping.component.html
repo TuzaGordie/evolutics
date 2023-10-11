@@ -1,0 +1,32 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts / Adjustment Account Mapping'"></app-form-navigation> -->
+<div class="container">
+  <br /><br /><br />
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Select Company"|appTranslate|async}}</label>
+      <select [(ngModel)]="companyCode" #company class="form-control form-control-md control-bg-gray">
+        <option value="{{ item?.code }}" *ngFor="let item of companyArray">
+          {{ item?.code }} - {{ item?.description }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <br />
+
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="dark" icon="show" (mclick)="show(companyCode)">Show</app-btn>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" icon="clone" (mclick)="clone(companyCode)">Clone</app-btn>
+    </div>
+  </div>
+</div>

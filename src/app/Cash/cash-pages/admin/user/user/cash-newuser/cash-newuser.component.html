@@ -1,0 +1,23 @@
+<app-form-navigation [cashtitle] = "'Admin/user'"></app-form-navigation> 
+<div  class="container-sm vh-100" id="form-body">
+    <div class="d-flex h-50 flex-column justify-content-center">
+      <div class="row">
+        <div class="col-md-6 mx-auto my-5 align-middle">
+          <form>
+            <div class="form-group mt-2">
+              <label class="mb-2"><b>Enter Client Number for New User</b></label>
+              <div class="row">
+                <div class="col-md-8">
+                  <input type="text" class="form-control form-control-lg control-bg-gray">
+                </div>
+                <div class="col-md-4">
+                  <button type="button"  [routerLink]="['/cash/cash-createuser']" 
+              class="btn btn-prime  px-4 py-2"> <i class="fas fa-plus px-2"></i> Create New</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

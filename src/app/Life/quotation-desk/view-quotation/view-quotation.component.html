@@ -1,0 +1,501 @@
+<!-- <app-form-navigation [title]="'Quotation Desk / View Quotation'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="">
+    <div class="row justify-content-end">
+      <div class="col-2">
+        <app-btn
+          type="primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          >{{ 'View Cover Details' | appTranslate | async }}</app-btn
+        >
+      </div>
+    </div>
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">
+        {{ 'Basic Details' | appTranslate | async }}
+      </h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center">
+          <div class="mx-1 col-md mb-3 lbl1" *ngFor="let item of lbls1">
+            <app-editable-text-case
+              [formatter]="item.formatter"
+              [stacked]="true"
+              [mini]="true"
+              [form]="viewQuotationForm"
+              [label]="item.label"
+              [name]="item.key"
+              [coloredLbl]="false"
+              [coloredVal]="true"
+              [showEditing]="false"
+              [hint]="item.hint"
+              [light]="true"
+              [value]="item.value"
+            >
+            </app-editable-text-case>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">
+        {{ 'Quote Details' | appTranslate | async }}
+      </h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center py-2">
+          <div class="col-md">
+            <div class="row">
+              <div class="col-auto" *ngFor="let item of lbls3">
+                <app-editable-text-case
+                  [formatter]="item.formatter"
+                  [stacked]="false"
+                  [mini]="true"
+                  [form]="viewQuotationForm"
+                  [label]="item.label"
+                  [name]="item.key"
+                  [coloredLbl]="false"
+                  [coloredVal]="true"
+                  [showEditing]="false"
+                  [hint]="item.hint"
+                  [light]="true"
+                  [value]="item.value"
+                  [action]="item.action"
+                >
+                </app-editable-text-case>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto">
+            <app-btn
+              type="secondary"
+              icon="edit"
+              routerLink="../notes"
+              [queryParams]="{
+                policyNo: policyNo,
+                policyCode: policyCode,
+                policyNoSuffix: suffix,
+                clientNo: quotation?.ownerClientNo
+              }"
+            >
+              Note
+            </app-btn>
+          </div>
+        </div>
+        <div class="border-top pt-2">
+          <div class="row">
+            <div class="col-md-2 mb-3" *ngFor="let item of lbls2">
+              <app-editable-text-case
+                [formatter]="item.formatter"
+                [stacked]="true"
+                [action]="item.action"
+                [form]="viewQuotationForm"
+                [label]="item.label"
+                [name]="item.key"
+                [coloredLbl]="true"
+                [coloredVal]="false"
+                [type]="item.inputType"
+                [showEditing]="false"
+                [hint]="item.hint"
+                [light]="true"
+                [value]="item.value"
+              >
+              </app-editable-text-case>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="py-3 m-0 row justify-content-center">
+      <ng-container *ngFor="let item of btns1">
+        <div class="col-md p-1">
+          <button
+            class="btn w-100 btn-outline-primary btn-clone btn-raised mx-1 mx-xxl-2"
+            [routerLink]="['../' + item.value]"
+            [disabled]="item.disabled"
+            [queryParams]="{
+              policyNo: quotation?.policyNo,
+              quoteNo: quoteNo,
+              policyCode: quotation?.policyCode,
+              policyNoSuffix: suffix,
+              clientNo: quotation?.ownerClientNo,
+              productCode: quotation?.productCode,
+              policyID: quotation?.id,
+              owner: quotation?.ownerClientNo,
+              pcd: quotation?.productCode,
+              pdsc: quotation?.pdsc,
+              pcl: quotation?.productClass,
+              is: quotation?.insType,
+              pfreq: quotation?.payinFreq
+            }"
+          >
+            {{ item.key }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      class="py-3 d-lg-flex justify-content-center section-cards"
+      id="section_cardsno"
+    >
+      <ng-container *ngFor="let item of btns2">
+        <div
+          class="card bg-card color1 shadow-sm mx-1 my-1 pointer {{ item.cls }}"
+          (click)="route(item)"
+        
+        >
+          <div class="card-body">
+            <h6 class="card-title">{{ item.key }}</h6>
+            <p class="btn-card-value" [innerHTML]="item.value"></p>
+          </div>
+        </div>
+
+        <ng-template #elseTemplate>
+          <div class="card bg-card color1 shadow-sm mx-1 my-1  {{ item.cls }}">
+            <div class="card-body">
+              <h6 class="card-title">{{ item.key }}</h6>
+              <p class="btn-card-value" [innerHTML]="item.value"></p>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+  </div>
+</loader>
+
+<!--
+<div class="container my-5">
+  <form [formGroup]="viewQuotationForm">
+    <div class="d-flex justify-content-around" *ngIf="quotation">
+      <span class="p-2">Quote No: <br> <span class="text-primary">{{quotation.quoteNo}}</span></span>
+      <span class="p-2">Policy No: <br> <span class="text-primary">{{quotation.policyNo}}</span></span>
+      <span class="p-2">Owner Client Number: <br> <span class="text-primary">{{quotation.ownerClientNo}}</span></span>
+      <span class="p-2">Jnt Owner Client Number: <br> <span class="text-primary">{{quotation.jointOwner}}</span></span>
+      <span class="p-2">Product Code: <br> <span class="text-primary">{{quotation.productCode}}</span></span>
+      <span class="p-2">Product Description: <br> <span class="text-primary">{{description}}</span></span>
+      <span class="p-2">Quote Status: <br>
+        <span class="text-primary">{{quotation.quoteStatus}}</span>
+        <span style=" font-size: 12px;" class="float-right text-primary">
+          <i class="fa fa-pencil-alt" (click)="changeStatus()"></i>
+        </span>
+      </span>
+      <span class="p-2">Agent: <br>
+        <span class="text-primary">{{quotation.agentNo}}</span>
+        <span style="font-size: 12px;" class="float-right text-primary">
+          <i class="fa fa-pencil-alt"></i>
+        </span>
+      </span>
+      <span class="p-2">Referrer: <br> <span class="text-primary">{{quotation.referrerNo}}</span></span>
+    </div>
+
+    <hr style="margin-top: 5px;">
+
+    <div class="row">
+      <div class="col">
+        <label class="text-primary">Owner Full Name</label><br>
+        <input type="text" formControlName="fullName" value="{{quotation.ownerName}}" readonly class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Jnt.Owner Full Name</label><br>
+        <input type="text" formControlName="jointOwnerName" value="{{quotation.jointOwnerName}}" readonly
+          class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Cover Commence</label><br>
+        <input type="text" formControlName="coverCommence" value="{{quotation.commenceDate}}" readonly value=""
+          class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Cover Expires</label><br>
+        <input type="text" formControlName="expiryDate" value="{{quotation.renewalDueOn}}" readonly class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Created By</label><br>
+        <input type="text" formControlName="createdBy" readonly value="{{quotation.createdBy}}" class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Currency</label><br>
+        <input type="text" formControlName="currencyType" readonly value="{{quotation.currency}}" class="inputform1 ">
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <label class="text-primary">Initial Quote Valid Days</label><br>
+        <input type="text" formControlName="quoteValidity" readonly value="{{quotation.quoteValidDays}}"
+          class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Total Sum at Risk</label>
+        <input type="text" formControlName="sumAtRisk" readonly value="{{quotation.sumAtRisk}}" class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Annualised Premium</label><br>
+        <input type="text" formControlName="annualisedPayment" value="{{quotation.annualisedPremium}}" readonly
+          class="inputform1">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Premium Payment Term</label><br>
+        <input type="text" formControlName="premTermPayment" value="{{quotation.premPayTermMo}} months" readonly
+          class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Policy Term</label><br>
+        <input type="text" formControlName="policyTerm" value="{{quotation.policyTermMo}} months" readonly
+          class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="text-primary">Created On</label><br>
+        <input type="text" formControlName="createdOn" value="{{quotation.createdOn | date}}" readonly
+          class="inputform1 ">
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <label class="  text-primary">Branch</label>
+        <input type="text" formControlName="branch" readonly value="{{quotation.branchCode}}" class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Annuities</label><br>
+        <input type="text" formControlName="annualisedPayment" readonly value="" class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Total No of Lives Covered</label><br>
+        <input type="text" formControlName="livesCovered" readonly value="{{quotation.noOfLives}}" class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Convert Reason</label><br>
+        <input type="text" formControlName="livesCovered" readonly value="{{quotation.convertreason}}"
+          class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary">Company</label><br>
+        <input type="text" formControlName="livesCovered" readonly value="Leadway" class="inputform1 ">
+      </div>
+
+      <div class="col">
+        <label class="  text-primary"></label><br>
+        <input type="text" formControlName="livesCovered" readonly value="" class="inputform1 ">
+      </div>
+    </div>
+    <br>
+    <br>
+  </form>
+
+  <br>
+  <div class="col-md-12 mx-auto">
+    <div class="table-responsive">
+      <table class="table table-striped border">
+        <thead class="py-3">
+          <tr>
+            <th scope="col">Cover Code</th>
+            <th scope="col">Cover Name</th>
+            <th scope="col">Life Assured</th>
+            <th scope="col">Issue Age</th>
+            <th scope="col">Prem Freq/Method</th>
+            <th scope="col">Periodic Premium</th>
+            <th scope="col">Initial Sum Assured</th>
+            <th scope="col">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quotation of quotationInfoList">
+            <th>{{quotation.code}}</th>
+            <td>{{quotation.description}}</td>
+            <td>{{quotation.assured}}</td>
+            <td>{{quotation.issueAge}}</td>
+            <td>{{quotation.coverpremFreq}}-{{quotation.quotation}}</td>
+            <td>{{quotation.coverpremium}}</td>
+            <td>{{quotation.initialSumAssured | number}}</td>
+            <td>
+              <input class="form-control mx-auto" type="checkbox">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="">
+      <table-plain [data]="table1" [distinct]="true" [displayedColumns]="dCols"></table-plain>
+    </div>
+  </div>
+
+  <div class="row justify-content-around my-5 ">
+    <div class="col">
+      <app-button buttonType="btnCustomCloneRaised" text="Documents" [routerLink]="['../quotationdocuments']"
+        [queryParams]="{clientNo:findQuotationService.quotationInfo?.agent?.clientNo}">
+      </app-button>
+    </div>
+
+    <div class="col">-->
+<!-- /life/quotation-desk/create-new-individual-quotation -->
+<!-- <app-button buttonType="btnCustomCloneRaised" text="Modify"
+        routerLink='../../create-new-individual-quotation' [queryParams]="{clientNo}"></app-button>
+    </div>
+
+    <div class="col">
+      <app-button buttonType="btnCustomCloneRaised" text="Pricing" [routerLink]="['../quotation-pricing']">
+      </app-button>
+    </div>
+
+    <div class="col">
+      <app-button buttonType="btnCustomCloneRaised" text="Generate"></app-button>
+    </div>
+
+
+    <div class="col">
+      <app-button buttonType="btnCustomCloneRaised" text="Convert To Policy" [routerLink]="['../convert-to-policy']">
+      </app-button>
+    </div>
+
+    <div class="col">
+      <app-button buttonType="btnCustomCloneRaised" text="Authorise Quote" (click)="authorise()"></app-button>
+    </div>
+
+
+  </div>
+
+
+  <div class="d-flex justify-content-around section-cards card-blue">
+    <div class="card  bg-card shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">Total Periodic Premium</h6>
+        <p class="card-number">{{quotation.totalPeriodicPremium | number}}</p>
+      </div>
+
+    </div>
+    <div class="card  shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">No Of Interations</h6>
+        <p class="card-number">{{quotation.iterations}}</p>
+      </div>
+
+    </div>
+    <div class="card  shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">Days to Auto Expiry</h6>
+        <p class="card-number">{{quotation.daysToExpiry}}</p>
+      </div>
+
+    </div>
+    <div class="card  shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title">Conversion Probability</h6>
+        <p class="card-number">{{quotation.conversionProb}}%</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form [formGroup]="viewQuotationForm">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Quotation Info</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">-->
+
+<!-- <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">update</button> -->
+
+<!--  </div>
+          <div class="modal-footer">
+            <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button>
+            <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="border-0 next-blue">Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="notemodel" tabindex="-1" aria-labelledby="notemodelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notemodelLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-4">
+                <label>Note</label><br>
+                <input type="textarea" formControlName="note"
+                class="inputform " >
+            </div>
+            <div class="mt-4">
+                <label>Visible to All</label>
+                <input type="checkbox" formControlName="visiblebox"  >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{ 'Vew Cover Details' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <loader
+            [loading]="tableLoading"
+            class="vh-30"
+            text="Obtaining Covers"
+          >
+            <table-plain
+              [pageSize]="tableLimit"
+              [showPager]="showPager"
+              [distinct]="true"
+              [nowrap]="true"
+              noItemTxt="There are no covers"
+              [data]="covers"
+              [displayedColumns]="dCols"
+            >
+            </table-plain>
+          </loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

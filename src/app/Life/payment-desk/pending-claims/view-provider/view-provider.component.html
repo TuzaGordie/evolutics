@@ -1,0 +1,219 @@
+<div class="container my-5">
+  <form>
+
+    <div class="row justify-content-between mt-3">
+
+      <div class="col"></div>
+
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomNote'" [text]="'Note'" [routerLink]="['../../payment-desk/agentnote']">
+        </app-button>
+      </div>
+
+    </div>
+    <hr style="margin-top: 5px;">
+
+    <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label">{{'Full Name'|appTranslate|async}}</label>
+
+          <div class="row">
+            <div class="col">James</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Category'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">Medical</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Sub Category'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">Diagnostics</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Network'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">CL</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label ">{{'Main Office Phone No'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">89789876670</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'All Office Phone No'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">89789876670</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label "> {{'Office Email'|appTranslate|async}}</label>
+
+          <div class="row">
+            <div class="col">Jemes@gmail.com</div>
+          </div>
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Office Email 2'|appTranslate|async}}</label>
+            <div class="row">
+              <div class="col">Jemes@gmail.com</div>
+            </div>
+        </div>
+
+
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label ">{{'Office Website'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">Jemes@gmail.com</div>
+          </div>
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Address'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">Jemes@gmail.com</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Language'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">English</div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label ">{{'Client Number'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">42342</div>
+          </div>
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label ">{{'Date Created'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">1/1/2020</div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label control-bg-gray">{{'Social Media'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">Y</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label ">{{'Bank No'|appTranslate|async}}</label>
+          <div class="row">
+            <div class="col">XXXX</div>
+          </div>
+
+        </div>
+        <div class="pb-4">
+          <label class="form-label ">{{'Payment Freq'|appTranslate|async}}</label>
+
+          <div class="row">
+            <div class="col">Weekly </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <hr class="my-2">
+    <div class="row justify-content-center my-4">
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'" [routerLink]="['../../endorsements']">
+        </app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'" [routerLink]="['../../documents']">
+        </app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['../../workflows']" [text]="'Workflows'">
+        </app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Web log in'" [routerLink]="['../../web-login']">
+        </app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Branches'"
+          [routerLink]="['../../underwritingevents']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Contant Persons'"
+          [routerLink]="['../../underwritingevents']"></app-button>
+      </div>
+
+    </div>
+
+    <div id="section_cardsno" class="section-cards d-flex justify-content-around">
+      <div class="card color1 shadow-sm" [routerLink]="['../../payment-desk/payment-policies']">
+        <div class="card-body">
+          <h6 class="card-title">{{'Disciplines'|appTranslate|async}}</h6>
+          <p id="card-text">5</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['../../payment-desk/relationships']">
+        <div class="card-body">
+          <h6 class="card-title">{{'Tarrif'|appTranslate|async}}</h6>
+          <p id="card-text">10</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['../../payment-desk/business']">
+        <div class="card-body">
+          <h6 class="card-title">{{'Product Mapped'|appTranslate|async}}</h6>
+          <p id="card-text">6</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['../../payment-desk/pendingquotes']">
+        <div class="card-body">
+          <h6 class="card-title">{{'Accounts'|appTranslate|async}}</h6>
+          <p id="card-text">45</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['../../payment-desk/pending-claims-view']">
+        <div class="card-body">
+          <h6 class="card-title">{{'Pending Payments'|appTranslate|async}}</h6>
+          <p id="card-text">100000</p>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+
+
+
+</div>

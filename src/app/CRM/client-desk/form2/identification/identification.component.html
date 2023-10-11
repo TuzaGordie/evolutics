@@ -1,0 +1,92 @@
+
+<div class="container mt-5">
+    <form [formGroup]="identificationForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md" >
+            <div class="d-block">
+                <div class="mt-4">
+            <label>ID Type</label><br>
+            <input type="text" formControlName="idType" class="inputform" required>
+     <div *ngIf="validation.idType.errors && (validation.idType.dirty || validation.idType.touched)">
+                            <div class="text-danger" *ngIf="validation.idType?.errors?.required ">Field is invalid!
+                            </div>
+                        </div>
+        </div>
+        <div class="mt-4">
+            <label>Id Expiry date</label><br>
+            <input type="date" formControlName="idExpiryDate" class="inputform" required>
+            <div *ngIf="validation.idExpiryDate.errors && (validation.idExpiryDate.dirty || validation.idExpiryDate.touched)">
+                <div class="text-danger" *ngIf="validation.idExpiryDate?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <input type="file" id="filebtn" style="display: none;" accept=".png,.jpg,.docx,.pdf" (change)="upload($event)">
+            <button for="filebtn"  (click)="getImage()" type="button" class="btn py-2 btnmoney w-100">Upload passport photo</button>
+            <p id="filenameifno" [innerHtml]="fileName"></p>
+        </div>
+        <div class="mt-4">
+            <input type="file" id="filebtn1" style="display: none;" accept=".png,.jpg,.docx,.pdf" (change)="upload2($event)">
+            <button for="filebtn1" (click)="getImage2()" type="button" class="btn py-2 btnmoney w-100">Upload Identity card</button>
+            <p id="filenameifno1" [innerHtml]="fileName2"></p>
+        </div>
+            <div class="mt-4">
+                <label>National Insurrance Number</label><br>
+                <input type="text" formControlName="nationalInsurranceNo" class="inputform" required>
+                <div *ngIf="validation.nationalInsurranceNo.errors && validation.nationalInsurranceNo.dirty">
+                    <div class="text-danger" *ngIf="validation.nationalInsurranceNo?.errors?.required ">Field is invalid!
+                    </div>
+                </div>
+        </div>
+        </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md position-relative">
+            <div class="mt-4">
+                <label>ID Number</label><br>
+            <input type="text" formControlName="idNumber" class="inputform"  required>
+            <div *ngIf="validation.idNumber.errors && (validation.idNumber.dirty || validation.idNumber.touched)">
+                <div class="text-danger" *ngIf="validation.idNumber?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Tax Identification Number</label><br>
+            <input type="text" formControlName="taxIdNo" class="inputform"  required>
+            <div *ngIf="validation.taxIdNo.errors && (validation.taxIdNo.dirty || validation.taxIdNo.touched)">
+                <div class="text-danger" *ngIf="validation.taxIdNo?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Bank Verification Number</label><br>
+            <input type="text" formControlName="bankVerifyNo" class="inputform"  required>
+            <div *ngIf="validation.bankVerifyNo.errors && (validation.bankVerifyNo.dirty || validation.bankVerifyNo.touched)">
+                <div class="text-danger" *ngIf="validation.bankVerifyNo?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Pension Commission Number</label><br>
+            <input type="text" formControlName="pensionNo" class="inputform"  required>
+            <div *ngIf="validation.pensionNo.errors && (validation.pensionNo.dirty || validation.pensionNo.touched)">
+                <div class="text-danger" *ngIf="validation.pensionNo?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+   <div class="d-flex justify-content-between mx-5 my-5">
+        <div class="d-flex" >
+            <button type="button" (click)="changeTab('personalInfo')" class="border-0 prev ml-3"><i class="fas fa-arrow-left"></i></button>
+            <span class="mx-3 my-auto">Prev</span>
+        </div>
+        <div class="d-flex">
+            <span class="mx-3 my-auto">Next</span>
+            <button type="submit" [disabled]="identificationForm.invalid" (click)="changeTab('employInfo')"class="border-0 next ml-3"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+</form>
+</div>

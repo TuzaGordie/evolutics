@@ -1,0 +1,4 @@
+<div class="center h-100 text-center text-danger" *ngIf="uS.secondsToHourMinSec(idlerService.timeLeft) as timeLeft">
+  You will be logged out in {{timeLeft.hours?timeLeft.hours+'hrs':''}}
+  {{timeLeft.mins?timeLeft.mins+'min':''}} {{timeLeft.secs?timeLeft.secs+'s':''}}
+</div>

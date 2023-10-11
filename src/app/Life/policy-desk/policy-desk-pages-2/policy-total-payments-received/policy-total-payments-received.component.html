@@ -1,0 +1,346 @@
+<div class="row">
+  <div class="col-md-12 mx-auto">
+    <div>
+      <h5 class="text-primary">Summary</h5>
+    </div>
+    <div class="my-3 d-flex justify-content-end">
+      <text-case-1
+        lbl="Owner Name:"
+        [val]="name"
+        [stacked]="false"
+      ></text-case-1>
+    </div>
+    <div class="my-2">
+      <table-plain [data]="list1" [displayedColumns]="dCols1"></table-plain>
+    </div>
+
+    <div class="mt-5 mb-3 mt-4">
+      <h5 class="text-primary">{{ 'Details' | appTranslate | async }}</h5>
+    </div>
+    <div
+      class="row row-cols-1 row-cols-lg-6 row-cols-xl-6 row-cols-sm-1 row-cols-xs-1 my-3"
+    >
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Show All' | appTranslate | async
+            }}</label>
+          <input type="checkbox" class="form-control control-bg-gray"/>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Reversed' | appTranslate | async
+            }}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'Canceled' | appTranslate | async
+            }}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'PayIn Type' | appTranslate | async
+            }}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{
+            'PayIn Reason' | appTranslate | async
+            }}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn icon="download" type="secondary">{{
+          'Download' | appTranslate | async
+          }}</app-btn>
+      </div>
+    </div>
+    <div class="my-2">
+      <table class="table table-responsive table-striped text-center">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" *ngFor="let col of dCols2">
+            {{ col.t | appTranslate | async }}
+          </th>
+          <!-- <th scope="col">{{ 'Gross Amount' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Amount Receipt' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Deduction' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Type' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Reason' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Reconciled' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Canceled' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Users' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Receiving Bank' | appTranslate | async }}</th>
+          <th scope="col">{{ 'Details' | appTranslate | async }}</th> -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let transaction of transactions; let i = index">
+          <ng-container *ngFor="let col of dCols2">
+            <ng-container [ngSwitch]="col.type">
+              <ng-container *ngSwitchCase="'checkbox'">
+                <td>
+                  <input
+                    *ngIf="col.extras == 'deduction'"
+                    class="form-control control-bg-gray"
+                    type="checkbox"
+                    [checked]="transaction[col.f]"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    trigger="hover focus"
+                    delay="0"
+                    title="Comm Deducted: {{
+                        transaction.commDeduct
+                      }}  UW Expense Deducted: {{
+                        transaction.uWExpDeduct
+                      }}  Co-Ins Fee Deducted: {{
+                        transaction.coinsDeduct
+                      }}  VAT Deducted : {{
+                        transaction.vatDeduct
+                      }} WHT Deducted: {{ transaction.whtDeduct || '-' }}"
+                    style="margin: auto"
+                  />
+                  <input
+                    *ngIf="col.extras == 'reconciled'"
+                    class="form-control control-bg-gray"
+                    type="checkbox"
+                    [checked]="transaction[col.f]"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    trigger="hover focus"
+                    delay="0"
+                    title="OS Days To Clear: {{
+                        transaction.osDaysToClear
+                      }}  Reconciled Reason: {{
+                        transaction.reconcileReason || '-'
+                      }} "
+                    style="margin: auto"
+                  />
+                  <input
+                    *ngIf="col.extras == 'canceled'"
+                    class="form-control control-bg-gray"
+                    type="checkbox"
+                    [checked]="transaction[col.f]"
+                    data-bs-toggle="tooltip"
+                    data-bs-html="true"
+                    trigger="hover focus"
+                    delay="0"
+                    title="Canceled Reason: {{
+                        transaction.cancelReasonm || '-'
+                      }}"
+                    style="margin: auto"
+                  />
+                </td>
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                <ng-container [ngSwitch]="col.otype">
+                  <ng-container *ngSwitchDefault
+                  >
+                    <td>{{ transaction[col.f] || '-' }}</td>
+                  </ng-container
+                  >
+                  <ng-container *ngSwitchCase="'calendar'">
+                    <td>
+                      <button
+                        class="btn btn-dark"
+                        type="button"
+                        data-bs-toggle="tooltip"
+                        data-bs-html="true"
+                        trigger="hover focus"
+                        delay="0"
+                        title="Created On: {{
+                            transaction.createdOn
+                          }} Effective On: {{
+                            transaction.effOn
+                          }}  Controlled On: {{
+                            transaction.controlledOn
+                          }}  Reconciled On: {{ transaction.reconciledOn }} "
+                      >
+                        <i class="fas fa-calendar-alt"></i>
+                      </button>
+                    </td>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'user'">
+                    <td>
+                      <button
+                        class="btn btn-dark"
+                        type="button"
+                        data-bs-toggle="tooltip"
+                        data-bs-html="true"
+                        trigger="hover focus"
+                        delay="0"
+                        title="Created By: {{
+                            transaction.createdBy
+                          }}  Reconciled By: {{
+                            transaction.reconciledBy
+                          }}  Canceled By: transaction.canceledBy  Controlled by: {{
+                            transaction.controlledBy
+                          }}  "
+                      >
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'detail'">
+                    <td>
+                      <button
+                        class="btn btn-dark"
+                        type="button"
+                        data-bs-toggle="tooltip"
+                        data-bs-html="true"
+                        trigger="hover focus"
+                        delay="0"
+                        title="Ref Number: {{
+                            transaction.transRefNo || '-'
+                          }}  Loan Number: {{
+                            transaction.loanNo || '-'
+                          }}  Coupon Number: {{
+                            transaction.couponNo || '-'
+                          }}  Payor : {{
+                            transaction.payorNo || '-'
+                          }} Batch Number: {{
+                            transaction.batchNo || '-'
+                          }} Debit Note: {{ transaction.dnNo || '-' }}"
+                      >
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <!-- <td *ngFor="let col of dCols2">{{ transaction[col.f] }}</td> -->
+          <!-- <td>{{ transaction.amount }}</td>
+          <td>x</td>
+          <td>
+            <input
+              type="checkbox"
+              class="form-control"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              trigger="hover focus"
+              delay="0"
+              title="Comm Deducted: --  UW Expense Deducted: --  Co-Ins Fee Deducted: --  VAT Deducted : -- WHT Deducted: --"
+            />
+          </td>
+          <td>xx</td>
+          <td>xx</td>
+          <td>
+            <input
+              type="checkbox"
+              class="form-control"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              trigger="hover focus"
+              delay="0"
+              title="OS Days To Clear: --  Reconciled Reason: -- "
+            />
+          </td>
+          <td>
+            <input
+              type="checkbox"
+              class="form-control"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              trigger="hover focus"
+              delay="0"
+              title="Canceled Reason: --"
+            />
+          </td>
+          <td>
+            <button
+              class="btn btn-dark"
+              type="button"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              trigger="hover focus"
+              delay="0"
+              title="Created On: --  Effective On: --  Controlled On: --  Reconciled On: -- "
+            >
+              <i class="fas fa-calendar-alt"></i>
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-dark"
+              type="button"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              trigger="hover focus"
+              delay="0"
+              title="Created By: --  Reconciled By: --  Canceled By: --  Controlled by: --  "
+            >
+              <i class="fa fa-users" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td
+            data-bs-toggle="tooltip"
+            data-bs-html="true"
+            trigger="hover focus"
+            delay="0"
+            title="Receiving Bank Name: --  Receiving Account Number: --"
+          >
+            <a href="#">xx</a>
+          </td>
+          <td>
+            <button
+              class="btn btn-dark"
+              type="button"
+              data-bs-toggle="tooltip"
+              data-bs-html="true"
+              trigger="hover focus"
+              delay="0"
+              title="Ref Number: --  Loan Number: --  Coupon Number: --  Payor : -- Batch Number: -- Debit Note: --"
+            >
+              <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+          </td> -->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="my-2 row justify-content-end">
+      <div class="col-3">
+        <app-btn type="primary" routerLink="../{{ statementRoute }}">
+          Statement
+        </app-btn>
+      </div>
+      <div class="col-3">
+        <app-btn type="secondary" (mclick)="ppfs()"
+        >Pay Premium From Suspense
+        </app-btn
+        >
+      </div>
+    </div>
+  </div>
+</div>

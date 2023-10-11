@@ -1,0 +1,199 @@
+<loader [text]="loadingText" [loading]="loading">
+<!-- <app-form-navigation [title]="'Set Up / Code / Numbering'"></app-form-navigation> -->
+<form novalidate #f="ngForm">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{"Company"|appTranslate|async}}</label>
+          <select name="company" [(ngModel)]="company" id="" class="form-control control-bg-gray" #companyCode (change)="getNumberingByCompanyCode(companyCode.value)">
+            <option *ngFor="let item of companyCodes" [value]="item.code">
+              {{item.code}} - {{item.description}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row gap-5">
+      <div class="col">
+        <h4>{{"Policy Number"|appTranslate|async}}</h4>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Numbering Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering33"
+              [(ngModel)]="numbering.numberings[0].numberingBasis">
+              <option *ngFor="let code of numberBasis" [value]="code.code">
+               {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{"Integer Digits Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering34"
+              [(ngModel)]="numbering.numberings[0].integerDigitBasis">
+              <option *ngFor="let code of integerDigitBasis" [value]="code.code">
+               {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Year Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering35"
+              [(ngModel)]="numbering.numberings[0].yearBasis">
+              <option *ngFor="let code of yearBasis" [value]="code.code">
+               {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{"No of Integer Digits "|appTranslate|async}}</label>
+            <input class="form-control form-control-md control-bg-gray" required name="numbering36"
+              [(ngModel)]="numbering.numberings[0].noIntegerDigit" type="number">
+          </div>
+
+        </div>
+
+      </div>
+      <div class="col">
+        <h4>{{"Reciept Number"|appTranslate|async}}</h4>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Numbering Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering37"
+              [(ngModel)]="numbering.numberings[1].numberingBasis">
+              <option *ngFor="let code of numberBasis" [value]="code.code">
+               {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{"Integer Digits Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering38"
+              [(ngModel)]="numbering.numberings[1].integerDigitBasis">
+              <option *ngFor="let code of integerDigitBasis" [value]="code.code">
+               {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Year Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering39"
+              [(ngModel)]="numbering.numberings[1].yearBasis">
+              <option *ngFor="let code of yearBasis" [value]="code.code">
+              {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{"No of Integer Digits "|appTranslate|async}}</label>
+            <input class="form-control form-control-md control-bg-gray" required name="numbering40"
+              [(ngModel)]="numbering.numberings[1].noIntegerDigit" type="number">
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Prefix"|appTranslate|async}}</label>
+            <input type="text"  class="form-control form-control-md control-bg-gray">
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+        <h4>{{"Enrolee No"|appTranslate|async}}</h4>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Numbering Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering17"
+                    [(ngModel)]="numbering.numberings[2].numberingBasis">
+              <option *ngFor="let code of numberBasis" [value]="code.code">
+               {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{"Integer Digits Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering18"
+                    [(ngModel)]="numbering.numberings[2].integerDigitBasis">
+              <option *ngFor="let code of integerDigitBasis" [value]="code.code">
+              {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Year Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering19"
+                    [(ngModel)]="numbering.numberings[2].yearBasis">
+              <option *ngFor="let code of yearBasis" [value]="code.code">
+              {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{"No of Integer Digits "|appTranslate|async}}</label>
+            <input class="form-control form-control-md control-bg-gray" required name="numbering20"
+                   [(ngModel)]="numbering.numberings[2].noIntegerDigit" type="number">
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{"Enrolee Suffix Basis"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray" required name="numbering21"
+                    [(ngModel)]="numbering.numberings[2].enrolleeSuffBasis">
+              <option *ngFor="let code of enrolleeSuffBasis" [value]="code.code">
+              {{code.code}} - {{code.title}}
+              </option>
+            </select>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="row mt-5"></div>
+    <div class="row mt-5">
+      <div class="col-12 d-flex justify-content-end">
+        <label class="form-label text-primary">&nbsp;</label>
+        <app-button [buttonType]="'save'" (click)="createNumbering()"></app-button>
+
+      </div>
+    </div>
+
+  </div>
+</form>
+
+</loader>

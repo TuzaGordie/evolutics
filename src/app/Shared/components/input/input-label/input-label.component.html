@@ -1,0 +1,6 @@
+ <label class="col-md-{{ stacked ? '12 pb-0  hide-scroll-x' : mini ? 'auto' : lblCl}} m-0" for="{{ id }}"
+   [ngClass]="{'text-primary form-label': colored,'overflow-x-auto': stacked,'py-2': theme == 1,'form-label': theme == 2,light,small,small1: xsmall,'invalid-label': invalidCheckbox}"
+   *ngIf="showLabel" (click)="log()">
+   {{ label |appTranslate|async}} {{isRequired?'*':''}} <span *ngIf="hint" [matTooltip]="hint|appTranslate|async"
+     class="fa fa-info-circle"></span>
+ </label>

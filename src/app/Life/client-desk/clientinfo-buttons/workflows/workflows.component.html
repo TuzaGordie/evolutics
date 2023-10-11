@@ -1,0 +1,79 @@
+<!-- <app-form-navigation [title]="'View Client / Workflows'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <label for="" class="form-label">{{"Start From"|appTranslate|async}}</label>
+          <input type="date" class="form-control control-bg-gray" [(ngModel)]="startFrom">
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label">{{"Start To"|appTranslate|async}}</label>
+          <input type="date" class="form-control control-bg-gray" [(ngModel)]="startTo">
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label">{{"SLA Level"|appTranslate|async}}</label>
+          <select name="" id="" class="form-control control-bg-gray" [(ngModel)]="slaLevel">
+            <option value="" *ngFor="let slaLevel of slaLevelsList" [value]="slaLevel.code">{{slaLevel.code}} - {{slaLevel.title}}</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label">{{"Status"|appTranslate|async}}</label>
+          <select name="" id="" class="form-control control-bg-gray" [(ngModel)]="status">
+            <option value="" *ngFor="let status of workflowStatusList" [value]="status.code">{{status.code}} - {{status.title}}</option>
+          </select>
+        </div>
+        <div class="col-2 d-flex flex-column justify-content-end">
+          <button class="btn btn-outline-primary btn-lg" (click)="clearFilters()">{{"Clear Filters"|appTranslate|async}}</button>
+        </div>
+      </div>
+      <div class="row py-3">
+        <p class="col"><b>{{"Client Name"|appTranslate|async}}:</b> <span class="px-3">{{clientName}}</span></p>
+        <p class="col"><b>{{"Workflows Count"|appTranslate|async}}:</b><span class="px-3">{{webflowsList.length}}</span></p>
+      </div>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{"SLA Level"|appTranslate|async}}</th>
+            <th scope="col">{{"Workflow No"|appTranslate|async}}</th>
+            <th scope="col">{{"Task Code"|appTranslate|async}}</th>
+            <th scope="col">{{"Task"|appTranslate|async}}</th>
+            <th scope="col">{{"Assigned To"|appTranslate|async}}</th>
+            <th scope="col">{{"Group Assigned"|appTranslate|async}}</th>
+            <th scope="col">{{"Start On"|appTranslate|async}}</th>
+            <th scope="col">{{"Due On"|appTranslate|async}}</th>
+            <th scope="col" style="border-top-right-radius: 12px;">{{"Time Outside SLA"|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of webflowsList | workflowsFilter: startFrom : startTo : slaLevel : status">
+          <th scope="row">
+            <div class="square" [ngClass]="item.slaLevel | slaLevelColour"></div>
+          </th>
+          <td>
+            <a [routerLink]="['../../../workflow-desk/view/index']" [queryParams]="{wfNo: item.wfNo}">{{item.wfNo}}</a>
+          </td>
+          <td>{{item.code}}</td>
+          <td>{{item.description}}</td>
+          <td>{{item.assignedTo}}</td>
+          <td>{{item.assignedToGroup}}</td>
+          <td>{{item.startOn}}</td>
+          <td>{{item.dueOn}}</td>
+          <td>{{item.timeOsSla | formatMinutes}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="mt-5 row justify-content-between">
+      <div class="col-3 ">
+        <app-button buttonType="addCustom" text="Create New Task" [routerLink]="'/life/workflow-desk/task'">
+        </app-button>
+      </div>
+      <div class="col-3 ">
+      </div>
+    </div>
+  </div>
+
+
+</div>

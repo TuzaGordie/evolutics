@@ -1,0 +1,361 @@
+<!-- <app-form-navigation [title]="'Set Up / Task Setup  '"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="row justify-content-end" *ngIf="isShow">
+    <div class="col-auto me-2">
+      <app-btn routerLink="../edit" [queryParamsHandling]="'merge'" icon="edit">Edit</app-btn>
+    </div>
+    <div class="col-auto">
+      <app-btn routerLink="../clone" [queryParamsHandling]="'merge'" icon="clone">Clone</app-btn>
+    </div>
+  </div>
+  <form [formGroup]="taskSetupForm">
+    <div class="">
+      <div class="row mt-2 align-items-end" formGroupName="workflowTask">
+        <div class="col-md">
+          <div class="row">
+            <div class="col-md-4" *ngIf="workflowTaskForm?.controls.code.value">
+              <app-input-basic label="Task Code" [stacked]="true" [form]="workflowTaskForm" name="code" type="viewer">
+              </app-input-basic>
+              <app-validation-message></app-validation-message>
+            </div>
+            <div class="col-md">
+              <app-input-basic label="Task Name" [stacked]="true" [form]="workflowTaskForm" [showValidationIcon]="false"
+                [showValidation]="wn.invalid" #wn name="description" type="text"></app-input-basic>
+              <app-validation-message [input]="wn" ></app-validation-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <label class="text-primary">{{"On Completion Trigger"|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray" formControlName="eventTrigger">
+            <option></option>
+            <option *ngFor="let trigger of onCompletionTriggers">
+              {{ trigger.code }}
+            </option>
+          </select>
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <ng-container formGroupName="workflowTask">
+          <div class="col-md-6">
+            <label class="text-primary">{{"Workflow Group"|appTranslate|async}}</label>
+            <app-input-basic [showLabel]="false" [form]="workflowTaskForm" [showValidationIcon]="false"
+              [showValidation]="tg.invalid" #tg name="taskGroup" type="select" [options]="workflowGroups" labelType="ct"
+              valueField="code"></app-input-basic>
+            <app-validation-message></app-validation-message>
+          </div>
+        </ng-container>
+        <ng-container formGroupName="workflowTaskNext">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-12">
+                <label class="text-primary">{{"Delay"|appTranslate|async}}</label>
+              </div>
+              <div class="col-12">
+                <app-day-hour-min-input [form]="workflowTaskNextForm" [stacked]="true" name="afterEventTime">
+                </app-day-hour-min-input>
+              </div>
+              <div class="col-12">
+                <app-validation-message></app-validation-message>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="row">
+        <div class="col" formGroupName="workflowTask">
+          <div class="row mt-2">
+            <div class="col-12">
+              <label class="text-primary">{{'SLA (days:hours:min)'|appTranslate |async}}</label>
+            </div>
+            <div class="col">
+              <app-day-hour-min-input [form]="workflowTaskForm" [stacked]="true" name="originalSla" #originalSlaTag>
+              </app-day-hour-min-input>
+            </div>
+            <div class="col-auto cursor-default">
+              <input readonly class="form-control sla-colour-box" style="background-color: red" />
+            </div>
+            <div class="col-12">
+              <app-validation-message [control]="originalSlaTag.control" label="SLA"></app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <label class="text-primary">{{'SLA Warning (days:hours:min)' | appTranslate| async}}</label>
+            </div>
+            <div class="col">
+              <app-day-hour-min-input [form]="workflowTaskForm" [stacked]="true" name="warningSla" #warningSlaTag>
+              </app-day-hour-min-input>
+            </div>
+            <div class="col-auto cursor-default">
+              <input readonly class="form-control sla-colour-box" style="background-color: rgb(207, 182, 37)" />
+            </div>
+            <div class="col-12">
+              <app-validation-message [control]="warningSlaTag.control" label="Warning SLA"></app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <label class="text-primary">{{'1st Order Escalate After (days:hours:min)'|appTranslate|async}}</label>
+            </div>
+            <div class="col">
+              <app-day-hour-min-input [form]="workflowTaskForm" [stacked]="true" name="firstOrderEscalateAfter"
+                [showValidation]="false" #firstOrderEscalateAfterTag>
+              </app-day-hour-min-input>
+            </div>
+            <div class="col-auto cursor-default">
+              <input readonly class="form-control sla-colour-box" style="background-color: rgb(0, 0, 0)" />
+            </div>
+            <div class="col-12">
+              <app-validation-message [control]="firstOrderEscalateAfterTag.control" label="1st Order Escalate After">
+              </app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <label class="text-primary">{{'2nd Order Escalate After (days:hours:min)'|appTranslate|async}}</label>
+            </div>
+            <div class="col">
+              <app-day-hour-min-input [form]="workflowTaskForm" [stacked]="true" name="secondOrderEscalateAfter"
+                #secondOrderEscalateAfterTag>
+              </app-day-hour-min-input>
+            </div>
+            <div class="col-auto cursor-default">
+              <input readonly class="form-control sla-colour-box" style="background-color: rgb(0, 0, 0)" />
+            </div>
+            <div class="col-12">
+              <app-validation-message [control]="secondOrderEscalateAfterTag.control" label="2nd Order Escalate After">
+              </app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-8 row">
+              <div class="col-12">
+                <label class="text-primary">{{'If unclosed After (days:hours:min)'|appTranslate|async}}</label>
+              </div>
+              <div class="col">
+                <app-day-hour-min-input [form]="workflowTaskForm" [stacked]="true" name="ifUnclosedAfter"
+                  #ifUnclosedAfterTag>
+                </app-day-hour-min-input>
+              </div>
+              <div class="col-12">
+                <app-validation-message [control]="ifUnclosedAfterTag.control" label="If unclosed After">
+                </app-validation-message>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="text-primary">{{"Action"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" formControlName="action">
+                <option></option>
+                <option *ngFor="let action of actions" [value]="action.code">
+                  {{ action.title }}
+                </option>
+              </select>
+              <app-validation-message></app-validation-message>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="row mt-2" formGroupName="workflowTask">
+            <div class="col-md-6">
+              <app-autocomplete label="Default User" [form]="workflowTaskForm" name="user"
+                [disabled]="workflowTaskForm?.value?.group" [stacked]="true" [showValidation]="userTag.invalid"
+                [options]="users" labelType="uf" valueField="userName" #userTag>
+              </app-autocomplete>
+              <app-validation-message [control]="userTag.control"></app-validation-message>
+            </div>
+            <div class="col-md-6">
+              <label class="text-primary">{{"Event On Creation"|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" formControlName="eventOnCreation" />
+              <app-validation-message></app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2" formGroupName="workflowTask">
+            <div class="col-md-6">
+              <app-input-basic label="Default User Group" [form]="workflowTaskForm" name="group" type="select"
+                [disabled]="workflowTaskForm?.value?.user" [stacked]="true" [showValidation]="userTag.invalid"
+                [options]="userGroups" labelField="group" valueField="group" #userGroupTag>
+              </app-input-basic>
+              <app-validation-message [control]="userGroupTag.control"></app-validation-message>
+            </div>
+            <div class="col-md-6">
+              <label class="text-primary">{{"Event On Assignment"|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" formControlName="eventOnAssignment" />
+              <app-validation-message></app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2" formGroupName="workflowTask">
+            <div class="col-md-6">
+              <label class="text-primary">{{"Maintenance Function Link"|appTranslate|async}}</label>
+              <select name="" id="" class="form-control control-bg-gray" formControlName="maintenanceFunctionLink">
+                <option value=""></option>
+                <option *ngFor="let mfl of maintenanceFunctionLinks" [value]="mfl.code">
+                  {{ mfl.code }} - {{ mfl.title }}
+                </option>
+              </select>
+              <app-validation-message></app-validation-message>
+            </div>
+            <div class="col-md-6">
+              <label class="text-primary">{{"Event On Completion"|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" formControlName="eventOnCompletion" />
+              <app-validation-message></app-validation-message>
+            </div>
+          </div>
+          <div class="row mt-2" formGroupName="workflowTask">
+            <div class="col">
+              <label class="text-primary">{{"Task Instructions"|appTranslate|async}}</label>
+              <textarea name="" id="" cols="30" rows="5" class="form-control control-bg-gray"
+                formControlName="taskInstructions"></textarea>
+              <app-validation-message></app-validation-message>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2" formGroupName="workflowTask">
+        <div class="col-md-4" *ngFor="let subForm of companiesAllowed?.controls; let k = index">
+          <div class="row align-items-end">
+            <div class="col">
+              <label class="text-primary">{{"Companies Allowed"|appTranslate|async}}</label>
+              <app-input-basic [showLabel]="false" [form]="subForm" [showValidationIcon]="false"
+                [showValidation]="comp.invalid" #comp name="item" type="select" [options]="companieAllowed"
+                labelType="cd" valueField="code"></app-input-basic>
+
+              <!-- <select class="form-control  control-bg-gray" [formControl]="lessonForm|toAny">
+                <option></option>
+                <option *ngFor="let ca of companieAllowed" [value]="ca.code">{{ca.code}} - {{ca.description}}
+                </option>
+              </select> -->
+            </div>
+            <div class="col-auto d-flex" *ngIf="!isShow">
+              <div class="me-2">
+                <app-btn icon="delete" type="danger-outline" [iconBtn]="true" [disabled]="companiesAllowed?.length == 1"
+                  (mclick)="catDec(k)"></app-btn>
+              </div>
+              <app-btn icon="add" type="outline" [iconBtn]="true" (mclick)="addCompanyForm(null, k + 1)"></app-btn>
+            </div>
+          </div>
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+
+      <div class="row mt-4 align-items-end text-center" formGroupName="workflowTask">
+        <div class="col-md ">
+          <app-input-basic label="Hide from manual selection" type="checkbox" name="hidden" [form]="workflowTaskForm"
+            [stacked]="true" [xsmall]="true"></app-input-basic>
+        </div>
+        <div class="col-md ">
+          <app-input-basic label="Unique Policy" type="checkbox" name="uniqueForPolicy" [form]="workflowTaskForm"
+            [stacked]="true" [xsmall]="true"></app-input-basic>
+        </div>
+        <div class="col-md ">
+          <app-input-basic label="Auto Assign to user who create policy" type="checkbox"
+            name="autoAssignToPolicyCreator" [form]="workflowTaskForm" [stacked]="true" [xsmall]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-md ">
+          <app-input-basic label="Random Assign" type="checkbox" name="randomAssign" [form]="workflowTaskForm"
+            [stacked]="true" [xsmall]="true"></app-input-basic>
+        </div>
+        <div class="col-md ">
+          <app-input-basic label="Prevent Manual closure" type="checkbox" name="preventManualClosing"
+            [form]="workflowTaskForm" [stacked]="true" [xsmall]="true"></app-input-basic>
+        </div>
+        <div class="col-md ">
+          <app-input-basic label="Client Not Mandatory" type="checkbox" name="clientNotMandatory"
+            [form]="workflowTaskForm" [stacked]="true" [xsmall]="true"></app-input-basic>
+        </div>
+        <div class="col-md d-flex justify-content-end">
+          <app-btn type="outline" icon="checklist" data-bs-toggle="modal" data-bs-target="#itemsModal">Check-list
+          </app-btn>
+        </div>
+      </div>
+
+      <div class="row mt-4" *ngIf="!isShow">
+        <div class="col" (click)="utilityService.logForm(taskSetupForm)">
+
+        </div>
+        <div class="col-auto">
+          <app-btn type="secondary" icon="save" [form]="taskSetupForm"  
+            (mclick)="submit()">
+            {{isEdit?'Update':'Save'}}
+          </app-btn>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</loader>
+
+
+<!-- MODAL -->
+
+<div class="modal fade" id="itemsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{"Items"|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" [formGroup]="workflowTaskChecklistForm">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="">{{"Checklist category "|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" (change)="onChangeChecklist($event)"
+                formControlName="checklistCategory">
+                <option></option>
+                <option *ngFor="let ca of checklist" [value]="ca.code">
+                  {{ ca.code }} - {{ ca.title }}
+                </option>
+              </select>
+              <!--   <select name="" id="" class="form-control control-bg-gray">
+                  <option value=""></option>
+                  <option value=""></option>
+                </select> -->
+            </div>
+          </div>
+        </div>
+        <ng-container formArrayName="checklistItems">
+          <div class="row align-items-end" *ngFor="
+                  let lessonForm of checklistItems?.controls;
+                  let k = index
+                " [formGroupName]="k">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="">{{"Item "|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray" formControlName="item" (change)="patchChecklistItem(k)">
+                  <option></option>
+                  <option *ngFor="let ca of item" [value]="ca.code">
+                    {{ ca.code }} - {{ ca.title }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="" class="w-100 text-center">{{"Mandatory"|appTranslate|async}}</label>
+                <input type="checkbox" class="form-control control-bg-gray mx-auto" formControlName="mandatory" />
+              </div>
+            </div>
+            <div class="col-md-auto d-flex" *ngIf="!isShow" >
+              <div class="me-2">
+                <app-btn icon="delete" type="danger" [iconBtn]="true" hint="Delete Member" (mclick)="itemsRemove(k)">
+                </app-btn>
+              </div>
+              <app-btn (mclick)="itemsInc()" icon="add" type="outline" [iconBtn]="true" hint="Add another member">
+              </app-btn>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="modal-footer" *ngIf="!isShow">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

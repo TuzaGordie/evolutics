@@ -1,0 +1,212 @@
+<loader [loading]="loading" [text]="loadingText">
+  <form #f="ngForm">
+    <div class="">
+      <div class="d-flex justify-content-end my-3" *ngIf="isShow">
+        <app-btn type="secondary" text="Edit" icon="edit" routerLink="../edit" [queryParamsHandling]="'merge'">
+        </app-btn>
+      </div>
+      <ul class="nav nav-pills  nav-justified" id="nav-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+            type="button" role="tab" aria-controls="pills-basic" aria-selected="true">{{'Basic'|appTranslate|async}}
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-requirement-tab" data-bs-toggle="pill" data-bs-target="#pills-requirement"
+            type="button" role="tab" aria-controls="pills-requirement"
+            aria-selected="false">{{'Requirement'|appTranslate|async}}
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{"Process Code"|appTranslate|async}}</label>
+                <input type="text" [(ngModel)]="createProcessNb.processNb.code" name="code" disabled
+                  class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+                <input type="text" [(ngModel)]="createProcessNb.processNb.description" name="description"
+                  class="form-control control-bg-gray" [disabled]="isShow">
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{"Company Filter"|appTranslate|async}}</label>
+                <select [(ngModel)]="createProcessNb.processNb.companyCode" name="companyCode" id=""
+                  class="form-control control-bg-gray"  [disabled]="isShow">
+                  <option value=""></option>
+                  <option *ngFor="let item of companies" [value]="item.code">
+                    {{item.code}} - {{item.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{"Product Class Filter"|appTranslate|async}}</label>
+                <select [(ngModel)]="createProcessNb.processNb.productClass" (change)="getProductCodes()"
+                  name="productClass" id="" class="form-control control-bg-gray"  [disabled]="isShow">
+                  <option value=""></option>
+                  <option *ngFor="let item of productClasses" [value]="item.code">
+                    {{item.code}} - {{item.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{"Product Filter"|appTranslate|async}}</label>
+                <select [(ngModel)]="createProcessNb.processNb.productCode" name="productCode" id=""
+                  class="form-control control-bg-gray"  [disabled]="isShow">
+                  <option value=""></option>
+                  <option *ngFor="let item of products" [value]="item.code">
+                    {{item.code}} - {{item.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{"Group Condition Filter"|appTranslate|async}}</label>
+                <select [(ngModel)]="createProcessNb.processNb.groupCond" name="groupCond" id=""
+                  class="form-control control-bg-gray"  [disabled]="isShow">
+                  <option value=""></option>
+                  <option *ngFor="let item of groupConds" [value]="item.code">
+                    {{item.code}} - {{item.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="d-flex mt-2">
+            <div class="d-flex align-items-center form-group">
+              <label class="form-label text-primary me-3">{{'Banded'|appTranslate|async}}</label>
+              <input type="checkbox" name="banded" [(ngModel)]="createProcessNb.processNb.banded"
+                class="form-control control-bg-gray" #banded="ngModel">
+            </div>
+          </div>
+          <!-- banded section -->
+          <div *ngIf="banded.value">
+            <div class="row mt-3">
+              <p class="small">{{"Premium Banding - "|appTranslate|async}}<span class="text-primary">
+                  {{'Leave Blank if same req apply to all Premium Amount'|appTranslate|async}}</span></p>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <label for="" class="form-label text-primary">{{"Band No"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md-5">
+                <label for="" class="form-label text-primary">{{"Premium Amount Band"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div *ngFor="let processNbBand of createProcessNb.processNbBand; let i = index" class="row mb-2">
+              <div class="col-md-5">
+                <input type="text" disabled [(ngModel)]="processNbBand.bandNo" name="bandNo_{{processNbBand.rowId}}"
+                  class="form-control control-bg-gray">
+              </div>
+              <div class="col-md-5">
+                <input type="number" [(ngModel)]="processNbBand.amount" name="amount_{{processNbBand.rowId}}"
+                  class="form-control control-bg-gray"  [disabled]="isShow">
+              </div>
+              <div class="col-md-2">
+                <app-button buttonType="delete" (click)="removeBand(i)"></app-button>
+              </div>
+            </div>
+            <div class="row mt-2 justify-content-end">
+              <div class="col-md-2">
+                <app-button buttonType="add" (click)="addBand()"></app-button>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row mt-5 justify-content-end">
+        <div class="col-md-2">
+          <app-button buttonType="submit"></app-button>
+        </div>
+      </div> -->
+
+        </div>
+        <div class="tab-pane fade" id="pills-requirement" role="tabpanel" aria-labelledby="pills-requirement-tab">
+          <hr class="my-2">
+          <div *ngIf="createProcessNb.processNb.banded" class="row justify-content-start">
+            <div class="col-md-1">
+              <label for="" class="form-label text-primary">{{"Band No"|appTranslate|async}}</label>
+            </div>
+            <div class="col-md-2">
+              <select name="bandNo" [(ngModel)]="bandNo" id="" class="form-control control-bg-gray"
+                 [disabled]="isShow">
+                <option value=""></option>
+                <option *ngFor="let item of createProcessNb.processNbBand" [value]="item.bandNo">
+                  {{item.bandNo}}
+                </option>
+              </select>
+            </div>
+
+          </div>
+          <div class="row mt-3">
+            <div class="col-md">
+              <label for=""
+                class="form-label text-primary">{{"New Business Requirement Code"|appTranslate|async}}</label>
+            </div>
+            <div class="col-md">
+              <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+            </div>
+            <div class="col-md-2">
+              <label for="" class="form-label text-primary">{{'Renewal'|appTranslate|async}}</label>
+            </div>
+            <div class="col-md-2" *ngIf="!isShow">
+            </div>
+          </div>
+
+          <div *ngFor="let processNbReq of createProcessNb.processNbReq; let i = index" class="row mt-2">
+            <div class="col-md">
+              <select [(ngModel)]="processNbReq.nbReq" name="nbReq_{{processNbReq.rowId}}" id=""  [disabled]="isShow"
+                (change)="selectClaimReqCodesDesc(i)" class="form-control control-bg-gray">
+                <option></option>
+                <option *ngFor="let item of nbReqs" [value]="item.code">
+                  {{item.code}}
+                </option>
+              </select>
+            </div>
+            <div class="col-md">
+              <input disabled [(ngModel)]="processNbReq.description" name="ndescription_{{processNbReq.rowId}}" id=""
+                class="form-control control-bg-gray"  [disabled]="isShow" />
+            </div>
+            <div class="col-md-2">
+              <input type="checkbox" name="nbRenewal_{{processNbReq.rowId}}" id=""  [disabled]="isShow"
+                class="form-control control-bg-gray">
+            </div>
+            <div class="col-md-2 d-flex justify-content-end" *ngIf="!isShow">
+              <app-btn group="delete" (click)="removeReq(i)"></app-btn>
+              <span class="mx-1"></span>
+              <app-btn group="add" (click)="addReq(i+1)"></app-btn>
+            </div>
+          </div>
+ 
+          <div class="row justify-content-end mt-4" *ngIf="!isShow">
+            <div class="col-md-auto">
+              <app-button buttonType="save" (click)="saveProcessNb()"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</loader>

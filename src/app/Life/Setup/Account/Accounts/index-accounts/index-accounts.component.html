@@ -1,0 +1,43 @@
+<div class="container">
+  <br><br><br>
+  <div class="row">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+          <app-input-basic label="Select Account Group" type="select" [form]="form" name="accountGroup" [stacked]="true"
+          [options]="accS.getCodeSubGroup|functionCaller1:'ACC_GROUP'|async" labelType="ct" #accountGroup>
+        </app-input-basic>
+      </div>
+
+  </div><br>
+  <div class="row">
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6">
+          <app-input-basic label="Select Account" type="select" [form]="form" name="accounts" [stacked]="true"
+          [options]="accS.getAccCodesAndDescriptionByGroup|functionCaller1:accountGroup?.value?.code|async" labelType="cd" #accounts>
+        </app-input-basic>
+      </div>
+  </div><br>
+
+
+  <div class="row">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-2">
+          <label>&nbsp;</label>
+          <app-btn type="dark" icon="show" [valid]="form?.valid"  (mclick)="show(accounts?.value?.code)">Show</app-btn>
+      </div>
+      <div class="col-md-2">
+          <label>&nbsp;</label>
+          <app-button [buttonType]="'create'" routerLink="../create">Create</app-button>
+      </div>
+      <div class="col-md-2">
+          <label>&nbsp;</label>
+          <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="clone(accounts?.value?.code)">Clone</app-btn>
+      </div>
+  </div>
+
+</div>

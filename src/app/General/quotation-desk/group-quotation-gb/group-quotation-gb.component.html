@@ -1,0 +1,89 @@
+<!-- <div class="container" id="initialContainer" style="height: 70vh; width: 70vw; position: fixed; top: 50%; left: 50%; background-color: white; transform: translate(-50%, -50%); z-index: 200;">
+  <div class="row justify-content-center mt-4">
+    <div class="col-3 align-items-center"><label class="py-2">Parent Company</label></div>
+    <div class="col-6">
+      <input type="text" name="" id="" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-3 align-items-center"><label class="py-2">Sector</label></div>
+    <div class="col-6">
+      <input type="text" name="" id="" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-3 align-items-center"><label class="py-2">Product Code</label></div>
+    <div class="col-6">
+      <input type="text" name="" id="" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-3 align-items-center"><label class="py-2">Product Class</label></div>
+    <div class="col-6">
+      <input type="text" name="" id="" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-2">
+      <app-button buttonType="saveGB" (click)="onInitialSubmit()" data-bs-dismiss="modal"></app-button>
+    </div>
+  </div>
+</div> -->
+<div class=" mt-5 pt-5">
+  <form [formGroup]="findGroupQuotationForm">
+
+    <div class="row justify-content-center">
+      <div class="col-md-6 position-relative">
+        <label class="py-2">{{'Group Owner Client Number'|appTranslate|async}}</label>
+        <div class="row">
+          <div class="col-md">
+            <app-input-basic [form]="findGroupQuotationForm" name="groupOwnerClientNo" type="text" [stacked]="false"
+              [showLabel]="false" label="Group Owner Client Number" [loading]="validatingClientNo"
+              [showValidation]="true" [showValidationIcon]="true" [colored]="false" [light]="false" #clientNo>
+            </app-input-basic>
+          </div>
+          <div class="col-md-auto">
+            <app-btn type="secondary" [iconBtn]="true" icon="search"
+              (click)="clientService.openFindClientModal(clientNo.control)"></app-btn>
+          </div>
+          <div class="col-md-auto">
+            <app-btn type="outline" icon="add" [text]="'Create New Client'" [matMenuTriggerFor]="clientMenu">
+            </app-btn>
+            <mat-menu #clientMenu="matMenu">
+              <button mat-menu-item (click)="clientService.openCreateIndividualClientModal(clientNo.control)">
+                {{'Individual Client'|appTranslate|async}}
+              </button>
+              <button mat-menu-item (click)="clientService.openCreateCorporateClientModal(clientNo.control)">
+                {{'Corporate Client'|appTranslate|async}}
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="row justify-content-end mt-3" *ngIf="groupOwnerClientNo?.valid">
+          <span style="text-decoration: none; list-style: none">{{clientNameFromCheck}}</span>
+        </div>
+        <app-input-basic [form]="findGroupQuotationForm" name="insuranceType" type="select" valueField="code"
+          labelType="ct" [options]="insuranceTypeOptions$" [stacked]="true" label="Insurance Type"
+          (mchange)="onInsuranceTypeChange()" [colored]="false">
+        </app-input-basic>
+        <app-input-basic [form]="findGroupQuotationForm" name="productClass" type="select" valueField="code"
+          labelType="ct" [options]="productClassOptions$ | async" [stacked]="true" label="Product Class"
+          (mchange)="onProductClassChange()" [colored]="false">
+        </app-input-basic>
+        <app-input-basic [form]="findGroupQuotationForm" name="product" type="select"  labelType="cd"
+          [options]="productOptions$ | async" [stacked]="true" label="Product" [colored]="false">
+        </app-input-basic>
+        <div class="row justify-content-end mt-5">
+          <div class="col-md-auto">
+
+            <app-btn [disabled]="findGroupQuotationForm?.invalid" icon="next" type="secondary" (mclick)="onNextClick()"
+              text="Next"></app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+
+</div>

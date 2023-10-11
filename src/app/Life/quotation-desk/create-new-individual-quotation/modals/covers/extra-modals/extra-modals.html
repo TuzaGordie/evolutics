@@ -1,0 +1,893 @@
+<div class="modal fade" id="rt1modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Life Annuity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeCoverScreen()" aria-label="Close"
+                ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let tb of targetBasesList" [value]="tb.title">{{tb.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Amount</label>
+              <input type="number" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Source Of Annuity</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let sa of sourcesOfAnnuityList" [value]="sa.title">{{sa.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Annuity Frequency</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Guarantee Period (Months)</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <!-- the endpoint for this was not found on the API docs -->
+              <label for="" class="form-label text-primary">Spouse Revisionary Proportion</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Pension Fund Administrator</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let pfa of pensionFundAdministratorsList" [value]="pfa.no">{{pfa.fullName}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Annuity Annual Escalation Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let aaeb of annuityAnnualEscalationBasesList" [value]="aaeb.title">{{aaeb.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Annuity Annual Escalation Value</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payment Method</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let pm of outwardPaymentMethodsList" [value]="pm.code">{{pm.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payee Name</label>
+              <input type="text" class="form-control  control-bg-gray" [value]="client.fullName">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>Existing Accounts for Client: {{client.fullName}}</p>
+        </div>
+
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+            <tr class="py-5 bg-primary text-white">
+              <th scope="col" class="text-white">Bank No</th>
+              <th scope="col" class="text-white">Payee Name</th>
+              <th scope="col" class="text-white">Account Type</th>
+              <th scope="col" class="text-white">Account No</th>
+              <th scope="col" class="text-white">Institution</th>
+              <th scope="col" class="text-white">Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr >
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary  p-2" (click)="toggleClass = !toggleClass"
+                     [ngClass]="{ 'btn-primary text-white': toggleClass }">Select
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2" (click)="toggleClass2 = !toggleClass2"
+                     [ngClass]="{ 'btn-primary text-white': toggleClass2 }">Select
+                </div>
+              </td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row justify-content-end">
+          <div class="col-3">
+            <div class="from-group align-items-center ">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'addCustom'" text="Create New Account"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal" (click)="closeCoverScreen(true)"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt2modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Individual Life Risk</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeCoverScreen()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Pricing Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let pb of pricingBasesList" [value]="pb.title">{{pb.title}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Initial Sum Assured</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Benefit Payment Frequency</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let bpf of benefitPaymentFrequenciesList" [value]="bpf.paymentFrequency">{{bpf.paymentFrequency}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Sum Assured Escalation rate (%) before chaim</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Sum Assured Escalation rate (%) post chaim</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Premium Payment Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Benefit Payment Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Enter Benefit Payment Schedule</label>
+              <input type="checkbox" class="form-control control-bg-gray">
+            </div>
+          </div>
+
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Bank No</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>Existing Account for Client {{client.fullName}}</p>
+        </div>
+
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+            <tr class="py-5 bg-primary text-white">
+              <th scope="col" class="text-white">Bank No</th>
+              <th scope="col" class="text-white">Payee Name</th>
+              <th scope="col" class="text-white">Account Type</th>
+              <th scope="col" class="text-white">Account No</th>
+              <th scope="col" class="text-white">Institution</th>
+              <th scope="col" class="text-white">Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <button class="btn btn-outline-primary p-2">Select</button>
+              </td>
+            </tr>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <button class="btn  btn-outline-primary p-2">Select</button>
+              </td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payment Method</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let opm of outwardPaymentMethodsList" [value]="opm.code">{{opm.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payee Name</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"  (click)="closeCoverScreen(true)"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt3modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Individual Credit Life</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeCoverScreen()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Initial Sum Assured</label>
+              <input type="text" class="form-control control-bg-gray"/>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Loan Interest rate (%)</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Loan Repayment Frequency</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let lrf of loanRepaymentFrequenciesList" [value]="lrf?.paymentFrequency">{{lrf?.paymentFrequency}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Lender</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Loan Issue Date</label>
+              <input type="date" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Loan Amortisation Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Premium Payment Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Loan Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Bank No</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>Existing Account for Client {{client.fullName}}</p>
+        </div>
+
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+            <tr class="py-5 bg-primary text-white">
+              <th scope="col" class="text-white">Bank No</th>
+              <th scope="col" class="text-white">Payee Name</th>
+              <th scope="col" class="text-white">Account Type</th>
+              <th scope="col" class="text-white">Account No</th>
+              <th scope="col" class="text-white">Institution</th>
+              <th scope="col" class="text-white">Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2">Select</div>
+              </td>
+            </tr>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2">Select</div>
+              </td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payment Method</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let pm of outwardPaymentMethodsList" [value]="pm.code">{{pm.code}} - {{pm.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payee Name</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- TODO clicking the following 2 buttons should open new modals -->
+        <app-button [buttonType]="'btnCustomClone'" [text]="'Joint Owner'" data-bs-dismiss="modal"></app-button>
+        <app-button [buttonType]="'btnCustomClone'" [text]="'Medical Questionnaire'"
+                    data-bs-dismiss="modal"></app-button>
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"  (click)="closeCoverScreen(true)"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt4modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Annuities Certain</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeCoverScreen()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let tb of targetBasesList" [value]="tb.title">{{tb.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Amount</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Annuity Frequency</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Annuity Annual Escalation Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let aaeb of annuityAnnualEscalationBasesList" [value]="aaeb.title">{{aaeb.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Annuity Annual Escaltion Value</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Enter Annuity Payment Schedule</label>
+              <input type="checkbox" class="form-control control-bg-gray">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal" (click)="closeCoverScreen(true)"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt6modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Endowment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeCoverScreen()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Pricing Basis</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let pb of pricingBasesList" [value]="pb.title">{{pb.title}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Premium Payment Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Benefit Payment Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Bank No</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>Existing Account for Client {{client.fullName}}</p>
+        </div>
+
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+            <tr class="py-5 bg-primary text-white">
+              <th scope="col" class="text-white">Bank No</th>
+              <th scope="col" class="text-white">Payee Name</th>
+              <th scope="col" class="text-white">Account Type</th>
+              <th scope="col" class="text-white">Account No</th>
+              <th scope="col" class="text-white">Institution</th>
+              <th scope="col" class="text-white">Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2">Select</div>
+              </td>
+            </tr>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2">Select</div>
+              </td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payment Method</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let opm of outwardPaymentMethodsList" [value]="opm.code">{{opm.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payee Name</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal" (click)="closeCoverScreen(true)"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt5modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Savings</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeCoverScreen()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Contribution Frequency</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let freq of targetContributionFrequenciesList" [value]="freq.frequency">{{freq.frequency}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Premium to Benefit</label>
+              <input type="checkbox" class="form-control control-bg-gray">
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Deposit</label>
+              <input type="checkbox" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Amount</label>
+              <input type="checkbox" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">At Maturity Convert To</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let amct of atMaturityConvertToList" [value]="amct.code">{{amct.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Contribution Payment Term</label>
+              <input type="text" placeholder="Years" class="form-control control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input type="text" placeholder="months" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Enter a Drawdown Benefit Payment Schedule</label>
+              <input type="checkbox" class="form-control control-bg-gray">
+            </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Bank No</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>Existing Account for Client {{client.fullName}}</p>
+        </div>
+
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+            <tr class="py-5 bg-primary text-white">
+              <th scope="col" class="text-white">Bank No</th>
+              <th scope="col" class="text-white">Payee Name</th>
+              <th scope="col" class="text-white">Account Type</th>
+              <th scope="col" class="text-white">Account No</th>
+              <th scope="col" class="text-white">Institution</th>
+              <th scope="col" class="text-white">Select</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2">Select</div>
+              </td>
+            </tr>
+            <tr>
+              <td>6567_1</td>
+              <td>James Bond</td>
+              <td>Mobile Money</td>
+              <td>090897676776</td>
+              <td>MTN</td>
+              <td>
+                <div class="btn  btn-outline-primary p-2">Select</div>
+              </td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payment Method</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let opm of outwardPaymentMethodsList" [value]="opm.code">{{opm.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">Payee Name</label>
+              <input type="text" class="form-control  control-bg-gray">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal" (click)="closeCoverScreen(true)"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

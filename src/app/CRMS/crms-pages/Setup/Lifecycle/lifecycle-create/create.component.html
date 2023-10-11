@@ -1,0 +1,53 @@
+<app-form-navigation [title]="'CRM / Setups / Client LifeCycle'"></app-form-navigation>
+<form [formGroup]="clientLifeCycleForm">
+<div class="container-sm mt-5 " id="form-body" >
+  <div class="row g-3">
+    <div class="col-4">
+      <div class="form-group mt-2">
+        <!-- <label class="form-label text-primary">Lifecycle Stage Code</label> -->
+        <label class="form-label text-primary">{{'Client LifeCycle'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" readonly="true" type="text" formControlName="clientLifeCycle" />
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="form-group mt-2">
+        <label class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="description" />
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row g-3">
+
+    <div class="col-6">
+      <div class="form-group ">
+        <app-input-basic label="Lower Duration Bound (months)" [colored]="true" type="text" [form]="clientLifeCycleForm"
+          name="lowerDurationBound" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-group ">
+        <app-input-basic label="Higher Duration Bound (months)" [colored]="true" type="text" [form]="clientLifeCycleForm"
+        name="higherDurationBound" [stacked]="true">
+      </app-input-basic>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <app-btn [valid]="clientLifeCycleForm?.valid" (click)="submitClient()" icon="save" buttonType="submitRed">Submit</app-btn>
+      </div>
+    </div>
+  </div>
+
+</div>
+</form>

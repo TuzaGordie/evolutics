@@ -1,0 +1,539 @@
+<div>
+<div class="container mt-2">
+  <form [formGroup]="viewClientForm">
+    <div class="container mt-2">
+      <div class="row justify-content-between mt-3">
+        <span class="col-3">{{'Client Class'|appTranslate|async}}: <span style="color:#514ef5">Individual</span></span>
+        <span class="col-2">{{'Client Number'|appTranslate|async}}: <span
+          style="color: #514ef5"></span>{{clientDetails?.clientNo}}</span>
+        <div class="col"></div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomNote'" [text]="'Note'"
+                      [routerLink]="['/life/agent-desk/agent-note']"></app-button>
+        </div>
+
+      </div>
+      <hr style="margin-top: 5px;">
+
+      <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+        <div class="d-block text-center mr-2">
+          <img src="https://ritecaremedicalofficepc.com/wp-content/uploads/2019/09/img_avatar.png"
+               class="rounded-circle" width="100px" alt="">
+          <p class="pt-2"></p>
+          <span style="color:#2ecc71">{{'Active'|appTranslate|async}}</span>
+        </div>
+
+        <div class="d-block mx-2 mt-1">
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Full Name'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.fullName">
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'First Name'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1" [value]="clientDetails?.firstName">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Middle Name'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.middleName">
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Surname'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.surname">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Gender'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.gender">
+
+          </div>
+        </div>
+
+        <div class="d-block mx-2 mt-1">
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Phone Number'|appTranslate|async}} 1</label>
+            <input type="text" readonly class="inputform1" [value]="clientDetails?.phoneNumber">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Phone Number'|appTranslate|async}} 2</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.alternativePhoneNumber">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Email'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.email">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Email'|appTranslate|async}} 2</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.alternativeEmail">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Address'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.address">
+
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Date Of Birth'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.dateOfBirth | date:'mediumDate'">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Category'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.category">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'ID Type'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="'--'">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'ID Number'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.idNumber">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Language'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.language">
+
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Employer'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.employer">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'CRM ID'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.crmId">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Bank No'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.bankNo">
+
+          </div>
+        </div>
+
+        <div class="d-block mx-2">
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Marital Status'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.maritalStatus">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Band'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.band">
+
+          </div>
+          <div class="pb-4">
+            <label class="form-label text-primary m-0">{{'Date Created'|appTranslate|async}}</label>
+            <input type="text" readonly class="inputform1 " [value]="clientDetails?.dateCreated | date:'mediumDate'">
+          </div>
+
+        </div>
+
+
+      </div>
+      <hr class="">
+      <div class="row justify-content-center my-4">
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'"
+                      [routerLink]="['/life/agent-desk/agent-endorsements']"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'"
+                      [routerLink]="['/life/agent-desk/agent-documents']"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Web log in'"
+                      [routerLink]="['/life/agent-desk/agent-workflows']"></app-button>
+        </div>
+
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Agent Loan'"
+                      [routerLink]="['/life/agent-desk/agent-loan']"></app-button>
+        </div>
+        <div class="col-2">
+          <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['/life/workflows']"
+                      [text]="'Workflows'"></app-button>
+        </div>
+      </div>
+
+
+      <div id="section_cardsno" class="section-cards d-flex justify-content-center">
+        <div class="card color1 shadow-sm mx-2" [routerLink]="['/life/policies']">
+          <div class="card-body">
+            <h6 class="card-title">{{'No of Policies'|appTranslate|async}}</h6>
+            <p id="card-text">50</p>
+          </div>
+        </div>
+        <div class="card color1 shadow-sm mx-2" [routerLink]="['/life/relationships']">
+          <div class="card-body">
+            <h6 class="card-title">{{'No of Relationships'|appTranslate|async}}</h6>
+            <p id="card-text">10</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm mx-2" [routerLink]="['/life/business']">
+          <div class="card-body">
+            <h6 class="card-title">{{'Other Business'|appTranslate|async}}</h6>
+            <p id="card-text">3</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm mx-2" [routerLink]="['/life/pendingquotes']">
+          <div class="card-body">
+            <h6 class="card-title">{{'Pending Quotes'|appTranslate|async}}</h6>
+            <p id="card-text">3</p>
+          </div>
+
+        </div>
+        <div class="card color1 shadow-sm mx-2" [routerLink]="['/life/pendingpayments']">
+          <div class="card-body">
+            <h6 class="card-title">{{'Pending Payments'|appTranslate|async}}</h6>
+            <p id="card-text">3</p>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{'Edit Owner Info'|appTranslate|async}}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeCoverScreen()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+              <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Full Name'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="fullName">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Id No'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="idNo">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'No. of Employees'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="noOfEmployee">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Financial Size Category'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="financialSizeCategory">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Sector'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="sector">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Phone Number'|appTranslate|async}} 1</label>
+                    <input type="text"
+                           class="inputform " formControlName="phoneNo">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Phone Number'|appTranslate|async}} 2</label>
+                    <input type="text"
+                           class="inputform " formControlName="phoneNo2">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Email'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="email">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Website'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="website">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Address'|appTranslate|async}}</label>
+                    <input type="text"
+
+                           class="inputform " formControlName="address">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'CRM ID'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="crm">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Client Category'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="category">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Language'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="language">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Date of Birth'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="dob">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'State'|appTranslate|async}}</label>
+                    <input type="text"
+
+                           class="inputform " formControlName="state">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Provider Category'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="providerCategory">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Band'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="band">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Bank No'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="bankNo">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'CLV'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="clv">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Communication'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="communication">
+                  </div>
+                </div>
+
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Provider Sub Category'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="providerSubCategory">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'No of Groups'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="groupNo">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Occupation Group'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="occupationGroup">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{Social Media'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="socialMedia">
+                  </div>
+                </div>
+
+                <div class="d-block ml-2">
+                  <div class="pb-4">
+                    <label class="form-label text-primary m-0">{{'Provider Code'|appTranslate|async}}</label>
+                    <input type="text"
+                           class="inputform " formControlName="providerCode">
+                  </div>
+                </div>
+
+              </div>
+
+              <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" (click)="closeCoverScreen(true)" class="btn btn-primary">update</button>
+               -->
+
+
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal" (click)="closeCoverScreen()">Close</button> -->
+              <button type="submit" data-bs-dismiss="modal" (click)="closeCoverScreen(true)" class="border-0 next-blue">{{'Save'|appTranslate|async}}
+              </button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    </div>
+  </form>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form>
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{'Edit Owner Info'|appTranslate|async}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+
+            <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Full Name'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Redg No'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'No. of Employees'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Financial Size Category'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Sector'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Phone Number 2'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{Phone Number 2'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Email'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Website'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Address'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'CRM ID'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Client Category'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Language'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Date'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'State'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Provider Category'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Brand'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Bank No'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'CLV'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Communication'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Provider Sub Category'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'No of Groups'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Group No'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Social Media'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+              </div>
+
+              <div class="d-block ml-2">
+                <div class="pb-4">
+                  <label class="form-label text-primary m-0">{{'Provider Code'|appTranslate|async}}</label>
+                  <input type="text" class="inputform ">
+                </div>
+              </div>
+
+            </div>
+
+            <!--        <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">update</button>
+             -->
+
+
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+            <button type="submit" data-bs-dismiss="modal" class="border-0 next-blue">{{'Save'|appTranslate|async}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+</div>

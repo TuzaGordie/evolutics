@@ -1,0 +1,160 @@
+<!-- <app-form-navigation [title]="'Set Up/Accounts/Transaction Reason Mapping'"></app-form-navigation> -->
+<div class="container-fluid" style="max-width: 1350px">
+  <br />
+  <ng-container [formGroup]="tRMForm">
+    <div class="row">
+      <div class="col-md-3">
+        <label class="form-label text-primary mb-2">{{"Company"|appTranslate|async}}</label>
+        <select formControlName="accFormat" #accFormat class="form-control form-control-md control-bg-gray">
+          <option></option>
+          <option *ngFor="let item of companyArray" [value]="item.code">
+            {{item.code}} - {{item.description}}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label text-primary mb-2">{{"Account Format"|appTranslate|async}}</label>
+        <select formControlName="accFormat" #accFormat class="form-control form-control-md control-bg-gray">
+          <option></option>
+          <option>1</option>
+        </select>
+      </div>
+    </div>
+    <br />
+    <div class="row justify-content-end">
+      <div class="col-sm-2">
+        <app-button buttonType="default" text="Download CSV"></app-button>
+      </div>
+      <div class="col-sm-2">
+        <app-button buttonType="default" text="Upload"></app-button>
+      </div>
+      <br />
+      <div class="row justify-content-end">
+        <div class="col-sm-2">
+          <app-button buttonType="default" text="Download CSV"></app-button>
+        </div>
+        <div class="col-sm-2">
+          <app-button buttonType="default" text="Upload"></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label " style="color: #1b1a50">{{'Factor Group'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label " style="color: #1b1a50">{{'Factor Table'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label" style="color: #1b1a50">{{'Factor Field'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label "style="color: #1b1a50">{{'Factor Key'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+      <ng-container *ngFor="let trmData of getTRMFormArray; let i = index">
+        <ng-container [formGroupName]="i">
+          <div class="row g-3 mb-2">
+            <div class="col">
+              <select formControlName="transReason" (ngModelChange)="changeTransReason($event, i)" #transReason
+                class="form-control form-control-md control-bg-gray">
+                <option value="{{ transReason?.code }}" *ngFor="let transReason of transReasArray">
+                  {{ transReason?.code }} - {{ transReason?.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <input value="{{ description[i] }}" type="text" class="form-control form-control-md control-bg-gray" />
+            </div>
+            <div class="col sm-col">
+              <input formControlName="drCr" #drCr type="text" class="form-control form-control-md control-bg-gray" />
+            </div>
+            <div class="col">
+              <select formControlName="claimType" #claimType class="form-control form-control-md control-bg-gray">
+                <option value="{{ claimType?.code }}" *ngFor="let claimType of claimTypeArray">
+                  {{ claimType?.code }} - {{ claimType?.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <select formControlName="payinReason" #payinReason class="form-control form-control-md control-bg-gray">
+                <option value="{{ item?.code }}" *ngFor="let item of payinReasonArray">
+                  {{ item?.code }} - {{ item?.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <select formControlName="payoutReason" #payoutReason class="form-control form-control-md control-bg-gray">
+                <option value="{{ item?.code }}" *ngFor="let item of payoutReasonArr">
+                  {{ item?.code }} - {{ item?.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <select formControlName="payinType" #payinType class="form-control form-control-md control-bg-gray">
+                <option value="{{ item?.code }}" *ngFor="let item of payinTypesArr">
+                  {{ item?.code }} - {{ item?.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <select formControlName="productCode" #productCode class="form-control form-control-md control-bg-gray">
+                <option value="{{ item?.code }}" *ngFor="let item of prodClassArr">
+                  {{ item?.code }} - {{ item?.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col">
+              <select formControlName="accountCode" #accountCode class="form-control form-control-md control-bg-gray">
+                <option value="{{ accountCode?.code }}" *ngFor="let accountCode of accountCodesArray">
+                  {{ accountCode?.code }} - {{ accountCode?.description }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <app-button (click)="deleteTRM(i)" buttonType="delete"></app-button>
+          </div>
+          <br />
+        </ng-container>
+      </ng-container>
+
+      <br /><br />
+      <div *ngIf="!isShow" class="row justify-content-end">
+        <div class="col-md-2">
+            <app-button (click)="submit()" buttonType="save"></app-button>
+        </div>
+      </div>
+    </div>
+    <br /><br /><br />
+    <div *ngIf="!isShow" class="row justify-content-end">
+      <div class="col-md-2">
+        <app-button (click)="submit()" buttonType="save"></app-button>
+      </div>
+    </div>
+
+    <div class="d-lg-flex mt-2" *ngIf="isShow">
+      <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+      </app-btn>
+      <span class="mx-1"></span>
+      <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+      </app-btn>
+    </div>
+  </ng-container>
+</div>
+<br /><br /><br />
+<div class="row justify-content-end">
+  <div class="col-md-2">
+    <app-button (click)="submit()" buttonType="save"></app-button>
+  </div>
+</div>
+<br /><br />

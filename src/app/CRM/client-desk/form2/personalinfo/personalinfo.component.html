@@ -1,0 +1,224 @@
+
+<div class="container mt-5">
+    <form [formGroup]="personalFormData" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md" >
+            <div class="d-block">
+                <div class="mt-4">
+            <label>Surame</label><br>
+            <input type="text"  formControlName="surname" class="inputform" required>
+            <div *ngIf="validation.surname.errors && (validation.surname.dirty || validation.surname.touched)">
+                <div class="text-danger" *ngIf="validation.surname?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>First Name</label><br>
+            <input type="text" formControlName="firstName" class="inputform" required>
+            <div *ngIf="validation.firstName.errors && (validation.firstName.dirty || validation.firstName.touched)">
+                <div class="text-danger" *ngIf="validation.firstName?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Email</label><br>
+            <input type="email" formControlName="email" class="inputform" required>
+            <div *ngIf="validation.email.errors && (validation.email.dirty || validation.email.touched)">
+                <div class="text-danger" *ngIf="validation.email?.errors?.required || validation.email?.errors?.pattern">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Phone Number</label><br>
+            <input type="number" formControlName="phoneNumber" class="inputform" required>
+            <div *ngIf="validation.phoneNumber.errors && (validation.phoneNumber.dirty || validation.phoneNumber.touched)">
+                <div class="text-danger" *ngIf="validation.phoneNumber?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+
+
+            <div class="mt-4">
+                <label>Address</label><br>
+                <input type="text" formControlName="address" class="inputform" required>
+                <div *ngIf="validation.address.errors && (validation.address.dirty || validation.address.touched)">
+                    <div class="text-danger" *ngIf="validation.address?.errors?.required">Field is invalid!
+                    </div>
+                </div></div>
+                <div class="mt-4">
+                <label>Address Country</label><br>
+                <select formControlName="addressCountry" (change)="setRegionList()" class="inputform" required>
+                    <option [value]="null">Select Country</option>
+                    <option [value]="item.ID" *ngFor="let item of countryList">{{item.DESCRIPTION}}</option>
+                </select>
+                <div *ngIf="validation.addressCountry.errors && (validation.addressCountry.dirty || validation.addressCountry.touched)">
+                    <div class="text-danger" *ngIf="validation.addressCountry?.errors?.required">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>Address Region</label><br>
+                <select formControlName="addressRegion" (change)="setStateList()" class="inputform" required>
+                    <option [value]="null">Select Region</option>
+                    <option [value]="item.ID" *ngFor="let item of regionList">{{item.DESCRIPTION}}</option>
+                </select>
+                <div *ngIf="validation.addressRegion.errors && (validation.addressRegion.dirty || validation.addressRegion.touched)">
+                    <div class="text-danger" *ngIf="validation.addressRegion?.errors?.required">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>Address State</label><br>
+                <select formControlName="addressState" (change)="setTownList()" class="inputform" required>
+                    <option [value]="null">Select State</option>
+                    <option [value]="item.ID" *ngFor="let item of stateList">{{item.DESCRIPTION}}</option>
+                </select>
+                <div *ngIf="validation.addressState.errors && (validation.addressState.dirty || validation.addressState.touched)">
+                    <div class="text-danger" *ngIf="validation.addressState?.errors?.required">Field is invalid!
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <label>Address Town</label><br>
+                <select formControlName="addressTown" class="inputform" >
+                    <option [value]="null">Select Town</option>
+                    <option [value]="item.ID" *ngFor="let item of townList">{{item.DESCRIPTION}}</option>
+                </select>
+            </div>
+
+
+        </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md position-relative">
+            <div class="mt-4">
+            <label>Middle Name</label><br>
+            <input type="text"  formControlName="middleName" class="inputform" required>
+            <div *ngIf="validation.middleName.errors && (validation.middleName.dirty || validation.middleName.touched)">
+                <div class="text-danger" *ngIf="validation.middleName?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Date of birth</label><br>
+            <input type="date"  formControlName="dob" class="inputform" required>
+            <div *ngIf="validation.dob.errors && (validation.dob.dirty || validation.dob.touched)">
+                <div class="text-danger" *ngIf="validation.dob?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Alternative Email</label><br>
+            <input type="email"  formControlName="alternateEmail" (keyup)="keyFunc($event)" class="inputform" required>
+            <div
+            *ngIf="validation.alternateEmail.errors && (validation.alternateEmail.dirty || validation.alternateEmail.touched)">
+                <div class="text-danger" *ngIf="validation.alternateEmail?.errors?.required || validation.alternateEmail?.errors?.pattern">Field is invalid!
+                </div>
+            </div>
+            <div *ngIf="validation.alternateEmail.touched && this.checkEmail == this.checkAltEmail"
+            class="text-danger">
+                Alternative Email Can't Be Same As Email
+              </div>
+
+        </div>
+        <div class="mt-4">
+            <label>Alternative Phone Number</label><br>
+            <input type="number" (keyup)="checkPhoneno($event)"  formControlName="alternatePhoneNo"  class="inputform" required>
+            <div
+            *ngIf="validation.alternatePhoneNo.errors && (validation.alternatePhoneNo.dirty || validation.alternatePhoneNo.touched)">
+                <div class="text-danger" *ngIf="validation.alternatePhoneNo?.errors?.required">Field is invalid!
+                </div>
+            </div>
+            <div *ngIf="validation.alternatePhoneNo.touched && this.checkPhoneNo == this.checkAltPhoneNo"
+            class="text-danger">
+                Alternative Phone Number Can't Be Same As Phone Number
+              </div>
+        </div>
+        <div class="mt-4 ">
+            <div class="d-flex pt-4">
+            <label for="maritialstatus">Marital Status</label><br>
+            <div class="radiodiv mx-2">
+                <input type="radio" id="maritialstatus" name="maritalStatus"
+                formControlName="maritalStatus" value="single" >
+                <span class="py-1 mx-3"> Single</span>
+            </div>
+            <div class="radiodiv mx-2">
+                <input type="radio" id="maritialstatus" name="maritalStatus"
+                formControlName="maritalStatus" value="married" >
+                <span class="py-1 mx-3">Married</span>
+            </div>
+            <div class="radiodiv mx-2">
+                <input type="radio" id="maritialstatus" name="maritalStatus"
+                formControlName="maritalStatus" value="divorced" >
+                <span class="py-1 mx-3">Divorced</span>
+            </div>
+            <div class="radiodiv ml-2 mr-0">
+                <input type="radio" id="maritialstatus" name="maritalStatus"
+                formControlName="maritalStatus" value="engaged" >
+                <span class="py-1 mx-3">Engaged</span>
+            </div>
+            </div>
+            <div
+            *ngIf="validation.maritalStatus.errors && (validation.maritalStatus.dirty || validation.maritalStatus.touched)">
+                <div class="text-danger" *ngIf="validation.maritalStatus?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 ">
+            <div class="d-flex" style="padding-top: 1rem !important;">
+            <label for="gender">Gender</label><br>
+            <div class="radiodiv mx-2 w-100">
+                <input type="radio" id="gender" name="gender"
+                formControlName="gender" value="M" class="w-100">
+                <span class="genderspan">Male</span>
+            </div>
+            <div class="radiodiv ml-2 mr-0 w-100">
+                <input type="radio" id="gender" name="gender"
+                formControlName="gender" value="F" class="w-100">
+                <span class="genderspan">Female</span>
+            </div>
+               <!--  <input type="text" style="width: 40%;"  formControlName="gender" class="inputform" required> -->
+             <!--    <button type="button" class="py-auto w-100 mx-2 createbtn px-5 ">Male</button>
+                <button type="button" class="py-auto w-100 mx-2 createbtn px-5 ">Female</button> -->
+            </div>
+            <div
+            *ngIf="validation.gender.errors && (validation.gender.dirty || validation.gender.touched)">
+                <div class="text-danger" *ngIf="validation.gender?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 ">
+            <label>Client Type</label><br>
+            <div class="d-flex">
+                <select formControlName="clientType" class="inputform" required>
+                    <option [value]="null">Select Client Type</option>
+                    <option value="I">I</option>
+                    <option value="C">C</option>
+                </select>
+                <button type="button" class="py-auto createbtn mx-2 px-5 ">Add</button>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Nationality</label><br>
+            <select  formControlName="nationality" class="inputform" required>
+                <option [value]="null">Select Nationality</option>
+                <option [value]="item.ID" *ngFor="let item of nationalityList">{{item.DESCRIPTION}}</option>
+            </select>
+        </div>
+        </div>
+    </div>
+    <div class=" mt-5">
+        <div  style="float: right;">
+          <button type="submit"
+
+          [disabled]=
+          "personalFormData.invalid ||
+          (this.checkEmail == this.checkAltEmail ||
+          this.checkPhoneNo == this.checkAltPhoneNo)
+          "
+          (click)="changeTab('Identification')"  class="border-0 mb-5 next ml-3"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+</form>
+</div>

@@ -1,0 +1,900 @@
+<div class="container">
+  <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="pills-owner-infos-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-owner-infos"
+        type="button"
+        role="tab"
+        aria-controls="pills-owner-infos"
+        (click)="isFinalStage = false"
+        aria-selected="true"
+      >
+        {{ 'Owner Informations' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-policy-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-policy"
+        (click)="isFinalStage = false"
+        type="button"
+        role="tab"
+        aria-controls="pills-policy"
+        aria-selected="false"
+      >
+        {{ 'Policy' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        [disabled]="false"
+        id="pills-cover-details-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-cover-details"
+        (click)="isFinalStage = false"
+        type="button"
+        role="tab"
+        aria-controls="pills-cover-details"
+        aria-selected="false"
+      >
+        {{ 'Cover Details' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        [disabled]="!quoteNo"
+        id="pills-underwriting-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-underwriting"
+        type="button"
+        role="tab"
+        aria-controls="pills-underwriting"
+        aria-selected="false"
+        (click)="isFinalStage = false"
+      >
+        {{ 'Under Writing' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        [disabled]="!quoteNo"
+        id="pills-agent-ref-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-agent-ref"
+        (click)="isFinalStage = false"
+        type="button"
+        role="tab"
+        aria-controls="pills-agent-ref"
+        aria-selected="false"
+      >
+        {{ 'Agent' | appTranslate | async }} /
+        {{ 'ref Agent' | appTranslate | async }}
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <!-- <q-individual-owner-info class="tab-pane fade show active" id="pills-owner-infos" role="tabpanel"
+      aria-labelledby="pills-owner-infos-tab"></q-individual-owner-info> -->
+    <div
+      class="tab-pane fade"
+      id="pills-policy"
+      aria-labelledby="pills-policy-tab"
+    >
+      <app-quotation-desk-policy-tab #policySection>
+      </app-quotation-desk-policy-tab>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitPolicyQuotation()"
+            [disabled]="isCreatingPolicyQuotation"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingPolicyQuotation,
+                'fa-spinner fa-spin': isCreatingPolicyQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingPolicyQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade show active"
+      id="pills-owner-infos"
+      role="tabpanel"
+      aria-labelledby="pills-owner-infos-tab"
+    >
+      <app-view-individual-client-comp
+        [clientNo]="clientNo"
+      ></app-view-individual-client-comp>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-cover-details"
+      role="tabpanel"
+      aria-labelledby="pills-cover-details-tab"
+    >
+      <q-individual-cover-details
+        #coverSection
+        [policyTerm]="policyTerm"
+        [premiumTerm]="premiumTerm"
+      >
+      </q-individual-cover-details>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitCoverInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingCoversQuotation,
+                'fa-spinner fa-spin': isCreatingCoversQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingCoversQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-underwriting"
+      role="tabpanel"
+      aria-labelledby="pills-underwriting-tab"
+    >
+      <q-individual-under-writing
+        #underWritingSection
+      ></q-individual-under-writing>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button class="w-100 btn btn-outline-primary btn-lg">
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingQuotation,
+                'fa-spinner fa-spin': isCreatingQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-agent-ref"
+      role="tabpanel"
+      aria-labelledby="pills-agent-ref-tab"
+    >
+      <q-individual-agent #agentSection></q-individual-agent>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitAgentInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingAgentsQuotation,
+                'fa-spinner fa-spin': isCreatingAgentsQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingAgentsQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row justify-content-end" *ngIf="isFinalStage">
+      <div class="col-3">
+        <button (click)="createQuotation()" class="w-100 btn btn-outline-primary btn-lg">
+          <span class="fa" [ngClass]="{
+              'fa-check': !isCreatingQuotation,
+              'fa-spinner fa-spin': isCreatingQuotation
+            }"></span>
+          <span class="ps-2">{{
+            isCreatingQuotation ? "Submitting..." : "Submit"
+          }}</span>
+        </button>
+      </div>
+    </div> -->
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="submitModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <style>
+    .modal-dialog {
+      max-width: 1024px;
+    }
+  </style>
+  <div class="modal-dialog">
+    <div class="modal-content" id="GQ_result" style="display: none">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fa fa-check text-success"></i>
+          {{ 'Screen Code' | appTranslate | async }} - GQ
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeQuoteResult()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <table class="table col-12">
+            <thead>
+              <tr>
+                <th>{{ 'Cover Code' | appTranslate | async }}</th>
+                <th>{{ 'Code Description' | appTranslate | async }}</th>
+                <th>{{ 'Premium Frequency' | appTranslate | async }}</th>
+                <th>{{ 'Premium Method' | appTranslate | async }}</th>
+                <th>{{ 'PAYG' | appTranslate | async }}</th>
+                <th>{{ 'Sum Assured' | appTranslate | async }}</th>
+                <th>{{ 'Premium' | appTranslate | async }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of createdCovers">
+                <td>{{ c.code }}</td>
+                <td>{{ c.coverDescription }}</td>
+                <td>{{ c.coverPremFreq || 'null' }}</td>
+                <td>{{ c.premPayMeth || c.coverPremPayMeth }}</td>
+                <td>{{ c.payG || false }}</td>
+                <td>{{ c.sumAssured | number: '1.2-2':'en' }}</td>
+                <td>{{ c.coverPremium | number: '1.2-2':'en' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <p>
+            {{ 'Quote No' | appTranslate | async }}:
+            <span class="text-primary">{{ quoteNo }}</span>
+          </p>
+          <p>
+            {{ 'Total Periodic Premium' | appTranslate | async }}:
+            <span class="text-primary">{{ totalPeriodicPremium || 0 }}</span>
+          </p>
+        </div>
+        <!-- <div class="row mt-2">
+          <app-button buttonType="addCustom" text="Create Quote Template"></app-button>
+        </div> -->
+        <div class="row mt-2">
+          <app-button
+            buttonType="btnCustomClone"
+            text="Email Quote To Client"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-content" id="AN_result" style="display: none">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fa fa-check text-success"></i>
+          {{ 'Screen Code' | appTranslate | async }} - ANQ
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeQuoteResult()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <table class="table col-12">
+            <thead>
+              <tr>
+                <th>{{ 'Cover Code' | appTranslate | async }}</th>
+                <th>{{ 'Code Description' | appTranslate | async }}</th>
+                <th>{{ 'Premium Frequency' | appTranslate | async }}</th>
+                <th>{{ 'Sum Assured' | appTranslate | async }}</th>
+                <th>{{ 'Assured' | appTranslate | async }}</th>
+                <th>{{ 'Annuity Freq' | appTranslate | async }}</th>
+                <th>{{ 'Annuity Amount' | appTranslate | async }}</th>
+                <th>{{ 'Premium' | appTranslate | async }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of createdCovers">
+                <td>{{ c.code }}</td>
+                <td>{{ c.coverDescription }}</td>
+                <td>{{ c.coverPremFreq }}</td>
+                <td>{{ c.sumAssured | number: '1.2-2':'en' }}</td>
+                <td>{{ c.assured }}</td>
+                <td>{{ c.annFreq }}</td>
+                <td>{{ c.annAmt }}</td>
+                <td>{{ c.coverPremium | number: '1.2-2':'en' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <p>
+            {{ 'Quote No' | appTranslate | async }}:
+            <span class="text-primary">{{ quoteNo }}</span>
+          </p>
+          <p>
+            {{ 'Total Periodic Premium' | appTranslate | async }}:
+            <span class="text-primary">{{ totalPeriodicPremium || 0 }}</span>
+          </p>
+        </div>
+        <!-- <div class="row mt-2">
+          <app-button buttonType="addCustom" text="Create Quote Template"></app-button>
+        </div> -->
+        <div class="row mt-2">
+          <app-button
+            buttonType="btnCustomClone"
+            text="Email Quote To Client"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-content" id="SA_result" style="display: none">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fa fa-check text-success"></i>
+          {{ 'Screen Code' | appTranslate | async }} - SAQ
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeQuoteResult()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <table class="table col-12">
+            <thead>
+              <tr>
+                <th>{{ 'Cover Code' | appTranslate | async }}</th>
+                <th>{{ 'Code Description' | appTranslate | async }}</th>
+                <th>{{ 'Premium Frequency' | appTranslate | async }}</th>
+                <th>{{ 'Sum Assured' | appTranslate | async }}</th>
+                <th>{{ 'Premium Method' | appTranslate | async }}</th>
+                <th>{{ 'Contribution Amount' | appTranslate | async }}</th>
+                <th>{{ 'Premium' | appTranslate | async }}</th>
+                <th>{{ 'Duration (Months)' | appTranslate | async }}</th>
+                <th>EMV</th>
+                <!-- <th>Premium</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of createdCovers">
+                <td>{{ c.code }}</td>
+                <td>{{ c.coverDescription }}</td>
+                <td>{{ c.coverPremFreq || 'null' }}</td>
+                <td>{{ c.sumAssured | number: '1.2-2':'en' }}</td>
+                <td>{{ c.premPayMeth || c.coverPremPayMeth }}</td>
+                <td></td>
+                <td>{{ c.coverPremium | number: '1.2-2':'en' }}</td>
+                <td>{{ (c.policyTermDays / 365) * 12 | number: '1.0-0' }}</td>
+                <td>{{ c.emv }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <p>
+            {{ 'Quote No' | appTranslate | async }}:
+            <span class="text-primary">{{ quoteNo }}</span>
+          </p>
+          <p>
+            {{ 'Total Periodic Premium' | appTranslate | async }}:
+            <span class="text-primary">{{ totalPeriodicPremium || 0 }}</span>
+          </p>
+        </div>
+        <!-- <div class="row mt-2">
+          <app-button buttonType="addCustom" text="Create Quote Template"></app-button>
+        </div> -->
+        <div class="row mt-2">
+          <app-button
+            buttonType="btnCustomClone"
+            text="Email Quote To Client"
+          ></app-button>
+        </div>
+        <!-- <div class="row mt-2">
+          <app-button buttonType="btnCustomClone" data-bs-toggle="modal" data-bs-target="#convertQuoteToPol"
+            text="Convert to Policy"></app-button>
+        </div> -->
+      </div>
+    </div>
+    <div class="modal-content" id="IC_result" style="display: none">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fa fa-check text-success"></i>
+          {{ 'Screen Code' | appTranslate | async }} - ICQ
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeQuoteResult()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <table class="table col-12">
+            <thead>
+              <tr>
+                <th>{{ 'Cover Code' | appTranslate | async }}</th>
+                <th>{{ 'Code Description' | appTranslate | async }}</th>
+                <th>{{ 'Sum Assured' | appTranslate | async }}</th>
+                <th>{{ 'Benefit Period (months)' | appTranslate | async }}</th>
+                <th>{{ 'Loan Int Rate (%)' | appTranslate | async }}</th>
+                <th>{{ 'Premium Method' | appTranslate | async }}</th>
+                <th>{{ 'Premium Freq' | appTranslate | async }}</th>
+                <th>{{ 'Duration (months)' | appTranslate | async }}</th>
+                <th>{{ 'Premium' | appTranslate | async }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of createdCovers">
+                <td>{{ c.code }}</td>
+                <td>{{ c.coverDescription }}</td>
+                <td>{{ c.coverPremFreq || 'null' }}</td>
+                <td>{{ c.premPayMeth }}</td>
+                <td>{{ c.payG || false }}</td>
+                <td>{{ c.sumAssured | number: '1.2-2':'en' }}</td>
+                <td>{{ c.coverPremFreq || 'null' }}</td>
+                <td>{{ (c.policyTermDays / 365) * 12 | number: '1.0-0' }}</td>
+                <td>{{ c.coverPremium | number: '1.2-2':'en' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <p>
+            {{ 'Quote No' | appTranslate | async }}:
+            <span class="text-primary">{{ quoteNo }}</span>
+          </p>
+          <p>
+            {{ 'Total Periodic Premium' | appTranslate | async }}:
+            <span class="text-primary">{{ totalPeriodicPremium || 0 }}</span>
+          </p>
+        </div>
+        <!-- <div class="row mt-2">
+          <app-button buttonType="addCustom" text="Create Quote Template"></app-button>
+        </div> -->
+        <div class="row mt-2">
+          <app-button
+            buttonType="btnCustomClone"
+            text="Email Quote To Client"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-content" id="IL_result" style="display: none">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          <i class="fa fa-check text-success"></i>
+          {{ 'Screen Code' | appTranslate | async }} - ILQ
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeQuoteResult()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <table class="table col-12">
+            <thead>
+              <tr>
+                <th>{{ 'Cover Code' | appTranslate | async }}</th>
+                <th>{{ 'Code Description' | appTranslate | async }}</th>
+                <th>{{ 'Sum Assured' | appTranslate | async }}</th>
+                <th>{{ 'Benefit Period (months)' | appTranslate | async }}</th>
+                <th>{{ 'Escal Rate(%)' | appTranslate | async }}</th>
+                <th>{{ 'Premium Frequency' | appTranslate | async }}</th>
+                <th>{{ 'Premium Method' | appTranslate | async }}</th>
+                <th>{{ 'Duration (months)' | appTranslate | async }}</th>
+                <th>{{ 'Premium' | appTranslate | async }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of createdCovers">
+                <td>{{ c.code }}</td>
+                <td>{{ c.coverDescription }}</td>
+                <td>{{ c.sumAssured | number: '1.2-2':'en' }}</td>
+                <td></td>
+                <td>{{ c.payG || false }}</td>
+                <td>{{ c.coverPremFreq || 'null' }}</td>
+                <td>{{ c.premPayMeth }}</td>
+                <td>{{ (c.policyTermDays / 365) * 12 | number: '1.0-0' }}</td>
+                <td>{{ c.coverPremium | number: '1.2-2':'en' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <p>
+            {{ 'Quote No' | appTranslate | async }}:
+            <span class="text-primary">{{ quoteNo }}</span>
+          </p>
+          <p>
+            {{ 'Total Periodic Premium' | appTranslate | async }}:
+            <span class="text-primary">{{ totalPeriodicPremium || 0 }}</span>
+          </p>
+        </div>
+        <!-- <div class="row mt-2">
+          <app-button buttonType="addCustom" text="Create Quote Template"></app-button>
+        </div> -->
+        <div class="row mt-2">
+          <app-button
+            buttonType="btnCustomClone"
+            text="Email Quote To Client"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="convertQuoteToPol"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ 'Convert Quote to Policy' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeCoverScreen()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body align-items-center d-flex justify-content-center"
+        style="min-height: 300px"
+      >
+        <div class="w-100">
+          <div class="row">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">
+                {{ 'Basis For conversion' | appTranslate | async }}
+              </label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-5 justify-content-end">
+            <div class="col-3">
+              <app-button
+                buttonType="submit"
+                data-bs-toggle="modal"
+                data-bs-target="#CreatedSuccessFully"
+              ></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="CreatedSuccessFully"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body align-items-center d-flex justify-content-center"
+        style="min-height: 300px"
+      >
+        <h4>
+          {{ 'Policy No' | appTranslate | async }} xxx
+          {{ 'created sucessfully' | appTranslate | async }}
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="paymentMethodModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ 'Direct Debit' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeCoverScreen()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">{{
+                'Bank No' | appTranslate | async
+              }}</label>
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>
+            {{ 'Existing Account for Client' | appTranslate | async }}
+            {{ client.fullName }}
+          </p>
+        </div>
+
+        <div class="row mt-3">
+          <table class="table table-responsive table-striped">
+            <thead>
+              <tr class="py-5 bg-primary text-white">
+                <th scope="col" class="text-white">
+                  {{ 'Bank No' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-white">
+                  {{ 'Payee Name' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-white">
+                  {{ 'Account Type' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-white">
+                  {{ 'Account No' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-white">
+                  {{ 'Institution' | appTranslate | async }}
+                </th>
+                <th scope="col" class="text-white">
+                  {{ 'Select' | appTranslate | async }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td>
+                  <button class="btn btn-outline-primary p-2">Select</button>
+                </td>
+              </tr>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td>
+                  <button class="btn btn-outline-primary p-2">
+                    {{ 'Select' | appTranslate | async }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group">
+              <label for="" class="form-label">{{
+                'Payee Name' | appTranslate | async
+              }}</label>
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button
+          [buttonType]="'save'"
+          data-bs-dismiss="modal"
+          (click)="closeCoverScreen(true)"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="addAnotherModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ 'Direct Debit' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="closeCoverScreen()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-2">
+          <div class="col-4">
+            <label for="" class="text-primary form-label">{{
+              'Select Cover' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-2">
+            <label for="" class="text-primary form-label">{{
+              'Assured' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-2">
+            <label for="" class="text-primary form-label">{{
+              'Assured Name' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-1">
+            <label for="" class="text-primary form-label">&nbsp;</label>
+          </div>
+          <div class="col-2">
+            <label for="" class="text-primary form-label">{{
+              'Assured Relationship to Owner' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-1">
+            <label for="" class="text-primary form-label text-center w-100">{{
+              'Details' | appTranslate | async
+            }}</label>
+          </div>
+        </div>
+        <div class="row g-2 mb-2" *ngFor="let cover of coversList">
+          <div class="col-4">
+            <div class="form-group">
+              <div class="row d-flex align-items-center">
+                <div class="col-2">
+                  <input class="form-control control-bg-gray" type="checkbox" />
+                </div>
+                <div class="col">
+                  <label for="" class="text-black-50 form-label small1">
+                    {{ cover.code }} - {{ cover.description }}</label
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control control-bg-gray"
+                [value]="clientNo"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control control-bg-gray"
+                [value]="client.fullName"
+              />
+            </div>
+          </div>
+          <div class="col-1">
+            <app-button
+              [buttonType]="'createCustom2'"
+              routerLink="/life/client-desk/create/individual"
+              [text]="'Assured'"
+            ></app-button>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control control-bg-gray"
+                [value]="defaultRelationshipToOwner"
+              />
+            </div>
+          </div>
+          <div class="col-1">
+            <input
+              class="form-control control-bg-gray mx-auto mt-1"
+              (click)="openCoverScreen(cover)"
+              [(ngModel)]="isCoverDetailsCheck[cover.code]"
+              type="checkbox"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button
+          [buttonType]="'save'"
+          data-bs-dismiss="modal"
+          (click)="closeCoverScreen(true)"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

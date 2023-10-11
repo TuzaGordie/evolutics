@@ -1,0 +1,53 @@
+.btn-outline-secondry{
+    border-color: red;
+    color: red;
+}
+.nav-pills{
+    padding: 2px;
+    background: #e3e5e7;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background: #fff !important;
+    color:rgb(0, 81, 255) !important;
+}
+.nav-link{    
+    color:#4e555c !important;
+}
+.fade:not(.show){
+    display: none;
+}
+.card-header{
+    padding: 10px;
+    background-color: #000;
+    color: #fff;;
+}
+.color-row{
+    width: 100%;
+    padding-left: 18px;
+    position: relative;
+}
+.color-box{
+    position:absolute;
+    width: 7px;
+    height: 7px;
+    left: 0px;
+    top: 8px;
+}
+.color-pink{
+ background-color: pink;
+}
+.darkpink{
+    background-color: purple;
+}
+.darkred{
+    background-color: rgb(56, 14, 14);
+}
+.card-body span{
+    font-weight: 600;
+}
+.spanshot{
+    font-size: 14px;
+}
+.height100{
+    height: 100%;
+}

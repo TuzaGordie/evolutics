@@ -1,0 +1,39 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>
+    {{ 'Results Chart' | appTranslate | async }}
+  </h5>
+  <button
+    type="button"
+    class="btn-close"
+    mat-dialog-close
+    attr.aria-label="Close"
+  ></button>
+</div>
+<mat-dialog-content>
+  <div class="row justify-content-between">
+    <div class="col-md-3 mx-auto">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{
+          'Splice' | appTranslate | async
+        }}</label>
+        <select name="" id="" class="form-control control-bg-gray" (change)="onSliceChange()" [(ngModel)]="query.scheduled">
+          <option value=""></option>
+          <option *ngFor="let splice of splices" [value]="splice">{{splice | spliceName}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <loader [loading]="isLoading">
+    <div class="row my-3" (click)="showTable()" matTooltip="Click to view results table">
+      <div class="card leaf-border p-3 pt-5">
+        <canvas
+          baseChart
+          [options]="chartOptions"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [chartType]="chartType"
+        ></canvas>
+      </div>
+    </div>
+  </loader>
+</mat-dialog-content>

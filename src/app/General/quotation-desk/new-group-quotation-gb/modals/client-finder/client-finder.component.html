@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{'Find Client'|appTranslate|async}}</h5>
+    <span class="fas fa-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content>
+  <div class="d-flex my-3 justify-content-center">
+    <div
+      class="form-group d-flex justify-content-center"
+      style="white-space: nowrap"
+    >
+      <input
+        type="text"
+        class="form-control control-bg-gray me-2"
+        [(ngModel)]="clientName"
+        [disabled]="loading"
+        placeholder="{{'Enter name'|appTranslate|async}}"
+        #name="ngModel"
+        required
+        (keyup.enter)="findClient()"
+      />
+      <button class="btn btn-outline-primary btn-lg" (click)="findClient()">
+        <span class="fas fa-search" *ngIf="!loading"></span>
+        <span class="fas fa-sync fa-spin" *ngIf="loading"></span>
+        {{ (loading ? 'Searching...' : 'Search' )|appTranslate|async}}
+      </button>
+    </div>
+  </div>
+  <p *ngIf="name.invalid && name.touched" class="text-danger small text-center">{{'Enter a name to search'|appTranslate|async}}</p>
+  <div class="table-responsive row my-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{'Client No'|appTranslate|async}}</th>
+          <th>{{'First Name'|appTranslate|async}}</th>
+          <th>{{'Middle Name'|appTranslate|async}}</th>
+          <th>{{'Surname'|appTranslate|async}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.clientNo }}</td>
+          <td>{{ client.firstName }}</td>
+          <td>{{ client.middleName }}</td>
+          <td>{{ client.surname }}</td>
+          <td>
+            <button
+              (click)="onSelectClient(client)"
+              class="btn btn-outline-primary btn-lg"
+            >
+              {{'Select'|appTranslate|async}}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-center" *ngIf="!clients.length">{{'No Clients found'|appTranslate|async}}</p>
+  </div>
+</mat-dialog-content>

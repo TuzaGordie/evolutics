@@ -1,0 +1,49 @@
+<div class="">
+  <div class="page-head m-0">
+    {{'Add Rider'|appTranslate|async}}
+  </div>
+  <!-- <div class="text-center row mt-2">
+    <div class="col" *ngFor="let item of tabs">
+      <div [ngClass]="{'bg-primary': item.value==sTab?.value ,'text-light': item.value==sTab?.value }"
+        (click)="open(item)" class="p-2 rounded pointer me-2 w-100">{{item.key}}</div>
+    </div>
+  </div> -->
+  <div [ngSwitch]="sTab?.value" class="px-4">
+    <div class="" *ngSwitchCase="'bc'">
+      <div class="my-5">
+        <h4 class="text-primary ">
+          {{'Existing Rider'|appTranslate|async}}
+        </h4>
+        <div class="">
+          <table-plain [data]="list" [displayedColumns]="dCols"></table-plain>
+        </div>
+      </div>
+      <div class=" ">
+        <h4 class="text-primary ">
+          {{'Avaliable Rider'|appTranslate|async}}
+        </h4>
+        <div class="">
+          <app-select-covers></app-select-covers>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="" *ngSwitchCase="'dtl'">
+      <div class="">
+        <div class="row mt-4">
+          <div class="col-lg-4">
+            <text-case-1 lbl="Policy No:" [val]="polNo" [stacked]="false"></text-case-1>
+          </div>
+          <div class="col-lg-4">
+            <text-case-1 lbl="Cover:" [val]="cover" [stacked]="false"></text-case-1>
+          </div>
+          <div class="col-12 my-4">
+            <hr>
+          </div>
+          <div class="col-lg-4" *ngFor="let item of inputs">
+            <app-input [input]="item" [stacked]="true"></app-input>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>

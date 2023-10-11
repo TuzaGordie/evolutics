@@ -1,0 +1,39 @@
+.rounded {
+  border-radius: 1rem !important;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.small3 {
+  font-size: .5rem !important;
+}
+
+#cp {
+  svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+
+.editableField {
+  background: #f8f9fa;
+  font-size: 11px;
+  border: none;
+
+  &.edit {
+    background: #e5e5e5;
+  }
+}
+
+.editableField2 {
+  font-size: 11px;
+  border: none;
+  font-weight: bold;
+
+  &.edit {
+    background: #e5e5e5;
+  }
+}
+ 

@@ -1,0 +1,44 @@
+<!-- <app-form-navigation [title]="'Set Up / Address / Region'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container-sm mt-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"Region Code"|appTranslate|async}}</label><br />
+            <input [(ngModel)]="regionCode" name="regionCode" required type="text"
+              class="form-control control-bg-gray" />
+          </div>
+          <br />
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"Region Name"|appTranslate|async}}</label><br />
+            <input [(ngModel)]="regionName" name="regionName" required type="text"
+              class="form-control control-bg-gray" />
+          </div>
+          <br />
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{"Country Code"|appTranslate|async}}</label><br />
+
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="countryCode" name="countryCode"
+              required type="text" class="form-control control-bg-gray">
+              <option value="{{ item.code }}" *ngFor="let item of countryCodes">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <div class="row justify-content-end">
+          <div class="col-3">
+            <div class="form-group mt-2">
+              <app-button (click)="createRegion()" buttonType="save"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

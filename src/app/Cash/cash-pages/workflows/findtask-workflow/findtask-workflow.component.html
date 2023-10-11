@@ -1,0 +1,124 @@
+<app-form-navigation [cashtitle] = "'Receipting/Find Workflow Task'"></app-form-navigation>
+<form [formGroup]="workflowlistForm">
+  <div class="container">
+    <div class="form-group mt-2">
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Workflow No</label></div>
+          <div class="col-8">
+            <input class="form-control  control-bg-gray" formControlName="workflowNo" type="text"/>
+          </div>
+          <div class="col-2 form-group mt-2 pt-2">
+            <div><button type="button" class="btn btn-lg find-button">
+                <i class="fa fa-eye"></i> Show
+            </button></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Group Assigned To</label></div>
+          <div class="col-8">
+            <select class="form-control  control-bg-gray" formControlName="groupAssignedTo" (keyup)="setGroupAssignedTo()">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Workflow Task Code</label></div>
+          <div class="col-8">
+            <select class="form-control  control-bg-gray" formControlName="workflowtaskcode" (keyup)="setWorkflowtaskcode()">
+              <option [value]="null">Select Task Code</option>
+              <option [value]="item.code" *ngFor="let item of taskcode">{{item.code}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Status</label></div>
+          <div class="col-8">
+            <select class="form-control  control-bg-gray" formControlName="status" (keyup)="setStatus()">
+              <option [value]="null">Select staus</option>
+              <option [value]="item.code" *ngFor="let item of status">{{item.title}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Level</label></div>
+          <div class="col-8">
+            <select class="form-control  control-bg-gray" formControlName="level" (keyup)="setLevel()">
+              <option></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Schedule</label></div>
+          <div class="col-8"><input class="form-control width-unset control-bg-gray" type="checkbox"/></div>
+        </div>
+      </div>
+
+      <div class="form-group mt-2">
+        <div class="row g-3">
+          <div class="col-2 d-flex align-vertical justify-content-start"><label>Assigned By</label></div>
+          <div class="col-8">
+            <input class="form-control  control-bg-gray" (keyup)="setAssignby()" formControlName="assignedBy" type="text"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group mt-2">
+      <div class="row g-3">
+        <div class="col-2 d-flex align-vertical justify-content-start"><label>Description text</label></div>
+        <div class="col-8">
+          <input class="form-control  control-bg-gray" formControlName="description" (keyup)="setDescription()" type="text"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3">
+        <div class="col-2 d-flex align-vertical justify-content-start"><label>Created Date From</label></div>
+        <div class="col-8">
+          <input class="form-control  control-bg-gray" formControlName="createDateForm" (keyup)="setCreatedFrom()" type="date"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-group mt-2">
+      <div class="row g-3">
+        <div class="col-2 d-flex align-vertical justify-content-start"><label>Created Date To</label></div>
+        <div class="col-8">
+          <input class="form-control  control-bg-gray" formControlName="createDateTo" (keyup)="setCreatedTo()" type="date"/>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-2 pt-3 form-group mt-2">
+      <div><button type="button" class="btn btn-lg search-button" (click)="call_workflowserach_list()">
+        <i class="fa fa-search"></i> Search
+      </button></div>
+    </div>
+
+
+  </div>
+  </form>

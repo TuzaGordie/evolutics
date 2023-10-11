@@ -1,0 +1,139 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{"Annuities"|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="col-md-4" *ngFor="let item of createCoverCode.annuities.annuityGuaranteePeriod; let i = index">
+      <div class="row">
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{"Annuity Guarantee Period Options"|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" name="annuityGuaranteePeriod_{{item.rowId}}"
+              [(ngModel)]="item.annuityGuarPeriod" placeholder="Month" type="number" />
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="removeNewAnnuityGuaranteeRow(i)" [group]="'delete'"
+              [disabled]="createCoverCode.annuities.annuityGuaranteePeriod.length==1">
+            </app-btn>
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addNewAnnuityGuaranteeRow(i+1)" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="mb-0">
+  <div class="row ">
+    <div class="col-md-4" *ngFor="let item of createCoverCode.annuities.annuityReversionaryRateOption; let i = index">
+      <div class="row">
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{"Annuity Reversionary Rate Options"|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              name="annuityReversionaryRateOption_{{item.rowId}}" [(ngModel)]="item.annuityRevPercent"
+              placeholder="Percent" type="number" />
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="removeNewannuityReversionaryRow(i)" [group]="'delete'"
+              [disabled]="createCoverCode.annuities.annuityReversionaryRateOption.length==1">
+            </app-btn>
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addNewannuityReversionaryRow(i+1)" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="mb-0">
+  <div class="row ">
+    <div class="col-md-4" *ngFor="let item of createCoverCode.annuities.annuityEscalationRateOption; let i = index">
+      <div class="row">
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{"Annuity Escalation Rate Options"|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              name="annuityEscalationRateOption_{{item.rowId}}" [(ngModel)]="item.annuityEscRate" placeholder="Percent"
+              type="number" />
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="removeNewannuityEscalationRow(i)" [group]="'delete'"
+              [disabled]="createCoverCode.annuities.annuityEscalationRateOption.length==1">
+            </app-btn>
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addNewannuityEscalationRow(i+1)" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="mb-0">
+  <div class="row ">
+    <div class="col-md-4" *ngFor="let item of createCoverCode.annuities.annuityDeferredPeriod; let i = index">
+      <div class="row align-items-end">
+        <div class="col">
+          <app-input-td-rf #inp label="Deferred Period" placeholder="Months" hint="Month"
+            [(model)]="item.deferredPeriod" type="number" [stacked]="true">
+          </app-input-td-rf>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-btn (mclick)="removeAnuityDeferredPeriodRow(i)" [group]="'delete'"
+              [disabled]="createCoverCode.annuities.annuityDeferredPeriod.length==1">
+            </app-btn>
+          </div>
+        </div>
+        <div class="col-auto" *ngIf="!coverService.isShow">
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addAnuityDeferredPeriodRow(i+1)" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row " *ngIf="!coverService.isShow">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveAnnuities()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

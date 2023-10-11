@@ -1,0 +1,72 @@
+<div class="container mt-4">
+  <loader [loading]="loading" [text]="loadingText">
+    <form #systemForm="ngForm">
+      <div class="col-6 mx-auto ">
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Select Company'|appTranslate|async}}</label>
+            <select name="companyCode" id="" class="form-control control-bg-gray" required
+              [(ngModel)]="systemDate.companyCode" (change)="fetchSystemDates()">
+              <option></option>
+              <option *ngFor="let item of companies" [value]="item.code">
+                {{item.code}} - {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'System Status'|appTranslate|async}}</label>
+            <select id="" class="form-control control-bg-gray" required name="companyCode"
+              [(ngModel)]="systemDate.companyCode">
+              <option *ngFor="let status of systemStatus" [value]="status.code">
+                {{status.code}} - {{status.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'System Effective Date'|appTranslate|async}}</label>
+            <input type="datetime-local" class="form-control control-bg-gray" required name="systemDate"
+              [value]="systemDate.systemDate" [(ngModel)]="systemDate.systemDate" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Reinsurance Statement Date'|appTranslate|async}}</label>
+            <input type="datetime-local" class="form-control control-bg-gray" required name="reinsStatDate"
+              [value]="systemDate.reinsStatDate" [(ngModel)]="systemDate.reinsStatDate" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Commission Statement Date'|appTranslate|async}}</label>
+            <input type="datetime-local" class="form-control control-bg-gray" required name="commStatDate"
+              [value]="systemDate.commStatDate" [(ngModel)]="systemDate.commStatDate" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Agent Salary Date'|appTranslate|async}}</label>
+            <input type="datetime-local" class="form-control control-bg-gray" required name="agentSalDate"
+              [value]="systemDate.agentSalDate" [(ngModel)]="systemDate.agentSalDate" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Annuity Payment Date'|appTranslate|async}}</label>
+            <input type="datetime-local" class="form-control control-bg-gray" required name="annPayDate"
+              [value]="systemDate.annPayDate" [(ngModel)]="systemDate.annPayDate" />
+          </div>
+        </div>
+        <div class="row justify-content-end mt-3">
+          <div class="col-4">
+            <app-button buttonType="save" (click)="saveSystemDates()"></app-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </loader>
+</div>

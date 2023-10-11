@@ -1,0 +1,11 @@
+<loader [loading]="loading">
+
+ <ng-container [ngSwitch]="true">
+   <ng-container *ngSwitchCase="client?.type=='I'">
+     <app-view-individual-client-comp [client]="client" ></app-view-individual-client-comp>
+   </ng-container>
+   <ng-container *ngSwitchCase="client?.type=='C'">
+     <app-view-corporate-client-comp [client]="client" ></app-view-corporate-client-comp>
+   </ng-container> 
+ </ng-container>
+</loader>

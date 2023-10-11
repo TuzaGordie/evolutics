@@ -1,0 +1,291 @@
+<loader [loading]="loading" [text]="loadingText">
+
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Taxes/Levies'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+  <p class="text-primary">{{'If different from company level settings on Taxes/Levies'|appTranslate|async}}</p>
+  <div class="row">
+    <div class="col-4">
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Premium Tax Basis'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.premiumTaxBasis">
+              <option></option>
+              <option *ngFor="let ot of premiumTaxesBasisList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Surrender Benefit Tax Basis'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.taxesLevies.surrenderBenefitTaxBasis">
+              <option></option>
+              <option *ngFor="let ot of surrenderTaxesBasisList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Maturity Benefit Tax Basis'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.taxesLevies.maturityBenefitTaxBasis">
+              <option></option>
+              <option *ngFor="let ot of maturityTaxesBenefitBasisList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Death Benefit Tax Basis'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.taxesLevies.deathBenefitTaxBasis">
+              <option></option>
+              <option *ngFor="let ot of deathTaxesBenefitBasisList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Stamp Duty'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.stampDuty">
+              <option></option>
+              <option *ngFor="let ot of stampDutyBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Interest Earned Tax Basis'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.taxesLevies.interestEarnedTaxBasis">
+              <option></option>
+              <option *ngFor="let ot of interestTaxesBasisList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Premium Tax Rate (%)'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.premiumTaxRate"
+              type="number" />
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Surrender Benefit Tax Rate (%)'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.surrBenTaxRate"
+              type="number" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Maturity Benefit Tax Rate (%)'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.matBenTaxRate"
+              type="number" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Death Benefit Tax Rate (%)'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.deathBenTaxRate"
+              type="number" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Stamp Duty Rate (%)'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.stampDutyRate"
+              type="number" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Interest Earned Tax Rate (%)'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.intEarnedTaxRate"
+              type="number" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Premium Tax Table'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.premiumTaxTable">
+              <option></option>
+              <option *ngFor="let ot of tablesCodeAndDesc" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Surrender Benefit Tax Table'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.surrBenTaxTable">
+              <option></option>
+              <option *ngFor="let ot of tablesCodeAndDesc" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Maturity Benefit Tax Table'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.matBanTaxTable">
+              <option></option>
+              <option *ngFor="let ot of tablesCodeAndDesc" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Death Benefit Tax Table'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.deathBenTaxTable">
+              <option></option>
+              <option *ngFor="let ot of tablesCodeAndDesc" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Stamp Duty Table'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.stampDutyTable">
+              <option></option>
+              <option *ngFor="let ot of tablesCodeAndDesc" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{'Interest Earned Tax Table'|appTranslate|async}}</label>
+           <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.taxesLevies.intEarnedTaxTable">
+              <option></option>
+              <option *ngFor="let ot of tablesCodeAndDesc" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveTax()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

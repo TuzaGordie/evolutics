@@ -1,0 +1,78 @@
+<app-form-navigation></app-form-navigation>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="table">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>{{"Product class"|appTranslate|async}}</td>
+                            <td>{{"Product Code"|appTranslate|async}}</td>
+                            <td>{{"Effective On"|appTranslate|async}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="" id="" class="form-control">
+                                    <option value=""></option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row border-bottom pb-3">
+                <div class="col-lg-4">
+                    <input type="checkbox">
+                    <span class="ms-3">{{"Claim Count"|appTranslate|async}}</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="checkbox">
+                    <span class="ms-3">{{"Claim Severity"|appTranslate|async}}</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="checkbox">
+                    <span class="ms-3">{{"Aggregate Claim"|appTranslate|async}}</span>
+                </div>  
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="btn">
+                <button class="btn btn-dark">{{"Show"|appTranslate|async}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3 w-100">
+        <div class="col-sm-6 mt-3">
+            <div class="container">
+                <app-chart-line></app-chart-line>
+                <div class="btnContainer w-100 d-flex justify-content-between">
+                    <button class="btn btn-dark">{{"CHI-SQUARE"|appTranslate|async}}</button>
+                    <button class="btn btn-outline-dark">{{"AOV"|appTranslate|async}}</button>
+                    <button class="btn btn btn-dark">{{"T-TEST"|appTranslate|async}}</button>
+                    <button class="btn btn-outline-dark">{{"Z-TEST"|appTranslate|async}}</button>
+                    <button class="btn btn btn-dark">{{"F-TEST"|appTranslate|async}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-3">
+            <div class="container">
+                <div class="w-100">
+                    <app-chart-line></app-chart-line>
+                </div>
+                <div class="btnContainer w-100 d-flex justify-content-between">
+                    <button class="btn btn-dark">{{"CHI-SQUARE"|appTranslate|async}}</button>
+                    <button class="btn btn-outline-dark">{{"AOV"|appTranslate|async}}</button>
+                    <button class="btn btn-dark">{{"T-TEST"|appTranslate|async}}</button>
+                    <button class="btn btn-outline-dark">{{"Z-TEST"|appTranslate|async}}</button>
+                    <button class="btn btn-dark">{{"F-TEST"|appTranslate|async}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,4372 @@
+<div class=" vh-100 bg-light-gray-evolutics">
+  <app-form-navigation [title]="'CRM / View Client'"></app-form-navigation>
+  <div class="container-fluid pb-3 ">
+    <div class="row gap-3 px-4">
+      <div class="col-2 bg-white rounded p-3">
+        <div class="">
+
+          <div class="text-center w-100">
+            <img imageUpload (extractedImg)="changePP($event)" src="{{clientPicture || '/assets/img/avatar.png'}}"
+                 style="width: 90px; height: 90px;"
+
+                 class="avatar"
+                 alt="" #passport>
+            <br>
+            <a (click)="passport.click()">
+              <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i> </a>
+          </div>
+
+
+          <div class="shadow-sm my-5 py-2 px-1">
+            <div class="row ">
+              <div class="col small2 text-start text-bold text-primary">{{'Client Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end">Alive <i class="fas fa-pen"></i></div>
+            </div>
+            <div class="row  ">
+              <div class="col small2 text-start text-bold text-primary">{{'Agent Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end"> Active <i class="fas fa-pen"></i></div>
+            </div>
+            <div class="row ">
+              <div class="col small2 text-start text-bold text-primary">{{'Provider Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end"> Active <i class="fas fa-pen"></i></div>
+            </div>
+            <div class="row ">
+              <div class="col small2 text-start text-bold text-primary">{{'User Status'|appTranslate|async}}</div>
+              <div class="col small2 text-end"> Active <i class="fas fa-pen"></i></div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="col bg-white rounded p-3 ">
+        <div class="row justify-content-end">
+          <div class="col-1">
+            <a (click)="openClientModal()">
+              <i class="fas fa-pencil-alt ml-2 text-red" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Full Name With Title</span>
+
+          </div>
+          <div class="col">
+            <span class="small2" style="white-space: nowrap;">{{fullNameWithTitle}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">First Name</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{viewClientForm.value.firstName}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Middle Name</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{viewClientForm.value.middleName}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Last Name</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{viewClientForm.value.surname}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Marital Status</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{viewClientForm.value.maritalStatus | maritalStatus}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Language</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{viewClientForm.value.language}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Gender</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{viewClientForm.value.gender | gender}}</span>
+
+          </div>
+
+        </div>
+        <div class="row px-3 py-2" style="border-bottom: 1px solid rgba(151,151,151,0.44)">
+          <div class="col">
+            <span class="small2 text-red">Age Group</span>
+
+          </div>
+          <div class="col">
+            <span class="small2">{{clientDetailsForm.value.ageGroup}}</span>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="col bg-white rounded py-3">
+        <ul class="nav nav-pills mb-0 bg-light px-0 py-1  mx-auto" id="pills-tab" role="tablist"
+            style="width: fit-content;">
+          <li class="nav-item" role="contacts">
+            <button class="nav-link active px-0  py-0 small2" id="pills-contacts-tab1"
+                    data-bs-toggle="pill" data-bs-target="#pills-contacts1" type="button" role="tab"
+                    aria-controls="pills-contacts1" aria-selected="true">
+              <div class="p-sm-1 px-1">Contacts</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Dates">
+            <button class="nav-link px-0  py-0 small2" id="pills-Dates-tab1"
+                    data-bs-toggle="pill" data-bs-target="#pills-Dates1" type="button" role="tab"
+                    aria-controls="pills-Dates1" aria-selected="true">
+              <div class="p-sm-1 px-1">Dates</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Identification">
+            <button class="nav-link px-0  py-0 small2" id="pills-Identification-tab1"
+                    data-bs-toggle="pill" data-bs-target="#pills-Identification1" type="button" role="tab"
+                    aria-controls="pills-Identification1" aria-selected="true">
+              <div class="p-sm-1 px-1">Identification</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Employment">
+            <button class="nav-link px-0  py-0 small2" id="pills-Employment-tab1"
+                    data-bs-toggle="pill" data-bs-target="#pills-Employment1" type="button" role="tab"
+                    aria-controls="pills-Employment1" aria-selected="true">
+              <div class="p-sm-1 px-1">Employment</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Dates">
+            <button class="nav-link px-1 py-0 small2" id="pills-Contact-Person-tab1"
+                    data-bs-toggle="pill" data-bs-target="#pills-Contact-Person1" type="button" role="tab"
+                    aria-controls="pills-Contact-Person1" aria-selected="true">
+              <div class="p-sm-1 px-1">Contact Person</div>
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content fz-10 RM" id="pills-tabContent">
+          <div [formGroup]="viewClientForm" class="tab-pane fade show active" id="pills-contacts1" role="tabpanel"
+               aria-labelledby="pills-contacts-tab1">
+            <div class="row m-0 justify-content-between mt-3">
+              <div class="col-1">
+                <a class="text-red" #penEmail (click)="editable(emailField,penEmail,penEmailSaves)"><i
+                  class="fas fa-pen"
+                  style="font-size: .8em;"></i></a>
+                <a class="text-red hiddenElement" #penEmailSaves (click)="onUpdateClientInfo('email')">
+                  <i *ngIf="!isUpdatingClient['email']" class="fas fa-save " style="font-size: .8em;"></i>
+                  <i *ngIf="isUpdatingClient['email']" class="fas fa-refresh fa-spin" style="font-size: .8em;"></i>
+                </a>
+              </div>
+              <div class="col">
+                <input type="text" class="editableField" formControlName="email" readonly #emailField>
+              </div>
+              <div class="col-4 justify-content-end">
+                <a href="mailto:{{viewClientForm.value.email}}" class="btn btn-outline-danger py-1 rounded small2"
+                   style="font-size: 10px;"><i
+                  class="far fa-envelope"></i> Send Mail
+                </a>
+              </div>
+
+            </div>
+            <div class="row m-0 justify-content-between mt-1">
+              <div class="col-1">
+                <a class="text-red" #penEmail2 (click)="editable(email2Field,penEmail2,penEmailSaves2)"><i
+                  class="fas fa-pen"
+                  style="font-size: .8em;"></i></a>
+                <a class="text-red hiddenElement" #penEmailSaves2>
+                  <i *ngIf="!isUpdatingClient['alternativeEmail']" class="fas fa-save " style="font-size: .8em;"
+                     (click)="onUpdateClientInfo('alternativeEmail')"></i>
+                  <i *ngIf="isUpdatingClient['alternativeEmail']" class="fas fa-refresh fa-spin"
+                     style="font-size: .8em;"></i>
+                </a>
+              </div>
+
+              <div class="col">
+                <input formControlName="alternativeEmail" type="text" class="editableField" readonly #email2Field>
+              </div>
+              <div class="col-4 justify-content-end">
+                <a href="mailto:{{viewClientForm.value.alternativeEmail}}"
+                   class="btn btn-outline-danger py-1 rounded small2" style="font-size: 10px;"><i
+                  class="far fa-envelope"></i> Send Mail
+                </a>
+              </div>
+
+            </div>
+            <div class="row px-3 mt-2">
+              <hr>
+            </div>
+            <div class="row m-0 justify-content-between mt-2">
+              <div class="col-1">
+                <a class="text-red" #penPhone (click)="editable(phoneField,penPhone,penPhoneSaves)"><i
+                  class="fas fa-pen"
+                  style="font-size: .8em;"></i></a>
+                <a class="text-red hiddenElement" #penPhoneSaves>
+                  <i *ngIf="!isUpdatingClient['phoneNumber']" class="fas fa-save " style="font-size: .8em;"
+                     (click)="onUpdateClientInfo('phoneNumber')"></i>
+                  <i *ngIf="isUpdatingClient['phoneNumber']" class="fas fa-refresh fa-spin"
+                     style="font-size: .8em;"></i>
+                </a>
+              </div>
+              <div class="col">
+
+                <input formControlName="phoneNumber" type="text" class="editableField" readonly #phoneField>
+              </div>
+              <div class="col-4 justify-content-end">
+                <a href="tel:{{viewClientForm.value.phoneNumber}}" class="btn btn-success py-1 rounded small2"
+                   style="font-size: 10px;"><i
+                  class="fas fa-phone-alt"></i> Call Phone
+                </a>
+              </div>
+
+            </div>
+            <div class="row m-0 justify-content-between mt-1">
+              <div class="col-1">
+                <a class="text-red" #penPhone2 (click)="editable(phone2Field, penPhone2, penPhone2Saves)">
+                  <i class="fas fa-pen" style="font-size: .8em;"></i>
+                </a>
+                <a class="text-red hiddenElement" #penPhone2Saves>
+                  <i *ngIf="!isUpdatingClient['alternativePhoneNumber']" class="fas fa-save " style="font-size: .8em;"
+                     (click)="onUpdateClientInfo('alternativePhoneNumber')"></i>
+                  <i *ngIf="isUpdatingClient['alternativePhoneNumber']" class="fas fa-refresh fa-spin"
+                     style="font-size: .8em;"></i>
+                </a>
+              </div>
+              <div class="col">
+                <input formControlName="alternativePhoneNumber" type="text" class="editableField" readonly #phone2Field>
+              </div>
+              <div class="col-4 justify-content-end">
+                <a href="tel:{{viewClientForm.value.alternativePhoneNumber}}"
+                   class="btn btn-success py-1 rounded small2" style="font-size: 10px;"><i
+                  class="fas fa-phone-alt"></i> Call Phone
+                </a>
+              </div>
+
+            </div>
+            <div class="row px-3 mt-2">
+              <hr>
+            </div>
+            <div class="row m-0 justify-content-between mt-2">
+              <div class="col-1">
+                <a class="text-red">
+                  <i class="fas fa-map-marker-alt" style="font-size: 1.8em;"></i>
+                </a>
+              </div>
+              <div class="col">
+                <p class="small1">
+                  {{viewClientForm.value.address}}
+                </p>
+              </div>
+              <div class="col-1">
+                <a class="text-red" data-bs-toggle="modal" data-bs-target="#editAddressModal">
+                  <i class="fas fa-pen" style="font-size: .8em;"></i>
+                </a>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="tab-pane fade show " id="pills-Dates1" role="tabpanel"
+               aria-labelledby="pills-Dates-tab1">
+            <div class="row m-0 justify-content-between mt-3">
+              <div class="col-1">
+                <a class="text-red" #penBday (click)="editable(bdayField,penBday,penBdaySaves)"><i
+                  class="fas fa-pen"
+                  style="font-size: .8em;"></i></a>
+                <a class="text-red hiddenElement" #penBdaySaves><i class="fas fa-save "
+                                                                   style="font-size: .8em;"></i></a>
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-red"><i class="fas fa-calendar-alt"></i> Birthday: </label>
+              </div>
+              <div class="col">
+                <input type="text" class="editableField2" value="01/January" readonly #bdayField>
+              </div>
+
+
+            </div>
+
+
+            <div class="row m-0 justify-content-between mt-3">
+              <div class="col-1">
+                <a class="text-red" #penwBday (click)="editable(wbdayField,penwBday,penwBdaySaves)"><i
+                  class="fas fa-pen"
+                  style="font-size: .8em;"></i></a>
+                <a class="text-red hiddenElement" #penwBdaySaves><i class="fas fa-save "
+                                                                    style="font-size: .8em;"></i></a>
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-red"><i class="fas fa-calendar-alt"></i> Wedding Birthday: </label>
+              </div>
+              <div class="col">
+                <input type="text" class="editableField2" value="01/January" readonly #wbdayField>
+              </div>
+
+
+            </div>
+            <div class="row m-0 justify-content-between mt-3">
+              <div class="col-1">
+                <a class="text-red" #pensBday (click)="editable(sbdayField,pensBday,pensBdaySaves)"><i
+                  class="fas fa-pen"
+                  style="font-size: .8em;"></i></a>
+                <a class="text-red hiddenElement" #pensBdaySaves><i class="fas fa-save "
+                                                                    style="font-size: .8em;"></i></a>
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-red"><i class="fas fa-calendar-alt"></i> Spouse Birthday: </label>
+              </div>
+              <div class="col">
+                <input type="text" class="editableField2" value="01/January" readonly #sbdayField>
+              </div>
+
+
+            </div>
+            <div class="row m-0 justify-content-between mt-3">
+              <div class="col-1">
+
+              </div>
+              <div class="col">
+                <label for="" class="form-label text-red"><i class="fas fa-calendar-alt"></i> Created On: </label>
+              </div>
+              <div class="col">
+                <input type="text" class="editableField2" value="01-12-2022" readonly>
+              </div>
+
+
+            </div>
+
+
+          </div>
+          <div class="tab-pane fade show " id="pills-Identification1" role="tabpanel"
+               aria-labelledby="pills-Identification-tab1">
+            <div class="row justify-content-end mt-2">
+              <div class="col-2">
+                <a (click)="editableID()">
+                  <i class="fas  ml-2 text-red"
+                     [ngClass]="{' fa-pencil-alt': isEditableClientID == false,' fa-save': isEditableClientID == true}"
+                     aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="col-2" (click)="addID()">
+                <a>
+                  <i class="fas fa-plus ml-2 text-red"
+
+                     aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col"><label for="" class="small2">NIN:</label> <input type="text" class="editableField"
+                                                                                [ngClass]="{' edit': isEditableClientID == true}"
+                                                                                value="xx"
+                                                                                [readonly]="!isEditableClientID"></div>
+              <div class="col"><label for="" class="small2">BVN:</label> <input type="text" class="editableField"
+                                                                                [ngClass]="{' edit': isEditableClientID == true}"
+                                                                                value="xx"
+                                                                                [readonly]="!isEditableClientID"></div>
+
+            </div>
+            <div class="row">
+              <div class="col"><label for="" class="small2">Pencom No:</label> <input type="text" class="editableField"
+                                                                                      [ngClass]="{' edit': isEditableClientID == true}"
+                                                                                      value="xx"
+                                                                                      [readonly]="!isEditableClientID">
+              </div>
+              <div class="col"><label for="" class="small2">TIN:</label> <input type="text" class="editableField"
+                                                                                [ngClass]="{' edit': isEditableClientID == true}"
+                                                                                value="xx"
+                                                                                [readonly]="!isEditableClientID"></div>
+            </div>
+
+            <div class="row mt-3">
+              <table class="table table-responsive  table-striped">
+                <thead class="py-3 theader">
+                <tr>
+                  <th scope="col" style="font-size: .5rem;">ID Type</th>
+                  <th scope="col" style="font-size: .5rem;">ID No</th>
+                  <th scope="col" style="font-size: .5rem;">Issued</th>
+                  <th scope="col" style="font-size: .5rem;">Expiry</th>
+                  <th scope="col" style="font-size: .5rem;">Expired</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="Int" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="xx" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="10-Dec-2022" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="12-Dec-2023" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="Yes" [readonly]="!isEditableClientID"></td>
+
+                </tr>
+                <tr *ngFor="let i of IDCounter()">
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="" [readonly]="!isEditableClientID"></td>
+                  <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableClientID == true}"
+                             value="" [readonly]="!isEditableClientID"></td>
+
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="row mt-3">
+              <H6>KYC Document</H6>
+
+              <table class="table table-responsive  table-striped">
+                <thead class="py-3 theader">
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Image</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row mt-3">
+              <H6>Upload</H6>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label">Item</label>
+                  <select name="" id="" class="form-control control-bg-gray"></select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label">&nbsp;</label>
+                  <app-button buttonType="upload"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade show " id="pills-Employment1" role="tabpanel"
+               aria-labelledby="pills-Employment-tab1">
+
+            <div class="row justify-content-end mt-2">
+              <div class="col-2">
+                <a (click)="editableEMP()">
+                  <i class="fas  ml-2 text-red"
+                     [ngClass]="{' fa-pencil-alt': isEditableEMP == false,' fa-save': isEditableEMP == true}"
+                     aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="col-2" (click)="addEMP()">
+                <a>
+                  <i class="fas fa-plus ml-2 text-red"
+
+                     aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3 theader">
+              <tr>
+                <th scope="col" class="small2" style="font-size: .5rem;">Employment</th>
+                <th scope="col" class="small2" style="font-size: .5rem;">Employer</th>
+                <th scope="col" class="small2" style="font-size: .5rem;">Employment Date</th>
+                <th scope="col" class="small2" style="font-size: .5rem;">Occupation</th>
+                <th scope="col" class="small2" style="font-size: .5rem;">Occupation Group</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableEMP == true}"
+                           value="E-employed" [readonly]="!isEditableEMP"></td>
+                <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableEMP == true}"
+                           value="MTN GABON" [readonly]="!isEditableEMP"></td>
+                <td><input type="text" class="editableField" [ngClass]="{' edit': isEditableEMP == true}"
+                           value="10-Dec-2022" [readonly]="!isEditableEMP"></td>
+                <td><select type="text" class="editableField" [ngClass]="{' edit': isEditableEMP == true}"
+                >
+
+                </select></td>
+                <td><select type="text" class="editableField" [ngClass]="{' edit': isEditableEMP == true}"
+                >
+
+                </select></td>
+
+              </tr>
+              <tr *ngFor="let i of EMPCounter()">
+                <td><input type="text" class="editableField"
+                           value=""></td>
+                <td><input type="text" class="editableField" placeholder="Employer Client Number"
+                           value=""></td>
+                <td><input type="text" class="editableField"
+                           value=""></td>
+                <td><select type="text" class="editableField"
+                >
+
+                </select></td>
+                <td><select type="text" class="editableField"
+                >
+
+                </select></td>
+
+              </tr>
+              </tbody>
+            </table>
+
+
+          </div>
+          <div class="tab-pane fade show " id="pills-Contact-Person1" role="tabpanel"
+               aria-labelledby="pills-Contact-Person-tab1">
+
+            <div class="row justify-content-between">
+              <div class="col"><label for="" class="small2">Full Name with Title</label></div>
+              <div class="col-4"><label for="" class="small2">Relationship</label></div>
+            </div>
+            <div class="row justify-content-between mt-1">
+              <div class="col"><h5 class="small2 text-bold">Mr Fashola Kamal</h5></div>
+              <div class="col-4"><select class="small2 text-bold" [disabled]="!isEditRelationShip">
+                <option value="">Brother</option>
+              </select>
+                &nbsp;
+                <a class="text-red small3" (click)="isEditRelationShip = !isEditRelationShip "><i
+                  class="fas fa-pen"></i></a>
+              </div>
+
+            </div>
+
+            <div class="row justify-content-between mt-3">
+              <div class="col">
+                <p class="small1">+2250749363075</p>
+              </div>
+              <div class="col-4 justify-content-end">
+                <button class="btn btn-success py-1 rounded small2" style="font-size: 10px;"><i
+                  class="fas fa-phone-alt"></i> Call Phone
+                </button>
+              </div>
+
+            </div>
+            <div class="row justify-content-between mt-1">
+              <div class="col">
+                <p class="small1">jamesbond@007.com</p>
+              </div>
+              <div class="col-4 justify-content-end">
+                <button class="btn btn-outline-danger py-1 rounded small2" style="font-size: 10px;"><i
+                  class="far fa-envelope"></i> Send Mail
+                </button>
+              </div>
+
+            </div>
+            <div class="row px-3 mt-2">
+              <hr>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col"><label for="" class="small2">Full Name with Title</label></div>
+              <div class="col-4"><label for="" class="small2">Relationship</label></div>
+            </div>
+            <div class="row justify-content-between mt-1">
+              <div class="col"><h5 class="small2 text-bold">Mr Joe Biden</h5></div>
+              <div class="col-4"><select class="small2 text-bold" [disabled]="!isEditRelationShip">
+                <option value="">Husband</option>
+              </select>
+                &nbsp;
+                <a class="text-red small3" (click)="isEditRelationShip = !isEditRelationShip "><i
+                  class="fas fa-pen"></i></a>
+
+              </div>
+
+
+            </div>
+            <div class="row justify-content-between mt-2">
+
+              <div class="col">
+                <p class="small1">+2250749363075</p>
+              </div>
+              <div class="col-4 justify-content-end">
+                <button class="btn btn-success py-1 rounded small2" style="font-size: 10px;"><i
+                  class="fas fa-phone-alt"></i> Call Phone
+                </button>
+              </div>
+
+            </div>
+            <div class="row mt-3 justify-content-end">
+              <div class="col-2">
+                <i class="fas fa-plus text-red" data-bs-toggle="modal" data-bs-target="#modalContact"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col bg-white rounded py-3">
+        <ul class="nav nav-pills mb-0 bg-light  px-1 py-1  mx-auto" id="pills-tab" role="tablist"
+            style="width: fit-content;">
+          <li class="nav-item" role="contacts">
+            <button class="nav-link px-xl-1  px-sm-1 px-0 py-sm-1 py-0 active small2" id="pills-relationship-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-relationship" type="button" role="tab"
+                    aria-controls="pills-relationship" aria-selected="true">
+              <div class="p-sm-1 px-1">Relationship</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Dates">
+            <button class="nav-link px-xl-1 px-sm-1 px-0 py-sm-1 py-0 small2" id="pills-Claims-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-Claims" type="button" role="tab"
+                    aria-controls="pills-Claims" aria-selected="true">
+              <div class="p-sm-1 px-1">Claims</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Dates">
+            <button class="nav-link px-xl-3 px-lg-2 px-sm-1 px-0 py-sm-1 py-0 small2" id="pills-Sales-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-Sales" type="button" role="tab"
+                    aria-controls="pills-Sales" aria-selected="true">
+              <div class="p-sm-1 px-1">Sales</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Dates">
+            <button class="nav-link px-xl-3 px-lg-2 px-sm-1 px-0 py-sm-1 py-0 small2" id="pills-Activities-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-Activities" type="button" role="tab"
+                    aria-controls="pills-Activities" aria-selected="true">
+              <div class="p-sm-1 px-1">Activities</div>
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content fz-10 RM" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-relationship" role="tabpanel"
+               aria-labelledby="pills-relationship-tab">
+            <div class="row  gap-2 px-2 mt-3">
+              <div class="col rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#policiesModal"
+                   style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Policies</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#clientsModal"
+                   style=" background: #ff8c8c;">
+                <label for="" class="cardo-label small2">Clients</label>
+                <p class="cardo-num">5</p>
+              </div>
+            </div>
+            <div class="row  gap-2 mt-1 px-2">
+              <div class="col  bg-general rounded p-0 cardo " data-bs-toggle="modal" data-bs-target="#webLoginModal"
+                   style="min-height: 120px; background: #ff42ec;">
+                <label for="" class="cardo-label small2">Web Login</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col  bg-crm rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#documentModal"
+                   style="background: #5eb1ff;">
+                <label for="" class="cardo-label small2">Documents</label>
+                <p class="cardo-num">5</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade show " id="pills-Claims" role="tabpanel"
+               aria-labelledby="pills-Claims-tab">
+            <div class="row  gap-2 px-2 mt-3">
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#registerClaimModal"
+                   style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Register Claims</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#pendingPaymentsModal"
+                   style=" background: #ff8c8c;">
+                <label for="" class="cardo-label small2">Pending Payment</label>
+                <p class="cardo-num">5</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="tab-pane fade show " id="pills-Sales" role="tabpanel"
+               aria-labelledby="pills-Sales-tab">
+            <div class="row  gap-2 px-2 mt-3">
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#opportunitiesModal"
+                   style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Opportunities</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col   rounded p-0 cardo" routerLink="/crms/sales/quotations" style=" background: #ff8c8c;">
+                <label for="" class="cardo-label small2">New Quotation</label>
+                <p class="cardo-num">5</p>
+              </div>
+            </div>
+            <div class="row  gap-2 px-2 mt-3">
+              <div class="col   rounded p-0 cardo" style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Calendar</label>
+                <p class="cardo-num">5</p>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="tab-pane fade show " id="pills-Activities" role="tabpanel"
+               aria-labelledby="pills-Activities-tab">
+            <div class="row  gap-2 px-2 mt-3">
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#TPRModal"
+                   style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Total Payment Received</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#pendingWorkflowsModal"
+                   style=" background: #ff8c8c;">
+                <label for="" class="cardo-label small2">Pending Workflows</label>
+                <p class="cardo-num">5</p>
+              </div>
+            </div>
+            <div class="row  gap-2 px-2 mt-3">
+              <div class="col   rounded p-0 cardo" data-bs-toggle="modal" data-bs-target="#pendingQuotesModal"
+                   style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Pending Quotes</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col   rounded p-0 cardo" style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Communication</label>
+                <p class="cardo-num">5</p>
+              </div>
+              <div class="col   rounded p-0 cardo" style="min-height: 120px; background: #ff6a97;">
+                <label for="" class="cardo-label small2">Underwriting Information</label>
+                <p class="cardo-num">5</p>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" mt-3 row gap-3 px-4">
+      <div class="col bg-white rounded p-3">
+        <h6 style="color: #808080">Client Details</h6>
+        <div class="row">
+          <div class="col px-3" style="border-right: rgba(130,128,128,0.63) 1px solid;">
+            <p class="small1 text-bold mb-0 mt-3 ">Prob of Churn</p>
+            <h2 style="color: #db2442;" class="text-bold">30%</h2>
+          </div>
+          <div class="col px-3">
+            <p class="small1 text-bold mb-0 mt-3 ">Relationship Age</p>
+            <h2 style="color: #fb5a26;" class="text-bold">2yr 6mo</h2>
+            <div class="row ">
+              <div class="col"><p class="mt-1 mb-0 small2 text-bold">Engagement Score</p></div>
+              <div class="col d-flex justify-content-end"><p
+                class=" mt-1 mb-0 text-success small2">{{(clientDetailsForm.value.engageScore || 0) + '%'}}</p></div>
+            </div>
+
+
+            <div class="row ">
+              <div class="col"><p class="mt-1 mb-0 small2 text-bold">CLV</p></div>
+              <div class="col d-flex justify-content-end"><p
+                class=" mt-1 mb-0  text-success small2">{{(viewClientForm.value.clv || 0) | number}}</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <p class="small1 text-bold mb-0 mt-3 px-3 ">LifeCycle Stage</p>
+        </div>
+      </div>
+      <div class="col-3 bg-white rounded p-3">
+        <h6 class="mb-0" style="color: #808080">More Client Details</h6>
+        <div class="row justify-content-between mt-5">
+          <div class="col p-2">
+            <p class="small1 text-bold mb-0 mt-1 ">Band</p>
+          </div>
+          <div class="col p-2">
+
+            <h4 style="color:#101dff;" class="my-0 small2 text-bold">C-CLV Bet</h4>
+            <h4 style="color: #101dff;" class="my-0 small2 text-bold">20,000 - 50,000</h4>
+          </div>
+
+        </div>
+        <div class="row my-3">
+          <div class="col p-2">
+            <p class="small1 text-bold mb-0 mt-1 ">Segment</p>
+          </div>
+          <div class="col p-2">
+
+            <h4 style="color:#101dff;" class="my-0 small2 text-bold">B- Annual Income Band</h4>
+            <h4 style="color: #101dff;" class="my-0 small2 text-bold">200,000 - 500,000</h4>
+          </div>
+
+        </div>
+        <div class="row my-3">
+          <div class="col p-2">
+            <p class="small1 text-bold mb-0 mt-1 ">Sector</p>
+          </div>
+          <div class="col p-2">
+
+            <h4 style="color:#101dff;" class="my-0 small2 text-bold">Agro & Allied</h4>
+          </div>
+
+        </div>
+      </div>
+      <div class="col bg-white rounded p-3">
+        <ul class="nav nav-pills mb-0 bg-light px-sm-2 px-1 py-1  mx-auto" id="pills-tab" role="tablist"
+            style="width: fit-content;">
+          <li class="nav-item" role="contacts">
+            <button class="nav-link px-xl-3 px-lg-2 px-sm-1 px-0 py-sm-1 py-0 active small2" id="pills-agentInfos-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-agentInfos" type="button" role="tab"
+                    aria-controls="pills-agentInfos" aria-selected="true">
+              <div class="p-sm-1 px-1">Agent Information</div>
+            </button>
+          </li>
+          <li class="nav-item" role="Dates">
+            <button class="nav-link px-xl-3 px-lg-2 px-sm-1 px-0 py-sm-1 py-0 small2" id="pills-providerInfos-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-providerInfos" type="button" role="tab"
+                    aria-controls="pills-providerInfos" aria-selected="true">
+              <div class="p-sm-1 px-1">Provider Information</div>
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content fz-10 RM" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-agentInfos" role="tabpanel"
+               aria-labelledby="pills-agentInfos-tab1">
+            <div class="row gap-2">
+              <div style="border-bottom:  2px solid #1a75ff" class="col py-2">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Hierarchy Manager</label>
+                </div>
+                <div class="row">
+                  <h6>IND - Individual Agent</h6>
+                </div>
+              </div>
+              <div style="border-bottom:  2px solid #1a75ff" class="col py-2">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold"> Agent Type</label>
+                </div>
+                <div class="row">
+                  <h6>56 - Kanayo O Kanayo</h6>
+                </div>
+              </div>
+
+            </div>
+            <div class="row gap-2 mt-2 ">
+              <div class="col">
+                <div class="row">
+                  <div class="col bg-crm text-white">
+                    <p class="small2">No Of Policies</p>
+                    <h4>17</h4>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col bg-crm text-white">
+                    <p class="small2">No Of Prospects</p>
+                    <h4>2,100</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 bg-general text-white p-3">
+                <p>Total Commission</p>
+                <h4>100,000</h4>
+              </div>
+              <div class="col-4 bg-blue text-white p-3">
+                <p>Commission Due</p>
+                <h4>2,000,000</h4>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade show " id="pills-providerInfos" role="tabpanel"
+               aria-labelledby="pills-providerInfos-tab1">
+            <div class="row gap-2">
+              <div style="border-bottom:  2px solid #1a75ff" class="col ">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Provider Name</label>
+                </div>
+                <div class="row">
+                  <h6 class="small2">IND - Individual Agent</h6>
+                </div>
+              </div>
+              <div style="border-bottom:  2px solid #1a75ff" class="col ">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Provider No</label>
+                </div>
+                <div class="row">
+                  <h6 class="small2">56 - Kanayo O Kanayo</h6>
+                </div>
+              </div>
+
+            </div>
+            <div class="row gap-2">
+              <div style="border-bottom:  2px solid #1a75ff" class="col ">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Category</label>
+                </div>
+                <div class="row">
+                  <h6 class="small2">IND - Individual Agent</h6>
+                </div>
+              </div>
+              <div style="border-bottom:  2px solid #1a75ff" class="col ">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Sub Category</label>
+                </div>
+                <div class="row">
+                  <h6 class="small2">56 - Kanayo O Kanayo</h6>
+                </div>
+              </div>
+
+            </div>
+            <div class="row gap-2">
+              <div style="border-bottom:  2px solid #1a75ff" class="col ">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Address</label>
+                </div>
+                <div class="row">
+                  <h6 class="small2">IND - Individual Agent</h6>
+                </div>
+              </div>
+              <div style="border-bottom:  2px solid #1a75ff" class="col">
+                <div class="row">
+                  <label for="" class="form-label text-blue small2 text-bold">Balance</label>
+                </div>
+                <div class="row">
+                  <h6 class="small2">56 - Kanayo O Kanayo</h6>
+                </div>
+              </div>
+
+            </div>
+            <div class="row gap-2 mt-2 ">
+              <div class="col bg-general text-white ">
+                <p>Tarriff</p>
+                <h4>100,000</h4>
+              </div>
+              <div class="col bg-general text-white">
+                <p>Discipline</p>
+                <h4>100,000</h4>
+              </div>
+              <div class="col bg-blue text-white ">
+                <p>Balance</p>
+                <h4>2,000,000</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--
+
+MODAL ZONE
+
+-->
+<form [formGroup]="viewClientForm">
+  <div class="modal fade" id="modalContact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Set New Relationship</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Rel Client Number</label>
+                    <input type="text" class="form-control control-bg-gray">
+                  </div>
+                </div>
+                <div class="col-5">
+                  <label class="form-label text-red">&nbsp;</label>
+                  <app-button buttonType="find"></app-button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Full Name</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Client Status</label>
+
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Phone Number</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Email</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Rel</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label class="form-label text-red">Rel Date</label>
+
+                <input class="form-control control-bg-gray" type="date"/>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editAddressModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Address</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Country</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Region</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">City</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Town</label>
+
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Geolocation</label>
+
+                <input type="text" class="form-control control-bg-gray">
+
+              </div>
+            </div>
+
+
+          </div>
+          <div class="row">
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Informations</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Main Phone No</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="phoneNo">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Alternate Phone No</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="phoneNo2">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Website</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="website">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Main Email</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="email">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Alternate Address Email</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="email2">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Address</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="address">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- remember to save contact person to its own form while saving the rest of the fields to the client form -->
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit3Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Dates Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="clientDatesForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Wed Anniv Dt</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="weddingAnniversaryDate">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Birthday</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="dateOfBirth">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Spouse Birthday</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="spouseDateOfBirth">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Created On</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="createdOn">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit4Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Client ID Info (KYC)</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label">NIN</label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label">BVN</label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label">Pencom No</label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label">TIN</label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <app-button buttonType="save-red"></app-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit5Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Employment Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ng-container *ngFor="let employment of clientEmploymentForm.controls; let i = index">
+            <form [formGroup]="$any(employment)">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Employment Status</label>
+                    <select class="form-control control-bg-gray" formControlName="employmentStatus">
+                      <option value="EMPLOYED">Employed</option>
+                      <option value="UNEMPLOYED">Unemployed</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Employer</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="employer">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Employment Date</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="employmentDate">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Occupation Group</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="occupationGroup">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Occupation</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="occupation">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Job Title</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="jobTitle">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Annual Salary Band</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="incomeBand">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Cadre</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="cadre">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Staff No</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="staffNo">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Active</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="active">
+                  </div>
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col">
+
+                </div>
+              </div>
+            </form>
+            <hr class="my-3">
+          </ng-container>
+          <app-button [buttonType]="showAddEmploymentForm ? 'delete' : 'addCustom-red'"
+                      [text]="'Add New Employment History'"
+                      (click)="showAddEmploymentForm = !showAddEmploymentForm" class="d-inline-block"></app-button>
+          <form [formGroup]="newEmploymentForm" *ngIf="showAddEmploymentForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Employment Status</label>
+                  <select class="form-control control-bg-gray" formControlName="employmentStatus">
+                    <option value="EMPLOYED">Employed</option>
+                    <option value="UNEMPLOYED">Unemployed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">`
+                <div class="form-group">
+                  <label class="form-label text-red">Employer</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="employer">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Employment Date</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="employmentDate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Occupation Group</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="occupationGroup">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Occupation</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="occupation">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Job Title</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="jobTitle">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Annual Salary Band</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="incomeBand">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Cadre</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="cadre">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Staff No</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="staffNo">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Active</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="active">
+                </div>
+              </div>
+              <div class="col">
+
+              </div>
+              <div class="col">
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit6Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Informations</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- if there are no data show empty fields -->
+          <div class="row" *ngIf="clientContactPersonsForm.value?.length == 0">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Title & Full Name</label>
+                <div class="input-group">
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let title of TITLES">{{title}}</option>
+                  </select>
+                  <input type="text" class="form-control control-bg-gray" placeholder="Full name">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Phone No</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Email</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Relationship</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+          </div>
+          <!-- else iterate through and show data -->
+          <div class="row" *ngFor="let contactPerson of clientContactPersonsForm.controls; index as i">
+            <form [formGroup]="$any(clientContactPersonsForm.controls[i])">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Full Name & Title</label>
+                  <div class="input-group">
+                    <select class="form-control control-bg-gray" formControlName="title">
+                      <option *ngFor="let title of TITLES">{{title}}</option>
+                    </select>
+                    <input type="text" class="form-control control-bg-gray" formControlName="fullName">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Phone No</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="phoneNo">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Email</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="email">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Relationship</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="relationship">
+                </div>
+              </div>
+            </form>
+            <hr *ngIf="clientContactPersonsForm.controls?.length > 1" class="my-3">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit7Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">First Name</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="firstName">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Middle Name</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="middleName">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Last Name</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="surname">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Marital Status</label>
+                <select class="form-control control-bg-gray" formControlName="maritalStatus">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Language</label>
+
+                <select class="form-control control-bg-gray" formControlName="language">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Gender</label>
+
+                <select class="form-control control-bg-gray" formControlName="gender">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal fade" id="policiesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General
+              Business:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:{{'xx'}}
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let policy of policiesList">
+                <td>{{policy.policyNo}}</td>
+                <td>xx</td>
+                <td>{{policy.productClass}}</td>
+                <td>{{policy.policyStatus}}</td>
+                <td>{{policy.issueDate}}</td>
+                <td>{{policy.policyTermMonths}} {{policy.policyTermDays}}</td>
+                <td>{{policy.annualisedPremium}}</td>
+                <td>{{policy.sumAtRisk}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let policy of policiesList">
+                <td>{{policy.policyNo}}</td>
+                <td>xx</td>
+                <td>{{policy.productClass}}</td>
+                <td>{{policy.policyStatus}}</td>
+                <td>{{policy.issueDate}}</td>
+                <td>{{policy.policyTermMonths}} {{policy.policyTermDays}}</td>
+                <td>{{policy.annualisedPremium}}</td>
+                <td>{{policy.sumAtRisk}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let policy of policiesList">
+                <td>{{policy.policyNo}}</td>
+                <td>xx</td>
+                <td>{{policy.productClass}}</td>
+                <td>{{policy.policyStatus}}</td>
+                <td>{{policy.issueDate}}</td>
+                <td>{{policy.policyTermMonths}} {{policy.policyTermDays}}</td>
+                <td>{{policy.annualisedPremium}}</td>
+                <td>{{policy.sumAtRisk}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="clientsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Clients</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <!-- <h1 class="my-5">Client Relationships</h1> -->
+            <div class="d-flex">
+              <p class="py-3 mx-3"><b>Client Name:</b> <span
+                class="px-3">{{viewClientForm.get('fullName')?.value}}</span>
+              </p>
+              <p class="py-3 mx-3"><b>Family size:</b> <span
+                class="px-3">{{clientRelationshipsForm.value?.length}}</span></p>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="py-3 theader">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Client Number</th>
+                  <th scope="col">Is</th>
+                  <th scope="col">Connector</th>
+                  <!-- <th scope="col">Full Name</th> -->
+                  <!-- <th scope="col">Rel</th> -->
+                  <!-- <th scope="col">Email</th> -->
+                  <th scope="col">Rel Client Number</th>
+                  <th scope="col">Client Status</th>
+                  <th scope="col" style="border-top-right-radius: 12px;">Rel Date</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <ng-container *ngFor="let relation of clientRelationshipsForm.controls; index as i">
+                  <tr [formGroup]="$any(clientRelationshipsForm.controls[i])">
+                    <th scope="row"><input formControlName="clientNo" readonly></th>
+                    <td>
+                      <select formControlName="relationship" readonly [attr.disabled]="true">
+                        <option *ngFor="let type of RELATIONSHIP_TYPES"
+                                [value]="type.code">{{type.description}}</option>
+                      </select>
+                    </td>
+                    <td><input formControlName="fullName" readonly></td>
+                    <td><input formControlName="relClientNo" readonly></td>
+                    <td><input formControlName="clientStatus" readonly></td>
+                    <td><input formControlName="relDt" readonly type="date"></td>
+                    <td>
+                      <app-button buttonType="editRed"></app-button>
+                    </td>
+                  </tr>
+                </ng-container>
+                <ng-container *ngFor="let relation of newRelationsList; index as i">
+                  <tr [formGroup]="newRelationsList[i]">
+                    <th scope="row">
+                      <input formControlName="clientNo" readonly>
+                    </th>
+                    <td>
+                      <select formControlName="relationship" class="form-control">
+                        <option *ngFor="let type of RELATIONSHIP_TYPES"
+                                [value]="type.code">{{type.description}}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <input formControlName="fullName" class="form-control">
+                    </td>
+                    <td>
+                      <input formControlName="relClientNo" class="form-control">
+                    </td>
+                    <td>
+                      <input formControlName="clientStatus" class="form-control">
+                    </td>
+                    <td>
+                      <input formControlName="relDt" class="form-control" type="date">
+                    </td>
+                    <td>
+                      <button class="btn btn-outline-danger btn-lg" (click)="onSaveNewRelation(newRelationsList[i])">
+                        <i class="fa fa-save"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row justify-content-end my-2">
+            <div class="col-md-3">
+              <app-button [buttonType]="'addCustom-red'" [text]="'Add New Relationship'" (click)="addNewRelationForm()"
+              ></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="webLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Web Logins</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container mt-2">
+          <div class="row">
+            <div class="col-md-12 mx-auto">
+              <p class="py-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span>
+              </p>
+              <table class="table table-responsive  table-striped">
+                <thead class="py-3 theader">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Web ID</th>
+                  <th scope="col">Account Name</th>
+                  <th scope="col">Last Login Date</th>
+                  <th scope="col" style="border-top-right-radius: 12px;">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let webLogin of clientWebLoginsList">
+                  <th scope="row">{{webLogin.webId}}</th>
+                  <td>{{webLogin.firstName}} {{webLogin.surname}}</td>
+                  <td>{{webLogin.lastLoggedInDate}}</td>
+                  <td>{{'xx'}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="modal fade" id="webLoginModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <h1 class="my-5">Web Logins</h1>
+                  <p class="py-3"><b>Client Name:</b> <span
+                    class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                    <tr>
+                      <th scope="col" style="border-bottom-left-radius: 12px;">Web ID</th>
+                      <th scope="col">Account Name</th>
+                      <th scope="col">Last Login Date</th>
+                      <th scope="col" style="border-top-right-radius: 12px;">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let webLogin of clientWebLoginsList">
+                      <th scope="row">{{webLogin.webId}}</th>
+                      <td>{{webLogin.firstName}} {{webLogin.surname}}</td>
+                      <td>{{webLogin.lastLoggedInDate}}</td>
+                      <td>{{'xx'}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+                <div class="col-md-3 mt-5">
+                  <app-button [buttonType]="'btnCustomClone'" [text]="'New Web Account'" data-bs-toggle="modal"
+                              data-bs-target="#webLoginModal"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Documents</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+
+        <div class="row justify-content-center">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Document Subcategory</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Created From</label>
+              <input type="date" class="control-bg-gray form-control">
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Created To</label>
+              <input type="date" class="control-bg-gray form-control">
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">How</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <p class="py-3"><b>Client Name:</b> <span
+                    class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                    <tr>
+                      <th scope="col" style="border-bottom-left-radius: 12px;">File Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Sub Category</th>
+                      <th scope="col">Document Title</th>
+                      <th scope="col">Created On</th>
+                      <th scope="col">Created By</th>
+                      <th scope="col">Auth. User</th>
+                      <th scope="col">How</th>
+                      <th scope="col" style="border-top-right-radius: 12px;">Box No.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let document of clientDocumentsList">
+                      <td scope="row" (click)="downloadDocument($event, document)"
+                          title="click to download this document">
+                        <a href="">{{document.fileName}}</a>
+                      </td>
+                      <th>{{document.docCat}}</th>
+                      <td>{{document.docSubCat}}</td>
+                      <td>{{document.title}}</td>
+                      <td>{{document.createdOn}}</td>
+                      <td>{{document.createdBy}}</td>
+                      <td>{{document.authorizedUser}}</td>
+                      <td>{{document.how}}</td>
+                      <td>{{document.docBox}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <app-button buttonType="addCustom-red" text="Add Document" data-bs-toggle="modal"
+                              data-bs-target="#addDocumentModal"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate"></app-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <p class="py-3"><b>Client Name:</b> <span
+                    class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                    <tr>
+                      <th scope="col" style="border-bottom-left-radius: 12px;">Category</th>
+                      <th scope="col">Document Title</th>
+                      <th scope="col">Document Names</th>
+                      <th scope="col">Created By</th>
+                      <th scope="col">Created On</th>
+                      <th scope="col">Auto</th>
+                      <th scope="col">How</th>
+                      <th scope="col" style="border-top-right-radius: 12px;">Box No.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">Premium</th>
+                      <td>Premium Receipt</td>
+                      <td>PREM_FIT_68</td>
+                      <td>SYSTEM</td>
+                      <td>01/MAR/2021 12:35</td>
+                      <td>Y</td>
+                      <td>SMS</td>
+                      <td>__</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <app-button buttonType="addCustom-red" text="Add Document"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate"></app-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <p class="py-3"><b>Client Name:</b> <span
+                    class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                    <tr>
+                      <th scope="col" style="border-bottom-left-radius: 12px;">Category</th>
+                      <th scope="col">Document Title</th>
+                      <th scope="col">Document Names</th>
+                      <th scope="col">Created By</th>
+                      <th scope="col">Created On</th>
+                      <th scope="col">Auto</th>
+                      <th scope="col">How</th>
+                      <th scope="col" style="border-top-right-radius: 12px;">Box No.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">Premium</th>
+                      <td>Premium Receipt</td>
+                      <td>PREM_FIT_68</td>
+                      <td>SYSTEM</td>
+                      <td>01/MAR/2021 12:35</td>
+                      <td>Y</td>
+                      <td>SMS</td>
+                      <td>__</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <app-button buttonType="addCustom-red" text="Add Document"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate"></app-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Claim</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  mx-auto justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-basic-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-basic" type="button" role="tab" aria-controls="pills-basic"
+                    aria-selected="true">Basic
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-document-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-document" type="button" role="tab" aria-controls="pills-document"
+                    aria-selected="false">Document
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-estimate-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-estimate" type="button" role="tab" aria-controls="pills-estimate"
+                    aria-selected="false">Estimate
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content  justify-content-start" id="pills-tabContent">
+          <div [formGroup]="newClaimForm" class="tab-pane fade show active" id="pills-basic" role="tabpanel"
+               aria-labelledby="pills-basic-tab">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy No</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" (change)="onPolicyNoChange()"
+                            formControlName="policyNo">
+                      <option value=""></option>
+                      <option *ngFor="let policy of policiesList">{{policy.policyNo}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPolicyNos">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy Code</label>
+                  <input class="form-control control-bg-gray" type="text" (change)="onPolicyCodeChange()"
+                         formControlName="policyCode">
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy No Suffix</label>
+                  <input class="form-control control-bg-gray" type="text">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy Currency</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="currency">
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Cover</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="coverCode" (change)="onCoverChange()">
+                      <option value=""></option>
+                      <option *ngFor="let cover of policyCoversList" [value]="cover.code">{{cover.code}}
+                        - {{cover.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingCovers">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Claim Type</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="claimType"
+                            (change)="onClaimTypeChange()">
+                      <option></option>
+                      <option *ngFor="let claimType of claimTypesList"
+                              [value]="claimType.type">{{claimType.type}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingClaimTypes">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Peril</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="perilCat" (change)="onPerilChange()">
+                      <option></option>
+                      <option *ngFor="let peril of perilsList" [value]="peril.perilCode">{{peril.perilCode}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPerils">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Severity Level</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="severityLevel"/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Report Date Time</label>
+                  <input class="form-control control-bg-gray" type="datetime-local" formControlName="reportOn">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Date Time</label>
+                  <input class="form-control control-bg-gray" type="datetime-local" formControlName="eventOn">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Country</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationCountry"
+                            (change)="setRegionsList()">
+                      <option value=""></option>
+                      <option *ngFor="let country of countriesList" [value]="country.code">{{country.code}}
+                        - {{country.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingCountries">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Region</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationRegion"
+                            (change)="setStatesList()">
+                      <option value=""></option>
+                      <option *ngFor="let region of regionsList" [value]="region.code">{{region.code}}
+                        - {{region.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingRegions">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event State</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationState">
+                      <option value=""></option>
+                      <option *ngFor="let state of statesList" [value]="state.code">{{state.code}}
+                        - {{state.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingStates">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Town</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="locationTown">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Address</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="locationAddress">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Geo Location</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="geolocation">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Client Loss Estimate</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="initialEstimate">
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="" class="form-label text-red">Proximate Cause</label>
+                <div class="position-relative">
+                  <select class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let proxCause of proximateCausesAllowedList"
+                            [value]="proxCause.proximateCauseAllowed">{{proxCause.proximateCauseAllowed}}</option>
+                  </select>
+                  <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingProximateCauses">
+                    <span class="fa fa-sync fa-spin"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Narration</label>
+                  <textarea class="form-control control-bg-gray" formControlName="narration"></textarea>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <button class="btn btn-outline-danger btn-lg d-block ms-auto" (click)="onSaveNewClaim()">
+              <i class="fa fa-save"></i>
+              Save
+            </button>
+          </div>
+          <div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">
+            <div class="row">
+              <h3 class="text-center text-red my-5">Claim Requirements</h3>
+            </div>
+            <div class="table-responsive px-3">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Action</th>
+                  <th>Received?</th>
+                  <th>Received By</th>
+                  <th>Received On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Medical Cause of Death</td>
+                  <td>
+                    <app-button buttonType="uploadRed"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Birth Certificate</td>
+                  <td>
+                    <app-button buttonType="uploadRed"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Claim Batch</td>
+                  <td>
+                    <app-button buttonType="uploadRed"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                <tr *ngFor="let item of claimDocsArray()">
+                  <td>
+                    <input type="text" class="inputform">
+                  </td>
+                  <td>
+                    <app-button buttonType="uploadRed"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="" class="form-label text-red text-center">&nbsp;</label>
+                  <app-button buttonType="addCustom-red" (click)="incClaimDocsCount()"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Claim No: <span class="text-red">xxxx</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Cover Name: <span class="text-red">xxxx</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Claim Type: <span class="text-red">xxxx</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Peril: <span class="text-red">xxxx</span></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="" class="form-label text-red"></label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" data-bs-toggle="modal" data-bs-target="#adjustClaimModal"
+                              data-bs-dismiss="modal" text="Adjust Claim"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Add Provider" data-bs-toggle="modal"
+                              data-bs-target="#assignProviderModal"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate DV"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Cancel Claim"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Change Status" data-bs-toggle="modal"
+                              data-bs-target="#changeStatus"></app-button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+<div class="modal fade" id="pendingPaymentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Client / Find Client / Client View / Pending Payments</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+
+
+            <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+              <thead class="py-3">
+              <tr>
+
+                <th scope="col">Claim No</th>
+                <th scope="col">Payment Id</th>
+                <th scope="col">Batch No</th>
+                <th scope="col">Initial Estimate</th>
+                <th scope="col">Adjustments</th>
+                <th scope="col">Current Estimate</th>
+                <th scope="col">Claim Type</th>
+                <th scope="col">Claim Status</th>
+                <th scope="col">Days to SLA</th>
+                <th scope="col">Completion Rate</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let pp of pendingPaymentsList">
+                <td>{{pp.claimNo}}</td>
+                <td>{{pp.paymentId}}</td>
+                <td>{{pp.batchNo}}</td>
+                <td>{{pp.initialEstimate}}</td>
+                <td>{{pp.adjustments}}</td>
+                <td>{{pp.currentEstimate}}</td>
+                <td>{{pp.claimType}}</td>
+                <td>{{pp.claimStatus}}</td>
+                <td>{{pp.daysToSla}}</td>
+                <td>
+                  <div class="progress">
+                    <div class="progress-bar  progress-bar-striped bg-success" role="progressbar"
+                         [ngStyle]="{width: pp.completionRate + '%'}"
+                         [attr.aria-valuenow]="pp.completionRate" aria-valuemin="0" aria-valuemax="100">
+                      {{pp.completionRate}}%
+                    </div>
+                  </div>
+                </td>
+                <td><a data-bs-toggle="modal" href="#" data-bs-target="#changeStatus">
+                  <a href="" class="btn btn-outline-danger"> <i class="fas fa-edit"></i> Status</a>
+                </a></td>
+                <td>
+                  <a href="" class="btn btn-outline-danger"><i class="fas fa-cogs"></i> Generate</a>
+                </td>
+                <td><a data-bs-toggle="modal" href="#" data-bs-target="#adjust">
+                  <a href="" class="btn btn-outline-danger"><i class="fas fa-sliders-h"></i> Adjust</a>
+                </a></td>
+                <td><a data-bs-toggle="modal" href="#" data-bs-target="#historys">
+                  <a href="" class="btn btn-outline-danger"><i class="fas fa-history"></i> History</a>
+                </a></td>
+                <td><a data-bs-toggle="modal" href="#" data-bs-target="">
+                  <a href="" class="btn btn-outline-danger"><i class="fas fa-hand-holding"></i> Receive Req</a>
+                </a></td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="text-danger text-center">
+              No Pending Payments!
+            </div>
+
+            <div class="form-group mt-2">
+              <div class="row g-3 form-group mt-1 pt-1">
+                <div class="col-10"></div>
+                <div class="col-2">
+
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="opportunitiesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Opportunities</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <h5 class="text-red mb-4">Existing Opportunities</h5>
+          <table class="table">
+            <thead class="py-3 theader">
+            <tr>
+              <th scope="col">Business Line</th>
+              <th scope="col">Product</th>
+              <th scope="col">Assigned To</th>
+              <th scope="col">Created On</th>
+              <th scope="col">Assigned On</th>
+              <th scope="col">Status</th>
+              <th scope="col">Estimated Revenue</th>
+              <th scope="col">Conversion Probability</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th>L</th>
+              <td>ABC</td>
+              <td>Agent-1345</td>
+              <td>01/Jan/2020 10:00</td>
+              <td>1-Feb-21 12:23</td>
+              <td>W</td>
+              <td>400,000</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <th>L</th>
+              <td>ABC</td>
+              <td>Agent-1345</td>
+              <td>01/Jan/2020 10:00</td>
+              <td>1-Feb-21 12:23</td>
+              <td>W</td>
+              <td>400,000</td>
+              <td>10</td>
+            </tr>
+            </tbody>
+          </table>
+          <h5 class="text-red my-4">New Opportunities</h5>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Business Line</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Product Opportunity</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Opportunity Generated By</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Referred By</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Narration</label>
+                <textarea name="" id="" cols="30" rows="3" class="form-control control-bg-gray"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Submit &check;</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="historys" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-red text-center text-bold">Policy No</div>
+                <div class="col small1 text-red text-center text-bold">Owner</div>
+                <div class="col small1 text-red text-center text-bold">Initial Estimate</div>
+                <div class="col small1 text-red text-center text-bold">Total Adjustments</div>
+                <div class="col small1 text-red text-center text-bold">Updated Amount</div>
+                <div class="col small1 text-red text-center text-bold">Payment Type</div>
+                <div class="col small1 text-red text-center text-bold">Currency</div>
+                <div class="col small1 text-red text-center text-bold">Cover Name</div>
+                <div class="col-2 small1 text-red text-center text-bold">Policy Code Claimed On</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+
+              <hr>
+
+              <table class="table table-responsive">
+                <thead>
+                <tr>
+                  <th scope="col">Action</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Reason</th>
+                  <th scope="col">Auth By</th>
+                  <th scope="col">Auth On</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Old Value</th>
+                  <th scope="col">New Value</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+
+                </tr>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+
+                </tr>
+
+                </tbody>
+              </table>
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'adjusts'"></app-button>
+                  </div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'action'"></app-button>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="adjust" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+              <ul class="nav nav-pills nav-fill sales-ul mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation"><label class="text-red">Policy No: </label><label
+                  class="valuehead">LTR21456</label></li>
+
+                <li class="nav-item" role="presentation"><label class="text-red">Owner: </label><label
+                  class="valuehead">XXXXX</label></li>
+                <li class="nav-item" role="presentation"><label class="text-red">Initial Estimate: </label><label
+                  class="valuehead">12000</label></li>
+                <li class="nav-item" role="presentation"><label class="text-red">Total Adjustments: </label><label
+                  class="valuehead">22000</label></li>
+                <li class="nav-item" role="presentation"><label class="text-red">Updated Amount: </label><label
+                  class="valuehead">23000</label></li>
+
+                <li class="nav-item" role="presentation"><label class="text-red">Payment Type: </label><label
+                  class="valuehead">Saving</label></li>
+
+                <li class="nav-item" role="presentation"><label class="text-red">Currency: </label><label
+                  class="valuehead">NGN</label></li>
+
+              </ul>
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-6">
+                    <label>New Adjustment</label>
+                    <input type="text" class="form-control  control-bg-gray">
+                  </div>
+                  <div class="col-6">
+                    <label>Reason</label>
+                    <select class="form-control  control-bg-gray"></select>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-6">
+                    <label> Adjustment Party</label>
+                    <input type="text" class="form-control  control-bg-gray">
+                  </div>
+                  <div class="col-6">
+                    <label>Client Number</label>
+                    <input type="text" class="form-control  control-bg-gray">
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-9">
+                    <label class="valuehead">Narration</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                  <div class="col-1 form-group mt-2 pt-2"></div>
+
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-10"></div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'btnCustomCloneRed'" text="Adjust"></app-button>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="changeStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Change Status</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>Current Value</label>
+                    <input class="form-control control-bg-gray"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>New Value</label>
+                    <select name="" id="" class="form-control control-bg-gray">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <hr>
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>Comment (Optional)</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div>
+                    <app-button [buttonType]="'submitRed'"></app-button>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="TPRModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Payment History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h3 class="mt-4 mb-4 text-red">Summary</h3>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Receipt Category</th>
+                <th scope="col">Total Posted</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Total Reconciled</th>
+                <th scope="col">In Suspense</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Premium</td>
+                <td>250000</td>
+                <td>NGN</td>
+                <td>250,000</td>
+                <td>30,000</td>
+              </tr>
+              <tr>
+                <td>Other Receipts</td>
+                <td>250000</td>
+                <td>NGN</td>
+                <td>250,000</td>
+                <td>30,000</td>
+              </tr>
+              <tr>
+                <td>Total Receipts</td>
+                <td>250000</td>
+                <td>NGN</td>
+                <td>250,000</td>
+                <td>30,000</td>
+              </tr>
+
+              </tbody>
+            </table>
+            <h3 class="mt-4 mb-4 text-danger">Details</h3>
+
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Payment Type</th>
+                <th scope="col">Batch No</th>
+                <th scope="col">Receipt Type</th>
+                <th scope="col">Receipt No</th>
+                <th scope="col">Create On</th>
+                <th scope="col">Reconciled On</th>
+                <th scope="col">Effective On</th>
+                <th scope="col">Ref No</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Source</th>
+                <th scope="col">Receipt Bank</th>
+                <th scope="col">Reconcilied By</th>
+                <th scope="col">Reversed</th>
+                <th scope="col">Payer No</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>MM</td>
+                <td>__</td>
+                <td>P</td>
+                <td>R6768</td>
+                <td>4-JUN-21</td>
+                <td>4-JUN-21</td>
+                <td>4-JUN-21</td>
+                <td>1789</td>
+                <td>NGN</td>
+                <td>W</td>
+                <td>FBN</td>
+                <td>WEB</td>
+                <td>N</td>
+                <td>4657</td>
+              </tr>
+              <tr>
+                <td>FF</td>
+                <td>__</td>
+                <td>P</td>
+                <td>R6768</td>
+                <td>4-JUN-21</td>
+                <td>4-JUN-21</td>
+                <td>4-JUN-21</td>
+                <td>1789</td>
+                <td>NGN</td>
+                <td>W</td>
+                <td>FBN</td>
+                <td>WEB</td>
+                <td>N</td>
+                <td>4657</td>
+              </tr>
+
+              </tbody>
+            </table>
+            <div class="row justify-content-end">
+              <div class="col-2">
+                <a class="btn btn-danger w-100">Statement</a>
+              </div>
+              <div class="col-3">
+                <a class="btn btn-outline-danger w-100">Pay Premium From Suspense</a>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>UIYT78987874</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>UND</td>
+                <td>31-Mar-21</td>
+                <td>5 yr 8 mo</td>
+                <td>230,000</td>
+                <td>450,000</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>UTUT965</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>OAW</td>
+                <td>9-AUG-21</td>
+                <td>1 yr 6 mo</td>
+                <td>786,000</td>
+                <td>870,000</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="PWModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Payment History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h3 class="mt-4 mb-4">Pending Workflows</h3>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task</th>
+                <th scope="col">User Assigned</th>
+                <th scope="col">Group Assigned</th>
+                <th scope="col">Start</th>
+                <th scope="col">Due</th>
+                <th scope="col">Time Outside SLA</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: 5</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>UIYT78987874</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>UND</td>
+                <td>31-Mar-21</td>
+                <td>5 yr 8 mo</td>
+                <td>230,000</td>
+                <td>450,000</td>
+              </tr>
+              <tr>
+                <td>YUII09986467</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>UND</td>
+                <td>1-DEC-21</td>
+                <td>4 yr 9 mo</td>
+                <td>789,000</td>
+                <td>755,000</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: 5</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>UTUT965</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>OAW</td>
+                <td>9-AUG-21</td>
+                <td>1 yr 6 mo</td>
+                <td>786,000</td>
+                <td>870,000</td>
+              </tr>
+              <tr>
+                <td>TREYY97865</td>
+                <td>HAL</td>
+                <td>F</td>
+                <td>QQV</td>
+                <td>6-JAN-21</td>
+                <td>1 yr 6 mo</td>
+                <td>89,000</td>
+                <td>347,000</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="QModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Payment History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h3 class="mt-4 mb-4">Pending Workflows</h3>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task</th>
+                <th scope="col">User Assigned</th>
+                <th scope="col">Group Assigned</th>
+                <th scope="col">Start</th>
+                <th scope="col">Due</th>
+                <th scope="col">Time Outside SLA</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>UIYT78987874</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>UND</td>
+                <td>31-Mar-21</td>
+                <td>5 yr 8 mo</td>
+                <td>230,000</td>
+                <td>450,000</td>
+              </tr>
+              <tr>
+                <td>YUII09986467</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>UND</td>
+                <td>1-DEC-21</td>
+                <td>4 yr 9 mo</td>
+                <td>789,000</td>
+                <td>755,000</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                <th scope="col">Client Relationship</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Policy Status</th>
+                <th scope="col">Issue Date</th>
+                <th scope="col">Policy Term</th>
+                <th scope="col">Annualised Premium</th>
+                <th scope="col">Sum At Risk</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>UTUT965</td>
+                <td>OWN</td>
+                <td>L</td>
+                <td>OAW</td>
+                <td>9-AUG-21</td>
+                <td>1 yr 6 mo</td>
+                <td>786,000</td>
+                <td>870,000</td>
+              </tr>
+              <tr>
+                <td>TREYY97865</td>
+                <td>HAL</td>
+                <td>F</td>
+                <td>QQV</td>
+                <td>6-JAN-21</td>
+                <td>1 yr 6 mo</td>
+                <td>89,000</td>
+                <td>347,000</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="pendingWorkflowsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Workflows</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General
+              Business:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:{{'xx'}}
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task</th>
+                <th scope="col">User Assigned</th>
+                <th scope="col">Group Assigned</th>
+                <th scope="col">Start</th>
+                <th scope="col">Due</th>
+                <th scope="col">Time Outside SLA</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h2 class="mt-3">Pending Workflows</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task</th>
+                <th scope="col">User Assigned</th>
+                <th scope="col">Group Assigned</th>
+                <th scope="col">Start</th>
+                <th scope="col">Due</th>
+                <th scope="col">Time Outside SLA</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h2 class="mt-3">Pending Workflows</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task</th>
+                <th scope="col">User Assigned</th>
+                <th scope="col">Group Assigned</th>
+                <th scope="col">Start</th>
+                <th scope="col">Due</th>
+                <th scope="col">Time Outside SLA</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>FI</td>
+                <td>Fraud Investigation</td>
+                <td>J-BOND</td>
+                <td>Operations</td>
+                <td>01/01/2020 00:00</td>
+                <td>01/01/2020 00:00</td>
+                <td>--</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="pendingQuotesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-pending-quotes-life" type="button" role="tab" aria-controls="pills-life"
+                    aria-selected="true">Life: {{pendingQuotesList | pendingQuotesLength : 'L'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-pending-quotes-general"
+                    type="button" role="tab" aria-controls="pills-general" aria-selected="false">General
+              Business: {{ pendingQuotesList | pendingQuotesLength : 'G'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-pending-quotes-health"
+                    type="button" role="tab" aria-controls="pills-health" aria-selected="false">
+              Health: {{ pendingQuotesList | pendingQuotesLength : 'H'}}
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-pending-quotes-life" role="tabpanel"
+               aria-labelledby="pills-life-tab">
+            <h2 class="mt-3">Pending Quotes</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Quotation No</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">No of Covers</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Agent No</th>
+                <th scope="col">Total Premium</th>
+                <th scope="col">Days To Expiry</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of pendingQuotesList | pendingQuotesFilter : 'L'">
+                <td>{{item.quoteNo}}</td>
+                <td>{{item.ownerName}}</td>
+                <td>{{item.noOfCovers}}</td>
+                <td>{{item.productClass}}</td>
+                <td>{{item.productCode}}</td>
+                <td>{{item.createdOn}}</td>
+                <td>{{item.agentNo}}</td>
+                <td>{{item.totalPeriodicPremium}}</td>
+                <td>{{item.daysToExpiry}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <p class="text-center" *ngIf="!(pendingQuotesList | pendingQuotesLength : 'L')">No quotes to display</p>
+          </div>
+          <div class="tab-pane fade" id="pills-pending-quotes-general" role="tabpanel"
+               aria-labelledby="pills-general-tab">
+            <h2 class="mt-3">Pending Quotes</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Quotation No</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">No of Covers</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Agent No</th>
+                <th scope="col">Total Premium</th>
+                <th scope="col">Days To Expiry</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of pendingQuotesList | pendingQuotesFilter : 'G'">
+                <td>{{item.quoteNo}} some general shit</td>
+                <td>{{item.ownerName}}</td>
+                <td>{{item.noOfCovers}}</td>
+                <td>{{item.productClass}}</td>
+                <td>{{item.productCode}}</td>
+                <td>{{item.createdOn}}</td>
+                <td>{{item.agentNo}}</td>
+                <td>{{item.totalPeriodicPremium}}</td>
+                <td>{{item.daysToExpiry}}</td>
+              </tr>
+
+              </tbody>
+            </table>
+            <p class="text-center" *ngIf="!(pendingQuotesList | pendingQuotesLength : 'G')">No quotes to display</p>
+          </div>
+          <div class="tab-pane fade" id="pills-pending-quotes-health" role="tabpanel"
+               aria-labelledby="pills-health-tab">
+            <h2 class="mt-3">Pending Quotes</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Quotation No</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">No of Covers</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">Product Code</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Agent No</th>
+                <th scope="col">Total Premium</th>
+                <th scope="col">Days To Expiry</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of pendingQuotesList | pendingQuotesFilter : 'H'">
+                <td>{{item.quoteNo}} health shit</td>
+                <td>{{item.ownerName}}</td>
+                <td>{{item.noOfCovers}}</td>
+                <td>{{item.productClass}}</td>
+                <td>{{item.productCode}}</td>
+                <td>{{item.createdOn}}</td>
+                <td>{{item.agentNo}}</td>
+                <td>{{item.totalPeriodicPremium}}</td>
+                <td>{{item.daysToExpiry}}</td>
+              </tr>
+              </tbody>
+            </table>
+            <p class="text-center" *ngIf="!(pendingQuotesList | pendingQuotesLength : 'H')">No quotes to display</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editbank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+          <tr class="">
+            <th scope="col">Bank No</th>
+            <th scope="col">Account Name</th>
+            <th scope="col">Bank Method</th>
+            <th scope="col">Bank Name</th>
+            <th scope="col">Sort Code</th>
+            <th scope="col">Account No</th>
+            <th scope="col">Blocked</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>5667_1</td>
+            <td>Ogene Obaseki</td>
+            <td>NG Banking</td>
+            <td>FBN</td>
+            <td>05677889</td>
+            <td>21923776</td>
+            <td><select name="" id="">
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select></td>
+          </tr>
+          <tr>
+            <td>5667_1</td>
+            <td>Ogene Obaseki</td>
+            <td>NG Banking</td>
+            <td>FBN</td>
+            <td>05677889</td>
+            <td>21923776</td>
+            <td><select name="" id="">
+              <option value="Y">Y</option>
+              <option value="N">N</option>
+            </select></td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'addCustom-red'" [text]="'Create new Account'" data-bs-toggle="modal"
+                    data-bs-target="#selectPayment"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selectPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="selectPaymentTitle" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="selectPaymentTitle">Create New Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-client-select-payment></app-client-select-payment>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addDocumentModal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content p-5">
+      <div class="d-flex justify-content-between">
+        <h3 class="">Add Document</h3>
+        <button type="button" class="btn-close" aria-label="Close" data-bs-toggle="modal"
+                data-bs-target="#documentModal"></button>
+      </div>
+      <form [formGroup]="addDocumentForm">
+        <div class="row my-3">
+          <div class="col-md-4">
+            <label>File <span class="text-danger">*</span></label>
+            <!-- TODO replace below with a fileUpload component and use value accessor to tell angular forms how to access the File value -->
+            <div>
+              <app-button buttonType="uploadRed" imageUpload (extractedImg)="setNewDocumentImage($event)"></app-button>
+              <span>{{fileToBeUploaded}}</span>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+            <label>Title <span class="text-danger">*</span></label>
+            <input class="inputform" formControlName="title">
+          </div>
+          <div class="col-md-4">
+            <label>Category</label>
+            <select class="inputform" formControlName="category">
+              <option [value]="null"></option>
+              <option *ngFor="let category of categoryList" [value]="category.code">{{category.code}} -
+                {{category.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-4">
+            <label>Sensitivity</label>
+            <select class="inputform" formControlName="sensitivity">
+              <option [value]="null"></option>
+              <option *ngFor="let sensitivity of sensitivityList" [value]="sensitivity.code">{{sensitivity.title}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Branch</label>
+            <select class="inputform" formControlName="branch">
+              <option [value]="null"></option>
+              <option *ngFor="let branch of branchList" [value]="branch.code">{{branch.code}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Box No</label>
+            <input class="inputform" formControlName="boxNo">
+          </div>
+        </div>
+        <div class="d-flex justify-content-between my-3">
+          <div class="text-danger">
+            <p *ngIf="addDocumentForm.touched && !newDocumentFile">File is required</p>
+            <p *ngIf="addDocumentForm.get('title').invalid && addDocumentForm.get('title').touched">Title is
+              required</p>
+          </div>
+          <button class="btn btn-danger width-unset align-self-center px-5" (click)="onDocumentSave()"
+                  [disabled]="isDocSaving">
+            <span class="fa fa-spinner fa-spin" *ngIf="isDocSaving"></span>
+            <span *ngIf="!isDocSaving">Save</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="assignProviderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Assign Provider</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#registerClaimModal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container p-3">
+          <div>
+            <p class="me-5">Claim No: <span class="text-danger">5777*3</span></p>
+            <p>Cover Name: <span class="text-danger">Death</span></p>
+          </div>
+          <form>
+            <div class="row my-3">
+              <div class="col-md-5">
+                <label for="providerActionRequired" class="fw-normal small text-danger">Provider Action Required</label>
+                <select id="providerActionRequired" class="inputform">
+                  <option [value]="null"></option>
+                </select>
+              </div>
+            </div>
+            <div class="row my-3 align-items-end">
+              <div class="col-md-3">
+                <label for="providerNo" class="fw-normal small text-danger">Provider No</label>
+                <input type="text" class="inputform">
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#findProviderModal">
+                  <i class="fa fa-search"></i>&nbsp;Find
+                </button>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="inputform">
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-12">
+                <label for="instructionToProvider" class="fw-normal small text-danger">Instruction to Provider - <span
+                  class="text-secondary">Optional</span></label>
+                <textarea id="instructionToProvider" rows="5" class="inputform"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger px-3" data-bs-dismiss="modal"><i class="fa fa-save"></i>&nbsp;Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="findProviderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Find Provider</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#assignProviderModal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3">
+          <form>
+            <div class="my-3">
+              <label for="providerName" class="fw-normal small text-danger">Provider Name</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerCategory" class="fw-normal small text-danger">Provider Category</label>
+              <select class="inputform">
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="my-3">
+              <label for="providerCountry" class="fw-normal small text-danger">Provider Country</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerState" class="fw-normal small text-danger">Provider State</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerTown" class="fw-normal small text-danger">Provider Town</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="provider" class="fw-normal small text-danger">Provider</label>
+              <select class="inputform">
+                <option value=""></option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#assignProviderModal">
+          <span class="fa fa-search"></span> Search
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adjustClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="" name="test"
+                                     [stacked]="true"></app-input-basic>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="" name="test"
+                                     [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-search"></span>
+                      Find
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <label class="text-danger small">Narration</label>
+                    <textarea class="inputform">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <button data-bs-toggle="modal" data-bs-target="#historyModal" class="btn btn-danger btn-lg w-100">
+                      <span class="fa fa-history"></span>
+                      History
+                    </button>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-save"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-danger text-center text-bold">Policy No</div>
+                <div class="col small1 text-danger text-center text-bold">Owner</div>
+                <div class="col small1 text-danger text-center text-bold">Initial Estimate</div>
+                <div class="col small1 text-danger text-center text-bold">Total Adjustments</div>
+                <div class="col small1 text-danger text-center text-bold">Updated Amount</div>
+                <div class="col small1 text-danger text-center text-bold">Payment Type</div>
+                <div class="col small1 text-danger text-center text-bold">Currency</div>
+                <div class="col small1 text-danger text-center text-bold">Cover Name</div>
+                <div class="col-2 small1 text-danger text-center text-bold">Policy Code Claimed On</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+              <hr>
+              <table class="table table-responsive">
+                <thead>
+                <tr>
+                  <th scope="col">Action</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Reason</th>
+                  <th scope="col">Auth By</th>
+                  <th scope="col">Auth On</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Old Value</th>
+                  <th scope="col">New Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+                </tr>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-danger btn-lg w-100" data-bs-toggle="modal"
+                            data-bs-target="#adjustClaimModal">
+                      Adjust
+                    </button>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">Action</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adjustClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="" name="test"
+                                     [stacked]="true"></app-input-basic>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="" name="test"
+                                     [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-search"></span>
+                      Find
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <label class="text-danger small">Narration</label>
+                    <textarea class="inputform">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <button data-bs-toggle="modal" data-bs-target="#historyModal" class="btn btn-danger btn-lg w-100">
+                      <span class="fa fa-history"></span>
+                      History
+                    </button>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-save"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

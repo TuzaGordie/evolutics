@@ -1,0 +1,50 @@
+<app-top-nav></app-top-nav>
+<app-bottom-nav></app-bottom-nav> 
+<app-header></app-header>
+<nav>
+  <div class="nav nav-tabs mt-5 d-flex justify-content-center border-0" id="nav-tab" role="tablist">
+    <button class="nav-link border-0" id="nav-home-tab" [ngClass]="formService.tabs == 'companyInfo'? 'active' : ''"
+      data-bs-toggle="tab" data-bs-target="#nav-home"  
+      (click)="changeTab('companyInfo')" type="button" role="tab"
+      aria-controls="nav-home" aria-selected="true">Company Information</button>
+    <button class="nav-link border-0" id="nav-profile-tab" [ngClass]="formService.tabs == 'contactInfo'? 'active' : ''"
+      data-bs-toggle="tab" data-bs-target="#nav-profile" 
+      [disabled]="this.formService.companyData == null" 
+      (click)="changeTab('contactInfo')" type="button" role="tab"
+      aria-controls="nav-profile" aria-selected="false">Contact Information</button>
+    <button class="nav-link border-0" id="nav-contact-tab" [ngClass]="formService.tabs == 'directors'? 'active' : ''"
+      data-bs-toggle="tab" data-bs-target="#nav-contact" 
+      [disabled]="this.formService.companyData == null || 
+      this.formService.contactData == null" 
+      (click)="changeTab('directors')" type="button" role="tab"
+      aria-controls="nav-contact" aria-selected="false">Directors</button>
+    <button class="nav-link border-0" id="nav-contact-tab" [ngClass]="formService.tabs == 'paymentInfo'? 'active' : ''"
+      data-bs-toggle="tab" data-bs-target="#nav-about" 
+      [disabled]="this.formService.companyData == null || 
+      this.formService.contactData == null || 
+      this.formService.directorData == null " 
+      (click)="changeTab('paymentInfo')" type="button" role="tab"
+      aria-controls="nav-about" aria-selected="false">Payment Information</button>
+  </div>
+</nav>
+
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade " id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+    [ngClass]="formService.tabs == 'companyInfo'? 'active show' : ''">
+    <app-screenshot1></app-screenshot1>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"
+    [ngClass]="formService.tabs == 'contactInfo'? 'active show' : ''">
+    <app-screenshot2></app-screenshot2>
+  </div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"
+    [ngClass]="formService.tabs == 'directors'? 'active show' : ''">
+    <app-screenshot3></app-screenshot3>
+  </div>
+  <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-contact-tab"
+    [ngClass]="formService.tabs == 'paymentInfo'? 'active show' : ''">
+    <app-screenshot4 ></app-screenshot4>
+    <!-- <app-screenshot5 *ngIf="formService.showBankDetails == true"></app-screenshot5> -->
+  </div>
+</div>

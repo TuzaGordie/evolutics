@@ -1,0 +1,456 @@
+<app-form-navigation [title]="'View Group'"></app-form-navigation>
+<div class="container my-5">
+    <form [formGroup]="viewGroupForm">
+        <div class="d-flex justify-content-around">
+            <span class="p-2">Group No: <span style="color: #db0041">XXXXXX</span></span>
+            <span class="p-2">Owner Client Number: <span style="color: #db0041">XXXXXX</span></span>
+            <span class="p-2">Joint Owner Client Number: <span style="color: #db0041">XXXXXX</span></span>
+           
+            <span class="p-2">Agent: <span style="color: #db0041">XXXXXX</span></span>
+            <span class="p-2">Referrer: <span style="color: #db0041">XXXXXX</span></span>
+
+
+
+        </div>
+
+
+
+
+        <hr style="margin-top: 5px;">
+
+        
+
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Status</label><br>
+                    <input type="text" formControlName="quoteStatus" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+
+                </div>
+                <div class="mt-4">
+                    <label>Free Cover Limit</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+
+                </div>
+                
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Cover Commence</label><br>
+                    <input type="text" formControlName="fullName" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+
+                </div>
+                <div class="mt-4">
+                    <label>Cover Period</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+
+                </div>
+
+                
+
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Cover Expires</label><br>
+                    <input type="text" formControlName="createdDateTo" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>Payee Account</label><br>
+                    <input type="text" formControlName="premTermPayment" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+               
+
+
+            </div>
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Sector</label><br>
+                    <input type="text" formControlName="expiryDate" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>Premium Frequency</label><br>
+                    <input type="text" formControlName="groupTerm" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+                
+
+            </div>
+
+          
+
+            <div class="d-block mx-2">
+                <div class="mt-4">
+                    <label>Coinsured</label><br>
+                    <input type="text" formControlName="quoteStatus" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>Branch</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Lead Coinsurrer</label><br>
+                    <input type="text" formControlName="currencyType" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>No o/s medical UWR</label><br>
+                    <input type="text" formControlName="annualisedPayment" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Coinsurance Share</label><br>
+                    <input type="text" formControlName="quoteValidity" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>Currency</label><br>
+                    <input type="text" formControlName="currencyType" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Oustanding Premiums</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+                    <!-- <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a> -->
+
+                </div>
+                <div class="mt-4">
+                    <label>No of Covers</label><br>
+                    <input type="text" formControlName="createdBy" readonly class="inputform1 ">
+                    <!-- <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a> -->
+
+                </div>
+
+            </div>
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>No Inactive</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>Subgroups</label><br>
+                    <input type="text" formControlName="branch" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="d-block ml-2">
+                <div class="mt-4">
+                    <label>Sign Off</label><br>
+                    <input type="text" formControlName="sumAtRisk" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+                <div class="mt-4">
+                    <label>Interests (%)</label><br>
+                    <input type="text" formControlName="branch" readonly class="inputform1 ">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModal" (click)="onEdit('')">Edit
+                        <i class="fas fa-pencil-alt ml-2" aria-hidden="true"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <br>
+        <div class="col-md-12 mx-auto">
+
+            <span class="p-2" style="color: #db0041">Cover Details - If SubGroups exists, click SubGroups</span>
+<br>
+         
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+           <table class="table">
+                <thead class="py-3">
+                  <tr>
+                    <th scope="col" >Group No</th>
+                    <th scope="col" >Full Name</th>
+                    <th scope="col">Policy No</th>
+                    <th scope="col">Product Class</th>
+                    <th scope="col">Product Code</th>
+                    <th scope="col">No of Members</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">Agent No</th>
+                    
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let it of groupInfoList">
+                    <th scope="row">{{it.QUOTE_NO}}</th>
+                    <td>{{it.OWNER_NAME}}</td>
+                    <td>{{it.REFERRER_NO}}</td>
+                    <td>{{it.PRODUCT_CLASS}}</td>
+                    <td>{{it.PRODUCT_CODE}}</td>
+                    <td>{{it.NO_OF_LIVES_COVERED}}</td>
+                    <td>{{it.CREATED_DATE_FROM}}</td>
+                    <td>{{it.AGENT_NO}}</td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+    
+    </div>
+    </div>
+        </div>
+
+
+<!-- <table class="table" >
+                <thead class="py-3">
+                    <tr>
+                        <th scope="col">Cover Code</th>
+                        <th scope="col">Cover Name</th>
+                        <th scope="col">SA Basis</th>
+                        <th scope="col">SA Factor</th>
+                        <th scope="col">Fixed SA</th>
+                        <th scope="col">Unit Rate (%)</th>
+                        <th scope="col">Rate Table</th>
+                        <th scope="col">Adjustment (%)</th>
+                        <th scope="col">Issue Dt</th>
+                        
+
+
+                    </tr>
+                </thead>
+                <tbody  >
+                    <tr *ng-repeat="let item of groupInfoList">
+                        <th scope="row" >{{item.QUOTE_NO}}</th>
+                        <td>{{item.AGENT_NAME}}</td>
+                        <td>{{item.NO_OF_LIVES_COVERED}}</td>
+                        <td>{{item.ITERATIONS}}</td>
+                        <td>{{item.DAYS_TO_SLA}}</td>
+                        <td>{{item.CREATED_DATE_FROM}}</td>
+                        <td>{{item.UNCOVERED_EXPOSURE}}</td>
+                        <td>{{item.UNCOVERED_EXPOSURE}}</td>
+                        <td>{{item.UNCOVERED_EXPOSURE}}</td>
+                        
+
+
+                    </tr>
+                </tbody>
+            </table> -->
+
+        </div>
+
+        <hr class="my-5">
+        <div class="d-flex justify-content-around  ">
+            <button type="button" class="btn-ir py-0 px-4 "
+                [routerLink]="['/life/documents']">
+                <span class="mx-4 my-auto">Documents</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Workflow</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Endorsement</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Reinsurance</span></button>
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-1 my-auto">Pricing</span></button>
+          
+            <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                <span class="mx-4 my-auto">Underwriting</span></button>
+
+                <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                    <span class="mx-4 my-auto">Commissions</span></button>
+
+                    <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                        <span class="mx-4 my-auto">Future_Actions </span></button>
+
+                        <button type="button" class=" btn-ir py-0 px-4 " [routerLink]="[]">
+                            <span class="mx-4 my-auto">Perils</span></button>
+
+        </div>
+
+        <br>
+
+
+        
+        <div id="section_cardsno" class="section-cards d-flex justify-content-around">
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Credit Note Balance</h6>
+                    <p id="card-text">5</p>
+                </div>
+
+            </div>
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Total Payments Received</h6>
+                    <p id="card-text">345,000</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Total Payments Outwards</h6>
+                    <p id="card-text">345,000</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Members</h6>
+                    <p id="card-text">5</p>
+                </div>
+
+            </div>
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Uncovered SAR</h6>
+                    <p id="card-text">6</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Accounts</h6>
+                    <p id="card-text">6</p>
+                </div>
+
+            </div>
+
+            <div class="card color1 shadow-sm" [routerLink]="['']">
+                <div class="card-body">
+                    <h6 class="card-title">Pending Payment Outward</h6>
+                    <p id="card-text">6</p>
+                </div>
+
+            </div>
+
+        
+
+          
+
+        </div>
+
+    </form>
+
+
+
+
+</div>
+
+
+
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="notemodel" tabindex="-1" aria-labelledby="notemodelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notemodelLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-4">
+                <label>Note</label><br>
+                <input type="textarea" formControlName="note" 
+                class="inputform " >
+            </div>
+            <div class="mt-4">
+                <label>Visible to All</label>
+                <input type="checkbox" formControlName="visiblebox"  >
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->

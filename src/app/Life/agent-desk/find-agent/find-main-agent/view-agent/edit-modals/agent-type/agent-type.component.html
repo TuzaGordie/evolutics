@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{"Edit Agent Type"|appTranslate|async}}</h5>
+    <button mat-dialog-close class="btn-close"></button>
+</div>
+<mat-dialog-content>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>{{"Agent Type"|appTranslate|async}}</th>
+                <th>{{"Effective Date"|appTranslate|async}}</th>
+                <th><!--Edit--></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="!isLoadingAgentType">
+                <ng-container *ngFor="let record of agentTypeForm.controls">
+                    <tr *ngIf="gotData" [formGroup]="$any(record)">
+                        <td class="position-relative">
+                            <select type="text" formControlName="type" class="form-control" [attr.disabled]="recordStatuses[record.value.id] != 'EDITING' ? 'disabled' : null">
+                                <option value=""></option>
+                                <option *ngFor="let type of agentTypesList" [value]="type.type">{{type.type}} - {{type.description}}</option>
+                            </select>
+                            <div *ngIf="isLoadingAgentTypesList" class="position-absolute top-50 start-50 translate-middle">
+                                <span class="spinner-border spinner-border-sm text-primary"></span>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="date" formControlName="typeDate" class="form-control" [readonly]="recordStatuses[record.value.id] != 'EDITING'">
+                        </td>
+                        <td class="position-relative">
+                            <app-button *ngIf="!recordStatuses[record.value.id] || recordStatuses[record.value.id] == 'VIEW'" buttonType="edit" (click)="recordStatuses[record.value.id] = 'EDITING'">Edit</app-button>
+                            <app-button *ngIf="recordStatuses[record.value.id] == 'EDITING'" buttonType="custSave" (click)="onUpdateRecord(record)"></app-button>
+                            <div *ngIf="recordStatuses[record.value.id] == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <tr *ngIf="!gotData && showNewRecordForm" [formGroup]="newRecordForm">
+                    <td class="position-relative">
+                        <select type="text" formControlName="type" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let type of agentTypesList" [value]="type.type">{{type.type}} - {{type.description}}</option>
+                        </select>
+                        <div *ngIf="isLoadingAgentTypesList" class="position-absolute top-50 start-50 translate-middle">
+                            <span class="spinner-border spinner-border-sm text-primary"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="date" formControlName="typeDate" class="form-control">
+                    </td>
+                    <td class="position-relative">
+                        <app-button *ngIf="!isCreatingRecord" buttonType="save" (click)="onCreateRecord()"></app-button>
+                        <div *ngIf="isCreatingRecord" class="position-absolute top-50 start-50 translate-middle">
+                            <div class="fa fa-refresh fa-spin"></div>
+                        </div>
+                    </td>  
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    <ng-container *ngIf="!gotData && !showNewRecordForm && !isLoadingAgentType">
+        <div class="text-center">
+            {{"No record found"|appTranslate|async}}
+        </div>
+        <div class="row d-flex justify-content-center mt-3">
+            <app-btn type="outline"  (mclick)="showNewRecordForm = true" icon="add" class="col-md-2">
+                Add new record
+            </app-btn>
+        </div>
+    </ng-container>
+    <loader [loading]="isLoadingAgentType"></loader>
+</mat-dialog-content>

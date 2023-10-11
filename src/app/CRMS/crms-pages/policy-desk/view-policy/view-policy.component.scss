@@ -1,0 +1,142 @@
+
+.profileimg{
+    border-radius: 50%;
+   /*  width: 200px; */
+    height: 200px;
+}
+.btn-ir{
+    border-top-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    border-radius: 0px;
+    padding-right: 10px;
+    padding: 10px;
+}
+
+.btn-ir:hover{
+    color: white;
+background-color: #4D56F9;
+margin-top: -7px;
+transition: 0.5s ease-in-out;
+box-shadow: 0px 15px 20px -8px #111;
+}
+
+#section_cards .color1:after {
+    content: "";
+    background: #5D26CE;
+    width: 80px;
+    height: 60px;
+    border-top-right-radius: 5rem;
+    border-bottom-left-radius: 20px;
+}
+.card{
+    width: 13rem;
+    height: 8rem;
+    background: #4E57FC;
+    color: white;
+    font-size: 12px;
+}
+label{
+    font-size: 12px !important;
+}
+.inputform1{
+    background-color: transparent;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+.inputform1:focus {
+    color: #212529;
+    background-color: transparent;
+    border-color: none;
+    outline: 0;
+}
+
+a {
+    font-size: 12px;
+}
+
+.higlightbox{
+    border: 2px solid blue !important;
+}
+
+#card-text{
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    font-size: 30px;
+}
+
+
+
+/* Element | http://localhost:4200/ */
+
+button.btn-ir:nth-child(1) {
+    margin-right: 14px;
+  }
+
+  button.btn-ir:nth-child(1):hover {
+    height: 45px;
+
+border-top-right-radius: 10px !important;
+border-bottom-left-radius: 10px !important;
+margin-right: 14px;
+  }
+  
+  /* Element | http://localhost:4200/ */
+  
+  button.btn-ir:nth-child(2) {
+    margin-right: 14px;
+  }
+
+  button.btn-ir:nth-child(2):hover {
+    border-top-right-radius: 10px !important;
+border-bottom-left-radius: 10px !important;
+margin-right: 14px;
+  }
+
+  button.btn-ir:nth-child(3) {
+    margin-right: 14px;
+  }
+
+  button.btn-ir:nth-child(4) {
+    margin-right: 14px;
+  }
+
+  button.btn-ir:nth-child(5) {
+    margin-right: 14px;
+  }
+
+  button.btn-ir:nth-child(6) {
+    margin-right: 7px;
+  }
+
+  button.btn-ir:nth-child(7) {
+    margin-right: 14px;
+  }
+  
+  .mx-4 {
+    margin-right: auto !important;
+    margin-left: 0.5rem !important;
+  }
+
+  .card-title {
+    margin-bottom: 2.5rem;
+    
+  }
+
+  table thead {
+    background-color:#3735a5 ;
+    color: white;
+  }
+  
+  table th:first-child{
+      border-bottom-left-radius: 10px;
+      -webkit-border-bottom-left-radius: 10px;
+      -moz-border-radius-bottomleft: 10px;
+    }
+    
+    table th:last-child{
+      border-top-right-radius: 10px;
+      -webkit-border-top-right-radius: 10px;
+      -moz-border-radius-topright: 10px;
+    }

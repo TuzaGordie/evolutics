@@ -1,0 +1,48 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / General  Ledger Mapping'"></app-form-navigation> -->
+<div class="container">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <label>{{"Select Company"|appTranslate|async}}</label>
+      <select class=" form-control control-bg-gray" (change)="clearOtherFields(0)" [(ngModel)]="accountCompany">
+        <option *ngFor="let item of accountCompanies" [value]="item.code">
+          {{item.code}} - {{item.description}}
+        </option>
+      </select>
+    </div>
+
+  </div><br>
+  <!-- <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <label>{{"Select Account Group"|appTranslate|async}}</label>
+      <select class=" form-control control-bg-gray" (change)="clearOtherFields(1)" [(ngModel)]="accountGroup">
+        <option *ngFor="let item of accountGroups" [value]="item.accountGroup">
+          {{item.accountGroup}} - {{item.description}}
+        </option>
+      </select>
+
+    </div>
+  </div><br> -->
+  <!-- <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2">
+      <label>{{"Select All Accounts"|appTranslate|async}}</label>
+      <input type="checkbox" class=" form-control control-bg-gray" (change)="clearOtherFields(2)" [(ngModel)]="allAccount" value="0">
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="dark" icon="show" [valid]="accountCompany != null && accountCompany != ''" (click)="show()">Show</app-btn>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,153 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{'Edit Social Media Accounts'|appTranslate|async}}</h5>
+  <button type="button" class="btn-close" (click)="closeModal()"></button>
+</div>
+
+<mat-dialog-content>
+  <table class="table table-borderless table-striped mt-5">
+    <thead>
+      <tr class="">
+        <th scope="col">{{'Platform Logo'|appTranslate|async}}</th>
+        <th scope="col">{{'Platform name'|appTranslate|async}}</th>
+        <th scope="col">{{'Username'|appTranslate|async}}</th>
+        <th scope="col">{{'Edit'|appTranslate|async}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let media of socialMediaForm.controls; index as i">
+        <tr [formGroup]="$any(media)">
+          <td>
+            <img
+              src="{{ media.value.platform | uppercase | socialMediaLogo }}"
+              alt="{{ media.value.platform | lowercase }} logo"
+            />
+          </td>
+          <td>
+            <select
+              class="form-control"
+              [attr.disabled]="
+                socialMediaEditStatus[media.value.id] != 'EDITING'
+                  ? 'disabled'
+                  : null
+              "
+              formControlName="platform"
+              [ngClass]="
+                isFieldInvalid(media, 'platform') && 'border border-danger'
+              "
+            >
+              <option
+                *ngFor="let platform of socialPlatformsList"
+                [value]="platform"
+              >
+                {{ platform | titlecase }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <input
+              class="form-control"
+              [readonly]="socialMediaEditStatus[media.value.id] != 'EDITING'"
+              type="text"
+              formControlName="username"
+              [ngClass]="
+                isFieldInvalid(media, 'username') && 'border border-danger'
+              "
+            />
+          </td>
+          <td class="position-relative">
+            <app-button
+              *ngIf="socialMediaEditStatus[media.value.id] == 'VIEW'"
+              buttonType="edit"
+              (click)="socialMediaEditStatus[media.value.id] = 'EDITING'"
+            ></app-button>
+            <app-button
+              *ngIf="socialMediaEditStatus[media.value.id] == 'EDITING'"
+              buttonType="custSave"
+              (click)="editSocialMediaAccount($any(media))"
+            ></app-button>
+            <div
+              *ngIf="socialMediaEditStatus[media.value.id] == 'PENDING'"
+              class="position-absolute top-50 start-50 translate-middle"
+            >
+              <div class="fa fa-refresh fa-spin text-primary"></div>
+            </div>
+          </td>
+          <td class="position-relative">
+            <app-button
+            *ngIf="!isDeletingRecord[media.value.id]"
+              buttonType="delete"
+              (click)="confirmDeleteRecord(media, i)"
+            ></app-button>
+            <div *ngIf="isDeletingRecord[media.value.id]" class="position-absolute start-50 top-50 translate-middle">
+                <span class="fa fa-refresh fa-spin"></span>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="showNewSocialMediaForm">
+        <tr [formGroup]="newSocialMediaForm">
+          <td>
+            <img src="{{ platformSelect.value | socialMediaLogo }}" alt="" />
+          </td>
+          <td>
+            <select
+              class="form-control"
+              formControlName="platform"
+              [ngClass]="
+                isFieldInvalid(newSocialMediaForm, 'platform') &&
+                'border border-danger'
+              "
+              #platformSelect
+            >
+              <option
+                *ngFor="let platform of socialPlatformsList"
+                [value]="platform"
+              >
+                {{ platform | titlecase }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <input
+              class="form-control"
+              formControlName="username"
+              placeholder="username"
+              [ngClass]="
+                isFieldInvalid(newSocialMediaForm, 'username') &&
+                'border border-danger'
+              "
+            />
+          </td>
+          <td class="position-relative" colspan="2">
+            <app-button
+              *ngIf="!isCreatingSocialMedia"
+              buttonType="custSave"
+              (click)="createSocialMedia()"
+            >
+            </app-button>
+            <div
+              *ngIf="isCreatingSocialMedia"
+              class="position-absolute top-50 start-50 translate-middle"
+            >
+              <span class="fa fa-refresh fa-spin text-primary"></span>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <p
+    *ngIf="newSocialMediaForm.touched && newSocialMediaForm.invalid"
+    class="text-danger text-center"
+  >
+    fill all required values
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <app-button
+    [buttonType]="'addCustom'"
+    [text]="'Create new Account'"
+    (click)="showNewSocialMediaForm = true"
+  >
+  </app-button>
+</mat-dialog-actions>

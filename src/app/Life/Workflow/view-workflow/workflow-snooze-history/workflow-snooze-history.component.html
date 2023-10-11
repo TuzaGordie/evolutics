@@ -1,0 +1,93 @@
+<router-outlet>
+  <!-- Snooze Modal -->
+</router-outlet>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <hr>
+      <table class="table table-responsive  table-striped px-5">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col">{{'Snooze From'|appTranslate|async}}</th>
+          <th scope="col">{{'Snooze To'|appTranslate|async}}</th>
+          <th scope="col">{{'Reason'|appTranslate|async}}</th>
+          <th scope="col">{{'Additional Comment'|appTranslate|async}}</th>
+          <th scope="col">{{'Snoozed By'|appTranslate|async}}</th>
+          <th scope="col">{{'Auth By'|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let item of snoozeList">
+          <tr>
+            <td>{{ item.snoozeDate }}</td>
+            <td>{{ item.snoozeUntilDate }}</td>
+            <td>{{ item.snoozeReason }}</td>
+            <td>{{ item.snoozeComment }}</td>
+            <td>{{ item.snoozeBy }}</td>
+            <td>{{ item.snoozeAuthBy }}</td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+      <p class="my-3 text-center" *ngIf="isEmptyList">
+        {{'No result to display'|appTranslate|async}}
+      </p>
+      <br>
+      <div class="row mt-4 justify-content-end">
+        <div class="col-md-2">
+          <app-button buttonType="default" text="Snooze" data-bs-toggle="modal"
+                      data-bs-target="#snoozeModal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="snoozeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Snooze'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Basis'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Duration'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="" class="form-label text-primary">{{'Reason'|appTranslate|async}}</label>
+
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Additional Comment'|appTranslate|async}}</label>
+
+            <textarea name="" id="" rows="2" class="form-control control-bg-gray"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.checkmark{
+  position: absolute;
+  left: 75%;
+  top: 25%;
+  font-size: 25px;
+  color: green;
+  display: block !important;
+}
+
+.valid {
+  border: 2px solid green;
+  outline: 0;
+}
+
+.invalid {
+  border: 2px solid red;
+  outline: 0;
+}
+
+.uncheckmark{
+  position: absolute;
+  left: 75%;
+  top: 25%;
+  font-size: 25px;
+  color: red;
+  display: block !important;
+}

@@ -1,0 +1,47 @@
+<app-form-navigation [cashtitle] = "'Receipting/Find Workflow Task List'"></app-form-navigation>
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+  
+        <h1 class="my-5">Workflow Task Search List</h1>
+        <hr>
+        <table class="table table-responsive  table-striped px-5">
+          <thead class="py-3 theader">
+          <tr>
+  
+            <th scope="col">Level</th>
+            <th scope="col">Business</th>
+            <th scope="col">Task</th>
+            <th scope="col">Ref Category</th>
+            <th scope="col"></th>
+            <th scope="col">Start</th>
+            <th scope="col">Due</th>
+            <th scope="col">Time Outside SLA</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of workflowData">
+            <td>{{item.id}}</td>
+            <td>{{item.busLine}}</td>
+            <td>{{item.clientNo}}</td>
+            <td>{{item.refCat}}</td>
+            <td>{{item.refCat}}</td>
+            <td>{{item.dueOn}}</td>
+            <td>{{item.finishOn}}</td>
+            <td>{{item.timeOsSla}}</td>
+            <td>
+              <!-- <app-button [buttonType]="'addCustom'" [text]="'Action'"></app-button> -->
+              <button type="button" class="btn btn-lg action-button">
+                Action <i class="fa fa-plus"></i> 
+              </button>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+  
+      </div>
+    </div>
+  </div>
+  

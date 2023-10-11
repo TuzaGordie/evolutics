@@ -1,0 +1,38 @@
+.createbtn{
+    background-color: white;
+    border: 2px solid #B22222;
+    color: #B22222;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .radiodiv{
+    position: relative;
+  }
+  span{
+    position: absolute;
+    color: #B22222;
+    font-size: 13px;
+    left: 0px;
+    cursor: pointer;
+  }
+  input[type=radio]{
+border: 2px solid #B22222;
+-webkit-appearance: none;
+padding: 13px 40px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  input[type=radio]:checked{
+background-color: #B22222;
+color: white;
+
+  }
+  input[type=radio]:checked + span{
+    color: white;
+    
+      }
+
+      .genderspan{
+        left: 82px;
+        top: 5px;
+      }

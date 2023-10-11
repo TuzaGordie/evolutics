@@ -1,0 +1,19 @@
+<div class="container-sm mt-5 " id="form-body">
+    <div class="row">
+        <div class="col-md-6 mx-auto my-5 align-middle">
+            <form>
+                <div class="row">
+                    <div class="form-group col-lg-8 mt-2">
+                        <label>{{'Enter New Bonus Code'|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="text" />
+                    </div>
+
+                    <div class="form-group col-lg-4 mt-2">
+                        <label>&nbsp;</label>
+                        <app-button [buttonType]="'createclone'" routerLink="../show-bonus-rates"></app-button>
+                        <!-- <a class="form-control btn btn-outline-secondry" href="life/report/new-create"><i class="fa fa-plus"></i> Create New</a> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,8 @@
+
+.form-control[readonly]:not([type='checkbox']){
+    background-color: #f4f4f4;
+}
+
+label {
+    white-space: nowrap
+}

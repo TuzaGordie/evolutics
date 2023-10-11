@@ -1,0 +1,102 @@
+<router-outlet>
+  <!-- for modal -->
+</router-outlet>
+<div class="container">
+
+  <div class="row justify-content-center mb-4">
+    <div class="col">
+      <label for="" class="small1">{{'WF Number'|appTranslate|async}} : <span class="text-primary">{{wfNo}}</span></label>
+    </div>
+    <div class="col">
+      <label for="" class="small1">{{'Task Code'|appTranslate|async}} : <span class="text-primary">{{tcd}}</span></label>
+    </div>
+    <div class="col">
+      <label for="" class="small1">{{'Ref Category'|appTranslate|async}} : <span class="text-primary">{{rct}}</span></label>
+    </div>
+    <div class="col">
+      <label for="" class="small1">{{'Ref Number'|appTranslate|async}} : <span class="text-primary">{{rno}}</span></label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <table class="table table-responsive  table-striped px-5">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col">{{'Action'|appTranslate|async}}</th>
+          <th scope="col">{{'Status'|appTranslate|async}}</th>
+          <th scope="col">{{'Comments'|appTranslate|async}}</th>
+          <th scope="col">{{'Action By'|appTranslate|async}}</th>
+          <th scope="col">{{'On'|appTranslate|async}}</th>
+          <th scope="col">{{'Linked WF'|appTranslate|async}}</th>
+          <th scope="col">{{'Reassign To'|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of history; index as i">
+          <td>{{item.id}}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.narration}}</td>
+          <td>{{item.actionBy}}</td>
+          <td></td>
+          <td>{{item.linkedWf}}</td>
+          <td>{{item.reassignedTo}}</td>
+
+
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <div class="row mt-4">
+        <div class="col-md-2">
+          <app-button buttonType="default" text="Reassign" data-bs-toggle="modal" data-bs-target="#reassignModal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="reassignModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Reassign'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="col-6 mx-auto">
+
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'User Group'|appTranslate|async}}: </label>
+                <select name="" id="" class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'User'|appTranslate|async}}: </label>
+                <select name="" id="" class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="" class="form-label text-primary">{{'Comment'|appTranslate|async}}: </label>
+                <textarea name="" id="" class="form-control control-bg-gray" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="submit" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,54 @@
+<app-form-navigation [title] = "'View Agent'"></app-form-navigation>
+<div class="container-fluid my-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h1 class="my-5">{{"Pending Payments"|appTranslate|async}}</h1>
+
+            <table class="table table-responsive  table-striped" style="font-size: 14px;">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">{{"Payment Id"|appTranslate|async}}</th>
+                    <th scope="col">{{"Batch No"|appTranslate|async}}</th>
+                    <th scope="col">{{"Initial Estimate"|appTranslate|async}}</th>
+                    <th scope="col">{{"Adjustments"|appTranslate|async}}</th>
+                    <th scope="col">{{"Current Estimate"|appTranslate|async}}</th>
+                    <th scope="col">{{"Claim Status"|appTranslate|async}}</th>
+                    <th scope="col">{{"Days To SLA"|appTranslate|async}}</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">{{"Completion Rate"|appTranslate|async}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of pendingPaymentsList" (click)="navigateback();" >
+                    <th scope="row">{{item.PAYOUT_CODE}}</th>
+                    <td>{{item.BATCH_NO}}</td>
+                    <td>{{item.INITIAL_ESTIMATE}}</td>
+                    <td></td>
+                    <td>{{item.CURRENT_ESTIMATE}}</td>
+                    <td>{{item.CLAIM_NO}}</td>
+                    <td>{{item.DAY_TO_SLA}}</td>
+                    <td>{{item.COMPLETE_RATE}}</td>
+                    <td class="p-0 d-flex g-3">
+                      <app-button class="m-1" [buttonType]="'edit'" [text]="'Change Status'"
+                      ></app-button>
+                      <app-button class="m-1"  [buttonType]="'generate'" [text]="'Generate DV'"
+                      ></app-button>
+                      <app-button class="m-1"  [buttonType]="'adjust'" [text]="'Adjust'"
+                      ></app-button>
+                      <app-button class="m-1"  [buttonType]="'history'" [text]="'History'"
+                      ></app-button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+    </div>
+    <div class="col-md-12 mx-auto mt-5">
+        <app-button buttonType="addCustom"  class="btn p-0 px-4 btn-radius py-2" style="float: right; background-color: #5D26CE; color:white">
+            <span class="mx-3 my-auto">Register New Claim</span></app-button>
+    </div>
+    </div>
+
+        </div>
+
+

@@ -1,0 +1,32 @@
+<app-form-navigation [cashtitle] = "'Reports/Clone Reports'"></app-form-navigation> 
+<div class="container-sm mt-5 " id="form-body">
+    <div class="row">
+        <div class="col-md-6 mx-auto my-5 align-middle">
+            <form>
+                <div class="row">
+                    <div class="form-group col-lg-8 mt-2">
+                        <label>Enter Code for Report</label>
+                        <input class="form-control  control-bg-gray" type="text" />
+                    </div>
+                    <div class="form-group col-lg-8 mt-2">
+                        <label>Select Report Group</label>
+                        <select class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+                    </div>
+                    <div class="form-group col-lg-4 mt-4">
+                        <label>&nbsp;</label>
+                        <button type="button" routerLink='/cash/cash-clone-new-report'
+                        class="btn btn-prime  px-4 py-2 mt-2"> <i class="fas fa-plus px-2 "></i> Create New</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

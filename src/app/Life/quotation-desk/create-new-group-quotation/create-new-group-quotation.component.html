@@ -1,0 +1,1100 @@
+<div class="container">
+  <ul class="nav nav-pills  nav-justified" id="nav-tab" role="tablist">
+    <li class="nav-item" role="presentation"> <button class="nav-link active" id="pills-owner-infos-tab"
+        data-bs-toggle="pill" data-bs-target="#pills-owner-infos" type="button" role="tab"
+        aria-controls="pills-owner-infos" aria-selected="true">{{'Owner Informations'|appTranslate|async}} </button>
+    </li>
+    <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-cover-details-tab"
+        data-bs-toggle="pill" data-bs-target="#pills-cover-details" type="button" role="tab"
+        aria-controls="pills-cover-details" aria-selected="false">{{'Cover Details'|appTranslate|async}} </button> </li>
+    <li class="nav-item" role="presentation"> <button class="nav-link" id="pills-agent-ref-tab" data-bs-toggle="pill"
+        data-bs-target="#pills-agent-ref" type="button" role="tab" aria-controls="pills-agent-ref"
+        aria-selected="false">{{'Agent / REF. Agent'|appTranslate|async}} </button> </li>
+    <!-- <li class="nav-item" role="presentation">      <button class="nav-link" id="pills-beneficiary-tab" data-bs-toggle="pill" data-bs-target="#pills-beneficiary"              type="button" role="tab" aria-controls="pills-beneficiary" aria-selected="false">Members      </button>    </li> -->
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-owner-infos" role="tabpanel"
+      aria-labelledby="pills-owner-infos-tab">
+      <app-view-corporate-client-comp [clientNo]="clientNo"></app-view-corporate-client-comp>
+    </div>
+    <div class="tab-pane fade" id="pills-cover-details" role="tabpanel" aria-labelledby="pills-cover-details-tab">
+      <div class="row mt-3">
+        <p class="col-md-4">{{'Product Class'|appTranslate|async}}: <span class="text-primary">{{productClass}}</span>
+        </p>
+        <p class="col">{{'Product Code'|appTranslate|async}}: <span class="text-primary">{{productCode}}</span></p>
+      </div>
+      <div class="row">
+        <hr class="mt-4">
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group"> <label
+              class="form-label text-primary">{{'Application Date'|appTranslate|async}}</label> <input type="date"
+              class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col">
+          <div class="form-group"> <label
+              class="form-label text-primary">{{'Cover Start Date'|appTranslate|async}}</label> <input type="date"
+              class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label class="form-label text-primary">{{'Cover Period'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray" placeholder="Years"> </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label class="form-label text-primary">&nbsp;</label> <input type="text "
+              class="form-control control-bg-gray" placeholder="Months"> </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label class="form-label text-primary">&nbsp;</label> <input type="text "
+              class="form-control control-bg-gray" placeholder="Days"> </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group"> <label
+              class="form-label text-primary">{{'Cover End Date'|appTranslate|async}}</label> <input type="date"
+              class="form-control control-bg-gray"> </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group"> <label class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option *ngFor="let currency of currenciesList" [value]="currency.code">{{currency.code}} -
+                {{currency.description}}</option>
+            </select> </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <label
+              class="form-label text-primary">{{'Premium Payment Term'|appTranslate|async}}</label> <input type="text"
+              class="form-control control-bg-gray" placeholder="Years"> </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <label class="form-label text-primary">&nbsp;</label> <input type="text"
+              class="form-control control-bg-gray" placeholder="Months"> </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <label class="form-label text-primary">&nbsp;</label> <input type="text"
+              class="form-control control-bg-gray" placeholder="Days"> </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group"> <label
+              class="form-label text-primary">{{'Premium payment Method'|appTranslate|async}}</label> <select name=""
+              id="" class="form-control control-bg-gray" [(ngModel)]="paymentMethod" (change)="setPlan(value)" #value>
+              <option>{{'Select one option'|appTranslate|async}}</option>
+              <option *ngFor="let ppm of premiumPaymentMethodsList" [value]="ppm.method">{{ppm.method}}</option>
+            </select> </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group"> <label
+              class="form-label text-primary">{{'Premium Payment Frequency'|appTranslate|async}}</label> <select name=""
+              id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select> </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group"> <label class="form-label text-primary">{{'Discount Code'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option *ngFor="let dc of discountCodesList" [value]="dc.code">{{dc.code}} - {{dc.description}}</option>
+            </select> </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group"> <label class="form-label text-primary">{{'Discount rate'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray"> </div>
+        </div>
+      </div>
+      <div class="row justify-content-center my-3">
+        <div class="col-3">
+          <div class="form-group"> <label
+              class="form-label text-primary w-100 text-center">{{'SubGroup'|appTranslate|async}}</label> <input
+              type="checkbox" class="form-control control-bg-gray mx-auto" (change)="isSubGroup = !isSubGroup"> </div>
+        </div>
+        <div class="col"> <label for="" class="form-label text-center w-100 text-primary">
+            {{'CoInsured'|appTranslate|async}} </label> <input type="checkbox"
+            class="control-bg-gray form-control mx-auto" (change)="isCoinsured = !isCoinsured"> </div>
+        <div class="col"> <label for="" class="form-label text-center w-100 text-primary">
+            {{'Restrict Scheme Access'|appTranslate|async}} </label> <input type="checkbox"
+            class="control-bg-gray form-control mx-auto" data-bs-toggle="modal" data-bs-target="#restrictAccessModal">
+        </div>
+        <div class="col"> <label for="" class="form-label text-center w-100 text-primary">
+            {{'Scheme Authorized'|appTranslate|async}} </label> <input type="checkbox"
+            class="control-bg-gray form-control mx-auto"> </div>
+      </div>
+      <div *ngIf="isCoinsured">
+        <h5> {{'List of Co-insurers'|appTranslate|async}} </h5>
+        <div *ngFor="let i of coinCounter()" class="row">
+          <div class="col"> <label for=""> &nbsp; </label> <input type="text" class="form-control control-bg-gray"
+              placeholder="Provider No of Co-Insurer"> </div>
+          <div class="col-1"> <label for=""> &nbsp; </label>
+            <app-button buttonType="find" data-bs-toggle="modal" data-bs-target="#findModal"></app-button>
+          </div>
+          <div class="col"> <label for="">&nbsp; </label> <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col-1"> <label for=""
+              class="form-label w-100 text-center text-primary">{{'Lead'|appTranslate|async}} </label> <input
+              type="checkbox" class="form-control control-bg-gray mx-auto"> </div>
+          <div class="col-2"> <label for="" class="form-label text-primary">{{'share'|appTranslate|async}} % </label>
+            <input type="text" class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="row justify-content-end mt-3">
+          <div class="col-2">
+            <app-button buttonType="add" (click)="coinInc()"></app-button>
+          </div>
+        </div>
+      </div>
+      <hr *ngIf="isSubGroup">
+      <div *ngIf="isSubGroup">
+        <div class="row" *ngFor="let i of sgCounter()">
+          <div class="col-3">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'SubGroup No'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'SubGroup Name'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col-3"> <label for="" class="form-label text-center w-100 text-primary"> Details </label> <input
+              type="checkbox" class="control-bg-gray form-control mx-auto" data-bs-toggle="modal"
+              data-bs-target="#addAnotherModal"> </div>
+          <div class="col-3"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="add" (click)="sgInc()"></app-button>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row g-2">
+        <div class="col-4"><label for="" class="text-primary form-label">{{'Select Cover'|appTranslate|async}}</label>
+        </div>
+        <div class="col-2"><label for=""
+            class="text-primary form-label">{{'Sum Assured Basis'|appTranslate|async}}</label></div>
+        <div class="col-2"><label for="" class="text-primary form-label">{{'Basis Value'|appTranslate|async}}</label>
+        </div>
+        <div class="col-1"><label for=""
+            class="text-primary form-label text-center w-100">{{'Details'|appTranslate|async}}</label></div>
+      </div>
+      <div class="row g-2 mb-2">
+        <div class="col-4 ">
+          <div class="form-group">
+            <div class="row d-flex align-items-center">
+              <div class="col-2 "><input class="form-control control-bg-gray" type="checkbox"></div>
+              <div class="col"><label for="" class="text-black-50 form-label small1">
+                  {{'RPI_1 - Group Life Risk'|appTranslate|async}}</label> </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select> </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <input type="text" class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-1 "> <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp1Modal()"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            title="{{'Target Basis: 0,Target Amount: 0,Source of Annuity:0 ,Annuity Frequency : 0,Guarantee Period (Months) : 0Guarantee Period (Months) : 0Spouse Revisionay Proportion : 0Source : 0Pension Fund Administrator : 0Annuity Annual Escalation Basis : 9Annuity Annual Escalation Value : 5'|appTranslate|async}}"
+            [(ngModel)]="isRp1Check" type="checkbox"> </div>
+      </div>
+      <div class="row g-2 mb-2">
+        <div class="col-4">
+          <div class="form-group">
+            <div class="row d-flex align-items-center">
+              <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+              <div class="col"><label for="" class="text-black-50  form-label small1">
+                  {{'RPI_2 - Group Credit Life'|appTranslate|async}}</label> </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select> </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <input type="text" class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-1 "> <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp2Modal()"
+            type="checkbox"> </div>
+      </div>
+      <div class="row g-2 mb-2">
+        <div class="col-4">
+          <div class="form-group">
+            <div class="row d-flex align-items-center">
+              <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>
+              <div class="col"><label for="" class="text-black-50  form-label small1">
+                  {{'RPI_3 - Savings'|appTranslate|async}} </label></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select> </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group"> <input type="text" class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-1 "> <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp3Modal()"
+            type="checkbox"> </div>
+      </div>
+      <div class="row g-2 justify-content-center mt-3" *ngIf="isSubGroup">
+        <div class="col-3">
+          <app-button [buttonType]="'addCustom'" [text]="'Add subGroup'" data-bs-toggle="modal"
+            data-bs-target="#addAnotherModal"></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-agent-ref" role="tabpanel" aria-labelledby="pills-agent-ref-tab">
+      <div *ngFor="let i of agentCounter()" class="row mt-3 align-items-end">
+        <div class="col-3">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'Agent No'|appTranslate|async}}</label> <input type="text"
+              class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'showsmall'"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'findsmall'"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'createCustom2small'" [text]="'New'"></app-button>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'Proportion'|appTranslate|async}}</label> <input type="text"
+              class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-md-auto d-flex">
+          <div class="me-2">
+            <app-btn icon="delete" type="danger" [iconBtn]="true" hint="Delete Member"></app-btn>
+          </div>
+          <app-btn (mclick)="agentInc()" icon="add" type="outline" [iconBtn]="true" hint="Add another member"></app-btn>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-3">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'Referrer Code'|appTranslate|async}}</label> <input type="text"
+              class="form-control control-bg-gray"> </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'showsmall'"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'findsmall'"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'createCustom2small'" [text]="'New'"></app-button>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'External Reference'|appTranslate|async}}</label> <input type="text"
+              class="form-control control-bg-gray"> </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'Branch Code'|appTranslate|async}}</label> <select name="" id=""
+              class="form-control control-bg-gray">
+              <option value=""></option>
+            </select> </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'Relationship Manager'|appTranslate|async}}</label> <select
+              class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select> </div>
+        </div>
+      </div>
+      <div class="row mt-3 align-items-end">
+        <div class="col-6">
+          <div class="form-group"> <label for=""
+              class="form-label text-primary">{{'Sub-Relationship Manager'|appTranslate|async}}</label> <select
+              class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select> </div>
+        </div>
+        <div class="col-6">
+          <app-button [buttonType]="'upload'" [text]="'Upload Document'"></app-button>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-5">
+        <div class="col-3">
+          <app-button [buttonType]="'submit'" routerLink="../../group-desk/view-group" [queryParams]="{groupNo:1}">
+          </app-button>
+          <!-- <app-button [buttonType]="'submit'" data-bs-toggle="modal" data-bs-target="#submitModal" routerLink="../../group-desk/view-group" [queryParams]="{groupNo:1}"></app-button> -->
+        </div>
+      </div>
+    </div>
+    <!-- <div class="tab-pane fade" id="pills-beneficiary" role="tabpanel" aria-labelledby="pills-beneficiary-tab">      <div class="row mt-5 mb-3">        <div class="col-4">          <app-button buttonType="upload" text="Upload Members"></app-button>        </div>        <div class="col-4">          <app-button buttonType="btnCustomClone" text="Add Member Manually" data-bs-toggle="modal"                      data-bs-target="#addManualyMember"></app-button>        </div>        <div class="col-4">          <app-button buttonType="upload" text="Upload Documents"></app-button>        </div>      </div>      <div class="row my-3">        <label for="">Download CSV Upload Format..</label>      </div>      <div class="row my-5">        <div class="col">          <label for="">No Data Basis</label>          <input type="checkbox" class="form-control control-bg-gray">        </div>        <div class="col">          <label for="">Total Sum Assured</label>          <input type="text" class="form-control control-bg-gray">        </div>        <div class="col">          <label for="">Total No of Members</label>          <input type="text" class="form-control control-bg-gray">        </div>      </div>      <div class="row justify-content-end">        <div class="col-3">          <app-button [buttonType]="'submit'" data-bs-toggle="modal"                      data-bs-target="#submitModal"></app-button>        </div>      </div>    </div> -->
+  </div>
+</div>
+<div class="modal fade" id="rt1modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Group Life Risk'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="uncheckrp1()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row"> <label for="" class="form-label text-primary">{{'Death'|appTranslate|async}}</label> </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Sum Assured Basis'|appTranslate|async}}</label> <select name="" id=""
+                class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Sum Assured Factor'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Fixed Sum Assured'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-3">
+            <div class="d-flex"> <input class="form-control control-bg-gray" type="checkbox"> <label
+                class="form-check-label text-primary mx-3 mt-2" for="flexRadioDefault1">
+                {{'Permanent and total Disability'|appTranslate|async}} </label> </div>
+          </div>
+        </div>
+        <div class="row">
+          <hr>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Sum Assured Basis'|appTranslate|async}}</label> <select name="" id=""
+                class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Sum Assured Factor'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Fixed Sum Assured'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-3">
+            <div class="d-flex"> <input class="control-bg-gray form-control" type="checkbox"> <label
+                class="form-label text-primary mx-3 mt-2" for="flexRadioDefault1">
+                {{'Critical Illness'|appTranslate|async}} </label> </div>
+          </div>
+        </div>
+        <div class="row">
+          <hr>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Sum Assured Basis'|appTranslate|async}}</label> <select name="" id=""
+                class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Sum Assured Factor'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Fixed Sum Assured'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" (click)="checkrp1()" data-bs-dismiss="modal"></app-button>
+        <app-button [buttonType]="'btnCustomClone'" text="Medical Questionnaire" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt2modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Group Credit Life'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Sum Assured Basis'|appTranslate|async}} </label> <select class="form-control control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Sum Assured Value'|appTranslate|async}} </label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Sum Assured Factor'|appTranslate|async}} </label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Fixed Sum Assured'|appTranslate|async}} </label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt3modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Savings'|appTranslate|async}}</h5> <button type="button"
+          class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Contribution by Employer'|appTranslate|async}} </label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Contribution by Employee'|appTranslate|async}} </label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Contribution Frequency'|appTranslate|async}} </label> <select class="form-control control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt4modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Annuities Certain'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Target Basis'|appTranslate|async}}</label> <select name="" id=""
+                class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let tb of targetBasesList" [value]="tb.title">{{tb.title}}</option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Target Amount'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Annuity Frequency'|appTranslate|async}}</label> <select name="" id=""
+                class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+              </select> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Annuity Annual Escalation Basis'|appTranslate|async}}</label> <select
+                name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let aaeb of annuityAnnualEscalationBasesList" [value]="aaeb.title">{{aaeb.title}}
+                </option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Annuity Annual Escalation Value'|appTranslate|async}}</label> <input
+                type="text" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Enter Annuity Payment Schedule'|appTranslate|async}}</label> <input
+                type="checkbox" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt6modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Endowment'|appTranslate|async}}</h5> <button type="button"
+          class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Pricing Basis'|appTranslate|async}}</label> <select name="" id=""
+                class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let pb of pricingBasesList" [value]="pb.title">{{pb.title}}</option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Target'|appTranslate|async}}</label> <input type="text"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Premium Payment Term'|appTranslate|async}}</label> <input type="text"
+                placeholder="Years" class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label> <input type="text"
+                placeholder="months" class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Benefit Payment Term'|appTranslate|async}}</label> <input type="text"
+                placeholder="Years" class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label> <input type="text"
+                placeholder="months" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Bank No'|appTranslate|async}}</label> <input
+                type="text" class="form-control  control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2"> <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>{{'Existing Account for Client xxxx'|appTranslate|async}} </p>
+        </div>
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+              <tr class="py-5 bg-primary text-white">
+                <th scope="col" class="text-white">{{'Bank No'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Account Type'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Account No'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Institution'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Select'|appTranslate|async}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td>
+                  <div class="btn  btn-outline-primary p-2">{{'Select'|appTranslate|async}}</div>
+                </td>
+              </tr>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td>
+                  <div class="btn  btn-outline-primary p-2">{{'Select'|appTranslate|async}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Payment Method'|appTranslate|async}}</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Payee Name'|appTranslate|async}}</label> <input
+                type="text" class="form-control  control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rt5modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Savings'|appTranslate|async}}</h5> <button type="button"
+          class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Target Contribution Frequency'|appTranslate|async}}</label> <select
+                name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Premium to Benefit'|appTranslate|async}}</label> <input
+                type="checkbox" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Deposit'|appTranslate|async}}</label> <input type="checkbox"
+                class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Target Amount'|appTranslate|async}}</label> <input type="checkbox"
+                class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'At Maturity Convert To'|appTranslate|async}}</label> <select name=""
+                id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option *ngFor="let amct of atMaturityConvertToList" [value]="amct.code">{{amct.code}} -
+                  {{amct.description}}</option>
+              </select> </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Contribution Payment Term'|appTranslate|async}}</label> <input
+                type="text" placeholder="Years" class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group"> <label for="" class="form-label text-primary">&nbsp;</label> <input type="text"
+                placeholder="months" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group"> <label for=""
+                class="form-label text-primary">{{'Enter a Drawdown Benefit Payment Schedule'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <hr>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label"> {{'Bank No'|appTranslate|async}}</label> <input
+                type="text" class="form-control  control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2"> <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>{{'Existing Account for Client xxxx'|appTranslate|async}} </p>
+        </div>
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+              <tr class="py-5 bg-primary text-white">
+                <th scope="col" class="text-white">{{'Bank No'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Account Type'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Account No'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Institution'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Select'|appTranslate|async}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td>
+                  <div class="btn  btn-outline-primary p-2">{{'Select'|appTranslate|async}}</div>
+                </td>
+              </tr>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td>
+                  <div class="btn  btn-outline-primary p-2">{{'Select'|appTranslate|async}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Payment Method'|appTranslate|async}}</label>
+              <select name="" id="" class="form-control  control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Payee Name'|appTranslate|async}}</label> <input
+                type="text" class="form-control  control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="submitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5> <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <p>{{'Quote No'|appTranslate|async}} <span class="text-primary">577881</span></p>
+          <p>{{'Total Periodic Premium'|appTranslate|async}} <span class="text-primary">2300000</span></p>
+        </div>
+        <div class="row mt-2">
+          <app-button buttonType="addCustom" text="Create Quote Template"></app-button>
+        </div>
+        <div class="row mt-2">
+          <app-button buttonType="btnCustomClone" text="Email Quote To Client"></app-button>
+        </div>
+        <div class="row mt-2">
+          <app-button buttonType="btnCustomClone" data-bs-toggle="modal" data-bs-target="#convertQuoteToPol"
+            text="Convert to Policy"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="convertQuoteToPol" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"> {{'Convert Quote to Policy'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body align-items-center d-flex justify-content-center" style="min-height: 300px;">
+        <div class="w-100">
+          <div class="row">
+            <div class="form-group"> <label for="" class="form-label text-primary">
+                {{'Basis For conversion'|appTranslate|async}} </label> <select name="" id=""
+                class="form-control control-bg-gray ">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="row mt-5 justify-content-end">
+            <div class="col-3">
+              <app-button buttonType="submit" data-bs-toggle="modal" data-bs-target="#CreatedSuccessFully"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="CreatedSuccessFully" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5> <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body align-items-center d-flex justify-content-center" style="min-height: 300px;">
+        <h4>{{'Policy No xxx created sucessfully'|appTranslate|async}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="paymentMethodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'Direct Debit'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Bank No'|appTranslate|async}}</label> <input
+                type="text" class="form-control  control-bg-gray"> </div>
+          </div>
+          <div class="col-3">
+            <div class="from-group align-items-center pt-2"> <label for="" class="form-label">&nbsp;</label>
+              <app-button [buttonType]="'add'"></app-button>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <p>{{'Existing Account for Client'|appTranslate|async}} xxxx</p>
+        </div>
+        <div class="row mt-3">
+          <table class="table table-responsive  table-striped">
+            <thead>
+              <tr class="py-5 bg-primary text-white">
+                <th scope="col" class="text-white">{{'Bank No'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Account Type'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Account No'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Institution'|appTranslate|async}}</th>
+                <th scope="col" class="text-white">{{'Select'|appTranslate|async}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td> <button class="btn btn-outline-primary p-2">{{'Select'|appTranslate|async}}</button> </td>
+              </tr>
+              <tr>
+                <td>6567_1</td>
+                <td>James Bond</td>
+                <td>Mobile Money</td>
+                <td>090897676776</td>
+                <td>MTN</td>
+                <td> <button class="btn  btn-outline-primary p-2">{{'Select'|appTranslate|async}}</button> </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="from-group"> <label for="" class="form-label">{{'Payee Name'|appTranslate|async}}</label> <input
+                type="text" class="form-control  control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addAnotherModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{'SubGroup'|appTranslate|async}}</h5> <button type="button"
+          class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- <div class="modal-body">        <div class="row">          <div class="col-3">            <div class="form-group">              <label for="" class="form-label text-primary">SubGroup No</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col-3">            <div class="form-group">              <label for="" class="form-label text-primary">SubGroup Name</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>        </div>        <hr>        <div class="row g-2">          <div class="col-4"><label for="" class="text-primary form-label">Select Cover</label></div>          <div class="col-2"><label for="" class="text-primary form-label">Sum Assured Basis</label></div>          <div class="col-2"><label for="" class="text-primary form-label">Basis Value</label></div>          <div class="col-1"><label for="" class="text-primary form-label text-center w-100">Details</label></div>        </div>        <div class="row g-2 mb-2">          <div class="col-4 ">            <div class="form-group">              <div class="row d-flex align-items-center">                <div class="col-2 "><input class="form-control control-bg-gray" type="checkbox"></div>                <div class="col"><label for="" class="text-black-50 form-label small1"> RPI_1 - Group Life Risk</label>                </div>              </div>            </div>          </div>          <div class="col-2">            <div class="form-group">              <select class="form-control control-bg-gray">                <option value=""></option>              </select>            </div>          </div>          <div class="col-2">            <div class="form-group">              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col-1 ">            <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp1Modal()" data-bs-toggle="tooltip"                   data-bs-placement="top" title="Target Basis: 0,Target Amount: 0,Source of Annuity:0 ,Annuity Frequency : 0,Guarantee Period (Months) : 0Guarantee Period (Months) : 0Spouse Revisionay Proportion : 0Source : 0Pension Fund Administrator : 0Annuity Annual Escalation Basis : 9Annuity Annual Escalation Value : 5" [(ngModel)]="isRp1Check" type="checkbox">          </div>        </div>        <div class="row g-2 mb-2">          <div class="col-4">            <div class="form-group">              <div class="row d-flex align-items-center">                <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>                <div class="col"><label for="" class="text-black-50  form-label small1"> RPI_2 - Group Credit                  Life</label>                </div>              </div>            </div>          </div>          <div class="col-2">            <div class="form-group">              <select class="form-control control-bg-gray">                <option value=""></option>              </select>            </div>          </div>          <div class="col-2">            <div class="form-group">              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col-1 ">            <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp2Modal()" type="checkbox">          </div>        </div>        <div class="row g-2 mb-2">          <div class="col-4">            <div class="form-group">              <div class="row d-flex align-items-center">                <div class="col-2"><input class="form-control control-bg-gray" type="checkbox"></div>                <div class="col"><label for="" class="text-black-50  form-label small1"> RPI_3 - Savings                </label></div>              </div>            </div>          </div>          <div class="col-2">            <div class="form-group">              <select class="form-control control-bg-gray">                <option value=""></option>              </select>            </div>          </div>          <div class="col-2">            <div class="form-group">              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col-1 ">            <input class="form-control control-bg-gray mx-auto mt-1" (click)="showRp3Modal()" type="checkbox">          </div>        </div>      </div> -->
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="modal fade" id="addManualyMember" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"  aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-fullscreen">    <div class="modal-content">      <div class="modal-header">        <h5 class="modal-title" id="staticBackdropLabel">Add Member Manually</h5>        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>      </div>      <div class="modal-body">        <div class="row" *ngFor="let i of memberCounter()">          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Client Number</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col-1">            <div class="form-group">              <label for="" class="form-label text-primary">&nbsp;</label>              <app-button buttonType="findsmall"></app-button>            </div>          </div>          <div class="col-1">            <div class="form-group">              <label for="" class="form-label text-primary">&nbsp;</label>              <app-button buttonType="createCustom2small"></app-button>            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Staff ID</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Rel Basis</label>              <select class="form-control control-bg-gray">                <option value=""></option>              </select>            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Relationship</label>              <select class="form-control control-bg-gray">                <option value=""></option>              </select>            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Related To</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Member name</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">Subgroup No</label>              <input type="text" class="form-control control-bg-gray">            </div>          </div>          <div class="col">            <div class="form-group">              <label for="" class="form-label text-primary">&nbsp;</label>              <app-button buttonType="upload" text="Picture"></app-button>            </div>          </div>        </div>        <div class="row justify-content-end mt-3">          <div class="col-2">            <app-button buttonType="add" (click)="memberInc()"></app-button>          </div>        </div>      </div>      <div class="modal-footer">        <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>      </div>    </div>  </div></div> -->
+<!-- Modal -->
+<div class="modal fade" id="restrictAccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Restrict Scheme Access'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngFor="let i of rsaCounter()">
+          <div class="col">
+            <div class="form-group"> <label for="" class="form-label text-primary">{{'User'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="col-3"> <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="add" (click)="rsaInc()"></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div><!-- Modal -->
+<div class="modal fade" id="findModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Find Provider'|appTranslate|async}}</h5> <button type="button"
+          class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-2 d-flex align-items-center"> <label
+                class="form-label text-primary my-auto">{{'Client Number'|appTranslate|async}}</label> </div>
+            <div class="col"> <input type="text" class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-2 d-flex align-items-center"> <label
+                class="form-label text-primary my-auto">{{'Provider Name'|appTranslate|async}}</label> </div>
+            <div class="col"> <input type="text" class="form-control control-bg-gray"> </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-2 d-flex align-items-center"> <label
+                class="form-label text-primary my-auto">{{'Provider Category'|appTranslate|async}}</label> </div>
+            <div class="col"> <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-2 d-flex align-items-center"> <label
+                class="form-label text-primary my-auto">{{'Provider SubCategory'|appTranslate|async}}</label> </div>
+            <div class="col"> <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select> </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-2 d-flex align-items-center"> <label
+                class="form-label text-primary my-auto">{{'External Ref'|appTranslate|async}}</label> </div>
+            <div class="col"> <input type="text" class="form-control control-bg-gray"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: flex-start">
+        <app-button buttonType="search" data-bs-dismiss="modal" data-bs-toggle="modal"
+          data-bs-target="#searchResultModal"></app-button>
+      </div>
+    </div>
+  </div>
+</div><!-- Modal -->
+<div class="modal fade" id="searchResultModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Find Provider - Result'|appTranslate|async}}</h5> <button
+          type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-responsive  table-striped">
+          <thead class="py-3 theader">
+            <tr>
+              <th scope="col">{{'Provider No'|appTranslate|async}}</th>
+              <th scope="col">{{'Provider Name'|appTranslate|async}}</th>
+              <th scope="col">{{'Category'|appTranslate|async}}</th>
+              <th scope="col">{{'SubCategory'|appTranslate|async}}</th>
+              <th scope="col">{{'Created On'|appTranslate|async}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th></th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <div class="modal-footer">         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>         <button type="button" class="btn btn-primary">Save changes</button>       </div>-->
+    </div>
+  </div>
+</div>

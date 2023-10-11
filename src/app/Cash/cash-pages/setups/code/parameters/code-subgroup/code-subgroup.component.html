@@ -1,0 +1,72 @@
+<app-form-navigation [cashtitle]="'Set Up / Code'"></app-form-navigation>
+<form #f="ngForm" novalidate>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <label for="" class="form-label">Sub-Group</label>
+          <input type="text" [attr.disabled]="editMode == true ? '' : null" class="form-control control-bg-gray" [(ngModel)]="codeSubgroup" required name="codeSubgroup">
+        </div>
+        <div class="col-6">
+          <label for="" class="form-label">Group</label>
+          <select class="form-control control-bg-gray" [(ngModel)]="codeGroup" required name="codeGroup">
+            <option *ngFor="let codeGroup of codeGroups" [value]="codeGroup?.group">
+              {{codeGroup?.group}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngFor="let allcode of codes.code; let i = index">
+        <div class="row mt-3" *ngIf="allcode.deleted == false">
+          <div class="col-1">
+            <label for="" class="form-label">Active</label>
+            <input type="checkbox" class="form-control control-bg-gray"
+              [attr.disabled]="allcode.recType === 'S' ? '' : null" checked [(ngModel)]="allcode.active"
+              name="active_{{allcode.rowId}}">
+          </div>
+          <div class="col">
+            <label for="" class="form-label">Value</label>
+            <input type="text" class="form-control control-bg-gray" [attr.disabled]="allcode.recType === 'S' ? '' : null"
+              [(ngModel)]="allcode.code" required name="code_{{allcode.rowId}}">
+          </div>
+          <div class="col">
+            <label for="" class="form-label">Description</label>
+            <input type="text" class="form-control control-bg-gray" [attr.disabled]="allcode.recType === 'S' ? '' : null"
+              [(ngModel)]="allcode.title" required name="title_{{allcode.rowId}}">
+          </div>
+          <div class="col">
+            <label for="" class="form-label">Category</label>
+            <input type="text" class="form-control control-bg-gray" [attr.disabled]="allcode.recType === 'S' ? '' : null"
+              [(ngModel)]="allcode.codeCat" name="codeCat_{{allcode.rowId}}">
+          </div>
+          <div class="col-3">
+            <label for="" class="form-label">System/user Defined</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="allcode.recType"
+              [attr.disabled]="allcode.editable == false && editMode == true && allcode.recType === 'S' ? '' : null"
+              required name="recType__{{allcode.rowId}}">
+              <option *ngFor="let recType of recTypes" [value]="recType?.code">
+                {{recType?.title}}
+              </option>
+            </select>
+          </div>
+          <div class="col-2">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-button buttonType="delete" *ngIf="allcode.recType != 'S'" (click)="removeCode(i)"></app-button>
+            <app-button buttonType="delete" *ngIf="allcode.recType == 'S'"></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-2">
+        <div class="col-2">
+          <label for="" class="form-label">&nbsp;</label>
+          <app-button buttonType="add" *ngIf="!isDisabled" (click)="addCode()"></app-button>
+        </div>
+      </div>
+
+      <div class="row justify-content-end mt-5">
+        <div class="col-2">
+          <app-button buttonType="save" (click)="creatorCode()"></app-button>
+        </div>
+      </div>
+    </div>
+  </form>

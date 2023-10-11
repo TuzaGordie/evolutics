@@ -1,0 +1,64 @@
+<div class="row align-items-center">
+  <label #labelEl l class="col-md-{{stacked?'12 pb-0':mini?'auto':lblCl}} m-0 " for="{{id}}"
+    [ngClass]="{'text-primary':colored,'py-2':theme==1,'form-label':theme==2,light:light,small,small1:xsmall,'order-1':lblPosition=='right'}"
+    *ngIf="showLabel">
+    {{label|appTranslate|async}}
+  </label>
+  <div class="  position-relative"
+    [ngClass]="{'order-0':lblPosition=='right','col-12':stacked,'col-md':!stacked,'col-md-auto':lblPosition=='right'}">
+    <ng-container [ngSwitch]="type">
+      <!-- CHECKBOX -->
+      <ng-container *ngSwitchCase="'checkbox'">
+        <input type="checkbox" id="{{id}}" [name]="name" [(ngModel)]="model" [disabled]="disabled"
+          class="{{inpCl}} d-inline-block form-control width-unset" placeholder="{{placeholder}}" [required]="required"
+          (change)="change($event)" [checked]="checked">
+      </ng-container>
+      <!-- FILE -->
+      <ng-container *ngSwitchCase="'file'">
+        <input type="file" id="{{ id }}" [class]="inpCl|inputClass" (change)="upload($event)" (change)="change($event)">
+      </ng-container>
+      <!-- SELECT -->
+      <ng-container *ngSwitchCase="'select'">
+        <select [name]="name" [(ngModel)]="model" id="{{ id }}" class=" mr-2" [class]="inpCl|inputClass"
+          [required]="required" [disabled]="disabled" (change)="change($event)">
+          <option *ngIf="showEmptyOption"></option>
+          <option *ngFor="let item of options; trackBy:iS.trackByValue" [ngValue]="item.value">
+            <!-- {{item|optionLabeller:optionFormatter:labelType:labelField}} -->
+            {{item.label}}
+          </option>
+        </select>
+      </ng-container>
+      <!-- TEXTAREA -->
+      <ng-container *ngSwitchCase="'textarea'">
+        <textarea [name]="name" [(ngModel)]="model" id="{{ id }}" [class]="inpCl|inputClass" [required]="required"
+          [disabled]="disabled" [readonly]="readonly" (change)="change($event)"></textarea>
+      </ng-container>
+      <!-- Radio -->
+      <ng-container *ngSwitchCase="'radio'">
+        <input type="radio" [(ngModel)]="model" id="{{ id }}" [readonly]="readonly" (change)="change($event)"
+          [disabled]="disabled" />
+      </ng-container>
+      <!-- Viewer -->
+      <ng-container *ngSwitchCase="'viewer'">
+        <input type="text" id="{{ id }}" placeholder="{{ placeholder }}" [readonly]="true" [value]="model"
+          [disabled]="disabled" />
+      </ng-container>
+      <!-- PASSWORD -->
+      <ng-container *ngSwitchCase="'password'">
+        <input type="{{ showPassword?'text':'password' }}" [(ngModel)]="model" placeholder="{{ placeholder }}"
+          [class]="inpCl|inputClass" id="{{ id }}" [required]="required" [readonly]="readonly" [disabled]="disabled" (change)="change($event)"
+          value="{{ __value }}" />
+        <div class="password-icons pointer" (click)="showPassword=!showPassword">
+          <i class="fa fa-eye-slash" *ngIf="showPassword"></i>
+          <i class="fa fa-eye" *ngIf="!showPassword"></i>
+        </div>
+      </ng-container>
+      <!-- DEFAULT -->
+      <ng-container *ngSwitchDefault>
+        <input type="{{type}}" id="{{ id }}" [name]="name" [(ngModel)]="model" placeholder="{{placeholder}}"
+          [class]="inpCl|inputClass" [required]="required" [disabled]="disabled" [max]="max" [min]="min"
+          [readonly]="readonly" (change)="change($event)">
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

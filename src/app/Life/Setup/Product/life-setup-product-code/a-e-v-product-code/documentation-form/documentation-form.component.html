@@ -1,0 +1,73 @@
+<div [formGroup]="form">
+  <div class="row g-3 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h6 class="text-primary m-0">{{"Product Level Documentation"|appTranslate|async}}</h6>
+    </div>
+    <div class="col-auto ">
+      <text-case-1 lbl="Product" [val]="product?.basic?.code +' - '+product?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+  <hr>
+
+  <ng-container formArrayName="documentations">
+    <ng-container *ngFor="let subForm of documentations?.controls; let i = index;" [formGroupName]="i">
+      <div class="row align-items-end">
+        <div class="col-md">
+          <div class="row gx-2">
+            <div class="col-xxl my-1">
+              <app-input-basic name="eventType" [stacked]="true" [form]="subForm" label="Event Type" type="select"
+                [options]="eventTypes" #eventType labelType="ct" valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic label="Event" type="select" name="event" [stacked]="true" [form]="subForm"
+                [options]="fpS.getEvent|functionCaller1:eventType?.value|async" #eventName labelType="cd"
+                valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic name="language" [stacked]="true" [form]="subForm" label="Language" type="select"
+                [options]="languages" labelType="ct" valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic name="action" [stacked]="true" [form]="subForm" label="Action" type="select"
+                [options]="documentActions" labelType="ct" valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic name="documentType" [stacked]="true" [form]="subForm" label="Document Type" type="select"
+                [options]="documentTypes" labelType="ct" valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic name="documentName" [stacked]="true" [form]="subForm" label="Document Name" type="select"
+                [options]="fpS.getDocumentNamesByEventName|functionCaller1:eventName?.value|async" labelType="cn"
+                valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic name="networkPath" [stacked]="true" [form]="subForm" label="Network Path" type="text"
+                [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-xxl my-1">
+              <app-input-basic name="condition" [stacked]="true" [form]="subForm" label="Condition" type="select"
+                [options]="conditions" labelType="ct" valueField="code" [xsmall]="true">
+              </app-input-basic>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-auto d-flex" *ngIf="!isShow ">
+          <div class="me-2">
+            <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeDocumentations(i)"
+              [valid]="documentations?.length>1"> </app-btn>
+          </div>
+          <app-btn group="add" [iconBtn]="true" (mclick)="addNewDocumentations(null,i+1)"> </app-btn>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

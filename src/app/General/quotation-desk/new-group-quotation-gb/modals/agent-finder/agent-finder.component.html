@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{'Find Agent' | appTranslate | async}}</h5>
+    <span class="fas fa-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content>
+  <div class="d-flex my-3 justify-content-center">
+    <div
+      class="form-group d-flex justify-content-center"
+      style="white-space: nowrap"
+    >
+      <input
+        type="text"
+        class="form-control control-bg-gray me-2"
+        [(ngModel)]="agentName"
+        [disabled]="loading"
+        placeholder="{{'Enter name'|appTranslate|async}}"
+        #name="ngModel"
+        required
+        (keyup.enter)="findAgent()"
+      />
+      <button class="btn btn-outline-primary btn-lg" (click)="findAgent()">
+        <span class="fas fa-search" *ngIf="!loading"></span>
+        <span class="fas fa-sync fa-spin" *ngIf="loading"></span>
+        {{ (loading ? 'Searching...' : 'Search')|appTranslate|async }}
+      </button>
+    </div>
+  </div>
+  <p *ngIf="name.invalid && name.touched" class="text-danger small text-center">{{'Enter a name to search' | appTranslate | async}}</p>
+  <div class="table-responsive row my-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{'Agent No' | appTranslate | async}}</th>
+          <th>{{'Agent Name' | appTranslate | async}}</th>
+          <th>{{'Client No' | appTranslate | async}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of agents">
+          <td>{{ agent.no }}</td>
+          <td>{{ agent.name }}</td>
+          <td>{{ agent.clientNo }}</td>
+          <td>
+            <button
+              (click)="onSelectAgent(agent)"
+              class="btn btn-outline-primary btn-lg"
+            >
+              {{'Select' | appTranslate | async}}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="text-center" *ngIf="!agents.length">{{'No Agents found' | appTranslate | async}}</p>
+  </div>
+</mat-dialog-content>

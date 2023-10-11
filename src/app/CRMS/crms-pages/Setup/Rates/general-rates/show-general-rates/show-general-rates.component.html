@@ -1,0 +1,263 @@
+<div class="container-fluid " id="form-body">
+  <ul class="nav nav-pills nav-fill mb-2 " id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent" [formGroup]="viewTestForm">
+    <div class="container">
+
+      <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-dependent-tab">
+        <div class="row ">
+          <div class="col-1">
+            <div class="form-group">
+              <p>{{'Rate Code'|appTranslate|async}}: <span class="text-primary"></span></p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <p>{{'Retrieval Basis'|appTranslate|async}}: <span class="text-primary">
+                <select name="" id="" (change)="onRetrievalSelected(retrieval.value)" #retrieval>
+                <option value="lookup">Lookup</option>
+                <option value="matrix">Matrix</option>
+              </select></span></p>
+            </div>
+          </div>
+
+          <div class="col" *ngIf="retrievalMtd =='lookup' ">
+            <div class="form-group">
+              <p>{{'Lookup Field:'|appTranslate|async}} <span class="text-primary">
+                 <select name="" id="" #lookupField_value (change)="setLookupField(lookupField_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+            </div>
+          </div>
+          <div class="col" *ngIf="retrievalMtd =='lookup'">
+            <div class="form-group">
+              <p>{{'Banding'|appTranslate|async}}: <span class="text-primary">
+                <select name="" id="" #bandingField_value (change)="setBandingField(bandingField_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+            </div>
+          </div>
+          <div class="col" *ngIf="retrievalMtd =='matrix' ">
+            <div class="form-group">
+              <p>{{'Y Axis'|appTranslate|async}}: <span class="text-primary">
+                 <select name="" id="" #axisy_value (change)="setAxisy(axisy_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+            </div>
+          </div>
+          <div class="col" *ngIf="retrievalMtd =='matrix'" >
+            <div class="form-group">
+              <p>{{'X Axis'|appTranslate|async}}: <span class="text-primary">
+                <select name="" id="" #axisx_value (change)="setAxisx(axisx_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+            </div>
+          </div>
+          <div class="col-2">
+            <app-button class="p-0" [buttonType]="'editCustom'" [text]="'Rate Structure'" routerLink="../create-general-rates"></app-button>
+
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Rate Partition 1'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Rate Partition 2'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Rate Partition 3'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Rate Partition 4'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row g-3">
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Rate Partition 5'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Rate Partition Version No'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Search Rate X axis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label>{{'Search Rate Y axis'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray">
+                <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+
+        <hr>
+
+        <div class="row">
+          <div class="col-1 d-flex align-items-center">
+            <p *ngIf="retrievalMtd =='lookup'" class=" text-center p-1 " style="  width: 200px;border: #1F1F1F 1px solid;transform: rotate(-90deg);">
+              {{lookupFieldval}}</p>
+            <p *ngIf="retrievalMtd =='matrix'" class=" text-center p-1 " style="  width: 200px;border: #1F1F1F 1px solid;transform: rotate(-90deg);">
+              {{axisYval}}</p>
+          </div>
+          <div class="col-11">
+            <p *ngIf="retrievalMtd =='lookup'" class="w-100 text-center p-1" style="border: #1F1F1F 1px solid"> {{bandingFieldval}}</p>
+            <p *ngIf="retrievalMtd =='matrix'" class="w-100 text-center p-1" style="border: #1F1F1F 1px solid"> {{axisXval}}</p>
+            <table class="table table-responsive  table-striped px-5">
+              <thead class="py-3 theader bg-primary text-white">
+              <tr>
+                <th scope="col" class="text-white"><input class="form-control  control-bg-primary" type="text"/></th>
+                <th scope="col" class="text-white"><input class="form-control  control-bg-primary" type="text"/></th>
+                <th scope="col" class="text-white"><input class="form-control  control-bg-primary" type="text"/></th>
+                <th scope="col" class="text-white"><input class="form-control  control-bg-primary" type="text"/></th>
+                <th scope="col" class="text-white"><input class="form-control  control-bg-primary" type="text"/></th>
+                <th scope="col" class="text-white"><input class="form-control  control-bg-primary" type="text"/></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row" class="bg-primary"><input class="form-control  control-bg-primary" type="text"/></th>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+
+              </tr>
+              <tr>
+                <th scope="row" class="bg-primary"><input class="form-control  control-bg-primary" type="text"/></th>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+
+              </tr>
+              <tr>
+                <th scope="row" class="bg-primary"><input class="form-control  control-bg-primary" type="text"/></th>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+
+              </tr>
+              <tr>
+                <th scope="row" class="bg-primary"><input class="form-control  control-bg-primary" type="text"/></th>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+
+              </tr>
+              <tr>
+                <th scope="row" class="bg-primary"><input class="form-control  control-bg-primary" type="text"/></th>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+
+              </tr>
+              <tr>
+                <th scope="row" class="bg-primary"><input class="form-control  control-bg-primary" type="text"/></th>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+        <div class="row ">
+          <div class="col-1"></div>
+          <div class="col-11 ">
+            <div class="row justify-content-center">
+              <div class="col-2">
+                <app-button class="p-0" [buttonType]="'btnCustomClone'" [text]="'Export Rates'"></app-button>
+              </div>
+              <div class="col-2">
+                <app-button class="p-0" [buttonType]="'btnCustomClone'" [text]="'Import Rates'"></app-button>
+              </div>
+              <div class="col-2">
+                <app-button class="p-0" [buttonType]="'btnCustomClone'" [text]="'Edit Rate Axis'"></app-button>
+              </div>
+              <div class="col-2">
+                <app-button class="p-0" [buttonType]="'btnCustomClone'" [text]="'Edit Rates'"></app-button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,173 @@
+<div class="container">
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <app-btn icon="add" type="secondary" data-bs-toggle="modal"
+               data-bs-target="#exampleModal">{{'Add New Record'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <label for="" class="form-label text-primary">{{'Company Code'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+
+
+    <div class="col-2">
+      <label for="" class="form-label">&nbsp;</label>
+      <app-btn type="dark" icon="show" [disabled]="true">{{'Show'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col-2">
+      <label for="" class="form-label">&nbsp;</label>
+      <app-btn type="outline" icon="edit">{{'Edit'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <hr>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <app-btn type="secondary" icon="download">{{'Download'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col-2">
+      <app-btn type="secondary" icon="upload">{{'Upload'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-responsive  table-striped">
+      <thead class="py-3 theader">
+      <tr>
+
+        <th scope="col">{{'Cost Center Code'|appTranslate|async}}</th>
+        <th scope="col">{{'Cost Center Category'|appTranslate|async}}</th>
+        <th scope="col">{{'Description'|appTranslate|async}}</th>
+        <th scope="col">{{'Default Branch'|appTranslate|async}}</th>
+        <th scope="col">{{'Default Division'|appTranslate|async}}</th>
+        <th scope="col">{{'Default Subdivision'|appTranslate|async}}</th>
+        <th scope="col">{{'Default Team'|appTranslate|async}}</th>
+        <th scope="col">{{'Default Personnel'|appTranslate|async}}</th>
+        <th scope="col">{{'Default Channel'|appTranslate|async}}</th>
+        <th style="width: 10%"></th>
+        <th style="width: 10%"></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        <td>
+          <app-btn icon="edit" type="outline"></app-btn>
+        </td>
+        <td>
+          <app-btn icon="delete" type="dark"></app-btn>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <div class="row justify-content-end mt-5">
+    <div class="col-2">
+      <app-button buttonType="submit"></app-button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Add New Record'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Cost Center Code'|appTranslate|async}}</label>
+              <input type="text" class="control-bg-gray form-control" readonly>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Cost Center Category'|appTranslate|async}}</label>
+              <select class="control-bg-gray form-control">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+              <input type="text" class="control-bg-gray form-control">
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Default Branch'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Default Division'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Default Subdivision'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Default Team'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Default Personnel'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'Default Channel'|appTranslate|async}}</label>
+              <select name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <app-btn type="secondary" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

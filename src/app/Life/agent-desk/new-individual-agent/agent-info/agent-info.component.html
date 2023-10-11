@@ -1,0 +1,142 @@
+<div class="container mt-5">
+  <form [formGroup]="agentInformation"  >
+    <div class="row">
+      <div class="col">
+        <div class="">
+          <label class="form-label text-primary">{{"Agent Type"|appTranslate|async}}</label><br>
+          <select class="form-control control-bg-gray" formControlName="type"  required>
+            <option [value]="null">{{"Select Agent Type"|appTranslate|async}}</option>
+            <option [ngValue]="item.type" *ngFor="let item of agentTypeList">{{item.type}} - {{item.description}}
+            </option>
+          </select>
+          <!--  <div *ngIf="validation.agentType.errors && (validation.agentType.dirty || validation.agentType.touched)">
+            <div class="text-danger" *ngIf="validation.agentType?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <div class="col-3">
+        <label class="form-label text-primary">{{"Company"|appTranslate|async}}</label><br>
+        <select formControlName="company" class="form-control control-bg-gray">
+          <option [value]="null">{{"Select Company"|appTranslate|async}}</option>
+          <option [value]="item.code" *ngFor="let item of companyList">{{item.code}} - {{item.description}}</option>
+        </select>
+        <div *ngIf="validation.branch.errors && (validation.branch.dirty || validation.branch.touched)">
+          <div class="text-danger" *ngIf="validation.branch?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="">
+          <label class="form-label text-primary">{{"Branch"|appTranslate|async}}</label><br>
+          <select formControlName="branch" class="form-control control-bg-gray"  required>
+            <option [value]="null">{{"Select Branch"|appTranslate|async}}</option>
+            <option [value]="item.code" *ngFor="let item of BranchList">{{item.code}} - {{item.description}}</option>
+          </select>
+          <div *ngIf="validation.branch.errors && (validation.branch.dirty || validation.branch.touched)">
+            <div class="text-danger" *ngIf="validation.branch?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <h5 class="mt-4">{{"Product Qualification"|appTranslate|async}}</h5>
+    <ng-container formArrayName="productList">
+      <ng-container *ngFor="let product of productListFormArray.controls; let i=index;" [formGroupName]="i">
+        <div class="row align-items-end justify-content-center">
+          <div class="col-md">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label><br>
+                <select formControlName="product" class="form-control control-bg-gray" required
+                   #prodCls>
+                  <option [value]="null">{{"Select Product Class Qualification"|appTranslate|async}}</option>
+                  <option [value]="item.code" *ngFor="let item of productClassList">{{item.code}} -
+                    {{item.title}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-primary">{{"Product Code"|appTranslate|async}}</label><br>
+                <select formControlName="productClass" class="form-control control-bg-gray"
+                 required>
+                  <option [value]="null">{{"Select Product Qualification"|appTranslate|async}}</option>
+                  <option [value]="item.code" *ngFor="let item of getProductCode|functionCaller1:prodCls?.value|async">
+                    {{item.code}} - {{item.description}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto d-flex">
+            <div class="me-1">
+              <app-btn icon="delete" type="danger-outline" [iconBtn]="true" (mclick)="removeProduct(i)"></app-btn>
+            </div>
+            <app-btn icon="add"  type="outline" [iconBtn]="true" (mclick)="addProduct()"></app-btn>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+
+    <h5 class="my-3">{{"Hierachy Agent"|appTranslate|async}}</h5>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="">
+          <label class="form-label text-primary">{{"Agent Number"|appTranslate|async}}</label><br>
+          <input type="text" formControlName="hierarchyAgentNo" (keyup)="setAgentName($event)"
+            class="form-control control-bg-gray"  > 
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="">
+          <label class="form-label text-primary">{{"Agent Name"|appTranslate|async}}</label><br>
+          <input type="text" readonly formControlName="name" class="form-control control-bg-gray"
+           > 
+        </div>
+      </div>
+
+
+      <div class="col-md">
+        <div class="">
+          <label class="form-label text-primary">{{"Agent Type"|appTranslate|async}}</label><br>
+          <select formControlName="hierarchyAgentType" class="form-control control-bg-gray" required
+            (change)="setManagerList()">
+            <ng-container *ngIf="!agentName">
+              <option [value]="null">{{"Select Agent Type"|appTranslate|async}}</option>
+              <option [ngValue]="item.type" *ngFor="let item of agentTypeList">{{item.type}} - {{item.description}}</option>
+            </ng-container>
+          </select>
+
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="">
+          <label class="form-label text-primary">{{"Manager"|appTranslate|async}}</label><br>
+          <select formControlName="hierarchyManager" class="form-control control-bg-gray" required>
+            <ng-container *ngIf="!agentName">
+              <option [value]="null">{{"Select Manager List"|appTranslate|async}}</option>
+              <option [ngValue]="item.no" *ngFor="let item of managerList">{{item.no}} - {{item.fullName}}</option>
+            </ng-container>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="">&nbsp;</label>
+        <div class=" "> 
+          <app-btn  (mclick)="openAddDocumentModal()" icon="upload" [type]="file?'primary':'secondary'" > 
+            Upload File
+          </app-btn> 
+        </div>
+        <p  [innerHtml]="file?.name"></p>
+      </div>
+    </div>
+
+
+  </form>
+
+ 
+</div>

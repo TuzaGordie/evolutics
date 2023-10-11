@@ -1,0 +1,91 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class="row justify-content-between align-items-center mt-2 m-0">
+    <div class="col-6 mb-2">
+      <h5 class="text-primary">{{'Add Dependent Covers'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div> 
+
+  <ng-container *ngFor="let item of createCoverCode?.dependents; let i = index"> 
+    <div class=" border p-2 rounded mb-2">
+      <div class="row m-0  align-items-center ">
+        <div class="col">
+          <div class="row justify-content-center align-items-end">
+            <div class="col-md-3">
+              <app-input-td-rf label="Company" type="select" [options]="companiesList" labelType="cd" [stacked]="true" valueField="code"
+                [(model)]="item.company" #companyTag></app-input-td-rf>
+            </div>
+            <div class="col-md-3">
+              <app-input-td-rf label="Cover" type="select" [options]="onSelectCompanyCode|functionCaller1: companyTag.value|async"
+                labelType="cd" [stacked]="true"
+                valueField="code" [(model)]="item.riderCoverCode" #companyTag></app-input-td-rf> 
+            </div>
+            <div class="col-md-2">
+              <div class="form-group mt-2">
+                <label class="text-primary">{{'Max Number'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control control-bg-gray" [(ngModel)]="item.maxNo" type="number"
+                  name="maxno_{{item.rowId}}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group mt-2">
+                <label class="text-primary">{{'Age Assured Limit'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control control-bg-gray" [(ngModel)]="item.ageAssuredLimit" type="number"
+                  name="age_{{item.rowId}}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <app-input-td-rf label="Funding Option" type="select"
+                [options]="fundingOptionsList" labelType="ct" [stacked]="true"
+                valueField="code" [(model)]="item.fundingOption" #companyTag></app-input-td-rf> 
+            </div>
+            <div class="col-md-auto mt-2">
+              <label class="text-primary m-0 d-flex align-items-center">{{'Sum Assured = Base Cover Sum Assured'|appTranslate|async}}
+                <input #inp="ngModel" class="form-control control-bg-gray ms-2" [(ngModel)]="item.sumAssuredEqualBaseCoverSumAssured"
+                  type="checkbox" name="coverassured_{{item.rowId}}"></label>
+            </div>
+            <div class="col-md-auto mt-2">
+              <label class="text-primary m-0 d-flex align-items-center ">{{'Blank SA'|appTranslate|async}}
+                <input #inp="ngModel" class="form-control control-bg-gray ms-2" [(ngModel)]="item.blankSumAssured" type="checkbox"
+                  name="blanksum_{{item.rowId}}"></label>
+            </div>
+            <div class="col-md-auto mt-2">
+              <label class="text-primary m-0 d-flex align-items-center ">{{'Mandatory'|appTranslate|async}}
+                <input #inp="ngModel" class="form-control control-bg-gray ms-2" [(ngModel)]="item.mandatory" type="checkbox"
+                  name="mandatory_{{item.rowId}}"></label>
+            </div>
+            <div class="col-md-auto  mt-2">
+              <label class="text-primary m-0 d-flex align-items-center">{{'Available Post Issue'|appTranslate|async}}
+                <input #inp="ngModel" class="form-control control-bg-gray ms-2" [(ngModel)]="item.availablePostIssue" type="checkbox"
+                  name="postissue_{{item.rowId}}"></label>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto d-flex">
+          <app-btn (mclick)="removeNewDependentRow(i)" [group]="'delete'" [disabled]="createCoverCode?.dependents?.length==1">
+          </app-btn>
+          <span class="mx-1"></span>
+          <app-button (click)="addNewDependentRow(i+1)" [buttonType]="'addCustom'"></app-button>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+
+  <div class="row m-0 " *ngIf="!coverService.isShow">
+    <div class="col"></div>
+    <div class="col-auto">
+      <div class="form-group mt-2">
+        <label class="text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveDependent()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

@@ -1,0 +1,24 @@
+<div class="container p-5">
+  <h2 class="p-3">{{"Claim Requirements"|appTranslate|async}}</h2>
+  <form>
+    <div class="p-3">
+      <label for="medicalCauseOfDeath">{{"Medical Cause of Death"|appTranslate|async}}</label>
+      <input type="file" class="inputform">
+    </div>
+    <div class="p-3">
+      <label for="birthCertificate">{{"Birth Certificate"|appTranslate|async}}</label>
+      <input type="file" class="inputform">
+    </div>
+    <div class="p-3">
+      <button class="btn btn-outline-primary">
+        <i class="fa fa-plus"></i>{{"Add Document"|appTranslate|async}}
+      </button>
+    </div>
+    <div class="p-3 pt-5 d-flex justify-content-between">
+      <button class="btn btn-outline-primary" (click)="openAssignProviderModal()">
+        <i class="fa fa-pen-square"></i>{{"Assign Provider"|appTranslate|async}}
+      </button>
+      <button class="btn btn-primary" (click)="nextTab()"><i class="fa fa-save"></i>&nbsp;{{"Save"|appTranslate|async}}</button>
+    </div>
+  </form>
+</div>

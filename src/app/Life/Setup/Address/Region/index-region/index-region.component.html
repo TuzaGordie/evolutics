@@ -1,0 +1,55 @@
+<!-- <app-form-navigation [title]="'Set Up / Address / Region'"></app-form-navigation> -->
+<loader [loading]="loading" text="Fetching region data....">
+  <div class="container-sm mt-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label>{{"Select Country Group "|appTranslate|async}}</label>
+
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="countryGroup" name="countryGroup"
+              required type="text" class="form-control control-bg-gray" (change)="getCountryCodes(group.value)" #group>
+              <option value="{{ item.group }}" *ngFor="let item of countryGroups">
+                {{ item.group }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label>{{"Select Country Code"|appTranslate|async}}</label>
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="countryCode" name="countryCode"
+              required type="text" class="form-control control-bg-gray" (change)="getCountryRegion(code.value)" #code>
+              <option></option>
+              <option value="{{ item.code }}" *ngFor="let item of countryCodes">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label>{{"Select Region"|appTranslate|async}}</label>
+
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="region" name="region" required
+              type="text" class="form-control control-bg-gray">
+              <option value="{{ item.code }}" *ngFor="let item of countryRegions">
+                {{ item.description }}
+              </option>
+            </select>
+
+            <span class="text-danger" *ngIf="message.error">{{"Select a Region cannot be blank"|appTranslate|async}}</span>
+          </div>
+
+          <div class="form-group row my-3">
+            <div class="col-sm-4 d-grid gap-1">
+              <app-button [buttonType]="'show'" (click)="show()"></app-button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <app-button [buttonType]="'create'" routerLink="../show-region"></app-button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <app-button [buttonType]="'clone'" (click)="clone()"></app-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</loader>

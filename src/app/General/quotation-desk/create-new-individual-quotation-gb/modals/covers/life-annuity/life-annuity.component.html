@@ -1,0 +1,125 @@
+
+<div class="modal fade" id="la_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="lifeForm" class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Target Basis'|appTranslate|async}}</label>
+            <select formControlName="basis" id="" class="form-control control-bg-gray">
+              <option selected disabled>Choose an Option</option>
+              <ng-container *ngFor="let option of basis_options">
+                <option [value]="option.code">
+                  {{option.code}} - {{option.title}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Target Amount'|appTranslate|async}}</label>
+            <input formControlName="target" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Source Of Annuity'|appTranslate|async}}</label>
+            <select formControlName="annSource" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Annuity Frequency'|appTranslate|async}}</label>
+            <select formControlName="annFreq" id="" class="form-control control-bg-gray">
+              <option selected disabled>Choose an Option</option>
+              <ng-container *ngFor="let option of freq_options">
+                <option [value]="option.code">
+                  {{option.code}} - {{option.title}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Guarantee Period (Months)'|appTranslate|async}}</label>
+            <input formControlName="period" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Spouse Revisionay Proportion'|appTranslate|async}}</label>
+            <select formControlName="proportion" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Source'|appTranslate|async}}</label>
+            <select formControlName="source" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Pension Fund Administrator'|appTranslate|async}}</label>
+            <select formControlName="admin" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Annuity Annual Escalation Basis'|appTranslate|async}}</label>
+            <select formControlName="escBasis" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Annuity Annual Escalation Value'|appTranslate|async}}</label>
+            <input formControlName="escValue" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <div class="from-group align-items-center ">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn type="outline" icon="add" (mclick)="stop">Create New Account</app-btn>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <app-button (click)="stop" [buttonType]="'saveGB'" data-bs-dismiss="modal"></app-button>
+    </div>
+  </div>
+</div>
+</div>
+

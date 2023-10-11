@@ -1,0 +1,139 @@
+<div
+  class="modal fade"
+  id="pc_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="propertyForm" class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Content Category' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="category"
+              name=""
+              id=""
+              class="form-control control-bg-gray"
+            >
+              <option value=""></option>
+              <ng-container *ngFor="let c of contentCatOptions$ | async">
+                <option [value]="c.title">{{ c.title }}</option>
+              </ng-container>
+            </select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Description' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="description"
+              type="text"
+              class="control-bg-gray form-control"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Total Purchase Value' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="purValue"
+              type="text"
+              readonly
+              class="form-control control-bg-gray"
+            />
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Item Count' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="count"
+              type="text"
+              readonly
+              class="form-control control-bg-gray"
+            />
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Total Market value' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="marValue"
+              type="text"
+              readonly
+              class="form-control control-bg-gray"
+            />
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">{{
+              'Year Fitted' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="year"
+              type="text"
+              readonly
+              class="form-control control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-3">
+            <app-button
+              buttonType="addCustomGB"
+              text="Add Content"
+            ></app-button>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <app-excess
+            class="col"
+            [excessMax]="excess_max"
+            [excessMin]="excess_min"
+            [excessType]="excess_type"
+            [excessDisplay]="excess_display"
+            [excessDisabled]="excess_disabled"
+            [excessOptions]="excess_options"
+            [excessAmount]="excessAmount"
+            [excessRate]="excessRate"
+            (excessAmountChange)="onExcessAmountChange($event)"
+            (excessRateChange)="onExcessRateChange($event)"
+          ></app-excess>
+
+          <app-deductible
+            class="col"
+            [deductibleMax]="deductible_max"
+            [deductibleMin]="deductible_min"
+            [deductibleType]="deductible_type"
+            [deductibleDisplay]="deductible_display"
+            [deductibleDisabled]="deductible_disabled"
+            [deductibleOptions]="deductible_options"
+            [deductibleAmount]="deductibleAmount"
+            [deductibleRate]="deductibleRate"
+            (deductibleAmountChange)="onDeductibleAmountChange($event)"
+            (deductibleRateChange)="onDeductibleRateChange($event)"
+          ></app-deductible>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <app-button (click)="stop()" [buttonType]="'saveGB'"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

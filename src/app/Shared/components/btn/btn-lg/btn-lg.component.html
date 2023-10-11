@@ -1,0 +1,24 @@
+<span class="section-cards">
+  <ng-container *ngIf="route; else elseTemplate">
+    <button matRipple class="btn-large" routerLink="{{route}}">
+      <ng-container *ngTemplateOutlet="btnContent">
+      </ng-container>
+    </button>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button matRipple class="btn-large">
+      <ng-container *ngTemplateOutlet="btnContent">
+      </ng-container>
+    </button>
+  </ng-template>
+
+
+</span>
+<ng-template #btnContent>
+  <div>
+    <div class="title" [innerHTML]="text|appTranslate|async"> </div>
+    <div class="text" [ngClass]="{detach:!!subText}"[innerHTML]="value|toAny|appTranslate|async"> </div>
+    <div class="sub-title" *ngIf="subText" [innerHTML]="subText|appTranslate|async"> </div>
+    <div class="sub-text" *ngIf="subValue" [innerHTML]="subValue|toAny|appTranslate|async"> </div>
+  </div>
+</ng-template>

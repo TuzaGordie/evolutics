@@ -1,0 +1,72 @@
+<div class="container">
+  <loader [loading]="loading">
+    <form [formGroup]="form">
+      <div class="row justify-content-end" *ngIf="isShow ">
+        <div class="col-auto my-2"  >
+          <app-btn type="secondary" icon="export" (mclick)="export()">Export Rates</app-btn>
+        </div>
+        <div class="col-auto my-2">
+          <app-btn type="secondary" icon="edit" routerLink="../../edit/{{rate?.code}}" >Edit</app-btn>
+        </div>
+        <div class="col-auto my-2">
+          <app-btn type="secondary" icon="clone" routerLink="../../clone/{{rate?.code}}" >Clone</app-btn>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col" *ngIf="rate?.code">
+          <app-input-basic label="Short Term Code" type="text" [form]="form" name="code" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col">
+          <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <hr>
+      <h6 class="">
+        Rate Values
+      </h6>
+      <ng-container formArrayName="shortTermRateValuesList">
+        <ng-container *ngFor="let subform of shortTermRateValuesList.controls; let k = index; let isLast = last"
+          [formGroupName]="k">
+          <div class="row align-items-end">
+            <div class="col my-2 my-lg-0">
+              <app-input-basic label="Days" type="number" [form]="subform" name="days" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col my-2 my-lg-0">
+              <app-input-basic label="Factor" type="number" [form]="subform" name="factor" [stacked]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto d-flex" *ngIf="!isShow">
+              <div class="me-2">
+                <app-btn icon="delete" [iconBtn]="true" type="danger" (mclick)="removeShortTermRateValuesListRow(k)"
+                  [valid]="shortTermRateValuesList?.length>1">
+                </app-btn>
+              </div>
+              <app-btn group="add" [iconBtn]="true" (mclick)="addShortTermRateValuesListRow(null,k+1)">
+              </app-btn>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </form>
+
+    <div class="row justify-content-between mt-3">
+      <div class="col-lg" >
+        <div class="row">
+          <div class="col-lg-auto my-2" *ngIf="!isShow ">
+            <app-btn type="secondary" icon="import" (mclick)="import()"  help="You can download the template for importing values">Import Rates</app-btn>
+          </div>
+          <div class="col-lg-auto my-2" *ngIf="!isShow ">
+            <app-btn type="secondary" icon="download" (mclick)="downloadTemplate()">Download Template</app-btn>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2" *ngIf="!isShow">
+        <app-btn type="secondary" icon="save" (mclick)="submit()" [valid]="form?.valid">Submit</app-btn>
+      </div>
+    </div>
+
+  </loader>
+</div>

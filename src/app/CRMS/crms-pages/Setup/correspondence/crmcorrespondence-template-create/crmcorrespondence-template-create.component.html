@@ -1,0 +1,62 @@
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-6">
+      <label>{{'File'|appTranslate|async}}</label>
+      <input class="form-control" id="upload_file" type="file" #file (change)="onChange(file)" />
+      <label class="btn btn-lg" for="file" (click)="trigger()">
+        <i class="fa fa-upload"></i> {{'Choose file...'|appTranslate|async}}</label>
+      <span class="mt-1" *ngIf="fileName">{{fileName}}</span>
+      <div class="text-danger" *ngIf="isFile">
+        {{'Choose a file...'|appTranslate|async}}
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <label>{{'Template Category'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray ht-50" [(ngModel)]="templateCategory">
+        <option *ngFor="let category of categories" (click)="getCategoryCode(category.code)">{{category.title}}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-6">
+      <label>{{'Description'|appTranslate|async}}</label>
+      <input class="form-control control-bg-gray" type="text" name="description" [(ngModel)]="description">
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="row mt-2">
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-6">
+      <button type="submit" (click)="uploadTemplate()" class="btn btn-danger form-control save-button">
+        <i class="fa fa-save"></i>
+        <span>{{ connection.creating ? ' Uploading...' : connection.error ? ' Try Again' : ' Upload'}}</span>
+      </button>
+    </div>
+    <div class="col-md-3">
+
+    </div>
+
+  </div>
+</div>

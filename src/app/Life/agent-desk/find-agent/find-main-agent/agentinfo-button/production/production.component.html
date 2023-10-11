@@ -1,0 +1,52 @@
+<app-form-navigation [title]="'View Agent'"></app-form-navigation>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{"Pending Quotes"|appTranslate|async}}</h1>
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">{{"Quotation No"|appTranslate|async}}</th>
+          <th scope="col">{{"Full Name"|appTranslate|async}}</th>
+          <th scope="col">{{"Individual"|appTranslate|async}}</th>
+          <th scope="col">{{"Product Class"|appTranslate|async}}</th>
+          <th scope="col">{{"Product Code"|appTranslate|async}}</th>
+          <th scope="col">{{"Created Date"|appTranslate|async}}</th>
+          <th scope="col">{{"Agent No"|appTranslate|async}}</th>
+          <th scope="col">{{"Total Premium"|appTranslate|async}}</th>
+          <th scope="col">{{"Days To Expire"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of quotesList" (click)="navigateback();">
+          <th scope="row">{{item.QUOTE_NO}}</th>
+          <td>{{item.OWNER_NAME}}</td>
+          <td>{{item.ENDORSE_NO}}</td>
+          <td>{{item.PRODUCT_CLASS}}</td>
+          <td>{{item.PRODUCT_CODE}}</td>
+          <td>{{item.QUOTED_ON}}</td>
+          <td></td>
+          <td></td>
+          <td>{{item.DAYS_TO_EXPIRY}} </td>
+          <td>
+            <app-button buttonType="edit" text="Modify">
+            </app-button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-2 mt-5">
+        <app-button buttonType="addCustom" text="New Quotation"></app-button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+

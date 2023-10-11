@@ -1,0 +1,176 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class=" form-body container mt-2">
+    <div class="col-6 mx-auto">
+      <div class="row g-1" *ngFor="let config of finalConfig; let i = index">
+        <div class="col-7">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+            <select type="text" class="form-control control-bg-gray" [(ngModel)]="config.config.code"
+              name="company_{{config.rowId}}" (change)="fetchConfigByCompanyCode(i)">
+              <option *ngFor="let company of companies" [value]="company.code">
+                {{company.code}} - {{company.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-5 row">
+          <div class="form-group col">
+            <label for="" class="form-label text-primary w-100 text-center">&nbsp;</label>
+            <app-button buttonType="btnCustomClone" (click)="fillConfig(i)" text="Details" data-bs-toggle="modal"
+              data-bs-target="#detailModal"></app-button>
+  
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'delete'" (click)="deleteConfig(i)" [text]="'Delete'"></app-button>
+          </div>
+        </div>
+      </div>      
+
+      <div class="row g-1">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="add" (click)="addConfig()"></app-button>
+          </div>
+        </div>
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="save" (click)="saveConfig()"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Configuration'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" attr.aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input name="rowNum" [(ngModel)]="modalConfig.rowId" type="hidden" />
+        <div class=" row container mx-auto 2">
+          <div class="col-md-6 p-5">
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Document Printer Option'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray " name="docPrintOption"
+                [(ngModel)]="modalConfig.config.docPrintOption">
+                <option *ngFor="let doc of docPrinters" [value]="doc.code">
+                  {{doc.code}} - {{doc.title}}
+                </option>
+              </select>
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Max Login Attempts'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray " type="number" name="maxLogin"
+                [(ngModel)]="modalConfig.config.maxLogin">
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Languages Allowed'|appTranslate|async}}</label>
+              <div class="row" *ngFor="let configlang of modalConfig.configLanguage; let i = index">
+                <div class="col-9">
+                  <select class="form-control control-bg-gray" name="language_{{configlang.rowId}}"
+                    [(ngModel)]="configlang.language">
+                    <option *ngFor="let lang of languages" [value]="lang.code">
+                      {{lang.code}} - {{lang.title}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">&nbsp;</label>
+                  <app-button [buttonType]="'delete'" (click)="deleteLanguage(i)" [text]="'Delete'"></app-button>
+                </div>
+              </div>
+              <div class="row mt-5">
+                <div class="col-md-10 clear"></div>
+                <div class="col-md-3">
+                  <app-button [buttonType]="'addCustom'" (click)="addLanguage()" [text]="'Add'"></app-button>
+                </div>
+              </div>
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Currency Converter url'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray " type="text" name="currConverter"
+                [(ngModel)]="modalConfig.config.currConverter" />
+            </div>
+            <div class=" mt-3">
+              <label class="form-label text-primary " for="">{{'Password is Case Sensitive'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray " type="checkbox" name="pswdCaseSens"
+                [(ngModel)]="modalConfig.config.pswdCaseSens">
+            </div>
+          </div>
+          <div class="col-md-6 p-5">
+            <div class="  form-group mt-4">
+              <label class="form-label text-primary">{{'Minimum Password Length'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" type="number" name="minPswdLen"
+                [(ngModel)]="modalConfig.config.minPswdLen">
+            </div>
+            <div class=" row  form-group mt-4">
+              <div class=" col-md-9 ">
+                <label class="form-label text-primary">{{'Force Password Change After'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" type="number" name="forcePswdAfter"
+                  [(ngModel)]="modalConfig.config.forcePswdAfter">
+              </div>
+              <div class="col-md-3 d-flex justify-content-end flex-column">
+                <span>{{'Days'|appTranslate|async}}</span>
+              </div>
+            </div>
+            <div class=" row  form-group mt-4">
+              <div class="col-md-9 ">
+                <label class="form-label text-primary">{{'Time Out After'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" type="number" name="timeOutAfter"
+                  [(ngModel)]="modalConfig.config.timeOutAfter">
+              </div>
+              <div class=" col-md-3 d-flex justify-content-end flex-column">
+                <span>{{'Min'|appTranslate|async}}</span>
+              </div>
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Default Screen Color'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="defaultScreen"
+                [(ngModel)]="modalConfig.config.defaultScreen">
+                <option *ngFor="let items of screenColors" [value]="items.code">
+                  {{items.code}} - {{items.title}}
+                </option>
+              </select>
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Auto Translate url'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" type="text" name="autoTranslator"
+                [(ngModel)]="modalConfig.config.autoTranslator">
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Vehicle Model Update url'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" type="text" name="vehicleUpdate"
+                [(ngModel)]="modalConfig.config.vehicleUpdate">
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Active Directory url'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" type="text" name="ad" [(ngModel)]="modalConfig.config.ad">
+            </div>
+            <div class=" form-group mt-4">
+              <label class="form-label text-primary">{{'Vehicle Market Value'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" type="text" name="vehicleMv"
+                [(ngModel)]="modalConfig.config.vehicleMv">
+            </div>
+            <div class="row d-flex flex-row justify-content-end mt-4 ">
+              <div class="col-2 ">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'save'" (click)="storeModal()" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

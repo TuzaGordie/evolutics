@@ -1,0 +1,116 @@
+<div class="container mt-5">
+  <form [formGroup]="agentInfoForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <div class="d-block">
+          <div class="mt-4">
+            <label>Agent Type</label><br>
+            <select formControlName="agentType" class="form-control control-bg-gray" (change)="agentTypeSemt()" required>
+              <option [value]="null">Select Agent Type</option>
+              <option [value]="item.agentType" *ngFor="let item of agentTypeList">{{item.description}}</option>
+            </select>
+            <div *ngIf="validation.agentType.errors && (validation.agentType.dirty || validation.agentType.touched)">
+              <div class="text-danger" *ngIf="validation.agentType?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label>Hierachy Manager</label><br>
+            <input type="text" [ngModel]="hierarchyCode" formControlName="hierarchyCode"
+                   class="form-control control-bg-gray"  (change)="hierarchy()">
+
+            <!-- <div *ngIf="validation.hierarchyCode.errors && (validation.hierarchyCode.dirty || validation.hierarchyCode.touched)">
+                <div class="text-danger" *ngIf="validation.hierarchyCode?.errors?.required ">Field is invalid!
+                </div>
+            </div> -->
+          </div>
+          <div class="mt-4 ">
+
+            <div class="w-100">
+              <div class="row">
+                <div class="col">
+                  <label>Product Qualification</label><br>
+                  <select formControlName="product" class="form-control control-bg-gray"
+                  (change)="storeProductList()" required>
+                    <option [value]="null">Select Product Qualification</option>
+                    <option [value]="item.CODE" *ngFor="let item of productList">{{item.CODE_TITLE}}</option>
+                  </select></div>
+                <div class="col-5">
+                  <app-button [buttonType]="'add'" class="mx-2"></app-button>
+                </div>
+              </div>
+
+
+            </div>
+            <div
+              *ngIf="validation.product.errors && (validation.product.dirty || validation.product.touched)">
+              <div class="text-danger" *ngIf="validation.product?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md position-relative">
+        <div class="mt-4">
+          <label>Branch</label><br>
+          <select formControlName="branch" class="form-control control-bg-gray" (change)="branchInfo()" required>
+            <option [value]="null">Select Branch</option>
+            <option [value]="item.code" *ngFor="let item of BranchList">{{item.description}}</option>
+          </select>
+          <div *ngIf="validation.branch.errors && (validation.branch.dirty || validation.branch.touched)">
+            <div class="text-danger" *ngIf="validation.branch?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 ">
+
+          <div class="w-100">
+            <div class="row">
+              <div class="col">
+                <label>Product Class Qualification</label><br>
+                <select formControlName="productClass" class="form-control control-bg-gray" required
+                        (change)="setProductList()">
+                  <option [value]="null">Select Product Class Qualification</option>
+                  <option [value]="item.code"  *ngFor="let item of productClassList">{{item.title}}</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <app-button [buttonType]="'add'" class="mx-2"></app-button>
+              </div>
+            </div>
+
+
+          </div>
+          <div
+            *ngIf="validation.productClass.errors && (validation.productClass.dirty || validation.productClass.touched)">
+            <div class="text-danger" *ngIf="validation.productClass?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-5">
+          <input type="file" id="fileBtnImg" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+                 (change)="upload($event)">
+          <button for="fileBtnImg" (click)="getImage()" type="button" class="btn btn-primary btn-lg">
+            <fa-icon [icon]="faUpload"></fa-icon>
+            Upload
+            Document
+          </button>
+
+        </div>
+        <p id="filenameifno" [innerHtml]="fileName"></p>
+      </div>
+    </div>
+
+
+  </form>
+  
+
+  <div class="d-flex justify-content-end my-5">
+
+    <!-- <div class="d-flex">
+      <app-button [text]="'Submit'" [buttonType]="'submit'" (click)="onSubmit()"
+      ></app-button>
+    </div> -->
+  </div>
+</div>

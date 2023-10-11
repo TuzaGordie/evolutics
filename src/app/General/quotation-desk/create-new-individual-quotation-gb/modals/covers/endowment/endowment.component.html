@@ -1,0 +1,62 @@
+
+<div class="modal fade" id="lil_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="endowmentForm" class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Pricing Basis'|appTranslate|async}}</label>
+            <select formControlName="basis" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Target'|appTranslate|async}}</label>
+            <input formControlName="target" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Premium Payment Term'|appTranslate|async}}</label>
+            <input formControlName="premTerm" type="text" placeholder="Years" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="premMonths" type="text" placeholder="months" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Benefit Payment Term'|appTranslate|async}}</label>
+            <input formControlName="benTerm" type="text" placeholder="Years" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="benMonths" type="text" placeholder="months" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <app-btn type="outline" icon="save" (mclick)="stop">Save</app-btn>
+    </div>
+  </div>
+</div>
+</div>
+

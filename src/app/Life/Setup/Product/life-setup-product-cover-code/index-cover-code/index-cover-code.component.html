@@ -1,0 +1,69 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-8 mx-auto my-5 align-middle">
+      <div class="form-group mt-2">
+        <label>{{"Select Insurance Type"|appTranslate|async}}</label>
+        <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="insuranceType"
+          (change)="onSelectInsuranceType()">
+          <option [value]="''">{{"Select Insurance Type"|appTranslate|async}}</option>
+          <option *ngFor="let ot of insuranceTypeList" [value]="ot.code">{{ot.code}} - {{ot.title}}</option>
+        </select>
+      </div>
+
+      <div class="form-group mt-2">
+        <label>{{"Select Cover"|appTranslate|async}}</label>
+        <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="cover">
+          <option>{{"Select Cover"|appTranslate|async}}</option>
+          <option *ngFor="let pc of productCovers" [value]="pc.code">{{pc.code}} - {{pc.description}}</option>
+        </select>
+      </div>
+
+      <div class="form-group row my-3">
+        <div class="col-sm-3 d-grid gap-1">
+          <app-button [buttonType]="'show'" (click)="show()"></app-button>
+        </div>
+        <div class="col-sm-3 d-grid gap-1">
+          <app-button [buttonType]="'create'" routerLink="create"></app-button>
+        </div>
+        <div class="col-sm-3 d-grid gap-1">
+          <app-button [buttonType]="'clone'" (click)="clone()"></app-button>
+        </div>
+        <div class="col-sm-3 d-grid gap-1">
+          <app-button [buttonType]="'btnCustomClone'" [text]="'LINK'" data-bs-toggle="modal"
+            data-bs-target="#linkModal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="linkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{"Cover Code "|appTranslate|async}}: </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{covers|json}}
+        <table class="table table-responsive  table-striped">
+          <thead class="py-3">
+            <tr>
+              <th scope="col">{{"Product"|appTranslate|async}}</th>
+              <th scope="col">{{"Description"|appTranslate|async}}</th>
+              <th scope="col">{{"Created On"|appTranslate|async}}</th>
+              <th scope="col">{{"Created By"|appTranslate|async}}</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let item of covers">
+            <td>{{"KNK"|appTranslate|async}}</td>
+            <td>{{"Lorem ipsum dolor sit amet,"|appTranslate|async}}</td>
+            <td>10/01/2022</td>
+            <td>{{"Michael Zoh"|appTranslate|async}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

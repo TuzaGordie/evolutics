@@ -1,0 +1,62 @@
+<app-form-navigation></app-form-navigation>
+<div class="container-fluid d-flex justify-content-center">
+  <div class="card mb-5">
+    <form [formGroup]="form">
+      <div class="mt-3">
+
+        <div class="form-group">
+          <label for="">Company</label>
+          <select name="" id="" class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3">
+        <div>
+          <label for="prodClass">Product Class</label>
+        </div>
+        <div>
+          <select name="prodClass" #prodClass class="form-control control-bg-gray"
+                  (change)='onChangeSelect(prodClass.value)' formControlName="prodClass">
+            <option value=""></option>
+            <option value="savings">Savings</option>
+            <hr class="dropdown-divider">
+            <option value="creditLife">Credit Life</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3">
+        <app-input-basic type="select" label='Product' [colored]='false'
+                         [options]="" labelType="ct" valueField="liability" [form]="form" name='product'
+                         [stacked]="true">
+        </app-input-basic>
+      </div>
+      <div class="mt-3">
+        <div>
+          <label for="prodClass">Valuation Method</label>
+        </div>
+        <div>
+          <select name="valMethod" #valMethod class="form-control control-bg-gray" formControlName="valMethod">
+            <option value=""></option>
+            <option value="formula">Conventional Formula</option>
+            <hr class="dropdown-divider">
+            <option value="cashflow">Conventional Cash Flow</option>
+            <hr class="dropdown-divider">
+            <option value="IFRS17">IFRS17</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <div class="d-flex justify-content-end">
+          <div class="" *ngIf="!isNextHidden">
+            <div class="btn bg-actuarial text-white btn-lg" routerLink='/actuarial/liability/life/parameters/formula'>
+              Next
+              <fa-icon [icon]="faArrowRight"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

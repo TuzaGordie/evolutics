@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="d-flex justify-content-end my-3" *ngIf="showEditButton">
+    <button class="btn btn-lg" [ngClass]="editMode ? 'btn-primary' : 'btn-outline-primary'" (click)="editMode = !editMode">
+      <span class="fa fa-edit"></span>  Edit
+    </button>
+  </div>
+  <hr *ngIf="showEditButton">
+  <form (ngSubmit)="submitRequiremnt()" #requirementForm="ngForm">
+    <div class="col-5 mx-auto">
+      <div class="row mt-2">
+        <div class="col">
+          <label class="form-label text-primary">{{"Requirement Code"|appTranslate|async}}</label>
+          <input type="text" [(ngModel)]="reqCodeValue" name="code" class="form-control form-control-sm control-bg-gray"
+                 #reqCode="ngModel" [required]="showEditButton" id="" class="form-control control-bg-gray" disabled/>
+
+          <div class="text-danger" *ngIf="reqCode.errors && (reqCode.dirty || reqCode.touched)">
+            <p *ngIf="reqCode.errors.required">{{"Requirement Code is required"|appTranslate|async}}</p>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label class="form-label text-primary">{{"Company"|appTranslate|async}}</label>
+          <select [(ngModel)]="companyValue" name="companyCode" class="form-control control-bg-gray"
+                  #company="ngModel" required class="form-control control-bg-gray" [disabled]="!editMode">
+            <option value=""></option>
+            <option *ngFor="let item of companyArray" value="{{ item.code }}">
+              {{ item.code }} - {{ item.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="company.errors && (company.dirty || company.touched)">
+            <p *ngIf="company.errors.required">
+              Company Code Allowed is required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label class="text-primary form-label">{{"Description "|appTranslate|async}}</label>
+          <input type="text" [(ngModel)]="descriptionValue" name="description"
+                 class="form-control form-control-sm control-bg-gray" #description="ngModel" required id=""
+                 [disabled]="!editMode"/>
+
+          <div class="text-danger" *ngIf="
+            description.errors && (description.dirty || description.touched)
+          ">
+            <p *ngIf="description.errors.required">{{"Description is required"|appTranslate|async}}</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="row mt-2">
+        <div class="col">
+          <label class="text-primary form-label">{{"Requirement Type"|appTranslate|async}}</label>
+
+          <select [(ngModel)]="reqTypeValue" name="type" class="form-control form-control-sm control-bg-gray"
+                  #reqType="ngModel" required class="form-control control-bg-gray" [disabled]="!editMode">
+            <option value=""></option>
+            <option *ngFor="let item of reqTypeArray" value="{{ item.code }}">
+              {{ item.code }} - {{ item.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="reqType.errors && (reqType.dirty || reqType.touched)">
+            <p *ngIf="reqType.errors.required">{{"Requirement Type is required"|appTranslate|async}}</p>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="row justify-content-end mt-5">
+        <div class="col-3">
+          <app-button buttonType="save" (click)="submitRequiremnt()"></app-button>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

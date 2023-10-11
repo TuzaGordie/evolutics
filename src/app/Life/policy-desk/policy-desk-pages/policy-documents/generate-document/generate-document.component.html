@@ -1,0 +1,42 @@
+<div class="">
+  <div class="d-flex justify-content-between">
+    <div class="page-head">
+     <h5>{{'Generate Document'|appTranslate|async}}</h5>
+    </div>
+    <div class="">
+      <img src="../../../../../assets/img/close.svg" alt="" class="pointer" (click)="close()">
+    </div>
+  </div>
+
+  <div class=" py-3">
+    <div class="row text-primary">
+      <div class="col-2 text-center">
+        <p>{{'Document'|appTranslate|async}}</p>
+      </div>
+      <div class="col-2 text-center">
+        <p>{{'How Delivered'|appTranslate|async}}</p>
+      </div>
+      <div class="col-6">
+        <p>{{'Normal Trigger'|appTranslate|async}}</p>
+      </div>
+    </div>
+    <div class="row mb-2 align-items-center" *ngFor="let item of docs">
+      <div class="col-2 text-center">
+        {{item.code}}_{{item.description}}
+      </div>
+      <div class="col-2 text-center">
+        {{item.delivery}}
+      </div>
+      <div class="col-2 fw-bold">
+        {{item.sendBy}}
+      </div>
+      <div class="col-2 text-center">
+        <app-btn type="primary" (click)="generatePolicyDocument(item.code)">
+          Generate
+        </app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

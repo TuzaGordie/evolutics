@@ -1,0 +1,23 @@
+.chd {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  .chd-icon {
+    height: 40px;
+    width: 40px;
+    font-size: 30px;
+  }
+  .chd-icon:hover { 
+    margin: -1px;
+  }
+  .chd-options {
+    position: absolute;
+    bottom: 50px;
+    right: 5px;
+    width: 200px;
+    height: auto;
+  }
+  .glass{
+      background-color: #ffffff52;
+  }
+}

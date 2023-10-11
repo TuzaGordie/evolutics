@@ -1,0 +1,140 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Premium Payment Method'"></app-form-navigation> -->
+<div class="d-flex justify-content-end my-3" *ngIf="showEditButton">
+  <button class="btn btn-lg" [ngClass]="editMode ? 'btn-primary' : 'btn-outline-primary'"
+    (click)="editMode = !editMode">
+    <span class="fa fa-edit"></span> {{'Edit'|appTranslate|async}}
+  </button>
+</div>
+<hr *ngIf="showEditButton">
+<form (ngSubmit)="createPayoutMethod()" novalidate #f="ngForm">
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+        <label class="form-label text-primary">{{"Premium Payment Method Code"|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" name="code" [disabled]="!editMode || disableCode"
+          [(ngModel)]="createPayinMethod.payinMethod.code" #code="ngModel" required>
+
+        <div class="text-danger" *ngIf="code.errors && (code.dirty || code.touched)">
+          <p *ngIf="code.errors.required">{{"code is required"|appTranslate|async}}</p>
+        </div>
+      </div>
+
+    </div><br>
+    <div class="row mt-2">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+        <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" [(ngModel)]="createPayinMethod.payinMethod.description"
+          name="description" #description="ngModel" required [disabled]="!editMode">
+
+        <div class="text-danger" *ngIf="description.errors && (description.dirty || description.touched)">
+          <p *ngIf="description.errors.required">{{"Description is required"|appTranslate|async}}</p>
+        </div>
+      </div>
+
+    </div><br>
+    <div class="row mt-2">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+        <label class="form-label text-primary">{{"Clearing Days (Leave Blank if already set in Finance)"|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" type="number" [disabled]="!editMode"
+          [(ngModel)]="createPayinMethod.payinMethod.daysToClear" name="daysToClear" #daysToClear="ngModel">
+
+        <!-- <div class="text-danger" *ngIf="daysToClear.errors && (daysToClear.dirty || daysToClear.touched)">
+          <p *ngIf="daysToClear.errors.required">{{"Days To Clear is required"|appTranslate|async}}</p>
+        </div> -->
+      </div>
+
+    </div><br>
+    <div class="row mt-2">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+        <label class="form-label text-primary">{{"Account Type"|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray" [(ngModel)]="createPayinMethod.payinMethod.accountCode"
+          name="accountCode" #accountCode="ngModel" [disabled]="!editMode">
+          <option></option>
+          <option *ngFor="let code of accCodes" [value]="code.code">
+            {{code.description}}
+          </option>
+        </select>
+
+        <!-- <div class="text-danger" *ngIf="accountCode.errors && (accountCode.dirty || accountCode.touched)">
+          <p *ngIf="accountCode.errors.required">{{"Account Code is required"|appTranslate|async}}</p>
+        </div> -->
+      </div>
+
+    </div><br>
+
+
+    <div class="row mt-2">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Direct Debit"|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" type="checkbox" [disabled]="!editMode"
+          [(ngModel)]="createPayinMethod.payinMethod.ddRequired" name="ddRequired">
+      </div>
+
+    </div>
+    <div *ngFor="let company of createPayinMethod.payinMethodCompany; let i = index">
+      <div class="row mt-2" *ngIf="company.deleted == false">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-primary">{{"Company Allowed"|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray" [(ngModel)]="company.companyCode"
+            name="companyCode_{{company.id}}" #companyCode="ngModel" [disabled]="!editMode">
+            <option *ngFor="let code of companyCodes" [value]="code.code">
+              {{code.description}}
+            </option>
+          </select>
+
+          <!-- <div class="text-danger" *ngIf="companyCode.errors && (companyCode.dirty || companyCode.touched)">
+            <p *ngIf="companyCode.errors.required">{{"Company Code is required"|appTranslate|async}}</p>
+          </div> -->
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="delete" (click)="removeCompany(i)"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+
+      </div>
+      <div class="col-md-6">
+        <label class="form-label text-primary">&nbsp;</label>
+        <app-button [buttonType]="'add'" (click)="addCompany()"></app-button>
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <div class="row mt-2">
+      <div class="col-9 d-flex justify-content-end">
+        <label class="form-label text-primary">&nbsp;</label>
+        <button class="btn btn-outline-primary" (click)="createPayoutMethod()">
+          <span *ngIf="!isSaving" class="fas fa-save"></span>
+          <span *ngIf="isSaving" class="spinner-border spinner-border-sm"></span>
+          {{ 'Save' |appTranslate|async}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</form>

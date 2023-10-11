@@ -1,0 +1,734 @@
+<div class="container">
+  <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="pills-owner-infos-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-owner-infos"
+        type="button"
+        role="tab"
+        aria-controls="pills-owner-infos"
+        (click)="isFinalStage = false"
+        aria-selected="true"
+      >
+        {{ 'Owner Informations' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-policy-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-policy"
+        (click)="isFinalStage = false"
+        type="button"
+        role="tab"
+        aria-controls="pills-policy"
+        aria-selected="false"
+      >
+        {{ 'Policy' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-cover-details-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-cover-details"
+        [disabled]="!quoteNo"
+        (click)="isFinalStage = false"
+        type="button"
+        role="tab"
+        aria-controls="pills-cover-details"
+        aria-selected="false"
+      >
+        {{ 'Cover Details' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-underwriting-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-underwriting"
+        (click)="isFinalStage = false"
+        [disabled]="!quoteNo"
+        type="button"
+        role="tab"
+        aria-controls="pills-underwriting"
+        aria-selected="false"
+      >
+        {{ 'Underwriting' | appTranslate | async }}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-agent-ref-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-agent-ref"
+        [disabled]="!quoteNo"
+        (click)="isFinalStage = false"
+        type="button"
+        role="tab"
+        aria-controls="pills-agent-ref"
+        aria-selected="false"
+      >
+        {{ 'Agent' | appTranslate | async }} /
+        {{ 'ref Agent' | appTranslate | async }}
+      </button>
+    </li>
+    <!-- <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-beneficiary-tab" data-bs-toggle="pill" data-bs-target="#pills-beneficiary"
+              type="button" role="tab" aria-controls="pills-beneficiary" aria-selected="false"
+              (click)="isFinalStage = true">
+        Beneficiary
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-payment-tab" data-bs-toggle="pill" data-bs-target="#pills-payment"
+              (click)="isFinalStage = false" type="button" role="tab" aria-controls="pills-payment"
+              aria-selected="false">
+        Payment
+      </button>
+    </li> -->
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <q-individual-owner-info
+      class="tab-pane fade show active"
+      id="pills-owner-infos"
+      role="tabpanel"
+      aria-labelledby="pills-owner-infos-tab"
+    ></q-individual-owner-info>
+    <div
+      class="tab-pane fade"
+      id="pills-policy"
+      aria-labelledby="pills-policy-tab"
+    >
+      <app-quotation-gbpolicy-tab #policySection></app-quotation-gbpolicy-tab>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitPolicyQuotation()"
+            [disabled]="isCreatingPolicyQuotation"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingPolicyQuotation,
+                'fa-spinner fa-spin': isCreatingPolicyQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingPolicyQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-cover-details"
+      role="tabpanel"
+      aria-labelledby="pills-cover-details-tab"
+    >
+      <q-individual-cover-details
+        [policyTerm]="policyTerm"
+        [premiumTerm]="premiumTerm"
+        #coverSection
+      >
+      </q-individual-cover-details>
+      <div class="row justify-content-end mt-3">
+        <div class="col-3">
+          <button
+            (click)="submitCoverInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingCoversQuotation,
+                'fa-spinner fa-spin': isCreatingCoversQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingCoversQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-underwriting"
+      role="tabpanel"
+      aria-labelledby="pills-underwriting-tab"
+    >
+      <q-individual-under-writing
+        #underWritingSection
+      ></q-individual-under-writing>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitPaymentInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingClientsQuotation,
+                'fa-spinner fa-spin': isCreatingClientsQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingClientsQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-agent-ref"
+      role="tabpanel"
+      aria-labelledby="pills-agent-ref-tab"
+    >
+      <q-individual-agent #agentSection></q-individual-agent>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitAgentInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingAgentsQuotation,
+                'fa-spinner fa-spin': isCreatingAgentsQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingAgentsQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-beneficiary"
+      role="tabpanel"
+      aria-labelledby="pills-beneficiary-tab"
+    >
+      <q-individual-beneficiary #beneficiarySection> </q-individual-beneficiary>
+      <div class="row justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitBeneficiaryInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingClientsQuotation,
+                'fa-spinner fa-spin': isCreatingClientsQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingClientsQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="pills-payment"
+      aria-labelledby="pills-payment-tab"
+    >
+      <app-quotation-gbpayment-tab
+        #paymentSection
+      ></app-quotation-gbpayment-tab>
+
+      <div class="row py-5 justify-content-end">
+        <div class="col-3">
+          <button
+            (click)="submitPaymentInfo()"
+            class="w-100 btn btn-outline-primary btn-lg"
+          >
+            <span
+              class="fa"
+              [ngClass]="{
+                'fa-check': !isCreatingClientsQuotation,
+                'fa-spinner fa-spin': isCreatingClientsQuotation
+              }"
+            ></span>
+            <span class="ps-2">{{
+              isCreatingClientsQuotation ? 'Submitting...' : 'Submit'
+            }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<q-new-asset></q-new-asset>
+<q-motor-risk-questionnaire></q-motor-risk-questionnaire>
+<q-medical-questionnaire></q-medical-questionnaire>
+
+<!-- Remaining modals -->
+<div
+  class="modal fade"
+  id="submitModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <style>
+    .modal-dialog {
+      max-width: 1024px;
+    }
+  </style>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 _ngcontent-oeb-c436="" id="staticBackdropLabel" class="modal-title">
+          <i _ngcontent-oeb-c436="" class="fa fa-check text-success"></i>
+          {{ 'Quote No' | appTranslate | async }} {{ createdQuoteNo }}
+          {{ 'Created
+          Successfully' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="closeQuoteResult()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <table class="table col-12">
+            <thead>
+              <tr>
+                <th>{{ 'Cover Code' | appTranslate | async }}</th>
+                <th>{{ 'Code Description' | appTranslate | async }}</th>
+                <th>{{ 'Premium Frequency' | appTranslate | async }}</th>
+                <th>{{ 'Premium Method' | appTranslate | async }}</th>
+                <th>{{ 'PAYG' | appTranslate | async }}</th>
+                <th>{{ 'Sum Assured' | appTranslate | async }}</th>
+                <th>{{ 'Premium' | appTranslate | async }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of createdCovers">
+                <td>{{ c.code }}</td>
+                <td>{{ c.coverDescription }}</td>
+                <td>{{ c.coverPremFreq || '-' }}</td>
+                <td>{{ c.premPayMeth }}</td>
+                <td>{{ c.payG || false }}</td>
+                <td>{{ c.sumAssured | number: '1.2-2':'en' }}</td>
+                <td>{{ c.coverPremium | number: '1.2-2':'en' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <p>
+            {{ 'Quote No' | appTranslate | async }}
+            <span class="text-primary">{{ quoteNo }}</span>
+          </p>
+          <p>
+            {{ 'Total Periodic Premium' | appTranslate | async }}
+            <span class="text-primary">{{
+              totalPremium | number: '1.2-2'
+            }}</span>
+          </p>
+        </div>
+        <div class="row mt-2">
+          <app-button
+            buttonType="addCustomGB"
+            text="Create Quote Template"
+          ></app-button>
+        </div>
+        <div class="row mt-2">
+          <app-button
+            buttonType="btnCustomClone"
+            text="Email Quote To Client"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="convertQuoteToPol"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ 'Convert Quote to Policy' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body align-items-center d-flex justify-content-center"
+        style="min-height: 300px"
+      >
+        <div class="w-100">
+          <div class="row">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">
+                {{ 'Basis For conversion' | appTranslate | async }}
+              </label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-5 justify-content-end">
+            <div class="col-3">
+              <app-button
+                buttonType="submit"
+                data-bs-toggle="modal"
+                data-bs-target="#CreatedSuccessFully"
+              ></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="CreatedSuccessFully"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body align-items-center d-flex justify-content-center"
+        style="min-height: 300px"
+      >
+        <h4>
+          {{ 'Policy No' | appTranslate | async }} xxx
+          {{ 'created sucessfully' | appTranslate | async }}
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="buildings"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          Building'|appTranslate|async}}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Limit'|appTranslate|async}}</label
+              >
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Value of Building' | appTranslate | async
+              }}</label>
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Monthy Rental - If rented' | appTranslate | async
+              }}</label>
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Excess Option' | appTranslate | async
+              }}</label>
+              <select class="form-control control-bg-gray">
+                <option value=""></option>
+                <ng-container *ngFor="let e of excessOptions$ | async">
+                  <option [value]="e">{{ e }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Deductible Option' | appTranslate | async
+              }}</label>
+              <select class="form-control control-bg-gray">
+                <option value=""></option>
+                <ng-container *ngFor="let d of deductibleOptions$ | async">
+                  <option [value]="d">{{ d }}</option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="travel"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ 'Travel' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Destination' | appTranslate | async
+              }}</label>
+              <select class="form-control control-bg-gray">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Travel From Date' | appTranslate | async
+              }}</label>
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{
+                'Travel To Date' | appTranslate | async
+              }}</label>
+              <input type="text" class="form-control control-bg-gray" />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-3">
+            <app-button
+              buttonType="upload"
+              text="Upload Passport Bio Data Page"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="propertyContent"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ 'Property Content' | appTranslate | async }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let i of contentCounter()">
+          <hr class="mt-3" />
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Content category' | appTranslate | async
+                }}</label>
+                <select name="" id="" class="form-control control-bg-gray">
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Description' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Item Purchase Value' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Item Market value' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Count' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Total Value' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Year Fitted' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-3">
+            <app-button
+              buttonType="addCustom"
+              text="Add Content"
+              (click)="contentInc()"
+            ></app-button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label class="form-label text-primary">{{
+              'Total Items Value' | appTranslate | async
+            }}</label>
+            <input type="text" class="form-control control-bg-gray" />
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{
+              'Excess' | appTranslate | async
+            }}</label>
+            <input type="text" class="form-control control-bg-gray" />
+            <select class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{
+              'Deductible' | appTranslate | async
+            }}</label>
+            <input type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <app-input-basic label="Select Rate Category" type="select" [form]="form" name="category" valueField="code"
+        [stacked]="true" labelType="ct" [options]="grS.getCategoryList|httpListCaller|async" #category>
+      </app-input-basic>
+
+      <app-input-basic label="Select Rate Group" type="select" [form]="form" name="group" valueField="code"
+        [stacked]="true" labelType="ct" [options]="grS.getGroupList|httpListCaller|async" #group>
+      </app-input-basic>
+      
+      <app-autocomplete label="Select Rate"  [form]="form" name="code" valueField="code" [stacked]="true"
+        labelType="cd" [options]="getRates|httpListCaller2:category.value:group.value|async"
+        #group>
+      </app-autocomplete>
+
+      <div class="form-group row my-3">
+        <div class="col-sm-4 d-grid gap-1">
+          <app-btn [disabled]="!rateCode" routerLink="show" [queryParams]="{id:rateCode}" icon="show"
+            type="dark">Show</app-btn>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-btn routerLink="create" icon="add" type="outline-nm">Create new</app-btn>
+        </div>
+        <div class="col-sm-4 d-grid gap-1">
+          <app-btn [disabled]="!rateCode" routerLink="clone" [queryParams]="{id:rateCode}" icon="file" type="secondary">Clone</app-btn>
+        </div>
+      </div>
+
+    </div>
+
+  </div>

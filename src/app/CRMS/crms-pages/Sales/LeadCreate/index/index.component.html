@@ -1,0 +1,1059 @@
+<!-- <app-form-navigation [title]="'Sales/Create Lead'"></app-form-navigation> -->
+<div class="container pb-5">
+  <!--<div class="row justify-content-center">
+    <div class="col-3">
+      <div class="form-group ">
+        <label class="form-label text-primary">Upload Leads</label>
+        <app-button buttonType="uploadRed" data-bs-toggle="modal" data-bs-target="#UPLOAD-LEADS-MODAL"></app-button>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+
+  <!-- Modal -->
+  <!-- <div class="modal fade" id="UPLOAD-LEADS-MODAL" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Upload Leads</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ng-container>
+            <div class="row justify-content-center mt-3 mb-20">
+              <div class="col-md-4">
+                <app-btn icon="download" type="outline" (mclick)="downloadTemplate()">Download CSV Template</app-btn>
+
+              </div>
+              <div class="col-md-4">
+                <app-button buttonType="upload" text="Upload Leads"></app-button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+
+
+  <!-- <div class="row">
+    <div class="col-9"></div>
+    <div class="col-3">
+      <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" (click)="show(1)">
+          <button class="nav-link" [ngClass]="classindividual=='true' ? 'active' : ''" type="button">Individual
+          </button>
+        </li>
+        <li class="nav-item" (click)="show(2)">
+          <button class="nav-link" [ngClass]="classcorporate=='true' ? 'active navblue' : ''" type="button">Corporate
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+
+  <div [hidden]="!individual">
+    <form id="form-body" [formGroup]="form" *ngIf="form" (submit)="onSubmit('individual')">
+      <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-client-tab" data-bs-toggle="pill" data-bs-target="#pills-client"
+            type="button" role="tab" aria-controls="pills-client" aria-selected="false">Client
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-prospect-tab" data-bs-toggle="pill" data-bs-target="#pills-prospect"
+            type="button" role="tab" aria-controls="pills-prospect" aria-selected="true">Prospect
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-opportunity-tab" data-bs-toggle="pill" data-bs-target="#pills-opportunity"
+            type="button" role="tab" aria-controls="pills-opportunity" aria-selected="false">Opportunity
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-assignment-tab" data-bs-toggle="pill" data-bs-target="#pills-assignment"
+            type="button" role="tab" aria-controls="pills-assignment" aria-selected="false">Assignment
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-appointment-tab" data-bs-toggle="pill" data-bs-target="#pills-appointment"
+            type="button" role="tab" aria-controls="pills-appointment" aria-selected="false">Appointment
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-client" role="tabpanel" aria-labelledby="pills-client-tab">
+          <app-view-individual-client-comp [client]="clientLeadDetailsForm.value"></app-view-individual-client-comp>
+        </div>
+
+        <div class="tab-pane fade" id="pills-prospect" role="tabpanel" aria-labelledby="pills-prospect-tab">
+          <div class="row g-3" formGroupName="clientLeadProspect">
+            <div class="col-md-4">
+              <div class="form-group">
+                <app-input-basic label="Event Generating the Prospect" type="select"
+                  [form]="form.get('clientLeadProspect')" name="eventGeneratingTheprospect" [stacked]="true"
+                  [options]="seS.getEventGeneratingProspect|functionCaller1:'CO234'|async" labelType="cmd"
+                  #eventGeneratingTheprospect>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="Country Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="countryProspected" [stacked]="true" [options]="seS.getCountry|functionCaller|async"
+                  labelType="cd" #countryProspected>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="Region Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="regionProspected" [stacked]="true"
+                  [options]="seS.getRegionByCountry|functionCaller1:countryProspected?.value?.code|async" labelType="cd"
+                  #regionProspected>
+                </app-input-basic>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group ">
+                <app-input-basic label="Prospecting Date" [colored]="true" type="date"
+                  [form]="form.get('clientLeadProspect')" name="prospectingDate" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="form-group ">
+                <app-input-basic label="Channel Generating the Prospect" type="select"
+                  [form]="form.get('clientLeadProspect')" name="channelGeneratingTheprospect" [stacked]="true"
+                  [options]="seS.getCodeSubGroup|functionCaller1:'CHANNEL'|async" labelType="ct"
+                  #channelGeneratingTheprospect>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="City Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="cityProspected" [stacked]="true"
+                  [options]="seS.getStateByRegion|functionCaller1:regionProspected?.value?.code|async" labelType="cd"
+                  #cityProspected>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="Town Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="townProspected" [stacked]="true"
+                  [options]="seS.getTownByCity|functionCaller1:cityProspected?.value?.code|async" labelType="cd"
+                  #townProspected>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group ">
+                    <app-input-basic [colored]="true" type="text" label="Referrer No" name="referrerNo"
+                      [form]="form.get('clientLeadProspect')" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label text-primary">&nbsp;</label>
+                  <app-button (mclick)="findReferrer()" buttonType="findRed"></app-button>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group ">
+                    <app-input-basic type="text" label="Referrer Name" [form]="form.get('clientLeadProspect')"
+                      [colored]="true" name="referrerName" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mt-3 mb-3">
+            <label class="form-label text-primary">
+              Prospect Generated By:
+            </label>
+          </div>
+          <div class="row g-3" formGroupName="clientLeadProspect">
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault1" type="radio">
+                  <label class="form-check-label text-primary">
+                    Social Media
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Walk In
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Agent
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Relationship Manager
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Staff
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Policy Holder
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="prospectgeneratedBy" name="prospectgeneratedBy"
+                    id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Event
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-opportunity" role="tabpanel" aria-labelledby="pills-opportunity-tab">
+          <div class="row g-3" formGroupName="clientLeadOpportunity">
+            <div class="col-md-12" formArrayName="opportunityList">
+              <div *ngFor="let a of opportunityList.controls; let i = index;" [formGroupName]="i" class="row g-3 py-2">
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Company" type="select" [form]="form.get('clientLeadOpportunity')"
+                      (mchange)="setCompanyProducts()" name="companyCode" [stacked]="true"
+                      [options]="seS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" #companyCode>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Product Opportunities" type="select"
+                      [form]="form.get('clientLeadOpportunity')" name="productOpportunities" [stacked]="true"
+                      [options]="companyProducts" labelType="ct" #productOpportunities>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Expected Currency" type="select" [form]="form.get('clientLeadOpportunity')"
+                      name="expectedCurrency" [stacked]="true" [options]="seS.getCurrency|functionCaller|async"
+                      labelType="cd" #expectedCurrency>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic [colored]="true" name="estimatedPremium" label="Estimated Premium" type="text"
+                      [form]="form.get('clientLeadOpportunity')" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Estimated Premium Range" type="select"
+                      [form]="form.get('clientLeadOpportunity')" name="estimatedPremiumRange" [stacked]="true"
+                      [options]="seS.getCodeSubGroup|functionCaller1:'ESTIMATE_REV_BAND'|async" labelType="ct"
+                      #estimatedPremiumRange>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-1 mt-4">
+                  <div class="form-group ">
+                    <label class="form-label text-primary">&nbsp;<br /></label>
+                    <app-button buttonType="delete" (click)="removeOpportunityList(i)"></app-button>
+                  </div>
+                </div>
+                <div class="col-md-1 mt-4">
+                  <div class="form-group ">
+                    <label class="form-label text-primary">&nbsp;<br /></label>
+                    <app-button buttonType="add" (click)="addOpportunityList()"></app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-assignment" role="tabpanel" aria-labelledby="pills-assignment-tab">
+
+          <div formGroupName="clientAssignment">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="form-group ">
+                      <app-input-basic label="Agent No" [colored]="true" type="text"
+                        [showValidation]="true" [showValidationIcon]="true" [showLabel]="true"
+                        [form]="form.get('clientAssignment')" name="agentNo" [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                  <div class="col-md-3 align-self-end">
+                    <div class="form-group ">
+                      <label class="form-label text-primary">&nbsp;<br /></label>
+                      <app-button (click)="findAgent()" buttonType="findRed"></app-button>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group ">
+                      <app-input-basic type="text" [form]="form.get('clientAssignment')" label="Agent Name"
+                        [colored]="true" name="agentName" [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <app-input-basic type="text" (keyup)="setRelationshipManager()" label="Enter Relationship Manager"
+                        [form]="form.get('clientAssignment')" [colored]="true" name="relationshipManager"
+                        [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                  <div class="col-md-3 align-self-center">
+                    <div class="form-group">
+                      <label class="form-label text-primary">&nbsp;<br /></label>
+                      <app-button (click)="findRelationshipManager()" buttonType="findRed"></app-button>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label class="form-label text-primary">&nbsp;</label>
+                      <app-input-basic type="text" [form]="form.get('clientAssignment')" [colored]="true"
+                        name="relManagerName" [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Team Category" type="select" [form]="form.get('clientAssignment')"
+                    name="teamCat" [stacked]="true"
+                    [options]="seS.getCodeSubGroup|functionCaller1:'TEAM_CATEGORY'|async" labelType="ct" #teamCategory>
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Team Code" type="select" [form]="form.get('clientAssignment')" name="teamCode"
+                    [stacked]="true" [options]="seS.getTeamCode|functionCaller|async" labelType="cd" #teamCode>
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Priority Level" type="select" [form]="form.get('clientAssignment')"
+                    name="priorityLevel" [stacked]="true"
+                    [options]="seS.getCodeSubGroup|functionCaller1:'PRIORITY_LEVEL'|async" labelType="ct"
+                    #priorityLevel>
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Lead Quality" type="select" [form]="form.get('clientAssignment')"
+                    name="leadQuality" [stacked]="true"
+                    [options]="seS.getCodeSubGroup|functionCaller1:'LEAD_QUALITY'|async" labelType="ct" #leadQuality>
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row g-3 mt-3 mb-3">
+              <div class="col-md-4">
+                <div>
+                  <app-input-basic label="Auto Assign" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="assignToself" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div>
+                  <app-input-basic label="Assign To Specific Sales Personnel" type="checkbox"
+                    [form]="form.get('clientAssignment')" name="assignToSpecificSalesPersonnel" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div>
+                  <app-input-basic label="Auto Assign" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="autoAssign" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-3">
+              <label for="" style="font-size: 15px;" class="form-label text-primary">
+                Lead Temperature :
+              </label>
+            </div>
+            <div class="row g-3 mt-3 mb-5">
+              <div class="col-md-4">
+                <div>
+                  <!-- <input class="form-check-input" formControlName="leadTemperature" name="leadTemperature" id="flexRadioDefault1" type="radio">
+                  <label class="form-check-label text-primary">
+                    Hot
+                  </label> -->
+                  <app-input-basic label="Hot" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="leadTemperature" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div>
+                  <!-- <input class="form-check-input" formControlName="leadTemperature" name="leadTemperature" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Warm
+                  </label> -->
+                  <app-input-basic label="Warm" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="leadTemperature" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div>
+                  <!-- <input class="form-check-input" formControlName="leadTemperature" name="leadTemperature" id="flexRadioDefault3" type="radio">
+                  <label class="form-check-label text-primary">
+                    Cold
+                  </label> -->
+                  <app-input-basic label="Cold" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="leadTemperature" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-appointment" role="tabpanel" aria-labelledby="pills-appointment-tab">
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group ">
+                <app-input-basic type="date" label="Date of Next Visit" [form]="form.get('clientLeadAppointment')"
+                  [colored]="true" name="dateOfNextVisit" [stacked]="true"></app-input-basic>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group ">
+                <app-input-basic type="text" label="Place of Next Visit" [form]="form.get('clientLeadAppointment')"
+                  [colored]="true" name="placeOfNextVisit" [stacked]="true"></app-input-basic>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group ">
+                <app-input-basic type="text" label="Time of Next Visit" [form]="form.get('clientLeadAppointment')"
+                  [colored]="true" name="timeOfNextVisit" [stacked]="true"></app-input-basic>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group ">
+                <app-input-basic label="Visit Type" type="select" [form]="form.get('clientLeadAppointment')"
+                  name="visitType" [stacked]="true" [options]="seS.getCodeSubGroup|functionCaller1:'VISIT_TYPE'|async"
+                  labelType="ct" #visitType>
+                </app-input-basic>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="form-group ">
+                <app-input-basic type="textarea" label="Notes" [form]="form.get('clientLeadAppointment')"
+                  [colored]="true" name="note" [stacked]="true"></app-input-basic>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-2">
+              <div class="form-group ">
+                <app-btn type="secondary" icon="save" (mclick)="onSubmit('individual')">Submit</app-btn>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div [hidden]="!corporate">
+    <form id="form-body" [formGroup]="form" *ngIf="form" (submit)="onSubmit('corporate')">
+      <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-client-tab-2" data-bs-toggle="pill" data-bs-target="#pills-client-2"
+            type="button" role="tab" aria-controls="pills-client-2" aria-selected="true">Client
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-prospect-tab-2" data-bs-toggle="pill" data-bs-target="#pills-prospect-2"
+            type="button" role="tab" aria-controls="pills-prospect-2" aria-selected="true">Prospect
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-opportunity-tab-2" data-bs-toggle="pill"
+            data-bs-target="#pills-opportunity-2" type="button" role="tab" aria-controls="pills-opportunity-2"
+            aria-selected="false">Opportunity
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-assignment-tab-2" data-bs-toggle="pill"
+            data-bs-target="#pills-assignment-2" type="button" role="tab" aria-controls="pills-assignment-2"
+            aria-selected="false">Assignment
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-appointment-tab-2" data-bs-toggle="pill"
+            data-bs-target="#pills-appointment-2" type="button" role="tab" aria-controls="pills-appointment-2"
+            aria-selected="false">Appointment
+          </button>
+        </li>
+      </ul>
+
+
+      <div class="tab-content" id="pills-tabContent-2">
+        <div formGroupName="clientLeadDetails" class="tab-pane fade show active" id="pills-client-2" role="tabpanel"
+          aria-labelledby="pills-client-tab-2">
+
+          <app-view-corporate-client-comp [client]="clientLeadDetailsForm.value" ></app-view-corporate-client-comp>
+
+        </div>
+
+        <div class="tab-pane fade" id="pills-prospect-2" role="tabpanel" aria-labelledby="pills-prospect-tab-2">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="form-group ">
+                <app-input-basic label="Event Generating the Prospect" type="select"
+                  [form]="form.get('clientLeadProspect')" name="eventGeneratingTheprospect" [stacked]="true"
+                  [options]="seS.getEventGeneratingProspect|functionCaller1:'CO234'|async" labelType="cd"
+                  #eventGeneratingTheprospect>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="Country Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="countryProspected" [stacked]="true" [options]="seS.getCountry|functionCaller|async"
+                  labelType="cd" #countryProspected>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="Region Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="regionProspected" [stacked]="true"
+                  [options]="seS.getRegionByCountry|functionCaller1:countryProspected.value?.code|async" labelType="cd"
+                  #regionProspected>
+                </app-input-basic>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group ">
+                <app-input-basic label="Prospecting Date" [colored]="true" type="date"
+                  [form]="form.get('clientLeadProspect')" name="prospectingDate" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="form-group ">
+                <app-input-basic label="Channel Generating the Prospect" type="select"
+                  [form]="form.get('clientLeadProspect')" name="channelGeneratingTheprospect" [stacked]="true"
+                  [options]="seS.getCodeSubGroup|functionCaller1:'CHANNEL'|async" labelType="ct"
+                  #channelGeneratingTheprospect>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="City Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="cityProspected" [stacked]="true"
+                  [options]="seS.getStateByRegion|functionCaller1:regionProspected?.value?.code|async" labelType="cd"
+                  #cityProspected>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group ">
+                <app-input-basic label="Town Prospected" type="select" [form]="form.get('clientLeadProspect')"
+                  name="townProspected" [stacked]="true"
+                  [options]="seS.getTownByCity|functionCaller1:cityProspected?.value?.code|async" labelType="cd"
+                  #townProspected>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group ">
+                    <app-input-basic [colored]="true" type="text" label="Referrer No" name="referrerNo"
+                      [form]="form.get('clientLeadProspect')" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label text-primary">&nbsp;</label>
+                  <app-button (mclick)="findReferrer()" buttonType="findRed"></app-button>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group ">
+                    <app-input-basic type="text" label="Referrer Name" [form]="form.get('clientLeadProspect')"
+                      [colored]="true" name="referrerName" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3 mb-3">
+            <label class="form-label text-primary">
+              Prospect Generated By:
+            </label>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault1" type="radio">
+                  <label class="form-check-label text-primary">
+                    Social Media
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Walk In
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Agent
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Relationship Manager
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Staff
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Policy Holder
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" name="prospectgeneratedBy" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Event
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-opportunity-2" role="tabpanel" aria-labelledby="pills-opportunity-tab-2">
+
+
+          <div class="row g-3" formGroupName="clientLeadOpportunity">
+            <div class="col-6" formArrayName="opportunityList">
+              <div *ngFor="let a of opportunityList.controls; let i = index;" [formGroupName]="i" class="row g-3">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <app-input-basic label="Company" type="select" [form]="form.get('clientLeadOpportunity')"
+                      name="companyCode" [stacked]="true" [options]="seS.getCompanyCodeAndDesc|functionCaller|async"
+                      (mchange)="setCompanyProducts()" labelType="cd" #companyCode>
+                    </app-input-basic>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Product Opportunities" type="select"
+                      [form]="form.get('clientLeadOpportunity')" name="productOpportunities" [stacked]="true"
+                      [options]="companyProducts" labelType="ct" #productOpportunities>
+                    </app-input-basic>
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Expected Currency" type="select" [form]="form.get('clientLeadOpportunity')"
+                      name="expectedCurrency" [stacked]="true" [options]="seS.getCurrency|functionCaller|async"
+                      labelType="cd" #expectedCurrency>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic [colored]="true" name="estimatedPremium" label="Estimated Premium" type="text"
+                      [form]="form.get('clientLeadOpportunity')" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+                    <app-input-basic label="Estimated Premium Range" type="select"
+                      [form]="form.get('clientLeadOpportunity')" name="estimatedPremiumRange" [stacked]="true"
+                      [options]="seS.getCodeSubGroup|functionCaller1:'ESTIMATE_REV_BAND'|async" labelType="ct"
+                      #estimatedPremiumRange>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md-1 mt-4">
+                  <div class="form-group ">
+                    <label class="form-label text-primary">&nbsp;<br /></label>
+                    <app-button buttonType="delete" (click)="removeOpportunityList(i)"></app-button>
+                  </div>
+                </div>
+                <div class="col-md-1 mt-4">
+                  <div class="form-group ">
+                    <label class="form-label text-primary">&nbsp;<br /></label>
+                    <app-button  buttonType="add red"  (mclick)="addOpportunityList()"></app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-assignment-2" role="tabpanel" aria-labelledby="pills-assignment-tab-2">
+          <div formGroupName="clientAssignment">
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="form-group ">
+                      <app-input-basic label="Agent No" [colored]="true" type="text"
+                        [showValidation]="true" [showValidationIcon]="true" [showLabel]="true"
+                        [form]="form.get('clientAssignment')" name="agentNo" [stacked]="true" #agentNo>
+                      </app-input-basic>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group ">
+                      <label class="form-label text-primary">&nbsp;<br /></label>
+                      <app-button (click)="findAgent()" buttonType="findRed"></app-button>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="form-group ">
+                      <app-input-basic type="text" [form]="form.get('clientAssignment')" label="Agent Name"
+                        [colored]="true" name="agentName" [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <app-input-basic type="text" (keyup)="setRelationshipManager()" label="Enter Relationship Manager"
+                        [form]="form.get('clientAssignment')" [colored]="true" name="relationshipManager"
+                        [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                  <div class="col-md-3 alifgn-self-center">
+                    <div class="form-group ">
+                      <label class="form-label text-primary">&nbsp;<br /></label>
+                      <app-button (click)="findRelationshipManager()" buttonType="findRed"></app-button>
+                    </div>
+                  </div>
+                  <div class="col-md-5 align-self-center">
+                    <div class="form-group">
+                      <!-- <label class="form-label text-primary">&nbsp;</label> -->
+                      <app-input-basic type="text" [form]="form.get('clientAssignment')" [colored]="true"
+                        name="relManagerName" [stacked]="true">
+                      </app-input-basic>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Team Category" type="select" [form]="form.get('clientAssignment')"
+                    name="teamCat" [stacked]="true"
+                    [options]="seS.getCodeSubGroup|functionCaller1:'TEAM_CATEGORY'|async" labelType="ct" #teamCategory>
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Team Code" type="select" [form]="form.get('clientAssignment')" name="teamCode"
+                    [stacked]="true" [options]="seS.getTeamCode|functionCaller|async" labelType="cd" #teamCode>
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Priority Level" type="select" [form]="form.get('clientAssignment')"
+                    name="priorityLevel" [stacked]="true"
+                    [options]="seS.getCodeSubGroup|functionCaller1:'PRIORITY_LEVEL'|async" labelType="ct"
+                    #priorityLevel>
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group ">
+                  <app-input-basic label="Lead Quality" type="select" [form]="form.get('clientAssignment')"
+                    name="leadQuality" [stacked]="true"
+                    [options]="seS.getCodeSubGroup|functionCaller1:'LEAD_QUALITY'|async" labelType="ct" #leadQuality>
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-3 mb-3">
+              <div class="col-md-4">
+                <div class="form-check">
+                  <app-input-basic label="Auto Assign" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="assignToself" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <app-input-basic label="Assign To Specific Sales Personnel" type="checkbox"
+                    [form]="form.get('clientAssignment')" name="assignToSpecificSalesPersonnel" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check">
+                  <app-input-basic label="Auto Assign" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="autoAssign" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-3">
+              <label for="" style="font-size: 15px;" class="form-label text-primary">
+                Lead Temperature :
+              </label>
+            </div>
+            <div class="row g-3 mt-3 mb-5">
+              <div class="col-md-4">
+                <div>
+                  <!-- <input class="form-check-input" formControlName="leadTemperature" name="leadTemperature" id="flexRadioDefault1" type="radio">
+                  <label class="form-check-label text-primary">
+                    Hot
+                  </label> -->
+                  <app-input-basic label="Hot" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="leadTemperature" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div>
+                  <!-- <input class="form-check-input" formControlName="leadTemperature" name="leadTemperature" id="flexRadioDefault2" type="radio">
+                  <label class="form-check-label text-primary">
+                    Warm
+                  </label> -->
+                  <app-input-basic label="Warm" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="leadTemperature" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div>
+                  <!-- <input class="form-check-input" formControlName="leadTemperature" name="leadTemperature" id="flexRadioDefault3" type="radio">
+                  <label class="form-check-label text-primary">
+                    Cold
+                  </label> -->
+                  <app-input-basic label="Cold" type="checkbox" [form]="form.get('clientAssignment')"
+                    name="leadTemperature" [stacked]="true">
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-appointment-2" role="tabpanel" aria-labelledby="pills-appointment-tab-2">
+          <div formGroupName="clientLeadAppointment">
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group">
+                  <app-input-basic type="date" label="Date of Next Visit" [form]="form.get('clientLeadAppointment')"
+                    [colored]="true" name="dateOfNextVisit" [stacked]="true"></app-input-basic>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group ">
+                  <app-input-basic type="text" label="Place of Next Visit" [form]="form.get('clientLeadAppointment')"
+                    [colored]="true" name="placeOfNextVisit" [stacked]="true"></app-input-basic>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group ">
+                  <app-input-basic type="text" label="Time of Next Visit" [form]="form.get('clientLeadAppointment')"
+                    [colored]="true" name="timeOfNextVisit" [stacked]="true"></app-input-basic>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group ">
+                  <app-input-basic label="Visit Type" type="select" [form]="form.get('clientLeadAppointment')"
+                    name="visitType" [stacked]="true" [options]="seS.getCodeSubGroup|functionCaller1:'VISIT_TYPE'|async"
+                    labelType="ct" #visitType>
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group ">
+                  <app-input-basic type="textarea" label="Notes" [form]="form.get('clientLeadAppointment')"
+                    [colored]="true" name="note" [stacked]="true"></app-input-basic>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-6">
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-2">
+              <div class="form-group ">
+                <app-btn type="secondary" icon="save" (mclick)="onSubmit('corporate')">Submit</app-btn>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

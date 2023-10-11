@@ -1,0 +1,43 @@
+<app-form-navigation [title] = "'Search Quotation'"></app-form-navigation> 
+<div class="container mt-5" >
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <h1 class="my-5">Quotation Search List</h1>
+
+        <table class="table">
+            <thead class="py-3">
+              <tr>
+                <th scope="col" >Quotation No</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Individual</th>
+                <th scope="col">Product Class</th>
+                <th scope="col">product Code</th>
+                <th scope="col">Last Updated On</th>
+                <th scope="col">Referrer No</th>
+                <th scope="col">Agent No</th>
+                <th scope="col">Iterations</th>
+                <th scope="col">Total Premium</th>
+                <th scope="col">Days to SLA</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of quotationInfoList" (click)="viewInfo(item.QUOTE_NO)">
+                <th scope="row">{{item.QUOTE_NO}}</th>
+                <td>{{item.OWNER_NAME}}</td>
+                <td>{{item.INDIVIDUAL}}</td>
+                <td>{{item.PRODUCT_CLASS}}</td>
+                <td>{{item.PRODUCT_CODE}}</td>
+                <td>{{item.LAST_UPDATE}}</td>
+                <td>{{item.REFERRER_NO}}</td>
+                <td>{{item.AGENT_NO}}</td>
+                <td>{{item.ITERATIONS}}</td>
+                <td>{{item.TOTAL_PREMIUMS}}</td>
+                <td>{{item.DAYS_TO_SLA}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+</div>
+</div>
+    </div>

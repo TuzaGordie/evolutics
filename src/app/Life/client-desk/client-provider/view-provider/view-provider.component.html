@@ -1,0 +1,132 @@
+<loader [loading]="loading">
+
+  <div class="row justify-content-between align-items-center">
+    <div class="col">
+      <div class="row">
+        <div class="col-md-auto">
+          <label for="" class="form-label ">{{"Provider No"|appTranslate|async}}: <span
+              class="text-primary">{{providerNo|uppercase}}</span></label>
+        </div>
+        <div class="col-md-auto">
+          <label for="" class="form-label ">{{"Client Number"|appTranslate|async}}: <a routerLink="../../client-desk/view-client-corporate"  [queryParams]="{clientNo}"
+              class="text-primary">{{clientNo|uppercase}}</a></label>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
+      <app-btn type="secondary" icon="edit" routerLink="../../client-desk/note" [queryParams]="{clientNo,providerNo}">
+        Note</app-btn>
+    </div>
+    <hr class="my-2">
+  </div>
+
+  <div class="row">
+    <div class=" col-lg-3 mb-3" *ngFor="let item of lbls1 ">
+      <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [action]="item.action" [form]="form"
+        [label]="item.label" [name]="item.key" [coloredLbl]="true" [coloredVal]="false" [type]="item.inputType"
+        [showEditing]="item.editable" [hint]="item.hint" [light]="true" [value]="item.value">
+      </app-editable-text-case>
+    </div>
+  </div> 
+  <hr>
+
+  <div class="row justify-content-center my-4">
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'" [routerLink]="['endorsements/']"
+        [queryParams]="{clientNo}"></app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'" [routerLink]="['documents/']"
+        [queryParams]="{clientNo}"></app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Web log in'" [routerLink]="['web-login/']"
+        [queryParams]="{clientNo}"></app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'License'" [routerLink]="['../license/']"
+        [queryParams]="{clientNo}"></app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['workflows/']" [queryParams]="{clientNo}"
+        [text]="'Workflows'">
+      </app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['../branches/']" [queryParams]="{clientNo}"
+        [text]="'Branches'">
+      </app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['../tariff']" [queryParams]="{clientNo}"
+        [text]="'Tariff'">
+      </app-button>
+    </div>
+    <div class="col-md">
+      <app-button [buttonType]="'btnCustomCloneRaised'" [routerLink]="['../payee']" [queryParams]="{clientNo}"
+        [text]="'Payee'">
+      </app-button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-around section-cards card-blue">
+    <div class="card shadow-sm" [routerLink]="['../disciplines']" [queryParams]="{clientNo}">
+      <div class="card-body">
+        <h6 class="card-title">{{"Disciplines"|appTranslate|async}}</h6>
+        <p class="card-number">55</p>
+      </div>
+    </div>
+    <div class="card shadow-sm" [routerLink]="['../product-mapped']">
+      <div class="card-body">
+        <h6 class="card-title">{{"Products Mapped"|appTranslate|async}}</h6>
+        <p class="card-number">43</p>
+      </div>
+
+    </div>
+    <div class="card shadow-sm" [routerLink]="['../account']">
+      <div class="card-body">
+        <h6 class="card-title">{{"Accounts"|appTranslate|async}}</h6>
+        <p class="card-number">12</p>
+      </div>
+
+    </div>
+    <div class="card shadow-sm" [routerLink]="['../pendingpayments']">
+      <div class="card-body">
+        <h6 class="card-title">{{"Pending Payments"|appTranslate|async}}</h6>
+        <p class="card-number">22</p>
+      </div>
+
+    </div>
+    <div class="card shadow-sm" [routerLink]="['../contact-persons']">
+      <div class="card-body">
+        <h6 class="card-title">{{"Contact Persons"|appTranslate|async}}</h6>
+        <p class="card-number">22</p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{"Change Status"|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row px-3">
+            <label for="" class="form-label text-primary">{{"New Status"|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

@@ -1,0 +1,64 @@
+<!-- <app-form-navigation [title] = "'Set Up/Accounts/Transaction Reason Mapping'"></app-form-navigation> -->
+<div class="container">
+  <form [formGroup]="trmForm">
+    <br /><br /><br />
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <label>{{ 'Company' | appTranslate | async }}</label>
+        <select
+          formControlName="company"
+          #company
+          class="form-control form-control-md control-bg-gray"
+        >
+          <option value="{{ item?.code }}" *ngFor="let item of companyArray">
+            {{ item?.code }} - {{ item?.description }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <br />
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <label>{{ 'Transaction Reason' | appTranslate | async }}</label>
+        <select
+          formControlName="transReason"
+          #transReason
+          class="form-control form-control-md control-bg-gray"
+        >
+          <option
+            value="{{ transReason?.code }}"
+            *ngFor="let transReason of transReasArray"
+          >
+            {{ transReason?.code }} - {{ transReason?.title }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <br />
+
+    <div class="row justify-content-center">
+      <div class="col-md-2">
+        <label>&nbsp;</label>
+        <app-btn
+          type="dark"
+          icon="show"
+          (mclick)="show(trmForm.value['company'])"
+          >Show</app-btn
+        >
+      </div>
+      <div class="col-md-2">
+        <label>&nbsp;</label>
+        <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+      </div>
+      <div class="col-md-2">
+        <label>&nbsp;</label>
+        <app-btn
+          type="secondary"
+          icon="clone"
+          (mclick)="clone(trmForm.value['company'])"
+          >Clone</app-btn
+        >
+      </div>
+    </div>
+  </form>
+</div>

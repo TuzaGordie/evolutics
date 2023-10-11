@@ -1,0 +1,22 @@
+<span class="{{appS.system}} d-flex align-items-center justify-content-center" (click)="checkForm()">
+  <i *ngIf="showHelpIcon && help" class="fa fa-info-circle me-2 text-primary" [matTooltip]="help|appTranslate|async"></i>
+  <button matRipple type="{{actionType}}" class="{{mclass}} {{_mclass}} " [ngClass]="{changecolor: valid,'btn-raised':animate}"
+    [disabled]="disabled||!valid||form?.invalid" (click)="click($event)"
+    [matTooltip]="showHelpIcon?null:(help|appTranslate|async)">
+    <span [ngClass]="{'pe-1':!iconBtn}" *ngIf="iconPosition=='left'">
+      <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+      <i *ngIf="customIcon" class="{{customIcon}}"></i>
+    </span>
+    <ng-container *ngIf="text; else elseTemplate">
+      {{text|appTranslate|async}}
+    </ng-container>
+    <ng-template #elseTemplate>
+      <span appTranslator>
+        <ng-content></ng-content>
+      </span>
+    </ng-template>
+    <span [ngClass]="{'ps-1':!iconBtn}" *ngIf="iconPosition=='right'">
+      <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+    </span>
+  </button>
+</span>

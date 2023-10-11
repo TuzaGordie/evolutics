@@ -1,0 +1,79 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Bank / Sort Code'"></app-form-navigation> -->
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <app-input-basic [showLabel]="false" placeholder="Select Country" type="select" [form]="form" name="country" [stacked]="true"
+          [options]="aeS.getCountry|functionCaller|async" labelType="cd" #country>
+        </app-input-basic>
+    </div>
+
+  </div><br>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <app-input-basic [showLabel]="false" placeholder="Select Bank" type="select" [form]="form" name="bank" [stacked]="true"
+      [options]="aeS.getBanks|functionCaller|async" labelType="cd" #bank>
+    </app-input-basic>
+    </div>
+
+  </div><br>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <app-input-basic [showLabel]="false" placeholder="Select State" type="select" [form]="form" name="state" [stacked]="true"
+      [options]="aeS.getCity|functionCaller|async" labelType="cd" #state>
+    </app-input-basic>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <app-input-basic [showLabel]="false" placeholder="Select Town" type="select" [form]="form" name="town" [stacked]="true"
+      [options]="aeS.getTownByCity|functionCaller1:state?.value?.code|async" labelType="cd" #town>
+    </app-input-basic>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6">
+      <app-input-basic [showLabel]="false" placeholder="Select Branch" type="select" [form]="form" name="branch" [stacked]="true"
+      [options]="aeS.getBranchTitleByBankCode|functionCaller1:bank?.value?.code|async" labelType="cd" #branch>
+    </app-input-basic>
+    </div>
+  </div><br>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-auto">
+      <label for="allSortCodes">{{'Select All Sort Codes'|appTranslate|async}}</label>
+      <app-input-basic [showLabel]="false" type="checkbox" [form]="form" name="allSortCodes" [stacked]="true">
+      </app-input-basic>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="dark" icon="show" [valid]="form?.valid" (mclick)="show(bank.value, true)">Show</app-btn>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'create'" routerLink="../create-sort-code"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" icon="show" [valid]="form?.valid" (mclick)="show(bank.value)">Show</app-btn>
+    </div>
+  </div>
+  <br><br>
+</div>

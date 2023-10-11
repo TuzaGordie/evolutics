@@ -1,0 +1,38 @@
+
+<!-- Bootstrap modal -->
+
+<button #launchBtn type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" hidden aria-hidden="true">
+  {{'launch'|appTranslate|async}}
+</button>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">{{'Escalation'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCloseClick()" #closeBtn></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+             
+            </div>
+            <hr>
+            <br>
+            <div class="row">
+                <label class="fw-bold">
+                    {{'Comment'|appTranslate|async}}
+                </label>
+                <textarea class="form-control control-bg-gray"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="submit" data-bs-dismiss="modal" (click)="onCloseClick()"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<ng-template #successMessage>
+  <p class="fw-bold">
+    {{'This task 57688 will be escalated to supervisor J-BOND upon submission'|appTranslate|async}}
+  </p>
+</ng-template>

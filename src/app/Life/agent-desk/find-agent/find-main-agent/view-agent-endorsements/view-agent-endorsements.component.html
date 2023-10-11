@@ -1,0 +1,70 @@
+
+<div class="container mt-5" >
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{"Endorsements"|appTranslate|async}}</h1>
+      <p class="py-3"><b>{{"Agent Name"|appTranslate|async}}:</b> <span class="px-3">{{findClientService.clientInfo?.FIRST_NAME}}</span></p>
+      <table class="table">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">{{"Endorsements No"|appTranslate|async}}</th>
+          <th scope="col">{{"Endorsements Category"|appTranslate|async}}</th>
+          <th scope="col">{{"Type"|appTranslate|async}}</th>
+          <th scope="col">{{"Field Names"|appTranslate|async}}</th>
+          <th scope="col">{{"From"|appTranslate|async}}</th>
+          <th scope="col">{{"To"|appTranslate|async}}</th>
+          <th scope="col">{{"Created By"|appTranslate|async}}</th>
+          <th scope="col">{{"Auth By"|appTranslate|async}}</th>
+          <th scope="col">{{"Pending"|appTranslate|async}}</th>
+          <th scope="col">{{"Created On"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;">{{"Auth On"|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of endorseList">
+          <th scope="row">{{item.ENDORSE_NO}}</th>
+          <td>{{item.ENDORSE_CAT}}</td>
+          <td>{{item.ENDORSE_TYPE}}</td>
+          <td>{{item.FIELD_NAME}}</td>
+          <td></td>
+          <td></td>
+          <td>{{item.CREATED_BY}}</td>
+          <td>{{item.AUTH_BY}}</td>
+          <td>{{item.PENDING}}</td>
+          <td>{{item.CREATED_ON}}</td>
+          <td>{{item.AUTH_ON}}</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>{{"Name Change"|appTranslate|async}}</td>
+          <td>{{"Text"|appTranslate|async}}</td>
+          <td>{{"Last Name"|appTranslate|async}}</td>
+          <td>{{"Snake"|appTranslate|async}}</td>
+          <td>{{"Lion"|appTranslate|async}}</td>
+          <td>{{"b. Kamal"|appTranslate|async}}</td>
+          <td>J-BOND</td>
+          <td>21/APRIL/2021</td>
+          <td>21/April/2021</td>
+          <td>{{"djfj"|appTranslate|async}}</td>
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>{{"Name Change"|appTranslate|async}}</td>
+          <td>{{"Text"|appTranslate|async}}</td>
+          <td>{{"Last Name"|appTranslate|async}}</td>
+          <td>{{"Snake"|appTranslate|async}}</td>
+          <td>{{"Lion"|appTranslate|async}}</td>
+          <td>{{"b. Kamal"|appTranslate|async}}</td>
+          <td>J-BOND</td>
+          <td>21/APRIL/2021</td>
+          <td>21/April/2021</td>
+          <td>{{"djfj"|appTranslate|async}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+

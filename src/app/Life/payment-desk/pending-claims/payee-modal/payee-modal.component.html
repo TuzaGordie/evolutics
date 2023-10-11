@@ -1,0 +1,202 @@
+
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>{{'Payee'|appTranslate|async}}</label>
+        <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+
+
+    <div class="modal-body">
+        <div class="row justify-content-center">
+        <div class="col-3">
+
+            <button class=" btn w-100 "
+                    [ngClass]="{'btn-primary' : !isSetPayeeHidden,'btn-outline-primary btn-clone' : isSetPayeeHidden}"
+                    (click)="setPayee()">
+            <i class="fas fa-user-alt"></i> {{'Set Payee'|appTranslate|async}}
+            </button>
+        </div>
+        <div class="col-3">
+            <button class="btn w-100 "
+                    [ngClass]="{'btn-primary' : !isCreatePaymentOutwardHidden,'btn-outline-primary btn-clone' : isCreatePaymentOutwardHidden}"
+                    (click)="createPaymentOutward()">
+            <i class="fas fa-money-bill-alt"></i> {{'Create Payment Outward'|appTranslate|async}}
+            </button>
+        </div>
+        </div>
+
+
+        <div [hidden]="isSetPayeeHidden">
+
+
+        <div class="row mt-4">
+            <table class="table table-responsive table-striped">
+            <thead>
+            <tr class="">
+                <th scope="col" class="small1" style="width: 8%">{{'Pay To'|appTranslate|async}}</th>
+
+                <th scope="col" class="small1" style="width: 8%">{{'Payee No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 8%">{{'Policy No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 30%">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 30%">{{'Bank No'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+                <td>
+
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        <div class="row mt-4 justify-content-end">
+            <div class="col-2">
+            <app-btn type="secondary" icon="checked">Submit</app-btn>
+            </div>
+        </div>
+        </div>
+
+
+        <div [hidden]="isCreatePaymentOutwardHidden">
+        <div class="row mt-3">
+            <div class="col">
+            <label for="" class="form-label small1">{{'Policy No'|appTranslate|async}}: <span class="text-primary">LRT21000899</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Owner'|appTranslate|async}}: <span class="text-primary">Spatial King</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Initial Estimate'|appTranslate|async}}: <span class="text-primary">970,000</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Adjustment'|appTranslate|async}}: <span class="text-primary">80,000</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Final Amount'|appTranslate|async}}: <span class="text-primary">180,000</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Claim Type'|appTranslate|async}}: <span class="text-primary">Surrender</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Cover Name'|appTranslate|async}}: <span class="text-primary">Savings</span></label>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+            <label for="" class="form-label small1">{{'Currency'|appTranslate|async}}: <span class="text-primary">NGN</span></label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Claim Type'|appTranslate|async}}: <span class="text-primary">xxx</span>x</label>
+            </div>
+            <div class="col">
+            <label for="" class="form-label small1">{{'Claim Status'|appTranslate|async}}: <span
+                class="text-primary">Active</span></label>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+
+        <div class="row mt-4">
+            <table class="table table-responsive table-striped">
+            <thead>
+            <tr class="">
+                <th scope="col" class="small1" style="width: 10%">{{'Pay To'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 7%">{{'Proportion (%)'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 8%">{{'Amount'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 7%">{{'Payee No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 10%">{{'Policy No'|appTranslate|async}}</th>
+                <th scope="col" class="small1">{{'Payee Name'|appTranslate|async}}</th>
+                <th scope="col" class="small1">{{'Payment Method'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 15%">{{'Bank No'|appTranslate|async}}</th>
+                <th scope="col" class="small1" style="width: 7%">{{'Payee Relationship'|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+                <td>
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+                <td>
+                <select name="" id="" class="form-control" style="max-height: 40px">
+                    <option value=""></option>
+                </select>
+                </td>
+                <td>
+                <input type="text" class="form-control" style="max-height: 40px">
+                </td>
+
+            </tr>
+
+
+            </tbody>
+            </table>
+        </div>
+        <div class="row mt-3">
+            <div class="col-1">
+            <label for="" class="form-label text-primary">{{'Narration'|appTranslate|async}} :</label>
+            </div>
+            <div class="col">
+            <textarea name="" id="" rows="5" class="form-control control-bg-gray"></textarea>
+            </div>
+        </div>
+        <div class="row mt-4 justify-content-end">
+            <div class="col-2">
+            <app-btn type="secondary" icon="checked">Submit</app-btn>
+            </div>
+        </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+</div>

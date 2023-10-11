@@ -1,0 +1,205 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{"Surrenders"|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row align-items-end">
+    <div class="col-md-6">
+      <div class="form-group mt-2 justify-content-center">
+        <label class=" text-primary w-100 text-center">{{"Partial Surrender Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.surrenders.partialSurrenderAllowed" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{"Full Surrender Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.surrenders.fullSurrenderAllowed" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Months to Partial Surrender"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.monthsToPartialSurrender" type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Months to Partial Surrender Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.monthsToPartialSurrenderTable">
+          <option></option>
+          <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.code">{{ot.code}} -
+            {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Max Partial Surrender Calc Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.maxPartialSurrenderCalcBasis">
+          <option></option>
+          <option *ngFor="let ot of maxPartialSurrenderBasisList" [ngValue]="ot.code">{{ot.code}} -
+            {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Max Partial Surrender Calc Factor"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.maxPartialSurrenderCalcFactor" type="number" />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Min Partial Surrender Amount"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.minPartialSurrAmt" type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Partial Surrender Penalty (%)"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.partialSurrenderPenalty" type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Partial Surrender Penalty Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.partialSurrenderPenaltyTable">
+          <option></option>
+          <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.code">{{ot.code}} -
+            {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">
+          <app-info-icon text="% of Total Premium Policy Life">{{"Min Contribution"|appTranslate|async}}</app-info-icon>
+        </label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.fullSurrenderValPenaltyRate" type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+
+      <app-input-td-rf #inp label="Cancelation Value Table" [(model)]="createCoverCode.surrenders.cancelValueTable"
+        type="select" labelType="cd" valueField="code" [options]="grS.getRatesByCat|functionCaller1:'T'|async"
+        [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-12">
+      <hr>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Months to Full Surrender"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.monthsToFullSurrender" type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Months to Full Surrender Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.monthsToFullSurrenderTable">
+          <option></option>
+          <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">
+          <app-info-icon text="% of Total Premium Policy Life">{{"Minimum Contribution"|appTranslate|async}}
+          </app-info-icon>
+        </label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.minFullSurrenderContributionRate" type="number" />
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Full Surrender Value Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.surrenderCalculationBasis">
+          <option></option>
+          <option *ngFor="let ot of surrenderPayBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Full Surrender Value Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.minFullSurrenderValueTable">
+          <option></option>
+          <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.code">{{ot.code}} -
+            {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">
+          <app-info-icon text="% of Account Balance">{{'Full Surrender Value Penalty Rate'|appTranslate|async}}
+          </app-info-icon>
+        </label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.surrenders.fullSurrenderValPenaltyRate" type="number" />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label
+          class=" text-primary  w-100 text-center">{{'Zero Surrender Fee on Surrender after PU status'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.surrenders.zeroSurrenderPenPuStatus" type="checkbox" />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary  w-100 text-center">{{'Clawback on Cancelation'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.surrenders.clawbackCancel " type="checkbox" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveSurrender()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

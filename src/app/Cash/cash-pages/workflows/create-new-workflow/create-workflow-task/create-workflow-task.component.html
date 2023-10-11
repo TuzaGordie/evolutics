@@ -1,0 +1,163 @@
+<app-form-navigation [cashtitle]="'Create Workflow Task'"></app-form-navigation>
+<div class="container">
+  <form [formGroup]="workflowTaskForm">
+    <div class="row g-3 my-4">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Task Code</label>
+          <select formControlName="code" class="form-control  control-bg-gray" required (change)="setDefaultSla()">
+            <option [value]="null">Select Task Code</option>
+            <option [value]="item.code" *ngFor="let item of taskcodes">{{item.code}}</option>
+            <!--  <option value="EVOTS_72815000_pFXey">EVOTS_72815000_pFXey</option> -->
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Source</label>
+          <select formControlName="source" class="form-control  control-bg-gray" required>
+            <option [value]="null">Select source</option>
+            <option [value]="item.code" *ngFor="let item of source">{{item.title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Status</label>
+          <select formControlName="status" class="form-control  control-bg-gray" required>
+            <option [value]="null">Select staus</option>
+            <option [value]="item.code" *ngFor="let item of status">{{item.title}}</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div class="row g-3 my-3">
+      <div class="col-2">
+        <div class="form-group ">
+          <label class="form-label">Default Start Date</label>
+          <input class="form-control  control-bg-gray" formControlName="startDate" type="date" />
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label class="form-label">Default Start Time</label>
+          <input class="form-control  control-bg-gray" formControlName="startTime" type="text" />
+        </div>
+      </div>
+
+      <div class="col-2">
+        <label class="form-label">Default SLA (hours:min)</label>
+        <input class="form-control  control-bg-gray" type="time" formControlName="defaultSla" />
+      </div>
+
+      <div class="col-2">
+        <label class="form-label">Override SLA (hours:min)</label>
+        <input class="form-control  control-bg-gray" type="time" formControlName="overrideSla" />
+      </div>
+
+
+    </div>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Reason for Changes to Default SLA</label>
+          <input class="form-control  control-bg-gray" formControlName="errorReason" type="text" />
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Assigned to User Group</label>
+          <input class="form-control  control-bg-gray" formControlName="assignedToGroup" type="text" />
+          <!--  <select class="form-control  control-bg-gray" formControlName="assignedUserGroup" >
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select> -->
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Assigned to User</label>
+          <input class="form-control  control-bg-gray" formControlName="assignedTo" type="text" />
+          <!-- <select class="form-control  control-bg-gray" formControlName="assignedUser" >
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 my-3">
+      <!-- *ngFor="let i of refCounter()" -->
+      <div class="col-4">
+        <div class="form-group">
+          <label for="1e" class="form-label">Ref Category</label>
+          <select formControlName="refCat" class="form-control  control-bg-gray" required>
+            <option [value]="null">Select Ref Category</option>
+            <option [value]="item.code" *ngFor="let item of reflist">{{item.code}} - {{item.title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-4">
+        <label for="2e" class="form-label">Ref Number</label>
+        <input id="2e" class="form-control  control-bg-gray" formControlName="refNo" (change)="setRefNumber()"
+          type="text" />
+      </div>
+      <div class="col-4">
+        <label class="form-label">&nbsp;</label>
+        <input class="form-control  control-bg-gray" type="text" formControlName="refDetails"
+          placeholder="Ref Details" />
+      </div>
+    </div>
+    <!-- <div class="row g-3 mt-2">
+      <div class="col-10 form-group "></div>
+      <div class="col-2 form-group">
+        <app-button [buttonType]="'addCustom'" (click)="incRef()" [text]="'Add Ref'"></app-button>
+      </div>
+    </div> -->
+    <hr>
+    <div class="row g-3">
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label">Description</label>
+          <textarea class="form-control  control-bg-gray" formControlName="description"></textarea>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row my-5 justify-content-between">
+      <div class="col-2">
+        <div>
+          <button class="btn btn-lg document-button" (click)="call_workflow_task_document_list()">
+            <i class="fa fa-file"></i> Document
+          </button>
+        </div>
+        <!-- <app-button [buttonType]="'document'" (click)="call_workflow_task_document_list()"></app-button> -->
+
+      </div>
+
+      <div class="col-2 d-grid gap-1">
+        <div>
+          <button class="btn btn-lg submit-button" (click)="onSubmit()">
+            <i class="fa fa-check"></i> Submit
+          </button>
+        </div>
+        <!-- <app-button [buttonType]="'submit'" (click)="onSubmit()"></app-button> -->
+      </div>
+    </div>
+  </form>
+</div>

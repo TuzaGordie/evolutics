@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{"Documents"|appTranslate|async}}</h1>
+      <p class="py-3"><b>{{"Agent Name"|appTranslate|async}}:</b> <span class="px-3">{{findAgentService.agentInfo?.agent.name}}</span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">{{"Category"|appTranslate|async}}</th>
+          <th scope="col">{{"Document Title"|appTranslate|async}}</th>
+          <th scope="col">{{"Document Names"|appTranslate|async}}</th>
+          <th scope="col">{{"Created By"|appTranslate|async}}</th>
+          <th scope="col">{{"Auto"|appTranslate|async}}</th>
+          <th scope="col">{{"How"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;">{{"Box No."|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of documentList">
+          <th scope="row">{{item.docCat}}</th>
+                    <td>{{item.title}}</td>
+                    <td>{{item.fileName}}</td>
+                    <td>{{item.createdUser}}</td>
+                    <td></td>
+                    <td>{{item.how}}</td>
+                    <td>{{item.docBox}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-md-2  mt-5">
+      <app-button [buttonType]="'addCustom'" [text]="'Add Document'"></app-button>
+    </div>
+  </div>
+
+</div>
+

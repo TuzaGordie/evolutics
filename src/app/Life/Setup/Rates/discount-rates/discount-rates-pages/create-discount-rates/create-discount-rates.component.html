@@ -1,0 +1,129 @@
+<div class="container-fluid mt-2 " id="form-body">
+
+  <div class="tab-content" id="pills-tabContent">
+    <div class="container">
+      <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+
+        <form [formGroup]="form">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <label class="form-label text-primary">{{"Discount Code"|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" type="text" name="code" value="{{code}}" disabled/>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="text" name="description" formControlName="description"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <label class="form-label text-primary">{{"Discount Group"|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray" formControlName="discRateGroup">
+                  <option></option>
+                  <option [value]="dg.code" *ngFor="let dg of discountGroups">{{dg.code}}-{{dg.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="form-group mt-2">
+                <label class="form-label text-primary">{{"Wheel"|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" type="checkbox" name="wheel" formControlName="wheel"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <label class="form-label text-primary">{{"Probability of Win (%)"|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="number" name="probWin" formControlName="probWin"/>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <label class="form-label text-primary">{{"Frequency of Win (%)"|appTranslate|async}}</label>
+                <input class="form-control  control-bg-gray" type="number" name="probWin" formControlName="rate"/>
+              </div>
+            </div>
+          </div>
+          <br><br><br>
+
+          <ng-container formArrayName="discRateValuesList">
+            <ng-container *ngFor="let subForm of versions?.controls; let i = index;" [formGroupName]="i">
+              <div class="row g-3">
+                <div class="col">
+                  <div class="form-group mt-3">
+                    <label class="form-label text-primary">{{"Promo Code"|appTranslate|async}}</label>
+                    <input class="form-control  control-bg-gray" type="text" name="promoCode" formControlName="promoCode"/>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group mt-3">
+                    <label class="form-label text-primary">{{"Fixed Rate (%)"|appTranslate|async}}</label>
+                    <input class="form-control  control-bg-gray" type="number" name="fixedRate" formControlName="fixedRate"/>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group mt-3">
+                    <label class="form-label text-primary">{{"Max Rate (%)"|appTranslate|async}}</label>
+                    <input class="form-control  control-bg-gray" type="number" name="maxRate" formControlName="maxRate"/>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group mt-3">
+                    <label class="form-label text-primary">{{"Valid From"|appTranslate|async}}</label>
+                    <input class="form-control  control-bg-gray" type="date" name="dateFrom" formControlName="dateFrom"/>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group mt-3">
+                    <label class="form-label text-primary">{{"Valid To"|appTranslate|async}}</label>
+                    <input class="form-control  control-bg-gray" type="date" name="dateTo" formControlName="dateTo"/>
+                  </div>
+                </div>
+                <div class="col-1 d-flex align-items-center">
+                  <div class="form-group mx-2 mt-4">
+                    <label class="form-label text-primary">{{"Auto"|appTranslate|async}}</label>
+                    <input class="form-control  control-bg-gray" type="checkbox" name="auto" formControlName="auto"/>
+                  </div>
+                </div>
+                <div class="col-auto d-flex align-items-end">
+                  <div class="form-group mt-2">
+                    <app-btn icon="delete" type="danger-outline" [iconBtn]="true" [disabled]="versions?.length==1" (mclick)="removeVersionRow(i)">
+                    </app-btn>
+                  </div>
+                </div>
+                <div class="col-auto d-flex align-items-end">
+                  <div class="from-group mt-2">
+                    <app-btn icon="add" type="outline" [iconBtn]="true" (mclick)="addVersionRow(null,i+1)">
+                    </app-btn>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+
+        </form>
+      </div>
+
+      <div *ngIf="isCreated" class="row g-3 d-flex justify-content-end mt-4">
+        <div class="col-2">
+          <app-btn type="outline" icon="save" (click)="createNew()">Create New</app-btn>
+        </div>
+      </div>
+
+      <div *ngIf="!isCreated" class="row g-3 d-flex justify-content-end mt-4">
+        <div *ngIf="!isShow" class="col-2">
+          <app-btn type="outline" icon="save" (click)="submit()">Save</app-btn>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2909 @@
+<div class="container-fluid mt-2 ">
+<form id="form-body" [formGroup]="productCoverForm" (submit)="onSubmit()">
+    <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic" type="button" role="tab" aria-controls="pills-basic" aria-selected="true">Basic
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-dependent-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Dependent Covers
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-benefit-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Benefits
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-premium-tab" data-bs-toggle="pill" data-bs-target="#pills-premium" type="button" role="tab" aria-controls="pills-premium" aria-selected="false">Premium
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-commission-tab" data-bs-toggle="pill" data-bs-target="#pills-commission" type="button" role="tab" aria-controls="pills-commission" aria-selected="false">Commissions
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-term-tab" data-bs-toggle="pill" data-bs-target="#pills-term" type="button" role="tab" aria-controls="pills-term" aria-selected="false">Terms
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-endorsements-tab" data-bs-toggle="pill" data-bs-target="#pills-endorsements" type="button" role="tab" aria-controls="pills-endorsements" aria-selected="false">Endorsement
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-underwriting-tab" data-bs-toggle="pill" data-bs-target="#pills-underwriting" type="button" role="tab" aria-controls="pills-underwriting" aria-selected="false">Underwriting
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-surrender-tab" data-bs-toggle="pill" data-bs-target="#pills-surrender" type="button" role="tab" aria-controls="pills-surrender" aria-selected="false">Surrenders
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-loan-tab" data-bs-toggle="pill" data-bs-target="#pills-loan" type="button" role="tab" aria-controls="pills-loan" aria-selected="false">Loan
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-annuities-tab" data-bs-toggle="pill" data-bs-target="#pills-annuities" type="button" role="tab" aria-controls="pills-annuities" aria-selected="false">Annuities
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-lapse-tab" data-bs-toggle="pill" data-bs-target="#pills-lapse" type="button" role="tab" aria-controls="pills-lapse" aria-selected="false">Lapse
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-perils-tab" data-bs-toggle="pill" data-bs-target="#pills-perils" type="button" role="tab" aria-controls="pills-perils" aria-selected="false">Perils
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-paidup-tab" data-bs-toggle="pill" data-bs-target="#pills-paidup" type="button" role="tab" aria-controls="pills-paidup" aria-selected="false">Paid up
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-Bonuses-tab" data-bs-toggle="pill" data-bs-target="#pills-Bonuses" type="button" role="tab" aria-controls="pills-Bonuses" aria-selected="false">Bonuses
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-acc-reins-tab" data-bs-toggle="pill" data-bs-target="#pills-acc-reins" type="button" role="tab" aria-controls="pills-acc-reins" aria-selected="false">Acc / Reins
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-taxes-tab" data-bs-toggle="pill" data-bs-target="#pills-taxes" type="button" role="tab" aria-controls="pills-taxes" aria-selected="false">Taxes / Levels
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-documentation-tab" data-bs-toggle="pill" data-bs-target="#pills-documentation" type="button" role="tab" aria-controls="pills-documentation" aria-selected="false">Documentation
+      </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-excess-tab" data-bs-toggle="pill" data-bs-target="#pills-excess" type="button" role="tab" aria-controls="pills-excess" aria-selected="false">Excess / deductible
+      </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="container">
+            <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Cover code</label>
+                            <input class="form-control control-bg-gray" formControlName="coverCode" type="text" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Description</label>
+                            <input class="form-control  control-bg-gray" formControlName="coverDescripton" type="text" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Insurance type</label>
+                            <select class="form-control  control-bg-gray" formControlName="insuranceType">
+                <option></option>
+                <option *ngFor="let ot of insuranceTypeList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+                        </div>
+                    </div>
+
+                   
+                </div>
+
+                <div class="row g-3">
+                    <div class="col py-4">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="flexSwitchCheckDefault2">Closed to new business</label>
+                            <input class="form-check-input" type="checkbox" formControlName="closedNewBusiness" id="flexSwitchCheckDefault2">
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="groupProcessing" id="flexSwitchCheckDefault3">
+                            <label class="form-check-label" for="flexSwitchCheckDefault3">Group prcessing</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="includeInSar" id="flexSwitchCheckDefault4">
+                            <label class="form-check-label" for="flexSwitchCheckDefault4">Include in SAR</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Company Allowed ( if different from product setup )</label>
+                            <select class="form-control  control-bg-gray" formControlName="companyAllowed">
+                <option></option>
+                <option *ngFor="let ot of companiesList" [ngValue]="ot.COMPANY_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-5" formArrayName="currencyAllowedArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of currencyAllowedArray.controls; let j = index">
+                            <ng-container [formGroupName]="j">
+                            <label>Currency Allowed ( if different from product setup )</label>
+                            <select class="form-control  control-bg-gray" formControlName="currencyAllowed">
+                                <option></option>
+                                <option *ngFor="let ot of currenciesList" [ngValue]="ot.CURR_CODE">{{ot.DESCRIPTION}}</option>
+                            </select>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control" (click)="addNewBasicCurrencyRow()"> Add</button>
+                        </div>
+                    </div>
+                    <div class="col-6 py-2">
+                        <p class="text-center"><label>Do not mature until :</label> </p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="depositAdministration" id="flexSwitchCheckDefault5">
+                            <label class="form-check-label" for="flexSwitchCheckDefault5">Deposit Administration</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="benefitPaidOut" id="flexSwitchCheckDefault6">
+                            <label class="form-check-label" for="flexSwitchCheckDefault6">Benefit is Paid Out</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" formControlName="definedBenefit" id="flexSwitchCheckDefault7">
+                            <label class="form-check-label" for="flexSwitchCheckDefault7">Defined Benefit</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Interest Basis - <span class="text-normal">( For deposit administration)</span></label>
+                            <select class="form-control  control-bg-gray" formControlName="interestBasis">
+                <option></option>
+                <option *ngFor="let ot of interestCalBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Quote Validity Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="qualityValidityBasis">
+                <option></option>
+                <option *ngFor="let ot of quoteValidityBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Interest Rate table - <span class="text-normal">( For deposit administration)</span></label>
+                            <select class="form-control  control-bg-gray" formControlName="interestTableRate">
+                <option></option>
+                <option *ngFor="let ot of interestTableList" [ngValue]="ot.CODE">{{ot.RATE}}</option>
+               
+              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Quote Validity Period (Days)</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="qualityValidityPeriod" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Issue Date Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="issueDateBasis">
+                <option></option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Payment Out Methods Allowed</label>
+                            <select class="form-control  control-bg-gray" formControlName="payOutMethodAllowed">
+                                <option></option>
+                                <option *ngFor="let ot of paymentMethodsList" [ngValue]="ot.PAYOUT_CODE">{{ot.DESCRIPTION}}</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Issue Date Factor</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="issueDateFactor" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Min No of Member - <span class="text-normal">Group Only</span></label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="minNoOfMember" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                <div class="col-6" formArrayName="providerArray">                    
+                        <div class="row g-3" *ngFor="let lessonForm of providerArray.controls; let i = index" [formGroupName]="i">
+                        <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Provider Category</label>
+                            <select class="form-control  control-bg-gray" formControlName="providerCategory">
+                                <option></option>
+                                <option *ngFor="let ot of providerCategoryList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Provider Code</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="providerCode" />
+                        </div>
+                    </div>
+                </div>
+                </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control" (click)="addNewProviderRow()"> Add</button>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control"> Find</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-dependent-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Add Dependent Covers</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3" formArrayName="dependentArray">
+                    <ng-container *ngFor="let lessonForm of dependentArray.controls; let k = index" [formGroupName]="k">
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Business Line</label>
+                            <select class="form-control  control-bg-gray" formControlName="businessLine">
+                                <option></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        </div>
+
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Cover</label>
+                            <select class="form-control  control-bg-gray" formControlName="coverId">
+                                <option></option>
+                                <option *ngFor="let ot of coversList" [ngValue]="ot.COVER_CODE">{{ot.DESCRIPTION}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Mandatory</label>
+                            <select class="form-control  control-bg-gray" formControlName="mandatory">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Available Post Issue</label>
+                            <input type="checkbox" class="form-control" formControlName="availablePostIssue">
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Max No</label>
+                            <input type="text" class="form-control control-bg-gray" formControlName="maxNo">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Age Assured Limit</label>
+                            <input type="text" class="form-control control-bg-gray" formControlName="ageAssuredLimit">
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Funding Option</label>
+                            <select class="form-control  control-bg-gray" formControlName="fundingOption">
+                                <option></option>
+                                <option *ngFor="let ot of fundingOptionsList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Sum Assured equal Base Cover Sum Assured</label>
+                            <input type="checkbox" class="form-control" formControlName="coverSumAssured">
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Blank Sum Assured</label>
+                            <input type="checkbox" class="form-control" formControlName="blankSumAssured">
+                        </div>
+                    </div>
+                    </ng-container>
+                </div>
+                <div class="row g-3">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class="btn bg-dark form-control btn-next" (click)="addNewDependentRow()"> Add Covers</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-benefit-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Benefits</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Payment Trigger Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="paymentTriggerBasis">
+                                <option></option>
+                                <option *ngFor="let ot of paymentTriggerList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>No of Payments Table - Optional</label>
+                            <select class="form-control  control-bg-gray" formControlName="noOfPaymentTable">
+                                <option></option>
+                                <option *ngFor="let ot of paymentTableList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Min Assured</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="minAssured" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Enter Schedule of Payments</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="paymentSchedule" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Max Assured</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="maxAssured" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Frequency of payments <span class="text-normal">(Only applicable if no of payments exceeds 1)</span></label>
+                            <select class="form-control  control-bg-gray" formControlName="paymentFrequency">
+                            <option></option>
+                            <option *ngFor="let ot of frequencyTableList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">                    
+                    <div class="col-5" formArrayName="benefitAssuredArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of benefitAssuredArray.controls; let i = index" [formGroupName]="i">
+                            <label>Sum Assured Options</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="sumAssuredOption" />
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control" (click)="addNewbenefitAssuredRow()"> Add</button>
+                        </div>
+                    </div>
+                
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Waiting Period</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="waitingPeriod" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Sum Assured Calc Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="sumAssuredCalcBasis">
+                <option></option>
+                <option *ngFor="let ot of sumAssuredCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Automatically Decrease Sum Assured when above Max</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox"  formControlName="decreaseSumAssured"/></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Deduct Outstanding Premiums from Benefit</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="deductOutstandingPremium" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <ng-container>
+                    <div class="col-5" formArrayName="benefitInterestArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of benefitInterestArray.controls; let i = index" [formGroupName]="i">
+                            <label>Low Interest Rate Options</label>
+                            <input class="form-control  control-bg-gray" type="text"  formControlName="lowInterestRate"/>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control" (click)="addNewbenefitInterestRow()"> Add</button>
+                        </div>
+                    </div>
+                </ng-container>
+
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Status Code when all annuity payments are finished</label>
+                            <select class="form-control  control-bg-gray" formControlName="paymentStatusCode">
+                                <option></option>
+                                <option *ngFor="let ot of statusCodeList" [ngValue]="ot.STATUS_CODE">{{ot.DESCRIPTION}}</option>
+                              </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Benefit Payment Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="benefitPaymentBasis">
+                <option></option>
+                <option *ngFor="let ot of paymentTriggerList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+              </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Max No of Claims in 1 year</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="maxNoOfClaims"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-5" formArrayName="coversWaivedArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of coversWaivedArray.controls; let i = index" [formGroupName]="i">
+                            <label>Covers Waived</label>
+                            <select class="form-control  control-bg-gray" formControlName="coverWaived">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control" (click)="addNewCoversWaivedArrayRow()"> Add</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Max No of Claims in Policy Life</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="maxNoOfClaimsInPolicyLife" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Covers on which Sum Assured Depends</label>
+                            <select class="form-control  control-bg-gray" formControlName="coverSumAssuredDepends">
+                <option></option>
+                <option *ngFor="let ot of coversList" [ngValue]="ot.COVER_CODE">{{ot.DESCRIPTION}}</option>
+              </select>
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Sum Assured Factor</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="sumAssuredFactor" />
+                        </div>
+                    </div>
+                   <div class="col-5" formArrayName="sumAssuredEscalationArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of sumAssuredEscalationArray.controls; let i = index" [formGroupName]="i">
+                            <label>Sum Assured Escalation Options</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="sumAssuredEscalation" />
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-outline-secondry form-control" (click)="addNewsumAssuredEscalationRow()"> Add</button>
+                        </div>
+                    </div>
+                
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-premium" role="tabpanel" aria-labelledby="pills-premium-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Premium</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Frequency</label>
+                            <select class="form-control  control-bg-gray" formControlName="frequency">
+                                <option></option>
+                                <option *ngFor="let ot of frequencyTableList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Method</label>
+                            <select class="form-control  control-bg-gray" formControlName="method">
+                                <option></option>
+                                <option *ngFor="let ot of paymentInMethodsList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-3" formArrayName="factorArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of factorArray.controls; let f = index" [formGroupName]="f">
+                            <label>Factor</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="factor" />
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewFactorRow()"> Add</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Premium Calculation Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="premiumCalculationBasis">
+                                <option></option>
+                                <option *ngFor="let ot of premiumCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Fixed Premium Amount</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="fixedPremiumAmount" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Rate Calculation Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="rateCalculationBasis">
+                                <option></option>
+                                <option *ngFor="let ot of rateCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-7">
+                                <div class="form-group mt-2">
+                                    <label>Fixed Rate Basis</label>
+                                    <select class="form-control  control-bg-gray" formControlName="fixedRateBasis">
+                                        <option></option>
+                                        <option *ngFor="let ot of fixedRateCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group mt-2">
+                                    <label>Fixed Rate</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="fixedRate" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Primary Premium Rate Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="primaryPremiumRateTable">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Secondary Premium Rate Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="secondaryPremiumRateTable">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-2">
+                            <label>Short Term Rate Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="shortTermRateTable">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Policy Fee Basis</label>
+                            <select class="form-control  control-bg-gray"formControlName="policyFeeBasis">
+                                <option></option>
+                                <option *ngFor="let ot of policyFeeBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Policy Fee Fixed Amount</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="policyFeeFixedAmount" />
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Policy Fee Amount Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="policyFeeAmountTable">
+                                <option></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Premium Rounding Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="premiumRoundBasis">
+                                <option></option>
+                                <option *ngFor="let ot of premiumRoundingBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Premium Rounding Factor</label>
+                            <input class="form-control  control-bg-gray" type="text"  formControlName="premiumRoundFactor"/>
+                        </div>
+                    </div>
+
+                    <div class="col">
+
+                        <div class="row g-3">                            
+                            <div class="col-9" formArrayName="discountCodeAllowedArray">
+                                <div class="form-group mt-2" *ngFor="let lessonForm of discountCodeAllowedArray.controls; let i = index" [formGroupName]="i">
+                                    <label>Discount Codes Allowed</label>
+                                    <select class="form-control  control-bg-gray" formControlName="discountCodeAllowed">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group mt-2">
+                                    <label>&nbsp;<br/></label>
+                                    <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewdiscountCodeAllowedRow()"> Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Fixed Smoker Age Adjustment</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="fixedSmokerAgeAdjustment" />
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label>Fixed Female Age Adjustment</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="fixedFemaleAgeAdjustment" />
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-commission" role="tabpanel" aria-labelledby="pills-commission-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Commissions</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <ng-container formArrayName="versionArray">
+                        <ng-container *ngFor="let lessonForm of versionArray.controls; let i = index" [formGroupName]="i">
+                        <div class="col-5">
+                            <div class="form-group mt-2">
+                                <label>Version No</label>
+                                <input class="form-control  control-bg-gray" type="text" formControlName="versionNo" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group mt-2">
+                                <label>Version Date From</label>
+                                <input class="form-control  control-bg-gray" type="text" formControlName="versionDate" />
+                            </div>
+                        </div>
+                        </ng-container>
+                    </ng-container>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-primary btn-next form-control" (click)="addNewVersionArrayRow()"> Add</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Fixed Commission Amount</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="fixedCommissionAmount" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Comission Code</label>
+                            <select class="form-control  control-bg-gray" formControlName="commissionCode">
+                                <option></option>
+                                <option *ngFor="let ot of commissionCodesList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Comission Earning Basis <span class="text-normal">(Overwrite Agent Type Setting)</span></label>
+                            <select class="form-control  control-bg-gray" formControlName="commissionEarningBasis">
+                                <option></option>
+                                <option *ngFor="let ot of commissionEarningList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Comission Earning Period <span class="text-normal">(Months)</span></label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="commissionEarningPeriod" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+
+                <div class="row g-3">
+                    <a class="text-primary text-underline">Fixed Commission Table- On every premium paid</a>
+                    <ng-container formArrayName="commissionArray">
+                        <ng-container *ngFor="let lessonForm of commissionArray.controls; let i = index" [formGroupName]="i">
+                            <div class="col-4">
+                                <div class="form-group mt-2">
+                                    <label>Agent Type</label>
+                                    <select class="form-control  control-bg-gray" formControlName="agentType">
+                                        <option></option>
+                                        <option *ngFor="let ot of agentTypeList" [ngValue]="ot.ID">{{ot.AGENT_NO}}</option>                                
+                                        </select>
+
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group mt-2">
+                                    <label>Writing Comission %</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="writtingCommission" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group mt-2">
+                                    <label>Hierarchy Comission (%)</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="hierarchyCommission" />
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-primary btn-next form-control" (click)="addNewcommissionRow()"> Add</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="row g-3">
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Referral Payment Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="referralPaymentBasis">
+                                <option></option>
+                                <option *ngFor="let ot of referralPaymentBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Telemarketer Rem Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="telemarketerRemBasis">
+                                <option></option>
+                                <option *ngFor="let ot of telemarketerRemBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Agent Clawback Basis </label>
+                            <select class="form-control  control-bg-gray" formControlName="agentClawbackBasis">
+                                <option></option>
+                                <option *ngFor="let ot of clawbackBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Clawback Spread Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="clawbackSpreadBasis">
+                                <option></option>
+                                <option *ngFor="let ot of clawbackSpreadBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Referral Payment Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="referralPaymentTable">
+                                <option></option>
+                                <option *ngFor="let ot of referralPaymentTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>TM Rem Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="tmRemTable">
+                                <option></option>
+                                <option *ngFor="let ot of tmRemTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Clawback Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="clawbackTable">
+                                <option></option>
+                                <option *ngFor="let ot of clawbackTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>                                
+                                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Clawback Spread Period - <span class="text-normal">months</span></label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="clawbackSpreadPeriod" />
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Referral Payment Rate % </label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="referralPaymentRate" />
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>TM Rem Rate %</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="tmRemRate" />
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <label>Clawback on Lapse</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="clawbackOnLapse" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-term" role="tabpanel" aria-labelledby="pills-term-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Terms</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Maturity Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="maturityBasis">
+                                <option></option>
+                                <option *ngFor="let ot of maturityBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>                                
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Age Calculation Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="ageCalculationBasis">
+                                <option></option>
+                                <option *ngFor="let ot of ageCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label>Fixed Premium Payment Term (If blank will be defined at quotation)</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="fixedPremiumPaymentTermYears" type="text" placeholder="Years" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="fixedPremiumPaymentTermMonths" type="text" placeholder="Months" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Minimum Entry Age</label>
+                            <input class="form-control  control-bg-gray" formControlName="minEntryAge" type="text" placeholder="Years" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label>Minimum Premium Payment Term</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="minPremiumPayTermYears" type="text" placeholder="Years" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="minPremiumPayTermMonths" type="text" placeholder="Months" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Maximum Entry Age</label>
+                            <input class="form-control  control-bg-gray" formControlName="maxEntryAge" type="text" placeholder="Years" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label>Maximum Premium Payment Term</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="maxPremiumPayTermYears" type="text" placeholder="Years" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="maxPremiumPayTermMonths" type="text" placeholder="Months" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Max Age at Policy Maturity</label>
+                            <input class="form-control  control-bg-gray" formControlName="maxAgePolicyMaturityYears" type="text" placeholder="Years" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label>Fixed Policy Term</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="fixedPolicyTermYears" type="text" placeholder="Years" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="fixedPolicyTermMonths" type="text" placeholder="Months" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Cooling Off Period (Overwrite company setting)</label>
+                            <input class="form-control  control-bg-gray" formControlName="coolingOffPeriod" type="text" placeholder="Years" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label>Minimum Policy Term</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="minPolicyTermYears" type="text" placeholder="Years" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="minPolicyTermMonths" type="text" placeholder="Months" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Do not Mature Until Benefit is Paid Out</label>
+                            <input class="form-control width-unset control-bg-gray" formControlName="doNotMaturePaidOut" type="checkbox" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label>Maximum Policy Term</label>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="maxPolicyTermYears" type="text" placeholder="Years" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" formControlName="maxPolicyTermMonths" type="text" placeholder="Months" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-endorsements" role="tabpanel" aria-labelledby="pills-endorsements-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Endorsements</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Beneficiary</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="beneficiary" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Bank Details</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="bankDetails" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Cover Term</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="coverTerm" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Owner</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="owner" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Life Assured</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="lifeAssured" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Premium Payment Term</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="premiumPayTerm" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Benefit Payment Term</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="benefitPayTerm" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Benefit Escalation Rate</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="benefitEscalationRate" /></div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Add Rider</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="addRider" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Sum Assured</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="sumAssured" /></div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Payment Method</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="paymentMethod" /></div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-2">
+                            &nbsp;
+                        </div>
+                        <div class="form-group mt-2">
+                            &nbsp;
+                        </div>
+                        <div class="form-group mt-2">
+                            &nbsp;
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Screen </label>
+                            <select class="form-control  control-bg-gray" formControlName="screen">
+                            <option></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Endorsement Calculation Basis </label>
+                            <select class="form-control  control-bg-gray" formControlName="endorsementCalcBasis">
+                            <option></option>
+                            <option *ngFor="let ot of endorsementCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <label>Endorsement Calculation Table </label>
+                            <select class="form-control  control-bg-gray" formControlName="endorsementCalcTable">
+                            <option></option>
+                            <option *ngFor="let ot of endorsementCalcTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-underwriting" role="tabpanel" aria-labelledby="pills-underwriting-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Underwriting</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Medical Underwriting Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="medicalUnderwritingTable">
+                                <option></option>
+                                <option *ngFor="let ot of endorsementCalcTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Financial Underwriting Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="financialUnderwritingTable">
+                                <option></option>
+                                <option *ngFor="let ot of endorsementCalcTableList" [ngValue]="ot.ID">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>EvoBOT</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="evobot" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>FCL Calculation Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="fclCalcBasis">
+                                <option></option>
+                                <option *ngFor="let ot of fclCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>FCL Calculation Factor</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="fclCalcFactor" />
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <div class="row g-3">
+                                <div class="col-9"><label>Load Only Above FCL</label></div>
+                                <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="loadOnlyAboveFcl" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="pills-surrender" role="tabpanel" aria-labelledby="pills-surrender-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Surrenders</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Partial Surrender Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="partialSurrenderAllowed" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Months to Partial Surrender</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="monthsToPartialSurrender" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Months to Partial Surrender Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="monthsToPartialSurrenderTable">
+                                <option></option>
+                                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} - {{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Max Partial Surrender Calc Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="maxPartialSurrenderCalcBasis">
+                                <option></option>
+                                <option *ngFor="let ot of maxPartialSurrenderBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Max Partial Surrender Calc Factor</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="maxPartialSurrenderCalcFactor" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Partial Surrender Penalty (%)</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="partialSurrenderPenalty" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Partial Surrender Penalty Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="partialSurrenderPenaltyTable">
+                                <option></option>
+                                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} - {{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Full Surrender Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="fullSurrenderAllowed" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Months to Full Surrender</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="monthsToFullSurrender" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Months to Full Surrender Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="monthsToFullSurrenderTable">
+                                <option></option>
+                                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} - {{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Full Surrender Value Penalty Rate (%)</label>
+                            <input class="form-control  control-bg-gray" type="text"formControlName="fullSurrenderValPenaltyRate" />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Surrender Value Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="surrenderValueTable">
+                                <option></option>
+                                <option *ngFor="let ot of surrenderPayBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Zero Surrender Fee on Surrender after PU status</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="zeroSurrenderFeePuStatus" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Full Surrender Value Penalty Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="fullSurrenderValuePenaltyTable">
+                                <option></option>
+                                <option *ngFor="let ot of monthsToPartialSurrenderTableList" [ngValue]="ot.ID">{{ot.RATE_CODE}} - {{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-loan" role="tabpanel" aria-labelledby="pills-loan-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Loan</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Premium Loan Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="premiumLoanAllowed" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Loan on Policy Value Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="localPolicyValueAllowed" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Premium Loan Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="premiumLoanBasis">
+                                <option></option>
+                                <option *ngFor="let ot of premiumLoanBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>No of Months before policy loan is allowed</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="noOfMonthsBeforeLoanPolicyAllowed" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Premium Loan Fee</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="premiumLoanFee" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Policy Loan Interest Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="policyLoanInterestTable">
+                                <option></option>
+                                <option *ngFor="let ot of interestTableList" [ngValue]="ot.RATE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Days before creating auto premium loan</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="daysBeforeAutoPreLoan" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Max Loan Calculation Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="maxLoanCalcBasis">
+                                <option></option>
+                                <option *ngFor="let ot of maxLoanCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>                                
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Premium Loan Interest Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="premiumLoanInterestTable">
+                                <option></option>
+                                <option *ngFor="let ot of interestTableList" [ngValue]="ot.RATE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Max Loan Calc Factor</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="maxLoanCalcFactor" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Minimum Policy Loan Amount</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="minPolicyLoanAmount" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-annuities" role="tabpanel" aria-labelledby="pills-annuities-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Annuities</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="row g-3" formArrayName="annuityGuaranteeArray">
+                            <div class="col-9" *ngFor="let lessonForm of annuityGuaranteeArray.controls; let i = index" [formGroupName]="i">
+                                <div class="form-group mt-2">
+                                    <label>Annuity Guarantee Period Options</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="annuityGuaranteePeriod" placeholder="Month" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group mt-2">
+                                    <label>&nbsp;<br/></label>
+                                    <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewAnnuityGuaranteeRow()"> Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="row g-3" formArrayName="annuityReversionaryArray">
+                            <div class="col-9" *ngFor="let lessonForm of annuityReversionaryArray.controls; let i = index" [formGroupName]="i">
+                                <div class="form-group mt-2">
+                                    <label>Annuity Reversionary Rate Options</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="annuityReversionaryRateOption" placeholder="Percent" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group mt-2">
+                                    <label>&nbsp;<br/></label>
+                                    <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewannuityReversionaryRow()"> Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="row g-3" formArrayName="annuityEscalationArray">
+                            <div class="col-9" *ngFor="let lessonForm of annuityEscalationArray.controls; let i = index" [formGroupName]="i">
+                                <div class="form-group mt-2">
+                                    <label>Annuity Escalation Rate Options</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="annuityEscalationRateOption" placeholder="Percent" />
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group mt-2">
+                                    <label>&nbsp;<br/></label>
+                                    <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewannuityEscalationRow()"> Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-lapse" role="tabpanel" aria-labelledby="pills-lapse-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Lapse</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Lapse Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" formControlName="lapseAllowed" type="checkbox" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Lapse Value Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="lapseValueTable">
+                                <option></option>
+                                <option *ngFor="let ot of lapseValueTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Days of Grace</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="daysOfGrace" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Reinstatement Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="reinstatementAllowed" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>No of Lapses Allowed</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="noOfLapseAllowed" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Reinstatement Charge Amount Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="reinstatementChargeAmountTable">
+                                <option></option>
+                                <option *ngFor="let ot of reinstatementChargeAmountTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Convert to Paid Up Instead of Lapsing</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="paidUpLapsing" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Reinstatement Fixed Charge Amount</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="reinstatementFixedChargeAmount" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Lapse Value Basis</label>
+                            <select class="form-control  control-bg-gray"  formControlName="lapseValueBasis">
+                                <option></option>
+                                <option *ngFor="let ot of lapseValueBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Reinstatement Interest Rate Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="reinstatementInterestRateTable">
+                                <option></option>
+                                <option *ngFor="let ot of policyLoanInterestTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-perils" role="tabpanel" aria-labelledby="pills-perils-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Perils</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-4" formArrayName="claimTypeArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of claimTypeArray.controls; let i = index" [formGroupName]="i">
+                            <label>Claim Types Allowed</label>
+                            <select class="form-control  control-bg-gray" formControlName="claimType">
+                                <option></option>
+                                <option *ngFor="let ot of claimTypesList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewclaimTypeRow()"> Add</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Peril</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Waiting Period months (Overwriting settings in benefit)</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Benefit % of sum assured</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Full Benefit on Death before U/W completion</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Severity Level</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Proximate Causes Allowed</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Peril Min Period (months)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3" formArrayName="perilsArray">
+                    <ng-container *ngFor="let lessonForm of perilsArray.controls; let i = index" [formGroupName]="i">
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="perilId">
+                                <option></option>
+                                <option *ngFor="let ot of perilList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="text" formControlName="perilWaitingPeriod" />
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="text" formControlName="perilBenefitSumAssured" />
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="checkbox" formControlName="perilBenefitOnDeath" />
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="text" formControlName="perilSeverityLevel" />
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="proximateCauseAllowed">
+                                <option></option>
+                                <option *ngFor="let ot of proximateCausesList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="text" formControlName="perilMinPeriod" />
+                        </div>
+                    </div>
+                </ng-container>
+                </div>
+                <div class="row g-3">
+                    <div class="col-9">
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewPerilRow()"> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-paidup" role="tabpanel" aria-labelledby="pills-paidup-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Paid Up</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Paid Up Allowed</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="paidUpAllowed" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Month Before Paid Up Is Allowed</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="monthBeforePaidUpAllowed" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Benefit Recalculation Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="benefitRecalcBasis">
+                                <option></option>
+                                <option *ngFor="let ot of benefitRecalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Minimum Policy Value before Paid Up Is Allowed</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="minPolicyBeforePaidUpAllowed" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Benefit Recalculation Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="benefitRecalcTable">
+                                <option></option>
+                                <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Allow Reinstatement from Paid Up</label>
+                            <input class="form-control width-unset control-bg-gray" type="checkbox" formControlName="allowReinstatementPaidup" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Paid Up Charges Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="paidupChargeTable">
+                                <option></option>
+                                <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Paid Up Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="paidupTable">
+                                <option></option>
+                                <option *ngFor="let ot of benefitRecalcTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Reinstatement Calc Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="reinstatementCalcBasis">
+                                <option></option>
+                                <option *ngFor="let ot of reinstCalcBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-Bonuses" role="tabpanel" aria-labelledby="pills-Bonuses-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Bonuses</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Version No</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Version Date</label>
+
+                        </div>
+                    </div>
+                </div>
+
+                <ng-container formArrayName="bonusArray">
+                    <ng-container *ngFor="let lessonForm of bonusArray.controls; let i = index" [formGroupName]="i">
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="bonusVersionNo">
+                                        <option></option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="text" formControlName="bonusVersionDate" />
+                        </div>
+                    </div>
+                </div>
+                </ng-container>
+                </ng-container>
+
+                <div class="row g-3">
+                    <div class="col-10">
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewBonusRow()"> Add</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Promo Bonus Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="promoBonusBasis">
+                                        <option></option>
+                                        <option *ngFor="let ot of bonusBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                        </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Promo Bonus Rate (%)</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="promoBonusRate" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Promo Bonus Rate Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="promoBonusRateTable">
+                                        <option></option>
+                                        <option *ngFor="let ot of bonusRateBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                        </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Annual Bonus Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="annualBonusBasis">
+                                        <option></option>
+                                        <option *ngFor="let ot of bonusBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                        </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Annual Bonus Rate (%)</label>
+                            <input class="form-control  control-bg-gray" type="text" formControlName="annualBonusRate" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Annual Bonus Table</label>
+                            <select class="form-control  control-bg-gray" formControlName="annualBonusTable">
+                                        <option></option>
+                                        <option *ngFor="let ot of bonusRateBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-acc-reins" role="tabpanel" aria-labelledby="pills-acc-reins-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Account/Reinsurance</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-4">
+                        <div class="form-group mt-2">
+                            <label>Accrual Accounting</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="checkbox" formControlName="accrualAccounting" />
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-5" formArrayName="accountArray">
+                        <div class="form-group mt-2" *ngFor="let lessonForm of accountArray.controls; let i = index" [formGroupName]="i">
+                            <label>Reinsurance Treaty</label>
+                            <select class="form-control  control-bg-gray" formControlName="reinsuranceTreaty">
+                                        <option></option>
+                                        <option *ngFor="let ot of reinsuranceTreatyList" [ngValue]="ot.WEB_ID">{{ot.FIRSTNAME}}</option>
+                                        </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewAccountRow()"> Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-5">
+                        <div class="form-group mt-2">
+                            <label>Quotes with uncovered SAR should not return results until treated for Reinsurance</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <input class="form-control  control-bg-gray" type="checkbox" formControlName="reinsuranceQuotes" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pills-taxes" role="tabpanel" aria-labelledby="pills-taxes-tab">
+                <p class="text-primary">If different from company level settings on Taxes/Levies</p>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Taxes/Levies</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Premium Tax Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="premiumTaxBasis">
+                                <option></option>
+                                <option *ngFor="let ot of premiumTaxesBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Surrender Benefit Tax Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="surrenderBenefitTaxBasis">
+                                <option></option>
+                                <option *ngFor="let ot of surrenderTaxesBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Maturity Benefit Tax Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="maturityBenefitTaxBasis">
+                                <option></option>
+                                <option *ngFor="let ot of maturityTaxesBenefitBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Death Benefit Tax Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="deathBenefitTaxBasis">
+                                <option></option>
+                                <option *ngFor="let ot of deathTaxesBenefitBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Stamp Duty</label>
+                            <select class="form-control  control-bg-gray" formControlName="stampDuty">
+                                <option></option>
+                                <option *ngFor="let ot of stampDutyBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <label>Interest Earned Tax Basis</label>
+                            <select class="form-control  control-bg-gray" formControlName="interestEarnedTaxBasis">
+                                <option></option>
+                                <option *ngFor="let ot of interestTaxesBasisList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-documentation" role="tabpanel" aria-labelledby="pills-documentation-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Documentation</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row g-3">
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Event Type</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Event</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>Language</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Action</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Document Cat</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Document Code</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <label>Condition</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3" formArrayName="documentationArray">
+                    <ng-container *ngFor="let lessonForm of documentationArray.controls; let i = index" [formGroupName]="i">
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="eventType">
+                                    <option></option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                  </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="event">
+                                    <option></option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                  </select>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="language">
+                                    <option></option>
+                                    <option *ngFor="let ot of languagesList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                  </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="action">
+                                    <option></option>
+                                    <option *ngFor="let ot of actionsList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                  </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="documentCategory">
+                                    <option></option>
+                                    <option *ngFor="let ot of documentationCategoryList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                  </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="documentCode">
+                                    <option></option>
+                                    <option *ngFor="let ot of docCategoryList" [ngValue]="ot.DOC_CAT">{{ot.TITLE}}</option>                                    
+                                  </select>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <select class="form-control  control-bg-gray" formControlName="condition">
+                                    <option></option>
+                                    <option *ngFor="let ot of conditionsList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                  </select>
+                        </div>
+                    </div>
+                </ng-container>
+
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-9">
+                    </div>
+                    <div class="col-1">
+                        <div class="form-group mt-2">
+                            <label>&nbsp;<br/></label>
+                            <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewDocumentationRow()"> Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-excess" role="tabpanel" aria-labelledby="pills-excess-tab">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="form-group mt-2">
+                            <p class="text-primary">Excess/Deductible</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Code: <span class="text-primary">BRC</span></p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="form-group mt-2">
+                            <p>Cover Name: <span class="text-primary">Bat Insurance</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row g-3">
+                    <div class="col-6"><span class="text-normal text-black">Excess - Policyholders bears the excess amount, while insurer bears only amounts in excess</span></div>
+                    <div class="col-6"><span class="text-normal text-black">Deductible - Policyholders bears the full less amount, when loss is within deductible. If loss exceeds deductible insurer bears full amount.</span></div>
+                </div>
+                <div class="row g-3">
+
+                    <div class="col-6">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Min Excess</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="minExcess" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Max Excess</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="maxExcess" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Fixed Excess option Amount</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Fixed Excess option rate (%)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <ng-container formArrayName="excessArray">
+                                <ng-container *ngFor="let lessonForm of excessArray.controls; let i = index" [formGroupName]="i">
+                                <div class="col-5">
+                                    <div class="form-group mt-2">
+                                        <input class="form-control  control-bg-gray" type="text" formControlName="fixedExcessOptionAmount" />
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group mt-2">
+                                        <input class="form-control  control-bg-gray" type="text" formControlName="fixedExcessOptionRate" />
+                                    </div>
+                                </div>
+                                </ng-container>
+                        </ng-container>
+                            <div class="col-2">
+                                <div class="form-group mt-2">
+                                    <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewExcessRow()"> Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Default Excess <span class="text-normal">(% of sum assured)</span></label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Default Excess <span class="text-normal">(Amount)</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="defaultExcessSumAssured" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="defaultExcessAmount" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Excess Calc Basis - <span class="text-normal">If auto calculation is required</span></label>
+                                    <select class="form-control  control-bg-gray" formControlName="excessCalcBasis">
+                                        <option></option>
+                                        <option *ngFor="let ot of excessCalcList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Excess Table - <span class="text-normal">In conjuction with excess calc basis</span></label>
+                                    <select class="form-control  control-bg-gray" formControlName="excessTable">
+                                        <option></option>
+                                        <option *ngFor="let ot of excessTableList" [ngValue]="ot.RATE_CODE">{{ot.DESCRIPTION}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <div class="row g-3">
+                                        <div class="col-9"><label>Excess BuyBack Allowed</label></div>
+                                        <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="excessBuyBackAllowed" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Excess BuyBack Premium Rate <span class="text-normal">(% sum assured)</span></label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="excessBuyBackPremiumRate" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Min Deductible</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="minDeductible" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Max Deductible</label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="maxDeductible" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Fixed Deductible option Amount</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Fixed Deductible option rate (%)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3" formArrayName="deductibleArray">
+                            <ng-container *ngFor="let lessonForm of deductibleArray.controls; let i = index" [formGroupName]="i">
+                            <div class="col-5">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="fixedDeductibleOptionAmount" />
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="fixedDeductibleOptionRate" />
+                                </div>
+                            </div>
+                        </ng-container>
+                            <div class="col-2">
+                                <div class="form-group mt-2">
+                                    <button type="button" class=" btn btn-secondary bg-dark btn-next form-control" (click)="addNewDeductibleRow()"> Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Default Deductible <span class="text-normal">(% of sum assured)</span></label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <label>Default Deductible <span class="text-normal">(Amount)</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="defaultDeductibleSumAssured" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mt-2">
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="defaultDeductibleAmount" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Deductible Calc Basis - <span class="text-normal">If auto calculation is required</span></label>
+                                    <select class="form-control  control-bg-gray" formControlName="deductibleCalcBasis">
+                                        <option></option>
+                                        <option *ngFor="let ot of deductibleCalcList" [ngValue]="ot.ID">{{ot.CODE_TITLE}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Deductible Table - <span class="text-normal">In conjuction with Deductible calc basis</span></label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="deductibleTable" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <div class="row g-3">
+                                        <div class="col-9"><label>Deductible BuyBack Allowed</label></div>
+                                        <div class="col-3"><input class="form-control  control-bg-gray" type="checkbox" formControlName="deductibleBuybackAllowed" /></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-group mt-2">
+                                    <label>Deductible BuyBack Premium Rate <span class="text-normal">(% sum assured)</span></label>
+                                    <input class="form-control  control-bg-gray" type="text" formControlName="deductibleBuybackPremiumRate" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                        <div class="form-group mt-2">
+                            <button type="submit" class=" btn btn-secondary btn-next form-control"> Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-2 footer-btn-left">
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="form-group mt-2">
+                                <button type="button" class=" btn btn-dark form-control btn-next"> <i class="fa fa-arrow-left"></i> </button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group mt-3">Prev</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8"></div>
+                <div class="col-2 footer-btn-right">
+                    <div class="form-group mt-2">
+                        <button type="button" class=" btn btn-secondary form-control btn-next"> Next <i class="fa fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </form>
+</div>

@@ -1,0 +1,145 @@
+.bg-row-dark-blue{
+  background: #262637;
+  color: white;
+}
+
+.progress{
+  background: #41415E !important;
+}
+
+.day{
+  background: #e7e7e7;
+  border: white 4px solid !important;
+}
+/* declare a 7 column grid on the table */
+#calendar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+#calendar tr, #calendar tbody {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 100%;
+}
+
+caption {
+  text-align: center;
+  grid-column: 1 / -1;
+  font-size: 130%;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+#calendar a {
+  color: #8e352e;
+  text-decoration: none;
+}
+
+#calendar td, #calendar th {
+  //padding: 5px;
+  box-sizing:border-box;
+  border: 1px solid #ccc;
+}
+
+#calendar .weekdays {
+  background: #8e352e;
+}
+
+
+#calendar .weekdays th {
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 20px;
+  border: none !important;
+  padding: 10px 6px;
+  color: #fff;
+  font-size: 13px;
+}
+
+#calendar td {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+#calendar .days li:hover {
+  background: #d3d3d3;
+}
+
+#calendar .date {
+  text-align: center;
+  margin-bottom: 5px;
+  background: #333;
+  color: #fff;
+  width: 20px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  align-self: flex-end;
+}
+
+#calendar .event {
+  flex: 0 0 auto;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  line-height: 14px;
+  background: #FFD1DC;
+  //border: 1px solid #b5dbdc;
+  color: #741F00;
+  text-decoration: none;
+  height: 100%;
+}
+.event-header{
+  padding: 5px;
+  background: #FF567E;
+  color: #4D1A08;
+}
+
+#calendar .event-desc {
+  color: #741F00;
+  margin: 3px 0 7px 0;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+#calendar .other-month {
+  background: #e7e7e7;
+  color: #666;
+}
+
+/* ============================
+				Mobile Responsiveness
+   ============================*/
+
+
+@media(max-width: 768px) {
+
+  #calendar .weekdays, #calendar .other-month {
+    display: none;
+  }
+
+  #calendar li {
+    height: auto !important;
+    border: 1px solid #ededed;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: -1px;
+  }
+
+  #calendar, #calendar tr, #calendar tbody {
+    grid-template-columns: 1fr;
+  }
+
+  #calendar  tr {
+    grid-column: 1 / 2;
+  }
+
+  #calendar .date {
+    align-self: flex-start;
+  }
+}

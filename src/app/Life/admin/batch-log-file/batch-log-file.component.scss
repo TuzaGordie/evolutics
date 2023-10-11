@@ -1,0 +1,45 @@
+table {
+  border-top: 1px solid rgb(222, 226, 230);
+}
+
+.items-per-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+}
+
+.items-per-page .left {
+  padding-left: 33px;
+}
+
+.fa {
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0 3px;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.ht-50 {
+  height: 50px;
+}
+
+table {
+  border: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.nodisplay {
+  display: none;
+}

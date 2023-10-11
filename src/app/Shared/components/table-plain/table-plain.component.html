@@ -1,0 +1,103 @@
+<div class=" "> 
+  <div class="row justify-content-between align-items-end">
+    <div class="col-md mb-3">
+
+      <form [formGroup]="form" *ngIf="showFilter">
+        <div class="row justify-content-center align-items-end">
+          <div class="col-md-auto">
+            <app-input-basic label="Filter" type="select" [form]="form" name="field" [stacked]="false"
+              [options]="filterOptions"
+              valueField="code" labelField="description">
+            </app-input-basic>
+          </div>
+          <div class="col-md-auto">
+            <app-input-basic label="Value" type="text" [form]="form" name="value" [stacked]="false">
+            </app-input-basic>
+          </div>
+          <div class="col-md-auto">
+            <app-btn text="Clear" type="secondary" (mclick)="clearFilter()">
+            </app-btn>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-auto mb-3" >
+      <app-export-table *ngIf="showExport" [label]="text" [displayedColumns]="displayedColumns" [data]="mutableList">
+      </app-export-table>
+    </div>
+  </div>
+  <div [ngClass]="{border:distinct}">
+    <div class="overflow-auto">
+      <table mat-table [dataSource]="dataSource" matSort class="w-100 d-table table table-striped mb-0"
+        [ngClass]="{smallerFonts,nowrap,centerCells}">
+        <!-- Columns -->
+        <ng-container *ngFor="let col of displayedColumns;let i = index">
+          <ng-container [ngSwitch]="col.type">
+
+            <!-- CHECKBOX -->
+            <ng-container *ngSwitchCase="'checkbox'" matColumnDef="{{col.f}}">
+              <th mat-header-cell *matHeaderCellDef>{{col.t|appTranslate|async}}</th>
+              <td mat-cell *matCellDef="let row">
+                <app-input-ngmodel [stacked]="true" type="checkbox" [checked]="col.checked" [(model)]="row[col.f]"
+                  (mchange)="outputCheckbox(col.f,row,$event)">
+                </app-input-ngmodel>
+              </td>
+            </ng-container>
+            <!--// -->
+
+            <!-- PROGRESS BAR -->
+            <ng-container *ngSwitchCase="'progress'" matColumnDef="{{col.f}}">
+              <th mat-header-cell *matHeaderCellDef>{{col.t|appTranslate|async}}</th>
+              <td mat-cell *matCellDef="let row">
+                <div class="progress">
+                  <div class="progress-bar  progress-bar-striped bg-success" role="progressbar"
+                    [ngStyle]="{width: row[col.f]}">{{row[col.f]}}
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+            <!--// -->
+
+            <!-- DEFAULT -->
+            <ng-container matColumnDef="{{col.f}}" *ngSwitchDefault>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{col.t|appTranslate|async}}</th>
+              <td mat-cell *matCellDef="let row">
+                <a class="cell" [ngClass]="{pointer:col.action}" (click)="col.action?col.action(row,col.f):null"
+                  [mqueryParams]="col.mqueryParams|functionCaller2:row:col.f"
+                  [mrouterLink]="(col.routeFormatter|functionCaller2:row:col.f)"
+                  [innerHTML]="(row|getColFormatted:col)||'-'">
+                </a>
+              </td>
+            </ng-container>
+            <!--// -->
+          </ng-container>
+        </ng-container>
+        <!-- Options Column -->
+        <ng-container matColumnDef="option" *ngIf="options?.length>0" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button type="button" [matMenuTriggerFor]="menu" class="btn ms-2"><i class="bx bx-menu me-0"></i>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let option of options" (click)="option.action(row)">
+                {{option.t|appTranslate|async}}
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="displayedColumns|getRawFields:options?.length as dcols">
+          <tr mat-header-row *matHeaderRowDef="dcols"></tr>
+          <tr mat-row *matRowDef="let row; columns: dcols" (click)="rowClick(row)"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="dcols?.length||1">{{noItemTxt|appTranslate|async}}</td>
+          </tr>
+        </ng-container>
+      </table>
+    </div>
+    <mat-paginator *ngIf="showPager" [length]="resultsLength" [pageSizeOptions]="pageSizeOptions" [pageSize]="pageSize"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+
+</div>

@@ -1,0 +1,173 @@
+<loader [loading]="loading" [text]="loadingText">
+  <form #f="ngForm" novalidate>
+    <div class="">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Policy Status Code"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray" [(ngModel)]="createStatusCode.statusCode.code" name="code">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray" [(ngModel)]="createStatusCode.statusCode.description" name="description">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Process Group"|appTranslate|async}}</label>
+            <select (change)="getProcessNodes()" class="form-control control-bg-gray" name="processGroup"
+              [(ngModel)]="createStatusCode.statusCode.processGroup">
+              <option></option>
+              <option *ngFor="let item of processGroups" [value]="item.code">
+                {{item.code}} - {{item.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Process Node"|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="createStatusCode.statusCode.processNode" name="processNode">
+              <option value=""></option>
+              <option *ngFor="let item of processNodes" [value]="item.code">
+                {{item.code}} - {{item.title}}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Company"|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray" [(ngModel)]="createStatusCode.statusCode.companyCode" name="companyCode">
+              <option value=""></option>
+              <option *ngFor="let item of companies" [value]="item.code">
+                {{item.code}} - {{item.description}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-xxl-12 mx-auto">
+          <div class="row">
+            <label for="" class="text-primary form-label">{{"Allow"|appTranslate|async}}</label>
+            <hr class=" mt-3">
+          </div>
+          <div class="row ">
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Premium Collection'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray"
+                  [(ngModel)]="createStatusCode.statusCode.allowPremColl" value="1" name="allowPremColl">
+              </div>
+            </div>
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Claim Payment'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray"
+                  [(ngModel)]="createStatusCode.statusCode.allowClaim" value="1" name="allowClaim">
+              </div>
+            </div>
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Endorsements'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray"
+                  [(ngModel)]="createStatusCode.statusCode.allowEndorse" value="1" name="allowEndorse">
+              </div>
+            </div>
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Reinsurance Payments'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray" name="allowReins"
+                  [(ngModel)]="createStatusCode.statusCode.allowReins" value="1">
+              </div>
+            </div>
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Cash Receipts'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray" name="allowCashReceipts"
+                  [(ngModel)]="createStatusCode.statusCode.allowCashReceipt" value="1">
+              </div>
+            </div>
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Incomplete'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray" name="incomplete"
+                  [(ngModel)]="createStatusCode.statusCode.incomplete" value="1">
+              </div>
+            </div>
+            <div class="col-md-3 col-xxl-2 mt-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">
+                  {{'Receipt Reversal'|appTranslate|async}}
+                </label>
+                <input type="checkbox" class="form-control control-bg-gray" name="allowReversal"
+                  [(ngModel)]="createStatusCode.statusCode.allowReceiptReversal">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <hr class=" mt-3">
+            <label for="" class="text-primary form-label">{{"Destination Status"|appTranslate|async}}</label>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mt-2" *ngFor="let dest of createStatusCode.statusCodeDestination; let i = index">
+              <div class="row">
+                <div class="col">
+                  <select name="dest_{{dest.rowId}}" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="dest.destStatus">
+                    <option value=""></option>
+                    <option *ngFor="let item of statusCodes" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-auto d-flex">
+                  <app-btn [group]="'delete'" [disabled]="createStatusCode?.statusCodeDestination?.length==1"
+                    (mclick)="removeStatusDestination(i)"></app-btn>
+                  <span class="mx-1"></span>
+                  <app-btn group="add" (click)="addStatusDestination(i)"></app-btn>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="row mt-4 justify-content-end">
+        <div class="col-2">
+          <app-button buttonType="save" (click)="saveStatusCode()"></app-button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+  <div class="d-flex justify-content-start my-3" *ngIf="isShow">
+    <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+    </app-btn>
+    <span class="mx-1"></span>
+    <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+    </app-btn>
+  </div>
+</loader>

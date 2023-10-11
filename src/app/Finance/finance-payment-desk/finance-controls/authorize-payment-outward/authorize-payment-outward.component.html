@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="">
+        <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-1">
+                <div class="mt-3">
+                    <app-input-basic  type="checkbox" label='Show All' [colored]='false'
+                    labelType="ct" valueField="" [form]="form" name='showAll' [stacked]="true">
+                  </app-input-basic>
+                  </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-3">
+                    <app-input-basic  type="select" label='Payment Status' [colored]='false'
+                    [options]="" labelType="ct" valueField="" [form]="form" name='paymentStatus' [stacked]="true">
+                  </app-input-basic>
+                  </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-3">
+                    <app-input-basic  type="select" label='SLA Level' [colored]='false'
+                    [options]="" labelType="ct" valueField="" [form]="form" name='slaLevel' [stacked]="true">
+                  </app-input-basic>
+                  </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-3">
+                    <app-input-basic  type="select" label='Company' [colored]='false'
+                    [options]="" labelType="ct" valueField="" [form]="form" name='company' [stacked]="true">
+                  </app-input-basic>
+                  </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-3">
+                    <app-input-basic  type="select" label='Currency' [colored]='false'
+                    [options]="" labelType="ct" valueField="" [form]="form" name='currency' [stacked]="true">
+                  </app-input-basic>
+                  </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-3">
+                    <app-input-basic  type="checkbox" label='Authorize All' [colored]='false'
+                    [options]="" labelType="ct" valueField="" [form]="form" name='authAll' [stacked]="true">
+                  </app-input-basic>
+            </div>
+            </div>
+            <div class="col-md-1">
+                <div class="mt-3">
+                    <app-input-basic  type="checkbox" label='Decline All' [colored]='false'
+                    [options]="" labelType="ct" valueField="" [form]="form" name='decAll' [stacked]="true">
+                  </app-input-basic>
+            </div>
+        </div>
+    </div>
+        <div class="table-responsive mt-5">
+            <table class="table table-striped">
+                <thead class="text-success">
+                    <ng-container *ngFor="let item of thead">
+                        <th scope="col">{{item}}</th>
+                    </ng-container>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of tdata">
+                        <td><input class="square {{item.SLA}}" type="checkbox"/></td>
+                        <td routerLink=''>{{item.paymentID}}</td>
+                        <td (click)='check(item.claimNo)'>{{item.claimNo}}</td>
+                        <td (click)='check(item.policyNo)'>{{item.policyNo}}</td>
+                        <td>{{item.initialEstimate | currency}}</td>
+                        <td>{{item.adjustments | currency}}</td>
+                        <td>{{item.finalAmount | currency}}</td>
+                        <td>{{item.currency}}</td>
+                        <td>{{item.created | date}}</td>
+                        <td>{{item.createdUser | uppercase}}</td>
+                        <td>{{item.lastModifiedUser | uppercase}}</td>
+                        <td>{{item.paymentStatus |uppercase}}</td>
+                        <td><input type="checkbox" class="form-control"/></td>
+                        <td><input type="checkbox" class="form-control"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex align-items-right mt-5">
+            <button class="btn btn-lg btn-outline-success">
+                <fa-icon [icon]="faSave"></fa-icon>
+                    Submit
+             </button>
+        </div>
+        </form>
+    </div>
+</div>

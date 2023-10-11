@@ -1,0 +1,8 @@
+<nav class="">
+  <div class="nav nav-pills nav-justified mt-5 d-flex justify-content-center border-0" id="nav-tab" role="tablist">
+    <button class="nav-link  border-0" *ngFor="let tab of tabs;let index=index"
+      [ngClass]="selectedIndex == index? 'active' : ''" (click)="changeTab(index)" type="button" role="tab"
+      aria-controls="nav-home">{{tab.label|appTranslate|async}}
+    </button>
+  </div>
+</nav>

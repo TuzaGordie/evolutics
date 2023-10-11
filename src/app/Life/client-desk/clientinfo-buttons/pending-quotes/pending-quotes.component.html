@@ -1,0 +1,51 @@
+<!-- <app-form-navigation [title] = "'View Client'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{"Quotation No"|appTranslate|async}}</th>
+            <th scope="col">{{"Full Name"|appTranslate|async}}</th>
+            <th scope="col">{{"No of Covers"|appTranslate|async}}</th>
+            <th scope="col">{{"Product Class"|appTranslate|async}}</th>
+            <th scope="col">{{"Product Code"|appTranslate|async}}</th>
+            <th scope="col">{{"Created Date"|appTranslate|async}}</th>
+            <th scope="col">{{"Agent No"|appTranslate|async}}</th>
+            <th scope="col">{{"Total Premium"|appTranslate|async}}</th>
+            <th scope="col">{{"Days To Expire"|appTranslate|async}}</th>
+            <th scope="col" style="border-top-right-radius: 12px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pendingQuotesList">
+            <th scope="row">
+              <a [routerLink]="['../../../../quotation-desk/view-quotation', item.quotationNo]">{{item.quotationNo}}</a>
+            </th>
+            <td>{{item.fullName}}</td>
+            <td>{{item.noOfCovers}}</td>
+            <td>{{item.productClass}}</td>
+            <td>{{item.productCode}}</td>
+            <td>{{item.createdDate}}</td>
+            <td>{{item.agentNo}}</td>
+            <td>{{item.totalPremium}}</td>
+            <td>{{item.daysToExpire}} </td>
+            <td>
+              <app-button [buttonType]="'editCustom'" [text]="'Modify'" (click)="onModify(item)"></app-button>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-md-3">
+
+        <app-button [buttonType]="'btnCustomClone'" [text]="'New Quote'" [routerLink]="['../../../../quotation-desk/create/individual']"></app-button>
+      </div>
+    </div>
+  </div>
+
+</div>

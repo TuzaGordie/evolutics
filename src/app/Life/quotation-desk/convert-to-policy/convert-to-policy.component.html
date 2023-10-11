@@ -1,0 +1,167 @@
+<div class="container">
+  <!-- segment -->
+  <div class=" ">
+    <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="pills-beneficiary-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-beneficiary"
+          type="button"
+          role="tab"
+          aria-controls="pills-beneficiary"
+          aria-selected="true"
+        >
+          {{ 'Beneficiary' | appTranslate | async }}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-med-quest-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-med-quest"
+          type="button"
+          role="tab"
+          aria-controls="pills-med-quest"
+          aria-selected="false"
+        >
+          {{ 'Underwriting' | appTranslate | async }}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-payment-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-payment"
+          type="button"
+          role="tab"
+          aria-controls="pills-payment"
+          aria-selected="false"
+        >
+          {{ 'Payment Information' | appTranslate | async }}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="pills-payment-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-convert"
+          type="button"
+          role="tab"
+          aria-controls="pills-payment"
+          aria-selected="false"
+        >
+          {{ 'Convert' | appTranslate | async }}
+        </button>
+      </li>
+    </ul>
+    <div class="mt-5 tab-content" id="pills-tabContent">
+      <div class="tab-pane show active" id="pills-beneficiary" role="tabpanel">
+        <q-individual-beneficiary
+          #beneficiarySection
+          class="tab-pane"
+          id="pills-beneficiary"
+          role="tabpanel"
+          aria-labelledby="pills-beneficiary-tab"
+        >
+        </q-individual-beneficiary>
+        <div class="row justify-content-end">
+          <div class="col-3">
+            <button
+              (click)="submitBeneficiaryInfo()"
+              class="w-100 btn btn-outline-primary btn-lg"
+            >
+              <span
+                class="fa"
+                [ngClass]="{
+                  'fa-check': !isCreatingClientsQuotation,
+                  'fa-spinner fa-spin': isCreatingClientsQuotation
+                }"
+              ></span>
+              <span class="ps-2">{{
+                isCreatingClientsQuotation ? 'Submitting...' : 'Submit'
+              }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- med segment -->
+      <div class="tab-pane" id="pills-med-quest" role="tabpanel">
+        <table class="table table-responsive border table-striped">
+          <thead class="py-3 theader">
+            <tr>
+              <th scope="col">{{ 'Assured' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Cover Code' | appTranslate | async }}</th>
+              <th scope="col">
+                {{ 'Questionnaire Code' | appTranslate | async }}
+              </th>
+              <th scope="col">{{ 'Fulfilled' | appTranslate | async }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- payment segment -->
+      <div class="tab-pane" id="pills-payment" role="tabpanel">
+        <app-quotation-desk-payment-tab
+          #paymentSection
+          class="tab-pane"
+          id="pills-payment"
+          role="tabpanel"
+          aria-labelledby="pills-payment-tab"
+        ></app-quotation-desk-payment-tab>
+        <div class="row py-5 justify-content-end">
+          <div class="col-3">
+            <button
+              (click)="submitPaymentInfo()"
+              class="w-100 btn btn-outline-primary btn-lg"
+            >
+              <span
+                class="fa"
+                [ngClass]="{
+                  'fa-check': !isCreatingPaymentsQuotation,
+                  'fa-spinner fa-spin': isCreatingPaymentsQuotation
+                }"
+              ></span>
+              <span class="ps-2">{{
+                isCreatingPaymentsQuotation ? 'Submitting...' : 'Submit'
+              }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="pills-convert" role="tabpanel">
+        <div class="row py-5 justify-content-end">
+          <div class="col-3">
+            <button
+              (click)="convert()"
+              class="w-100 btn btn-outline-primary btn-lg"
+            >
+              <span
+                class="fa"
+                [ngClass]="{
+                  'fa-check': !isCreatingPaymentsQuotation,
+                  'fa-spinner fa-spin': isCreatingPaymentsQuotation
+                }"
+              ></span>
+              <span class="ps-2">{{
+                isCreatingPaymentsQuotation ? 'Submitting...' : 'Submit'
+              }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

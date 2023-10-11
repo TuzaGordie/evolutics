@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{ 'Create Asset' | appTranslate | async }}</h5>
+  <span class="fas fa-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content>
+  <div class="my-3 justify-content-center">
+    <div class="form-group justify-content-center" style="white-space: nowrap">
+      <label>{{ 'Select Asset Class' | appTranslate | async }}</label>
+      <select
+        class="form-control control-bg-gray me-2"
+        [(ngModel)]="assetType"
+        #name="ngModel"
+      >
+        <option value="M">{{ 'Motor' | appTranslate | async }}</option>
+        <option value="P">{{ 'Property' | appTranslate | async }}</option>
+        <option value="" disabled>
+          {{ 'Machinery' | appTranslate | async }}
+        </option>
+        <option value="" disabled>
+          {{ 'Mobile Phone' | appTranslate | async }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button
+      class="btn btn-outline-primary btn-lg"
+      (click)="onSelectCoupon()"
+      [disabled]="!assetType"
+    >
+      {{ 'Create' | appTranslate | async }}
+    </button>
+  </div>
+  <p *ngIf="name.invalid && name.touched" class="text-danger small text-center">
+    {{ 'Enter a name to search' | appTranslate | async }}
+  </p>
+</mat-dialog-content>

@@ -1,0 +1,183 @@
+<app-form-navigation [title]="'Found Campaign'"></app-form-navigation>
+
+
+<!-- <app-form-navigation [title]="'Sales / View Lead'"></app-form-navigation> -->
+<div class="container px-4">
+  <div class="card mt-3">
+    <h5 class="card-header bg-primary color-white">
+      {{ 'Basic Details' | appTranslate | async }}
+    </h5>
+    <div class="card-body">
+      <div class="row justify-content-between mb-2">
+        <div class="col-2">
+          <p>
+            {{'Campaign Code :'|appTranslate|async}}
+            <span class="text-primary">xxxxxx</span>
+          </p>
+        </div>
+        <div class="col-2">
+          <p>
+            {{'Description:'|appTranslate|async}}
+            <span class="text-primary">xxxxxx</span>
+          </p>
+        </div>
+        <div class="col-2">
+          <p>
+            {{'Target Group:'|appTranslate|async}}
+            <span class="text-primary">xxxxxx</span>
+          </p>
+        </div>
+        <div class="col-2">
+          <p>
+            {{'Control Group'|appTranslate|async}} (%):
+            <span class="text-primary">xxxxxx</span>
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="card mt-3">
+    <h5 class="card-header bg-primary color-white">
+      {{ 'Campaign Details' | appTranslate | async }}
+    </h5>
+    <div class="card-body">
+      <div class="row justify-content-end ">
+        <div class="col-2">
+          <app-button buttonType="edit" text="Edit"></app-button>
+        </div>
+        <div class="col-2">
+          <app-btn icon="edit" type="secondary" routerLink="../note">Note</app-btn>
+        </div>
+      </div>
+      <hr class="my-3">
+      <div class="row pt-3">
+
+        <div class="col">
+          <div class="row row-cols-1 row-cols-lg-4">
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                {{'Template'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                {{'Medium'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                {{'Start Date'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                Send Time{{'Client Status'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                {{'End Date'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                {{'Recurrence'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+            <div class="col">
+              <label for="" class="form-label text-primary">
+                {{'Campaign Cost'|appTranslate|async}}
+              </label>
+              <br>
+              <p>--</p>
+            </div>
+          </div>
+          <div class="row">
+            <label for="" class="form-label text-primary">{{'Recommendation'|appTranslate|async}}</label>
+            <textarea name="" id="" rows="4" class="form-control control-bg-gray"></textarea>
+          </div>
+
+          <div class="mt-3">&nbsp;</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex mt-3 justify-content-around section-cards-2 card-red">
+
+    <div class="card color1 shadow-sm" routerLink="../sales/target-list">
+      <div class="card-body">
+        <h6 class="card-title">{{'Target List'|appTranslate|async}}</h6>
+        <p class="card-sm-num ">5</p>
+      </div>
+
+    </div>
+
+    <div class="card color1 shadow-sm"  routerLink="../sales/exclusion-list">
+      <div class="card-body">
+        <h6 class="card-title">{{'Exclusion List'|appTranslate|async}}</h6>
+        <p class="card-sm-num ">300,000</p>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm"  routerLink="../sales/campaign-target">
+      <div class="card-body">
+        <h6 class="card-title">{{'Campaign Target'|appTranslate|async}}</h6>
+        <p class="card-sm-num "></p>
+
+      </div>
+
+    </div>
+    <div class="card color1 shadow-sm" routerLink="../analytics-campaign-index">
+      <div class="card-body">
+        <h6 class="card-title">{{'Campaign Calendar'|appTranslate|async}}</h6>
+        <p class="card-sm-num "></p>
+
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Change Status'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row px-3">
+          <label class="form-label text-primary">{{'New Status'|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray">
+            <option value=""></option>
+            <option></option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

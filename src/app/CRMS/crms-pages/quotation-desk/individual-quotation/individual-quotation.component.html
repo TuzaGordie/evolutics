@@ -1,0 +1,102 @@
+<app-form-navigation [title]="'Create New Individual Quotation'"></app-form-navigation>
+<div class="container mt-5">
+    <form [formGroup]="findIndividualQuotationForm">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="row my-2" >
+                    <div class="col-md-2" >
+                        <label class="py-2">Client Number</label>
+                    </div><br>
+                    <div class="col">
+                        <input type="text" formControlName="quotationNo" class="inputClient" 
+                            [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}"
+                            required (keyup)="setQuotationList()">
+                        <div style="display: none;" [ngClass]="{checkmark: validResult == 'true'}"><i
+                                class="fa fa-check"></i></div>
+                        <div style="display: none;" [ngClass]="{uncheckmark: validResult == 'false'}"> <i
+                                class="fa fa-times"></i></div>
+                    </div>
+                    <div class="col" style="width: 60%; margin-right: -70px;" >
+                        <button type="submit" class="py-2 btn-dark mx-2"
+                            [disabled]="validResult == 'false' || validResult == '' " style="width: 60%; margin-right: -70px;"
+                            (click)="onNext()">Find Client</button>
+                    </div>
+
+                    <div class="col">
+                        <button type="submit" class="py-3 btn-blue mx-3"
+                            
+                            (click)="onCreate()">Create New Client</button>
+                    </div>
+
+                    <div class="col">
+                        
+                        <li [value]="item.OWNER_NAME" *ngFor="let item of quotationList">{{item.OWNER_NAME}}</li>
+                    </div>
+                    
+                </div>
+
+                <div class="row my-2">
+                    <div class="col-md-2"><label class="py-2">Select Insurance Type</label> </div>
+                    <div class="col-md">
+                        <select formControlName="quotationNo" (change)="setQuotationList()" class="inputform mr-2"
+                            required>
+                            <option [value]="item.INSURANCE_TYPE" *ngFor="let item of quotationList">{{item.INSURANCE_TYPE}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+                <div class="row my-2">
+                    <div class="col-md-2"><label class="py-2">Select Product Class</label> </div>
+                    <div class="col-md">
+                        <select formControlName="quotationNo" (change)="setQuotationList()" class="inputform mr-2"
+                            required>
+                            <option [value]="item.PRODUCT_CLASS" *ngFor="let item of quotationList">{{item.PRODUCT_CLASS}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+
+                <div class="row my-2">
+                    <div class="col-md-2"><label class="py-2">Select Product</label> </div>
+                    <div class="col-md">
+                        <select formControlName="quotationNo" (change)="setQuotationList()" class="inputform mr-2"
+                        required>
+                        <option [value]="item.PRODUCT_CODE" *ngFor="let item of quotationList">{{item.PRODUCT_CODE}}</option>
+                    </select>
+                    </div>
+                    <div class="col-md-2">
+
+                    </div>
+                </div>
+
+              
+
+               
+
+
+
+                
+               
+
+            </div>
+
+          
+
+            <!-- <div class=" my-5">
+            <div  style="float: right; margin-top: 10%;">
+                
+              <button type="submit" [disabled]="validResult == 'false' || validResult == '' " 
+              [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"  
+              class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                  <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div> -->
+        </div>
+
+    </form>
+
+</div>

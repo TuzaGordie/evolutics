@@ -1,0 +1,505 @@
+<div class="container-fluid mt-2 " id="form-body">
+  <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+              type="button" role="tab" aria-controls="pills-basic" aria-selected="true">Basic
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-dependent-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+              type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Rate Entry
+      </button>
+
+    </li>
+  </ul>
+  <form [formGroup]="CreateGenRateForm" (submit)="onSubmit()">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+        <div class="container">
+
+          <div class="row g-3">
+            <div class="col-1 d-flex ">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Code </label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="code" [(ngModel)]="code"/>
+              </div>
+            </div>
+            <div class="col-5">
+              <div class="form-group">
+                <label class="text-primary form-label ">Description</label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="description"/>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+
+                <label class="text-primary form-label ">Rate Partition 1</label>
+                <select class="form-control  control-bg-gray" formControlName="key1">
+                  <option value="" disabled></option>
+                  <option *ngFor="let ot of ratePartition1" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Category</label>
+                <select class="form-control  control-bg-gray" formControlName="category">
+                  <option value="" disabled></option>
+                  <option *ngFor="let ot of rateCategoryList" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Partition 2</label>
+                <select class="form-control  control-bg-gray" formControlName="key2">
+                  <option></option>
+                  <option *ngFor="let ot of ratePartition1" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Group </label>
+                <select class="form-control  control-bg-gray" formControlName="sub_group">
+                  <option></option>
+                  <option *ngFor="let ot of rateGroupList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Partition 3</label>
+                <select class="form-control  control-bg-gray" formControlName="key3">
+                  <option></option>
+                  <option *ngFor="let ot of ratePartition1" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Retrieval Basis</label>
+                <select class="form-control  control-bg-gray"
+                        (change)="onRateRetrievalBasisChange(retrievalSelected.value)" #retrievalSelected
+                        formControlName="retrievalBasis">
+                  <option></option>
+                  <option *ngFor="let ot of rateRetrieval" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Partition 4</label>
+                <select class="form-control  control-bg-gray" formControlName="key4">
+                  <option></option>
+                  <option *ngFor="let ot of ratePartition1" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Value Basis</label>
+                <select class="form-control  control-bg-gray" formControlName="valueBasis">
+                  <option></option>
+                  <option *ngFor="let ot of valueBasis" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Partition 5</label>
+                <select class="form-control  control-bg-gray" formControlName="key5">
+                  <option></option>
+                  <option *ngFor="let ot of ratePartition1" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Value Parameter</label>
+                <select class="form-control  control-bg-gray">
+                  <option></option>
+                  <option *ngFor="let ot of valueParam" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Duration Calculation Basis</label>
+                <select class="form-control  control-bg-gray" formControlName="durationCalcBasis">
+                  <option></option>
+                  <option *ngFor="let ot of durationBasisCalc" [ngValue]="ot.title">{{ot.code}} - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="form-group">
+                <label class="text-primary form-label ">Version Date Basis</label>
+                <input class="form-control  control-bg-gray" type="text" formControlName="versionDateBasis"/>
+              </div>
+            </div>
+            <div class="col-1 d-flex align-items-center">
+              <label class="text-primary pt-4">Exact Axis :</label>
+            </div>
+            <div class="col-1 d-flex align-items-center">
+              <div class="form-group">
+                <label class="text-primary form-label "></label>
+                <input class="form-control width-unset control-bg-gray" type="checkbox"/>
+              </div>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Rate Divisor</label>
+                <input class="form-control  control-bg-gray" type="text"/>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Version Date</label>
+                <input class="form-control  control-bg-gray" type="date" formControlName="versionDate"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="container">
+          <div class="row ">
+            <div class="col-1">
+              <div class="form-group">
+                <p>Rate Code: <span class="text-primary"></span></p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <p>Retrieval Basis: <span class="text-primary">
+                <select name="" id="" (change)="onRetrievalSelected(retrieval.value)" #retrieval>
+                <option value="lookup">Lookup</option>
+                <option value="matrix">Matrix</option>
+              </select></span></p>
+              </div>
+            </div>
+
+            <div class="col" *ngIf="retrievalMtd =='lookup' ">
+              <div class="form-group">
+                <p>Lookup Field: <span class="text-primary">
+                 <select name="" id="" #lookupField_value (change)="setLookupField(lookupField_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+              </div>
+            </div>
+            <div class="col" *ngIf="retrievalMtd =='lookup'">
+              <div class="form-group">
+                <p>Banding: <span class="text-primary">
+                <select name="" id="" #bandingField_value (change)="setBandingField(bandingField_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+              </div>
+            </div>
+            <div class="col" *ngIf="retrievalMtd =='matrix' ">
+              <div class="form-group">
+                <p>Y Axis: <span class="text-primary">
+                 <select name="" id="" #axisy_value (change)="setAxisy(axisy_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+              </div>
+            </div>
+            <div class="col" *ngIf="retrievalMtd =='matrix'" >
+              <div class="form-group">
+                <p>X Axis: <span class="text-primary">
+                <select name="" id="" #axisx_value (change)="setAxisx(axisx_value.value)">
+                  <option value="vehicle_type">vehicle_type</option>
+                  <option value="fuel_type">fuel_type</option>
+                  <option value="vehicule_catergory">vehicule_catergory</option>
+                  <option value="vehicule_speed">vehicule_speed</option>
+                </select>
+              </span></p>
+              </div>
+            </div>
+
+
+          </div>
+          <hr>
+
+          <div class="container">
+            <div class="row ">
+              <div class="col">
+                <div class="form-group">
+                  <label>Rate Partition 1</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Rate Partition 2</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Rate Partition 3</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Rate Partition 4</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group">
+                  <label>Rate Partition 5</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Rate Partition Version No</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Search Rate X axis</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Search Rate Y axis</label>
+                  <select class="form-control  control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">{{ot.PRODUCT_CLASS}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center my-3">
+              <div class="col-2">
+                <input class="form-control  control-bg-gray" type="text" placeholder="No of Columns:"
+                       (keyup)="setCols(numCols.value)" #numCols/></div>
+              <div class="col-2">
+                <input class="form-control  control-bg-gray" type="number" placeholder="No of Rows:"
+                       (keyup)="setRows(numRows.value)" #numRows/>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-1 d-flex align-items-center">
+                <p *ngIf="retrievalMtd =='lookup'" class=" text-center p-1 " style="  width: 200px;border: #1F1F1F 1px solid;transform: rotate(-90deg);">
+                  {{lookupFieldval}}</p>
+                <p *ngIf="retrievalMtd =='matrix'" class=" text-center p-1 " style="  width: 200px;border: #1F1F1F 1px solid;transform: rotate(-90deg);">
+                  {{axisYval}}</p>
+
+              </div>
+              <div class="col-11">
+                <p *ngIf="retrievalMtd =='lookup'" class="w-100 text-center p-1" style="border: #1F1F1F 1px solid"> {{bandingFieldval}}</p>
+                <p *ngIf="retrievalMtd =='matrix'" class="w-100 text-center p-1" style="border: #1F1F1F 1px solid"> {{axisXval}}</p>
+
+                <table class="table table-responsive  table-striped px-5">
+                  <thead class="py-3 theader bg-primary text-white">
+                  <tr>
+                    <th *ngFor="let y of colCounter()" scope="col" class="text-white"><input
+                      class="form-control  control-bg-primary" type="text"/>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let x of rowCounter()">
+
+                    <th *ngFor="let y of colCounter();let j = index" scope="row">
+                      <span *ngIf="j == 0">
+                        <input class="form-control  control-bg-primary" type="text"/>
+                      </span>
+                      <span *ngIf="j != 0">
+                        <input class="form-control  control-bg-gray-tb" type="text"/>
+                      </span>
+                    </th>
+
+                    <!--
+                     <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                     <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                     <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                     <td><input class="form-control  control-bg-gray-tb" type="text"/></td>
+                     <td><input class="form-control  control-bg-gray-tb" type="text"/></td>-->
+
+                  </tr>
+
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-12 d-flex justify-content-end">
+
+            <app-button [buttonType]="'save'" (click)="onSubmit()"></app-button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="LookupModal" tabindex="-1" aria-labelledby="LookupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="LookupModalLabel">Lookup</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Lookup Field</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Band Field (optional)</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Filter (E.g No of Covers. No of Members)</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="MatrixModal" tabindex="-1" aria-labelledby="MatrixModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="MatrixModalLabel">Matrix</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-1">
+              <div class="form-group">
+                <label class="text-primary form-label ">Axis</label>
+                <p class="text-primary form-control " style="border: none">X</p>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Selection</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">Filter (E.g No of Covers. No of Members)</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-1">
+              <div class="form-group">
+                <label class="text-primary form-label ">&nbsp;</label>
+                <p class="text-primary form-control " style="border: none">Y</p>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">&nbsp;</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="text-primary form-label ">&nbsp;</label>
+                <select class="form-control  control-bg-gray">
+                  <option value="" disabled></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <form [formGroup]="clientNoForm">
+    <div class="row d-flex align-items-center h-100 justify-content-center">
+      <div class="col-4">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="form-group">
+              <label class="form-label">Client Number</label>
+
+              <app-input-basic [form]="clientNoForm" name="clientNo" type="text" [stacked]="false" [showLabel]="false"
+                [loading]="validatingClientNo" [showValidation]="true" [showValidationIcon]="true" [colored]="false" [light]="false">
+              </app-input-basic>
+              <!-- <input type="text" formControlName="clientNo" class="form-control control-bg-gray"
+                [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}" required
+                (keyup)="setClientList()"> -->
+            </div>
+          </div>
+          <div class="col d-flex align-items-center text-primary">
+            {{clientName}}
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+    <div class="row d-flex align-items-center h-100 justify-content-center">
+
+      <div class="col-2">
+        <label class="form-label">&nbsp;</label>
+
+        <app-button buttonType="find" (click)="setClientList()"></app-button>
+      </div>
+      <div class="col-2">
+        <label class="form-label">&nbsp;</label>
+
+        <app-button buttonType="addCustom" text="Create New Client" routerLink='/crms/agent-desk/create-agent'>
+        </app-button>
+
+      </div>
+
+    </div>
+
+    <div class="row justify-content-end my-5">
+      <div class="col-2 mt-5">
+
+        <app-btn (mclick)="onNext();changeTab('ownerInfo')" type="secondary" icon="next" [valid]="clientNoForm?.valid">
+          Next</app-btn>
+      </div>
+    </div>
+  </form>
+
+</div>

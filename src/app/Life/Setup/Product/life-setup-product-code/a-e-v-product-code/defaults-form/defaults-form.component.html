@@ -1,0 +1,92 @@
+<div [formGroup]="form">
+  <div class="row g-3 align-items-center justify-content-between">
+    <div class="col-md-auto order-lg-1">
+      <text-case-1 lbl="Product" [val]="product?.basic?.code +' - '+product?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+    <div class="col-md-auto order-lg-0">
+    </div>
+  </div>
+  <div class="row gy-2">
+    <div class="col-lg-4">
+      <app-input-basic name="defaultBranch" [stacked]="true" [form]="form" label="Default All Sales to Branch"
+        type="select" [options]="fpS.getBranch|functionCaller|async" labelType="cd" valueField="code">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <!-- form?.value?.ageCalculationBasis:{{form?.value?.ageCalculationBasis}} -->
+      <app-input-basic name="ageCalculationBasis" [stacked]="true" [form]="form" label="Age Calculation Basis"
+        type="select" [options]="fpS.getAgeCalculationBases|functionCaller|async" labelType="ct" valueField="code">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="writingAgentNo" [stacked]="true" [form]="form" label="Writing Agent No" type="text">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="autoSetPhoneNoAsExternalRef" [stacked]="true" [form]="form"
+        label="Auto Set Phone No as Default External Ref" type="checkbox">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="referralAgentNo" [stacked]="true" [form]="form" label="Referral Agent No" type="text">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="coolOffPeriod" [stacked]="true" [form]="form" label="Cooling Off Period" type="number">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="maturityBasis" [stacked]="true" [form]="form" label="Maturity Basis" type="select"
+        [options]="fpS.getCodeLists|functionCaller1:'MAT_BASIS'|async" labelType="ct" valueField="code">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="coolOffFee" [stacked]="true" [form]="form" label="Cooling Off Exercise Fee" type="number">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="policyTerm" [stacked]="true" [form]="form" label="Policy Term (Month)" type="number">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="premiumFrequency" [stacked]="true" [form]="form" label="Premium Frequency" type="select"
+        [options]="fpS.getPremiumFrequency|functionCaller|async" labelType="ct" valueField="code">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="providerCategory" [stacked]="true" [form]="form" label="Provider Category" type="select"
+        #providerCategory [options]="fpS.getCodeGroup|functionCaller1:'PROVIDER_CAT'|async" labelType="ct"
+        valueField="code">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="providerCode" [stacked]="true" [form]="form" label="Default Provider Code" type="select"
+        [options]="fpS.getDefaultProvider|functionCaller1:providerCategory?.value|async" labelType="nf" valueField="no">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4">
+      <app-input-basic name="loanArmotizationBasis" [stacked]="true" [form]="form" label="Loan Armotization Basis" type="select"
+        [options]="fpS.getCodeLists|functionCaller1:'ARMOTISATION_BASIS'|async" labelType="ct" valueField="code">
+      </app-input-basic>
+    </div>
+    <div class="col-lg-4" *ngFor="let subForm of benefitPaymentMethodAllowed?.controls; let i = index;">
+      <div class="row align-items-end">
+        <div class="col-md">
+          <app-input-basic name="code" [stacked]="true" [form]="subForm" label="Benefit Payment Method Allowed"
+            type="select" [options]="fpS.getBenefitPayment|functionCaller|async" labelType="ct" valueField="code">
+          </app-input-basic>
+        </div>
+        <div class="col-auto d-flex" *ngIf="!isShow">
+          <div class="me-2">
+            <app-btn icon="delete" [iconBtn]="true" type="danger-outline"
+              (mclick)="removeBenefitPaymentMethodAllowed(i)" [valid]="benefitPaymentMethodAllowed?.length>1">
+            </app-btn>
+          </div>
+          <app-btn group="add" [iconBtn]="true" (mclick)="addNewBenefitPaymentMethodAllowed(null,i+1)">
+          </app-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

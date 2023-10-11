@@ -1,0 +1,33 @@
+<div class="container-sm">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+        <app-autocomplete label="Select Vehicle Brand" [form]="form" name="brandCode" [stacked]="true"
+          [showValidation]="brandCode.invalid" [showValidationIcon]="false"
+          [options]="ves.getVehicleBrand|functionCaller|async" labelType="cd" valueField="code" #brandCode>
+        </app-autocomplete>
+        <app-autocomplete label="Select Vehicle Make" [form]="form" name="makeCode" [stacked]="true"
+          [showValidation]="makeCode.invalid" [showValidationIcon]="false"
+          [options]="ves.getVehicleMake|functionCaller1:brandCode.value|async" labelType="cd" valueField="code"
+          #makeCode>
+        </app-autocomplete>
+
+        <div class="form-group row my-2">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="dark" icon="show" [valid]="form?.valid" (mclick)="show( )">Show</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../vehicle-make-create"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="clone( )">Clone</app-btn>
+          </div>
+        </div>
+ 
+      </form>
+
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,152 @@
+<div
+  class="modal fade"
+  id="is_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="savingsForm" class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Target Contribution Frequency</label
+              >
+              <input
+                type="text"
+                formControlName="target_frequency"
+                class="form-control control-bg-gray"
+                [hidden]="defaultPremFreq ? false : true"
+              />
+              <select
+                formControlName="target_frequency"
+                id=""
+                class="form-control control-bg-gray"
+                [hidden]="!defaultPremFreq ? false : true"
+              >
+                <option selected disabled>Choose an Option</option>
+                <ng-container *ngFor="let option of freq_options">
+                  <option [value]="option.code">
+                    {{ option.code }} - {{ option.title }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Target Basis</label>
+              <select
+                formControlName="basis"
+                id=""
+                class="form-control control-bg-gray"
+              >
+                <ng-container *ngFor="let option of basis_options">
+                  <option [value]="option.code">
+                    {{ option.code }} - {{ option.title }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Target Amount</label
+              >
+              <input
+                formControlName="target_amount"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Deposit</label>
+              <input
+                formControlName="deposit"
+                type="text"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-end">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Contribution Payment Term</label
+              >
+              <input
+                formControlName="conTerm"
+                type="number"
+                min="0"
+                max="conyearmax"
+                placeholder="Years"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input
+                formControlName="conMonths"
+                type="number"
+                max="conmonmax"
+                min="0"
+                placeholder="months"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input
+                readonly
+                formControlName="conDays"
+                type="text"
+                placeholder="Days"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Enter a drawdown Benefit Payment Schedule</label
+              >
+              <input
+                formControlName="benSchedule"
+                type="checkbox"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save" (mclick)="stop()">Save</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

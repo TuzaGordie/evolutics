@@ -1,0 +1,85 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{"Edit Agent Salary Status"|appTranslate|async}}</h5>
+    <button mat-dialog-close class="btn-close"></button>
+</div>
+<mat-dialog-content>
+    <div class="container">
+        <table class="table table-striped my-5">
+            <thead>
+                <tr>
+                    <th>{{"Agent No"|appTranslate|async}}</th>
+                    <th>{{"Salary Status"|appTranslate|async}}</th>
+                    <th>{{"Date"|appTranslate|async}}</th>
+                    <th>{{"Updated By"|appTranslate|async}}</th>
+                    <th>{{"Updated On"|appTranslate|async}}</th>
+                    <th><!--Edit--></th>
+                    <th><!--Delete--></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let record of agentSalaryStatusForm.controls">
+                    <tr [formGroup]="$any(record)">
+                        <td>
+                            <input formControlName="agentNo" type="text" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'agentNo') && 'border border-danger'">
+                        </td>
+                        <td>
+                            <input type="text" formControlName="salaryStatus" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'salaryStatus') && 'border border-danger'">
+                        </td>
+                        <td>
+                            <input type="date" formControlName="date" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'date') && 'border border-danger'">
+                        </td>
+                        <td>
+                            <input type="text" formControlName="updatedBy" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'updatedBy') && 'border border-danger'">
+                        </td>
+                        <td>
+                            <input type="date" formControlName="updatedOn" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'updatedOn') && 'border border-danger'">
+                        </td>
+                        <td class="position-relative">
+                            <app-button *ngIf="!recordStatus[record.value.id] || recordStatus[record.value.id] == 'VIEW'" buttonType="edit" (click)="recordStatus[record.value.id] = 'EDITING'"></app-button>
+                            <app-button *ngIf="recordStatus[record.value.id] == 'EDITING'" buttonType="custSave" (click)="onUpdateRecord(record)"></app-button>
+                            <div *ngIf="recordStatus[record.value.id] == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                        <td class="position-relative">
+                            <app-button *ngIf="!isDeletingRecord[record.value.id]" buttonType="delete" (click)="confirmDeleteRecord(record)"></app-button>
+                            <div *ngIf="isDeletingRecord[record.value.id]" class="position-absolute top-50 start-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <tr *ngIf="showNewRecordForm" [formGroup]="newRecordForm">
+                    <td>
+                        <input formControlName="agentNo" type="text" class="form-control" placeholder="Agent No" [ngClass]="isFieldInvalid(newRecordForm, 'agentNo') && 'border border-danger'">
+                    </td>
+                    <td>
+                        <input type="text" formControlName="salaryStatus" class="form-control" placeholder="Salary Status" [ngClass]="isFieldInvalid(newRecordForm, 'salaryStatus') && 'border border-danger'">
+                    </td>
+                    <td>
+                        <input type="date" formControlName="date" class="form-control" placeholder="Date" [ngClass]="isFieldInvalid(newRecordForm, 'date') && 'border border-danger'">
+                    </td>
+                    <td>
+                        <input type="text" formControlName="updatedBy" class="form-control" placeholder="Updated By" [ngClass]="isFieldInvalid(newRecordForm, 'updatedBy') && 'border border-danger'">
+                    </td>
+                    <td>
+                        <input type="date" formControlName="updatedOn" class="form-control" placeholder="Updated On" [ngClass]="isFieldInvalid(newRecordForm, 'updatedOn') && 'border border-danger'">
+                    </td>
+                    <td class="position-relative" colspan="2">
+                        <app-button *ngIf="!isCreatingRecord" buttonType="save" (click)="onCreateRecord()"></app-button>
+                        <div *ngIf="isCreatingRecord" class="position-absolute top-50 start-50 translate-middle">
+                            <div class="fa fa-refresh fa-spin"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p *ngIf="!agentSalaryStatusForm.controls.length" class="text-center">0 records found</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+    <button class="btn btn-outline-primary btn-lg" [disabled]="showNewRecordForm" (click)="showNewRecordForm = true">
+        <span class="fa fa-plus"></span>
+        Add new record
+    </button>
+</mat-dialog-actions>

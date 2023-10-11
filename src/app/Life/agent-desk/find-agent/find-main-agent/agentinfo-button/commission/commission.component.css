@@ -1,0 +1,59 @@
+.overlay, .secondoverlay{
+    position:fixed; top:0px; left:0px; width:100vw; height: 100vh; background-color:black; opacity:0.2; display:flex; justify-content:center; align-items:center;
+  }
+  .secondoverlay{
+    opacity:1; background-color:transparent;
+  }
+  .overlay-content{overflow:auto;
+    position:absolute; width:85%; min-height:80%; background-color:white; border-bottom-left-radius:12px; border-top-right-radius:12px; opacity:1;
+  }
+  .overlay-content{
+    padding:40px; box-sizing:border-box;
+    position:relative;
+  }
+  
+  .header-left{
+    position:absolute; right:10px; top:10px; width: 25px; height: 25px; background-color:black; border-radius: 50%;color:white; 
+  }
+  .header-right{
+    font-size:1.5em;
+  }
+  
+  .flex-center{
+    display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
+  }
+  .overlay-subheader, .overlay-body{
+    justify-content: space-around;
+    margin-top:20px; padding: 10px 0px; width:100%; border-bottom: 1px solid #bbbb;
+  }
+  .bold{
+    font-weight:bold;
+  }
+.input{
+  display:block;
+  width:100%;
+  height: 20px; background-color:#f4f4f4;
+  border:none;
+  border-bottom-left-radius:5px; border-top-right-radius:5px; 
+}
+.mb-input{
+  width:120px;
+  padding-right:5px;
+  box-sizing:border-box;
+}
+.label{
+  margin-bottom:7px;
+}
+.overlay-body{border:none; margin-bottom:20px;}
+.mb-whole{
+  display:flex; width:100%;
+}
+.mb-whole .input{
+  display:block;
+ margin-left:5px;
+  height:100px;
+}
+.inside{
+  right:20px; bottom:20px; width:100px;
+  border-bottom-left-radius:5px; border-top-right-radius:5px; background-color: #3733a6; outline:none; border:none;
+}

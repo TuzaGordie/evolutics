@@ -1,0 +1,164 @@
+/* .dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
+    background-color: #00bd6e;
+} */
+/* .dropdown-item:active{
+    background-color: #00bd6e;
+}
+ */
+@import '../../../../sass/variables';
+.dropdown-toggle::after,
+.hasDropDown::after {
+  font-size: 9px;
+  margin-left: 3px;
+  font-family: 'evolustics';
+  content: '\e901';
+  // transform: translateY(-2px);
+  border: none; //to reset bootstrap
+}
+
+.evoicon,
+.fas,
+.fa {
+  margin-right: 3px;
+  padding-right: 0 !important;
+}
+
+.nav-item {
+  font-weight: 400;
+  font-size: 9px;
+  white-space: nowrap;
+}
+nav {
+  margin-left: 100.36px;
+  // position: absolute;
+}
+@media screen and (max-width: 1366px) {
+  nav {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .navbar #navbar1 ul li a {
+    color: #fffffff8;
+  }
+}
+
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+.life {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $primary;
+  }
+}
+
+.general {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:hover {
+    color: #fff;
+    background-color: $general_color;
+  }
+}
+
+.health {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $health_color;
+  }
+}
+
+.actuarial {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $actuarial_color;
+  }
+}
+
+.finance {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $finance_color;
+  }
+}
+
+.document {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $document_color;
+  }
+}
+
+.crms {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $crm_color;
+  }
+}
+
+.receipt {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $cash_color;
+  }
+}
+.dbcloner {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $dbcloner_color;
+  }
+}
+.assets {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $assets_color;
+  }
+}
+
+.analytics {
+  .dropdown-menu-dark .dropdown-item.active,
+  .dropdown-menu-dark .dropdown-item:active {
+    color: #fff;
+    background-color: $analytics_color;
+  }
+}
+.extra-menu .dropdown-toggle::after {
+  color: #fff;
+}
+ul li a {
+  font-size: 12px;
+}
+.dropdown-menu {
+  padding: 0;
+}
+.dropdown-item {
+  padding: 10px 16px;
+  height: auto;
+  line-height: inherit;
+  color: #949799;
+}
+.underline {
+  border-bottom: 1px solid #464748;
+}
+
+a[disabled] {
+  display: none;
+}
+.dropdown-item:focus {
+  background-color: unset;
+}

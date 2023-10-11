@@ -1,0 +1,16 @@
+table thead {
+  background-color:#db0041 ;
+  color: white;
+}
+
+table th:first-child{
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+  }
+  
+  table th:last-child{
+    border-top-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topright: 10px;
+  }

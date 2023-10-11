@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between">
+  <h2 mat-dialog-title>{{'Find Provider'|appTranslate|async}}</h2>
+  <span class="btn btn-close" mat-dialog-close></span>
+</div>
+<hr />
+<mat-dialog-content>
+  <form [formGroup]="findProviderForm">
+    <div class="my-3">
+      <label for="providerName">{{'Provider Name'|appTranslate|async}}</label>
+      <input type="text" class="inputform" formControlName="providerName" />
+    </div>
+    <div class="my-3">
+      <label for="providerCategory">{{'Provider Category'|appTranslate|async}}</label>
+      <select
+        class="inputform"
+        formControlName="providerCategory"
+        (change)="setProviderSubCategories()"
+      >
+        <option value=""></option>
+        <option
+          *ngFor="let category of providerCategories"
+          [value]="category.code"
+        >
+          {{ category.code }} - {{ category.title }}
+        </option>
+      </select>
+    </div>
+    <div class="my-3">
+      <label for="providerCountry">{{'Provider Sub Category'|appTranslate|async}}</label>
+      <div class="position-relative">
+        <select class="inputform" formControlName="providerSubCategory">
+          <option value=""></option>
+          <option
+            *ngFor="let subCat of providerSubCategories"
+            [value]="subCat.code"
+          >
+            {{ subCat.code }} - {{ subCat.title }}
+          </option>
+        </select>
+        <div *ngIf="loadingSubCategories" class="position-absolute top-50 start-50 translate-middle">
+          <span class="fa fa-sync fa-spin"></span>
+        </div>
+      </div>
+    </div>
+    <div class="my-3" class="d-flex justify-content-end">
+      <button class="btn btn-dark py-3 px-5" (click)="onSearch()">
+        <i *ngIf="isSearching" class="fa fa-sync fa-spin"></i>
+        {{ isSearching ? 'Searching...' : 'Search' |appTranslate|async}}
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

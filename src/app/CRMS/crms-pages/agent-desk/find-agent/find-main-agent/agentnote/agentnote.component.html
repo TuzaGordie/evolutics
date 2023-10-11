@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <div class="row">
+    <form [formGroup]="noteForm">
+      <div class="col-md-12 mx-auto">
+        <div class="mt-4">
+          <label>Note</label><br>
+          <textarea name="" id="" cols="30" rows="5" class="control-bg-gray form-control"></textarea>
+        </div>
+        <div class="mt-4">
+          <label>Visible To All</label> <br>
+          <input type="checkbox" class="form-control control-bg-gray" formControlName="visible">
+        </div>
+      </div>
+
+
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <app-button buttonType="save-red" (click)="onSave()"></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

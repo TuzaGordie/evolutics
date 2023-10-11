@@ -1,0 +1,1070 @@
+<app-form-navigation [title]="'Client Desk / Create New Client / Provider'"></app-form-navigation>
+
+<div class="container-fluid mt-2" id="form-body">
+    <form [formGroup]="CreateProviderForm" (submit)="onSubmitProvider()">
+      <div class="container">
+        <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-clientInfoTab-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-clientInfoTab" type="button" role="tab" aria-controls="pills-clientInfoTab"
+                    aria-selected="true">
+              Client Information
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-providerInfoTab-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-providerInfoTab" type="button" role="tab" aria-controls="pills-providerInfoTab"
+                    aria-selected="false">
+              Provider Information
+            </button>
+          </li>
+  
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-paymentdetails-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-paymentdetails" type="button" role="tab" aria-controls="pills-paymentdetails"
+                    aria-selected="false">
+              Payment Details
+            </button>
+          </li>
+  
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-licenseTab-tab" data-bs-toggle="pill" data-bs-target="#pills-licenseTab"
+                    type="button" role="tab" aria-controls="pills-licenseTab" aria-selected="false">
+              License
+            </button>
+          </li>
+  
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-accountsTab-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-accountsTab" type="button" role="tab" aria-controls="pills-accountsTab"
+                    aria-selected="false">
+              Accounts
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+  
+  
+          <div class="tab-pane fade show active" id="pills-clientInfoTab" role="tabpanel" formGroupName="postProviderForm"
+               aria-labelledby="pills-clientInfoTab-tab">
+            <div class="container mt-2">
+              <div class="row justify-content-between mt-3">
+                <span class="col-2">Client Class: <span class="text-danger">Corporate</span></span>
+                <span class="col-2">Client Number: <span class="text-danger">1</span></span>
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col-2">
+                  <app-button [buttonType]="'edit'" data-bs-target="#exampleModal" [text]="'Edit'" data-bs-toggle="modal"
+                              (click)="onEdit('surname')"></app-button>
+                </div>
+  
+                <div class="col-2">
+                  <app-button [buttonType]="'btnCustomClone'" [text]="'Provider View'"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button [buttonType]="'btnCustomNote'" [routerLink]="['/life/agent-desk/note']"
+                              [text]="'Note'"></app-button>
+                </div>
+              </div>
+              <hr style="margin-top: 5px;">
+  
+              <div class="d-flex justify-content-around" style="font-size: 15px;">
+  
+                <div class="d-block text-center mr-2">
+                  <img alt="" class="rounded-circle"
+                       src="https://ritecaremedicalofficepc.com/wp-content/uploads/2019/09/img_avatar.png" width="100px">
+                  <p class="pt-2">{{findClientService.clientInfo?.FIRST_NAME}}</p>
+                  <span style="color:#2ecc71" data-bs-toggle="modal" data-bs-target="#changeStatusModal">Active <i class="fas fa-pen"></i></span>
+                </div>
+  
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Full Name</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Redg No</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+  
+                  <div class="pb-4">
+                    <label class="form-label text-danger">No of employee</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+  
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Financial Size Category</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+  
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Sector</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                </div>
+  
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Phone Number 1</label>
+                    <input [ngClass]="{higlightbox: checkHighlight('phoneNo')}" [readonly]="checkReadonly('phoneNo')"
+                           class="inputform1"
+  
+                           type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Phone Number 2</label>
+                    <input class="inputform1 ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Email</label>
+                    <input [ngClass]="{higlightbox: checkHighlight('email')}" [readonly]="checkReadonly('email')"
+                           class="inputform1"
+  
+                           type="text">
+                  </div>
+  
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Website</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+  
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Address</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+  
+                </div>
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-danger">CRM ID</label>
+                    <input class="inputform1 ">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Client Category</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Language</label>
+                    <input [ngClass]="{higlightbox: checkHighlight('language')}" [readonly]="checkReadonly('language')"
+                           class="inputform1"
+  
+                           type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Date Created</label>
+                    <input [ngClass]="{higlightbox: checkHighlight('dateCreated')}"
+                           [readonly]="checkReadonly('dateCreated')"
+                           class="inputform1"
+  
+                           type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">State</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                </div>
+  
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Provider Category</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+  
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Band</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Bank No</label>
+                    <div class="row">
+                      <div class="col"><input class="inputform1 "></div>
+                      <div class="col-3"><a><i aria-hidden="true" class="fas fa-pencil-alt ml-2" data-bs-toggle="modal"
+                                               data-bs-target="#editbank"></i> </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">CLV</label>
+                    <input [ngClass]="{higlightbox: checkHighlight('clv')}" [readonly]="checkReadonly('clv')"
+                           class="inputform1"
+  
+                           type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Communication</label>
+  
+                    <input class="inputform1 ">
+  
+  
+                  </div>
+                </div>
+  
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Provider Sub Category</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">No of Groups</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Group No</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Social Media</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                </div>
+                <div class="d-block mx-2">
+                  <div class="pb-4">
+                    <label class="form-label text-danger">Provider Code</label>
+                    <input class="inputform1 " readonly type="text">
+                  </div>
+                </div>
+  
+              </div>
+              <hr class="my-2">
+              <div class="row justify-content-center my-4">
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRaised" text="Endorsements"
+                              [routerLink]="['/life/agent-endorsements']"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRaised" text="Documents"
+                              [routerLink]="['/life/agent-documents']"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRaised" text="Workflows"
+                              [routerLink]="['/life/agent-workflows']"></app-button>
+  
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRaised" text="Web log in"
+                              [routerLink]="['/life/agent-web-login']"></app-button>
+                </div>
+  
+              </div>
+  
+              <div class="d-flex justify-content-around section-cards card-blue">
+                <div class="card color1 shadow-sm" [routerLink]="['/life/policies']">
+                  <div class="card-body">
+                    <h6 class="card-title">No of Policies</h6>
+                    <p class="card-number">55</p>
+                  </div>
+  
+                </div>
+                <div class="card color1 shadow-sm" [routerLink]="['/life/relationships']">
+                  <div class="card-body">
+                    <h6 class="card-title">No Of Relationships</h6>
+                    <p class="card-number">12</p>
+                  </div>
+  
+                </div>
+                <div class="card color1 shadow-sm" [routerLink]="['/life/business']">
+                  <div class="card-body">
+                    <h6 class="card-title">Other Business</h6>
+                    <p class="card-number">43</p>
+                  </div>
+  
+                </div>
+                <div class="card color1 shadow-sm" [routerLink]="['/life/pendingquotes']">
+                  <div class="card-body">
+                    <h6 class="card-title">Pending Quotes</h6>
+                    <p class="card-number">12</p>
+                  </div>
+  
+                </div>
+                <div class="card color1 shadow-sm" [routerLink]="['/life/pendingpayments']">
+                  <div class="card-body">
+                    <h6 class="card-title">Pending Payments</h6>
+                    <p class="card-number">22</p>
+                  </div>
+  
+                </div>
+              </div>
+  
+  
+              <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal"
+                   tabindex="-1">
+  
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Owner Info</h5>
+                      <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <div class="modal-body">
+  
+  
+                      <div class="d-flex justify-content-around" style="font-size: 15px;">
+  
+                        <div class="d-block mx-2">
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Full Name</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('fullName')}"
+                                   [readonly]="checkReadonly('fullName')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Redg No</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('redgNo')}"
+                                   [readonly]="checkReadonly('redgNo')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">No. of Employees</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('employeNo')}"
+                                   [readonly]="checkReadonly('employeNo')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Financial Size Category</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('financial')}"
+                                   [readonly]="checkReadonly('financial')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Sector</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('sector')}"
+                                   [readonly]="checkReadonly('sector')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                        </div>
+  
+                        <div class="d-block mx-2">
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Phone Number 1</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('phoneNo')}"
+                                   [readonly]="checkReadonly('phoneNo')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Phone Number 2</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('phoneNo2')}"
+                                   [readonly]="checkReadonly('phoneNo2')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Email</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('email')}"
+                                   [readonly]="checkReadonly('email')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Website</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('website')}"
+                                   [readonly]="checkReadonly('website')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Address</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('address')}"
+                                   [readonly]="checkReadonly('address')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                        </div>
+  
+                        <div class="d-block mx-2">
+                          <div class="mt-4">
+                            <label class="form-label text-primary">CRM ID</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('crmid')}"
+                                   [readonly]="checkReadonly('crmid')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Client Category</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('clientCategory')}"
+                                   [readonly]="checkReadonly('clientCategory')" class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Language</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('language')}"
+                                   [readonly]="checkReadonly('language')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Date</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('date')}" [readonly]="checkReadonly('date')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">State</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('state')}"
+                                   [readonly]="checkReadonly('state')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                        </div>
+  
+                        <div class="d-block mx-2">
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Provider Category</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('providerCategory')}"
+                                   [readonly]="checkReadonly('providerCategory')" class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Brand</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('brand')}"
+                                   [readonly]="checkReadonly('brand')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Bank No</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('bankNo')}"
+                                   [readonly]="checkReadonly('bankNo')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">CLV</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('clv')}" [readonly]="checkReadonly('clv')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Communication</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('communication')}"
+                                   [readonly]="checkReadonly('communication')" class="inputform "
+  
+                                   type="text">
+                          </div>
+                        </div>
+  
+                        <div class="d-block mx-2">
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Provider Sub Category</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('subCategory')}"
+                                   [readonly]="checkReadonly('subCategory')" class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">No of Groups</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('groups')}"
+                                   [readonly]="checkReadonly('groups')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Group No</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('groupNo')}"
+                                   [readonly]="checkReadonly('groupNo')"
+                                   class="inputform "
+  
+                                   type="text">
+                          </div>
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Social Media</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('socialmedia')}"
+                                   [readonly]="checkReadonly('socialmedia')" class="inputform "
+  
+                                   type="text">
+                          </div>
+                        </div>
+  
+                        <div class="d-block ml-2">
+                          <div class="mt-4">
+                            <label class="form-label text-primary">Provider Code</label><br>
+                            <input [ngClass]="{higlightbox: checkHighlight('providerCode')}"
+                                   [readonly]="checkReadonly('providerCode')" class="inputform "
+  
+                                   type="text">
+                          </div>
+                        </div>
+  
+                      </div>
+  
+  
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+                      <button class="border-0 next-blue" data-bs-dismiss="modal" type="submit">
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="modal fade" id="editbank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-borderless table-striped my-5">
+                      <thead>
+                      <tr class="">
+                        <th scope="col">Bank No</th>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Bank Method</th>
+                        <th scope="col">Bank Name</th>
+                        <th scope="col">Sort Code</th>
+                        <th scope="col">Account No</th>
+                        <th scope="col">Blocked</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <td>5667_1</td>
+                        <td>Ogene Obaseki</td>
+                        <td>NG Banking</td>
+                        <td>FBN</td>
+                        <td>05677889</td>
+                        <td>21923776</td>
+                        <td>Y</td>
+                      </tr>
+                      <tr>
+                        <td>5667_1</td>
+                        <td>Ogene Obaseki</td>
+                        <td>NG Banking</td>
+                        <td>FBN</td>
+                        <td>05677889</td>
+                        <td>21923776</td>
+                        <td>N</td>
+                      </tr>
+  
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <app-button [buttonType]="'addCustom'" [text]="'Create new Account'"
+                                data-bs-dismiss="modal"></app-button>
+  
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+  
+          </div>
+  
+          <div class="tab-pane fade" id="pills-providerInfoTab" role="tabpanel"
+               aria-labelledby="pills-providerInfoTab-tab">
+            <div class="row g-3">
+              <div class="col" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Provider Type</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of providerTypeList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Status</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of providerStatusList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2" formGroupName="clientProvider">
+                  <label class="form-label text-primary">Sub Provider Type</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of providerSubCategoryList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2" formGroupName="clientProvider">
+                  <label class="form-label text-primary">Tarrif Code</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of tarrifCodeList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2" formGroupName="clientProvider">
+                  <label class="form-label text-primary">Network </label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of providerNetworkList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col-4" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Discipline Category</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of disciplineCatList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col-2 ">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">&nbsp;</label>
+                  <app-button buttonType="add"></app-button>
+                </div>
+  
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Disciplines</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of disciplineList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col-2" formGroupName="providerDiscipline">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Quantity Basis</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of qtyBasisList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2" formGroupName="providerDiscipline">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Quantity Available</label>
+                  <input class="form-control control-bg-gray" type="text"/>
+                </div>
+              </div>
+              <div class="col-2 ">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">&nbsp;</label>
+                  <app-button buttonType="add"></app-button>
+                </div>
+  
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col-6" formGroupName="providerBranches">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Branch Addresses</label>
+                  <input class="form-control control-bg-gray" type="text"/>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group mt-2" formGroupName="providerBranches">
+                  <label class="form-label text-primary">Branch State</label>
+                  <input class="form-control control-bg-gray" type="textarea"/>
+                </div>
+              </div>
+              <div class="col-2 ">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">&nbsp;</label>
+                  <app-button buttonType="add"></app-button>
+                </div>
+  
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col-6" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Description of Facility</label>
+                  <textarea name="" id="" cols="30" rows="5" class="form-control control-bg-gray"></textarea>
+  
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-6">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <app-button buttonType="upload" text="Upload Photos of Facility"></app-button>
+  
+                </div>
+              </div>
+            </div>
+  
+  
+          </div>
+  
+          <div class="tab-pane fade" id="pills-paymentdetails" role="tabpanel"
+               aria-labelledby="pills-paymentdetails-tab">
+            <div class="row g-3">
+              <div class="col" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Payment Method</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of paymentMethodList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Payee Name</label>
+                  <input class="form-control control-bg-gray" type="textarea"/>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col" formGroupName="clientProvider">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Frequency of Payment</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of paymentFreqList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col"></div>
+            </div>
+  
+            <div class="row mt-5">
+              <p>Existing Account for Client xxxx</p>
+            </div>
+
+            <div class="row mt-3">
+              <table class="table table-responsive  table-striped">
+                <thead>
+                <tr class="py-5 bg-primary text-white">
+                  <th scope="col" class="text-white">Bank No</th>
+                  <th scope="col" class="text-white">Payee Name</th>
+                  <th scope="col" class="text-white">Account Type</th>
+                  <th scope="col" class="text-white">Account No</th>
+                  <th scope="col" class="text-white">Institution</th>
+                  <th scope="col" class="text-white">Select</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>6567_1</td>
+                  <td>James Bond</td>
+                  <td>Mobile Money</td>
+                  <td>090897676776</td>
+                  <td>MTN</td>
+                  <td>
+                    <div class="btn  btn-outline-primary  p-2" (click)="toggleClass = !toggleClass" [ngClass]="{ 'btn-primary text-white': toggleClass }">Select</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>6567_1</td>
+                  <td>James Bond</td>
+                  <td>Mobile Money</td>
+                  <td>090897676776</td>
+                  <td>MTN</td>
+                  <td>
+                    <div class="btn  btn-outline-primary p-2"  (click)="toggleClass2 = !toggleClass2" [ngClass]="{ 'btn-primary text-white': toggleClass2 }">Select</div>
+                  </td>
+                </tr>
+  
+  
+  
+  
+                </tbody>
+              </table>
+            </div>
+  
+            <div class="row justify-content-end">
+              <div class="col-3">
+                <div class="from-group align-items-center ">
+                  <label for="" class="form-label">&nbsp;</label>
+                  <app-button [buttonType]="'addCustom'" text="Create New Account"></app-button>
+                </div>
+              </div>
+            </div>
+  
+  
+          </div>
+  
+          <div class="tab-pane fade" id="pills-licenseTab" role="tabpanel" aria-labelledby="pills-licenseTab-tab"
+               formGroupName="clientProviderLicense">
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">License Type</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of licenseTypeList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">License Issue Date</label>
+                  <input class="form-control control-bg-gray" type="date"
+                  />
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">License Authority</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of licenseAuthList" [ngValue]="ot.title">
+                      {{ ot.code }} - {{ ot.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">License Expiry Date</label>
+                  <input class="form-control control-bg-gray" type="date"
+                  />
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">License Condition</label>
+                  <textarea name="" id="" cols="30" rows="5" class="form-control control-bg-gray"></textarea>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">&nbsp;</label>
+                 <app-button buttonType="upload" text="Upload License"></app-button>
+                </div>
+              </div>
+            </div>
+  
+  
+          </div>
+  
+          <div class="tab-pane fade" id="pills-accountsTab" role="tabpanel" aria-labelledby="pills-accountsTab-tab">
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Free Due To</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Free Due From</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Premium Due To </label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Premium Due To</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Claim Due To </label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Claim Due From</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Medical UW Due To</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Medical UW Due From</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row g-3">
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Commissions Due To</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="col">
+                <div class="form-group mt-2">
+                  <label class="form-label text-primary">Coinsurance Commissions Due From</label>
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let ot of testList" [ngValue]="ot.RATE_CODE">
+                      {{ ot.FIRST_NAME }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row justify-content-end mt-5 ">
+  
+              <div class="col-2">
+                <app-button buttonType="submit"></app-button>
+  
+              </div>
+  
+            </div>
+          </div>
+  
+          <!-- </form> -->
+  
+  
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal fade" id="changeStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Status</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+          <div class="row px-3">
+            <label for="" class="form-label text-primary">New Status</label>
+            <select name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>

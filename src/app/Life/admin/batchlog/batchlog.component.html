@@ -1,0 +1,91 @@
+<div *ngIf="operation === 'actions'" class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <div class="form-group mt-2">
+        <label class="form-label text-primary">{{'Select Batch Category'|appTranslate|async}}</label>
+        <select [(ngModel)]="batchParams.batchCategory" (change)="getBatchCodes()"
+          class="form-control form-control-lg control-bg-gray">
+          <option>---</option>
+          <option *ngFor="let item of batchCategories" [value]="item.code">
+            {{item.code}} - {{item.title}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group mt-2">
+        <label class="form-label text-primary">{{'Select Batch Code'|appTranslate|async}}</label>
+        <select [(ngModel)]="batchParams.batchCode" (change)="getBatchNos()"
+          class="form-control form-control-lg control-bg-gray">
+          <option></option>
+          <option *ngFor="let item of batchCodes" [value]="item.code">
+            {{item.code}} - {{item.description}}
+          </option>
+        </select>
+      </div>
+      <!-- <div class="form-group mt-2">
+        <label class="form-label text-primary">{{'Enter Date'|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" [(ngModel)]="batchParams.enterDate" type="date" />
+      </div> -->
+      <div class="row form-group row my-3">
+        <div class="col-sm-9">
+          <label class="form-label text-primary">{{'Select Batch No'|appTranslate|async}}</label>
+          <select [(ngModel)]="batchParams.batchNo" class="form-control form-control-lg control-bg-gray">
+            <option></option>
+            <option *ngFor="let item of batchNos" [value]="item.batchNo">
+              {{item.batchNo}} - {{item.startOn | date}}
+            </option>
+          </select>
+        </div>
+        <div class="d-flex flex-column justify-content-end col-sm-3 form-group">
+          <app-button (click)="showBatch()" [buttonType]="'show'"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="operation === 'show'" class="container">
+
+  <div class="row topbar mt-5 mb-2">
+    <div *ngFor="let el of topBarElements" class=" col-md-2 mb-4 topbarElement">
+      <div class="text-primary font-weight-bold">{{el.title}}</div>
+      <div>{{el.content}}</div>
+    </div>
+  </div>
+
+  <table class=" mt-5 table table-responsive  table-striped">
+
+    <thead class="">
+      <tr class=" py-5">
+        <td scope="col">{{'Seq No'|appTranslate|async}}</td>
+        <td scope="col">{{'Process Type'|appTranslate|async}}</td>
+        <td scope="col">{{'Select'|appTranslate|async}}</td>
+        <td scope="col">{{'Process Code'|appTranslate|async}}</td>
+        <td scope="col">{{'Process Name'|appTranslate|async}}</td>
+        <td scope="col">{{'Parameter'|appTranslate|async}}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let el of batchLogReq.batchLogDetails" class="py-5">
+        <td class="col-md-1">
+          {{el.lineNo}}
+        </td>
+        <td class="col-md-2">
+          {{el.processType}}
+        </td>
+        <td class="col-md-1">
+          {{el.select}}
+        </td>
+        <td class="col-md-2">
+          {{el.processCode}}
+        </td>
+        <td class="col-md-4">
+          {{el.processName}}
+        </td>
+        <td class="col-lg-2">
+          {{el.processParameter}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

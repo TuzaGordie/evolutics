@@ -1,0 +1,22 @@
+<app-form-navigation [title]="'Document / Bulk Upload'"></app-form-navigation>
+
+<div class="conatiner">
+  <div class="row mt-5">
+      <div class="col-4"></div>
+      <div class="col-4">
+          <label for="">{{'File'|appTranslate|async}}</label>
+          <input class="form-control" id="upload_file" type="file" #file (change)="onChange(file)" multiple/>
+          <label class="mt-2 btn btn-lg" for="file" (click)="trigger()">
+              <i class="fa fa-upload"></i>{{'Choose file'|appTranslate|async}}...
+          </label>
+          <span class="mt-1" *ngIf="fileName">{{fileName}}</span>
+          <span class="text-danger mt-1" *ngIf="isFile">{{'Upload a file'|appTranslate|async}}</span>
+          <br>
+          <br>
+          <app-btn type="primary" icon="upload" (click)="bulkUpload()" style="width: 100%">
+            Save
+          </app-btn>
+      </div>
+      <div class="col-4"></div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<loader [text]="loadingText" [loading]="loading">
+  <!-- <app-form-navigation [title]="'Set Up / Accounts  / General  Ledger Mapping'"></app-form-navigation> -->
+  <div class="container py-4">
+    <table class="table table-borderless">
+      <thead>
+        <tr class="text-bold">
+          <th scope="col" class="text-primary">{{"Account"|appTranslate|async}}</th>
+          <th scope="col" class=" text-primary">{{"Account Type"|appTranslate|async}}</th>
+          <th scope="col" class=" text-primary">{{"Description"|appTranslate|async}}</th>
+          <!-- <th scope="col" class=" text-primary">{{"Company"|appTranslate|async}}</th> -->
+          <th scope="col" class=" text-primary">{{"Ledger Code"|appTranslate|async}}</th>
+          <!-- <th></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of allAccCode.accCodeMappings; let i = index">
+          <td>
+            <input class="form-control form-control-md control-bg-gray" [(ngModel)]="item.accCode" disabled
+              name="code_{{item.rowId}}">
+          </td>
+          <td>
+            <input class="form-control form-control-md control-bg-gray" [(ngModel)]="item.accountType" disabled
+              name="accountType_{{item.rowId}}">
+          </td>
+          <td>
+            <input class="form-control form-control-md control-bg-gray" [(ngModel)]="item.description" disabled
+              name="description_{{item.rowId}}">
+          </td>
+          <!-- <td>
+            <input class="form-control form-control-md control-bg-gray" [(ngModel)]="item.companyCode"
+              name="companyCode_{{item.rowId}}">
+          </td> -->
+          <td>
+            <input class="form-control form-control-md control-bg-gray" [(ngModel)]="item.ledgerCode"
+              name="ledgerCode_{{item.rowId}}">
+          </td>
+          <!-- <td>
+            <app-button [buttonType]="'delete'" [text]="'Delete'" (click)="removeAccCode(i)"></app-button>
+          </td> -->
+        </tr>
+
+      </tbody>
+    </table>
+    <!-- <div class="row">
+      <div class="col-md-2">
+        <app-button [buttonType]="'add'" [text]="'Add'" (click)="addAccCodes()"></app-button>
+      </div>
+    </div> -->
+    <div class="row justify-content-end">
+      <div class="col-md-2 mt-5">
+        <app-button [buttonType]="'save'" (click)="saveAccCode()" [text]="'Save'"></app-button>
+      </div>
+    </div>
+  </div>
+
+</loader>

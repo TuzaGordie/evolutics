@@ -1,0 +1,447 @@
+<div class="container-fluid px-4">
+  <div class="row justify-content-end mt-2 mb-2">
+    <div class="col-auto"> 
+      <app-btn type="secondary"  icon="edit" text="Edit" data-bs-toggle="modal" data-bs-target="#editModal"></app-btn>
+    </div> 
+    <div class="col-auto">
+      <app-btn type="secondary" routerLink="" text="Notes" icon="edit"></app-btn>
+    </div> 
+  </div>
+  <div class="row">
+    <!-- <div class="col-md-auto mb-2">
+      <div class="rounded-circle mb-3 mx-auto overflow-hidden"
+        style="height: 128px; width: 129px; background-color: #FEC55F;">
+        <img alt=" " src="" style="width: 100%; height: 100%">
+      </div>
+
+    </div> -->
+    <div class="col">
+        <!-- <div class="row">
+          <div class=" col-md-3 col-xxl-2 mb-3" *ngFor="let item of lbls ">
+            <app-editable-text-case [formatter]="item.formatter" [stacked]="true" [action]="item.action" [form]="form"
+              [label]="item.label" [name]="item.key" [coloredLbl]="true" [coloredVal]="false" [route]="item.route"
+              [type]="item.inputType" [showEditing]="item.editable" [hint]="item.hint" [light]="true"
+              [value]="item.value">
+            </app-editable-text-case>
+          </div>
+        </div> -->
+      <div class="row mb-4">
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Asset ID </span>
+            <br> 
+          {{asset?.asset?.id}}
+          </span>
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Asset Type</span>
+            <br>
+            {{asset?.asset?.type|assetTyper|async}} </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Asset Class</span>
+            <br>
+            --
+          </span>
+          <br>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Property Type</span>
+            <br>
+            {{asset?.asset?.propertyType}}
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Relationship of assured to prop</span>
+            <br>
+            {{asset?.asset?.relationship}}
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Construction Status</span>
+             <br>
+            {{asset?.assetSpecification?.constrStatus}}
+          </span>
+
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">No of Floors</span>
+             <br>
+            {{asset?.asset?.noFloors}}
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">No of Appmt In Building</span>
+             <br>
+            {{asset?.asset?.relationship}}
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">No of Rooms</span>
+            <br> </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Insured Proportion Of Building</span>
+            <br> </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Appmt No of Insured</span>
+            <br> --</span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Est Prop Value</span>
+            <br> --</span>
+
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Monthly Rent Of Tenant</span>
+            <br> --
+          </span>
+          <br>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Surface Area</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Year Of Construction</span>
+             <br>
+            {{asset?.asset?.relationship}}
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Risk Category</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Currency</span>
+            <br> </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Address</span>
+             <br>
+            {{asset?.asset?.relationship}}
+          </span>
+
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Region</span>
+            <br> --
+          </span>
+          <br>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Status</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Country</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Geolocation</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Sawmill Within 10KM Radius</span>
+            <br> </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span><span class="text-primary">Fuel Station Within 10KM Radius</span>
+            <br> </span>
+
+        </div>
+      </div>
+
+      <div class="row mb-4">
+
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Factory Within 10KM Radius</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Created By</span>
+            <br> --
+          </span>
+
+        </div>
+        <div class="col-md-3 mt-2">
+          <span>
+            <span class="text-primary">Created On</span>
+            <br> --
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="row d-flex flex-wrap my-5" style="gap: 20px;">
+
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Create Quotation'"></app-button>
+        </div>
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Tracker'" routerLink="../tracker">
+          </app-button>
+        </div>
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Risk Information'" routerLink="../risk-info">
+          </app-button>
+        </div>
+
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Partners'" routerLink="../partners">
+          </app-button>
+        </div>
+
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Workflows'" routerLink="../workflows">
+          </app-button>
+        </div>
+        <div class="col">
+          <app-button [buttonType]="'btnCustomCloneRaisedYellow'" [text]="'Endorsement'" routerLink="../../endorsements"
+            [queryParams]="{clientNo:asset?.asset?.ownerClientNo,assetNo:asset?.asset?.assetNo}"></app-button>
+        </div>
+
+
+      </div>
+      <div class="d-flex justify-content-around section-cards-2 ">
+        <app-btn-lg route="../pending-claims" text="Pending Claims" [value]="'123,000'"></app-btn-lg>
+        <app-btn-lg route="../policy-rel" text="Policy Relationships" [value]="1"></app-btn-lg>
+        <app-btn-lg route="../client-relationships" text="Client Relationships" [value]="2"></app-btn-lg>
+        <app-btn-lg route="../../documents" text="Documents" [value]="2"></app-btn-lg>
+        <app-btn-lg text="Accessories" [value]="2"></app-btn-lg>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="editModal" tabindex="-1">
+  <form>
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Asset Info</h5>
+          <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+            <div class="d-block mx-2">
+
+              <div class="pb-4">
+                <label class="form-label ">Asset Type</label>
+                <input class="inputform " type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Asset Class</label>
+                <input class="inputform " type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Property Type</label>
+                <input class="inputform " type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Property Usage</label>
+                <select class="inputform " type="text">
+                  <option value="m">M</option>
+                  <option value="f">F</option>
+                </select>
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Region</label>
+                <input class="inputform ">
+              </div>
+
+
+            </div>
+
+            <div class="d-block mx-2">
+              <div class="pb-4">
+                <label class="form-label ">Relationship Of Assured To Property</label>
+                <input class="inputform " type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Construction Status</label>
+                <input class="inputform " type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">No Of Floors</label>
+                <input class="inputform " type="text">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">No Of Appmt</label>
+                <input class="inputform ">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">No Of Rooms</label>
+                <input class="inputform ">
+              </div>
+
+            </div>
+
+            <div class="d-block mx-2">
+              <!--  <div class="pb-4">
+                     <label class="form-label ">KYC</label>
+                     <input
+  
+                     class="inputform " >
+                 </div> -->
+              <div class="pb-4">
+                <label class="form-label ">Insured Proportion Of Building</label>
+                <select class="inputform " type="text">
+                  <option value="fr">FR</option>
+                  <option value="en">EN</option>
+                </select>
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Appmt No Insured</label>
+                <select class="inputform ">
+                  <option value=""></option>
+                </select>
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Est Propt Value</label>
+                <input class="inputform ">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Monthly Rent Of Tenant</label>
+                <input class="inputform ">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Surface Area</label>
+                <select class="inputform " type="text">
+                  <option value=""></option>
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-block mx-2">
+
+              <div class="pb-4">
+                <label class="form-label ">Year Of Construction</label>
+                <select class="inputform ">
+                  <option value=""></option>
+                  <option value=""></option>
+                </select>
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Risk Category</label>
+                <select class="inputform " type="text">
+                  <option value=""></option>
+                </select>
+              </div>
+
+
+              <div class="pb-4">
+                <label class="form-label ">Currency</label>
+                <input class="inputform ">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Address</label>
+                <input class="inputform ">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Country</label>
+                <select class="inputform " type="text">
+                  <option value=""></option>
+                </select>
+              </div>
+
+            </div>
+            <div class="d-block mx-2">
+
+
+              <div class="pb-4">
+                <label class="form-label ">Geolocation
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <input class="inputform ">
+              </div>
+              <div class="pb-4">
+                <label class="form-label ">Swamill Within a 10 KM Radius</label>
+                <input type="checkbox" class="form-control control-bg-gray mx-auto">
+              </div>
+              <div class="pb-4">
+                <label class="form-label  w-100">Fuel Station Within a 10 KM Radius</label>
+                <input type="checkbox" class="form-control control-bg-gray mx-auto">
+              </div>
+            </div>
+
+
+          </div>
+
+          <!--        <button type="submit" >update</button>
+             -->
+
+
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

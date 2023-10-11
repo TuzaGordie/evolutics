@@ -1,0 +1,105 @@
+<!-- <app-form-navigation [title]="'Set Up / Code / Currency / Rates'"></app-form-navigation> -->
+<div class="container">
+  <div class="">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-md-6">
+          <app-input-basic label="Date" type="date" [colored]='true' [options]="" labelType="ct" valueField="code"
+                           [form]="form" name='code' [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-md-6">
+          <app-input-basic label="To Currency" type="select" [colored]='true' [options]="" labelType="ct"
+                           valueField="code" [form]="form" name='code' [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-3">
+        <app-button buttonType="add" text="Add"></app-button>
+      </div>
+      <div class="row mt-3 d-flex justify-content-between">
+        <div class="col-md-3">
+          <div class="mt-4">
+            <label for="currency" class="text-primary">{{"From Currency"|appTranslate|async}}</label>
+          </div>
+          <div class="">
+            <app-input-basic type="select" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="select" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="select" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="select" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="mt-4">
+            <label for="sell" class="text-primary">{{"Sell Rate"|appTranslate|async}}</label>
+          </div>
+          <div class="">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="mt-4">
+            <label for="buy" class="text-primary">{{"Buy Rate"|appTranslate|async}}</label>
+          </div>
+          <div class="">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="mt-2">
+            <app-input-basic type="text" [options]="" labelType="ct" valueField="code" [form]="form" name='code'
+                             [stacked]="true">
+            </app-input-basic>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end mt-3">
+        <app-button buttonType="add" text="Add"></app-button>
+      </div>
+      <div class="d-flex justify-content-end my-5">
+        <app-button buttonType="save"></app-button>
+      </div>
+    </form>
+  </div>
+</div>

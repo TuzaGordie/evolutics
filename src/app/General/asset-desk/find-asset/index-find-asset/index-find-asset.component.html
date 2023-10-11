@@ -1,0 +1,137 @@
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-md-2">
+      <label>{{'Asset Reg No'|appTranslate|async}}</label>
+    </div>
+    <div class="col-md" style="position: relative;">
+      <app-input-basic [form]="form" [showValidation]="true" [showValidationIcon]="true" [showLabel]="false"
+        name="registrationNo" #regNo>
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+      <app-btn type="dark" icon="show" [valid]="regNo?.valid" (mclick)="showAsset(true)">Show</app-btn>
+    </div>
+  </div>
+
+
+  <div class="row mb-2">
+    <div class="col-md-2">
+      <label>{{'Asset No'|appTranslate|async}}</label>
+    </div>
+    <div class="col-md" style="position: relative;">
+      <app-input-basic [form]="form" [showValidation]="true" [showValidationIcon]="true" [showLabel]="false"
+        name="assetNo" #assetNo>
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+      <app-btn type="dark" icon="show" [valid]="assetNo?.valid" (mclick)="showAsset()">Show</app-btn>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Policy No'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic [form]="searchForm" [showLabel]="false" name="policyNo">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Client Number'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic [form]="searchForm" [showLabel]="false" name="ownerClientNo">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Owner Name'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic [form]="searchForm" [showLabel]="false" name="ownerName">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'External Ref'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic [form]="searchForm" [showLabel]="false" name="externalRef">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Group No'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic [form]="searchForm" [showLabel]="false" name="groupNo">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label>{{'Asset Type'|appTranslate|async}}</label>
+    </div>
+    <div class="col-md-8">
+      <app-input-basic [form]="searchForm" type="select" [options]="assetTypes" [showLabel]="false" name="assetType"
+        valueField="code" labelType="ct">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Created Date From'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic type="date" [form]="searchForm" [showLabel]="false" name="createDateFrom">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Created Date To'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic type="date" [form]="searchForm" [showLabel]="false" name="createDateTo">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-md-2">
+      <label class="py-2">{{'Vehicle Model'|appTranslate|async}}</label></div>
+    <div class="col-md">
+      <app-input-basic [form]="searchForm" [showLabel]="false" name="vehicleModel">
+      </app-input-basic>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+  <br />
+  <div class="col-lg-10 mt-2 p-0">
+    <div class="col-lg-2 ">
+      <app-btn icon="search" type="secondary" (mclick)="search()">Search</app-btn>
+    </div>
+  </div>
+</div>

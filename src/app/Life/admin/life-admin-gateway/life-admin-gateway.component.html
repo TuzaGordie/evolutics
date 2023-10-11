@@ -1,0 +1,322 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class="container">
+    <ul class="nav nav-pills mb-3 nav-fill" id="nav-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+          type="button" role="tab" aria-controls="pills-home"
+          aria-selected="true">{{'Email'|appTranslate|async}}</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+          type="button" role="tab" aria-controls="pills-profile"
+          aria-selected="false">{{'SMS'|appTranslate|async}}</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
+          type="button" role="tab" aria-controls="pills-contact"
+          aria-selected="false">{{'BOT'|appTranslate|async}}</button>
+      </li>
+    </ul>
+    <div class="row justify-content-end mb-2" *ngIf="isShow">
+      <div class="col-auto">
+        <app-btn text="Edit" type="secondary" icon="edit" routerLink="../edit"></app-btn>
+      </div>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+        <div class="border rounded p-2 mb-2" *ngFor="let emailsItem of emailGateWays; let i = index">
+          <div class="row align-items-center">
+            <div class="col-md">
+              <div class="row justify-content-center">
+                <div class="col-auto">
+                  <label class=" text-primary ">{{"Active"|appTranslate|async}}</label>
+                  <input [disabled]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.active"
+                    name="{{emailsItem.rowId}}_active" type="checkbox" />
+                </div>
+                <div class="col-md-3">
+                  <label class=" text-primary ">{{"Server"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.server"
+                    name="{{emailsItem.rowId}}_server" type="text" />
+                </div>
+                <div class="col-md-3">
+                  <label class=" text-primary ">{{"Sender Email Address"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.senderEmail"
+                    name="{{emailsItem.rowId}}_senderEmail" type="email" />
+                </div>
+                <div class="col-md-3">
+                  <app-input-ngmodel label="Password" [readonly]="isShow" [(model)]="emailsItem.password" [type]="'password'" [stacked]="true">
+                  </app-input-ngmodel> 
+                </div>
+                <div class="col-md-2">
+                  <label class=" text-primary ">{{"Port"|appTranslate|async}}</label>
+                  <ng-container *ngIf="isShow; else elseTemplate">
+                    <input [readonly]="true" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.port"
+                      name="{{emailsItem.rowId}}_port" type="text" />
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    <select [disabled]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.port"
+                      name="{{emailsItem.rowId}}_port">
+                      <option *ngFor="let item of ports" [value]="item.code">
+                        {{item.code}} 
+                      </option>
+                    </select>
+                  </ng-template>
+                </div>
+                <div class="col-md-auto">
+                  <label class=" text-primary ">{{"Secure"|appTranslate|async}}</label>
+                  <input [disabled]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.secure"
+                    name="{{emailsItem.rowId}}_secure" type="checkbox" />
+                </div>
+                <div class="col-md-3">
+                  <label class=" text-primary ">{{"Email Sender Name"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.senderName"
+                    name="{{emailsItem.rowId}}_senderName" type="text" />
+                </div>
+                <div class="col-md-2">
+                  <label class=" text-primary ">{{"Protocol"|appTranslate|async}}</label>
+                  <ng-container *ngIf="isShow; else elseTemplate">
+                    <input [readonly]="true" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.protocol"
+                      name="{{emailsItem.rowId}}_protocol" type="text" />
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    <select [disabled]="isShow" class="form-control  control-bg-gray" [(ngModel)]="emailsItem.protocol"
+                      name="{{emailsItem.rowId}}_protocol">
+                      <option *ngFor="let item of protocols" [value]="item.code">
+                        {{item.code}} 
+                      </option>
+                    </select>
+                  </ng-template>
+
+
+                </div>
+                <div class="col-md-2">
+                  <label class=" text-primary ">{{"Usage"|appTranslate|async}}</label>
+                  <select [disabled]="isShow" class="form-control  control-bg-gray"
+                    [(ngModel)]="emailsItem.gatewayUsage" name="{{emailsItem.rowId}}_gatewayUsage">
+                    <option>{{"IN"|appTranslate|async}}</option>
+                    <option>{{"OUT"|appTranslate|async}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-auto d-flex" *ngIf="!isShow">
+              <app-btn [group]="'delete'" [disabled]="emailGateWays?.length==1" (mclick)="removeEmail(i)"></app-btn>
+              <span class="mx-1"></span>
+              <app-btn [group]="'add'" (mclick)="addEmails(i+1)"></app-btn>
+            </div>
+          </div>
+        </div>
+
+        <div class="row m-0" *ngIf="!isShow">
+          <div class="col"></div>
+          <div class="col-auto">
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="saveEmailGateway()" [buttonType]="'submit'" [text]="'save'"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="mb-2 p-2 border rounded" *ngFor="let smsItem of smsGateways; let i = index">
+          <div class="row align-items-center">
+            <div class="col-md">
+              <div class="row justify-content-center">
+                <div class="col-auto">
+                  <label class=" text-primary">{{"Active"|appTranslate|async}}</label>
+                  <input [disabled]="isShow" class="form-control  control-bg-gray" [(ngModel)]="smsItem.active"
+                    name="{{smsItem.rowId}}_active" type="checkbox" />
+                </div>
+                <div class="col-md-3">
+                  <label class=" text-primary">{{"Default SMS Url"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="smsItem.smsUrl"
+                    name="{{smsItem.rowId}}_smsUrl" type="url" />
+                </div>
+                <div class="col-md-auto">
+                  <label class=" text-primary">{{"Mobile No Parameter"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="smsItem.mobileNoPar"
+                    name="{{smsItem.rowId}}_mobileNoPar" type="text" />
+                </div>
+                <div class="col-md-auto">
+                  <label class=" text-primary">{{"Message Parameter"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="smsItem.messagePar"
+                    name="{{smsItem.rowId}}_messagePar" type="text" />
+                </div>
+                <div class="col-md-auto">
+                  <label class=" text-primary">{{"Username"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="smsItem.username"
+                    name="{{smsItem.rowId}}_username" type="text" />
+                </div>
+                <div class="col-md-auto">
+                  <app-input-ngmodel label="Password" [readonly]="isShow" [(model)]="smsItem.password" [type]="'password'" [stacked]="true">
+                  </app-input-ngmodel>
+                </div>
+                <div class="col-md-auto">
+                  <label class=" text-primary">{{"Sender Name"|appTranslate|async}}</label>
+                  <input [readonly]="isShow" class="form-control  control-bg-gray" [(ngModel)]="smsItem.senderName"
+                    name="{{smsItem.rowId}}_senderName" type="text" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-auto d-flex" *ngIf="!isShow">
+              <app-btn [group]="'delete'" [disabled]="smsGateways?.length==1" (mclick)="removeSms(i)"></app-btn>
+              <span class="mx-1"></span>
+              <app-btn [group]="'add'" (mclick)="addSms(i+1)"></app-btn>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0" *ngIf="!isShow">
+          <div class="col"></div>
+          <div class="col-auto">
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="saveSmsGateway()" [buttonType]="'submit'" [text]="'save'"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <div class="row justify-content-center">
+          <div class="col-4">
+            <div class="form-group">
+              <label for="" class=" text-primary">{{"Email Gateway"|appTranslate|async}}</label>
+              <select [disabled]="isShow" name="" id="" class="control-bg-gray form-control"></select>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="form-group">
+              <label for="" class=" text-primary">{{"Details"|appTranslate|async}}</label>
+              <input [disabled]="isShow" type="checkbox" class="control-bg-gray form-control" data-bs-toggle="modal"
+                data-bs-target="#BOTModal" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>
+
+
+<!-- Modal -->
+<div class="modal fade" id="BOTModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{"Configuration"|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="row">
+          <label for="">{{"Email EvoBOT Configuration"|appTranslate|async}}</label>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label for="" class=" text-primary">{{"Email Gateway"|appTranslate|async}}</label>
+            <select [disabled]="isShow" name="" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="col-4">
+            <label for="" class=" text-primary">{{"Default Workflow Code"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="control-bg-gray form-control">
+          </div>
+          <div class="col-4">
+            <label for="" class=" text-primary">{{"Policy No Character Lenght"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="control-bg-gray form-control">
+          </div>
+        </div>
+        <hr>
+
+        <div class="row mt-3">
+          <label for="">{{"Scenario 1- Email Sender is a client in only 1 Sub-System"|appTranslate|async}}</label>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label for="" class=" text-primary">{{"Default WF code if LIFE Client"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="form-control control-bg-gray" />
+          </div>
+          <div class="col-4">
+            <label for="" class=" text-primary">{{"Default WF code if GB Client"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="control-bg-gray form-control">
+          </div>
+          <div class="col-4">
+            <label for="" class=" text-primary">{{"Default WF code if HEALTH Client"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="control-bg-gray form-control">
+          </div>
+        </div>
+        <hr>
+
+        <div class="row mt-3">
+          <label for="">{{"Scenario 1- Email Sender is a client in more than 1 Sub-System"|appTranslate|async}}</label>
+        </div>
+        <div class="row mt-2">
+          <label for="" class="">{{"Email Subject Sniffer"|appTranslate|async}}</label>
+        </div>
+        <div class="row" *ngFor="let i of aCounter()">
+          <div class="col">
+            <label for="" class=" text-primary">{{"Field"|appTranslate|async}}</label>
+            <select [disabled]="isShow" class="form-control control-bg-gray"> </select>
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Condition"|appTranslate|async}}</label>
+            <select [disabled]="isShow" class="form-control control-bg-gray"> </select>
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Value"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="form-control control-bg-gray" />
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Company Code"|appTranslate|async}}</label>
+            <select [disabled]="isShow" class="form-control control-bg-gray"> </select>
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Default WF Code"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="row justify-content-end mt-2">
+          <div class="col-2">
+            <app-button buttonType="add" (click)="aInc()"></app-button>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <label for="" class="">{{"Email Body Sniffer"|appTranslate|async}}</label>
+        </div>
+        <div class="row" *ngFor="let i of bCounter()">
+          <div class="col">
+            <label for="" class=" text-primary">{{"Field"|appTranslate|async}}</label>
+            <select [disabled]="isShow" class="form-control control-bg-gray"> </select>
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Condition"|appTranslate|async}}</label>
+            <select [disabled]="isShow" class="form-control control-bg-gray"> </select>
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Value"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="form-control control-bg-gray" />
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Company Code"|appTranslate|async}}</label>
+            <select [disabled]="isShow" class="form-control control-bg-gray"> </select>
+          </div>
+          <div class="col">
+            <label for="" class=" text-primary">{{"Default WF Code"|appTranslate|async}}</label>
+            <input [readonly]="isShow" type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="row justify-content-end mt-2">
+          <div class="col-2">
+            <app-button buttonType="add" (click)="bInc()"></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+        <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

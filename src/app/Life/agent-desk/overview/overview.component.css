@@ -1,0 +1,21 @@
+.spacing{
+    PADDING:30PX;
+   max-height:100%;
+    max-width:100%;
+    margin:auto;
+    border: 1px solid blue;
+    border-bottom: none;
+    box-shadow: 0px 25px 30px 1px rgb(225, 225, 225);
+}
+.restrict-height{
+    height:80Vh;
+}
+@media only screen and (min-width:1024px){
+   .spacing{ 
+       max-width: 50%;
+   }
+   .restrict-height{
+    height:50Vh;
+    
+}
+}

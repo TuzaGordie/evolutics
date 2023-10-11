@@ -1,0 +1,52 @@
+<div class="">
+
+  <div class="container">
+
+    <!-- <div class="items-per-page">
+      <div class="left pt-3">
+        
+      </div>
+      <div class="right">
+        <div>
+          <select class="form-select" [(ngModel)]="pageSize" #select (change)="fetchAllRecords()">
+            <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+          </select>
+        </div>
+      </div>
+    </div> -->
+
+
+    <table class="table table-striped">
+      <thead>
+       <tr>
+        <th scope="col">{{'Policy Number'|appTranslate|async}}</th>
+        <th scope="col">{{'Company Code'|appTranslate|async}}</th>
+        <th scope="col">{{'Owner Name'|appTranslate|async}}</th>
+        <th scope="col">{{'Product Code'|appTranslate|async}}</th>
+        <th scope="col">{{'Annualised PR'|appTranslate|async}}</th>
+        <th scope="col">{{'Issued Date'|appTranslate|async}}</th>
+        <th scope="col">{{'Sum At Risk'|appTranslate|async}}</th>
+       </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let policy of policies">
+          <td ><a routerLink="../view-policy/{{policy.policyNo}}/{{policy.policyCode}}/{{policy.policyNoSuffix}}"> {{policy.policyNo}}</a></td>
+          <td>{{policy.companyCode}}</td>
+          <td>{{policy.ownerName}}</td>
+          <td>{{policy.productCode}}</td>
+          <td>{{policy.annualisedPremium}}</td>
+          <td>{{policy.issueDate | date}}</td>
+          <td>{{policy.sumAtRisk}}</td>
+        </tr>
+
+        <tr *ngIf="policies?.length === 0">
+          <td colspan="12">
+            <span class="">{{'No records were found'|appTranslate|async}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

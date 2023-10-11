@@ -1,0 +1,412 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+
+      <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+        <thead class="py-3">
+          <tr>
+
+            <th scope="col">{{'Claim Number'|appTranslate|async}}</th>
+            <th scope="col">{{'Payment ID'|appTranslate|async}}</th>
+            <th scope="col">{{'Batch No'|appTranslate|async}}</th>
+            <th scope="col">{{'Initial Estimate'|appTranslate|async}}</th>
+            <th scope="col">{{'Adjustments'|appTranslate|async}}</th>
+            <th scope="col">{{'Current Estimate'|appTranslate|async}}</th>
+            <th scope="col">{{'Claim Status'|appTranslate|async}}</th>
+            <th scope="col">{{'Days to SLA'|appTranslate|async}}</th>
+            <th scope="col">{{'Completion Rate'|appTranslate|async}}</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a [routerLink]="[ '../view-claim' ]" [queryParams]="{claimNo}">1343</a> </td>
+            <td>5678</td>
+            <td>100353</td>
+            <td>25000</td>
+            <td>2300</td>
+            <td>20000</td>
+            <td>ADV</td>
+            <td>3</td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar  progress-bar-striped bg-success" role="progressbar" style="width: 75%;"
+                  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%
+                </div>
+              </div>
+            </td>
+            <td>
+              <app-btn icon="edit" type="outline" (mclick)="openStatusDialog()">Change Status</app-btn>
+            </td>
+            <td (click)="client_view()">
+              <app-button [buttonType]="'generate'" [text]="'Generate DV'"></app-button>
+            </td>
+            <td><a data-bs-toggle="modal" href="#" data-bs-target="#adjust">
+                <app-button [buttonType]="'adjust'" [text]="'Adjust'"></app-button>
+              </a></td>
+            <td><a data-bs-toggle="modal" href="#" data-bs-target="#historys">
+                <app-button [buttonType]="'history'" [text]="'History'"></app-button>
+              </a>
+            </td>
+            <td><a>
+                <app-btn icon="cash" data-bs-toggle="modal" data-bs-target="#setPayeeModal" type="outline">Payout
+                </app-btn>
+              </a>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="form-group mt-2">
+        <div class="row g-3 form-group mt-1 pt-1">
+          <div class="col-10"></div>
+          <div class="col-2">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="historys" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-primary text-center text-bold">{{'Policy Number'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Owner'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Initial Estimate'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Total Adjustments'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Updated Amount'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Payment Type'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Currency'|appTranslate|async}}</div>
+                <div class="col small1 text-primary text-center text-bold">{{'Cover Name'|appTranslate|async}}</div>
+                <div class="col-2 small1 text-primary text-center text-bold">{{'Policy Code Claimed On'|appTranslate|async}}</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+
+              <hr>
+
+              <table class="table table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">{{'Action'|appTranslate|async}}</th>
+                    <th scope="col">{{'Created On'|appTranslate|async}}</th>
+                    <th scope="col">{{'Created By'|appTranslate|async}}</th>
+                    <th scope="col">{{'Reason'|appTranslate|async}}</th>
+                    <th scope="col">{{'Auth By'|appTranslate|async}}</th>
+                    <th scope="col">{{'Auth On'|appTranslate|async}}</th>
+                    <th scope="col">{{'Parameter'|appTranslate|async}}</th>
+                    <th scope="col">{{'Old Value'|appTranslate|async}}</th>
+                    <th scope="col">{{'New Value'|appTranslate|async}}</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Claim Notified</td>
+                    <td>1/1/2020</td>
+                    <td>J-Bond</td>
+                    <td>Interest</td>
+                    <td>System</td>
+                    <td>1/1/2020</td>
+                    <td>Status Code</td>
+                    <td>30000</td>
+                    <td>35000</td>
+
+                  </tr>
+                  <tr>
+                    <td>Claim Notified</td>
+                    <td>1/1/2020</td>
+                    <td>J-Bond</td>
+                    <td>Interest</td>
+                    <td>System</td>
+                    <td>1/1/2020</td>
+                    <td>Status Code</td>
+                    <td>30000</td>
+                    <td>35000</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <app-button data-bs-toggle="modal" href="#" data-bs-target="#adjust" [buttonType]="'adjusts'">
+                    </app-button>
+                  </div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'action'"></app-button>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="adjust" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="form" name="test"
+                      [stacked]="true"></app-input-basic>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="form" name="test"
+                      [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <app-btn icon="search" type="secondary">
+                      Find
+                    </app-btn>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <app-input-basic label="Narration" type="textarea" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <app-btn data-bs-toggle="modal" href="#" data-bs-target="#historys" type="primary">
+                      History
+                    </app-btn>
+                  </div>
+                  <div class="col-lg-2">
+                    <app-btn icon="save" type="secondary">
+                      Submit
+                    </app-btn>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="setPayeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>{{'Set Payee'|appTranslate|async}}</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-2">
+            <app-btn type="primary"> Set Payee</app-btn>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-3">
+            <app-btn type="primary" icon="add"> Creat Payment Outward</app-btn>
+          </div>
+        </div>
+        <div class="row mt-4 ">
+          <h6>{{'Set Payee'|appTranslate|async}}</h6>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Provider'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Policy Owner'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Other'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Policy'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Payee No'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="search">Find</app-btn>
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="add">Create</app-btn>
+          </div>
+          <div class="col-3">
+            <label class="form-label text-primary">{{'Payee Name'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row mt-4 justify-content-end">
+          <div class="col-2">
+            <app-btn type="secondary" icon="checked">Submit</app-btn>
+          </div>
+        </div>
+
+        <div class="row mt-4 ">
+          <h6>{{'Create Payment Outward'|appTranslate|async}}</h6>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Provider'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Policy Owner'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Other'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Pay To Policy'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">{{'Payee No'|appTranslate|async}}</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="search">Find</app-btn>
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="add">Create</app-btn>
+          </div>
+          <div class="col-3">
+            <label class="form-label text-primary">{{'Payee Name'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row mt-4 justify-content-end">
+          <div class="col-2">
+            <app-btn type="secondary" icon="checked">Submit</app-btn>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

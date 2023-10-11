@@ -1,0 +1,983 @@
+@import 'variables';
+
+.section-cards {
+  .card:after {
+    content: '';
+    width: 80px;
+    height: 60px;
+    border-top-right-radius: 5rem;
+    border-bottom-left-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    background-color: #0000004a;
+  }
+}
+* {
+  //#region actuarial_color
+  .actuarial {
+    .btn-outline-primary {
+      color: $actuarial_color;
+      border-color: $actuarial_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $actuarial_color;
+      border-color: $actuarial_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $actuarial_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $actuarial_color;
+      border-color: $actuarial_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $actuarial_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $actuarial_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $actuarial_color;
+    }
+    .text-primary {
+      color: $actuarial_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $actuarial_color;
+      border-color: $actuarial_color;
+    }
+    .bg-primary {
+      background-color: $actuarial_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $actuarial_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $actuarial_color;
+    }
+    .form-check-input:checked {
+      background-color: $actuarial_color;
+      border-color: $actuarial_color;
+    }
+    .mat-tab-label-content {
+      color: $actuarial_color;
+    }
+    .mat-tab-label-active {
+      background-color: $actuarial_color;
+    }
+  }
+  //#endregion
+
+  //#region analytics_color
+  .analytics {
+    .btn-outline-primary {
+      color: $analytics_color;
+      border-color: $analytics_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $analytics_color;
+      border-color: $analytics_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $analytics_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $analytics_color;
+      border-color: $analytics_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $analytics_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $analytics_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $analytics_color;
+    }
+    .text-primary {
+      color: $analytics_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $analytics_color;
+      border-color: $analytics_color;
+    }
+    .bg-primary {
+      background-color: $analytics_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $analytics_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $analytics_color;
+    }
+    .form-check-input:checked {
+      background-color: $analytics_color;
+      border-color: $analytics_color;
+    }
+    .mat-tab-label-content {
+      color: $analytics_color;
+    }
+    .mat-tab-label-active {
+      background-color: $analytics_color;
+    }
+  }
+  //#endregion
+
+  //#region assets
+  .assets {
+    .btn-outline-primary {
+      color: $assets_color;
+      border-color: $assets_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $assets_color;
+      border-color: $assets_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $assets_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $assets_color;
+      border-color: $assets_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $assets_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $assets_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $assets_color;
+    }
+    .text-primary {
+      color: $assets_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $assets_color;
+      border-color: $assets_color;
+    }
+    .bg-primary {
+      background-color: $assets_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $assets_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $assets_color;
+    }
+    .form-check-input:checked {
+      background-color: $assets_color;
+      border-color: $assets_color;
+    }
+    .mat-tab-label-content {
+      color: $assets_color;
+    }
+    .mat-tab-label-active {
+      background-color: $assets_color;
+    }
+  }
+  //#endregion
+
+  //#region CRMS
+  .crms {
+    .btn-outline-primary {
+      color: $crm_color;
+      border-color: $crm_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $crm_color;
+      border-color: $crm_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $crm_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $crm_color;
+      border-color: $crm_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $crm_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $crm_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $crm_color;
+    }
+    .text-primary {
+      color: $crm_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $crm_color;
+      border-color: $crm_color;
+    }
+    .bg-primary {
+      background-color: $crm_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $crm_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $crm_color;
+    }
+    .form-check-input:checked {
+      background-color: $crm_color;
+      border-color: $crm_color;
+    }
+    .mat-tab-label-content {
+      color: $crm_color;
+    }
+    .mat-tab-label-active {
+      background-color: $crm_color;
+    }
+  }
+  //#endregion
+
+  //#region dbcloner_color
+  .dbcloner {
+    .btn-outline-primary {
+      color: $dbcloner_color;
+      border-color: $dbcloner_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $dbcloner_color;
+      border-color: $dbcloner_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $dbcloner_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $dbcloner_color;
+      border-color: $dbcloner_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $dbcloner_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $dbcloner_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $dbcloner_color;
+    }
+    .text-primary {
+      color: $dbcloner_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $dbcloner_color;
+      border-color: $dbcloner_color;
+    }
+    .bg-primary {
+      background-color: $dbcloner_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $dbcloner_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $dbcloner_color;
+    }
+    .form-check-input:checked {
+      background-color: $dbcloner_color;
+      border-color: $dbcloner_color;
+    }
+    .mat-tab-label-content {
+      color: $dbcloner_color;
+    }
+    .mat-tab-label-active {
+      background-color: $dbcloner_color;
+    }
+  }
+  //#endregion
+
+  //#region document_color
+  .document {
+    .btn-outline-primary {
+      color: $document_color;
+      border-color: $document_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $document_color;
+      border-color: $document_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $document_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $document_color;
+      border-color: $document_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $document_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $document_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $document_color;
+    }
+    .text-primary {
+      color: $document_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $document_color;
+      border-color: $document_color;
+    }
+    .bg-primary {
+      background-color: $document_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $document_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $document_color;
+    }
+    .form-check-input:checked {
+      background-color: $document_color;
+      border-color: $document_color;
+    }
+    .mat-tab-label-content {
+      color: $document_color;
+    }
+    .mat-tab-label-active {
+      background-color: $document_color;
+    }
+  }
+  //#endregion
+
+  //#region finance
+  .finance {
+    .btn-outline-primary {
+      color: $finance_color;
+      border-color: $finance_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $finance_color;
+      border-color: $finance_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $finance_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $finance_color;
+      border-color: $finance_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $finance_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $finance_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $finance_color;
+    }
+    .text-primary {
+      color: $finance_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $finance_color;
+      border-color: $finance_color;
+    }
+    .bg-primary {
+      background-color: $finance_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $finance_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $finance_color;
+    }
+    .form-check-input:checked {
+      background-color: $finance_color;
+      border-color: $finance_color;
+    }
+    .mat-tab-label-content {
+      color: $finance_color;
+    }
+    .mat-tab-label-active {
+      background-color: $finance_color;
+    }
+  }
+  //#endregion
+
+  //#region general
+  .general {
+    .btn-outline-primary {
+      color: $general_color;
+      border-color: $general_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $general_color;
+      border-color: $general_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $general_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $general_color;
+      border-color: $general_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $general_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $general_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $general_color;
+    }
+    .text-primary {
+      color: $general_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $general_color;
+      border-color: $general_color;
+    }
+    .bg-primary {
+      background-color: $general_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $general_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $general_color;
+    }
+    .control-bg-primary {
+      background-color: $general_color;
+      &:focus {
+        background-image: linear-gradient(45deg, #00000026, #00000026);
+        background-color: $general_color;
+      }
+    }
+    .form-check-input:checked {
+      background-color: $general_color;
+      border-color: $general_color;
+    }
+    .mat-tab-label-content {
+      color: $general_color;
+    }
+    .mat-tab-label-active {
+      background-color: $general_color;
+    }
+  }
+  //#endregion
+
+  //#region health
+  .health {
+    .btn-outline-primary {
+      color: $health_color;
+      border-color: $health_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $health_color;
+      border-color: $health_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $health_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $health_color;
+      border-color: $health_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $health_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $health_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $health_color;
+    }
+    .text-primary {
+      color: $health_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $health_color;
+      border-color: $health_color;
+    }
+    .bg-primary {
+      background-color: $health_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $health_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $health_color;
+    }
+    .form-check-input:checked {
+      background-color: $health_color;
+      border-color: $health_color;
+    }
+    .mat-tab-label-content {
+      color: $health_color;
+    }
+    .mat-tab-label-active {
+      background-color: $health_color;
+    }
+  }
+  //#endregion
+
+  //#region human
+  .mat-tab-label-health {
+    color: $cash_color;
+  }
+  .mat-tab-label-health {
+    background-color: $cash_color;
+  }
+  .human {
+    .btn-outline-primary {
+      color: $human_color;
+      border-color: $human_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $human_color;
+      border-color: $human_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $human_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $human_color;
+      border-color: $human_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $human_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $human_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $human_color;
+    }
+    .text-primary {
+      color: $human_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $human_color;
+      border-color: $human_color;
+    }
+    .bg-primary {
+      background-color: $human_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $human_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $human_color;
+    }
+    .form-check-input:checked {
+      background-color: $human_color;
+      border-color: $human_color;
+    }
+    .mat-tab-label-content {
+      color: $cash_color;
+    }
+    .mat-tab-label-active {
+      background-color: $cash_color;
+    }
+  }
+  //#endregion
+
+  //#region LIFE
+  .life {
+    .btn-outline-primary {
+      color: $primary;
+      border-color: $primary;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $primary;
+      border-color: $primary;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $primary;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $primary;
+      border-color: $primary;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $primary;
+    }
+    .nav-gray {
+      button.active {
+        color: $primary !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $primary;
+    }
+    .text-primary {
+      color: $primary !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $primary;
+      border-color: $primary;
+    }
+    .bg-primary {
+      background-color: $primary !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $primary;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $primary;
+    }
+    .control-bg-primary {
+      background-color: $primary;
+      &:focus {
+        background-image: linear-gradient(45deg, #00000026, #00000026);
+        background-color: $primary;
+      }
+    }
+    .form-check-input:checked {
+      background-color: $primary;
+      border-color: $primary;
+    }
+    .mat-tab-label-content {
+      color: $primary;
+    }
+    .mat-tab-label-active {
+      background-color: $primary;
+    }
+  }
+  //#endregion
+
+  //#region receipt
+  .receipt {
+    .btn-outline-primary {
+      color: $cash_color;
+      border-color: $cash_color;
+    }
+    .btn-check:active + .btn-outline-primary,
+    .btn-check:checked + .btn-outline-primary,
+    .btn-outline-primary.active,
+    .btn-outline-primary.dropdown-toggle.show,
+    .btn-outline-primary:active {
+      color: #fff;
+      background-color: $cash_color;
+      border-color: $cash_color;
+    }
+    .btn-check:focus + .btn-outline-primary,
+    .btn-outline-primary:focus {
+      box-shadow: 0 0 0 0.25rem $cash_color;
+    }
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: $cash_color;
+      border-color: $cash_color;
+    }
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+      color: #fff;
+      background-color: $cash_color;
+    }
+    .nav-gray {
+      button.active {
+        color: $cash_color !important;
+        background-color: #fff !important;
+      }
+    }
+    .nav-link {
+      color: $cash_color;
+    }
+    .text-primary {
+      color: $cash_color !important;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: $cash_color;
+      border-color: $cash_color;
+    }
+    .bg-primary {
+      background-color: $cash_color !important;
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card,
+      .btn-large {
+        background: $cash_color;
+        color: white;
+      }
+    }
+    .section-cards.card-blue,
+    .section-cards {
+      .card.color1:after {
+        background: #0000004a;
+      }
+    }
+    input[type='checkbox']:checked {
+      background-color: $cash_color;
+    }
+    .form-check-input:checked {
+      background-color: $cash_color;
+      border-color: $cash_color;
+    }
+    .mat-tab-label-content {
+      color: $cash_color;
+    }
+    .mat-tab-label-active {
+      background-color: $cash_color;
+    }
+  }
+  //#endregion
+}

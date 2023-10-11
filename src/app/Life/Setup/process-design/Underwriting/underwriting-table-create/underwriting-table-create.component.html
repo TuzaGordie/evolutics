@@ -1,0 +1,125 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="container">
+    <div class="d-flex justify-content-end my-3" *ngIf="showEditButton">
+      <button class="btn btn-lg" [ngClass]="editMode ? 'btn-primary' : 'btn-outline-primary'" (click)="editMode = !editMode">
+        <span class="fa fa-edit"></span>  Edit
+      </button>
+    </div>
+    <hr *ngIf="showEditButton">
+    <form (ngSubmit)="submitTable()" #tableForm="ngForm">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Table Code"|appTranslate|async}}</label>
+            <input type="text" [(ngModel)]="code" name="code" #tableCode="ngModel" id=""
+              class="form-control control-bg-gray" readonly/>
+  
+            <div class="text-danger" *ngIf="tableCode.errors && (tableCode.dirty || tableCode.touched)">
+              <p *ngIf="tableCode.errors.required">{{"Table Code is required"|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+            <input type="text" [(ngModel)]="description" name="description" #desc="ngModel" required id=""
+              class="form-control form-control-sm control-bg-gray" [disabled]="!editMode"/>
+  
+            <div class="text-danger" *ngIf="
+            desc.errors && (desc.dirty || desc.touched)
+              ">
+              <p *ngIf="desc.errors.required">{{"Description is required"|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Table Group"|appTranslate|async}}</label>
+  
+            <select [(ngModel)]="group" name="group" class="form-control form-control-sm control-bg-gray"
+              #tableGroup="ngModel" required class="form-control control-bg-gray" [disabled]="!editMode">
+              <option value=""></option>
+              <option *ngFor="let item of tableGroupArray" value="{{ item.code }}">
+                {{ item.code }} - {{ item.title }}
+              </option>
+            </select>
+  
+            <div class="text-danger" *ngIf="
+                tableGroup.errors && (tableGroup.dirty || tableGroup.touched)
+              ">
+              <p *ngIf="tableGroup.errors.required">{{"Table Group is required"|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+            <app-autocomplete-ng-model
+              [options]="currencyArray"
+              [showLabel]="false"
+              [valueField]="'code'"
+              [labelType]="'cd'"
+              [stacked]="false"
+              [(model)]="currency"
+              name="currency"
+              [required]="true"
+            ></app-autocomplete-ng-model>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Underwritten Sum Assured Basis"|appTranslate|async}}</label>
+            <select [(ngModel)]="uwrSaBasis" name="uwrSaBasis"
+              class="form-control form-control-sm control-bg-gray" #underWrittenSAB="ngModel" required
+              class="form-control control-bg-gray" [disabled]="!editMode">
+              <option value=""></option>
+              <option *ngFor="let item of underWrittenSABArray" value="{{ item.code }}">
+                {{ item.code }} - {{ item.title }}
+              </option>
+            </select>
+  
+            <div class="text-danger" *ngIf="
+                underWrittenSAB.errors &&
+                (underWrittenSAB.dirty || underWrittenSAB.touched)
+              ">
+              <p *ngIf="underWrittenSAB.errors.required">
+                Underwritten Sum Assured Basis is required
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{"Table"|appTranslate|async}}</label>
+  
+            <select [(ngModel)]="uwrTable" name="uwrTable" class="form-control form-control-sm control-bg-gray"
+              #table="ngModel" required class="form-control control-bg-gray" [disabled]="!editMode">
+              <option value=""></option>
+              <option *ngFor="let item of tableArray" value="{{ item.code }}">
+                {{ item.code }} - {{ item.description }}
+              </option>
+            </select>
+  
+            <div class="text-danger" *ngIf="table.errors && (table.dirty || table.touched)">
+              <p *ngIf="table.errors.required">{{"Table is required"|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5 justify-content-between">
+        <!-- <div class="col-2">
+          <button class="btn btn-outline-primary btn-clone w-100">
+            Products
+          </button>
+        </div> -->
+        <div class="col-2">
+          <app-button buttonType="save" (click)="submitTable()"></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</loader>

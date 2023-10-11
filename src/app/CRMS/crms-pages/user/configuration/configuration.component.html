@@ -1,0 +1,91 @@
+<app-form-navigation [title] = "'Configuration'"></app-form-navigation> 
+    <div class=" form-body container-fluid mt-2">
+        <div class=" row container mx-auto mt-5 pt-2">
+            <div class="col-md-6 p-5">
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Company</label>
+                    <select class="form-control control-bg-gray" name="" id=""></select>
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Document Printer Option</label>
+                    <select class="form-control control-bg-gray " name="" id=""></select>
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Max Login Attempts</label>
+                    <input class="form-control control-bg-gray " type="text">
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Languages Allowed</label>
+                    <select class="form-control control-bg-gray " name="" id=""></select>
+                    <div class="row mt-5">
+                        <div class="col-md-10 clear"></div>
+                        <div class="col-md-3">
+                          <app-button [buttonType]="'addCustom-red'"  [text]="'Add'"></app-button>
+                        </div>
+                    </div>
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Currency Converter url</label>
+                    <select class="form-control control-bg-gray " name="" id=""></select>
+                </div>
+                <div class=" form-check mt-4">
+                    <label class="form-check-label " for="">Password is Case Sensitive</label>
+                    <input class="form-check-input " type="checkbox">
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <button class="btn w-100 btn-dark text-white">Email EvoBot Configuration</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 p-5">
+                <div class="  form-group mt-4">
+                    <label class="form-label ">Minimum Password Length</label>
+                    <input class="form-control control-bg-gray" type="text">
+                </div>
+                <div class=" row  form-group mt-4">
+                    <div class=" col-md-9 ">
+                        <label class="form-label ">Force Password Change After</label>
+                        <input class="form-control control-bg-gray" type="text">
+                    </div>
+                    <div class="col-md-3 d-flex justify-content-end flex-column">
+                        <span>Days</span>
+                    </div>
+                </div>
+                <div class=" row  form-group mt-4">
+                    <div class="col-md-9 ">
+                        <label class="form-label ">Time Out After</label>
+                        <input class="form-control control-bg-gray" type="text">
+                    </div>
+                    <div class=" col-md-3 d-flex justify-content-end flex-column">
+                        <span>Min</span>
+                    </div>
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Default Screen Color</label>
+                    <select class="form-control control-bg-gray" name="" id=""></select>
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Auto Translate url</label>
+                    <input class="form-control control-bg-gray" type="text">
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Vehicle Model Update url</label>
+                    <input class="form-control control-bg-gray" type="text">
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Active Directory url</label>
+                    <input class="form-control control-bg-gray" type="text">
+                </div>
+                <div class=" form-group mt-4">
+                    <label class="form-label ">Vehicle Market Value</label>
+                    <input class="form-control control-bg-gray" type="text">
+                </div>
+                <div class="row d-flex flex-row justify-content-end mt-4 ">
+                    <div class="col-4 ">
+                      <app-button [buttonType]="'custSave-red'" [text]="'Save'"></app-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

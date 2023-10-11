@@ -1,0 +1,59 @@
+.header {
+    font-size: 40px;
+    font-weight: 400;
+    margin: 30px 0;
+}
+
+.excel-button {
+    background: #00BCC8;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.excel-button:hover {
+    background: #029da8;
+    color: #fff;
+}
+
+.save-button {
+    background-color: #0bbbc833;
+    border: 1px solid #00BCC8;
+    color: #00BCC8;
+}
+
+.save-button:hover {
+    background-color: #00BCC8;
+    color: #fff;
+}
+
+.find-button {
+    background-color: #0bbbc833;
+    color: #00BCC8;
+    height: 50px;
+    border-radius: 4px;
+    border: 1px solid #00BCC8;
+}
+
+.find-button:hover {
+    background-color: #00BCC8;
+    color: #fff;
+}
+
+label {
+    color: #00BCC8;
+}
+
+.sla-text {
+    font-weight: 700;
+    font-size: 16px;
+    color: #00BCC8;
+}
+
+.ht-48 {
+    height: 48px;
+}
+
+.table {
+    border: 1px solid lightgray;
+}

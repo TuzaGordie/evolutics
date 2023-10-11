@@ -1,0 +1,61 @@
+<!-- <app-form-navigation [title]="'Set Up / Address / Town'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container-sm mt-3">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group">
+            <label class="form-label text-primary">{{"Town Code"|appTranslate|async}}</label><br />
+            <input [(ngModel)]="code" name="townCode" required type="text" class="form-control control-bg-gray" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label><br />
+            <input [(ngModel)]="description" name="description" required type="text"
+              class="form-control control-bg-gray" />
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="form-label text-primary">{{"Country "|appTranslate|async}}</label><br />
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="country" name="countryGroup"
+              required type="text" class="form-control control-bg-gray" (change)="getCountryRegion(country_.value)"
+              #country_>
+              <option value="{{ item.code }}" *ngFor="let item of countryCodes">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="form-label text-primary">{{"Region"|appTranslate|async}}</label><br />
+            <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="region" name="region" required
+              type="text" class="form-control control-bg-gray" (change)="getRegionStateByRegion(region_.value)"
+              #region_>
+              <option value="{{ item.code }}" *ngFor="let item of regions">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+          <br />
+          <div class="form-group">
+            <label class="form-label text-primary">{{"State"|appTranslate|async}}</label><br />
+            <select [(ngModel)]="state" name="state" required type="text"
+              class="form-control form-control-lg control-bg-gray">
+              <option value="{{ item.code }}" *ngFor="let item of states">
+                {{ item.description }}
+              </option>
+            </select>
+          </div>
+
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex justify-content-end">
+        <div class="form-group">
+          <app-button (click)="createTown()" buttonType="save"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

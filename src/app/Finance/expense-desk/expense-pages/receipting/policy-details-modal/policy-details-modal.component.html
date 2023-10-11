@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-between">
+  <h4 mat-dialog-title>
+    {{ 'Policy Details' | appTranslate | async }}
+  </h4>
+  <button
+    type="button"
+    class="btn-close"
+    mat-dialog-close
+    aria-label="Close"
+  ></button>
+</div>
+<mat-dialog-content>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Agent No:' | appTranslate | async
+    }}</label>
+    <span class="col-md-6">{{ policy?.primaryAgent }}</span>
+  </div>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Modal Premium: ' | appTranslate | async
+    }}</label>
+    <span class="col-md-6">{{ policy?.totalPeriodicPremium }}</span>
+  </div>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Premium Due: ' | appTranslate | async
+    }}</label>
+    <span class="col-md-6">{{ policy?.premiumDue }}</span>
+  </div>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Policy Status: ' | appTranslate | async
+    }}</label>
+    <span class="col-md-6">{{ policy?.policyStatus }}</span>
+  </div>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Policy Maturity Date: ' | appTranslate | async
+    }}</label>
+    <span class="col-md-6">{{ policy?.renewalDueOn || 'null' }}</span>
+  </div>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Loan Balance: ' | appTranslate | async
+    }}</label>
+    <span class="col-md-6">{{ policy?.loanBalance }}</span>
+  </div>
+  <div class="row mb-1">
+    <label class="text-primary col-md-6">{{
+      'Product Name: ' | appTranslate | async
+    }}</label>
+    <span class="col-md-6 d-flex">
+      <ng-container *ngIf="product">
+        {{ product.code + ' - ' + product.description }}
+      </ng-container>
+    </span>
+  </div>
+</mat-dialog-content>

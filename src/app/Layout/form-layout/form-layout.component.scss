@@ -1,0 +1,123 @@
+@import '../../../sass/variables';
+.form-layout {
+  min-height: 100vh;
+  background-color: #fff;
+  padding-bottom: 5rem;
+}
+header {
+  background-color: #000;
+  border-bottom: 1px solid #000;
+  margin-bottom: 2rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  a {
+    color: #fff;
+    position: relative;
+  }
+  .action-button {
+    text-align: center !important;
+  }
+  .page-title {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+    font-size: 1.8rem;
+    position: relative;
+    height: 97px;
+    text-align: center;
+  }
+  .circle-1 {
+    height: 70px;
+    border-bottom-right-radius: 100%;
+    width: 70px;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+  .circle-2 {
+    height: 130px;
+    border-radius: 100%;
+    width: 130px;
+    bottom: -60px;
+    right: -40px;
+    position: absolute;
+  }
+}
+.actuarial {
+  .circle-bg {
+    background: $actuarial_color;
+  }
+}
+.analytics {
+  .circle-bg {
+    background: $analytics_color;
+  }
+}
+.assets {
+  .circle-bg {
+    background: $assets_color;
+  }
+}
+.crms {
+  .circle-bg {
+    background: $crm_color;
+  }
+}
+.dbcloner {
+  .circle-bg {
+    background: $dbcloner_color;
+  }
+}
+.document {
+  .circle-bg {
+    background: $document_color;
+  }
+}
+.finance {
+  .circle-bg {
+    background: $finance_color;
+  }
+}
+.general {
+  .circle-bg {
+    background: $general_color;
+  }
+}
+.health {
+  .circle-bg {
+    background: $health_color;
+  }
+}
+.life {
+  .circle-bg {
+    background: $primary;
+  }
+}
+.receipt {
+  .circle-bg {
+    background: $cash_color;
+  }
+}
+@media only screen and (max-width: 600px) {
+  header {
+    font-size: small;
+    .page-title {
+      height: 69px;
+      font-size: small;
+    }
+    .action-button {
+      padding: 0 0.5rem;
+    }
+
+    .circle-1 {
+      height: 40px;
+      width: 40px;
+    }
+    .circle-2 {
+      height: 100px;
+      width: 100px;
+    }
+  }
+}

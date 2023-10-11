@@ -1,0 +1,4 @@
+<loader [loading]="loading">
+  <app-view-motor *ngIf="asset?.asset?.type==eAssetType.motor" [asset]="asset" [assetNo]="assetNo"></app-view-motor>
+  <app-view-property *ngIf="asset?.asset?.type==eAssetType.property" [asset]="asset" [assetNo]="assetNo"></app-view-property>
+</loader>

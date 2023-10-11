@@ -1,0 +1,136 @@
+<loader [text]="loadingText" [loading]="loading">
+
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Loan'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Premium Loan Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.premiumLoanBasis">
+          <option></option>
+          <option *ngFor="let ot of premiumLoanBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"No of Months before policy loan is allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.noOfMonthsBeforeLoanPolicyAllowed" type="number" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Premium Loan Fee"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.loan.premiumLoanFee"
+          type="number" />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Policy Loan Interest Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.policyLoanInterestTable">
+          <option></option>
+          <option *ngFor="let ot of PolicyloanInterestTableList" [ngValue]="ot.code">{{ot.code}}
+            - {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Days before creating auto premium loan"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.daysBeforeAutoPreLoan" type="number" />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Max Policy Loan Calculation Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.maxLoanCalculationBasis">
+          <option></option>
+          <option *ngFor="let ot of maxLoanCalcBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Premium Loan Interest Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.premiumLoanInterestTable">
+          <option></option>
+          <option *ngFor="let ot of PolicyloanInterestTableList" [ngValue]="ot.code">{{ot.code}}
+            - {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Max Policy Loan Calculation Factor"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.maxLoanCalculationFactor" type="number" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary w-100 text-center">{{"Premium Loan Allowed"|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+              [(ngModel)]="createCoverCode.loan.premiumLoanAllowed" type="checkbox" />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class=" text-primary w-100 text-center">{{'Loan on Policy Value Allowed'|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+              [(ngModel)]="createCoverCode.loan.loanPolicyValueAllowed" type="checkbox" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Minimum Policy Loan Amount"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.loan.minimumPolicyLoanAmount" type="number" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveLoan()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

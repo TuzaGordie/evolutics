@@ -1,0 +1,261 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class="row ">
+    <div class="col-md-6" *ngIf="createCoverCode?.basic?.basic?.code">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Cover code"|appTranslate|async}}</label>
+        <input class="form-control control-bg-gray" [value]="createCoverCode?.basic?.basic?.code||''" type="text"
+          disabled />
+        <app-validation-message></app-validation-message>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Description" [(model)]="createCoverCode.basic.basic.description" type="text"
+          [stacked]="true" [validators]="[validators.required]" #descriptionTag></app-input-td-rf>
+        <app-validation-message [input]="descriptionTag"></app-validation-message>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Insurance type" [(model)]="createCoverCode.basic.basic.insuranceType" type="select"
+          labelType="ct" valueField="code" [options]="insuranceTypeList" [stacked]="true"
+          [validators]="[validators.required]" #insuranceTypeTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="insuranceTypeTag"></app-validation-message>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Cover Screen"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.basic.basic.coverScreen">
+          <option></option>
+          <option *ngFor="let ot of coverScreenList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Interest Basis" hint="For deposit administration"
+          [(model)]="createCoverCode.basic.basic.interestBasis"
+          [disabled]="!createCoverCode.basic.basic.depositAdministration" type="select" labelType="ct" valueField="code"
+          [options]="interestCalBasisList" [stacked]="true"
+          [validators]="createCoverCode.basic.basic.depositAdministration?[validators.required]:[]" #interestBasisTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="interestBasisTag"></app-validation-message>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Quote Validity Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.basic.basic.quoteValidityBasis">
+          <option> </option>
+          <option *ngFor="let ot of quoteValidityBasisList" [ngValue]="ot.code">{{ot.code}}
+            - {{ot.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Interest Rate table" hint="For deposit administration"
+          [(model)]="createCoverCode.basic.basic.interestRateTable" type="select" labelType="cd" valueField="code"
+          [options]="interestTableList" [stacked]="true" [disabled]="!createCoverCode.basic.basic.depositAdministration"
+          [validators]="createCoverCode.basic.basic.depositAdministration?[validators.required]:[]"
+          #interestRateTableTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="interestRateTableTag"></app-validation-message>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Quote Validity Period" hint="Days"
+          [disabled]="!createCoverCode.basic.basic.quoteValidityBasis"
+          [(model)]="createCoverCode.basic.basic.quoteValidityPeriod" type="number" [stacked]="true"
+          #quoteValidityPeriodTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="quoteValidityPeriodTag"></app-validation-message>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Issue Date Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.basic.basic.issueDateBasis">
+          <!--  <option>{{"Select Issue Date Basis"|appTranslate|async}}</option> -->
+          <option *ngFor="let ot of issueDateList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Issue Date Factor" [(model)]="createCoverCode.basic.basic.issueDateFactor"
+          type="number" [stacked]="true" [disabled]="createCoverCode.basic.basic.issueDateBasis!='SID'"
+          [validators]="createCoverCode.basic.basic.issueDateBasis=='SID'?[validators.required]:[]" #issueDateFactorTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="issueDateFactorTag"></app-validation-message>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Min No of Members" hint="Group Only"
+          [(model)]="createCoverCode.basic.basic.minGroupMembers" type="number" [stacked]="true"
+          [disabled]="!createCoverCode.basic.basic.groupProcessing"
+          [validators]="createCoverCode.basic.basic.groupProcessing?[validators.required]:[]" #minGroupMembersTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="minGroupMembersTag"></app-validation-message>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center text-center">
+    <div class="col-xl-4  ">
+      <app-input-td-rf #inp label="Closed to new business" [disabled]="isCreate"
+        [(model)]="createCoverCode.basic.basic.closedToNewBusiness" type="checkbox" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-xl-4  ">
+      <app-input-td-rf #inp label="Group processing" [(model)]="createCoverCode.basic.basic.groupProcessing"
+        type="checkbox" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-xl-4  ">
+      <app-input-td-rf #inp label="include in SAR" [(model)]="createCoverCode.basic.basic.includeInSar" type="checkbox"
+        [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-xl-4  ">
+      <app-input-td-rf #inp label="Deposit Administration" [(model)]="createCoverCode.basic.basic.depositAdministration"
+        type="checkbox" [stacked]="true" #depositAdministration>
+      </app-input-td-rf>
+    </div>
+    <div class="col-xl-4  ">
+      <app-input-td-rf #inp label="Do not mature until benefit is Paid Out"
+        [(model)]="createCoverCode.basic.basic.benefitPaidOut" type="checkbox"
+        [disabled]="!createCoverCode.basic.basic.depositAdministration" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-xl-4  ">
+      <app-input-td-rf #inp label="Defined Benefit" [(model)]="createCoverCode.basic.basic.definedBenefit"
+        type="checkbox" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Provider Category"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray" (change)="setProviderCodes()"
+          [(ngModel)]="createCoverCode.basic.basic.providerCategory">
+          <!-- <option>Select Provider Category</option> -->
+          <option *ngFor="let ot of providerCategoryList" [ngValue]="ot.code">{{ot.code}}
+            - {{ot.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group mt-2">
+        <label class=" text-primary ">{{"Provider Code"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.basic.basic.providerCode">
+          <!-- <option>Select Provider Category</option> -->
+          <option *ngFor="let ot of providerCodes" [value]="ot.no"
+            [selected]="ot.no == createCoverCode.basic.basic.providerCode">{{ot.no}}
+            - {{ot.fullName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div *ngFor="let currencyAllowed of createCoverCode.basic.basic.currencyAllowed; let i = index"
+        class="row align-items-end  mt-2">
+        <div class="col">
+          <label class=" text-primary ">
+            <app-info-icon text="( if different from product
+            setup)">{{'Currency Allowed'|appTranslate|async}}</app-info-icon>
+          </label>
+          <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="currencyAllowed.currencyAllowed"
+            name="item_1_{{currencyAllowed.rowId}}">
+            <option></option>
+            <option *ngFor="let ot of currenciesList" [ngValue]="ot.code">
+              {{ot.code}} - {{ot.description}}
+            </option>
+          </select>
+        </div>
+        <div class="col-auto d-flex" *ngIf="!coverService.isShow">
+          <app-btn [disabled]="createCoverCode.basic.basic.currencyAllowed?.length==1" (mclick)="deleteCurrency(i)"
+            group="delete">
+          </app-btn>
+          <span class="mx-1"></span>
+          <app-button (click)="addCurrencyAllowed(i+1)" [buttonType]="'addCustom'"></app-button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row mt-2 align-items-center"
+        *ngFor="let companyAllowed of createCoverCode.basic.coversCompanies; let i = index">
+        <div class="col">
+          <app-input-td-rf #inp label="Company Allowed" [(model)]="companyAllowed.companyAllowed" type="select"
+            [stacked]="true" [options]="companiesList" labelType="cd" valueField="code"
+            [validators]="[validators.required]" #companyTag>
+          </app-input-td-rf>
+          <app-validation-message [input]="companyTag"></app-validation-message>
+        </div>
+        <div class=" col-auto d-flex" *ngIf="!coverService.isShow">
+          <app-btn [disabled]="createCoverCode.basic.coversCompanies?.length==1" (mclick)="deleteCompany(i)"
+            group="delete">
+          </app-btn>
+          <span class="mx-1"></span>
+          <app-button (click)="addCompaniesAllowed(i+1)" [buttonType]="'addCustom'"></app-button>
+        </div>
+      </div>
+      <div class="" *ngIf="!createCoverCode.basic.coversCompanies?.length">
+        {{'A company is required'|appTranslate|async}}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="row  mt-2 align-items-end"
+        *ngFor="let coversPayoutMethod of createCoverCode.basic.coversPayoutMethod; let i = index">
+        <div class="col-12">
+          <label class=" text-primary">
+            <app-info-icon text="( if different from product
+            setup)">{{'Payment Out Methods Allowed'|appTranslate|async}}</app-info-icon>
+          </label>
+        </div>
+        <div class="col">
+          <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="coversPayoutMethod.payoutMethod"
+            name="item_3_{{coversPayoutMethod.rowId}}">
+            <option></option>
+            <option *ngFor="let ot of paymentMethodsList" [value]="ot.payoutMethod">{{ot.payoutMethod}}
+              - {{ot.description}}</option>
+          </select>
+        </div>
+        <div class="  col-auto d-flex" *ngIf="!coverService.isShow">
+          <label class=" text-primary">&nbsp; </label>
+          <app-btn [disabled]="createCoverCode.basic.coversPayoutMethod?.length==1" (mclick)="deletePayoutMethod(i)"
+            group="delete">
+          </app-btn>
+          <span class="mx-1"></span>
+          <app-button (click)="addPaymentOutMethodAllowed(i+1)" [buttonType]="'addCustom'"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!coverService.isShow">
+    <div class="col"></div>
+    <div class="col-auto">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-btn (mclick)="saveBasic()" icon="save" [disabled]="coverService.isFormInvalid(inputs)"
+          *ngIf="!coverService.isShow" [text]="'save'">
+        </app-btn>
+      </div>
+    </div>
+  </div>
+</loader>

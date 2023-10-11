@@ -1,0 +1,49 @@
+<!-- <app-form-navigation [title]="'Create New Asset / Other Upload'"></app-form-navigation> -->
+<div class="row justify-content-between">
+  <div class="col-auto">
+    <h4>Other Upload</h4>
+  </div>
+  <div class="col-auto">
+    <button class="btn" (click)="close()">Close</button>
+  </div>
+</div>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="row">
+    <div class="my-2 col-lg-12">
+      <app-input-ngmodel label="File" type="file" [light]="false" [colored]="false" [stacked]="true"  (change)="upload($event)">
+      </app-input-ngmodel>
+    </div>
+    <div class="my-2 col-lg-6">
+      <app-input-basic label="Title" type="text" [light]="false" [colored]="false" name="title" [form]="form"
+        [stacked]="true"></app-input-basic>
+    </div>
+    <div class="my-2 col-lg-6">
+      <app-input-basic #cat label="Category" type="select" [light]="false" [colored]="false" name="category"
+        valueField="code" labelType="ct" [options]="dS.getCategory|functionCaller|async" [form]="form" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="my-2 col-lg-6">
+      <app-input-basic label="Sub Category" type="select" [light]="false" [colored]="false" name="subCategory"
+        valueField="code" labelType="ct" [options]="dS.getSubCategory|functionCaller1:cat.value|async" [form]="form"
+        [stacked]="true"></app-input-basic>
+    </div>
+    <div class="my-2 col-lg-6">
+      <app-input-basic label="Sensitivity" type="select" [light]="false" [colored]="false" name="sensitivity"
+        valueField="code" labelType="ct" [options]="dS.getSensitivity|functionCaller|async" [form]="form"
+        [stacked]="true"></app-input-basic>
+    </div>
+    <div class="my-2 col-lg-6">
+      <app-input-basic label="Branch" type="select" [light]="false" [colored]="false" name="branch" valueField="code"
+        labelType="cd" [options]="dS.getBranch|functionCaller|async" [form]="form" [stacked]="true"></app-input-basic>
+    </div>
+    <div class="my-2 col-lg-6">
+      <app-input-basic label="Box No." type="text" [light]="false" [colored]="false" name="boxNo" [form]="form"
+        [stacked]="true"></app-input-basic>
+    </div>
+  </div>
+  <div class="row justify-content-end mt-5">
+    <div class="col-3">
+      <app-btn [valid]="form?.valid" (mclick)="submit()" icon="upload" type="primary">Upload</app-btn> 
+    </div>
+  </div>
+</form>

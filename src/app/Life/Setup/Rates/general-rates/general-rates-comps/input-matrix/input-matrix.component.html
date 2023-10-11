@@ -1,0 +1,96 @@
+<div class="row justify-content-center align-items-end my-3 text-center" *ngIf="showBoxes">
+  <div class="col-2">
+    <app-input [input]="inputs[1]" [min]="0" [stacked]="true" [disabled]="lockRowGen"></app-input>
+  </div>
+  <div class="col-2">
+    <app-input [input]="inputs[0]" [min]="0" [stacked]="true" [disabled]="lockColumnGen"></app-input>
+  </div>
+  <div class="col-lg-auto">
+    <app-btn (mclick)="gen()" type="secondary" icon="generate" [valid]="form?.valid"
+      help="Click to generate the input boxes for the rate values">Generate</app-btn>
+  </div>
+</div>
+
+<loader [loading]="loading" class="vh-60">
+  <div class="row justify-content-center gx-5" *ngIf="matrix?.hasData">
+
+    <div class="col-1 col-lg-auto d-flex justify-content-end p-0" matTooltip="{{yAxisLabel}}">
+      <div class="y-label-container">
+        <div class="y-label">
+          {{yAxisLabel}}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-11 p-0 x-case">
+      <div class="x-label-container" *ngIf="xAxisLabel" matTooltip="{{xAxisLabel}}">
+        {{xAxisLabel}}
+      </div>
+      <div class="scroll-cage">
+        <table class="table table-responsive table-hover m-0 table-striped px-5">
+          <thead class="py-3 theader bg-light sticky-top">
+            <tr class="">
+              <th id="cellHeaderID{{i}}" *ngFor="let cell of matrix.inputBoxes[0];let i = index;trackBy: trackByID"
+                scope="col" class="text-white bg-primary"
+                [ngClass]="{sticky:i==0,left:i==0,'disabled-cell':i==0,'error-cell':cell.hasError}"
+                >
+                <div class="index" [hidden]="i==0">
+                  {{i}}
+                </div>
+                <input *ngIf="i" class="form-control  control-bg-primary" [readonly]="!canEditAxis" type="{{cell.type}}"
+                  [(ngModel)]="cell.value" (change)="validateColumnHeader(cell,i)" [disabled]="lockColumnGen" />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let row of matrix?.inputBoxes|arraySplitter:matrix?.data.length:1; let r = index;trackBy: trackByID">
+              <ng-container *ngFor="let cell of row;let c = index">
+                <td scope="row " [ngClass]="{sticky:c==0,left:c==0,'bg-primary':c==0,'error-cell':cell.hasError}">
+                  <div class="index" [hidden]="c!=0">
+                    {{r+1}}
+                  </div>
+                  <input #cellInp *ngIf="!cell?.hide"
+                    (click)="c?checkInputType(cell?.value,c,r+1):null"
+                    class="form-control control-bg-{{c?'gray-tb':'primary'}}" type="{{cell?.type}}"
+                    [(ngModel)]="cell.value" [readonly]="(customInput && c) || (c?!canEditCells:!canEditAxis)"
+                    (change)="c?validateCell(cell,c):validateRowHeader(cell,c)" />
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center p-2 table-details">
+        {{matrix?.inputBoxes?.length-1}} rows x {{matrix?.inputBoxes[0]?.length-1}} columns
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-4 mt-2 mx-0">
+    <ng-container>
+      <div class="col-auto my-2" *ngIf="matrix?.hasData">
+        <app-btn type="secondary" icon="export" [disabled]="matrix?.hasError||!matrix?.hasData" (mclick)="export()">
+          Export Rates</app-btn>
+      </div>
+      <div class="col-auto my-2">
+        <app-btn type="secondary" icon="import" [valid]="isCreationMode" (mclick)="import()"
+          help="You can download the template for importing values">Import Rates</app-btn>
+      </div>
+      <div class="col-auto my-2">
+        <app-btn type="secondary" icon="download" [valid]="isCreationMode" (mclick)="downloadTemplate()">Download Template</app-btn>
+      </div>
+      <div class="col-auto my-2" *ngIf="matrix?.hasData">
+        <app-btn type="secondary" [valid]="isShow && matrix?.hasData && !isFiltered" [icon]="canEditAxis?'lock':'edit'"
+          (mclick)="editAxis()">{{canEditAxis?'Lock':'Edit'}} Rate Axis</app-btn>
+      </div>
+      <div class="col-auto my-2" *ngIf="matrix?.hasData">
+        <app-btn type="secondary" [valid]="isShow &&matrix?.hasData&& !isFiltered" [icon]="canEditCells?'lock':'edit'"
+          (mclick)="editCells()">{{canEditCells?'Lock':'Edit'}} Rates</app-btn>
+      </div>
+    </ng-container>
+    <div class="col-lg d-lg-flex justify-content-end my-2" *ngIf="matrix?.hasData">
+      <app-btn type="primary" icon="save" [disabled]="matrix?.hasError||!matrix?.hasData" (mclick)="submit()">Submit
+      </app-btn>
+    </div>
+  </div>
+</loader>

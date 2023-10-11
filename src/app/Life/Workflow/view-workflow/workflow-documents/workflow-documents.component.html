@@ -1,0 +1,52 @@
+<router-outlet>
+  <!-- Modal Outlet -->
+</router-outlet>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+
+        <h1 class="my-5">{{'Documents'|appTranslate|async}}</h1>
+
+        <br>
+        <hr>
+        <table class="table table-responsive  table-striped px-5">
+          <thead class="py-3 theader">
+          <tr>
+            <th scope="col">{{'Category'|appTranslate|async}}</th>
+            <th scope="col">{{'Document Title'|appTranslate|async}}</th>
+            <th scope="col">{{'Document Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Created By'|appTranslate|async}}</th>
+            <th scope="col">{{'Created On'|appTranslate|async}}</th>
+            <th scope="col">{{'Auto'|appTranslate|async}}</th>
+            <th scope="col">{{'How'|appTranslate|async}}</th>
+            <th scope="col">{{'Box Number'|appTranslate|async}}</th>
+          </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let doc of documentList">
+              <tr>
+                <td>{{doc.docCat}}</td>
+                <td>{{doc.title}}</td>
+                <td>{{doc.fileName}}</td>
+                <td>{{doc.createdUser}}</td>
+                <td>{{doc.createdDate | date:'mediumDate'}}</td>
+                <td>{{ '-' }}</td>
+                <td>{{ doc.how }}</td>
+                <td>{{doc.docBox}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <p class="my-3 text-center" *ngIf="isEmptyList">
+          {{'No Document to display'|appTranslate|async}}
+        </p>
+        <br>
+        <div class="row mt-4">
+            <div class="col-md-2">
+                <app-button buttonType="addCustom" text="Add Document" routerLink="../../workflow-document-add"></app-button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

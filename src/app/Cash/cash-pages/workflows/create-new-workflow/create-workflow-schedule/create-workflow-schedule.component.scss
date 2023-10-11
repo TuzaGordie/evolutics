@@ -1,0 +1,33 @@
+div.btn {
+    width: 100%;
+}
+
+label {
+    color: #00BD6E;
+}
+
+.document-button {
+    background:#00bd6e36;
+    border-radius: 4px;
+    color: #00BD6E;
+    border: 1px solid #00BD6E;
+    // width: 100%;
+}
+
+.document-button:hover {
+    background:#00BD6E;
+    color: #fff;
+}
+
+.submit-button {
+    background:#fff;
+    color :#00BD6E;
+    border-radius: 4px;
+    border: 1px solid #00BD6E;
+    // width: 100%;
+}
+
+.submit-button:hover {
+    color:#fff;
+    background:#00BD6E;
+}

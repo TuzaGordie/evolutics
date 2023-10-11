@@ -1,0 +1,48 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts  / Bank / Bank'"></app-form-navigation> -->
+<div class="container">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <app-input-basic label="Select Country" type="select" [form]="form" name="country" [stacked]="true" (mchange)="onCountryChange($event)"
+          [options]="aeS.getCountry|functionCaller|async" labelType="cd" #country>
+      </app-input-basic>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6 position-relative">
+      <app-input-basic label="Select Bank" type="select" [form]="form" name="bank" [stacked]="true"
+        [options]="banksList" labelType="cd" #bank>
+      </app-input-basic>
+      <div *ngIf="isLoadingBanks" class="position-absolute start-50 translate-middle" [style.top]="'70%'">
+        <div class="fa fa-refresh fa-spin"></div>
+      </div>
+    </div>
+
+  </div>
+  <br>
+
+
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="dark" icon="show" [valid]="form?.valid" (mclick)="show(bank.value)">Show</app-btn>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'create'" routerLink="../create-bank-code"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="clone(bank.value)">Clone</app-btn>
+    </div>
+
+  </div>

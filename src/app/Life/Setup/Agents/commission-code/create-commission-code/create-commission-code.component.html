@@ -1,0 +1,166 @@
+<!-- <app-form-navigation [title]="'Set Up / Commission Codes   '"></app-form-navigation> -->
+<loader [loading]="loading" [text]="loadingText">
+  <form (ngSubmit)="submitCommCode()" #commCodeForm="ngForm">
+    <div class="container">
+      <div class="row justify-content-center" *ngIf="showMode">
+        <div class="col-3">
+          <label class="form-label text-primary">{{"Comm Type Version"|appTranslate|async}}</label>
+          <select [(ngModel)]="commTypeVersionNo" name="commTypeVersionNo" #commVersionNo="ngModel"
+          (change)="getCommTypeByVersionNo()"
+            class="form-control control-bg-gray">
+            <option [selected]="item.versionNo == 1" value="{{ item.versionNo }}" *ngFor="let item of commissionCode.commTypeVersion">
+              {{ item.versionNo }} - {{ item.date }}
+            </option>
+          </select>
+        </div>
+        <div class="col-2">
+          <label class="form-label text-primary">&nbsp;</label>
+          <app-button (click)="addNewCommTypeVersion()" [buttonType]="'add'"></app-button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!showMode">
+        <div class="col-10">
+          <div class="row" *ngFor="let item of commissionCode.commTypeVersion; let i = index">
+            <div class="col-5">
+              <label class="form-label text-primary">{{"Version No"|appTranslate|async}}</label>
+
+              <input class="form-control control-bg-gray" type="number" min="1" [(ngModel)]="item.versionNo" disabled
+                name="versionNo_{{ i }}" required #versionNo="ngModel" />
+              <div class="text-danger" *ngIf="versionNo.errors && (versionNo.dirty || versionNo.touched)">
+                <p *ngIf="versionNo.errors.required">{{"Version Number is required"|appTranslate|async}}</p>
+              </div>
+            </div>
+
+            <div class="col-5">
+              <label class="form-label text-primary">{{"Date From"|appTranslate|async}}</label>
+
+              <input class="form-control control-bg-gray" type="date" [value]="item.date" [(ngModel)]="item.date"
+                name="dateFrom_{{ i }}" required #dateFrom="ngModel" />
+              <div class="text-danger" *ngIf="dateFrom.errors && (dateFrom.dirty || dateFrom.touched)">
+                <p *ngIf="dateFrom.errors.required">{{"Date From is required"|appTranslate|async}}</p>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <label class="form-label text-primary">&nbsp;</label>
+              <app-btn [disabled]="item.id != null" (click)="deleteCommTypeVersion(i)" [actionType]="'button'"
+                type="danger" icon="delete">
+              </app-btn>
+            </div>
+          </div>
+        </div>
+        <div class="col-2" *ngIf="commissionCode.commTypeVersion[0].id != null">
+          <label class="form-label text-primary">&nbsp;</label>
+          <app-button (click)="addCommTypeVersion()" [buttonType]="'add'"></app-button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label class="form-label text-primary">{{"Commission Code"|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" type="text" disabled [(ngModel)]="commissionCode.commType.code"
+            name="commCode" />
+        </div>
+
+        <div class="col">
+          <label class="form-label text-primary">{{"Commission Group"|appTranslate|async}}</label>
+          <select [(ngModel)]="commissionCode.commType.group" name="commGroup" #commGroup="ngModel"
+            class="form-control control-bg-gray">
+            <!-- required -->
+            <option value="{{ item.code }}" *ngFor="let item of commGroupData">
+              {{ item.code }} - {{ item.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="commGroup.errors && (commGroup.dirty || commGroup.touched)">
+            <p *ngIf="commGroup.errors.required">{{"Commission Group is required"|appTranslate|async}}</p>
+          </div>
+        </div>
+        <div class="col">
+          <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+
+          <input class="form-control control-bg-gray" type="text" [(ngModel)]="commissionCode.commType.description"
+            name="description" required #description="ngModel" />
+          <div class="text-danger" *ngIf="
+            description.errors && (description.dirty || description.touched)
+          ">
+            <p *ngIf="description.errors.required">{{"Description is required"|appTranslate|async}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-4">
+          <label class="form-label text-primary">{{"Writing Agent Commission Table"|appTranslate|async}}</label>
+
+          <select class="form-control control-bg-gray" [(ngModel)]="commissionCode.commType.writingCommTable"
+            name="writingCommTable" #writingCommTable="ngModel" required>
+            <option value="{{ item?.code }}" *ngFor="let item of writingCommTables">
+              {{ item?.code }} - {{ item?.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+            writingCommTable.errors &&
+            (writingCommTable.dirty || writingCommTable.touched)
+          ">
+            <p *ngIf="writingCommTable.errors.required">
+              {{"Writing Comm commission Table is required"|appTranslate|async}}
+            </p>
+          </div>
+        </div>
+        <div class="col-4">
+          <label class="form-label text-primary">{{"Hierachy Agent Commission Basis"|appTranslate|async}}</label>
+
+          <select class="form-control control-bg-gray" [(ngModel)]="commissionCode.commType.hierachyCommBasis"
+            name="hierachyCommBasis" #hierachyCommBasis="ngModel" required>
+            <option value="{{ item.code }}" *ngFor="let item of hierachyCommBasiss">
+              {{ item.code }} - {{ item.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+            hierachyCommBasis.errors &&
+            (hierachyCommBasis.dirty || hierachyCommBasis.touched)
+          ">
+            <p *ngIf="hierachyCommBasis.errors.required">
+              {{"Hierachy Commission Basis is required"|appTranslate|async}}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <label class="form-label text-primary">{{"Hierachy Agent Commission Table"|appTranslate|async}}</label>
+
+          <select class="form-control control-bg-gray" [(ngModel)]="commissionCode.commType.hierachyCommTable"
+            name="hierachyCommTable" #hierachyCommTable="ngModel">
+            <!-- required -->
+            <option value="{{ item?.code }}" *ngFor="let item of writingCommTables">
+              {{ item?.code }} - {{ item?.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+            hierachyCommTable.errors &&
+            (hierachyCommTable.dirty || hierachyCommTable.touched)
+          ">
+            <p *ngIf="hierachyCommTable.errors.required">
+              {{"Hierachy Commission Table is required"|appTranslate|async}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <br />
+      <br />
+      <br />
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <app-button (click)="submitCommCode()" [buttonType]="'save'"></app-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</loader>

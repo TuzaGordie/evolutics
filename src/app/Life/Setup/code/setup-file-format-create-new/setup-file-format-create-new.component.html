@@ -1,0 +1,98 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 row cols-xs-1">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'File Format Code'|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray" disabled>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Category'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Table Group'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Primary Table'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Key'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn icon="save" type="secondary">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+
+  <hr class="mt-3">
+
+  <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 row-cols-sm-1 row cols-xs-1 justify-content-end mt-3">
+    <div class="col">
+      <app-btn type="secondary" icon="download">{{'Download'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="secondary" icon="upload">{{'Upload'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 row cols-xs-1" *ngFor="let i of tableCounter()">
+    <div class="col-lg-5">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Table Group'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Table'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn type="dark" icon="add" (click)="tableInc()"></app-btn>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn type="outline" icon="delete" (click)="tableDec()"></app-btn>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 row-cols-sm-1 row cols-xs-1 justify-content-between mt-5">
+    <div class="col">
+      <app-btn type="dark" icon="add" (click)="tableInc()">{{'Add'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="secondary" icon="checked">{{'Submit'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+</div>

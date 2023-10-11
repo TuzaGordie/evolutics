@@ -1,0 +1,75 @@
+<div class="row row-cols-1 row-cols-lg-3 g-3">
+  <div class="col">
+    <label for="" class="form-label text-primary">{{'Company Code'|appTranslate|async}}</label>
+    <input type="text" class="form-control control-bg-gray">
+  </div>
+  <div class="col">
+    <label for="" class="form-label text-primary">{{'Account Format'|appTranslate|async}}</label>
+    <input type="text" class="form-control control-bg-gray">
+  </div>
+  <div class="col">
+    <label for="" class="form-label text-primary">{{'Statement Category'|appTranslate|async}}</label>
+    <input type="text" class="form-control control-bg-gray">
+  </div>
+  <div class="col">
+    <label for="" class="form-label text-primary">{{'Version Number'|appTranslate|async}}</label>
+    <input type="text" class="form-control control-bg-gray">
+  </div>
+
+  <div class="col">
+    <label for="" class="form-label text-primary">{{'Date From'|appTranslate|async}}</label>
+    <input type="date" class="form-control control-bg-gray">
+  </div>
+  <div class="col">
+    <label for="" class="form-label text-primary">{{'Date To'|appTranslate|async}}</label>
+    <input type="date" class="form-control control-bg-gray">
+  </div>
+</div>
+<div class="row justify-content-end mt-3">
+  <div class="col-2">
+    <app-btn type="secondary" icon="search">Result</app-btn>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <hr>
+  </div>
+</div>
+
+
+
+<div class="row mt-3">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <p>{{'Currency:'|appTranslate|async}} -- </p>
+      </div>
+    </div>
+    <table class="table table-responsive  table-striped">
+      <thead class="py-3 theader">
+      <tr>
+        <th scope="col">{{'Account Header'|appTranslate|async}}</th>
+        <th scope="col">{{'Value'|appTranslate|async}}</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="row  justify-content-end">
+      <div class="col-4">
+        <app-btn icon="show" type="outline">Visualize Date</app-btn>
+      </div>
+      <div class="col-4">
+        <app-btn icon="download" type="primary">Download</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

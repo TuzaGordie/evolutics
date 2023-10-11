@@ -1,0 +1,140 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{"Edit Agent Hierarchy"|appTranslate|async}}</h5>
+    <button mat-dialog-close class="btn-close"></button>
+</div>
+<mat-dialog-content>
+    <loader [loading]="isLoading">
+        <table class="table table-striped my-5">
+            <thead>
+                <tr>
+                    <th>{{"Agent No"|appTranslate|async}}</th>
+                    <th>{{"Hierarchy Agent No"|appTranslate|async}}</th>
+                    <th>{{"Hier. Agent Name"|appTranslate|async}}</th>
+                    <th>{{"Hier. Agent Type"|appTranslate|async}}</th>
+                    <!-- <th>{{"Updated By"|appTranslate|async}}</th>
+                    <th>{{"Updated On"|appTranslate|async}}</th> -->
+                    <th><!--Edit--></th>
+                    <th><!--Delete--></th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let record of agentHierarchyForm.controls">
+                    <tr [formGroup]="$any(record)">
+                        <td>
+                            <input formControlName="agentNo" type="text" class="form-control" placeholder="Agent No" readonly>
+                        </td>
+                        <td>
+                            <input type="text" formControlName="hierarchyAgentNo" class="form-control" placeholder="Hier. Agent No" [readonly]="recordStatus[record.value.id] != 'EDITING'" (click)="onHierarchyAgentNoChange(record)">
+                        </td>
+                        <td class="input-group">
+                            <div class="position-relative">
+                                <input type="text" formControlName="agentName" class="form-control" placeholder="Hier. Agent Name" readonly>
+                                <div *ngIf="isLoadingAgentName[record.value.id]" class="position-absolute top-50 start-50 translate-middle">
+                                    <span class="border-spinner border-spinner-sm text-primary"></span>
+                                </div>
+                            </div>
+                            <span class="input-group-text" (click)="openFindAgentModal(record)">
+                                <span class="fa fa-search"></span>
+                            </span>
+                        </td>
+                        <!-- <td class="position-relative">
+                            <select type="text" formControlName="hierarchyAgentType" class="form-control" [attr.disabled]="recordStatus[record.value.id] != 'EDITING' ? 'disabled' : null">
+                                <option value=""></option>
+                                <option *ngFor="let type of hierarchyAgentTypesList" [value]="type.type">{{type.type}} - {{type.description}}</option>
+                            </select>
+                            <div *ngIf="isLoadingAgentTypesList" class="position-absolute top-50 start-50 translate-middle">
+                                <span class="fa fa-spinner fa-spin"></span>
+                            </div>
+                        </td> -->
+                        <!-- <td>
+                            <input type="text" formControlName="updatedBy" class="form-control" placeholder="Updated By" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="ifFieldInvalid(record, 'updatedBy') && 'border border-danger'">
+                        </td>
+                        <td>
+                            <input type="date" formControlName="updatedOn" class="form-control" placeholder="Updated On" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="ifFieldInvalid(record, 'updatedOn') && 'border border-danger'">
+                        </td> -->
+                        <td class="position-relative">
+                            <app-button *ngIf="!recordStatus[record.value.id] || recordStatus[record.value.id] == 'VIEW'" buttonType="edit" (click)="recordStatus[record.value.id] = 'EDITING'"></app-button>
+                            <app-button *ngIf="recordStatus[record.value.id] == 'EDITING'" buttonType="custSave" (click)="onUpdateRecord(record)"></app-button>
+                            <div *ngIf="recordStatus[record.value.id] == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                        <!-- <td class="position-relative">
+                            <app-button *ngIf="!isDeletingRecord[record.value.id]" buttonType="delete" (click)="confirmDeleteRecord(record)"></app-button>
+                            <div *ngIf="isDeletingRecord[record.value.id]" class="position-absolute top-50 start-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td> -->
+                    </tr>
+                </ng-container>
+                <!-- <tr *ngIf="showNewRecordForm" [formGroup]="newRecordForm">
+                    <td>
+                        <input formControlName="agentNo" type="text" class="form-control" placeholder="Agent No" >
+                    </td>
+                    <td>
+                        <input type="text" formControlName="hierarchyAgentNo" class="form-control" placeholder="Hier. Agent No" (change)="onHierarchyAgentNoChange(newRecordForm)">
+                    </td>
+                    <td>
+                        <input type="text" formControlName="agentName" class="form-control" placeholder="Hier. Agent Name" (change)="onHierarchyAgentNameChange(newRecordForm)">
+                    </td>
+                    <td>
+                        <select type="text" formControlName="hierarchyAgentType" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let type of hierarchyAgentTypesList" [value]="type.type">{{type.type}} - {{type.description}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" formControlName="updatedBy" class="form-control" placeholder="updatedBy">
+                    </td>
+                    <td>
+                        <input type="date" formControlName="updatedOn" class="form-control" placeholder="updatedOn">
+                    </td>
+                    <td class="position-relative" colspan="2">
+                        <app-button *ngIf="!isCreatingRecord" buttonType="save" (click)="onCreateRecord()"></app-button>
+                        <div *ngIf="isCreatingRecord" class="position-absolute top-50 start-50 translate-middle">
+                            <div class="fa fa-refresh fa-spin"></div>
+                        </div>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+        <p *ngIf="!agentHierarchyForm.controls.length" class="text-center">{{'0 records found'|appTranslate|async}}</p>
+        <div class="d-flex justify-content-center my-3 ">
+            <button class="btn btn-outline-primary btn-lg" (click)="viewLinkedAgents = !viewLinkedAgents">
+                <span class="fas fa-eye"></span>
+                {{'View Linked Agents'|appTranslate|async}}
+            </button>
+        </div>
+        <table *ngIf="viewLinkedAgents" class="table table-striped mb-5">
+            <thead>
+                <tr>
+                    <th>{{"Agent No"|appTranslate|async}}</th>
+                    <th>{{"Hierarchy Agent No"|appTranslate|async}}</th>
+                    <th>{{"Hier. Agent Name"|appTranslate|async}}</th>
+                    <th>{{"Hier. Agent Type"|appTranslate|async}}</th>
+                    <th>{{"Updated By"|appTranslate|async}}</th>
+                    <th>{{"Updated On"|appTranslate|async}}</th>
+                    <th><!--Edit--></th>
+                    <th><!--Delete--></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let agent of linkedAgents">
+                    <td>{{agent.agentNo}}</td>
+                    <td>{{agent.hierarchyAgentNo}}</td>
+                    <td>{{agent.agentName}}</td>
+                    <td>{{agent.hierarchyAgentType}}</td>
+                    <td>{{agent.updatedBy}}</td>
+                    <td>{{agent.updatedOn}}</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    </loader>
+</mat-dialog-content>
+<!-- <mat-dialog-actions class="d-flex justify-content-end">
+    <button class="btn btn-outline-primary btn-lg" [disabled]="showNewRecordForm" (click)="showNewRecordForm = true">
+        <span class="fa fa-plus"></span>
+        Add new record
+    </button>
+</mat-dialog-actions> -->

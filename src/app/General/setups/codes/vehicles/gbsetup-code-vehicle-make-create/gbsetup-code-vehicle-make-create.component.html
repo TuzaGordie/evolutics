@@ -1,0 +1,29 @@
+<loader [loading]="loading" class="vh-80">
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="container-sm">
+      <div class="row pt-4">
+        <div class="col-md-6 mx-auto">
+          <div class="row mt-3">
+            <app-input-basic label="Make Code" type="text" [form]="form" name="makeCode" [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="row mt-3">
+            <app-input-basic label="Make Name" type="text" [form]="form" name="description" [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="row mt-3">
+            <app-input-basic label="Brand Code" type="text" [form]="form" name="brandCode" [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="row justify-content-end mt-5">
+            <div class="col-4">
+              <app-btn type="primary" icon="save" *ngIf="!(type|isShowPage)" [hidden]="submitBtn" [valid]="form?.valid"
+                (mclick)="onSubmit()">
+                Save</app-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</loader>

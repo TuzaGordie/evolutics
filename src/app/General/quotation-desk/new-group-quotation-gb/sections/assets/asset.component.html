@@ -1,0 +1,63 @@
+<div>
+  <form [formGroup]="assetForm">
+    <div formArrayName="assets">
+      <div
+        [formGroupName]="i"
+        class="row mt-3"
+        *ngFor="let i of memberCounter()"
+      >
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Asset ID' | appTranslate | async
+            }}</label>
+            <input type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="findsmallGB"></app-button>
+          </div>
+        </div>
+        <div class="col-1">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button buttonType="createCustom2smallGB"></app-button>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Redg No' | appTranslate | async
+            }}</label>
+            <input type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{
+              'Subgroup No' | appTranslate | async
+            }}</label>
+            <input type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button
+              buttonType="uploadGB"
+              text="Upload Picture"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-end mt-3">
+      <div class="col-2">
+        <app-button buttonType="addYellow" (click)="memberInc()"></app-button>
+      </div>
+    </div>
+  </form>
+</div>

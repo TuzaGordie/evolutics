@@ -1,0 +1,483 @@
+<loader [loading]="loading" [text]="loadingText">
+  <!-- <app-form-navigation [title]="'Set Up / Process Design / Process SetUp  '"></app-form-navigation> -->
+  <div class="d-flex justify-content-end my-3" *ngIf="isEdit">
+    <app-btn [type]="processForm.form.enabled ? 'outline': 'primary'" (mclick)="toggleEditMode()" icon="edit">
+      Edit
+    </app-btn>
+  </div>
+  <hr *ngIf="isEdit">
+  <form novalidate #processForm="ngForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary">{{
+            'Process Code' | appTranslate | async
+          }}</label>
+
+          <input [(ngModel)]="processSetupData.processSetup.code" class="form-control control-bg-gray" type="text"
+            name="processCode" #processCode="ngModel" [required]="isEdit" disabled />
+
+          <div class="text-danger" *ngIf="
+              processCode.errors && (processCode.dirty || processCode.touched)
+            ">
+            <p *ngIf="processCode.errors.required">
+              {{ 'Process Code is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary required">{{
+            'Description' | appTranslate | async
+          }}</label>
+
+          <input [(ngModel)]="processSetupData.processSetup.description" class="form-control control-bg-gray"
+            type="text" name="description" #description="ngModel" required [disabled]="isShow" />
+
+          <div class="text-danger" *ngIf="
+              description.errors && (description.dirty || description.touched)
+            ">
+            <p *ngIf="description.errors.required">
+              {{ 'Description is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary required">{{
+            'Process Group' | appTranslate | async
+          }}</label>
+
+          <select [(ngModel)]="processSetupData.processSetup.group" class="form-control control-bg-gray"
+            name="processGroup" required #processGroup="ngModel" [disabled]="isShow">
+            <option value=""></option>
+            <option value="{{ item?.code }}" *ngFor="let item of processGroupArray">
+              {{ item?.code }} - {{ item?.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+              processGroup.errors &&
+              (processGroup.dirty || processGroup.touched)
+            ">
+            <p *ngIf="processGroup.errors.required">
+              {{ 'Process Group is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary">{{
+            'Company Filter' | appTranslate | async
+          }}</label>
+          <select class="form-control control-bg-gray" [(ngModel)]="processSetupData.processSetup.companyCode"
+            name="companyFilter" #companyFilter="ngModel" [disabled]="isShow" (change)="onFilterChange($event)">
+            <option value=""></option>
+            <option value="{{ item?.code }}" *ngFor="let item of companyFilterArray">
+              {{ item?.code }} - {{ item?.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+              companyFilter.errors &&
+              (companyFilter.dirty || companyFilter.touched)
+            ">
+            <p *ngIf="companyFilter.errors.required">
+              {{ 'Company filter is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary">{{
+            'Cover Code' | appTranslate | async
+          }}</label>
+          <select class="form-control control-bg-gray" [(ngModel)]="processSetupData.processSetup.coverCode"
+            name="coverCode" #coverCode="ngModel" [disabled]="isShow" (change)="onFilterChange($event)">
+            <option value=""></option>
+            <option value="{{ item?.code }}" *ngFor="let item of coverCodeArray">
+              {{ item?.code }} - {{ item?.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="coverCode.errors && (coverCode.dirty || coverCode.touched)">
+            <p *ngIf="coverCode.errors.required">
+              {{ 'Cover code is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+
+        <!-- A LITTLE CHANGE -->
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary">{{
+            'Group Condition' | appTranslate | async
+          }}</label>
+          <select [(ngModel)]="processSetupData.processSetup.groupCond" class="form-control control-bg-gray"
+            name="groupCondition" #groupCondition="ngModel" [disabled]="isShow" (change)="onFilterChange($event)">
+            <option value=""></option>
+            <option value="{{ item?.code }}" *ngFor="let item of groupConditionArray">
+              {{ item?.code }} - {{ item?.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+              groupCondition.errors &&
+              (groupCondition.dirty || groupCondition.touched)
+            ">
+            <p *ngIf="groupCondition.errors.required">
+              {{ 'Group Condition is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE ONE WITH AN ARRAY -->
+      <!-- <div class="row" *ngFor="let i of pFilters; let in = index">
+      <div class="col-md-6 mb-3">
+        <label class="form-label text-primary">{{"Product Class Filter"|appTranslate|async}}</label>
+        <select
+          class="form-control control-bg-gray"
+          [(ngModel)]="processSetupData.processSetup.processCode"
+          name="pClassFilter_{{ i }}"
+          required
+          #pClassFilter="ngModel"
+        >
+          <option
+            value="{{ item?.code }}"
+            *ngFor="let item of pFiltersClassArray"
+          >
+            {{ item?.title }}
+          </option>
+        </select>
+
+        <div
+          class="text-danger"
+          *ngIf="
+            pClassFilter.errors && (pClassFilter.dirty || pClassFilter.touched)
+          "
+        >
+          <p *ngIf="pClassFilter.errors.required">{{"Product Class is required"|appTranslate|async}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-5 mb-3">
+        <label class="form-label text-primary">{{"Product Filter"|appTranslate|async}}</label>
+        <select
+          class="form-control control-bg-gray"
+          [(ngModel)]="processSetupData.processSetup.processCode"
+          name="pFilter_{{ i }}"
+          required
+          #pFilter="ngModel"
+        >
+          <option value=""></option>
+          <option value="{{ item?.code }}" *ngFor="let item of pFiltersArray">
+            {{ item?.description }}
+          </option>
+        </select>
+
+        <div
+          class="text-danger"
+          *ngIf="pFilter.errors && (pFilter.dirty || pFilter.touched)"
+        >
+          <p *ngIf="pFilter.errors.required">{{"Product filter is required"|appTranslate|async}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-1 mb-3">
+        <label class="form-label text-primary">&nbsp;</label>
+        <app-button
+          [buttonType]="'delete'"
+          (click)="deleteProcessFilter(in)"
+        ></app-button>
+      </div>
+    </div> -->
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary">{{
+            'Product Class Filter' | appTranslate | async
+          }}</label>
+          <select class="form-control control-bg-gray" [(ngModel)]="processSetupData.processSetup.productClass"
+            name="pClassFilter" #pClassFilter="ngModel" [disabled]="isShow" (change)="onFilterChange($event)">
+            <option value=""></option>
+            <option value="{{ item?.code }}" *ngFor="let item of pFiltersClassArray">
+              {{ item?.code }} - {{ item?.title }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="
+              pClassFilter.errors &&
+              (pClassFilter.dirty || pClassFilter.touched)
+            ">
+            <p *ngIf="pClassFilter.errors.required">
+              {{ 'Product Class is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label text-primary">{{
+            'Product Filter' | appTranslate | async
+          }}</label>
+          <select [disabled]="!processSetupData.processSetup.productClass || isShow"
+            class="form-control control-bg-gray" [(ngModel)]="processSetupData.processSetup.productCode" name="pFilter"
+            #pFilter="ngModel" (change)="onFilterChange($event)">
+            <option value=""></option>
+            <option value="{{ item?.code }}" *ngFor="let item of pFiltersArray">
+              {{ item?.code }} - {{ item?.description }}
+            </option>
+          </select>
+
+          <div class="text-danger" *ngIf="pFilter.errors && (pFilter.dirty || pFilter.touched)">
+            <p *ngIf="pFilter.errors.required">
+              {{ 'Product filter is required' | appTranslate | async }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row"> -->
+      <div class="col-md-1 mb-3">
+        <label class="form-label text-primary">{{
+          'System' | appTranslate | async
+        }}</label>
+
+        <input type="checkbox" class="form-control control-bg-gray" [(ngModel)]="processSetupData.processSetup.system"
+          name="sysUser" #sysUser="ngModel" [disabled]="isShow" />
+        <!-- <select
+          class="form-control control-bg-gray"
+          [(ngModel)]="processSetupData.processSetup.processCode"
+          name="sysUser"
+          required
+          #sysUser="ngModel"
+        >
+          <option value=""></option>
+          <option value="{{ item?.code }}" *ngFor="let item of systemUserArray">
+            {{ item?.title }}
+          </option>
+        </select> -->
+
+        <div class="text-danger" *ngIf="sysUser.errors && (sysUser.dirty || sysUser.touched)">
+          <p *ngIf="sysUser.errors.required">
+            {{ 'System and User is required' | appTranslate | async }}
+          </p>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+    <br />
+    <div class="row justify-content-end mt-3">
+      <div class="col-2">
+        <button [disabled]="isShow" class="btn btn-outline-primary w-100" (click)="saveBasicSection()">
+          <i *ngIf="!isSavingBasic" class="fas fa-save"></i>
+          <i *ngIf="isSavingBasic" class="fa fa-sync fa-spin"></i>
+          {{ (isSavingBasic ? 'Saving...' : 'Save') | appTranslate | async }}
+        </button>
+      </div>
+    </div>
+    <hr class="mt-5 mb-0" />
+    <div class="container position-relative pt-5">
+      <!-- below is an overlay to prevent interaction with this section when basic section above is not yet saved -->
+      <div *ngIf="disableTableSection" class="position-absolute top-0 w-100 start-0 h-100 disable-table-section"
+        matTooltip="Edit and save Basic section above to unlock below section"></div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="text-primary">
+                {{ 'Trigger Category' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Trigger' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'When?' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Duration' | appTranslate | async }}
+              </th>
+
+              <th scope="col" class="text-primary">
+                {{ 'Policy Status' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Event' | appTranslate | async }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="
+                let item of processSetupData.processSetupEvent;
+                let i = index
+              " class="align-top">
+              <td>
+                <div class="form-group">
+                  <select class="form-control control-bg-gray" [(ngModel)]="item.triggerCat"
+                      name="triggerCat_{{ item.rowId }}" required
+                    #triggerCat="ngModel" [disabled]="isShow || disableTableSection">
+                    <option value=""></option>
+                    <option value="{{ item?.code }}" *ngFor="let item of triggerCatArray">
+                      {{ item?.code }} - {{ item?.title }}
+                    </option>
+                  </select>
+
+                  <div class="text-danger" *ngIf="
+                      triggerCat.errors &&
+                      (triggerCat.dirty || triggerCat.touched)
+                    ">
+                    <p *ngIf="triggerCat.errors.required">
+                      {{
+                        'Trigger Category is required' | appTranslate | async
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <!-- [disabled]="!item.triggerCat" -->
+                  <select class="form-control control-bg-gray" [(ngModel)]="item.triggerEvent"
+                    (ngModelChange)="changeTriggerCategory($event)" [ngModelOptions]="{ standalone: true }"
+                    name="trigger_{{ item.rowId }}" required #trigger="ngModel"
+                    [disabled]="isShow || disableTableSection">
+                    <option value=""></option>
+                    <option value="{{ trigger?.code }}"
+                      *ngFor="let trigger of fetchCatChange|functionCaller1:triggerCat.value|async">
+                      {{ trigger?.code }} - {{ trigger?.title || trigger?.description }}
+                    </option>
+                  </select>
+
+                  <div class="text-danger" *ngIf="trigger.errors && (trigger.dirty || trigger.touched)">
+                    <p *ngIf="trigger.errors.required">
+                      {{ 'Trigger is required' | appTranslate | async }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <select class="form-control control-bg-gray" [(ngModel)]="item.when" name="when_{{ item.rowId }}"
+                    required #when="ngModel" [disabled]="isShow || disableTableSection">
+                    <option value=""></option>
+                    <option value="{{ item?.code }}" *ngFor="let item of whenArray">
+                      {{ item?.code }} - {{ item?.title }}
+                    </option>
+                  </select>
+
+                  <div class="text-danger" *ngIf="when.errors && (when.dirty || when.touched)">
+                    <p *ngIf="when.errors.required">
+                      {{ 'When is required' | appTranslate | async }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input class="form-control control-bg-gray" type="number" size="2" [(ngModel)]="item.duration"
+                    name="duration_{{ item.rowId }}" #duration="ngModel" required
+                    [disabled]="isShow || disableTableSection" />
+
+                  <div class="text-danger" *ngIf="
+                      duration.errors && (duration.dirty || duration.touched)
+                    ">
+                    <p *ngIf="duration.errors.required">
+                      {{ 'Duration is required' | appTranslate | async }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <select class="form-control control-bg-gray" slot="3" [(ngModel)]="item.policyStatus"
+                    name="policyStatus_{{ item.rowId }}" required #policyStatus="ngModel"
+                    [disabled]="isShow || disableTableSection">
+                    <option value=""></option>
+                    <option value="{{ item?.code }}" *ngFor="let item of policyStatusArray">
+                      {{ item?.code }} - {{ item?.description }}
+                    </option>
+                  </select>
+
+                  <div class="text-danger" *ngIf="
+                      policyStatus.errors &&
+                      (policyStatus.dirty || policyStatus.touched)
+                    ">
+                    <p *ngIf="policyStatus.errors.required">
+                      {{ 'Policy Status is required' | appTranslate | async }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input class="form-control control-bg-gray" type="text" [(ngModel)]="item.eventCode"
+                    name="event_{{ item.rowId }}" #event="ngModel" required
+                    [disabled]="isShow || disableTableSection" />
+
+                  <div class="text-danger" *ngIf="event.errors && (event.dirty || event.touched)">
+                    <p *ngIf="event.errors.required">
+                      {{ 'Event is required' | appTranslate | async }}
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <app-btn type="danger-outline" (mclick)="deleteProcessEvent(i)" [hidden]="isShow"
+                    [disabled]="disableTableSection" icon="delete">
+                  </app-btn>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="col-md-1 mb-3" *ngIf="!isShow">
+          <label class="form-label text-primary">&nbsp;</label>
+          <app-button [buttonType]="'add'" (click)="addProcessEvent()"></app-button>
+        </div>
+      </div>
+
+      <div class="row justify-content-end mt-3">
+        <div class="col-2">
+          <button class="btn btn-outline-primary w-100" (click)="createProcess()" [disabled]="isShow">
+            <i class="fas fa-check"></i>
+            {{ 'Submit' | appTranslate | async }}
+          </button>
+        </div>
+      </div>
+      <!-- <div class="row">
+    <div class="col-2">
+      <label class="form-label text-primary">{{"Total SLA for Process Group"|appTranslate|async}}</label>
+
+    </div>
+    <div class="col-1">
+      <input class="form-control  control-bg-gray" type="text" placeholder="days"/>
+
+    </div>
+    <div class="col-1">
+      <input class="form-control  control-bg-gray" type="text" placeholder="hours"/>
+
+    </div>
+    <div class="col-1">
+      <input class="form-control  control-bg-gray" type="text" placeholder="mins"/>
+
+    </div>
+    <div class="col-1">
+
+    </div>
+
+
+  </div> -->
+    </div>
+  </form>
+  <div class="d-flex justify-content-start my-3" *ngIf="isShow">
+    <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+    </app-btn>
+    <span class="mx-1"></span>
+    <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+    </app-btn>
+  </div>
+</loader>

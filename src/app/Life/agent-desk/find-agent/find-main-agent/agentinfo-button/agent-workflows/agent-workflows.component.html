@@ -1,0 +1,44 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{"Workflows"|appTranslate|async}}</h1>
+      <p class="py-3"><b>{{"Agent Name"|appTranslate|async}}:</b> <span class="px-3">{{findAgentService.agentInfo?.NAME}}</span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">{{"SLA Tracker"|appTranslate|async}}</th>
+          <th scope="col">{{"Task Code"|appTranslate|async}}</th>
+          <th scope="col">{{"Task"|appTranslate|async}}</th>
+          <th scope="col">{{"User Assigned"|appTranslate|async}}</th>
+          <th scope="col">{{"Group Assigned"|appTranslate|async}}</th>
+          <th scope="col">{{"Start"|appTranslate|async}}</th>
+          <th scope="col">{{"Due"|appTranslate|async}}</th>
+          <th scope="col" style="border-top-right-radius: 12px;">{{"Time Outside SLA"|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  >
+          <th scope="row">
+            <p class="colorplate btn-radius mx-auto" [ngStyle]="{'background-color': webflowsList.status }"></p>
+          </th>
+          
+          <td>{{webflowsList.code}}</td>
+          <td>{{webflowsList.description}}</td>
+          <td>{{webflowsList.assignedTo}}</td>
+          <td>{{webflowsList.assignedToGroup}}</td>
+          <td>{{webflowsList.startOn}}</td>
+          <td>{{webflowsList.dueOn}}</td>
+          <td>{{webflowsList.timeOsSla}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="col-md-2  mt-5">
+      <app-button [buttonType]="'btnCustomClone'" [text]="'Create New Task'"></app-button>
+    </div>
+  </div>
+
+</div>
+

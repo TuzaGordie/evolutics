@@ -1,0 +1,52 @@
+<div class="container mt-4">
+  <loader [loading]="loading" [text]="loadingText">
+    <form #ddForm="ngForm">
+      <div class="col-8 mx-auto ">
+        <div class="row mt-2">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'DD Method'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">{{'DD Date'|appTranslate|async}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2" *ngFor="let ddates of createDates.ddates; let i = index">
+          <div class="col">
+            <div class="form-group">
+              <select required class="form-control control-bg-gray" [(ngModel)]="ddates.ddMethod"
+                name="method_{{ddates.rowId}}">
+                <option *ngFor="let method of ddMethods" [value]="method.code">
+                  {{method.code}} - {{method.title}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <input required type="date" value="ddates.date" class="form-control control-bg-gray"
+                [(ngModel)]="ddates.date" name="date_{{ddates.rowId}}" />
+            </div>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'delete'" (click)="deleteDdates(i)" [text]="'Delete'"></app-button>
+          </div>
+        </div>
+        <div class="row justify-content-end mt-3">
+          <div class="col-4">
+            <app-button buttonType="add" (click)="addDdates()"></app-button>
+          </div>
+          <div class="col-4">
+
+          </div>
+          <div class="col-4">
+            <app-button buttonType="save" (click)="saveDdates()"></app-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </loader>
+</div>

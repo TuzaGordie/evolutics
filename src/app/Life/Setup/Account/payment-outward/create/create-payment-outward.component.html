@@ -1,0 +1,345 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts / Payment Outward'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container">
+    <br /><br /><br />
+    <form
+      [formGroup]="paymentOutwardForm"
+      (submit)="onSubmit(paymentOutwardForm)"
+    >
+      <ng-container formGroupName="companyPayout">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Default Claim Bank' | appTranslate | async
+            }}</label>
+            <select
+              class="form-control control-bg-gray"
+              formControlName="defaultPayoutBank"
+              #defaultPayoutBank
+            >
+              <option></option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Default Claim Bank Account No' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="defaultPayoutAccNo"
+              #defaultPayoutAccNo
+              class="form-control form-control-md control-bg-gray"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Default Claim Bank Sort Code' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="defaultPayoutSortCode"
+              #defaultPayoutSortCode
+              class="form-control form-control-md control-bg-gray"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Company' | appTranslate | async
+            }}</label>
+
+            <select
+              formControlName="companyCode"
+              class="form-control control-bg-gray"
+              #companyCode
+            >
+              <option *ngFor="let item of companyArray" value="{{ item.code }}">
+                {{ item.code }} - {{ item.description }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Direct Credit Batch File Name' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="dcBatchFile"
+              #dcBatchFile
+              class="form-control form-control-md control-bg-gray"
+            >
+              <option>1</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Mobile Money Batch File Name' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="mmBatchFile"
+              #mmBatchFile
+              class="form-control form-control-md control-bg-gray"
+            >
+              <option>1</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Cheque Batch File Name' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="chqBatchFile"
+              #chqBatchFile
+              class="form-control form-control-md control-bg-gray"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Encryption Process for Payments' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="encryptPayoutProcess"
+              #encryptPayoutProcess
+              class="form-control control-bg-gray"
+            >
+              <option></option>
+              <option>1</option>
+            </select>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container formGroupName="companyPayoutRounding">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Payout Currency' | appTranslate | async
+            }}</label>
+            <select
+              formControlName="currency"
+              #currency
+              class="form-control form-control-md control-bg-gray"
+            >
+              <option
+                *ngFor="let item of currencyArray"
+                value="{{ item.code }}"
+              >
+                {{ item.code }} - {{ item.description }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label text-primary">{{
+              'Rounding for PayOut' | appTranslate | async
+            }}</label>
+            <input
+              formControlName="rounding"
+              #rounding
+              class="form-control form-control-md control-bg-gray"
+            />
+          </div>
+        </div>
+      </ng-container>
+      <div class="table-responsive py-5">
+        <table class="table table-borderless">
+          <thead>
+            <tr class="text-bold">
+              <th scope="col" class="text-primary">
+                {{ 'Claim Type' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Payment Type' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Payment Acc Code' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Bank Code' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Bank Acc No' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Bank Sort Code' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'Payout Basis' | appTranslate | async }}
+              </th>
+              <th scope="col" class="text-primary">
+                {{ 'PayOut File Format' | appTranslate | async }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container formArrayName="companyPayoutAccTypes">
+              <tr
+                *ngFor="
+                  let companyPayoutAccType of getCompanyPayoutAccTypes;
+                  let in = index
+                "
+              >
+                <ng-container [formGroupName]="in">
+                  <td>
+                    <select
+                      formControlName="claimType"
+                      #claimType
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of claimTypeArray"
+                        value="{{ item.title }}"
+                      >
+                        {{ item.title }} - {{ item.title }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="paymentType"
+                      #paymentType
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of paymentTypeArray"
+                        value="{{ item.code }}"
+                      >
+                        {{ item.code }} - {{ item.description }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="payAccCode"
+                      #payAccCode
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of paymentAccCodeArray"
+                        value="{{ item.code }}"
+                      >
+                        {{ item.code }} - {{ item.description }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="bankCode"
+                      #bankCode
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of bankCodeArray"
+                        value="{{ item.code }}"
+                      >
+                        {{ item.code }} - {{ item.description }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="bankAccNo"
+                      #bankAccNo
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of bankAccNoArray"
+                        value="item.companyCode"
+                      >
+                        {{ item.code }} - {{ item.description }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="bankSortCode"
+                      #bankSortCode
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option>{{ 'sample' | appTranslate | async }}</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="payoutBasis"
+                      #payoutBasis
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of payoutBasisArray"
+                        value="{{ item.title }}"
+                      >
+                        {{ item.title }} - {{ item.title }}
+                      </option>
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      formControlName="payoutFileFormat"
+                      #payoutFileFormat
+                      class="form-control form-control-md control-bg-gray"
+                    >
+                      <option
+                        *ngFor="let item of fileFormatArray"
+                        value="{{ item.title }}"
+                      >
+                        {{ item.title }} - {{ item.title }}
+                      </option>
+                    </select>
+                  </td>
+                  <app-button
+                    [hidden]="isShow"
+                    (click)="deletePaymentOutward(in)"
+                    [buttonType]="'delete'"
+                  ></app-button>
+                </ng-container>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <app-button
+              [hidden]="isShow"
+              [buttonType]="'add'"
+              (click)="addPaymentOutward()"
+              [text]="'Add'"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div [hidden]="isShow" class="row justify-content-end">
+        <div class="col-md-2 py-2">
+          <app-button
+            [buttonType]="'save'"
+            (click)="onSubmit(paymentOutwardForm)"
+            [text]="'Save'"
+          ></app-button>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="d-lg-flex mt-2" *ngIf="isShow">
+        <app-btn
+          text="Edit"
+          routerLink="../edit"
+          icon="edit"
+          [queryParamsHandling]="'merge'"
+          type="secondary"
+        ></app-btn>
+        <span class="mx-1"></span>
+        <app-btn
+          text="Clone"
+          routerLink="../clone"
+          icon="clone"
+          [queryParamsHandling]="'merge'"
+          type="secondary"
+        >
+        </app-btn>
+      </div>
+    </form>
+  </div>
+</loader>

@@ -1,0 +1,68 @@
+<!-- <app-form-navigation [title]="'View Agent'"></app-form-navigation> -->
+<div class="container mt-5">
+  <app-topplace>
+    <span tabletoptotal>
+      {{'Total Unsettled'|appTranslate|async}}
+
+    </span>
+    <span tabletoptotalvalue>
+      {{totalUnsettled}}
+
+    </span>
+    <span tabletopunpaid>
+      {{"Days Outstanding"|appTranslate|async}}
+
+    </span>
+    <span tabletopunpaidvalue>
+      {{daysOutstanding}}
+
+    </span>
+  </app-topplace>
+
+
+  <table class="table table-responsive  ">
+    <thead class="py-3 theader bg-primary text-light">
+      <tr>
+        <th scope="col">{{"CN No"|appTranslate|async}}</th>
+        <th scope="col">{{"Policy No"|appTranslate|async}}</th>
+        <th scope="col">{{"CN Issued On"|appTranslate|async}}</th>
+        <th scope="col">{{"Amount"|appTranslate|async}}</th>
+        <th scope="col">{{"Currency"|appTranslate|async}}</th>
+        <th scope="col">{{"Created By"|appTranslate|async}}</th>
+        <th scope="col">{{"Cancelled"|appTranslate|async}}</th>
+        <th scope="col">{{"Cancelled By"|appTranslate|async}}</th>
+        <th scope="col">{{"Cancellation Reason"|appTranslate|async}}</th>
+        <th scope="col">{{"DN Number"|appTranslate|async}}</th>
+        <th scope="col">{{"Settled"|appTranslate|async}}</th>
+        <th scope="col">Days o/s</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of creditNotesBalanceList" (click)=navigateback();>
+        <th scope="row">{{item.cnNo}}</th>
+        <td>{{item.policyNo}}</td>
+        <td>{{item.cnIssuedOn}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.currency}}</td>
+        <td>{{item.createdBy}}</td>
+        <td>{{item.cancelled}}</td>
+        <td>{{item.cancelledBy}}</td>
+        <td>{{item.cancellationReason}}</td>
+        <td>{{item.dnNumber}}</td>
+        <td>{{item.settled}}</td>
+        <td>{{item.daysOutstanding}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between mt-5 mb-3 ">
+    <div class="me-4">
+      <app-button buttonType="btnCustomClone" text="View Credit Note Documents"></app-button>
+    </div>
+    <div class="me-4">
+      <app-button buttonType="btnCustomClone" text="Add Credit Note"></app-button>
+    </div>
+  </div>
+
+</div>

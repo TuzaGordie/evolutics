@@ -1,0 +1,258 @@
+<loader [loading]="loading">
+  <div class="" (click)="log()">
+    <div class="row justify-content-end">
+      <div class=" col-md-auto">
+        <app-btn
+          type="primary"
+          (click)="openCoverDialog()"
+          [disabled]="tableLoading"
+          >View Cover Details</app-btn
+        >
+      </div>
+    </div>
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">
+        {{ 'Basic Details' | appTranslate | async }}
+      </h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center">
+          <div class="mx-1 col-md mb-3 lbl1" *ngFor="let item of lbls1">
+            <app-editable-text-case
+              [formatter]="item.formatter"
+              [stacked]="true"
+              [mini]="true"
+              [form]="form"
+              [label]="item.label"
+              [name]="item.key"
+              [coloredLbl]="false"
+              [coloredVal]="true"
+              [route]="item.route"
+              [showEditing]="item.editable"
+              [hint]="item.hint"
+              [light]="true"
+              [value]="item.value"
+            >
+            </app-editable-text-case>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <h5 class="card-header bg-primary color-white">
+        {{ 'Policy Details' | appTranslate | async }}
+      </h5>
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center py-2">
+          <div class="col-md-8">
+            <div class="row align-items-center">
+              <div class="col-md-3">
+                <app-input-basic
+                  [mini]="true"
+                  (mchange)="refetch()"
+                  [light]="true"
+                  [form]="form"
+                  label="Policy Code"
+                  name="policyCode"
+                  [colored]="true"
+                  type="select"
+                  [options]="policyCodes"
+                  valueField="policyCode"
+                  labelField="policyCode"
+                >
+                </app-input-basic>
+              </div>
+              <div class="col-md-3">
+                <app-input-basic
+                  [mini]="true"
+                  [light]="true"
+                  [form]="form"
+                  label="Policy No Suffix"
+                  name="policyNoSuffix"
+                  [colored]="true"
+                  type="select"
+                  [options]="policyNoSuffixesList"
+                  valueField="policyNoSuffix"
+                  labelField="policyNoSuffix"
+                >
+                </app-input-basic>
+              </div>
+              <div class="col-md-4">
+                <app-editable-text-case
+                  [formatter]="policyStatus.formatter"
+                  [stacked]="true"
+                  [mini]="true"
+                  [form]="form"
+                  [label]="policyStatus.label"
+                  [name]="policyStatus.key"
+                  [coloredLbl]="true"
+                  [coloredVal]="false"
+                  [showEditing]="policyStatus.editable"
+                  [hint]="policyStatus.hint"
+                  [light]="true"
+                  [value]="policyStatus.value"
+                  [action]="openStatusDialog"
+                >
+                </app-editable-text-case>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto">
+            <div class="row">
+              <div class="col-md-auto my-2 my-lg-0">
+                <app-btn
+                  type="secondary"
+                  icon="edit"
+                  routerLink="../notes"
+                  [queryParams]="{
+                    policyNo: policyNo,
+                    policyCode: policyCode,
+                    policyNoSuffix: suffix,
+                    clientNo: policy?.ownerClientNo
+                  }"
+                >
+                  Note
+                </app-btn>
+              </div>
+              <div class="col-md-auto my-2 my-lg-0">
+                <app-btn icon="renew" type="secondary">Renewal</app-btn>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-top pt-2">
+          <div class="row">
+            <div class="col-xxl-2 col-md-3 mb-3" *ngFor="let item of lbls2">
+              <app-editable-text-case
+                [formatter]="item.formatter"
+                [stacked]="true"
+                [action]="item.action"
+                [form]="form"
+                [label]="item.label"
+                [name]="item.key"
+                [coloredLbl]="true"
+                [coloredVal]="false"
+                [route]="item.route"
+                [type]="item.inputType"
+                [showEditing]="item.editable"
+                [hint]="item.hint"
+                [light]="true"
+                [value]="item.value"
+              >
+              </app-editable-text-case>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="py-3 m-0 row justify-content-center">
+      <ng-container *ngFor="let item of btns1">
+        <div class="col-md p-1">
+          <button
+            class="btn w-100 btn-outline-primary btn-clone btn-raised mx-1 mx-xxl-2"
+            [routerLink]="['../' + item.value]"
+            [queryParams]="{
+              policyNo: policyNo,
+              policyCode: policyCode,
+              policyNoSuffix: suffix,
+              clientNo: policy?.ownerClientNo
+            }"
+          >
+            {{ item.key | appTranslate | async }}
+          </button>
+        </div>
+      </ng-container>
+    </div>
+    <div
+      class="py-3 d-lg-flex justify-content-center section-cards"
+      id="section_cardsno"
+    >
+      <ng-container *ngFor="let item of btns2">
+        <div
+          class="card bg-card color1 shadow-sm mx-1 my-1 pointer {{ item.cls }}"
+          routerLink="../{{ item?.action }}"
+          [queryParams]="{ policyNo, policyCode, policyNoSuffix:suffix, clientNo:policy?.ownerClientNo, owner:policy?.ownerName}"
+        >
+          <div class="card-body">
+            <h6 class="card-title">{{ item.key | appTranslate | async }}</h6>
+            <p class="btn-card-value" [innerHTML]="item.value"></p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</loader>
+
+<div
+  class="modal fade"
+  id="editbank"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+            <tr class="">
+              <th scope="col">{{ 'Bank Nunmber' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Account Name' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Bank Method' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Bank Name' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Sort Code' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Account Number' | appTranslate | async }}</th>
+              <th scope="col">{{ 'Blocked' | appTranslate | async }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5667_1</td>
+              <td>Ogene Obaseki</td>
+              <td>NG Banking</td>
+              <td>FBN</td>
+              <td>05677889</td>
+              <td>21923776</td>
+              <td>
+                <select name="" id="">
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>5667_1</td>
+              <td>Ogene Obaseki</td>
+              <td>NG Banking</td>
+              <td>FBN</td>
+              <td>05677889</td>
+              <td>21923776</td>
+              <td>
+                <select name="" id="">
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <!-- <app-button [buttonType]="'addCustom'" [text]="'Create new Account'" data-bs-dismiss="modal"></app-button> -->
+        <app-btn icon="add" type="outline-nm" data-bs-dismiss="modal"
+          >Create new Account</app-btn
+        >
+      </div>
+    </div>
+  </div>
+</div>

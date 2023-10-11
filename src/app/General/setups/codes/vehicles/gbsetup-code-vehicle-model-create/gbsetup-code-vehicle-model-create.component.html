@@ -1,0 +1,41 @@
+<loader [loading]="loading" class="vh-80">
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <app-input-basic label="Model Code" type="text" [form]="form" name="modelCode" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-3">
+          <app-input-basic label="Description" type="text" [form]="form" name="modelName" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-3">
+          <app-input-basic label="Vehicle Brand" type="text" [form]="form" name="vehicleBrand" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-3">
+          <app-input-basic label="Vehicle Make" type="text" [form]="form" name="vehicleMake" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-3">
+          <app-input-basic label="Model Start Year" type="text" [form]="form" name="modelStartYear" [stacked]="true">
+          </app-input-basic>
+        </div>
+        <div class="col-3">
+          <app-input-basic label="Model End Year" type="text" [form]="form" name="modelEndYear" [stacked]="true">
+          </app-input-basic>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-5">
+        <div class="col-2">
+          <app-btn type="primary" icon="save" *ngIf="!(type|isShowPage)" [hidden]="submitBtn" [valid]="form?.valid"
+            (mclick)="onSubmit()">
+            Save</app-btn>
+        </div>
+      </div>
+    </div>
+  </form>
+</loader>

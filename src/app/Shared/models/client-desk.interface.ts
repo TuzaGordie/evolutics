@@ -1,0 +1,46 @@
+import { EClientType } from "src/app/Life/client-desk/client-extras/client.interface";
+
+export interface IClientViewData {
+  address: string;
+  alternativeEmail: string;
+  alternativePhoneNumber: string;
+  band: string;
+  bankNo: string;
+  category: string;
+  clientNo: string;
+  clv: string;
+  communication?: any;
+  crmId: string;
+  dateCreated: Date;
+  dateOfBirth?: any;
+  email: string;
+  employer?: any;
+  enroleeNo?: string;
+  enroleeSuffix?: string;
+  financialSizeCategory?: any;
+  firstName: string;
+  fullName: string;
+  gender: string;
+  idNumber?: any;
+  kyc?: any;
+  language: string;
+  maritalStatus: string;
+  middleName: string;
+  noOfEmployee?: any;
+  noOfGroups?: any;
+  occupationGroup?: any;
+  phoneNumber: string;
+  providerCategory: string;
+  providerCode?: any;
+  providerNo:   string [];
+  providerSubCategory: string;
+  redgNo?: any;
+  salutation?: any;
+  sector: string;
+  socialMedia?: any;
+  state?: any;
+  surname: string;
+  title: string;
+  type: EClientType;
+  website?: any;
+}

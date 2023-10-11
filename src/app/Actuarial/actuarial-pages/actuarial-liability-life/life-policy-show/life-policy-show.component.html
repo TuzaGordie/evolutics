@@ -1,0 +1,36 @@
+<app-form-navigation></app-form-navigation>
+
+<div class="container">
+  <div class="">
+    <div class="row">
+      <div class="col-md-4">
+        <label class="small1">Policy No: <span class="text-primary">{{policyNo}}</span> </label>
+      </div>
+      <div class="col-md-4">
+        <label class="small1">Opening Date: <span class="text-primary"> {{openingDate}} </span></label>
+      </div>
+      <div class="col-md-4">
+        <label class="small1">Closing Date: <span class="text-primary">{{closingDate}} </span></label>
+      </div>
+    </div>
+
+    <div class="table-responsive mt-5">
+      <table class="table table-striped">
+        <thead>
+        <th class="small">Transaction No</th>
+        <th class="small">Transaction Date</th>
+        <th class="small">Status at this date</th>
+        <th class="small">Amount</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of tableData">
+          <td>{{item.transNo}}</td>
+          <td>{{item.transDate    }}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.amount | currency:'USD':'symbol':'1.2-2'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

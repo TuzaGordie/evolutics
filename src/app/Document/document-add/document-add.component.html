@@ -1,0 +1,217 @@
+<app-form-navigation [title]="'Document / Upload'"></app-form-navigation>
+<div class="container-sm pb-5" id="form-body">
+
+    <div class="row g-5">
+        <div class="col-4">
+            <div class="form-group mt-1">
+            <label>{{'Ref Category'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="REF_CATEGORY" #refCode (change)="findRouteParameter(refCode.value)">
+                    <option [value]=""> </option>
+                    <option *ngFor="let category of refCategories" [value]="category.title">{{category.code}}-{{category.title}}</option>
+                </select>
+                <span class="text-danger mt-1" *ngIf="isRefCatValid">Ref Category is required</span>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <div class="row g-2">
+                    <div class="col-9">
+                        <label>Ref No</label>
+                        <input class="form-control control-bg-gray" [(ngModel)]="REF_NO" name="refNo" type="text" (change)="getPolicyCode()"/>
+                        <span class="text-danger mt-1" *ngIf="isRefNo">Ref No is required</span>
+                    </div>
+                    <div class="col-3">
+                        <label>&nbsp;</label>
+                        <app-btn class="find-button" icon="search" routerLink='/life/{{routeParams}}' (keyup)="getRefNo()">
+                             Find
+                        </app-btn>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label></label>
+                <input class="form-control control-bg-gray mt-2" value="{{readOnly}}" type="text" disabled />
+            </div>
+        </div>
+
+        <div class="col-4" *ngIf="isPolicyNo">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group mt-1">
+                <label>{{'Policy Code'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray mt-2 ht-48" [(ngModel)]="POLICY_CODE">
+                    <option [value]="pc.policyCode" *ngFor="let pc of policyCodes">{{pc.policyCode}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group mt-1">
+                <label>{{'Policy Suffix No'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray mt-2 ht-48" [(ngModel)]="POLICY_NO_SUFFIX">
+                    <option [value]="pc.policyNoSuffix" *ngFor="let pc of policyCodes">{{pc.policyNoSuffix}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label>{{'File'|appTranslate|async}}</label>
+                <input class="form-control" id="upload_file" type="file" #file (change)="onChange(file)" multiple/>
+                <label class="btn btn-lg" for="file" (click)="trigger()">
+                    <i class="fa fa-upload"></i> Choose file...
+                </label>
+                <span class="mt-1" *ngIf="fileName">{{fileName}}</span>
+                <span class="text-danger mt-1" *ngIf="isFile">Upload a file</span>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label>{{'Title'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray mt-2" [(ngModel)]="TITLE" name="title" type="text" />
+            </div>
+        </div>
+
+        <div class="col-4">
+          <div class="form-group mt-1">
+              <label>{{'Sensitivity'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray mt-2 ht-48" [(ngModel)]="SENSITIVITY">
+                  <option value=""></option>
+                  <option  [value]="sensitivity.code" *ngFor="let sensitivity of sensitivities">{{sensitivity.code}}-{{sensitivity.title}}</option>
+              </select>
+          </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label>{{'Category'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="CATEGORY" #category (change)="getCategoryCode(category.value)">
+                    <option [value]=""> </option>
+                    <option *ngFor="let category of categories" [value]="category.code">
+                        {{category.code}}-{{category.title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label>{{'Sub Category'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="SUB_CATEGORY">
+                    <option [value]=""> </option>
+                    <option [value]="category.code" *ngFor="let category of subCategories">{{category.code}}-{{category.title}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+          <div class="row">
+              <div class="col-2">
+                  <div class="form-group mt-1">
+                      <label>{{'Boxed'|appTranslate|async}}</label>
+                      <input class="form-control" (click)="boxVisibility()" [(ngModel)]="isBoxed" type="checkbox" />
+                  </div>
+              </div>
+              <div class="col" *ngIf="isBoxed">
+                  <div class="form-group mt-1">
+                      <label>{{'Box No'|appTranslate|async}}</label>
+                      <input class="form-control control-bg-gray" name="boxno" [(ngModel)]="BOX_NO" type="text" />
+                  </div>
+              </div>
+          </div>
+      </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label>{{'Company'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray ht-48" [(ngModel)]="COMPANY">
+                    <option [value]=""> </option>
+                    <option  [value]="company.code" *ngFor="let company of companies">{{company.code}}-{{company.description}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-1">
+                <label>{{'Branch'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray ht-48" [(ngModel)]="BRANCH">
+                    <option [value]=""> </option>
+                    <option  [value]="branch.code" *ngFor="let branch of branches">{{branch.code}}-{{branch.description}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row g-4 mt-2">
+        <div class="col-8">
+            <div class="row g-4">
+                <div class="col-6">
+                    <h6 class="text-center sla-text">{{'Default SLA'|appTranslate|async}}</h6>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control  control-bg-gray mt-2" name="d-sla-d" [(ngModel)]="D_DAY"
+                                    type="text" placeholder="Days" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control control-bg-gray mt-2" name="d-sla-h" [(ngModel)]="D_HOUR"
+                                    type="text" placeholder="hours" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control control-bg-gray mt-2" name="d-sla-m" [(ngModel)]="D_MIN"
+                                    type="text" placeholder="mins" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h6 class="text-center sla-text">{{'Modify SLA'|appTranslate|async}}</h6>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control control-bg-gray mt-2" name="m-sla-d" type="text"
+                                    [(ngModel)]="M_DAY" placeholder="Days" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control control-bg-gray mt-2" name="m-sla-h" type="text"
+                                    [(ngModel)]="M_HOUR" placeholder="hours" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <input class="form-control control-bg-gray mt-2" name="m-sla-m" type="text"
+                                    [(ngModel)]="M_MIN" placeholder="mins" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <div class="form-group">
+            <app-btn type="outline" icon="upload" (click)="uploadDocument()">
+                Upload
+            </app-btn>
+        </div>
+      </div>
+    </div>
+</div>

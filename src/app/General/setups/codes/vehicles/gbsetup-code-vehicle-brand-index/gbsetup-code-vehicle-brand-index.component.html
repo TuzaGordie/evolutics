@@ -1,0 +1,42 @@
+<div class="container-sm">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+        <app-autocomplete label="Select Vehicle Brand" [form]="form" name="vehicleBrand" [stacked]="true"
+          [showValidation]="vehicleBrand.invalid" [showValidationIcon]="false" [options]="ves.getVehicleBrand|functionCaller|async" labelType="cd"
+          valueField="code" #vehicleBrand>
+        </app-autocomplete>
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="dark" icon="show" [valid]="form?.valid" (mclick)="show(vehicleBrand.value)">Show</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../vehicle-brand-create"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="clone(vehicleBrand.value)">Clone
+            </app-btn>
+          </div>
+        </div>
+
+        <!-- <div class="form-group row my-2">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'show'" routerLink="../code-vehicle-brand-create"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'create'" routerLink="../code-vehicle-brand-create"></app-button>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-button [buttonType]="'clone'" routerLink="../code-vehicle-brand-create"></app-button>
+          </div>
+
+        </div> -->
+        <br>
+      </form>
+
+    </div>
+  </div>
+
+
+</div>

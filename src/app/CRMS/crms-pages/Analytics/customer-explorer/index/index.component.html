@@ -1,0 +1,238 @@
+<app-form-navigation [title]="'Analytics/Customer Explorer'"></app-form-navigation>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3">
+      <select class="form-control  control-bg-gray">
+        <option>Select Company</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-control  control-bg-gray">
+        <option>{{'Select Customer Group'|appTranslate|async}}</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3 d-flex align-items-center justify-content-end">
+      <label for="" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">{{'Select Attributes to Display'|appTranslate|async}} &nbsp;
+        <i class="fas fa-bars"></i></label>
+    </div>
+  </div>
+
+  <h3 class="my-4"><span class="text-danger">{{'Group'|appTranslate|async}} : </span>{{'VIP Class'|appTranslate|async}}</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card height100">
+        <div class="card-header text-center">{{'GROUP'|appTranslate|async}}</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <label for="" class="text-primary"># {{'of Customers:'|appTranslate|async}} </label>
+            </div>
+            <div class="col">
+              <label for="" class="">{{'3500'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="" class="text-primary">{{'Snapshot Date'|appTranslate|async}}: </label>
+            </div>
+            <div class="col">
+              <label for="" class="">{{'2020-12-01'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="" class="text-primary">{{'Band'|appTranslate|async}}: </label>
+            </div>
+            <div class="col">
+              <label for="" class="">{{'C'|appTranslate|async}}</label>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card height100">
+        <div class="card-header text-center">{{'LAST 12 MONTHS REVENUE'|appTranslate|async}}</div>
+        <div class="card-body">
+          <div class="color-row"><p class="color-box color-pink"></p> <span>{{'N300,000,350 Max'|appTranslate|async}}</span></div>
+          <div class="color-row"><p class="color-box color-pink"></p> <span>{{'N500,000 Min'|appTranslate|async}}</span></div>
+          <div class="color-row"><p class="color-box darkpink"></p> <span>{{'N4,000,200 Avg'|appTranslate|async}}</span></div>
+          <div class="color-row"><p class="color-box darkred"></p> <span>{{'N3,330,200 Median'|appTranslate|async}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card height100">
+        <div class="card-header text-center">{{'FUTURE VALUE'|appTranslate|async}}</div>
+        <div class="card-body">
+          <div class="color-row"><p class="color-box color-pink"></p> <span>{{'N1,259 Max'|appTranslate|async}}</span></div>
+          <div class="color-row"><p class="color-box color-pink"></p> <span>{{'N360 Min'|appTranslate|async}}</span></div>
+          <div class="color-row"><p class="color-box darkpink"></p> <span>{{'N568 Avg'|appTranslate|async}}</span></div>
+          <div class="color-row"><p class="color-box darkred"></p> <span>{{'N442 Median'|appTranslate|async}}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card height100">
+        <div class="card-header text-center">{{'PERSISTENCY'|appTranslate|async}}</div>
+        <div class="card-body">
+          <circle-progress
+            [percent]="80"
+            [radius]="100"
+            [outerStrokeWidth]="23"
+            [innerStrokeWidth]="8"
+            [outerStrokeColor]="'#DB0041'"
+            [innerStrokeColor]="'#fff'"
+            [animation]="true"
+            [animationDuration]="300"
+
+          ></circle-progress>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Select Attributes To Display'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <input type="search" placeholder="Quick Search" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Churn Rate'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Future Value'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'VIP Status'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Favorite PLatform'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Number Of Policies, Lifetime'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Premium Paid Last Month'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Premiums Paid Last Year'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Most Effective Channel'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Percent of Online Purchases Last Year'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Percent of Offline Purchases Last Year'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{'Percent of Discounts, Last 3 Months'|appTranslate|async}} </label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{Total Return Amount, Lifetime'|appTranslate|async}}</label>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-1">
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label ">{{Email'|appTranslate|async}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="btnCustomCloneRed" text="Cancel" data-bs-dismiss="modal"></app-button>
+        <app-button buttonType="btnCustomCloneRed" text="Done" data-bs-dismiss="modal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

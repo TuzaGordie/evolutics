@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="">
+        <div class="border-bottom text-success">
+            <label for="">
+                New Cost Center
+            </label>
+        </div>
+        <form [formGroup]="form">
+            <div class="row text-success">
+                    <div class="col-md-4">
+                        <div class="mt-3">
+                            <label for="">Code</label>
+                            <input type="text" class="form-control" formControlName="code">
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" formControlName="name">
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Cost SubType</label>
+                            <select name="" id="" class="form-control" formControlName="costSubType">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Line Type</label>
+                            <select name="" id="" class="form-control" formControlName="lineType">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Totalling</label>
+                           <select name="" id="" class="form-control" formControlName="totalling">
+                               <option value=""></option>
+                           </select>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <label for="">Responsible Person</label>
+                            <select name="" id="" class="form-control" formControlName="resPerson">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                                            
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mt-3">
+                            <label for="">Balance at Date</label>
+                            <input type="text" class="form-control" formControlName="balAtDate">
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Balance to Allocate</label>
+                            <!-- <input type="text" class="form-control" formControlName="no"> -->
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Sorting Order</label>
+                            <input type="text" class="form-control" formControlName="sortingOrder">
+                        </div>
+                             <div class="mt-3">
+                            <label for="">Blank Line</label>
+                            <input type="checkbox" class="form-control" [style.width.px]='styleCheck' formControlName="blankLine"/>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">New Page</label>
+                            <input type="checkbox" class="form-control" [style.width.px]='styleCheck' formControlName="newPage"/>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Blocked</label>
+                            <input type="checkbox" class="form-control" [style.width.px]='styleCheck' formControlName="blocked"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Note</label>
+                           <textarea name="" id="" cols="30" rows="10" class="form-control" formControlName="note"></textarea>
+                    </div>
+        </div>
+                        <div class="border-top border-bottom text-success my-3">             
+                        <div class="mt-3">
+                            <label for="">Last Modify Date: </label>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Modify By: </label>
+                        </div>
+                </div>
+                <div class="py-3 d-flex justify-content-end">
+                    <button class="btn btn-lg btn-outline-success">
+                        <fa-icon [icon]="faSave"></fa-icon>
+                    Save
+                    </button>
+                </div>
+        </form>
+    </div>
+</div>
+

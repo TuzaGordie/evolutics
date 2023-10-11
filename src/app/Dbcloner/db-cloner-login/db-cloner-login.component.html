@@ -1,0 +1,31 @@
+<div class="d-flex justify-content-center w-100">
+  <div class="bg-white card">
+    <div class="heading-area d-flex flex-nowrap justify-content-between px-5 pt-3 pb-2 align-items-center">
+      <!-- <h1 class="text-primary">Login</h1> -->
+      <!-- <button routerLink="/dbcloner/home" class="btn-close" aria-label="Close" type="button"></button> -->
+    </div>
+    <form [formGroup]="form" class="p-5">
+      <div class=" row justify-content-center gx-1 gy-2">
+        <div class="col-sm-9">
+          <app-input-basic label="Host Name" [colored]="true" type="text" [form]="form" name="server" [stacked]="true">
+          </app-input-basic>
+        </div> 
+        <div class="col-sm-9">
+          <app-input-basic label="Account Name" [colored]="true"  type="text" [form]="form" name="accountName" [stacked]="true">
+          </app-input-basic>
+        </div> 
+        <div class="col-sm-9">
+          <app-input-basic label="User Name" [colored]="true" type="text" [form]="form" name="userName" [stacked]="true">
+          </app-input-basic>
+        </div> 
+        <div class="col-sm-9">
+          <app-input-basic label="Password" [colored]="true"  type="text" [form]="form" name="password" [stacked]="true">
+          </app-input-basic>
+        </div> 
+        <div class="col-sm-9">
+          <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="onSubmit()">Login</app-btn>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

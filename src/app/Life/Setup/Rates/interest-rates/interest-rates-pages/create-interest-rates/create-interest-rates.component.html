@@ -1,0 +1,103 @@
+<div class="container-fluid mt-4" id="form-body">
+  <div class="container">
+
+    <form [formGroup]="form">
+      <div class="row mb-4">
+        <div class="col-6">
+          <div class="form-group">
+            <label class="text-primary">{{"Interest Rate Code"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray" type="text" name="code" value="{{code}}" disabled>
+          </div>
+        </div>
+  
+        <div class="col-6">
+          <div class="form-group">
+            <label class="text-primary">{{"Description"|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray" type="text" name="description" formControlName="description">
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-6">
+          <label class="text-primary">{{"Interest Rate Group "|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray" name="interestGroup" formControlName="interestGroup">
+            <option value=""></option>
+            <option [value]="rate.code" *ngFor="let rate of intRateGroup">{{rate.code}}-{{rate.title}}</option>
+        </select>
+        </div>
+        <div class="col-6">
+          <label class="text-primary">{{"Table Format"|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray" name="tableFormat" formControlName="tableFormat" (change)="checkFormatCode()">
+            <option value=""></option>
+            <option [value]="format.code" *ngFor="let format of tableDataList">{{format.code}}-{{format.title}}</option>
+        </select>
+        </div>
+      </div>
+  
+      <div class="row" *ngIf="disable.table">
+        <div class="col-6">
+          <label class="text-primary">{{"Table"|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray" formControlName="table">
+            <option value=""></option>
+            <option [value]="data.code" *ngFor="let data of tableData">
+              {{data.code}}-{{data.description}}
+            </option>
+        </select>
+        </div>
+        <div class="col-6"></div>
+      </div>
+  
+      <div class="row g-3 align-items-end mt-2" *ngIf="disable.rate">
+        <ng-container formArrayName="interestRateValuesList">
+          <ng-container *ngFor="let subForm of versions?.controls; let i = index;" [formGroupName]="i">
+            <div class="col-lg-6">
+              <div class="row align-items-end">
+                <div class="col-md">
+                  <div class="form-group mt-2">
+                    <app-input-basic [light]="true" label="Date From" type="date" [form]="subForm" name="dateFrom"
+                      [stacked]="true" [showValidationIcon]="false" [showValidation]="dateFrom.invalid" #dateFrom>
+                    </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-md">
+                  <div class="form-group mt-2">
+                    <app-input-basic [light]="true" label="Rate (%)" type="number" [form]="subForm" name="rate"
+                      [stacked]="true" [showValidationIcon]="false" [showValidation]="rate.invalid" #rate>
+                  </app-input-basic>
+                  </div>
+                </div>
+                <div class="col-auto d-flex align-items-end">
+                  <div class="form-group mt-2">
+                    <app-btn icon="delete" type="danger-outline" [iconBtn]="true" [disabled]="versions?.length==1" (mclick)="removeVersionRow(i)">
+                    </app-btn>
+                  </div>
+                </div>
+                <div class="col-auto d-flex align-items-end">
+                  <div class="from-group mt-2">
+                    <app-btn icon="add" type="outline" [iconBtn]="true" (mclick)="addVersionRow(null,i+1)">
+                    </app-btn>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+
+    </form>
+    
+    <div *ngIf="!isCreated" class="row g-3 d-flex justify-content-end mt-4">
+      <div *ngIf="!isShow" class="col-2">
+        <app-btn type="outline" (click)="submit()" icon="file">Save</app-btn>
+      </div>
+    </div>
+
+    <div *ngIf="isCreated" class="row g-3 d-flex justify-content-end mt-4">
+      <div class="col-2">
+        <app-btn type="outline" (click)="createNew()" icon="add">Create New</app-btn>
+      </div>
+    </div>
+
+  </div>
+</div>

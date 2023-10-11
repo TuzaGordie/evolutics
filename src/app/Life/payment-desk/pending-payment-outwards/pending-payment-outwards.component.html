@@ -1,0 +1,412 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="form-group mt-2">
+        <div class="row g-3 form-group mt-2 pt-2">
+          <div class="col-1">
+            <label class="text-primary form-label">{{'Show All'|appTranslate|async}}</label>
+            <input class="form-control width-unset control-bg-gray" id="showAll" type="checkbox" (change)="reset()"/>
+          </div>
+          <div class="col form-group">
+            <label class="text-primary form-label">{{'Payment Status'|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray" [(ngModel)]="filterPaymentStatus" (change)="filter()">
+              <option value=""></option>
+              <option [value]="status.code" *ngFor="let status of paymentStatus">{{status.code}}-{{status.title}}</option>
+            </select>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="text-primary form-label">{{'Company'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" [(ngModel)]="filterCompanyCode" (change)="filter()">
+                <option value=""></option>
+                <option [value]="company.code" *ngFor="let company of companies">{{company.code}}-{{company.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="text-primary form-label">{{'Currency'|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" [(ngModel)]="filterCurrency" (change)="filter()">
+                <option value=""></option>
+                <option [value]="currency.code" *ngFor="let currency of currencies">{{currency.code}}-{{currency.description}}</option>
+              </select>
+            </div>
+          </div>
+          <!-- <div class="col-1"></div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">Items per page</label>
+              <select class="form-control control-bg-gray" #select>
+                <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+              </select>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="items-per-page mt-2">
+        <div class="left">
+          <div class="row" *ngIf="checkedList2.length">
+            <div class="col">
+              <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizeModal">{{'Authorize'|appTranslate|async}}</span>
+            </div>
+            <div class="col">
+              <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declineModal">{{'Decline'|appTranslate|async}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div>
+
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 100%; overflow-x: scroll;">
+        <table class="table table-responsive  table-striped form-group mt-2 pt-2">
+          <thead class="py-3">
+            <tr>
+              <th scope="col">{{'Payment ID'|appTranslate|async}}</th>
+              <th scope="col">{{'Claim No'|appTranslate|async}}</th>
+              <th scope="col">{{'Policy No'|appTranslate|async}}</th>
+              <th scope="col">{{'Next Tier'|appTranslate|async}}</th>
+              <th scope="col">{{'Initial Estimate'|appTranslate|async}}</th>
+              <th scope="col">{{'Adjustments'|appTranslate|async}}</th>
+              <th scope="col">{{'Final Estimate'|appTranslate|async}}</th>
+              <th scope="col">{{'Currency'|appTranslate|async}}</th>
+              <th scope="col">{{'Company Code'|appTranslate|async}}</th>
+              <th scope="col">{{'Created On'|appTranslate|async}}</th>
+              <th scope="col">{{'Created By'|appTranslate|async}}</th>
+              <th scope="col">{{'Updated By'|appTranslate|async}}</th>
+              <th scope="col">{{'Payment Status'|appTranslate|async}}</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let payment of pendingPayments">
+              <td ><a routerLink="../view-payout" [queryParams]="{slug:payment.id}">{{payment.id}}</a></td>
+              <td><a [routerLink]="[ '../view-claim' ]" [queryParams]="{claimNo:payment.claimNo}">{{payment.claimNo}}</a></td>
+              <td ><a routerLink="../../policy-desk/view-policy" [queryParams]="{number:payment.policyNo,code:payment.policyCode,suffix:payment.policyNoSuffix}">{{payment.policyNo}}</a></td>
+              <td>{{payment.nextAuthTier}}</td>
+              <td>{{payment.initialAmount | number}}</td>
+              <td>{{payment.adjAmt | number}}</td>
+              <td>{{payment.netAmt | number}}</td>
+              <td>{{payment.currency}}</td>
+              <td>{{payment.companyCode}}</td>
+              <td>{{payment.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+              <td>{{payment.createdBy}}</td>
+              <td>{{payment.lastChangeBy}}</td>
+              <td>{{payment.status}}</td>
+
+            </tr>
+            <tr *ngIf="connection.creating">
+              <td colspan="14">
+                <loader [loading]="connection.creating" text="Fetching records" class="vh-30">
+                </loader>
+              </td>
+            </tr>
+            <tr *ngIf="data.retrieved && pendingPayments.length === 0">
+              <td colspan="14">
+                <span class="text-primary">{{'No records were found.'|appTranslate|async}}</span>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Payment ID'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-0">
+          <div class="col-2 ">
+            <p >{{'Policy No'|appTranslate|async}}: <span class="text-primary">LRP3440298</span></p>
+
+          </div>
+          <div class="col-2 ">
+            <p >{{'Owner Client Number'|appTranslate|async}}: <span class="text-primary">xxxxxx</span></p>
+
+          </div>
+          <div class="col ">
+            <p >{{'Joint Owner Client Number'|appTranslate|async}}: <span class="text-primary">xxxxx</span></p>
+
+          </div>
+          <div class="col ">
+            <p >{{'External Ref'|appTranslate|async}}: <span class="text-primary">xxxxx</span></p>
+
+          </div>
+          <div class="col ">
+            <p >{{'Cover Name'|appTranslate|async}}: <span class="text-primary">Savigns</span></p>
+
+          </div>
+
+        </div>
+        <div class="row g-0">
+          <div class="col-2 ">
+            <p >{{'Referer'|appTranslate|async}}: <span class="text-primary">256-amala</span></p>
+
+          </div>
+          <div class="col-3 ">
+            <p >{{'Policy Code Claimed on'|appTranslate|async}}: <span class="text-primary">3</span></p>
+
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-2">
+            <span class="text-primary text-bold">{{'Renewals'|appTranslate|async}}:</span>
+          </div>
+          <div class="col-1">
+            1
+          </div>
+          <div class="col-1">
+            2
+          </div>
+          <div class="col-1">
+            3
+          </div>
+        </div>
+        <hr>
+
+        <div class="row">
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Owner Full Name'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Joint Owner Full Name'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Matures'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Issue Date'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Status'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Currency'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Outstanding premiums'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Outstanding target contributions'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Total Sum at Risk'|appTranslate|async}}</label></div>
+        </div>
+        <div class="row">
+          <div class="col"><p>James Bond</p></div>
+          <div class="col"><p>Ogbene Tchokubu</p></div>
+          <div class="col"><p>31/oct/2024</p></div>
+          <div class="col"><p>12/oct/2023</p></div>
+          <div class="col"><p>23/oct/1975</p></div>
+          <div class="col"><p>NGN</p></div>
+          <div class="col"><p>23,000</p></div>
+          <div class="col"><p>20,000</p></div>
+          <div class="col"><p>2,000,000</p></div>
+
+        </div>
+        <div class="row">
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Deposit Balance'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Annualised Premium'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Premium Payment Term'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Policy Term'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Premium Payment Method'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Payee Account'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Payment Outwards Accounts'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'Benefits Assigned To'|appTranslate|async}}</label></div>
+          <div class="col"><label for="" class="form-label text-primary small1">{{'LA01'|appTranslate|async}}</label></div>
+        </div>
+        <div class="row">
+          <div class="col"><p>405,000</p></div>
+          <div class="col"><p>230,000</p></div>
+          <div class="col"><p>0 yr 6 mo</p></div>
+          <div class="col"><p>0 yr 6 mo</p></div>
+          <div class="col"><p>Direct Debits</p></div>
+          <div class="col"><p>xxx_1</p></div>
+          <div class="col"><p>xxx_1</p></div>
+          <div class="col"><p>3432-James Bond</p></div>
+          <div class="col"><p>LA01</p></div>
+
+        </div>
+
+        <table class="table table-striped mt-4">
+          <thead>
+          <tr>
+            <th scope="col">{{'Cover Code'|appTranslate|async}}</th>
+            <th scope="col">{{'Cover Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Life Assured'|appTranslate|async}}</th>
+            <th scope="col">{{'Issued Age'|appTranslate|async}}</th>
+            <th scope="col">{{'Current Age'|appTranslate|async}}</th>
+            <th scope="col">{{'Prem Freq/Method'|appTranslate|async}}</th>
+            <th scope="col">{{'Periodic Premium'|appTranslate|async}}</th>
+            <th scope="col">{{'Sum Assured'|appTranslate|async}}</th>
+            <th scope="col">{{'Issue Dt'|appTranslate|async}}</th>
+            <th scope="col">{{'Next Prem Due Date'|appTranslate|async}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">LRT</th>
+            <td>Retirement Savings</td>
+            <td>4587</td>
+            <td>6777</td>
+            <td>---</td>
+            <td>MD</td>
+            <td>25,000</td>
+            <td>500,000</td>
+            <td>01/jan/2022</td>
+            <td>23/Oct/2020</td>
+          </tr>
+          <tr>
+            <th scope="row">LRT</th>
+            <td>Retirement Savings</td>
+            <td>4587</td>
+            <td>6777</td>
+            <td>---</td>
+            <td>MD</td>
+            <td>25,000</td>
+            <td>500,000</td>
+            <td>01/jan/2022</td>
+            <td>23/Oct/2020</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="row justify-content-center my-4">
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Documents'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Workflows'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Endorsements'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Reinsurance'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Pricing'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Underwriting'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Commissions'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Future Actions'"></app-button>
+          </div>
+          <div class="col">
+            <app-button [buttonType]="'btnCustomCloneRaised'" [text]="'Peril'"></app-button>
+          </div>
+
+        </div>
+
+        <div class="d-flex justify-content-around section-cards-2 card-blue">
+          <div class="card color2 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Loss Ratios'|appTranslate|async}}</h6>
+
+            </div>
+
+          </div>
+          <div class="card color1 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Loss Details'|appTranslate|async}}</h6>
+
+            </div>
+
+          </div>
+          <div class="card color1 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Payee'|appTranslate|async}}</h6>
+
+            </div>
+
+          </div>
+          <div class="card color1 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Claim Adjustment'|appTranslate|async}}</h6>
+
+            </div>
+
+          </div>
+          <div class="card color1 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Loss Parties'|appTranslate|async}}</h6>
+
+            </div>
+
+          </div>
+          <div class="card color1 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Payment Auth History'|appTranslate|async}}</h6>
+
+            </div>
+
+          </div>
+          <div class="card color2 shadow-sm" >
+            <div class="card-body">
+              <h6 class="card-title">{{'Time Outside SLA'|appTranslate|async}}</h6>
+              <p class="card-number">10Hr:15mn</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="btnCustomClone" data-bs-dismiss="modal" text="Action" data-bs-toggle="modal" data-bs-target="#authorizeModal"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Authorize Modal -->
+<div class="modal fade" id="authorizeModal" tabindex="-1" aria-labelledby="authorizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="exampleModalLabel">{{'ALERT'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Authorize'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let payment of checkedList2">
+          <p><b class="text-primary">{{payment.PaymentId}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5"><i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}</button>
+        <button type="button" class="btn btn-danger px-5"><i class="fas fa-ban"></i> {{'No'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">{{'WARNING'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Decline'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let payment of checkedList2">
+          <p><b class="text-primary">{{payment.PaymentId}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5"><i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}</button>
+        <button type="button" class="btn btn-danger px-5"><i class="fas fa-ban"></i> {{'No'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>

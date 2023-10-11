@@ -1,0 +1,20 @@
+.curr-value {
+    font-size: 26px;
+    color: rgba(0, 0, 0, 1);
+}
+
+.modal-dialog {
+    width: 90vw;
+    max-width: 721px;
+}
+.modal-content {
+    border-radius: 0px 20px;
+    padding: 35px 54px 35px 56px;
+}
+
+.modal-header, .modal-footer, .modal-body {
+    border: none;
+}
+label {
+    min-width: 88px;
+}

@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="">
+        <div class="border-bottom text-success">
+            <label for="">
+                New Cost Allocation
+            </label>
+        </div>
+        <form [formGroup]="form">
+            <div class="row text-success">
+                    <div class="col-md-4">
+                        <div class="mt-3">
+                            <label for="">ID</label>
+                            <input type="text" class="form-control" formControlName="id">
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Level</label>
+                            <input type="text" class="form-control" formControlName="level">
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Valid From</label>
+                            <select name="" id="" class="form-control" formControlName="validFrom">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Valid To</label>
+                            <select name="" id="" class="form-control" formControlName="validTo">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Variant</label>
+                            <input type="text" class="form-control" formControlName="variant">
+                        </div>
+                                            
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mt-3">
+                            <label for="">Cost Type Range</label>
+                            <select name="" id="" class="form-control" formControlName="costTypeRange">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Cost Center Code</label>
+                            <select name="" id="" class="form-control" formControlName="costCenter">
+                                <option value=""></option>
+                            </select>                        </div>
+                        <div class="mt-3">
+                            <label for="">Cost Object Code</label>
+                            <select name="" id="" class="form-control" formControlName="costObject">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Credit to Cost Type</label>
+                            <select name="" id="" class="form-control" formControlName="creditCost">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="">Blocked</label>
+                            <input type="checkbox" class="form-control" [style.width.px]='styleCheck' formControlName="blocked"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">Note</label>
+                           <textarea name="" id="" cols="30" rows="10" class="form-control" formControlName="note"></textarea>
+                    </div>
+        </div>
+                <div class="border-top mt-5 py-3 d-flex justify-content-end">
+                    <button class="btn btn-lg btn-outline-success">
+                        <fa-icon [icon]="faSave"></fa-icon>
+                    Save
+                    </button>
+                </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,151 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class=" mt-2 coverPage ">
+    <mat-tab-group mat-align-tabs="center" dynamicHeight> 
+      <mat-tab label="{{'Basic'|appTranslate|async}}">
+        <ng-template matTabContent>
+          <app-cover-basic [isModal]="isModal" (onComplete)="modalOnComplete($event)" [providerCodes]="providerCodes"
+            [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode" [isCreate]="isCreate"
+            [paymentMethodsList]="paymentMethodsList" [loading]="loading" [loadingText]="loadingText"></app-cover-basic>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Dependent Covers'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-dependant [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText">
+          </app-cover-dependant>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Benefits'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-benefit [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [isCreate]="isCreate" [loading]="loading" [loadingText]="loadingText"></app-cover-benefit>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Premium'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-premium [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-premium>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Commissions'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-commissions [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-commissions>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Terms'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-terms [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-terms>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Endorsement'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-endorsements [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-endorsements>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Underwriting'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-underwritting [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-underwritting>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Surrenders'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-surrenders [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-surrenders>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Loan'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-loan [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-loan>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Annuities'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-annuities [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-annuities>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Lapse'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-lapse [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-lapse>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Perils'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-perils [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-perils>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Paid up'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-paid-up [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-paid-up>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Bonuses'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-bonuses [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-bonuses>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Acc / Reins'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-acc-reins [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-acc-reins>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Taxes / Levels'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-tax-levels [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-tax-levels>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Documentation'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-documentations [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-documentations>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="{{'Excess / Deductible'|appTranslate|async}}"
+        [disabled]="!createCoverCode?.basic?.basic?.code  && !createCoverCode?.basic?.basic?.id">
+        <ng-template matTabContent>
+          <app-cover-excess-deductible [action]="action" [coverCode]="coverCode" [createCoverCode]="createCoverCode"
+            [loading]="loading" [loadingText]="loadingText"></app-cover-excess-deductible>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="d-lg-flex mt-5" *ngIf="isShow">
+      <hr>
+      <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary">
+      </app-btn>
+      <span class="mx-1"></span>
+      <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+      </app-btn>
+
+    </div>
+
+  </div>
+</loader>

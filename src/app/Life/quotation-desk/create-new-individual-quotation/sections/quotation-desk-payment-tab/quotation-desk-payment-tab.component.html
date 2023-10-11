@@ -1,0 +1,303 @@
+<div class="row" id="pills-payment" role="tabpanel">
+  <div class="row mt-3 mb-4">
+    <div class="col-12 d-flex justify-content-end">
+      <!-- <app-btn type="secondary" (click)="createNewPaymentMethod()" icon="save"> Create New Account</app-btn> -->
+      <app-button
+        [buttonType]="'addCustom'"
+        [text]="'Create new Account'"
+        (click)="createNewPaymentMethod()"
+      ></app-button>
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Code' | appTranslate | async }}:
+        <span class="text-primary">{{ product?.code }}</span></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Description' | appTranslate | async }}:
+        <span class="text-primary">{{ pdsc }}</span></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Quote No' | appTranslate | async }}:
+        <span class="text-primary">{{ quoteNo }}</span></span
+      >
+    </div>
+    <!-- <div class="col-3">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">Cover type</label>
+          <select name="" id="" class="form-control control-bg-gray" [(ngModel)]='systemSelect'>
+            <option value="motor">Motor</option>
+            <option value="houseHolder">Householder</option>
+            <option value="travel">Travel</option>
+          </select>
+        </div>
+      </div> -->
+  </div>
+  <div class="col-12">
+    <div class="mt-3">
+      <h6>{{ 'Existing Account for Client' | appTranslate | async }}</h6>
+    </div>
+
+    <div class="mt-3">
+      <table class="table table-responsive table-striped">
+        <thead>
+          <tr class="py-5 bg-primary text-white">
+            <th scope="col" class="text-white">
+              {{ 'Bank No' | appTranslate | async }}
+            </th>
+            <th scope="col" class="text-white">
+              {{ 'Payee Name' | appTranslate | async }}
+            </th>
+            <th scope="col" class="text-white">
+              {{ 'Account Type' | appTranslate | async }}
+            </th>
+            <th scope="col" class="text-white">
+              {{ 'Account No' | appTranslate | async }}
+            </th>
+            <th scope="col" class="text-white">
+              {{ 'Institution' | appTranslate | async }}
+            </th>
+            <th scope="col" class="text-white">
+              {{ 'Select DD' | appTranslate | async }}
+            </th>
+            <th scope="col" class="text-white">
+              {{ 'Select PO' | appTranslate | async }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of accounts; let j = index">
+            <td>{{ account.id }}</td>
+            <td>{{ account.accountName }}</td>
+            <td>{{ account.accountType }}</td>
+            <td>{{ account.accountNo }}</td>
+            <td>{{ account.bankName }}</td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <input
+                  type="checkbox"
+                  id="dd_checkbox_{{ j }}"
+                  (change)="changedd(j)"
+                  class="form-control"
+                  id=""
+                />
+              </div>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center">
+                <input
+                  type="checkbox"
+                  id="po_checkbox_{{ j }}"
+                  name=""
+                  (change)="changepo(j)"
+                  class="form-control"
+                  id=""
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <form [formGroup]="pForm" class="row mt-3">
+    <div class="col">
+      <h5 class="text-primary">
+        {{ 'Direct Debit Account' | appTranslate | async }}
+      </h5>
+      <table class="table table-responsive table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col">{{ 'Payee Method' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Payee No' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Payee Name' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Bank Number' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Bank Name' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Account No' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Sort Code' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Preferred Day' | appTranslate | async }}</th>
+            <th scope="col">{{ 'First Pay Date' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Bank Branch' | appTranslate | async }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of ddaccounts; let j = index">
+            <td>
+              <input
+                readonly
+                [value]="account.accountType"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.payeeNo"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.accountName"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.id"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.bankName"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.no"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.sortCode"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                class="form-control control-bg-gray"
+                type="text"
+                min="0"
+                max="31"
+                formControlName="prefDay"
+              />
+            </td>
+            <td>
+              <input
+                class="form-control control-bg-gray"
+                type="text"
+                formControlName="firstPayDate"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.bankBranch"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+  <div class="row mt-3">
+    <div class="col">
+      <h5 class="text-primary">
+        {{ 'Payment Outward Account' | appTranslate | async }}
+      </h5>
+      <table class="table table-responsive table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col">{{ 'Payee Method' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Payee No' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Payee Name' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Bank Number' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Bank Name' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Account No' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Sort Code' | appTranslate | async }}</th>
+            <th scope="col">{{ 'Bank Branch' | appTranslate | async }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let account of poaccounts; let j = index">
+            <td>
+              <input
+                readonly
+                [value]="account.accountType"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.payeeNo"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.accountName"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.id"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.bankName"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.no"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.sortCode"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+            <td>
+              <input
+                readonly
+                [value]="account.bankBranch"
+                class="form-control control-bg-gray"
+                type="text"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

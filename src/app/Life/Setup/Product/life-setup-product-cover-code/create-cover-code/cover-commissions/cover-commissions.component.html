@@ -1,0 +1,283 @@
+<loader [loading]="loading" [text]="loadingText">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-6 mb-2">
+      <h5 class="text-primary">{{'Commissions'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row">
+    <ng-container *ngIf="showMode == false">
+      <div class="row" *ngFor="let item of createCoverCode.commission.coversCommissionVersions; let i = index">
+        <div class="col-md">
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group mt-2">
+                <label class="text-primary">{{'Version No'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" disabled name="no_{{item.rowId}}"
+                  [(ngModel)]="item.versionNo" type="number" />
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group mt-2">
+                <label class="text-primary">{{'Version Date From'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" name="date_{{item.rowId}}" [(ngModel)]="item.versionDate"
+                  [value]="item.versionDate | date:'yyyy-MM-dd'" type="date" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto d-flex">
+          <div class="form-group mt-2 me-2">
+            <label class="text-primary">&nbsp;<br /></label>
+            <app-button (click)="deleteNewVersionArrayRow(i)" [buttonType]="'delete'">
+            </app-button>
+          </div>
+          <div class="form-group mt-2">
+            <label class="text-primary">&nbsp;<br /></label>
+            <app-button (click)="addNewVersionArrayRow(i+1)" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+
+    </ng-container>
+
+    <div class="row" *ngIf="showMode == true">
+      <div class="col-6">
+        <div class="form-group mt-2">
+          <label class="text-primary">{{'Select a version No'|appTranslate|async}}</label>
+         <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.commissionCode">
+            <option></option>
+            <option *ngFor="let ot of commissionCodesList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class="text-primary">&nbsp;<br /></label>
+          <app-button (click)="addNewVersionArrayRow(0)" [buttonType]="'addCustom'">
+          </app-button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Fixed Commission Amount'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.fixedCommissionAmount"
+          type="number" />
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Comission Code'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.commissionCode">
+          <option></option>
+          <option *ngFor="let ot of commissionCodesList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group mt-2">
+        <label class="text-primary">
+          <app-info-icon text="Overwrite Agent Type Setting">{{'Commission Earning Basis'|appTranslate|async}}</app-info-icon> 
+        </label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.commissionEarningBasis">
+          <option></option>
+          <option *ngFor="let ot of commissionEarningList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Comission Earning Period'|appTranslate|async}} <span
+            class="text-normal">{{'(Months)'|appTranslate|async}}</span></label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.commissionEarningPeriod"
+          type="number" />
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+
+  <div class="">
+    <h5 class="text-primary ">{{'Fixed Commission Table - On every premium paid'|appTranslate|async}}</h5>
+    <div class="row" *ngFor="let item of createCoverCode.commission.coversCommissionRates; let i = index">
+      <div class="col-md">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group mt-2">
+              <label class="text-primary">{{'Agent Type'|appTranslate|async}}</label>
+             <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.agentType">
+                <option></option>
+                <option *ngFor="let ot of agentTypeList" [ngValue]="ot.type">{{ot.type}}
+                   - {{ot.description}}</option>
+              </select>
+
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group mt-2">
+              <label class="text-primary">{{'Writing Comission %'|appTranslate|async}}</label>
+              <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.writingCommission" type="number" />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group mt-2">
+              <label class="text-primary">{{'Hierarchy Comission (%)'|appTranslate|async}}</label>
+              <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.hierarchyCommission" type="number" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto d-flex">
+        <div class="form-group mt-2 me-2">
+          <label class="text-primary">&nbsp;<br /></label>
+          <app-button (click)="deleteNewcommissionRow(i)" [buttonType]="'delete'"></app-button>
+        </div>
+        <div class="form-group mt-2">
+          <label class="text-primary">&nbsp;<br /></label>
+          <app-button (click)="addNewcommissionRow()" [buttonType]="'addCustom'"></app-button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row align-items-end">
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Referral Payment Basis'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.referralPaymentBasis">
+          <option></option>
+          <option *ngFor="let ot of referralPaymentBasisList" [ngValue]="ot.code">{{ot.code}}
+             - {{ot.title}}</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Telemarketer Rem Basis'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.telemarketerRemBasis">
+          <option></option>
+          <option *ngFor="let ot of telemarketerRemBasisList" [ngValue]="ot.code">{{ot.code}}
+             - {{ot.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Agent Clawback Basis'|appTranslate|async}} </label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.agentClawBackBasis">
+          <option></option>
+          <option *ngFor="let ot of clawbackBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Clawback Spread Basis'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.clawBackSpreadBasis">
+          <option></option>
+          <option *ngFor="let ot of clawbackSpreadBasisList" [ngValue]="ot.code">{{ot.code}}
+             - {{ot.title}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Referral Payment Table'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.referralPaymentTable">
+          <option></option>
+          <option *ngFor="let ot of referralPaymentTableList" [ngValue]="ot.code">{{ot.code}}
+             - {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'TM Rem Table'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.tmRemTable">
+          <option></option>
+          <option *ngFor="let ot of tmRemTableList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Clawback Table'|appTranslate|async}}</label>
+       <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.clawbackTable">
+          <option></option>
+          <option *ngFor="let ot of clawbackTableList" [ngValue]="ot.code">{{ot.code}}
+             - {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Clawback Spread Period - months'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.clawBackSpreadPeriod"
+          type="number" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'Referral Payment Rate %'|appTranslate|async}} </label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.referralPaymentRate"
+          type="number" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2">
+        <label class="text-primary">{{'TM Rem Rate %'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.commission.tmRemRate" type="number" />
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="form-group mt-2 justify-content-center">
+        <label class="d-flex align-items-center text-primary w-100 text-center">{{'Clawback on Lapse'|appTranslate|async}}
+          <input #inp="ngModel" class="form-control width-unset control-bg-gray   ms-2"
+            [(ngModel)]="createCoverCode.commission.clawbackOnLapse" type="checkbox" />
+        </label> 
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row"  >
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class="text-primary">&nbsp;<br /></label>
+        <app-button (click)="savecommission()" [buttonType]="'submit'"  *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

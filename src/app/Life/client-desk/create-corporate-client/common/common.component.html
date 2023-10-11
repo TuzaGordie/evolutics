@@ -1,0 +1,29 @@
+<loader [loading]="loading">
+  <form [formGroup]="corporateForm"> 
+    <app-form-tabs-header [tabs]="tabs" [(selectedIndex)]="selectedIndex"></app-form-tabs-header>
+
+    <div class="">
+      <div class="" [hidden]="selectedIndex!=0" >
+        <app-company-info-form [form]="companyForm"></app-company-info-form>
+      </div>
+      <div class="" [hidden]="selectedIndex!=1" >
+        <app-contact-info-form [form]="contactInformationArray"></app-contact-info-form>
+      </div>
+      <div class="" [hidden]="selectedIndex!=2" >
+        <app-directors-form [form]="directorsArray"></app-directors-form>
+      </div>
+      <div class="" [hidden]="selectedIndex!=3" >
+        <!-- <app-payment-info-form [fc]="payment" #paymentInfo></app-payment-info-form> -->
+        <app-create-account-form #paymentInfo></app-create-account-form>
+        <div class="row mt-5 justify-content-end">
+          <div class="col" (click)="uS.logForm(corporateForm)">
+          </div>
+          <div class="col-2">
+            <app-btn [valid]="corporateForm?.valid" type="secondary" icon="save" (mclick)="onSubmit()">
+              Submit</app-btn>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</loader>

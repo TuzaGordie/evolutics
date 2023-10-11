@@ -1,0 +1,90 @@
+<div class="container mt-5">
+  <form [formGroup]="licenseForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <div class="d-block">
+          <div class="mt-4">
+            <label class="text-red form-label">Certificate Number</label><br>
+            <input type="text" formControlName="certificateNumber" class="control-bg-gray form-control" required>
+            <div
+              *ngIf="validation.certificateNumber.errors && (validation.certificateNumber.dirty || validation.certificateNumber.touched)">
+              <div class="text-danger" *ngIf="validation.certificateNumber?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="text-red form-label">License Authourity</label><br>
+            <select formControlName="licenseAuthourity" class="control-bg-gray form-control" required>
+              <option [value]="null">Select License Authourity</option>
+              <option [value]="item.CODE" *ngFor="let item of licenseAuthorityList">{{item.CODE_TITLE}}</option>
+            </select>
+            <div
+              *ngIf="validation.licenseAuthourity.errors && (validation.licenseAuthourity.dirty || validation.licenseAuthourity.touched)">
+              <div class="text-danger" *ngIf="validation.licenseAuthourity?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <!--  <div class="mt-4">
+               <input type="file" id="filebtn" accept=".png,.jpg,.docx,.pdf" >
+               <button for="filebtn" type="button" class="btn py-2 btnmoney w-100">Upload passport photo</button>
+           </div>
+           <div class="mt-4">
+               <input type="file" id="filebtn" accept=".png,.jpg,.docx,.pdf" >
+               <button for="filebtn" type="button" class="btn py-2 btnmoney w-100">Upload Identity card</button>
+           </div> -->
+          <div class="mt-4">
+            <label class="text-red form-label">Expiry Date</label><br>
+            <input type="date" formControlName="expiryDate" class="control-bg-gray form-control" required>
+            <div *ngIf="validation.expiryDate.errors && validation.expiryDate.dirty">
+              <div class="text-danger" *ngIf="validation.expiryDate?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md position-relative">
+        <div class="mt-4">
+          <label class="text-red form-label">License Type</label><br>
+          <select formControlName="licensetype" class="control-bg-gray form-control" required>
+            <option [value]="null">Select License Type</option>
+            <option [value]="item.CODE" *ngFor="let item of licenseTypeList">{{item.CODE_TITLE}}</option>
+          </select>
+          <div
+            *ngIf="validation.licensetype.errors && (validation.licensetype.dirty || validation.licensetype.touched)">
+            <div class="text-danger" *ngIf="validation.licensetype?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="text-red form-label">Issue Date</label><br>
+          <input type="date" formControlName="issueDate" class="control-bg-gray form-control" required>
+          <div *ngIf="validation.issueDate.errors && (validation.issueDate.dirty || validation.issueDate.touched)">
+            <div class="text-danger" *ngIf="validation.issueDate?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-5">
+          <input type="file" id="fileBtnImg1" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+                 (change)="upload($event)">
+          <button for="fileBtnImg1" (click)="getImage1()" type="button" class="btn btn-danger btn-lg"> <fa-icon [icon]="faUpload"></fa-icon> Upload
+            Document
+          </button>
+
+        </div>
+        <p id="filenameifno" [innerHtml]="fileName"></p>
+      </div>
+    </div>
+
+
+
+    <div class="d-flex justify-content-end my-5">
+
+      <div class="d-flex">
+        <app-button [text]="'Submit'" [buttonType]="'submitRed'"
+        ></app-button>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,39 @@
+<div class="container mt-5" >
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">Policy Relationship</h1>
+      <div class="d-flex">
+        <p class="py-3 mx-3"><b>Agent Name:</b> <span class="px-3">{{findAgentService.agentInfo?.NAME}}</span></p>
+        <p class="py-3 mx-3" style="float: right;"><b>Total Sum At Risk:</b> <span class="px-3">2000</span></p>
+      </div>
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+          <th scope="col">Relationship</th>
+          <th scope="col">Policy Status</th>
+          <th scope="col">Issue Date</th>
+          <th scope="col">Policy Term</th>
+          <th scope="col">Annualised Premium</th>
+          <th scope="col" style="border-top-right-radius: 12px;">Sum At Risk</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of policyList">
+          <th scope="row">{{item.POLICY_NO}}</th>
+          <td>{{item.POLICY_REL}}</td>
+          <td>{{item.POLICY_STATUS}}</td>
+          <td>{{item.ISSUE_DATE}}</td>
+          <td>{{item.POLICY_TERM}}</td>
+          <td>{{item.ANN_PREM}}</td>
+          <td>{{item.SAR}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

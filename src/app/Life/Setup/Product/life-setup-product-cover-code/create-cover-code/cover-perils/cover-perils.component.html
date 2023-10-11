@@ -1,0 +1,129 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Perils'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class=" ">
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group mt-2">
+          <label class=" text-primary">{{'Claim Types Allowed'|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.perils.peril.type" #peril
+            (change)="setPeril(peril.value)">
+            <option></option>
+            <option *ngFor="let ot of createCoverCode.benefit.coversBenefitClaims" [value]="ot.type">
+              {{ot.type}} - {{getClaimTypeDescription(ot.type)}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group mt-2">
+          <label class=" text-primary">{{'Peril Code'|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.perils.peril.perilCode" (change)="setProximateCause()">
+            <option></option>
+            <option *ngFor="let ot of perilList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="border rounded px-2 pb-2 mt-2"
+      *ngFor="let item of createCoverCode.perils.coversPerilDetails; let i = index">
+      <div class="row align-items-center ">
+        <div class="col-md">
+          <div class="row align-items-end justify-content-center ">
+            <div class="col-md-3">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Peril'|appTranslate|async}}</label>
+                <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.perilCode">
+                  <option></option>
+                  <option *ngFor="let ot of perilList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group mt-2">
+                <label class=" text-primary">
+                  <app-info-icon text="Overwriting settings in
+                  benefit">{{'Waiting Period months'|appTranslate|async}}</app-info-icon>
+                </label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.perilWaitingPeriod"
+                  type="number" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Benefit % of sum assured'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.perilBenefitSumAssured"
+                  type="number" />
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Severity Level'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.perilSeverityLevel"
+                  type="number" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Proximate Causes Allowed'|appTranslate|async}}</label>
+                <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.proximateCauseAllowed">
+                  <option></option>
+                  <option *ngFor="let ot of proximateCausesList" [ngValue]="ot.code">{{ot.code}}
+                    - {{ot.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-auto">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{'Peril Min Period (months)'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.perilMinPeriod"
+                  type="number" />
+              </div>
+            </div>
+            <div class="col-md-auto">
+              <div class="align-items-center d-flex form-group mt-2 ">
+                <label
+                  class=" text-primary me-2">{{'Full Benefit on Death before U/W completion'|appTranslate|async}}</label>
+                <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.perilBenefitOnDeath"
+                  type="checkbox" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-auto">
+          <div class="d-flex mt-2">
+            <app-btn [iconBtn]="true" icon="delete" type="danger-outline" (mclick)="removePeril(i)"></app-btn>
+            <span class="me-1"></span>
+            <app-btn [iconBtn]="true" icon="add" type="outline" (mclick)="addNewPerilRow()"></app-btn>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="savePeril()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

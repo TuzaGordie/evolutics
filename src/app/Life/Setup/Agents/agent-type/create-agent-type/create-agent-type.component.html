@@ -1,0 +1,498 @@
+<!-- <app-form-navigation [title]="'Set Up / Agent Type '"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container-fluid mt-2" id="form-body">
+    <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+          type="button" role="tab" aria-controls="pills-basic" aria-selected="true">
+          {{"Details"|appTranslate|async}}
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-tiers-tab" data-bs-toggle="pill" data-bs-target="#pills-tiers" type="button"
+          role="tab" aria-controls="pills-tiers" aria-selected="false">
+          {{"Agent Salary Level"|appTranslate|async}}
+        </button>
+      </li>
+    </ul>
+    <form (ngSubmit)="createAgent()" #agentForm="ngForm">
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <br />
+          <div class="">
+
+
+
+            <div class="row">
+              <div class="col-md-6">
+                <label class=" text-primary">{{"Agent Type"|appTranslate|async}}</label>
+                <input [attr.disabled]="disableEdit == true ? '' : null"
+                  class="form-control form-control-sm control-bg-gray" type="text"
+                  [(ngModel)]="agentData.agentSetupType.type" name="agentType" #agentType="ngModel" required />
+
+                <div class="text-danger" *ngIf="
+                  agentType.errors && (agentType.dirty || agentType.touched)
+                ">
+                  <p *ngIf="agentType.errors.required">{{"Agent Type is required"|appTranslate|async}}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class=" text-primary">
+                  {{"Default Sales to branch"|appTranslate|async}}</label>
+                <select [(ngModel)]="agentData.agentSetupType.defaultBranch" name="defaultSalesBranch"
+                  #defaultSalesBranch="ngModel" class="form-control form-control-sm control-bg-gray">
+                  <option *ngFor="let item of branchNameAndDes" value="{{ item?.code }}">
+                    {{ item?.code }} - {{ item?.description }}
+                  </option>
+                </select>
+
+                <div class="text-danger" *ngIf="
+                  defaultSalesBranch.errors &&
+                  (defaultSalesBranch.dirty || defaultSalesBranch.touched)
+                ">
+                  <p *ngIf="defaultSalesBranch.errors.required">
+                    {{"Default Sales to branch is required"|appTranslate|async}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label class=" text-primary">{{"Description"|appTranslate|async}}</label>
+                <input [attr.disabled]="disableEdit == true ? '' : null"
+                  class="form-control form-control-sm control-bg-gray" type="text"
+                  [(ngModel)]="agentData.agentSetupType.description" name="description" #description="ngModel"
+                  required />
+
+                <div class="text-danger" *ngIf="
+                  description.errors &&
+                  (description.dirty || description.touched)
+                ">
+                  <p *ngIf="description.errors.required">
+                    {{"Description is required"|appTranslate|async}}
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class=" text-primary">
+                  {{"Company Code Allowed"|appTranslate|async}}</label>
+                <select [(ngModel)]="agentData.agentSetupType.company" name="companyCodeAllowed"
+                  class="form-control form-control-sm control-bg-gray" #companyCodeAllowed="ngModel">
+                  <option value="{{ item?.code }}" *ngFor="let item of companyCode">
+                    {{ item?.code }} - {{ item?.description }}
+                  </option>
+                </select>
+
+                <div class="text-danger" *ngIf="
+                  companyCodeAllowed.errors &&
+                  (companyCodeAllowed.dirty || companyCodeAllowed.touched)
+                ">
+                  <p *ngIf="companyCodeAllowed.errors.required">
+                    {{"Company Code Allowed is required"|appTranslate|async}}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <label class=" text-primary">{{"Channel"|appTranslate|async}}</label>
+                <select [(ngModel)]="agentData.agentSetupType.channel" name="channel" #channel="ngModel"
+                  class="form-control form-control-sm control-bg-gray">
+                  <option value="{{ channel?.code }}" *ngFor="let channel of channels">
+                    {{ channel?.code }} - {{ channel?.title }}
+                  </option>
+                </select>
+
+                <div class="text-danger" *ngIf="channel.errors && (channel.dirty || channel.touched)">
+                  <p *ngIf="channel.errors.required">{{"Channel is required"|appTranslate|async}}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class=" text-primary">
+                  {{"Tax on Commissions (%)"|appTranslate|async}}</label>
+                <input class="form-control form-control-sm control-bg-gray" type="number" min="1"
+                  [(ngModel)]="agentData.agentSetupType.commTaxRate" name="taxOnCommission"
+                  #taxOnCommission="ngModel" />
+
+                <div class="text-danger" *ngIf="
+                  taxOnCommission.errors &&
+                  (taxOnCommission.dirty || taxOnCommission.touched)
+                ">
+                  <p *ngIf="taxOnCommission.errors.required">
+                    {{"Tax On Commission is required"|appTranslate|async}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class=" text-primary">{{"Commission Statement Action Basis"|appTranslate|async}}</label>
+                <select [(ngModel)]="agentData.agentSetupType.commStatementActionBasis" name="commissionActBasis"
+                  #commissionActBasis="ngModel" class="form-control form-control-sm control-bg-gray">
+                  <option *ngFor="let item of commissionActionBasis" value="{{ item?.code }}">
+                    {{ item?.title }}
+                  </option>
+                </select>
+
+                <div class="text-danger" *ngIf="
+                  commissionActBasis.errors &&
+                  (commissionActBasis.dirty || commissionActBasis.touched)
+                ">
+                  <p *ngIf="commissionActBasis.errors.required">
+                    {{"Commission Statement Action Basis is required"|appTranslate|async}}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class=" text-primary">{{"Hold Commissions"|appTranslate|async}}</label>
+                <input class="form-control form-control-sm control-bg-gray" type="checkbox"
+                  [(ngModel)]="agentData.agentSetupType.holdComm" name="holdCommission" #holdCommission="ngModel" />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12" *ngFor="let payment of agentData.agentSetupTypePayment; let i = index">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <label class=" text-primary">
+                        {{"Pay Commissions Only if it exceeds"|appTranslate|async}}</label>
+                      <input class="form-control form-control-sm control-bg-gray" type="number"
+                        [(ngModel)]="payment.minPayAmount" name="minPayAmount_{{payment.rowId}}" min="1"
+                        #minPayAmount="ngModel" />
+
+                      <div class="text-danger"
+                        *ngIf="minPayAmount.errors && (minPayAmount.dirty || minPayAmount.touched)">
+                        <p *ngIf="minPayAmount.errors.required">
+                          {{"Pay Commissions is required"|appTranslate|async}}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <label class=" text-primary">{{"Currency"|appTranslate|async}}</label>
+                      <select class="form-control form-control-sm control-bg-gray" aria-placeholder="currency"
+                        [(ngModel)]="payment.currCode" name="currCode_{{ payment.rowId }}" #currCode="ngModel">
+                        <option value="{{ item?.code }}" *ngFor="let item of currencyCodeAndDes">
+                          {{ item?.code }} - {{ item?.description }}
+                        </option>
+                      </select>
+                      <div class="text-danger" *ngIf="currCode.errors && (currCode.dirty || currCode.touched)">
+                        <p *ngIf="currCode.errors.required">
+                          {{"Currency code is required"|appTranslate|async}}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex">
+                      <div>
+                        <label class=" text-primary">&nbsp;</label>
+                        <app-btn [icon]="'delete'" [iconBtn]="true" type="danger-outline" (mclick)="deletePayment(i)">
+                        </app-btn>
+                      </div>
+                      <div class="ms-2">
+                        <label class=" text-primary">&nbsp;</label>
+                        <app-btn type="outline" icon="add" [iconBtn]="true" (mclick)="addPayment()"></app-btn>
+                      </div>
+                    </div>
+                  </div>
+                <br />
+                <br />
+              </div>
+            </div>
+
+            <div class="row">
+              <h5 class="text-primary">{{"Product Qualification"|appTranslate|async}}</h5>
+                <ng-container *ngFor="let product of productListForm; let i=index;">
+                  <div class="row align-items-end justify-content-center">
+                    <div class="col-md">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label><br>
+                          <select class="form-control control-bg-gray" required #prodCls>
+                            <option [value]="null">{{"Select Product Class Qualification"|appTranslate|async}}</option>
+                            <option [value]="item.code" *ngFor="let item of productClassList">{{item.code}} -
+                              {{item.title}}</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label text-primary">{{"Product Code"|appTranslate|async}}</label><br>
+                          <select class="form-control control-bg-gray" required>
+                            <option [value]="null">{{"Select Product Qualification"|appTranslate|async}}</option>
+                            <option [value]="item.code"
+                              *ngFor="let item of getProductCode|functionCaller1:prodCls?.value|async">
+                              {{item.code}} - {{item.description}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-auto d-flex">
+                      <div class="me-1">
+                        <app-btn icon="delete" type="danger-outline" [iconBtn]="true" (mclick)="removeProduct(i)">
+                        </app-btn>
+                      </div>
+                      <app-btn icon="add" type="outline" [iconBtn]="true" (mclick)="addProduct()"></app-btn>
+                    </div>
+                  </div>
+                </ng-container>
+            </div>
+
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-tiers" role="tabpanel" aria-labelledby="pills-tiers-tab">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col">
+                    <div class="col">
+                      <label class=" text-primary">{{"Version Number"|appTranslate|async}}</label>
+                      <input class="form-control form-control-sm control-bg-gray" type="number" min="1"
+                        [(ngModel)]="agentData.agentSetuptypeVersion.versionNo" name="versionNumber"
+                        #versionNumber="ngModel" />
+
+                      <div class="text-danger" *ngIf="
+                        versionNumber.errors &&
+                        (versionNumber.dirty || versionNumber.touched)
+                      ">
+                        <p *ngIf="versionNumber.errors.required">
+                          Version Number is required
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Agent Salary Level"|appTranslate|async}}</label>
+                    <select [(ngModel)]="agentData.agentSetupType.salaryLevel" name="agentSalaryLev"
+                      #agentSalaryLev="ngModel" class="form-control form-control-sm control-bg-gray">
+                      <option value="{{ item?.code }}" *ngFor="let item of agentSalaryLevel">
+                        {{ item.title }}
+                      </option>
+                    </select>
+
+                    <div class="text-danger" *ngIf="
+                      agentSalaryLev.errors &&
+                      (agentSalaryLev.dirty || agentSalaryLev.touched)
+                    ">
+                      <p *ngIf="agentSalaryLev.errors.required">
+                        Agent Salary Level is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Salary Frequency Level"|appTranslate|async}}</label>
+                    <select [(ngModel)]="agentData.agentSetupType.salaryFreq" name="salaryFreqLev"
+                      #salaryFreqLev="ngModel" class="form-control form-control-sm control-bg-gray">
+                      <option value="{{ item?.code }}" *ngFor="let item of salaryFreqLevel">
+                        {{ item?.title }}
+                      </option>
+                    </select>
+
+                    <div class="text-danger" *ngIf="
+                      salaryFreqLev.errors &&
+                      (salaryFreqLev.dirty || salaryFreqLev.touched)
+                    ">
+                      <p *ngIf="salaryFreqLev.errors.required">
+                        Salary Frequency Level is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Basic Salary"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number" min="1"
+                      [(ngModel)]="agentData.agentSetupType.basicSalary" name="basicSalary" #basicSalary="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      basicSalary.errors &&
+                      (basicSalary.dirty || basicSalary.touched)
+                    ">
+                      <p *ngIf="basicSalary.errors.required">
+                        Basic Salary is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Max Salary Achievable"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.maxSalAchievable" min="1" name="maxSalaryAchievable"
+                      #maxSalaryAchievable="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      maxSalaryAchievable.errors &&
+                      (maxSalaryAchievable.dirty || maxSalaryAchievable.touched)
+                    ">
+                      <p *ngIf="maxSalaryAchievable.errors.required">
+                        Max Salary Achievable is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Max Number of Agents per unit"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.maxNoOfAgents" min="1" name="maxAgentsPerUnit"
+                      #maxAgentsPerUnit="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      maxAgentsPerUnit.errors &&
+                      (maxAgentsPerUnit.dirty || maxAgentsPerUnit.touched)
+                    ">
+                      <p *ngIf="maxAgentsPerUnit.errors.required">
+                        Max Number of Agents per unit is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Min Number of Agents per unit"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.minNoOfUnitsAgency" min="1" name="minAgentsPerUnit"
+                      #minAgentsPerUnit="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      minAgentsPerUnit.errors &&
+                      (minAgentsPerUnit.dirty || minAgentsPerUnit.touched)
+                    ">
+                      <p *ngIf="minAgentsPerUnit.errors.required">
+                        Min Number of Agents per unit is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Fixed Number of Agents per agency"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.fixedNoOfAgentsAgency" min="1" name="fixedAgentsPerAgency"
+                      #fixedAgentsPerAgency="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      fixedAgentsPerAgency.errors &&
+                      (fixedAgentsPerAgency.dirty ||
+                        fixedAgentsPerAgency.touched)
+                    ">
+                      <p *ngIf="fixedAgentsPerAgency.errors.required">
+                        Fixed Number of Agents per agency is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Max No of unit per agency"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.maxNoOfUnitsAgency" min="1" name="maxUnitsPerAgencys"
+                      #maxUnitsPerAgencys="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      maxUnitsPerAgencys.errors &&
+                      (maxUnitsPerAgencys.dirty || maxUnitsPerAgencys.touched)
+                    ">
+                      <p *ngIf="maxUnitsPerAgencys.errors.required">
+                        Max No of unit per agency is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Min No of unit per agency"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.minNoOfAgents" min="1" name="minNoOfUnitsAgency"
+                      #minNoOfUnitsAgency="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      minNoOfUnitsAgency.errors &&
+                      (minNoOfUnitsAgency.dirty || minNoOfUnitsAgency.touched)
+                    ">
+                      <p *ngIf="minNoOfUnitsAgency.errors.required">
+                        Min No of unit per agency is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Production"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.production" name="production" #production="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      production.errors &&
+                      (production.dirty || production.touched)
+                    ">
+                      <p *ngIf="production.errors.required">
+                        Production is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Fixed Number of Agents per unit"|appTranslate|async}}</label>
+                    <input class="form-control form-control-sm control-bg-gray" type="number"
+                      [(ngModel)]="agentData.agentSetupType.fixedNoAgentUnit" min="1" name="fixedAgentsPerUnit"
+                      #fixedAgentsPerUnit="ngModel" />
+
+                    <div class="text-danger" *ngIf="
+                      fixedAgentsPerUnit.errors &&
+                      (fixedAgentsPerUnit.dirty || fixedAgentsPerUnit.touched)
+                    ">
+                      <p *ngIf="fixedAgentsPerUnit.errors.required">
+                        Fixed Number of Agents per unit is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label class=" text-primary">{{"Select Product Group"|appTranslate|async}}</label>
+                    <select ngModel name="productGroup" #productGroup="ngModel"
+                      class="form-control form-control-sm control-bg-gray">
+                      <!-- Un comment out code when the dropdown is populated with the needed values -->
+                      <!-- required -->
+
+                      <option value="{{ item?.code }}" *ngFor="let item of agentProdGroup">
+                        {{ item.title }}
+                      </option>
+                    </select>
+
+                    <!-- <div
+                  class="text-danger"
+                  *ngIf="
+                    productGroup.errors && (productGroup.dirty || productGroup.touched)
+                  "
+                >
+                  <p *ngIf="productGroup.errors.required">{{"Salary Frequency Level is required"|appTranslate|async}}</p>
+                </div> -->
+                  </div>
+                </div>
+
+                <br />
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-end">
+                    <app-button (click)="createAgent()" [buttonType]="'save'"></app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</loader>

@@ -1,0 +1,416 @@
+<app-form-navigation
+  [title]="'Setup / Document / Mapping'"
+></app-form-navigation>
+
+<div class="d-flex justify-content-end mx-5">
+  <button class="btn btn-outline-primary btn-lg" (click)="openCreateModal()">
+    <span class="fas fa-plus"></span>
+    {{ 'Add New Record' | appTranslate | async }}
+  </button>
+</div>
+<div class="mx-5">
+  <div class="d-flex justify-content-start mb-5">
+    <form [formGroup]="searchForm" class="d-flex align-items-end search-form" style="white-space: nowrap;">
+      <div class="form-group me-2">
+        <label>{{ 'Category' | appTranslate | async }}</label>
+        <select
+          class="form-control form-bg-gray"
+          formControlName="docCat"
+          (change)="onCategoryChange(searchForm)"
+        >
+          <option *ngFor="let category of categories" [value]="category.code">
+            {{ category.code }} - {{ category.title }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group me-2">
+        <label for="">{{ 'SubCategory' | appTranslate | async }}</label>
+        <div class="position-relative">
+          <select
+            class="form-control form-bg-gray"
+            formControlName="docSubCat"
+          >
+            <option
+              *ngFor="let subCategory of subCategories[searchForm.value.id]"
+              [value]="subCategory.code"
+            >
+              {{ subCategory.code }} - {{ subCategory.title }}
+            </option>
+          </select>
+          <div
+            *ngIf="isLoadingSubCategories[searchForm.value.id]"
+            class="position-absolute start-50 top-50 translate-middle"
+          >
+            <span class="spinner-border spinner-border-sm text-primary"></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group me-2">
+        <label for="">{{ 'Company' | appTranslate | async }}</label>
+        <select class="form-control form-bg-gray" formControlName="company">
+          <option *ngFor="let company of companies" [value]="company.code">
+            {{ company.code }} - {{ company.description }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group me-2">
+        <label for="">{{ 'Workflow Category' | appTranslate | async }}</label>
+        <select
+          class="form-control form-bg-gray"
+          formControlName="wfCat"
+          (change)="onWorkflowCategoryChange(searchForm)"
+        >
+          <option
+            *ngFor="let workflowCategory of workflowCategories"
+            [value]="workflowCategory.code"
+            [value]="workflowCategory.code"
+          >
+            {{ workflowCategory.code }} - {{ workflowCategory.title }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group me-2 position-relative">
+        <label for="">{{ 'Workflow' | appTranslate | async }}</label>
+        <div class="position-relative">
+          <select class="form-control form-bg-gray" formControlName="taskCode">
+            <option
+              *ngFor="let workflow of workflows[searchForm.value.id]"
+              [value]="workflow.code"
+              [value]="workflow.code"
+            >
+              {{ workflow.code }} - {{ workflow.description }}
+            </option>
+          </select>
+          <div
+            *ngIf="isLoadingWorkflows[searchForm.value.id]"
+            class="position-absolute start-50 top-50 translate-middle"
+          >
+            <span class="spinner-border spinner-border-sm text-primary"></span>
+          </div>
+        </div>
+      </div>
+      <button
+        class="btn btn-primary me-2"
+        (click)="search()"
+        [disabled]="isLoading"
+      >
+        <span class="fa fa-search"></span>
+        {{ 'Search' | appTranslate | async }}
+      </button>
+      <button
+        class="btn btn-outline-primary"
+        (click)="fetchAllRecords()"
+        [disabled]="isLoading"
+      >
+        {{ 'Fetch All' | appTranslate | async }}
+      </button>
+    </form>
+  </div>
+  <div class="row mb-1 justify-content-end">
+    <div class="col-md-2">
+      <select
+      class="form-control form-bg-gray"
+      [(ngModel)]="pageSize"
+      #select
+      (change)="fetchAllRecords()"
+    >
+      <option
+        *ngFor="let item of itemsPerPageParmeters"
+        [value]="item.number"
+      >
+        {{ item.number }}
+      </option>
+    </select>
+    </div>
+  </div>
+  <div class="table-responsive-lg">
+    <table class="table table-responsive border table-striped" id="excel-table">
+      <thead>
+        <tr>
+          <th class="p-3" scope="col">
+            {{ 'Documents Category' | appTranslate | async }}
+          </th>
+          <th class="p-3" scope="col">
+            {{ 'Documents Sub Category' | appTranslate | async }}
+          </th>
+          <th class="p-3" scope="col">
+            {{ 'Company' | appTranslate | async }}
+          </th>
+          <th class="p-3" scope="col">
+            {{ 'Workflow Category' | appTranslate | async }}
+          </th>
+          <th class="p-3" scope="col">
+            {{ 'Workflow' | appTranslate | async }}
+          </th>
+          <th><!--Edit button--></th>
+          <th><!--Delete button--></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngIf="!isLoading">
+          <ng-container *ngFor="let document of documentMappingsForm.controls">
+            <tr [formGroup]="document | toAny">
+              <td>
+                <select
+                  class="form-control form-bg-gray"
+                  formControlName="docCat"
+                  [attr.disabled]="
+                    editStatus[document.value.id] != 'EDITING'
+                      ? 'disabled'
+                      : null
+                  "
+                  (change)="onCategoryChange(document)"
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let category of categories"
+                    [value]="category.code"
+                  >
+                    {{ category.code }} - {{ category.title }}
+                  </option>
+                </select>
+              </td>
+              <td class="position-relative">
+                <select
+                  class="form-control form-bg-gray"
+                  formControlName="docSubCat"
+                  [attr.disabled]="
+                    editStatus[document.value.id] != 'EDITING'
+                      ? 'disabled'
+                      : null
+                  "
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let subCategory of subCategories[document.value.id]"
+                    [value]="subCategory.code"
+                  >
+                    {{ subCategory.code }} - {{ subCategory.title }}
+                  </option>
+                </select>
+                <div
+                  class="position-absolute start-50 top-50 translate-middle"
+                  *ngIf="isLoadingSubCategories[document.value.id]"
+                >
+                  <span
+                    class="spinner-border spinner-border-sm text-primary"
+                    role="status"
+                  ></span>
+                </div>
+              </td>
+              <td>
+                <select
+                  class="form-control form-bg-gray"
+                  formControlName="company"
+                  [attr.disabled]="
+                    editStatus[document.value.id] != 'EDITING'
+                      ? 'disabled'
+                      : null
+                  "
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let company of companies"
+                    [value]="company.code"
+                  >
+                    {{ company.code }} - {{ company.description }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <select
+                  class="form-control form-bg-gray"
+                  formControlName="wfCat"
+                  [attr.disabled]="
+                    editStatus[document.value.id] != 'EDITING'
+                      ? 'disabled'
+                      : null
+                  "
+                  (change)="onWorkflowCategoryChange(document)"
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let workflowCategory of workflowCategories"
+                    [value]="workflowCategory.code"
+                  >
+                    {{ workflowCategory.code }} - {{ workflowCategory.title }}
+                  </option>
+                </select>
+              </td>
+              <td class="position-relative">
+                <select
+                  class="form-control form-bg-gray"
+                  formControlName="taskCode"
+                  [attr.disabled]="
+                    editStatus[document.value.id] != 'EDITING'
+                      ? 'disabled'
+                      : null
+                  "
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let workflow of workflows[document.value.id]"
+                    [value]="workflow.code"
+                  >
+                    {{ workflow.code }} - {{ workflow.description }}
+                  </option>
+                </select>
+                <div
+                  class="position-absolute start-50 top-50 translate-middle"
+                  *ngIf="isLoadingWorkflows[document.value.id]"
+                >
+                  <span
+                    class="spinner-border spinner-border-sm text-primary"
+                    role="status"
+                  ></span>
+                </div>
+              </td>
+              <td>
+                <button
+                  *ngIf="
+                    editStatus[document.value.id] === 'VIEW' ||
+                    !editStatus[document.value.id]
+                  "
+                  class="btn btn-outline-primary btn-lg"
+                  (click)="editStatus[document.value.id] = 'EDITING'"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button
+                  *ngIf="editStatus[document.value.id] === 'EDITING'"
+                  class="btn btn-primary btn-lg"
+                  (click)="onUpdateDocument(document)"
+                >
+                  <i class="fas fa-save"></i>
+                </button>
+                <button
+                  *ngIf="editStatus[document.value.id] === 'PENDING'"
+                  class="btn btn-outline-primary btn-lg"
+                >
+                  <i class="fa fa-sync fa-spin"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn btn-dark btn-lg"
+                  (click)="confirmDelete(document)"
+                  [disabled]="isDeletingDoc[document.value.id]"
+                >
+                  <i
+                    *ngIf="!isDeletingDoc[document.value.id]"
+                    class="fa fa-trash"
+                  ></i>
+                  <i
+                    *ngIf="isDeletingDoc[document.value.id]"
+                    class="fa fa-sync fa-spin"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+        <tr *ngIf="isLoading">
+          <td colspan="12">
+            <span class="text-primary"
+              >{{ 'Fetching records' | appTranslate | async }}
+            </span>
+            <div
+              class="spinner-border spinner-border-sm text-primary"
+              role="status"
+            >
+              <span class="visually-hidden">{{
+                'Loading...' | appTranslate | async
+              }}</span>
+            </div>
+          </td>
+        </tr>
+        <tr
+          *ngIf="
+            dataRetrieved === true && documentMappingsForm.controls.length === 0
+          "
+        >
+          <td colspan="10">
+            <span class="text-primary">
+              {{ 'No records were found.' | appTranslate | async }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row" *ngIf="totalPages > 1">
+    <div class="col-md-6">
+      <p>
+        {{ 'showing page' | appTranslate | async }} {{ pageNumber }}
+        {{ 'of' | appTranslate | async }} {{ totalPages }}
+      </p>
+    </div>
+    <div class="col-md-6">
+      <nav class="float-right" aria-label="...">
+        <ul class="pagination">
+          <li
+            [ngClass]="{ nodisplay: pageNumber <= 1 }"
+            class="page-item first-item"
+          >
+            <a
+              href="javascript:void(0)"
+              (click)="first()"
+              class="page-link document-color"
+            >
+              {{ 'First page' | appTranslate | async }}
+            </a>
+          </li>
+
+          <li
+            [ngClass]="{ nodisplay: pageNumber <= 1 }"
+            class="page-item previous-item"
+          >
+            <a
+              href="javascript:void(0)"
+              (click)="previous()"
+              class="page-link document-color"
+              ><i class="fas fa-long-arrow-alt-left"></i
+            ></a>
+          </li>
+
+          <li *ngFor="let page of pages" class="page-item number-item">
+            <a
+              href="javascript:void(0)"
+              [ngClass]="{ 'pagination-color': pageNumber === page }"
+              (click)="toPageNumber(page)"
+              class="page-link document-color"
+              >{{ page }}</a
+            >
+          </li>
+
+          <li
+            [ngClass]="{ nodisplay: pageNumber >= totalPages }"
+            class="page-item next-item"
+          >
+            <a
+              href="javascript:void(0)"
+              (click)="next()"
+              class="page-link document-color"
+              ><i class="fas fa-long-arrow-alt-right"></i
+            ></a>
+          </li>
+
+          <li
+            [ngClass]="{ nodisplay: pageNumber >= totalPages }"
+            class="page-item last-item"
+          >
+            <a
+              href="javascript:void(0)"
+              (click)="last()"
+              class="page-link document-color"
+            >
+              {{ 'Last page' | appTranslate | async }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

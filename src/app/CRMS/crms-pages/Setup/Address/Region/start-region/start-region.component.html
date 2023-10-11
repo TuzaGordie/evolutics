@@ -1,0 +1,20 @@
+<app-form-navigation [title] = "'Set Up / Address / Region'"></app-form-navigation>
+<div class="container-sm mt-5 " id="form-body">
+    <div class="row">
+        <div class="col-md-6 mx-auto my-5 align-middle">
+            <form>
+                <div class="row">
+                    <div class="form-group col-lg-8 mt-2">
+                        <label>{{'Enter Code for New Region'|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="text" />
+                    </div>
+
+                    <div class="form-group col-lg-4 mt-2">
+                        <label>&nbsp;</label>
+                        <app-button [buttonType]="'createclone'" routerLink="/life/show-region"></app-button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,147 @@
+<!-- <app-form-navigation [title]="'Set Up / Accounts / Adjustment Account Mapping'"></app-form-navigation> -->
+<loader [loading]="loading">
+  <div class="container">
+    <br /><br /><br />
+    <form [formGroup]="aAMForm">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <label class="form-label text-primary">{{
+            'Select Company' | appTranslate | async
+          }}</label>
+          <select
+            (ngModelChange)="changeCompany()"
+            formControlName="company"
+            #company
+            class="form-control form-control-md control-bg-gray"
+          >
+            <option value="{{ item?.code }}" *ngFor="let item of companyArray">
+              {{ item?.code }} - {{ item?.description }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <br /><br />
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="table-responsive">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="w-25 text-primary">
+                    {{ 'Adjustment Reason' | appTranslate | async }}
+                  </th>
+                  <th scope="col" class="w-25 text-primary">
+                    {{ 'Default Account Code' | appTranslate | async }}
+                  </th>
+                  <th scope="col" class="w-25 text-primary">
+                    {{ 'Ledger Code' | appTranslate | async }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- <tr *ngFor="let i of qalCounter()"> -->
+                <ng-container formArrayName="aAMFormArray">
+                  <tr *ngFor="let aAMData of getaAMFormArray; let i = index">
+                    <ng-container [formGroupName]="i">
+                      <td>
+                        <select
+                          formControlName="adjReason"
+                          #adjReason
+                          class="form-control form-control-md control-bg-gray"
+                        >
+                          <option
+                            value="{{ item?.code }}"
+                            *ngFor="let item of adjustmentReasonArray"
+                          >
+                            {{ item?.code }} - {{ item?.title }}
+                          </option>
+                        </select>
+                      </td>
+                      <td>
+                        <select
+                          formControlName="accCode"
+                          #accCode
+                          (ngModelChange)="
+                            changeDefAccountCode($event, company.value, i)
+                          "
+                          class="form-control form-control-md control-bg-gray"
+                        >
+                          <option
+                            value="{{ item.accCodes?.code }}"
+                            *ngFor="let item of defAccCodeArray"
+                          >
+                            {{ item.accCodes?.code }} -
+                            {{ item.accCodes?.description }}
+                          </option>
+                        </select>
+                      </td>
+                      <td>
+                        <select
+                          formControlName="ledgerReason"
+                          #ledgerReason
+                          class="form-control form-control-md control-bg-gray"
+                        >
+                          <option></option>
+
+                          <option
+                            value="{{ item?.ledgerCode }}"
+                            *ngFor="let item of ledgerCodeArray[i]"
+                          >
+                            {{ item?.ledgerCode }} -
+                            {{ item?.description }}
+                          </option>
+                        </select>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+                <!-- </tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div [hidden]="isShow" class="row justify-content-end">
+        <div class="col-md-2">
+          <app-button
+            buttonType="add"
+            text="Add"
+            (click)="addAAM()"
+          ></app-button>
+        </div>
+      </div>
+    </form>
+    <br /><br /><br />
+    <div [hidden]="isShow" class="row justify-content-end">
+      <div class="col-md-2">
+        <app-button
+          buttonType="save"
+          (click)="submit()"
+          text="Save"
+        ></app-button>
+      </div>
+    </div>
+    <div class="row" *ngIf="isShow">
+      <div class="col-md-2">
+        <app-btn
+          text="Edit"
+          routerLink="../edit"
+          icon="edit"
+          [queryParamsHandling]="'merge'"
+          type="secondary"
+        >
+        </app-btn>
+      </div>
+      <div class="col-md-2">
+        <app-btn
+          text="Clone"
+          routerLink="../clone"
+          icon="clone"
+          [queryParamsHandling]="'merge'"
+          type="secondary"
+        >
+        </app-btn>
+      </div>
+    </div>
+  </div>
+</loader>

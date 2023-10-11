@@ -1,0 +1,33 @@
+<div class="row d-flex flex-lg-row flex-column justify-content-between mb-5">
+<div class="left col">
+    <ng-content></ng-content>
+</div>
+<div class="right col">
+    <div class="row d-flex justify-content-lg-end ">
+    <div class="agentno col-auto ">
+        <span class="me-1">Agent No</span>
+        <span class="text-primary">552</span>
+    </div>
+    <div class="agentname col-auto">
+        <span class="me-1">Agent Name</span>
+        <span class="text-primary">Bruce Wills</span>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="tabletop row d-flex justify-content-between mb-2 fw-bold">
+<div class="col-auto">
+<ng-content select="[tabletoptotal]"></ng-content>
+<span class="text-primary ms-2">
+<ng-content class="text-primary" select="[tabletoptotalvalue]" ></ng-content>
+</span>
+</div>
+<div class="col-auto">
+    <ng-content select="[tabletopunpaid]"></ng-content>
+    <span class="text-primary ms-2">
+    <ng-content select="[tabletopunpaidvalue]" class="text-primary"></ng-content>
+    </span>
+    </div>
+</div>
+

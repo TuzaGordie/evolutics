@@ -1,0 +1,120 @@
+<div class="container ">
+  <form [formGroup]="findQuotationForm">
+
+<div class="row my-2">
+  <div class="col-md-2">
+    <label class="py-2">{{'Quote No'|appTranslate|async}}</label>
+  </div>
+  <div class="col-md">
+    <app-input-basic name="quotationNo" [showLabel]="false" [form]="findQuotationForm" [showValidation]="true"
+      [showValidationIcon]="true" #quoteNoTag>
+    </app-input-basic>
+
+  </div>
+  <div class="col-md-2">
+    <app-btn icon="show" type="dark" [disabled]="quoteNoTag.invalid" (click)="onNext()">Show
+    </app-btn>
+  </div>
+</div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Client Number'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="clientNo" class="form-control control-bg-gray mr-2"
+               (keyup)="setQuotationList()" required>
+      </div>
+      <div class="col-md-2">
+
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Agent'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="agentID" class="form-control control-bg-gray mr-2" required>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Status'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="statusID" class="form-control control-bg-gray mr-2" required>
+      </div>
+      <div class="col-md-2">
+
+      </div>
+    </div>
+
+
+    <div class="row  mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Product Class'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <form action="" [formGroup]="firstFormGroup">
+          <select formControlName="productClassCtrl" class="form-control control-bg-gray mr-2"
+                  >
+            <option [ngValue]="null" selected>{{'Select a type'|appTranslate|async}}</option>
+            <option [ngValue]="'IM'">IM - Individual Motor</option>
+            <option [ngValue]="'GM'">GM - Group Motor</option>
+            <option [ngValue]="'HH'">HH - Individual Property</option>
+            <option [ngValue]="'GP'">GP - Group Property</option>
+            <option [ngValue]="'PM'">PM - Professional Multi-Risk</option>
+            <option [ngValue]="'CT'">CT - Construction</option>
+          </select>
+        </form>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Product Code'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="text" formControlName="productCode" class="form-control control-bg-gray mr-2" required>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Created By'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <select formControlName="quotationNo" (change)="setQuotationList()"
+                class="form-control control-bg-gray mr-2" required>
+          <option [value]="item.CREATED_BY" *ngFor="let item of quotationList">{{item.CREATED_BY}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Created Date From'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="date" formControlName="createdDateFrom" class="form-control control-bg-gray mr-2" required>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-md-2 d-flex align-items-center"><label>{{'Created Date To'|appTranslate|async}}</label></div>
+      <div class="col-md">
+        <input type="date" class="form-control control-bg-gray mr-2" required>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2 pt-3 form-group mt-2">
+        <app-button [buttonType]="'search'" (click)="onSearch()"></app-button>
+      </div>
+    </div>
+
+
+  </form>
+
+</div>

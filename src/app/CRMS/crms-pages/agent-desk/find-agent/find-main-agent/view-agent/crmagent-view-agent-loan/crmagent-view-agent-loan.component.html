@@ -1,0 +1,101 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="row justify-content-around">
+        <div class="col-3">
+          <h1 class="my-5">Agent Loan</h1>
+        </div>
+        <div class="col-2">
+          <label for="">Agent No: 555</label>
+        </div>
+        <div class="col-2">
+          <label for="">Agent Name: Bruce Willis</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <label for="">Agent Name: Bruce Willis</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-striped">
+      <thead class="py-3">
+      <tr>
+        <th scope="col">Loan ID</th>
+        <th scope="col">Loan Commence Dt</th>
+        <th scope="col" >Loan Amount</th>
+        <th scope="col" >Loan Interest Rate (%)</th>
+        <th scope="col" >Loan Tenor (month)</th>
+        <th scope="col" >Currency</th>
+        <th scope="col" >Repayment Amt</th>
+        <th scope="col" >Loan Balance</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">6567_1</th>
+        <td>01/Jan/2021</td>
+        <td>3,000,000</td>
+        <td>10</td>
+        <td>24</td>
+        <td>NGN</td>
+        <td>24,000</td>
+        <td>1,800,000</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row justify-content-end">
+    <div class="col-2">
+      <button class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#paymentFromAgent">Payment From Agent</button>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-outline-danger w-100">Create New Loan</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="paymentFromAgent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Payment From Agent</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="label form-label text-danger">Amount</label>
+              <input class="input form-control control-bg-gray"/>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="label form-label text-danger">Purpose</label>
+              <input class="input form-control control-bg-gray"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger">Submit &check;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,105 @@
+<app-form-navigation [title]="'Setup / Code / Client Data Score'"></app-form-navigation>
+
+
+<div class="container">
+  <form [formGroup]="form"></form>
+  <div class="row">
+    <div class="col-2">
+      <div class="form-group">
+        <app-input-basic label="Score" type="text" [form]="form" name="clientDataScore" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="form-group">
+        <app-input-basic label="Description" type="text" [form]="form"  name="description" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Fullname" type="checkbox" [form]="form"  name="fullName" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <app-input-basic label="Phone No" type="checkbox" [form]="form"  name="phoneNumber" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <app-input-basic label="Surname" type="checkbox" [form]="form"  name="surname" [stacked]="true">
+      </app-input-basic>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Email" type="checkbox" [form]="form"  name="email" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Date Of Birth" type="checkbox" [form]="form"  name="dob" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Income" type="checkbox" [form]="form"  name="income" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Identity" type="checkbox" [form]="form"  name="id" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Gender" type="checkbox" [form]="form"  name="gender" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Marital Status" type="checkbox" [form]="form"  name="maritalStatus" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Employment" type="checkbox" [form]="form"  name="employment" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Bank" type="checkbox" [form]="form"  name="bank" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="NIN" type="checkbox" [form]="form"  name="nin" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="BVN" type="checkbox" [form]="form"  name="bvn" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-5 justify-content-end">
+    <div class="col-2">
+      <app-btn type="secondary" icon="save" [valid]="form?.valid" (mclick)="onSubmit()">Submit</app-btn>
+    </div>
+  </div>
+</div>

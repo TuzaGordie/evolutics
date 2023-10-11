@@ -1,0 +1,17 @@
+<div class="  mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <app-input-basic label="Batch Upload Type" type="select" [form]="form" name="type" valueField="code"
+        [stacked]="true" labelField="title" [options]="types" [translateOptions]="true" #typeTag>
+      </app-input-basic>
+      <app-validation-message [input]="typeTag"></app-validation-message>
+
+      <div class="justify-content-end row my-3">
+        <div class="col-md-auto">
+          <app-btn (mclick)="open()" icon="next" type="outline-nm" [form]="form">Next</app-btn>
+        </div>
+      </div>
+
+    </div>
+
+  </div>

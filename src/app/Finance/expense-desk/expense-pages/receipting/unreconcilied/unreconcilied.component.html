@@ -1,0 +1,130 @@
+<!-- <app-form-navigation [cashtitle]="'Receipting/Unreconciled'"></app-form-navigation> -->
+<loader [text]="loadingText" [loading]="loading">
+  <div class="container">
+    <div class="items-per-page mt-2">
+      <div class="left">
+        <div class="row" *ngIf="checkedList2.length">
+          <div class="col">
+            <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#reconcileModal">{{'Reconcile'|appTranslate|async}}</span>
+          </div>
+          <div class="col">
+            <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declineModal">{{'Unreconcile'|appTranslate|async}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+  
+        </div>
+      </div>
+    </div>
+  
+    <div class="table-responsive">
+      <table class="table table-striped my-3">
+        <thead>
+          <tr>
+            <th scope="col">{{'Seq No'|appTranslate|async}}</th>
+            <th scope="col">{{'Created On'|appTranslate|async}}</th>
+            <th scope="col">{{'Client Name'|appTranslate|async}}</th>
+            <th scope="col">{{'Policy No'|appTranslate|async}}</th>
+            <th scope="col">{{'Clearing On'|appTranslate|async}}</th>
+            <th scope="col">{{'Created By'|appTranslate|async}}</th>
+            <th scope="col">{{'Cheque No'|appTranslate|async}}</th>
+            <th scope="col">{{'Amount'|appTranslate|async}}</th>
+            <th scope="col">{{'Currency'|appTranslate|async}}</th>
+            <th scope="col">{{'Bank'|appTranslate|async}}</th>
+            <th scope="col">
+              <input type="checkbox" class="form-control" id="showAll" [(ngModel)]="isMasterSel" name="select" value=""
+                (change)="checkUncheckAll()">
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let unReconciled of unReconciledData; let i = index">
+            <td class="truncate">{{unReconciled.id}}</td>
+            <td class="truncate">{{unReconciled.createdOn | date:'medium'}}</td>
+            <td class="truncate">{{unReconciled.clientName}}</td>
+            <td class="truncate">{{unReconciled.policyNo}}</td>
+            <td class="truncate">{{unReconciled.clearingDate | date:'medium'}}</td>
+            <td class="truncate">{{unReconciled.createdBy}}</td>
+            <td class="truncate">{{unReconciled.chequeNo}}</td>
+            <td class="truncate">{{unReconciled.amount}}</td>
+            <td class="truncate">{{unReconciled.currency}}</td>
+            <td class="truncate">{{unReconciled.bankCode}}</td>
+            <td class="truncate">
+              <input type="checkbox" class="form-control" id="showAll" [(ngModel)]="unReconciled.selected"
+                value="{{unReconciled.SeqNo}}" (change)="isAllSelected(i)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+</loader>
+
+<!-- Reconcile Modal -->
+<div class="modal fade" id="reconcileModal" tabindex="-1" aria-labelledby="reconcileModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-exclamation-triangle"></i>{{'ALERT'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+            {{'Are you sure you want to Reconcile'|appTranslate|async}}
+            <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+            <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+          </b></p>
+        <span *ngFor="let payment of checkedList2">
+          <span><b class="text-primary">{{payment.id}}</b>,</span>
+        </span> <br> <br>
+        <label for="">{{'Reason'|appTranslate|async}}:</label>
+        <select class="form-control  control-bg-gray mt-2" [(ngModel)]="authorizeReason">
+          <option *ngFor="let authroizeREason of authroizeREasons" [value]="authroizeREason.code">
+            {{authroizeREason.title}}
+          </option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|appTranslate|async}}</button>
+        <button type="button" (click)="reconcileReceipt()" class="btn px-4 py-2 find-button">{{'Proceed'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel"><i class="fa fa-exclamation-triangle"></i>{{'WARNING'|appTranslate|async}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+            {{'Are you sure you want to Decline'|appTranslate|async}}
+            <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+            <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+          </b></p>
+        <span *ngFor="let payment of checkedList2">
+          <span><b class="text-primary">{{payment.id}}</b>,</span>
+        </span> <br> <br>
+        <label for="">{{'Reason'|appTranslate|async}}:</label>
+        <select class="form-control  control-bg-gray mt-2" [(ngModel)]="declineReason">
+          <option *ngFor="let declineReason of declineReasons" [value]="declineReason.code">
+            {{declineReason.title}}
+          </option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|appTranslate|async}}</button>
+        <button type="button" (click)="declineReceiptReconciliation()" class="btn px-4 py-2 find-button">{{'Proceed'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>

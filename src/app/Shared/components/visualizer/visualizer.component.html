@@ -1,0 +1,43 @@
+<div class="">
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer mode="side" [opened]="true">
+      <div class="card-body">
+        <app-input-basic label="Chart Type" cls="text-uppercase" type="select" [options]="chartTypes" [form]="form"
+          name="chartType" [stacked]="true">
+        </app-input-basic>
+        <hr>
+        <app-input-basic label="Field To Summarize" cls="text-uppercase" type="select" [options]="fields" [form]="form"
+          name="axisX" [stacked]="true" #axisX>
+        </app-input-basic>
+        <app-input-basic label="Field To Compare" cls="text-uppercase" type="select"
+          [options]="filterFields|functionCaller3:'y':fields:axisX.value" [form]="form" name="axisY" [stacked]="true"
+          #axisY>
+        </app-input-basic>
+        <app-input-basic label="Field To Filter By" cls="text-uppercase" type="select"
+          [options]="filterFields|functionCaller3:'f':fields:axisX.value" [form]="form" name="filterField"
+          [stacked]="true" #filterField>
+        </app-input-basic>
+        <ng-container *ngIf="showValueType">
+          <hr>
+          <app-input-basic label="Value Type" type="select" cls="text-uppercase" [showEmptyOption]="false" [options]="valueTypes" [form]="form"
+            name="valueType" [stacked]="true">
+          </app-input-basic>
+        </ng-container>
+        <hr>
+        <app-btn (mclick)="showChart()" type="secondary" icon="show" [disabled]="form?.disabled">Show Chart</app-btn>
+      </div>
+    </mat-drawer>
+    <div class="card-body">
+      <loader [loading]="loading">
+        <div style="display: block;">
+          <canvas baseChart [data]="chartData" [datasets]="chartDataSets" [labels]="chartLabels" [options]="chartOptions"
+            [plugins]="chartPlugins" [legend]="chartLegend" [chartType]="chartType">
+          </canvas>
+        </div>
+        <div class="text-center text-uppercase">
+          <span *ngIf="config?.chartType">{{config?.chartType}} Chart</span>
+        </div>
+      </loader>
+    </div>
+  </mat-drawer-container>
+</div>

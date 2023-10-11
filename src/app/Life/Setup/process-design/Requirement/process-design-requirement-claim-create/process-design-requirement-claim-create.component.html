@@ -1,0 +1,378 @@
+<loader [loading]="loading" [text]="loadingText">
+  <form #f="ngForm" novalidate>
+    <div class="container">
+      <div class="d-flex justify-content-end my-3" *ngIf="!isShow">
+        <button
+          class="btn btn-lg"
+          [ngClass]="editMode ? 'btn-primary' : 'btn-outline-primary'"
+          (click)="editMode = !editMode"
+        >
+          <span class="fa fa-edit"></span> {{ 'Edit' | appTranslate | async }}
+        </button>
+      </div>
+      <ul class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="pills-basic-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-basic"
+            type="button"
+            role="tab"
+            aria-controls="pills-basic"
+            aria-selected="true"
+          >
+            {{ 'Basic' | appTranslate | async }}
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-requirement-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-requirement"
+            type="button"
+            role="tab"
+            aria-controls="pills-requirement"
+            aria-selected="false"
+          >
+            {{ 'Requirement' | appTranslate | async }}
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-basic"
+          role="tabpanel"
+          aria-labelledby="pills-basic-tab"
+        >
+          <div class="row mt-2">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Process Code' | appTranslate | async
+                }}</label>
+                <input
+                  type="text"
+                  [(ngModel)]="createProcessClaim.processClaim.code"
+                  name="code"
+                  class="form-control control-bg-gray"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Description' | appTranslate | async
+                }}</label>
+                <input
+                  type="text"
+                  [(ngModel)]="createProcessClaim.processClaim.description"
+                  name="description"
+                  class="form-control control-bg-gray"
+                  [disabled]="!editMode"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Claim Type' | appTranslate | async
+                }}</label>
+                <select
+                  [(ngModel)]="createProcessClaim.processClaim.type"
+                  name="type"
+                  id=""
+                  class="form-control control-bg-gray"
+                  [disabled]="!editMode"
+                >
+                  <option value=""></option>
+                  <option *ngFor="let item of claimTypes" [value]="item.code">
+                    {{ item.code }} - {{ item.title }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Company Filter' | appTranslate | async
+                }}</label>
+                <select
+                  [(ngModel)]="createProcessClaim.processClaim.companyCode"
+                  name="companyCode"
+                  id=""
+                  class="form-control control-bg-gray"
+                  [disabled]="!editMode"
+                >
+                  <option value=""></option>
+                  <option *ngFor="let item of companies" [value]="item.code">
+                    {{ item.code }} - {{ item.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Group Condition Filter' | appTranslate | async
+                }}</label>
+                <select
+                  [(ngModel)]="createProcessClaim.processClaim.groupCond"
+                  name="groupCond"
+                  id=""
+                  [disabled]="!editMode"
+                  (change)="selectProductFilterByProductClass()"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                  <option *ngFor="let item of groupConds" [value]="item.code">
+                    {{ item.code }} - {{ item.title }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Product Class Filter' | appTranslate | async
+                }}</label>
+                <select
+                  [(ngModel)]="createProcessClaim.processClaim.prodClass"
+                  name="prodClass"
+                  id=""
+                  (change)="selectProductFilterByProductClass()"
+                  class="form-control control-bg-gray"
+                  [disabled]="!editMode"
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let item of productClasses"
+                    [value]="item.code"
+                  >
+                    {{ item.code }} - {{ item.title }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Product Filter' | appTranslate | async
+                }}</label>
+                <select
+                  [(ngModel)]="createProcessClaim.processClaim.productCode"
+                  name="productCode"
+                  id=""
+                  class="form-control control-bg-gray"
+                  [disabled]="!editMode"
+                >
+                  <option value=""></option>
+                  <option
+                    *ngFor="let item of productFilters"
+                    [value]="item.code"
+                  >
+                    {{ item.code }} - {{ item.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex mt-2">
+            <div class="d-flex align-items-center form-group">
+              <label class="form-label text-primary me-3">{{
+                'Banded' | appTranslate | async
+              }}</label>
+              <input
+                type="checkbox"
+                name="banded"
+                (change)="runBanded()"
+                [(ngModel)]="createProcessClaim.processClaim.banded"
+                class="form-control control-bg-gray"
+                #banded="ngModel"
+              />
+            </div>
+          </div>
+          <!-- banded section -->
+          <div *ngIf="banded.value">
+            <div class="row mt-3">
+              <p class="small">
+                {{ 'Claim Banding - ' | appTranslate | async
+                }}<span class="text-primary">
+                  {{
+                    'Leave Blank if same req apply to all Claim Amount'
+                      | appTranslate
+                      | async
+                  }}</span
+                >
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <label for="" class="form-label text-primary">{{
+                  'Band No' | appTranslate | async
+                }}</label>
+              </div>
+              <div class="col-md-5">
+                <label for="" class="form-label text-primary">{{
+                  'Claim Amount Band' | appTranslate | async
+                }}</label>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+            <div
+              *ngFor="
+                let processClaimBand of createProcessClaim.processClaimBand;
+                let i = index
+              "
+              class="row mb-2"
+            >
+              <div class="col-md-5">
+                <input
+                  type="number"
+                  disabled
+                  [(ngModel)]="processClaimBand.bandNo"
+                  name="bandNo_{{ processClaimBand.rowId }}"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+              <div class="col-md-5">
+                <input
+                  type="number"
+                  [(ngModel)]="processClaimBand.amount"
+                  name="amount_{{ processClaimBand.rowId }}"
+                  class="form-control control-bg-gray"
+                  [disabled]="!editMode"
+                  appCommafyNumber
+                />
+              </div>
+              <div class="col-md-2">
+                <app-button
+                  buttonType="delete"
+                  (click)="removeBand(i)"
+                ></app-button>
+              </div>
+            </div>
+            <div class="row mt-2 justify-content-end">
+              <div class="col-md-2">
+                <app-button buttonType="add" (click)="addBand()"></app-button>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row mt-4 justify-content-end">
+        <div class="col-md-2">
+          <app-button buttonType="submit"></app-button>
+        </div>
+      </div> -->
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-requirement"
+          role="tabpanel"
+          aria-labelledby="pills-requirement-tab"
+        >
+          <div
+            *ngIf="createProcessClaim.processClaim.banded"
+            class="row justify-content-start mt-4"
+          >
+            <div class="col-md-1">
+              <label for="" class="form-label text-primary">{{
+                'Band No' | appTranslate | async
+              }}</label>
+            </div>
+            <div class="col-md-2">
+              <select
+                [(ngModel)]="bandNo"
+                name="bandNo"
+                id=""
+                class="form-control control-bg-gray"
+                [disabled]="!editMode"
+              >
+                <option value=""></option>
+                <option
+                  *ngFor="let item of createProcessClaim.processClaimBand"
+                  [value]="item.bandNo"
+                >
+                  {{ item.bandNo }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-5">
+              <label for="" class="form-label text-primary">{{
+                'Claim Requirement Code' | appTranslate | async
+              }}</label>
+            </div>
+            <div class="col-md-5">
+              <label for="" class="form-label text-primary">{{
+                'Description' | appTranslate | async
+              }}</label>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+
+          <div
+            *ngFor="
+              let processClaimReq of createProcessClaim.processClaimReq;
+              let i = index
+            "
+            class="row mt-2"
+          >
+            <div class="col-md-5">
+              <select
+                [(ngModel)]="processClaimReq.claimReq"
+                (change)="onProcessClaimReqChange(i, processClaimReq)"
+                name="claimReq_{{ processClaimReq.rowId }}"
+                id=""
+                class="form-control control-bg-gray"
+                [disabled]="!editMode"
+              >
+                <option value=""></option>
+                <option *ngFor="let item of claimReqCodes" [value]="item.code">
+                  {{ item.code }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <input
+                [(ngModel)]="processClaimReq.description"
+                name="description_{{ processClaimReq.rowId }}"
+                class="form-control control-bg-gray"
+                [disabled]="!editMode"
+              />
+            </div>
+            <div class="col-md-2">
+              <app-button
+                buttonType="delete"
+                (click)="removeReq(i)"
+              ></app-button>
+            </div>
+          </div>
+
+          <div class="row justify-content-end mt-2">
+            <div class="col-md-2">
+              <app-button buttonType="add" (click)="addReq()"></app-button>
+            </div>
+          </div>
+          <div class="row justify-content-end mt-4">
+            <div class="col-md-2">
+              <app-button
+                buttonType="save"
+                (click)="saveProcessClaim()"
+              ></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</loader>

@@ -1,0 +1,70 @@
+<!-- <app-form-navigation [title]="'View Client / Workflows'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="row justify-content-center">
+        <div class="col-2">
+          <label for="" class="form-label">Start Date</label>
+          <input type="date" class="form-control control-bg-gray">
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label">Due Date</label>
+          <input type="date" class="form-control control-bg-gray">
+        </div>
+        <div class="col-2">
+          <label for="" class="form-label">SLA Level</label>
+          <select name="" id="" class="form-control control-bg-gray">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <p class="py-3"><b>Client Name:</b> <span class="px-3"></span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+          <th scope="col">Task Code</th>
+          <th scope="col">Task</th>
+          <th scope="col">User Assigned</th>
+          <th scope="col">Group Assigned</th>
+          <th scope="col">Start</th>
+          <th scope="col">Due</th>
+          <th scope="col">SLA Level</th>
+          <th scope="col" style="border-top-right-radius: 12px;">Time Outside SLA</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">
+            <div class="square red"></div>
+          </th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="mt-5 row justify-content-between">
+      <div class="col-3 ">
+
+        <app-button buttonType="addCustom" text="Create New Task" [routerLink]="'../../workflow/workflow-task'">
+        </app-button>
+
+      </div>
+      <div class="col-3 ">
+
+        <app-button buttonType="history"></app-button>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>

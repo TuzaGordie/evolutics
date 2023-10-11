@@ -1,0 +1,145 @@
+
+<div class="modal fade" id="lic_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="lifeForm" class="modal-body">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Initial Sum Assured'|appTranslate|async}}</label>
+            <input formControlName="assured" type="text" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Loan Interest rate (%)'|appTranslate|async}}</label>
+            <select formControlName="loan_rate" id="" class="form-control control-bg-gray">
+              <option selected disabled>{{'Choose an Option'|appTranslate|async}}</option>
+              <ng-container *ngFor="let option of loan_options">
+                <option [value]="option.loanIntRate">
+                  {{option.loanIntRate}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Loan Repayment Frequency'|appTranslate|async}}</label>
+            <select formControlName="loan_freq" id="" class="form-control control-bg-gray">
+              <option selected disabled>{{'Choose an Option'|appTranslate|async}}</option>
+              <ng-container *ngFor="let option of freq_options">
+                <option [value]="option.code">
+                  {{option.code}} - {{option.title}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Lender</label>
+            <select formControlName="lender" id="" class="form-control control-bg-gray">
+              <option selected disabled>Choose an Option</option>
+              <ng-container *ngFor="let option of lender_options">
+                <option [value]="option.id">
+                  {{option.provider_code}} - {{option.full_name}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Loan Issue Date'|appTranslate|async}}</label>
+            <input formControlName="loan_issue" type="date" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Loan Amortisation Basis'|appTranslate|async}}</label>
+            <select formControlName="loan_amortisation" id="" class="form-control control-bg-gray">
+              <option selected disabled>{{'Choose an Option'|appTranslate|async}}</option>
+              <ng-container *ngFor="let option of amortisation_options">
+                <option [value]="option.code">
+                  {{option.code}} - {{option.title}}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Premium Payment Term'|appTranslate}}</label>
+            <input formControlName="premTerm" readonly type="text" placeholder="Years" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input type="text" formControlName="premMonths" readonly placeholder="months" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input type="text" formControlName="premDays" readonly placeholder="days" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">{{'Loan Term'|appTranslate|async}}</label>
+            <input formControlName="loanTerm" type="text" placeholder="Years" class="form-control control-bg-gray" readonly>
+            <!-- <select formControlName="premTerm" id="" class="form-control control-bg-gray" [hidden]="!termList">
+              <option selected disabled>Choose an option</option>
+              <ng-container *ngFor="let year of allowedPremPayTermYears">
+                <option [value]="year">
+                  {{year}}
+                </option>
+              </ng-container>
+            </select> -->
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="loanMonths" type="text" placeholder="months" class="form-control control-bg-gray" readonly>
+            <!-- <select formControlName="premMonths" id="" class="form-control control-bg-gray" [hidden]="!termList">
+              <option selected disabled>Choose an option</option>
+              <ng-container *ngFor="let year of allowedPremPayTermMonths">
+                <option [value]="year">
+                  {{year}}
+                </option>
+              </ng-container>
+            </select> -->
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="loanDays" type="text" placeholder="days" class="form-control control-bg-gray" readonly>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <app-btn type="secondary">Joint Owner</app-btn>
+          <app-btn type="outline" icon="save" (mclick)="stop()">Save</app-btn>
+
+
+    </div>
+  </div>
+</div>
+</div>
+

@@ -1,0 +1,400 @@
+<!-- <app-form-navigation [title]="'Set Up / Correspondence / Email '"></app-form-navigation> -->
+<loader [loading]="loading">
+  <form (ngSubmit)="createCorrespondenceEmail()" novalidate #f="ngForm">
+    <div class="mt-2" id="form-body">
+      <ul class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+            type="button" role="tab" aria-controls="pills-basic" aria-selected="true">
+            {{ 'Basic' | appTranslate | async }}
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-fields-tab" data-bs-toggle="pill" data-bs-target="#pills-fields"
+            type="button" role="tab" aria-controls="pills-fields" aria-selected="false">
+            {{ 'Fields' | appTranslate | async }}
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+          <div class="">
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Document Code' | appTranslate | async
+                }}</label>
+                <input class="form-control control-bg-gray" name="code" disabled
+                  [(ngModel)]="createCorrespondence.correspondence.code" />
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email body' | appTranslate | async
+                }}</label>
+                <input class="form-control control-bg-gray" name="emailBody" readonly 
+                  [(ngModel)]="createCorrespondence.correspondence.emailBody" (click)="openTextArea()" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email Body Template' | appTranslate | async
+                }}</label>
+                <select name="" id="" class="form-control control-bg-gray" name="emailBodyTemplate"
+                  [disabled]="!!createCorrespondence.correspondence.emailBody" [(ngModel)]="
+                    createCorrespondence.correspondence.emailBodyTemplate
+                  ">
+                  <option></option>
+                  <option *ngFor="let emailTemplateBodyCode of emailTemplateBodyCodes"
+                    [ngValue]="emailTemplateBodyCode?.code">
+                    {{ emailTemplateBodyCode?.code }} -
+                    {{ emailTemplateBodyCode?.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Description' | appTranslate | async
+                }}</label>
+                <input class="form-control control-bg-gray" name="description"
+                  [(ngModel)]="createCorrespondence.correspondence.description" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email Subject' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" name="emailSubject" (change)="subjectChange()"
+                  [(ngModel)]="createCorrespondence.correspondence.emailSubject" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email Subject Template' | appTranslate | async
+                }}</label>
+                <select name="" id="" class="form-control control-bg-gray" name="emailSubjectTemplate"
+                  [disabled]="disableSubject" [(ngModel)]="
+                    createCorrespondence.correspondence.emailSubjectTemplate
+                  ">
+                  <option></option>
+                  <option *ngFor="let emailTemplateBodyCode of emailTemplateBodyCodes"
+                    [ngValue]="emailTemplateBodyCode?.code">
+                    {{ emailTemplateBodyCode?.code }} -
+                    {{ emailTemplateBodyCode?.description }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email Gateway' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="emailGateway"
+                  [(ngModel)]="createCorrespondence.correspondence.emailGateway">
+                  <option></option>
+                  <option *ngFor="let idsAndEmail of emailGateways" [ngValue]="idsAndEmail?.id">
+                    {{ idsAndEmail?.id }} - {{ idsAndEmail?.senderEmail }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Status' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="status" disabled
+                  [(ngModel)]="createCorrespondence.correspondence.docStatus">
+                  <option *ngFor="let code of statusCodes" [ngValue]="code?.code" [selected]="code?.code === 'A'">
+                    {{ code?.code }} - {{ code?.title }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Send by' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="sendBy" disabled
+                  [(ngModel)]="createCorrespondence.correspondence.sendBy">
+                  <option *ngFor="let code of sendByCodes" [ngValue]="code?.code" [selected]="code?.code == 'E'">
+                    {{ code?.code }} - {{ code?.title }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-4"> 
+                <label class="form-label text-primary">{{
+                  'Category' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="docCategory" [attr.disabled]="
+                    createCorrespondence.correspondence.code != null ? '' : null
+                  " [(ngModel)]="createCorrespondence.correspondence.docCategory">
+                  <option></option>
+                  <option *ngFor="let category of categoryCodes" [ngValue]="category?.code">
+                    {{ category?.code }} - {{ category?.title }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Spool Folder Path' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" name="spoolPath"
+                  [(ngModel)]="createCorrespondence.correspondence.spoolPath" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Folder Path to store documents not emailed'
+                    | appTranslate
+                    | async
+                }}</label>
+                <input class="form-control control-bg-gray" name="pathDocNotEmailed" [(ngModel)]="
+                    createCorrespondence.correspondence.pathDocNotEmailed
+                  " />
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Table Group' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="tableGroup" (change)="getPrimaryTable()"
+                  [(ngModel)]="createCorrespondence.correspondence.tableGroup">
+                  <option></option>
+                  <option *ngFor="let tableGroup of tableGroups" [ngValue]="tableGroup || ''">
+                    {{ tableGroup || '' }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Primary Table Name' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="tableName" #table (change)="onSelectPrimaryTable()"
+                  [(ngModel)]="createCorrespondence.correspondence.tableName">
+                  <option></option>
+                  <option *ngFor="let tableName of tableNames" [ngValue]="tableName || ''">
+                    {{ tableName || '' }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email To' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" name="emailTo"
+                  [(ngModel)]="createCorrespondence.correspondence.emailTo" />
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email Cc' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" name="emailCc"
+                  [(ngModel)]="createCorrespondence.correspondence.emailCc" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Email BCc' | appTranslate | async
+                }}</label>
+                <input type="text" class="form-control control-bg-gray" name="emailBcc"
+                  [(ngModel)]="createCorrespondence.correspondence.emailBcc" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Auto Attach Document To Workflow Code' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="autoAttachWf"
+                  [(ngModel)]="createCorrespondence.correspondence.autoAttachWf">
+                  <option *ngFor="let workflowTaskCode of workflowTaskCodes" [ngValue]="workflowTaskCode?.code">
+                    {{ workflowTaskCode?.code }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col-md-4">
+                <label class="form-label text-primary">{{
+                  'Numbering Format' | appTranslate | async
+                }}</label>
+                <select class="form-control control-bg-gray" name="numberFormat"
+                  [(ngModel)]="createCorrespondence.correspondence.numberFormat">
+                  <option></option>
+                  <option *ngFor="let numberFormat of numberFormats" [ngValue]="numberFormat?.code">
+                    {{ numberFormat?.code }} - {{ numberFormat?.title }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mt-4 justify-content-center">
+              <div class="col-3">
+                <label class="form-label text-primary w-100 text-center">{{
+                  'Add Filter' | appTranslate | async
+                }}</label>
+                <input type="checkbox" [disabled]="isShow" class="form-control control-bg-gray mx-auto"
+                  data-bs-target="#addFilterModal" data-bs-toggle="modal" />
+              </div>
+              <div class="col-3">
+                <label class="form-label text-primary w-100 text-center">{{
+                  'Generate But Do Not Email' | appTranslate | async
+                }}</label>
+                <input type="checkbox" class="form-control control-bg-gray mx-auto" name="doNotSendEmail" [(ngModel)]="
+                    createCorrespondence.correspondence.doNotSendEmail
+                  " />
+              </div>
+              <div class="col-3">
+                <label class="form-label text-primary w-100 text-center">{{
+                  'Convert To Pdf' | appTranslate | async
+                }}</label>
+                <input type="checkbox" class="control-bg-gray form-control mx-auto" name="pdfEnforce"
+                  [(ngModel)]="createCorrespondence.correspondence.pdfEnforce" />
+              </div>
+              <div class="col-3">
+                <label class="form-label text-primary w-100 text-center">{{
+                  'Can Be Viewed By Client On Mobile' | appTranslate | async
+                }}</label>
+                <input type="checkbox" class="control-bg-gray form-control mx-auto" name="viewByClient"
+                  [(ngModel)]="createCorrespondence.correspondence.viewByClient" />
+              </div>
+            </div>
+
+            <app-templates-to-attach-to-email [correspondence]="createCorrespondence" [isShow]="isShow">
+            </app-templates-to-attach-to-email>
+
+            <div class="row mt-3">
+              <div class="col-4" S *ngFor="
+                  let correspondenceDocLinkList of createCorrespondence.correspondenceDocLinkList;
+                  let i = index
+                ">
+                <label class="form-label text-primary">{{
+                  'Other document Linked' | appTranslate | async
+                }}</label>
+                <div class="row">
+                  <div class="col-md">
+                    <select class="form-control control-bg-gray" name="otherDocLinked_{{
+                        correspondenceDocLinkList.rowId
+                      }}" [(ngModel)]="correspondenceDocLinkList.docLink">
+                      <option *ngFor="let documentCodeAndDesc of documentCodeAndDescs"
+                        [ngValue]="documentCodeAndDesc?.code">
+                        {{ documentCodeAndDesc?.code }} -
+                        {{ documentCodeAndDesc?.description }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-auto d-flex" *ngIf="!isShow">
+                    <app-btn group="delete" [disabled]="
+                        createCorrespondence.correspondenceDocLinkList
+                          ?.length == 1
+                      " (mclick)="removeCorrespondenceDocLink(i)"></app-btn>
+                    <span class="mx-1"></span>
+                    <app-button buttonType="addCustom" (click)="addCorrespondenceDocLink(i)"></app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pills-fields" role="tabpanel" aria-labelledby="pills-fields-tab">
+          <app-correspondence-fields-tab [correspondence]="createCorrespondence" [isShow]="isShow"
+            [connectors]="connectors" [tableColumns]="tableColumns">
+          </app-correspondence-fields-tab>
+          <div class="mt-5 row justify-content-end" *ngIf="!isShow">
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">&nbsp;</label>
+                <app-button [buttonType]="'submit'" (click)="createCorrespondenceEmail()"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addFilterModal" aria-hidden="true" aria-labelledby="addFilterModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">
+              {{ 'Add Filter' | appTranslate | async }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div *ngFor="
+                let correspondenceFilterList of createCorrespondence.correspondenceFilterList;
+                let i = index
+              ">
+              <div class="row">
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{
+                    'Filter' | appTranslate | async
+                  }}</label>
+                  <select class="form-control control-bg-gray" name="filter_{{ correspondenceFilterList.rowId }}"
+                    [(ngModel)]="correspondenceFilterList.filter">
+                    <option *ngFor="let filtersCode of filtersCodes" [ngValue]="filtersCode?.code">
+                      {{ filtersCode?.code }} - {{ filtersCode?.title }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{
+                    'Operator' | appTranslate | async
+                  }}</label>
+                  <select class="form-control control-bg-gray" name="operator_{{ correspondenceFilterList.rowId }}"
+                    [(ngModel)]="correspondenceFilterList.operator">
+                    <option *ngFor="let operatorCode of operatorCodes" [ngValue]="operatorCode?.code">
+                      {{ operatorCode?.code }} - {{ operatorCode?.title }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{
+                    'Value' | appTranslate | async
+                  }}</label>
+                  <input type="number" class="form-control control-bg-gray"
+                    name="value_{{ correspondenceFilterList.rowId }}" [(ngModel)]="correspondenceFilterList.value" />
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">{{
+                    'And/Or' | appTranslate | async
+                  }}</label>
+                  <select class="form-control control-bg-gray" name="connector_{{ correspondenceFilterList.rowId }}"
+                    [(ngModel)]="correspondenceFilterList.connector">
+                    <option *ngFor="let connectorCode of connectorCodes" [ngValue]="connectorCode?.code">
+                      {{ connectorCode?.code }} - {{ connectorCode?.title }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label text-primary">&nbsp;</label>
+                  <app-button buttonType="delete" (click)="removeCorrespondenceFilter(i)"></app-button>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <app-button buttonType="add" (click)="addCorrespondenceFilter()"></app-button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-primary btn" data-bs-dismiss="modal">
+              <i class="fa fa-clipboard"></i>
+              {{ 'Continue' | appTranslate | async }}
+            </button>
+            <!-- <app-button buttonType="save" data-bs-dismiss="modal"></app-button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-lg-flex mt-2" *ngIf="isShow">
+      <app-btn text="Edit" routerLink="../edit" icon="edit" [queryParamsHandling]="'merge'" type="secondary"></app-btn>
+      <span class="mx-1"></span>
+      <app-btn text="Clone" routerLink="../clone" icon="clone" [queryParamsHandling]="'merge'" type="secondary">
+      </app-btn>
+    </div>
+  </form>
+</loader>

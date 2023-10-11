@@ -1,0 +1,9 @@
+<div class="text-danger">
+  <ng-container *ngIf="control?.errors && (control?.dirty || control?.touched)">
+    <ng-container *ngFor="let error of validations">
+      <span class="me-2" *ngIf="control?.errors[error.type] as controlMessage"> 
+        {{((error|errorMessage:label:maxLength:minLength:controlMessage)||customMessage)|appTranslate|async}}
+      </span>
+    </ng-container>
+  </ng-container>
+</div>

@@ -1,0 +1,148 @@
+<app-form-navigation [title]="'Document / Retrieve'"></app-form-navigation>
+<div class="container mb-5 pb-5" id="form-body">
+
+    <div class="row g-5">
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Ref Category'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="REF_CATEGORY" #refCode (change)="findRouteParameter(refCode.value)">
+                    <option [ngValue]=""> </option>
+                    <option *ngFor="let category of refCategories" [value]="category.title">{{category.code}}-{{category.title}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <div class="row g-2">
+                    <div class="col-9">
+                        <label>{{'Ref Number'|appTranslate|async}}</label>
+                        <input class="form-control control-bg-gray" type="text" [(ngModel)]="REF_NO" name="refNo" (change)="getPolicyCode()"/>
+                    </div>
+                    <div class="col-3">
+                        <label>&nbsp;</label>
+                        <app-btn type="outline" icon="search" routerLink='/life/{{routeParams}}' (keyup)="getRefNo()">
+                          Find
+                        </app-btn>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label></label>
+                <input class="form-control control-bg-gray" value="{{readOnly}}" type="text" disabled/>
+            </div>
+        </div>
+
+        <div class="col-4" *ngIf="isPolicyNo">
+            <div class="form-group mt-2">
+              <div class="row">
+                <div class="col-6">
+                  <label>{{'Policy Code'|appTranslate|async}}</label>
+                  <select class="form-control  control-bg-gray mt-2 ht-48" [(ngModel)]="POLICY_CODE">
+                    <option [ngValue]=""> </option>
+                    <option [value]="pc.policyCode" *ngFor="let pc of policyCodes">{{pc.policyCode}}</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <label>{{'Policy Number Suffix'|appTranslate|async}}</label>
+                  <select class="form-control  control-bg-gray mt-2 ht-48" [(ngModel)]="POLICY_NO_SUFFIX">
+                    <option [ngValue]=""> </option>
+                    <option [value]="pc.policyNoSuffix" *ngFor="let pc of policyCodes">{{pc.policyNoSuffix}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Category'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="CATEGORY" #category (change)="getCategoryCode(category.value)">
+                    <option [ngValue]=""> </option>
+                    <option *ngFor="let category of categories" [value]="category.code">{{category.code}}-{{category.title}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Sub Category'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="SUB_CATEGORY">
+                    <option [ngValue]=""> </option>
+                    <option *ngFor="let category of subCategories" [value]="category.code">{{category.code}}-{{category.title}}</option>
+                </select>
+            </div>
+        </div>
+
+     
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Company'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray ht-48" [(ngModel)]="COMPANY">
+                    <option [ngValue]=""> </option>
+                    <option *ngFor="let company of companies" [value]="company.code">{{company.code}}-{{company.description}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Branch'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray ht-48" [(ngModel)]="BRANCH">
+                    <option [ngValue]=""> </option>
+                    <option *ngFor="let branch of branches" [value]="branch.code">{{branch.code}}-{{branch.description}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+          <div class="form-group mt-2">
+              <label>{{'Title'|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" [(ngModel)]="TITLE" name="title" type="text"/>
+          </div>
+        </div>
+
+      
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Sensitivty'|appTranslate|async}}</label>
+                <select class="form-control  control-bg-gray ht-48" [(ngModel)]="SENSITIVITY">
+                    <option [ngValue]=""> </option>
+                    <option *ngFor="let sensitivity of sensitivities" [value]="sensitivity.code">{{sensitivity.code}}-{{sensitivity.title}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mt-2">
+                <label>{{'Box Number'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" type="text" name="boxno" [(ngModel)]="BOX_NO" />
+            </div>
+        </div>
+
+        <div class="col-4">
+          <div class="form-group mt-2">
+            <label>{{'Bus Line'|appTranslate|async}}</label>
+            <select class="form-control  control-bg-gray ht-48" [(ngModel)]="BUS_LINE">
+                <option [ngValue]=""> </option>
+                <option *ngFor="let bl of busLines" [value]="bl.code">{{bl.code}}-{{bl.title}}</option>
+            </select>
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <div class="form-group mt-4">
+            <app-btn type="primary" icon="download" (click)="retrieveDocument()" class="mt-5">
+                <span>{{ (connectionRetrieve.creating ? ' Retrieving...' : connectionRetrieve.error ? ' Try Again' : ' Retrieve')|appTranslate|async}}</span>
+            </app-btn>
+        </div>
+    </div>
+    </div>
+</div>
+

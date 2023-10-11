@@ -1,0 +1,39 @@
+table {
+  border: 1px solid lightgray;
+}
+
+table tr th{
+  color: rgb(21, 21, 87)
+}
+
+.find-button {
+  background:#00BD6E;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.find-button:hover {
+  background:#029658;
+}
+
+.badge {
+  cursor: pointer;
+}
+
+.items-per-page {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: 5px;
+}
+
+#showAll {
+  height: 30px;
+  width: 30px;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,36 @@
+<div class="">
+  <div class="page-head">Relationships</div>
+  <div class="d-flex justify-content-end mb-3">
+    <div class="">
+      <text-case-1
+        lbl="Client Name:"
+        [val]="name"
+        [stacked]="false"
+      ></text-case-1>
+    </div>
+  </div>
+  <div class="">
+    <table-plain
+      style="visibility: hidden"
+      [data]="slist"
+      [displayedColumns]="dCols"
+    ></table-plain>
+
+    <table class="w-100 d-table table table-striped mb-0">
+      <thead>
+        <ng-container *ngFor="let col of dCols; let i = index">
+          <th>{{ col.t | appTranslate | async }}</th>
+        </ng-container>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let rel of list; let i = index">
+          <tr class="mat-row">
+            <ng-container *ngFor="let col of dCols; let i = index">
+              <td class="mat-cell">{{ rel[col.f] }}</td>
+            </ng-container>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

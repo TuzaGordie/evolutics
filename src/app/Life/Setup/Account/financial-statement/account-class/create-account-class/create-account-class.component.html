@@ -1,0 +1,74 @@
+<!-- <app-form-navigation [title] = "'Set Up/Accounts/Financial Statement/Account Class'"></app-form-navigation> -->
+<div class="container-fluid" style="max-width: 1350px;">
+  <br>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="text-primary form-label">{{"Company"|appTranslate|async}}</label>
+      <p class="">1- Leadway Vie</p>
+    </div>
+    <div class="col-md-4">
+      <label class="text-primary form-label">{{"Account Format"|appTranslate|async}}</label>
+      <p class="">1- IFRS17</p>
+    </div>
+    <div class="col-md-3">
+      <label class="text-primary form-label">{{"Account Format"|appTranslate|async}}</label>
+      <div class="col">
+        <select class="form-control form-control-md control-bg-gray">
+          <option></option>
+          <option>1</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label class="text-primary form-label">{{"Account Class"|appTranslate|async}}</label>
+      <div class="col">
+        <select class="form-control form-control-md control-bg-gray">
+          <option></option>
+          <option>1</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row justify-content-end">
+    <div class="col-sm-2">
+      <app-button buttonType="default" text="Download CSV"></app-button>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="container-fluid">
+    <div class="headings row fw-bold g-3 mb-3">
+      <div class="col-4">
+        <span class="form-label text-primary">{{"Account Line"|appTranslate|async}}</span>
+      </div>
+      <div class="col-4">
+        <span class="form-label text-primary">{{"Account Class"|appTranslate|async}}</span>
+      </div>
+    </div>
+    <div class="row g-3 mb-2">
+      <div class="col-4">
+        <select class="form-control form-control-md control-bg-gray">
+          <option></option>
+          <option>1</option>
+        </select>
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control form-control-md control-bg-gray">
+      </div>
+    </div>
+    <br>
+    <div class="row justify-content-end">
+      <div class="col-md-2">
+        <app-button buttonType="add"></app-button>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="row justify-content-end">
+    <div class="col-md-2">
+      <app-button buttonType="save"></app-button>
+    </div>
+  </div>
+</div>
+<br><br>
+

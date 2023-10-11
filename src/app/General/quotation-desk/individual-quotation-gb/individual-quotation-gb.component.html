@@ -1,0 +1,103 @@
+<div class="container mt-5 pt-5">
+  <form [formGroup]="findIndividualQuotationForm">
+
+    <div class="row justify-content-center">
+      <div class="col-2 align-items-center">
+        <label class="py-2">{{'Client Number'|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2 position-relative">
+        <app-input-basic [form]="findIndividualQuotationForm" name="clientNo" type="text" [stacked]="false"
+                         [showLabel]="false"
+                         label="Client Number" [loading]="validatingClientNo" [showValidation]="true" [showValidationIcon]="true" [colored]="false"
+                         [light]="false">
+        </app-input-basic>
+      </div>
+      <!-- <div class="col-2 position-relative">
+        <input type="text" formControlName="clientNo" class="form-control control-bg-gray"
+          [ngClass]="{bordercheck: clientNo.valid, borderuncheck: clientNo.invalid && clientNo.dirty && clientNo.value}">
+        <div *ngIf="clientNo.valid" class="checkmark"><i class="fa fa-check"></i></div>
+        <div style="display: none;" *ngIf="!clientNo.valid && clientNo.touched && clientNo.value"><i class="fa fa-times"></i></div>
+      </div> -->
+      <div class="col-2">
+        <app-button [buttonType]="'searchGB'" routerLink="/general/asset-desk/find-asset/"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'createGB'" [text]="'Create New Client'" (click)="onCreate()"></app-button>
+      </div>
+
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 text-end">
+        <div class="row justify-content-end mt-3" *ngIf="clientNo?.valid">
+          <span style="text-decoration: none; list-style: none">{{clientNameFromCheck}}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-2 align-items-center"><label class="py-2">{{'Select Insurance Type'|appTranslate|async}}</label></div>
+      <div class="col-6">
+        <select formControlName="insuranceType" class="form-control control-bg-gray mr-2"
+                (change)="onInsuranceTypeChange()">
+          <option></option>
+          <ng-container *ngFor="let it of (insuranceTypeOptions$ | async)">
+            <option [value]="it.code">{{it.code}} - {{it.title}}</option>
+          </ng-container>
+          <!-- <option [value]="item.INSURANCE_TYPE" *ngFor="let item of quotationList">{{item.INSURANCE_TYPE}}</option> -->
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+      <div class="col-2 align-items-center"><label class="py-2">{{'Select Product Class'|appTranslate|async}}</label></div>
+      <div class="col-6">
+        <select formControlName="productClass" class="form-control control-bg-gray mr-2"
+                (change)="onProductClassChange()">
+          <option></option>
+          <ng-container *ngFor="let pc of (productClassOptions$ | async)">
+            <option [ngValue]="pc"> {{pc.code}} - {{pc.title}}</option>
+          </ng-container>
+          <!-- <option [value]="item.PRODUCT_CLASS" *ngFor="let item of quotationList">{{item.PRODUCT_CLASS}}</option> -->
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row mt-4 justify-content-center">
+      <div class="col-2 align-items-center"><label class="py-2">{{'Select Product'|appTranslate|async}}</label></div>
+      <div class="col-6">
+        <select formControlName="product" class="form-control control-bg-gray mr-2">
+          <!-- <option [value]="item.PRODUCT_CODE" *ngFor="let item of quotationList">{{item.PRODUCT_CODE}}</option> -->
+          <option></option>
+          <ng-container *ngFor="let p of (productOptions$ | async) ">
+            <option [ngValue]="p">{{p.code}} - {{p.description}}</option>
+          </ng-container>
+        </select>
+      </div>
+
+
+    </div>
+
+
+    <!-- <div class=" my-5">
+    <div  style="float: right; margin-top: 10%;">
+
+      <button type="submit" [disabled]="validResult == 'false' || validResult == '' "
+      [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"
+      class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+          <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+    </div>
+</div> -->
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-2"></div>
+      <div class="col-2" *ngIf="findIndividualQuotationForm.valid">
+        <app-button [buttonType]="'nextGB'" [text]="'Next'" (click)="onNextClick()"></app-button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,37 @@
+label {
+  color: #00BCC8;
+}
+
+[type="file"] {
+  height: 0;
+  overflow: hidden;
+  width: 0;
+  display: none;
+}
+
+[type="file"] + label {
+  width: 100%;
+  height: 48px;
+  color: #00BCC8;
+  background: rgb(240, 239, 239);
+  border: none;
+  padding: 15px 0;
+  text-align: center;
+  display: inline-block;
+  font-weight: 500;
+  outline: none;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: #0bbbc833;
+  border: 1px solid #00BCC8;
+  color: #00BCC8;
+}
+
+.save-button:hover {
+  background-color: #00BCC8;
+  color: #fff;
+}

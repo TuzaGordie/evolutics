@@ -1,0 +1,15 @@
+<q-individual-beneficiary #beneficiarySection>
+</q-individual-beneficiary>
+<div class="row justify-content-end">
+    <div class="col-3">
+      <button (click)="submitBeneficiaryInfo()" class="w-100 btn btn-outline-primary btn-lg">
+        <span class="fa" [ngClass]="{
+            'fa-check': !isCreatingClientsQuotation,
+            'fa-spinner fa-spin': isCreatingClientsQuotation
+          }"></span>
+        <span class="ps-2">{{
+          isCreatingClientsQuotation ? "Submitting..." : "Submit"
+        }}</span>
+      </button>
+    </div>
+  </div>

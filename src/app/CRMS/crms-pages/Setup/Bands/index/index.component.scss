@@ -1,0 +1,10 @@
+.btn-outline-secondry{
+    border-color: red;
+    color: red;
+}
+
+.btn.disabled{
+    pointer-events: all;
+    cursor: not-allowed;
+    opacity: 0.65;
+}

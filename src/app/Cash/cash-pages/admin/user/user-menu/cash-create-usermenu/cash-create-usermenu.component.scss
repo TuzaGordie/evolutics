@@ -1,0 +1,20 @@
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  background:  #00BD6E !important;
+  color: #fff;
+  font-size: 18px;
+}
+.nav-tabs .nav-link, .nav-tabs .nav-item.show .nav-link {
+  color: #00BD6E;
+  font-size: 18px;
+}
+
+.save-button {
+  background: #fff;
+  color: #00BD6E;
+  border: 1px solid #00BD6E;
+}
+
+.save-button:hover {
+  background: #00BD6E;
+  color: #fff;
+}

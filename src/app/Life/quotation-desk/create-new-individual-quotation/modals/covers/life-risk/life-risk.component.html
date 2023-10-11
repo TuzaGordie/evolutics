@@ -1,0 +1,265 @@
+<div
+  class="modal fade"
+  id="lir_modal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="lifeForm" class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Pricing Basis</label
+              >
+              <select
+                formControlName="basis"
+                id=""
+                class="form-control control-bg-gray"
+              >
+                <option selected disabled>Choose an Option</option>
+                <ng-container *ngFor="let option of basis_options">
+                  <option [value]="option.code">
+                    {{ option.code }} - {{ option.title }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-end">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Initial Sum Assured</label
+              ><span
+                style="padding-left: 10px"
+                *ngIf="assured_min || assured_max"
+                >min: {{ assured_min | number: '1.0-0':'en' }} - max:
+                {{ assured_max | number: '1.0-0':'en' }}</span
+              >
+              <input
+                formControlName="assured"
+                type="text"
+                class="form-control control-bg-gray"
+                [hidden]="assured_value_disabled"
+              />
+              <select
+                formControlName="assured"
+                id=""
+                class="form-control control-bg-gray"
+                [hidden]="!assured_value_disabled"
+              >
+                <ng-container *ngFor="let option of assured_options">
+                  <option [value]="option">
+                    {{ option }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Benefit Payment Frequency</label
+              >
+              <input
+                formControlName="benPaymentFreq"
+                type="text"
+                class="form-control control-bg-gray"
+                [hidden]="benfreq_options"
+              />
+              <select
+                formControlName="benPaymentFreq"
+                id=""
+                class="form-control control-bg-gray"
+                [hidden]="!benfreq_options"
+              >
+                <option selected disabled>Select an option</option>
+                <ng-container *ngFor="let option of benfreq_options">
+                  <option [value]="option.benPayFreq">
+                    {{ option.benPayFreq || 'null' }} -
+                    {{ option.description || 'null' }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-end">
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Sum Assured Escalation rate (%) before claim</label
+              >
+              <select
+                formControlName="escalation_before"
+                id=""
+                class="form-control control-bg-gray"
+              >
+                <option selected [value]="null">Select an option</option>
+                <ng-container *ngFor="let option of escal_options">
+                  <option [value]="option.rate">
+                    {{ option.rate || 'null' }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Sum Assured Escalation rate (%) post claim</label
+              >
+              <select
+                formControlName="escalation_after"
+                id=""
+                class="form-control control-bg-gray"
+              >
+                <option selected [value]="null">Select an option</option>
+                <ng-container *ngFor="let option of escal_options">
+                  <option [value]="option.rate">
+                    {{ option.rate || 'null' }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-end">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Premium Payment Term</label
+              >
+              <input
+                formControlName="premTerm"
+                readonly
+                type="text"
+                placeholder="Years"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input
+                type="text"
+                readonly
+                formControlName="premMonths"
+                placeholder="months"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input
+                type="text"
+                readonly
+                formControlName="premDays"
+                placeholder="days"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Benefit Payment Term</label
+              >
+              <input
+                formControlName="benTerm"
+                type="text"
+                placeholder="Years"
+                class="form-control control-bg-gray"
+                [hidden]="benterm_options"
+              />
+              <select
+                class="form-control control-bg-gray"
+                id=""
+                [hidden]="!benterm_options"
+              ></select>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="form-group">
+              <label for="" class="form-label text-primary">&nbsp;</label>
+              <input
+                formControlName="benMonths"
+                type="text"
+                placeholder="months"
+                class="form-control control-bg-gray"
+                [hidden]="benterm_options"
+              />
+              <select
+                class="form-control control-bg-gray"
+                id=""
+                [hidden]="!benterm_options"
+              >
+                <option selected>Select an option</option>
+                <ng-container *ngFor="let option of benterm_options">
+                  <option [value]="option.benPayTermMonth">
+                    {{ option.benPayTermMonth }}{{ ' ' }}{{ 'months' }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="" class="form-label text-primary"
+                >Enter Benefit Payment Schedule</label
+              >
+              <input
+                formControlName="benSchedule"
+                type="checkbox"
+                class="form-control control-bg-gray"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+        <div class="col-3">
+          <div class="from-group">
+            <label for="" class="form-label">Payment Method</label>
+            <select formControlName="method" id="" class="form-control  control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="from-group">
+            <label for="" class="form-label">Payee Name</label>
+            <input formControlName="payee" type="text" class="form-control  control-bg-gray">
+          </div>
+        </div>
+      </div> -->
+      </form>
+      <div class="modal-footer">
+        <app-btn type="secondary" (mclick)="openJointOwner()"
+          >Joint Owner</app-btn
+        >
+        <app-btn type="outline" icon="save" (mclick)="stop()">Save</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

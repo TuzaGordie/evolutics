@@ -1,0 +1,4227 @@
+<div class="wrapper w-100 bg-light-gray-evolutics m-0 p-0">
+  <app-form-navigation [title]="'CRM / View Client'"></app-form-navigation>
+  <div class="container">
+    <div class="row gap-3 pb-3">
+      <div class="row">
+        <div class="col-md-7 pe-1">
+          <div class="col-12 bg-white px-2 py-3 h-100">
+            <div class="row">
+              <div class="col-4 py-4" style="border-right: 2px solid #e7e7e7 ">
+                <div class="text-center">
+                  <img imageUpload (extractedImg)="changePP($event)" [src]="clientPassport"
+                    class="img-fluid" alt="loading image..." style="max-width: 130px; border-radius: 100%">
+                </div>
+                <div class="text-center">
+                  <h5>{{viewClientForm.get('title')?.value}} {{viewClientForm.get('fullName')?.value}}
+                  </h5>
+                  <p class="small">Status: <span class="text-green">Active</span></p>
+                  <div class="row px-3">
+                    <div class="col text-start" style="border-right: 2px solid #e7e7e7 ">
+                      <span class="small">Engagement</span> <br>
+                      <p class="small">Score: <strong><span class="text-red">{{generalInfo?.engagementScore}}</span></strong></p>
+                    </div>
+                    <div class="col text-start">
+                      <span class="small">CLV</span> <br>
+                      <p class="small"><strong><span
+                            class="text-red">{{viewClientForm.get('clv')?.value}}</span></strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col py-2">
+                <div class="row justify-content-end">
+                  <div class="col-3">
+                    <app-button buttonType="editRed" text="Edit" data-bs-toggle="modal" data-bs-target="#edit1Modal">
+                    </app-button>
+                  </div>
+                </div>
+                <div class="row mb-3 mt-4">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Title:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('title')?.value}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">First Name:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('firstName')?.value}}</p>
+                    <p class="small1 m-0">&nbsp;</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Middle Name:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('middleName')?.value}}</p>
+                    <p class="small1 m-0">&nbsp;</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Last Name:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('surname')?.value}}</p>
+                    <p class="small1 m-0">&nbsp;</p>
+
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Client Age:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('dateOfBirth')?.value | getAge}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Marital Status:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('maritalStatus')?.value}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Language:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('language')?.value}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Gender:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('gender')?.value}}</p>
+
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Nationality:</label>
+                    <p class="small1 m-0">{{clientIdentificationForm.get('nationality')?.value}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Type:</label>
+                    <p class="small1 m-0">
+                      {{viewClientForm.get('clientType')?.value === 'I' ? 'Individual' : (viewClientForm.get('clientType')?.value === "C" ? 'Corporate' : '')}}
+                    </p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Comm Allowed:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('communication')?.value ? 'Yes' : 'No'}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Bank:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('bankNo')?.value}}<a (click)="editbankNo()"><i
+                          aria-hidden="true" class="fas fa-pencil-alt ms-2"></i> </a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 h-auto">
+          <div class="col-12 h-100 bg-white py-3">
+            <ul class="nav nav-pills mb-3 mx-auto justify-content-center nav-gray" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active small1" id="pills-t1-tab" data-bs-toggle="pill"
+                  data-bs-target="#pills-t1" type="button" role="tab" aria-controls="pills-t1"
+                  aria-selected="true">Contact
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t2-tab" data-bs-toggle="pill" data-bs-target="#pills-t2"
+                  type="button" role="tab" aria-controls="pills-t2" aria-selected="false">Dates
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t3-tab" data-bs-toggle="pill" data-bs-target="#pills-t3"
+                  type="button" role="tab" aria-controls="pills-t3" aria-selected="false">Identification
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t4-tab" data-bs-toggle="pill" data-bs-target="#pills-t4"
+                  type="button" role="tab" aria-controls="pills-t4" aria-selected="false">Employment
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t5-tab" data-bs-toggle="pill" data-bs-target="#pills-t5"
+                  type="button" role="tab" aria-controls="pills-t5" aria-selected="false">Contact Person
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content mx-auto justify-content-center" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-t1" role="tabpanel" aria-labelledby="pills-t1-tab">
+                <div class="row mb-3 px-3 justify-content-end">
+                  <div class="col-3">
+                    <button class="btn btn-outline-danger p-1" data-bs-toggle="modal" data-bs-target="#edit2Modal">
+                      <span class="fa fa-edit"></span> Edit
+                    </button>
+                  </div>
+
+                </div>
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Main Phone No:</label>
+                    <p class="small1 m-0"><span class="text-red" style="font-size: 1rem">
+                        <fa-icon [icon]="faPhoneSquareAlt"></fa-icon>
+                      </span> {{viewClientForm.get('phoneNo')?.value}}
+                    </p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Alternate Phone No:</label>
+                    <p class="small1 m-0"><span class="text-red" style="font-size: 1rem">
+                        <fa-icon [icon]="faPhoneSquareAlt"></fa-icon>
+                      </span> {{viewClientForm.get('phoneNo2')?.value}}
+                    </p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Website:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('website')?.value}}</p>
+
+                  </div>
+                </div>
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Main Email:</label>
+                    <p class="small1 m-0"><a href="mailto:">{{viewClientForm.get('email')?.value}}</a></p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Alternate Email Address:</label>
+                    <p class="small1 m-0"><a href="mailto:">{{viewClientForm.get('email2')?.value}}</a></p>
+
+                  </div>
+                </div>
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Address:</label>
+                    <p class="small1 m-0">{{viewClientForm.get('address')?.value}}</p>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t2" role="tabpanel" aria-labelledby="pills-t2-tab">
+                <div class="row mb-3 px-3 justify-content-end">
+                  <div class="col-3">
+                    <button class="btn btn-outline-danger p-1" data-bs-toggle="modal" data-bs-target="#edit3Modal">
+                      <span class="fa fa-edit"></span> Edit
+                    </button>
+                  </div>
+
+                </div>
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Wedding Anniversary Date:</label>
+                    <p class="small1 m-0">{{clientDatesForm.get('weddingAnniversaryDate')?.value}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Birthday:</label>
+                    <p class="small1 m-0">{{clientDatesForm.get('dateOfBirth')?.value}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Spouse Birthday:</label>
+                    <p class="small1 m-0">{{clientDatesForm.get('spouseDateOfBirth')?.value}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Created On:</label>
+                    <p class="small1 m-0">{{clientDatesForm.get('createdOn')?.value}}</p>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t3" role="tabpanel" aria-labelledby="pills-t3-tab">
+                <div class="row mb-3 px-3 justify-content-end">
+                  <div class="col-3">
+                    <button class="btn btn-outline-danger p-1" data-bs-toggle="modal" data-bs-target="#edit4Modal">
+                      <span class="fa fa-edit"></span> Edit
+                    </button>
+                  </div>
+
+                </div>
+                <div *ngFor="let idControl of clientIdentificationForm.controls; let i = index">
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">ID Type:</label>
+                      <p class="small1 m-0">{{idControl.get('idType')?.value | idDisplayName}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">ID Number:</label>
+                      <p class="small1 m-0">{{idControl.get('idNumber')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Issue Authority:</label>
+                      <p class="small1 m-0">{{idControl.get('idIssueAuth')?.value}}</p>
+  
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Issue Date:</label>
+                      <p class="small1 m-0">{{idControl.get('idIssueDate')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Expiry Date:</label>
+                      <p class="small1 m-0">{{idControl.get('idExpiryDate')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+  
+                    </div>
+                  </div>
+                  <!-- show a seperating hr if there is more than one item and this item is not the last -->
+                  <hr *ngIf="clientIdentificationForm?.length > 1 && (i < clientIdentificationForm.controls?.length - 1)" class="m-3">
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t4" role="tabpanel" aria-labelledby="pills-t4-tab">
+                <div class="row mb-3 px-3 justify-content-end">
+                  <div class="col-3">
+                    <button class="btn btn-outline-danger p-1" data-bs-toggle="modal" data-bs-target="#edit5Modal">
+                      <span class="fa fa-edit"></span> Edit
+                    </button>
+                  </div>
+
+                </div>
+                <div *ngIf="!clientEmploymentForm.controls?.length">
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Employment Status:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Employer:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Employment Date:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Occupation Group:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Occupation:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Annual Salary Band:</label>
+                      <p class="small1 m-0"></p>
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Cadre:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Staff No:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Job Title:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Active:</label>
+                      <p class="small1 m-0"></p>
+  
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                  </div>
+                </div>
+                <div *ngFor="let employment of clientEmploymentForm.controls; let i = index">
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Employment Status:</label>
+                      <p class="small1 m-0">{{employment.get('employmentStatus')?.value | titlecase}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Employer:</label>
+                      <p class="small1 m-0">{{employment.get('employer')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Employment Date:</label>
+                      <p class="small1 m-0">{{employment.get('employmentDate')?.value}}</p>
+  
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Occupation Group:</label>
+                      <p class="small1 m-0">{{employment.get('occupationGroup')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Occupation:</label>
+                      <p class="small1 m-0">{{employment.get('occupation')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Annual Salary Band:</label>
+                      <p class="small1 m-0">{{employment.get('incomeBand')?.value}}</p>
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Cadre:</label>
+                      <p class="small1 m-0">{{employment.get('cadre')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Staff No:</label>
+                      <p class="small1 m-0">{{employment.get('staffNo')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                      <label class="form-label small1 m-0">Job Title:</label>
+                      <p class="small1 m-0">{{employment.get('jobTitle')?.value}}</p>
+  
+                    </div>
+                  </div>
+                  <div class="row mb-3 px-3">
+                    <div class="col">
+                      <label class="form-label small1 m-0">Active:</label>
+                      <p class="small1 m-0">{{employment.get('active')?.value}}</p>
+  
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                  </div>
+                  <hr *ngIf="clientEmploymentForm.controls?.length > 1 && i < clientEmploymentForm.controls?.length - 1" class="my-3">
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t5" role="tabpanel" aria-labelledby="pills-t5-tab">
+                <div class="row mb-3 px-3 justify-content-end">
+                  <div class="col-3">
+                    <button class="btn btn-outline-danger p-1" data-bs-toggle="modal" data-bs-target="#edit6Modal">
+                      <span class="fa fa-edit"></span> Edit
+                    </button>
+                  </div>
+
+                </div>
+                <!-- if there are no data, show labels with no value -->
+                <div class="row mb-3 px-3" *ngIf="clientContactPersonsForm.value?.length == 0">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Title & Full Name:</label>
+                    <p class="small1 m-0"></p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Phone No:</label>
+                    <p class="small1 m-0"><span class="text-red" style="font-size: 1rem">
+                        <fa-icon [icon]="faPhoneSquareAlt"></fa-icon>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Email:</label>
+                    <p class="small1 m-0"><a href=""></a></p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Relationship:</label>
+                    <p class="small1 m-0"></p>
+                  </div>
+                </div>
+                <!-- else iterate through and render values -->
+                <div class="row mb-3 px-3" *ngFor="let contactPerson of clientContactPersonsForm.value">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Full Name & Title:</label>
+                    <p class="small1 m-0">{{contactPerson.title}} {{contactPerson.fullName}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Phone No:</label>
+                    <p class="small1 m-0"><span class="text-red" style="font-size: 1rem">
+                        <fa-icon [icon]="faPhoneSquareAlt"></fa-icon>
+                      </span> {{contactPerson.phoneNo}}
+                    </p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Email:</label>
+                    <p class="small1 m-0"><a href="">{{contactPerson.email}}</a></p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Relationship:</label>
+                    <p class="small1 m-0">{{contactPerson.relationship}}</p>
+                  </div>
+                  <hr *ngIf="clientContactPersonsForm.value?.length > 1" class="my-3">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7 pe-1 h-100">
+          <div class="col-12 bg-white py-3 px-4">
+            <h5 class="text-red mb-3">Engagements</h5>
+            <div class="row">
+              <div class="col py-2">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Last premium due date:</label>
+                    <p class="small1 m-0">{{generalInfo?.lastPremiumDueDate}}</p>
+                    <!-- <p class="small1 m-0">Unpaid</p> -->
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Last Interaction Date:</label>
+                    <p class="small1 m-0">{{generalInfo?.lastInteractionDate}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Last Contact Form:</label>
+                    <p class="small1 m-0">{{generalInfo?.lastContactForm}}</p>
+                    <!-- <p class="small1 m-0">Email</p> -->
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Last Contact:</label>
+                    <p class="small1 m-0">{{generalInfo?.lastContact}}</p>
+
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Interaction Reason:</label>
+                    <p class="small1 m-0">{{generalInfo?.interactionReason}}</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col py-2">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Last Campaign:</label>
+                    <p class="small1 m-0">{{generalInfo?.lastCampaign}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Pending Quotation:</label>
+                    <p class="small1 m-0">{{generalInfo?.pendingQuotation}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Mobile App Usage:</label>
+                    <p class="small1 m-0">{{generalInfo?.mobileAppUsage}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Pending Workflows</label>
+                    <p class="small1 m-0">{{generalInfo?.pendingWorkflow}}</p>
+
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Pending Payments Out</label>
+                    <p class="small1 m-0">{{generalInfo?.pendingPaymentOut}}</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 h-auto">
+          <div class="col-12 h-100 bg-white py-3 px-2">
+            <ul class="nav nav-pills mb-3 mx-auto justify-content-center nav-gray" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active small1" id="pills-t6-tab" data-bs-toggle="pill"
+                  data-bs-target="#pills-t6" type="button" role="tab" aria-controls="pills-t6"
+                  aria-selected="true">Relationships
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t7-tab" data-bs-toggle="pill" data-bs-target="#pills-t7"
+                  type="button" role="tab" aria-controls="pills-t7" aria-selected="false">Claims
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t8-tab" data-bs-toggle="pill" data-bs-target="#pills-t8"
+                  type="button" role="tab" aria-controls="pills-t8" aria-selected="false">Sales
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t9-tab" data-bs-toggle="pill" data-bs-target="#pills-t9"
+                  type="button" role="tab" aria-controls="pills-t9" aria-selected="false">Activities
+                </button>
+              </li>
+
+            </ul>
+            <div class="tab-content mx-auto justify-content-center" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-t6" role="tabpanel" aria-labelledby="pills-t6-tab">
+                <div class="row mb-3 px-3  gap-1 ">
+
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#policiesModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Policies
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{policiesList?.length}}
+                    </div>
+                    <div class="color red">
+
+                    </div>
+                    <div class="color2 red">
+
+                    </div>
+
+                  </div>
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#clientsModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Clients
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{clientRelationshipsForm.value?.length}}
+                    </div>
+                    <div class="color blue">
+
+                    </div>
+                    <div class="color2 blue">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#webLoginModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Web Logins
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{clientWebLoginsList?.length}}
+                    </div>
+                    <div class="color yellow">
+
+                    </div>
+                    <div class="color2 yellow">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#documentModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Documents
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{clientDocumentsList?.length}}
+                    </div>
+                    <div class="color cyan">
+
+                    </div>
+                    <div class="color2 cyan">
+
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div class="tab-pane fade" id="pills-t7" role="tabpanel" aria-labelledby="pills-t7-tab">
+                <div class="row mb-3 px-3  gap-1 ">
+
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#registerClaimModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Register Claim
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{pendingClaimsCount}}
+                    </div>
+                    <div class="color red">
+
+                    </div>
+                    <div class="color2 red">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#pendingPaymentsModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Pending Payments
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{pendingPaymentsCount}}
+                    </div>
+                    <div class="color blue">
+
+                    </div>
+                    <div class="color2 blue">
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t8" role="tabpanel" aria-labelledby="pills-t8-tab">
+                <div class="row mb-3 px-3  gap-1 ">
+
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#opportunitiesModal">
+                    <div class="cardlabel px-2 pt-3">
+                      Opportunities
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{opportunities}}
+                    </div>
+                    <div class="color red">
+
+                    </div>
+                    <div class="color2 red">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0" routerLink="/crms/sales/quotations">
+                    <div class="cardlabel px-2 pt-3">
+                      New Quotation
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{newQuotation}}
+                    </div>
+                    <div class="color blue">
+
+                    </div>
+                    <div class="color2 blue">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0">
+                    <div class="cardlabel px-2 pt-3">
+                      Calendar
+                    </div>
+                    <div class="cardNumber text-end px-2">
+                      {{calendar}}
+                    </div>
+                    <div class="color yellow">
+
+                    </div>
+                    <div class="color2 yellow">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t9" role="tabpanel" aria-labelledby="pills-t9-tab">
+                <div class="row mb-3 px-3  gap-1 ">
+
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#TPRModal">
+                    <div class="cardlabel2 px-2 pt-3">
+                      Total Payment Received
+                    </div>
+                    <div class="cardNumber2 text-end px-2">
+                      {{totalPaymentsReceived}}
+                    </div>
+                    <div class="color red">
+
+                    </div>
+                    <div class="color2 red">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#pendingWorkflowsModal">
+                    <div class="cardlabel2 px-2 pt-3">
+                      Pending Workflows
+                    </div>
+                    <div class="cardNumber2 text-end px-2">
+                      {{pendingWorkflows}}
+                    </div>
+                    <div class="color yellow">
+
+                    </div>
+                    <div class="color2 yellow">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0" data-bs-toggle="modal" data-bs-target="#pendingQuotesModal">
+                    <div class="cardlabel2 px-2 pt-3">
+                      Pending Quotes
+                    </div>
+                    <div class="cardNumber2 text-end px-2">
+                      {{pendingQuotesList?.length}}
+                    </div>
+                    <div class="color blue">
+
+                    </div>
+                    <div class="color2 blue">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0">
+                    <div class="cardlabel2 px-2 pt-3">
+                      Communication
+                    </div>
+                    <div class="cardNumber2 text-end px-2">
+                      {{communication}}
+                    </div>
+                    <div class="color cyan">
+
+                    </div>
+                    <div class="color2 cyan">
+
+                    </div>
+                  </div>
+                  <div class="col crmCard py-0 px-0">
+                    <div class="cardlabel2 px-2 pt-3">
+                      Underwriting Information
+                    </div>
+                    <div class="cardNumber2 text-end px-2">
+                      {{underwritingInformation}}
+                    </div>
+                    <div class="color purple">
+
+                    </div>
+                    <div class="color2 purple">
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7 pe-1">
+          <div class="col-12 bg-white py-3 px-4 h-100">
+            <h5 class="text-red mb-3">Who is my Client ?</h5>
+            <div class="row">
+              <div class="col py-2">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Prob of Churn:</label>
+                    <p class="small1 m-0">{{generalInfo?.probOfChurn}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">LifeCycle Stage:</label>
+                    <p class="small1 m-0">{{generalInfo?.lifeCycleStage}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Relationship Age:</label>
+                    <p class="small1 m-0">{{generalInfo?.relationshipAge}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Band:</label>
+                    <p class="small1 m-0">{{generalInfo?.band}}</p>
+                    <!-- <p class="small1 m-0">20,000-50,000</p> -->
+
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Segment:</label>
+                    <p class="small1 m-0">{{generalInfo?.segment}}</p>
+                    <!-- <p class="small1 m-0">200,000 - 500,000</p> -->
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col py-2">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Sector:</label>
+                    <p class="small1 m-0">{{generalInfo?.sector}}</p>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 h-auto">
+          <div class="col-12 h-100 bg-white py-3">
+            <ul class="nav nav-pills mb-3 mx-auto justify-content-center nav-gray" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active small1" id="pills-t10-tab" data-bs-toggle="pill"
+                  data-bs-target="#pills-t10" type="button" role="tab" aria-controls="pills-t10"
+                  aria-selected="true">Agent Information
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link small1" id="pills-t11-tab" data-bs-toggle="pill" data-bs-target="#pills-t11"
+                  type="button" role="tab" aria-controls="pills-t11" aria-selected="false">Provider Information
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content mx-auto justify-content-center" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-t10" role="tabpanel" aria-labelledby="pills-t10-tab">
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Agent Type:</label>
+                    <p class="small1 m-0">{{agentDetails?.agentType}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Hierarchy Manager:</label>
+                    <p class="small1 m-0">{{agentDetails?.hierarchyManager}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">No of Prospects:</label>
+                    <p class="small1 m-0">{{agentDetails?.noOfProspects}}</p>
+                  </div>
+                </div>
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Total Commissions:</label>
+                    <p class="small1 m-0">{{agentDetails?.totalCommissions}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Commission Due:</label>
+                    <p class="small1 m-0">{{agentDetails?.commissionDue}}</p>
+
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">No of Policies:</label>
+                    <p class="small1 m-0">{{agentDetails?.noOfPolicies}}</p>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-t11" role="tabpanel" aria-labelledby="pills-t11-tab">
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Provider Category:</label>
+                    <p class="small1 m-0">{{providerInfo?.providerCategory}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Provider SubCategory:</label>
+                    <p class="small1 m-0">{{providerInfo?.providerSubCategory}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Balance:</label>
+                    <p class="small1 m-0">{{providerInfo?.providerBalance}}</p>
+                  </div>
+                </div>
+                <div class="row mb-3 px-3">
+                  <div class="col">
+                    <label class="form-label small1 m-0">Provider Full Name:</label>
+                    <p class="small1 m-0">{{providerInfo?.fullName}}</p>
+                  </div>
+                  <div class="col">
+                    <label class="form-label small1 m-0">Headquaters Address:</label>
+                    <p class="small1 m-0">{{providerInfo?.hqAddress}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<form [formGroup]="viewClientForm">
+  <!-- Modal -->
+  <div class="modal fade" id="edit1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Informations</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Full Name & Title</label>
+                <div class="input-group">
+                  <input type="text" class="form-control control-bg-gray" formControlName="title">
+                  <input type="text" class="form-control control-bg-gray" formControlName="fullName">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">First Name</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="firstName">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Middle Name</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="middleName">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Last Name</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="surname">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Client's Date of Birth</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="dateOfBirth">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Marital Status</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="maritalStatus">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Language</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="language">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Gender</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="gender">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Nationality</label>
+                <input type="text" class="form-control control-bg-gray" [(ngModel)]="clientNationality" [ngModelOptions]="{standalone: true}">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Type</label>
+                <select class="form-control control-bg-gray" formControlName="clientType">
+                  <option value="I">Individual</option>
+                  <option value="C">Corporate</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Comm Allowed</label>
+                <select formControlName="communication" class="form-control control-bg-gray">
+                  <option value="">No</option>
+                  <option [value]="true">Yes</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Bank No</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="bankNo">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Informations</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Main Phone No</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="phoneNo">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Alternate Phone No</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="phoneNo2">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Website</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="website">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Main Email</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="email">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Alternate Address Email</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="email2">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Address</label>
+                <input type="text" class="form-control control-bg-gray" formControlName="address">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- remember to save contact person to its own form while saving the rest of the fields to the client form -->
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit3Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Dates Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="clientDatesForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Wed Anniv Dt</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="weddingAnniversaryDate">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Birthday</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="dateOfBirth">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Spouse Birthday</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="spouseDateOfBirth">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Created On</label>
+                  <input type="date" class="form-control control-bg-gray" formControlName="createdOn">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit4Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client ID Info (KYC)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-2">Pencom No</div>
+            <div class="col-2 text-danger">{{clientIdentificationForm.controls[0]?.get('pensionCommissionNumber')?.value}}</div>
+          </div>
+          <div class="row">
+            <div class="col-2">NIN</div>
+            <div class="col-2 text-danger">{{clientIdentificationForm.controls[0]?.get('nationalIdentificationNumber')?.value}}</div>
+          </div>
+          <div class="row">
+            <div class="col-2">BVN</div>
+            <div class="col-2 text-danger">{{clientIdentificationForm.controls[0]?.get('bvn')?.value}}</div>
+          </div>
+          <div class="row">
+            <div class="col-2">TIN</div>
+            <div class="col-2 text-danger">--</div>
+          </div>
+  
+          <form>
+            <table class="table table-borderless table-striped my-5">
+              <thead>
+                <tr class="">
+                  <th scope="col">ID Type</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Expiry Date</th>
+                  <th scope="col">ID Number</th>
+                  <th scope="col">Download</th>
+                  <th scope="col">Upload</th>
+                  <th scope="col">Expiry Warning sent</th>
+                  <th scope="col">Active</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let id of clientIdentificationForm.controls; index as i">
+                  <ng-container [formGroup]="$any(clientIdentificationForm.controls[i])">
+                    <td>
+                      <select formControlName="idType" class="form-control">
+                        <option *ngFor="let idType of idTypesList" [value]="idType.code">{{idType.title}}</option>
+                      </select>
+                    </td>
+                    <td><input type="date" class="form-control" formControlName="idIssueDate"></td>
+                    <td><input type="date" class="form-control" formControlName="idExpiryDate"></td>
+                    <td><input type="text" class="form-control" formControlName="idNumber"></td>
+                    <td>
+                      <button class="btn btn-danger" (click)="downloadDocument($event, id.value?.document)"><i class="fas fa-download"></i> Download</button>
+                    </td>
+                    <td>
+                      <app-button buttonType="uploadRed" text="Upload" imageUpload (extractedImg)="uploadDocument($event, 'ID')"></app-button>
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                  </ng-container>
+                </tr>
+                <tr *ngIf="showNewIdRow" [formGroup]="clientNewIdForm">
+                  <td>
+                    <select formControlName="idType" class="form-control">
+                      <option *ngFor="let idType of idTypesList" [value]="idType.code">{{idType.title}}</option>
+                    </select>
+                  </td>
+                  <td><input type="date" class="form-control" formControlName="idIssueDate"></td>
+                  <td><input type="date" class="form-control" formControlName="idExpiryDate"></td>
+                  <td><input type="text" class="form-control" formControlName="idNumber"></td>
+                  <td>
+                    <button class="btn btn-danger" disabled><i class="fas fa-download"></i> Download</button>
+                  </td>
+                  <td>
+                    <app-button buttonType="uploadRed" text="Upload" imageUpload (extractedImg)="uploadDocument($event, 'ID')"></app-button>
+                  </td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>  
+              </tbody>
+            </table>
+          </form>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <app-button buttonType="addred" text="Add New Id" (click)="showNewIdRow = true"></app-button>
+            </div>
+            <div class="col-2">
+              <app-button buttonType="delete" text="Add New Id" (click)="showNewIdRow = false"></app-button>
+            </div>
+          </div>
+          <label class="form-label text-danger">Other KYC</label>
+          <div class="row">
+            <div class="col-6">
+              <table class="table table-borderless table-striped my-5">
+                <thead>
+                  <tr class="text-danger">
+                    <th scope="col">Item</th>
+                    <th scope="col">Uploaded</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Uploaded</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="" (click)="downloadDocument($event, clientPicture)" title="download picture">Picture</a>
+                    </td>
+                    <td>{{clientPicture?.createdOn | stripTime}}</td>
+                    <td>
+                      <app-button [buttonType]="'uploadRed'" [text]="'Upload'" imageUpload (extractedImg)="uploadDocument($event, 'PP')"></app-button>
+                    </td>
+                    <td>
+                      <a href="" (click)="downloadDocument($event, clientSignature)" title="download signature">Signature</a>
+                    </td>
+                    <td>{{clientSignature?.createdOn | stripTime}}</td>
+                    <td>
+                      <app-button [buttonType]="'uploadRed'" [text]="'Upload'" imageUpload (extractedImg)="uploadDocument($event, 'SI')"></app-button>
+                    </td>
+                  </tr>
+  
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+  
+        </div>
+  
+        <div class="modal-footer">
+          <!-- TODO on saving identification remember to replace back idType codes to normal text -->
+          <!-- check component method getIdType for details -->
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit5Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Employment Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ng-container *ngFor="let employment of clientEmploymentForm.controls; let i = index">
+            <form [formGroup]="$any(employment)">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Employment Status</label>
+                    <select class="form-control control-bg-gray" formControlName="employmentStatus">
+                      <option value="EMPLOYED">Employed</option>
+                      <option value="UNEMPLOYED">Unemployed</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Employer</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="employer">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Employment Date</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="employmentDate">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Occupation Group</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="occupationGroup">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Occupation</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="occupation">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Job Title</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="jobTitle">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Annual Salary Band</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="incomeBand">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Cadre</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="cadre">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Staff No</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="staffNo">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label class="form-label text-red">Active</label>
+                    <input type="text" class="form-control control-bg-gray" formControlName="active">
+                  </div>
+                </div>
+                <div class="col">
+  
+                </div>
+                <div class="col">
+                  
+                </div>
+              </div>
+            </form>
+            <hr class="my-3">
+          </ng-container>
+          <app-button [buttonType]="showAddEmploymentForm ? 'delete' : 'addCustom-red'" [text]="'Add New Employment History'"
+              (click)="showAddEmploymentForm = !showAddEmploymentForm" class="d-inline-block"></app-button>
+          <form [formGroup]="newEmploymentForm" *ngIf="showAddEmploymentForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Employment Status</label>
+                  <select class="form-control control-bg-gray" formControlName="employmentStatus">
+                    <option value="EMPLOYED">Employed</option>
+                    <option value="UNEMPLOYED">Unemployed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">`
+                <div class="form-group">
+                  <label class="form-label text-red">Employer</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="employer">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Employment Date</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="employmentDate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Occupation Group</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="occupationGroup">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Occupation</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="occupation">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Job Title</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="jobTitle">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Annual Salary Band</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="incomeBand">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Cadre</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="cadre">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Staff No</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="staffNo">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Active</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="active">
+                </div>
+              </div>
+              <div class="col">
+
+              </div>
+              <div class="col">
+                
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="edit6Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Client Informations</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- if there are no data show empty fields -->
+          <div class="row" *ngIf="clientContactPersonsForm.value?.length == 0">
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Title & Full Name</label>
+                <div class="input-group">
+                  <select class="form-control control-bg-gray">
+                    <option *ngFor="let title of TITLES">{{title}}</option>
+                  </select>
+                  <input type="text" class="form-control control-bg-gray" placeholder="Full name">
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Phone No</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Email</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label class="form-label text-red">Relationship</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+          </div>
+          <!-- else iterate through and show data -->
+          <div class="row" *ngFor="let contactPerson of clientContactPersonsForm.controls; index as i">
+            <form [formGroup]="$any(clientContactPersonsForm.controls[i])">
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Full Name & Title</label>
+                  <div class="input-group">
+                    <select class="form-control control-bg-gray" formControlName="title">
+                      <option *ngFor="let title of TITLES">{{title}}</option>
+                    </select>
+                    <input type="text" class="form-control control-bg-gray" formControlName="fullName">
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Phone No</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="phoneNo">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Email</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="email">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-label text-red">Relationship</label>
+                  <input type="text" class="form-control control-bg-gray" formControlName="relationship">
+                </div>
+              </div>
+            </form>
+            <hr *ngIf="clientContactPersonsForm.controls?.length > 1" class="my-3">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save-red"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="modal fade" id="policiesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:{{'xx'}}
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let policy of policiesList">
+                  <td>{{policy.policyNo}}</td>
+                  <td>xx</td>
+                  <td>{{policy.productClass}}</td>
+                  <td>{{policy.policyStatus}}</td>
+                  <td>{{policy.issueDate}}</td>
+                  <td>{{policy.policyTermMonths}} {{policy.policyTermDays}}</td>
+                  <td>{{policy.annualisedPremium}}</td>
+                  <td>{{policy.sumAtRisk}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let policy of policiesList">
+                  <td>{{policy.policyNo}}</td>
+                  <td>xx</td>
+                  <td>{{policy.productClass}}</td>
+                  <td>{{policy.policyStatus}}</td>
+                  <td>{{policy.issueDate}}</td>
+                  <td>{{policy.policyTermMonths}} {{policy.policyTermDays}}</td>
+                  <td>{{policy.annualisedPremium}}</td>
+                  <td>{{policy.sumAtRisk}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let policy of policiesList">
+                  <td>{{policy.policyNo}}</td>
+                  <td>xx</td>
+                  <td>{{policy.productClass}}</td>
+                  <td>{{policy.policyStatus}}</td>
+                  <td>{{policy.issueDate}}</td>
+                  <td>{{policy.policyTermMonths}} {{policy.policyTermDays}}</td>
+                  <td>{{policy.annualisedPremium}}</td>
+                  <td>{{policy.sumAtRisk}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="clientsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Clients</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <!-- <h1 class="my-5">Client Relationships</h1> -->
+            <div class="d-flex">
+              <p class="py-3 mx-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span>
+              </p>
+              <p class="py-3 mx-3"><b>Family size:</b> <span class="px-3">{{clientRelationshipsForm.value?.length}}</span></p>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">Client Number</th>
+                    <th scope="col">Is</th>
+                    <th scope="col">Connector</th>
+                    <!-- <th scope="col">Full Name</th> -->
+                    <!-- <th scope="col">Rel</th> -->
+                    <!-- <th scope="col">Email</th> -->
+                    <th scope="col">Rel Client Number</th>
+                    <th scope="col">Client Status</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">Rel Date</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let relation of clientRelationshipsForm.controls; index as i">
+                    <tr [formGroup]="$any(clientRelationshipsForm.controls[i])">
+                     <th scope="row"><input formControlName="clientNo" readonly></th>
+                     <td>
+                       <select formControlName="relationship" readonly [attr.disabled]="true">
+                         <option *ngFor="let type of RELATIONSHIP_TYPES" [value]="type.code">{{type.description}}</option>
+                        </select>
+                      </td>
+                      <td><input formControlName="fullName" readonly></td>
+                      <td><input formControlName="relClientNo" readonly></td>
+                      <td><input formControlName="clientStatus" readonly></td>
+                      <td><input formControlName="relDt" readonly type="date"></td>
+                      <td>
+                        <app-button buttonType="editRed"></app-button>
+                      </td>
+                    </tr>
+                  </ng-container>  
+                  <ng-container *ngFor="let relation of newRelationsList; index as i">
+                    <tr [formGroup]="newRelationsList[i]">
+                      <th scope="row">
+                        <input formControlName="clientNo" readonly>
+                      </th>
+                      <td>
+                        <select formControlName="relationship" class="form-control">
+                          <option *ngFor="let type of RELATIONSHIP_TYPES" [value]="type.code">{{type.description}}</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input formControlName="fullName" class="form-control">
+                      </td>
+                      <td>
+                        <input formControlName="relClientNo" class="form-control">
+                      </td>
+                      <td>
+                        <input formControlName="clientStatus" class="form-control">
+                      </td>
+                      <td>
+                        <input formControlName="relDt" class="form-control" type="date">
+                      </td>
+                      <td>
+                        <button class="btn btn-outline-danger btn-lg" (click)="onSaveNewRelation(newRelationsList[i])">
+                          <i class="fa fa-save"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row justify-content-end my-2">
+            <div class="col-md-3">
+              <app-button [buttonType]="'addCustom-red'" [text]="'Add New Relationship'" (click)="addNewRelationForm()"
+              ></app-button>
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="webLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Web Logins</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container mt-2">
+          <div class="row">
+            <div class="col-md-12 mx-auto">
+              <p class="py-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+              <table class="table table-responsive  table-striped">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">Web ID</th>
+                    <th scope="col">Account Name</th>
+                    <th scope="col">Last Login Date</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let webLogin of clientWebLoginsList">
+                    <th scope="row">{{webLogin.webId}}</th>
+                    <td>{{webLogin.firstName}} {{webLogin.surname}}</td>
+                    <td>{{webLogin.lastLoggedInDate}}</td>
+                    <td>{{'xx'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="modal fade" id="webLoginModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <h1 class="my-5">Web Logins</h1>
+                  <p class="py-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                      <tr>
+                        <th scope="col" style="border-bottom-left-radius: 12px;">Web ID</th>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Last Login Date</th>
+                        <th scope="col" style="border-top-right-radius: 12px;">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let webLogin of clientWebLoginsList">
+                        <th scope="row">{{webLogin.webId}}</th>
+                        <td>{{webLogin.firstName}} {{webLogin.surname}}</td>
+                        <td>{{webLogin.lastLoggedInDate}}</td>
+                        <td>{{'xx'}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+                <div class="col-md-3 mt-5">
+                  <app-button [buttonType]="'btnCustomClone'" [text]="'New Web Account'" data-bs-toggle="modal"
+                    data-bs-target="#webLoginModal"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Documents</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+
+        <div class="row justify-content-center">
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Document Subcategory</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Created From</label>
+              <input type="date" class="control-bg-gray form-control" >
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">Created To</label>
+              <input type="date" class="control-bg-gray form-control" >
+            </div>
+          </div>
+          <div class="col-2">
+            <div class="form-group">
+              <label for="" class="form-label">How</label>
+              <select name="" id="" class="form-control control-bg-gray">
+                <option value=""></option>
+              </select>
+            </div>
+          </div>
+        </div>  
+
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <p class="py-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                      <tr>
+                        <th scope="col" style="border-bottom-left-radius: 12px;">File Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Sub Category</th>
+                        <th scope="col">Document Title</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Created By</th>
+                        <th scope="col">Auth. User</th>
+                        <th scope="col">How</th>
+                        <th scope="col" style="border-top-right-radius: 12px;">Box No.</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let document of clientDocumentsList">
+                        <td scope="row" (click)="downloadDocument($event, document)" title="click to download this document">
+                          <a href="">{{document.fileName}}</a>
+                        </td>
+                        <th>{{document.docCat}}</th>
+                        <td>{{document.docSubCat}}</td>
+                        <td>{{document.title}}</td>
+                        <td>{{document.createdOn}}</td>
+                        <td>{{document.createdBy}}</td>
+                        <td>{{document.authorizedUser}}</td>
+                        <td>{{document.how}}</td>
+                        <td>{{document.docBox}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <app-button buttonType="addCustom-red" text="Add Document" data-bs-toggle="modal" data-bs-target="#addDocumentModal"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate"></app-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <p class="py-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                      <tr>
+                        <th scope="col" style="border-bottom-left-radius: 12px;">Category</th>
+                        <th scope="col">Document Title</th>
+                        <th scope="col">Document Names</th>
+                        <th scope="col">Created By</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Auto</th>
+                        <th scope="col">How</th>
+                        <th scope="col" style="border-top-right-radius: 12px;">Box No.</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Premium</th>
+                        <td>Premium Receipt</td>
+                        <td>PREM_FIT_68</td>
+                        <td>SYSTEM</td>
+                        <td>01/MAR/2021 12:35</td>
+                        <td>Y</td>
+                        <td>SMS</td>
+                        <td>__</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <app-button buttonType="addCustom-red" text="Add Document"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate"></app-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 mx-auto">
+                  <p class="py-3"><b>Client Name:</b> <span class="px-3">{{viewClientForm.get('fullName')?.value}}</span></p>
+                  <table class="table table-responsive  table-striped">
+                    <thead class="py-3 theader">
+                      <tr>
+                        <th scope="col" style="border-bottom-left-radius: 12px;">Category</th>
+                        <th scope="col">Document Title</th>
+                        <th scope="col">Document Names</th>
+                        <th scope="col">Created By</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Auto</th>
+                        <th scope="col">How</th>
+                        <th scope="col" style="border-top-right-radius: 12px;">Box No.</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Premium</th>
+                        <td>Premium Receipt</td>
+                        <td>PREM_FIT_68</td>
+                        <td>SYSTEM</td>
+                        <td>01/MAR/2021 12:35</td>
+                        <td>Y</td>
+                        <td>SMS</td>
+                        <td>__</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row justify-content-between">
+                <div class="col-2">
+                  <app-button buttonType="addCustom-red" text="Add Document"></app-button>
+                </div>
+                <div class="col-2">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate"></app-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registerClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Claim</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  mx-auto justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-basic-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-basic" type="button" role="tab" aria-controls="pills-basic"
+              aria-selected="true">Basic
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-document-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-document" type="button" role="tab" aria-controls="pills-document"
+              aria-selected="false">Document
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-estimate-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-estimate" type="button" role="tab" aria-controls="pills-estimate"
+              aria-selected="false">Estimate
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content  justify-content-start" id="pills-tabContent">
+          <div [formGroup]="newClaimForm" class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy No</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" (change)="onPolicyNoChange()" formControlName="policyNo">
+                      <option value=""></option>
+                      <option *ngFor="let policy of policiesList">{{policy.policyNo}}</option>                    
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPolicyNos">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy Code</label>
+                  <input class="form-control control-bg-gray" type="text" (change)="onPolicyCodeChange()" formControlName="policyCode">
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy No Suffix</label>
+                  <input class="form-control control-bg-gray" type="text">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Policy Currency</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="currency">
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Cover</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="coverCode" (change)="onCoverChange()">
+                      <option value=""></option>
+                      <option *ngFor="let cover of policyCoversList" [value]="cover.code">{{cover.code}} - {{cover.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingCovers">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Claim Type</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="claimType" (change)="onClaimTypeChange()">
+                      <option></option>
+                      <option *ngFor="let claimType of claimTypesList" [value]="claimType.type">{{claimType.type}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingClaimTypes">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Peril</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="perilCat" (change)="onPerilChange()">
+                      <option></option>
+                      <option *ngFor="let peril of perilsList" [value]="peril.perilCode">{{peril.perilCode}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPerils">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Severity Level</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="severityLevel"/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Report Date Time</label>
+                  <input class="form-control control-bg-gray" type="datetime-local" formControlName="reportOn">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Date Time</label>
+                  <input class="form-control control-bg-gray" type="datetime-local" formControlName="eventOn">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Country</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationCountry" (change)="setRegionsList()">
+                      <option value=""></option>
+                      <option *ngFor="let country of countriesList" [value]="country.code">{{country.code}} - {{country.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingCountries">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Region</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationRegion" (change)="setStatesList()">
+                      <option value=""></option>
+                      <option *ngFor="let region of regionsList" [value]="region.code">{{region.code}} - {{region.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingRegions">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event State</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationState">
+                      <option value=""></option>
+                      <option *ngFor="let state of statesList" [value]="state.code">{{state.code}} - {{state.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingStates">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Town</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="locationTown">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Address</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="locationAddress">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Event Geo Location</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="geolocation">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Client Loss Estimate</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="initialEstimate">
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="" class="form-label text-red">Proximate Cause</label>
+                <div class="position-relative">
+                  <select class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let proxCause of proximateCausesAllowedList" [value]="proxCause.proximateCauseAllowed">{{proxCause.proximateCauseAllowed}}</option>
+                  </select>
+                  <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingProximateCauses">
+                    <span class="fa fa-sync fa-spin"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="" class="form-label text-red">Narration</label>
+                  <textarea class="form-control control-bg-gray" formControlName="narration"></textarea>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <button class="btn btn-outline-danger btn-lg d-block ms-auto" (click)="onSaveNewClaim()">
+              <i class="fa fa-save"></i>
+              Save
+            </button>    
+          </div>
+          <div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">
+            <div class="row">
+              <h3 class="text-center text-red my-5">Claim Requirements</h3>
+            </div>
+            <div class="table-responsive px-3">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Document Name</th>
+                    <th>Action</th>
+                    <th>Received?</th>
+                    <th>Received By</th>
+                    <th>Received On</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Medical Cause of Death</td>
+                    <td>
+                      <app-button buttonType="uploadRed"></app-button>
+                    </td>
+                    <td>
+                      <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                    </td>
+                    <td>
+                      <input class="inputform">
+                    </td>
+                    <td>
+                      <input type="date" class="inputform">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Birth Certificate</td>
+                    <td>
+                      <app-button buttonType="uploadRed"></app-button>
+                    </td>
+                    <td>
+                      <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                    </td>
+                    <td>
+                      <input class="inputform">
+                    </td>
+                    <td>
+                      <input type="date" class="inputform">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Claim Batch</td>
+                    <td>
+                      <app-button buttonType="uploadRed"></app-button>
+                    </td>
+                    <td>
+                      <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                    </td>
+                    <td>
+                      <input class="inputform">
+                    </td>
+                    <td>
+                      <input type="date" class="inputform">
+                    </td>
+                  </tr>
+                  <tr *ngFor="let item of claimDocsArray()">
+                    <td>
+                      <input type="text" class="inputform">
+                    </td>
+                    <td>
+                      <app-button buttonType="uploadRed"></app-button>
+                    </td>
+                    <td>
+                      <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                    </td>
+                    <td>
+                      <input class="inputform">
+                    </td>
+                    <td>
+                      <input type="date" class="inputform">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="" class="form-label text-red text-center">&nbsp;</label>
+                  <app-button buttonType="addCustom-red" (click)="incClaimDocsCount()"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab">
+            <div class="container">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Claim No: <span class="text-red">xxxx</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Cover Name: <span class="text-red">xxxx</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Claim Type: <span class="text-red">xxxx</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Peril: <span class="text-red">xxxx</span></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="" class="form-label text-red"></label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" data-bs-toggle="modal" data-bs-target="#adjustClaimModal"
+                    data-bs-dismiss="modal" text="Adjust Claim"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Add Provider" data-bs-toggle="modal" data-bs-target="#assignProviderModal"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Generate DV"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Cancel Claim"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomCloneRed" text="Change Status" data-bs-toggle="modal" data-bs-target="#changeStatus"></app-button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+<div class="modal fade" id="pendingPaymentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Client / Find Client / Client View / Pending Payments</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+
+
+            <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+              <thead class="py-3">
+                <tr>
+
+                  <th scope="col">Claim No</th>
+                  <th scope="col">Payment Id</th>
+                  <th scope="col">Batch No</th>
+                  <th scope="col">Initial Estimate</th>
+                  <th scope="col">Adjustments</th>
+                  <th scope="col">Current Estimate</th>
+                  <th scope="col">Claim Type</th>
+                  <th scope="col">Claim Status</th>
+                  <th scope="col">Days to SLA</th>
+                  <th scope="col">Completion Rate</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pp of pendingPaymentsList">
+                  <td>{{pp.claimNo}}</td>
+                  <td>{{pp.paymentId}}</td>
+                  <td>{{pp.batchNo}}</td>
+                  <td>{{pp.initialEstimate}}</td>
+                  <td>{{pp.adjustments}}</td>
+                  <td>{{pp.currentEstimate}}</td>
+                  <td>{{pp.claimType}}</td>
+                  <td>{{pp.claimStatus}}</td>
+                  <td>{{pp.daysToSla}}</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar  progress-bar-striped bg-success" role="progressbar" [ngStyle]="{width: pp.completionRate + '%'}"
+                        [attr.aria-valuenow]="pp.completionRate" aria-valuemin="0" aria-valuemax="100">{{pp.completionRate}%
+                      </div>
+                    </div>
+                  </td>
+                  <td><a data-bs-toggle="modal" href="#" data-bs-target="#changeStatus">
+                      <a href="" class="btn btn-outline-danger"> <i class="fas fa-edit"></i> Status</a>
+                    </a></td>
+                  <td>
+                    <a href="" class="btn btn-outline-danger"><i class="fas fa-cogs"></i> Generate</a>
+                  </td>
+                  <td><a data-bs-toggle="modal" href="#" data-bs-target="#adjust">
+                      <a href="" class="btn btn-outline-danger"><i class="fas fa-sliders-h"></i> Adjust</a>
+                    </a></td>
+                  <td><a data-bs-toggle="modal" href="#" data-bs-target="#historys">
+                      <a href="" class="btn btn-outline-danger"><i class="fas fa-history"></i> History</a>
+                    </a></td>
+                    <td><a data-bs-toggle="modal" href="#" data-bs-target="">
+                      <a href="" class="btn btn-outline-danger"><i class="fas fa-hand-holding"></i> Receive Req</a>
+                    </a></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="text-danger text-center">
+              No Pending Payments!
+            </div>
+
+            <div class="form-group mt-2">
+              <div class="row g-3 form-group mt-1 pt-1">
+                <div class="col-10"></div>
+                <div class="col-2">
+
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="opportunitiesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Opportunities</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <h5 class="text-red mb-4">Existing Opportunities</h5>
+          <table class="table">
+            <thead class="py-3 theader">
+              <tr>
+                <th scope="col">Business Line</th>
+                <th scope="col">Product</th>
+                <th scope="col">Assigned To</th>
+                <th scope="col">Created On</th>
+                <th scope="col">Assigned On</th>
+                <th scope="col">Status</th>
+                <th scope="col">Estimated Revenue</th>
+                <th scope="col">Conversion Probability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>L</th>
+                <td>ABC</td>
+                <td>Agent-1345</td>
+                <td>01/Jan/2020 10:00</td>
+                <td>1-Feb-21 12:23</td>
+                <td>W</td>
+                <td>400,000</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <th>L</th>
+                <td>ABC</td>
+                <td>Agent-1345</td>
+                <td>01/Jan/2020 10:00</td>
+                <td>1-Feb-21 12:23</td>
+                <td>W</td>
+                <td>400,000</td>
+                <td>10</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 class="text-red my-4">New Opportunities</h5>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Business Line</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Product Opportunity</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Opportunity Generated By</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Referred By</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Narration</label>
+                <textarea name="" id="" cols="30" rows="3" class="form-control control-bg-gray"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Submit &check;</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="historys" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-red text-center text-bold">Policy No</div>
+                <div class="col small1 text-red text-center text-bold">Owner</div>
+                <div class="col small1 text-red text-center text-bold">Initial Estimate</div>
+                <div class="col small1 text-red text-center text-bold">Total Adjustments</div>
+                <div class="col small1 text-red text-center text-bold">Updated Amount</div>
+                <div class="col small1 text-red text-center text-bold">Payment Type</div>
+                <div class="col small1 text-red text-center text-bold">Currency</div>
+                <div class="col small1 text-red text-center text-bold">Cover Name</div>
+                <div class="col-2 small1 text-red text-center text-bold">Policy Code Claimed On</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+
+              <hr>
+
+              <table class="table table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">Action</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Created By</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col">Auth By</th>
+                    <th scope="col">Auth On</th>
+                    <th scope="col">Parameter</th>
+                    <th scope="col">Old Value</th>
+                    <th scope="col">New Value</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Claim Notified</td>
+                    <td>1/1/2020</td>
+                    <td>J-Bond</td>
+                    <td>Interest</td>
+                    <td>System</td>
+                    <td>1/1/2020</td>
+                    <td>Status Code</td>
+                    <td>30000</td>
+                    <td>35000</td>
+
+                  </tr>
+                  <tr>
+                    <td>Claim Notified</td>
+                    <td>1/1/2020</td>
+                    <td>J-Bond</td>
+                    <td>Interest</td>
+                    <td>System</td>
+                    <td>1/1/2020</td>
+                    <td>Status Code</td>
+                    <td>30000</td>
+                    <td>35000</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'adjusts'"></app-button>
+                  </div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'action'"></app-button>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="adjust" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+              <ul class="nav nav-pills nav-fill sales-ul mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation"><label class="text-red">Policy No: </label><label
+                    class="valuehead">LTR21456</label></li>
+
+                <li class="nav-item" role="presentation"><label class="text-red">Owner: </label><label
+                    class="valuehead">XXXXX</label></li>
+                <li class="nav-item" role="presentation"><label class="text-red">Initial Estimate: </label><label
+                    class="valuehead">12000</label></li>
+                <li class="nav-item" role="presentation"><label class="text-red">Total Adjustments: </label><label
+                    class="valuehead">22000</label></li>
+                <li class="nav-item" role="presentation"><label class="text-red">Updated Amount: </label><label
+                    class="valuehead">23000</label></li>
+
+                <li class="nav-item" role="presentation"><label class="text-red">Payment Type: </label><label
+                    class="valuehead">Saving</label></li>
+
+                <li class="nav-item" role="presentation"><label class="text-red">Currency: </label><label
+                    class="valuehead">NGN</label></li>
+
+              </ul>
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-6">
+                    <label>New Adjustment</label>
+                    <input type="text" class="form-control  control-bg-gray">
+                  </div>
+                  <div class="col-6">
+                    <label>Reason</label>
+                    <select class="form-control  control-bg-gray"></select>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-6">
+                    <label> Adjustment Party</label>
+                    <input type="text" class="form-control  control-bg-gray">
+                  </div>
+                  <div class="col-6">
+                    <label>Client Number</label>
+                    <input type="text" class="form-control  control-bg-gray">
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-9">
+                    <label class="valuehead">Narration</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                  <div class="col-1 form-group mt-2 pt-2"></div>
+
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-10"></div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'btnCustomCloneRed'" text="Adjust"></app-button>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="changeStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Change Status</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>Current Value</label>
+                    <input class="form-control control-bg-gray" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>New Value</label>
+                    <select name="" id="" class="form-control control-bg-gray">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <hr>
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>Comment (Optional)</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div>
+                    <app-button [buttonType]="'submitRed'"></app-button>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="TPRModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Payment History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h3 class="mt-4 mb-4 text-red">Summary</h3>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Receipt Category</th>
+                  <th scope="col">Total Posted</th>
+                  <th scope="col">Currency</th>
+                  <th scope="col">Total Reconciled</th>
+                  <th scope="col">In Suspense</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Premium</td>
+                  <td>250000</td>
+                  <td>NGN</td>
+                  <td>250,000</td>
+                  <td>30,000</td>
+                </tr>
+                <tr>
+                  <td>Other Receipts</td>
+                  <td>250000</td>
+                  <td>NGN</td>
+                  <td>250,000</td>
+                  <td>30,000</td>
+                </tr>
+                <tr>
+                  <td>Total Receipts</td>
+                  <td>250000</td>
+                  <td>NGN</td>
+                  <td>250,000</td>
+                  <td>30,000</td>
+                </tr>
+
+              </tbody>
+            </table>
+            <h3 class="mt-4 mb-4 text-danger">Details</h3>
+
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Payment Type</th>
+                  <th scope="col">Batch No</th>
+                  <th scope="col">Receipt Type</th>
+                  <th scope="col">Receipt No</th>
+                  <th scope="col">Create On</th>
+                  <th scope="col">Reconciled On</th>
+                  <th scope="col">Effective On</th>
+                  <th scope="col">Ref No</th>
+                  <th scope="col">Currency</th>
+                  <th scope="col">Source</th>
+                  <th scope="col">Receipt Bank</th>
+                  <th scope="col">Reconcilied By</th>
+                  <th scope="col">Reversed</th>
+                  <th scope="col">Payer No</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>MM</td>
+                  <td>__</td>
+                  <td>P</td>
+                  <td>R6768</td>
+                  <td>4-JUN-21</td>
+                  <td>4-JUN-21</td>
+                  <td>4-JUN-21</td>
+                  <td>1789</td>
+                  <td>NGN</td>
+                  <td>W</td>
+                  <td>FBN</td>
+                  <td>WEB</td>
+                  <td>N</td>
+                  <td>4657</td>
+                </tr>
+                <tr>
+                  <td>FF</td>
+                  <td>__</td>
+                  <td>P</td>
+                  <td>R6768</td>
+                  <td>4-JUN-21</td>
+                  <td>4-JUN-21</td>
+                  <td>4-JUN-21</td>
+                  <td>1789</td>
+                  <td>NGN</td>
+                  <td>W</td>
+                  <td>FBN</td>
+                  <td>WEB</td>
+                  <td>N</td>
+                  <td>4657</td>
+                </tr>
+
+              </tbody>
+            </table>
+            <div class="row justify-content-end">
+              <div class="col-2">
+                <a class="btn btn-danger w-100">Statement</a>
+              </div>
+              <div class="col-3">
+                <a class="btn btn-outline-danger w-100">Pay Premium From Suspense</a>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>UIYT78987874</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>UND</td>
+                  <td>31-Mar-21</td>
+                  <td>5 yr 8 mo</td>
+                  <td>230,000</td>
+                  <td>450,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>UTUT965</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>OAW</td>
+                  <td>9-AUG-21</td>
+                  <td>1 yr 6 mo</td>
+                  <td>786,000</td>
+                  <td>870,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="PWModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Payment History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h3 class="mt-4 mb-4">Pending Workflows</h3>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                  <th scope="col">Task Code</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">User Assigned</th>
+                  <th scope="col">Group Assigned</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">Due</th>
+                  <th scope="col">Time Outside SLA</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: 5</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>UIYT78987874</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>UND</td>
+                  <td>31-Mar-21</td>
+                  <td>5 yr 8 mo</td>
+                  <td>230,000</td>
+                  <td>450,000</td>
+                </tr>
+                <tr>
+                  <td>YUII09986467</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>UND</td>
+                  <td>1-DEC-21</td>
+                  <td>4 yr 9 mo</td>
+                  <td>789,000</td>
+                  <td>755,000</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: 5</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>UTUT965</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>OAW</td>
+                  <td>9-AUG-21</td>
+                  <td>1 yr 6 mo</td>
+                  <td>786,000</td>
+                  <td>870,000</td>
+                </tr>
+                <tr>
+                  <td>TREYY97865</td>
+                  <td>HAL</td>
+                  <td>F</td>
+                  <td>QQV</td>
+                  <td>6-JAN-21</td>
+                  <td>1 yr 6 mo</td>
+                  <td>89,000</td>
+                  <td>347,000</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="QModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Total Payment History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:2
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:1
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h3 class="mt-4 mb-4">Pending Workflows</h3>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                  <th scope="col">Task Code</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">User Assigned</th>
+                  <th scope="col">Group Assigned</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">Due</th>
+                  <th scope="col">Time Outside SLA</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+
+
+              </tbody>
+            </table>
+
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>UIYT78987874</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>UND</td>
+                  <td>31-Mar-21</td>
+                  <td>5 yr 8 mo</td>
+                  <td>230,000</td>
+                  <td>450,000</td>
+                </tr>
+                <tr>
+                  <td>YUII09986467</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>UND</td>
+                  <td>1-DEC-21</td>
+                  <td>4 yr 9 mo</td>
+                  <td>789,000</td>
+                  <td>755,000</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h5 class="mt-3">Policies: {{policiesList?.length}}</h5>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Policy No</th>
+                  <th scope="col">Client Relationship</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Policy Status</th>
+                  <th scope="col">Issue Date</th>
+                  <th scope="col">Policy Term</th>
+                  <th scope="col">Annualised Premium</th>
+                  <th scope="col">Sum At Risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>UTUT965</td>
+                  <td>OWN</td>
+                  <td>L</td>
+                  <td>OAW</td>
+                  <td>9-AUG-21</td>
+                  <td>1 yr 6 mo</td>
+                  <td>786,000</td>
+                  <td>870,000</td>
+                </tr>
+                <tr>
+                  <td>TREYY97865</td>
+                  <td>HAL</td>
+                  <td>F</td>
+                  <td>QQV</td>
+                  <td>6-JAN-21</td>
+                  <td>1 yr 6 mo</td>
+                  <td>89,000</td>
+                  <td>347,000</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="pendingWorkflowsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business:{{'xx'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health:{{'xx'}}
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h2 class="mt-3">Pending Workflows</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                  <th scope="col">Task Code</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">User Assigned</th>
+                  <th scope="col">Group Assigned</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">Due</th>
+                  <th scope="col">Time Outside SLA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h2 class="mt-3">Pending Workflows</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                  <th scope="col">Task Code</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">User Assigned</th>
+                  <th scope="col">Group Assigned</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">Due</th>
+                  <th scope="col">Time Outside SLA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="pills-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h2 class="mt-3">Pending Workflows</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">SLA Tracker</th>
+                  <th scope="col">Task Code</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">User Assigned</th>
+                  <th scope="col">Group Assigned</th>
+                  <th scope="col">Start</th>
+                  <th scope="col">Due</th>
+                  <th scope="col">Time Outside SLA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>FI</td>
+                  <td>Fraud Investigation</td>
+                  <td>J-BOND</td>
+                  <td>Operations</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>01/01/2020 00:00</td>
+                  <td>--</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="pendingQuotesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Policies</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  justify-content-center " id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-life-tab" data-bs-toggle="pill"
+              data-bs-target="#pills-pending-quotes-life" type="button" role="tab" aria-controls="pills-life"
+              aria-selected="true">Life: {{pendingQuotesList | pendingQuotesLength : 'L'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-general-tab" data-bs-toggle="pill" data-bs-target="#pills-pending-quotes-general"
+              type="button" role="tab" aria-controls="pills-general" aria-selected="false">General Business: {{ pendingQuotesList | pendingQuotesLength : 'G'}}
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-health-tab" data-bs-toggle="pill" data-bs-target="#pills-pending-quotes-health"
+              type="button" role="tab" aria-controls="pills-health" aria-selected="false">Health: {{ pendingQuotesList | pendingQuotesLength : 'H'}}
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content mx-auto justify-content-start" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-pending-quotes-life" role="tabpanel" aria-labelledby="pills-life-tab">
+            <h2 class="mt-3">Pending Quotes</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Quotation No</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">No of Covers</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Product Code</th>
+                  <th scope="col">Created Date</th>
+                  <th scope="col">Agent No</th>
+                  <th scope="col">Total Premium</th>
+                  <th scope="col">Days To Expiry</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of pendingQuotesList | pendingQuotesFilter : 'L'">
+                  <td>{{item.quoteNo}}</td>
+                  <td>{{item.ownerName}}</td>
+                  <td>{{item.noOfCovers}}</td>
+                  <td>{{item.productClass}}</td>
+                  <td>{{item.productCode}}</td>
+                  <td>{{item.createdOn}}</td>
+                  <td>{{item.agentNo}}</td>
+                  <td>{{item.totalPeriodicPremium}}</td>
+                  <td>{{item.daysToExpiry}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center" *ngIf="!(pendingQuotesList | pendingQuotesLength : 'L')">No quotes to display</p>
+          </div>
+          <div class="tab-pane fade" id="pills-pending-quotes-general" role="tabpanel" aria-labelledby="pills-general-tab">
+            <h2 class="mt-3">Pending Quotes</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Quotation No</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">No of Covers</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Product Code</th>
+                  <th scope="col">Created Date</th>
+                  <th scope="col">Agent No</th>
+                  <th scope="col">Total Premium</th>
+                  <th scope="col">Days To Expiry</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of pendingQuotesList | pendingQuotesFilter : 'G'">
+                  <td>{{item.quoteNo}} some general shit</td>
+                  <td>{{item.ownerName}}</td>
+                  <td>{{item.noOfCovers}}</td>
+                  <td>{{item.productClass}}</td>
+                  <td>{{item.productCode}}</td>
+                  <td>{{item.createdOn}}</td>
+                  <td>{{item.agentNo}}</td>
+                  <td>{{item.totalPeriodicPremium}}</td>
+                  <td>{{item.daysToExpiry}}</td>
+                </tr>
+
+              </tbody>
+            </table>
+            <p class="text-center" *ngIf="!(pendingQuotesList | pendingQuotesLength : 'G')">No quotes to display</p>
+          </div>
+          <div class="tab-pane fade" id="pills-pending-quotes-health" role="tabpanel" aria-labelledby="pills-health-tab">
+            <h2 class="mt-3">Pending Quotes</h2>
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3">
+                <tr>
+                  <th scope="col" style="border-bottom-left-radius: 12px;">Quotation No</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">No of Covers</th>
+                  <th scope="col">Product Class</th>
+                  <th scope="col">Product Code</th>
+                  <th scope="col">Created Date</th>
+                  <th scope="col">Agent No</th>
+                  <th scope="col">Total Premium</th>
+                  <th scope="col">Days To Expiry</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of pendingQuotesList | pendingQuotesFilter : 'H'">
+                  <td>{{item.quoteNo}} health shit</td>
+                  <td>{{item.ownerName}}</td>
+                  <td>{{item.noOfCovers}}</td>
+                  <td>{{item.productClass}}</td>
+                  <td>{{item.productCode}}</td>
+                  <td>{{item.createdOn}}</td>
+                  <td>{{item.agentNo}}</td>
+                  <td>{{item.totalPeriodicPremium}}</td>
+                  <td>{{item.daysToExpiry}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="text-center" *ngIf="!(pendingQuotesList | pendingQuotesLength : 'H')">No quotes to display</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="editbank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+            <tr class="">
+              <th scope="col">Bank No</th>
+              <th scope="col">Account Name</th>
+              <th scope="col">Bank Method</th>
+              <th scope="col">Bank Name</th>
+              <th scope="col">Sort Code</th>
+              <th scope="col">Account No</th>
+              <th scope="col">Blocked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5667_1</td>
+              <td>Ogene Obaseki</td>
+              <td>NG Banking</td>
+              <td>FBN</td>
+              <td>05677889</td>
+              <td>21923776</td>
+              <td><select name="" id="">
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td>5667_1</td>
+              <td>Ogene Obaseki</td>
+              <td>NG Banking</td>
+              <td>FBN</td>
+              <td>05677889</td>
+              <td>21923776</td>
+              <td><select name="" id="">
+                  <option value="Y">Y</option>
+                  <option value="N">N</option>
+                </select></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'addCustom-red'" [text]="'Create new Account'" data-bs-toggle="modal" data-bs-target="#selectPayment"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selectPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="selectPaymentTitle" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="selectPaymentTitle">Create New Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-client-select-payment></app-client-select-payment>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addDocumentModal" class="modal fade" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content p-5">
+      <div class="d-flex justify-content-between">
+        <h3 class="">Add Document</h3>
+        <button type="button" class="btn-close" aria-label="Close" data-bs-toggle="modal" data-bs-target="#documentModal"></button>
+      </div>
+      <form [formGroup]="addDocumentForm">
+        <div class="row my-3">
+          <div class="col-md-4">
+            <label>File <span class="text-danger">*</span></label>
+            <!-- TODO replace below with a fileUpload component and use value accessor to tell angular forms how to access the File value -->
+            <div>
+              <app-button buttonType="uploadRed" imageUpload (extractedImg)="setNewDocumentImage($event)"></app-button>
+              <span>{{fileToBeUploaded}}</span>
+            </div>
+            
+          </div>
+          <div class="col-md-4">
+            <label>Title <span class="text-danger">*</span></label>
+            <input class="inputform" formControlName="title">
+          </div>
+          <div class="col-md-4">
+            <label>Category</label>
+            <select class="inputform" formControlName="category">
+              <option [value]="null"></option>
+              <option *ngFor="let category of categoryList" [value]="category.code">{{category.code}} -
+                {{category.title}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col-md-4">
+            <label>Sensitivity</label>
+            <select class="inputform" formControlName="sensitivity">
+              <option [value]="null"></option>
+              <option *ngFor="let sensitivity of sensitivityList" [value]="sensitivity.code">{{sensitivity.title}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Branch</label>
+            <select class="inputform" formControlName="branch">
+              <option [value]="null"></option>
+              <option *ngFor="let branch of branchList" [value]="branch.code">{{branch.code}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label>Box No</label>
+            <input class="inputform" formControlName="boxNo">
+          </div>
+        </div>
+        <div class="d-flex justify-content-between my-3">
+          <div class="text-danger">
+            <p *ngIf="addDocumentForm.touched && !newDocumentFile">File is required</p>
+            <p *ngIf="addDocumentForm.get('title').invalid && addDocumentForm.get('title').touched">Title is required</p>
+          </div>
+          <button class="btn btn-danger width-unset align-self-center px-5" (click)="onDocumentSave()" [disabled]="isDocSaving">
+            <span class="fa fa-spinner fa-spin" *ngIf="isDocSaving"></span>
+            <span *ngIf="!isDocSaving">Save</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="assignProviderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Assign Provider</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#registerClaimModal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container p-3">
+          <div>
+            <p class="me-5">Claim No: <span class="text-danger">5777*3</span></p>
+            <p>Cover Name: <span class="text-danger">Death</span></p>
+          </div>
+          <form>
+            <div class="row my-3">
+              <div class="col-md-5">
+                <label for="providerActionRequired" class="fw-normal small text-danger">Provider Action Required</label>
+                <select id="providerActionRequired" class="inputform">
+                  <option [value]="null"></option>
+                </select>
+              </div>
+            </div>
+            <div class="row my-3 align-items-end">
+              <div class="col-md-3">
+                <label for="providerNo" class="fw-normal small text-danger">Provider No</label>
+                <input type="text" class="inputform">
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-outline-danger w-100" data-bs-toggle="modal" data-bs-target="#findProviderModal"><i class="fa fa-search"></i>&nbsp;Find</button>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="inputform">
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-12">
+                <label for="instructionToProvider" class="fw-normal small text-danger">Instruction to Provider - <span class="text-secondary">Optional</span></label>
+                <textarea id="instructionToProvider" rows="5" class="inputform"></textarea>
+              </div>
+            </div>
+          </form>       
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger px-3" data-bs-dismiss="modal" ><i class="fa fa-save"></i>&nbsp;Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="findProviderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Find Provider</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#assignProviderModal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3">
+          <form>
+            <div class="my-3">
+              <label for="providerName" class="fw-normal small text-danger">Provider Name</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerCategory" class="fw-normal small text-danger">Provider Category</label>
+              <select class="inputform">
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="my-3">
+              <label for="providerCountry" class="fw-normal small text-danger">Provider Country</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerState" class="fw-normal small text-danger">Provider State</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerTown" class="fw-normal small text-danger">Provider Town</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="provider" class="fw-normal small text-danger">Provider</label>
+              <select class="inputform">
+                <option value=""></option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#assignProviderModal">
+          <span class="fa fa-search"></span> Search
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adjustClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="" name="test"
+                      [stacked]="true"></app-input-basic>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="" name="test"
+                      [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-search"></span>
+                      Find
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <label class="text-danger small">Narration</label>
+                    <textarea class="inputform">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <button data-bs-toggle="modal" data-bs-target="#historyModal" class="btn btn-danger btn-lg w-100">
+                      <span class="fa fa-history"></span>
+                      History
+                    </button>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-save"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-danger text-center text-bold">Policy No</div>
+                <div class="col small1 text-danger text-center text-bold">Owner</div>
+                <div class="col small1 text-danger text-center text-bold">Initial Estimate</div>
+                <div class="col small1 text-danger text-center text-bold">Total Adjustments</div>
+                <div class="col small1 text-danger text-center text-bold">Updated Amount</div>
+                <div class="col small1 text-danger text-center text-bold">Payment Type</div>
+                <div class="col small1 text-danger text-center text-bold">Currency</div>
+                <div class="col small1 text-danger text-center text-bold">Cover Name</div>
+                <div class="col-2 small1 text-danger text-center text-bold">Policy Code Claimed On</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+              <hr>
+              <table class="table table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">Action</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Created By</th>
+                    <th scope="col">Reason</th>
+                    <th scope="col">Auth By</th>
+                    <th scope="col">Auth On</th>
+                    <th scope="col">Parameter</th>
+                    <th scope="col">Old Value</th>
+                    <th scope="col">New Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Claim Notified</td>
+                    <td>1/1/2020</td>
+                    <td>J-Bond</td>
+                    <td>Interest</td>
+                    <td>System</td>
+                    <td>1/1/2020</td>
+                    <td>Status Code</td>
+                    <td>30000</td>
+                    <td>35000</td>
+                  </tr>
+                  <tr>
+                    <td>Claim Notified</td>
+                    <td>1/1/2020</td>
+                    <td>J-Bond</td>
+                    <td>Interest</td>
+                    <td>System</td>
+                    <td>1/1/2020</td>
+                    <td>Status Code</td>
+                    <td>30000</td>
+                    <td>35000</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-danger btn-lg w-100" data-bs-toggle="modal" data-bs-target="#adjustClaimModal">
+                      Adjust
+                    </button>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">Action</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adjustClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="" name="test"
+                      [stacked]="true"></app-input-basic>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="" name="test"
+                      [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-search"></span>
+                      Find
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <label class="text-danger small">Narration</label>
+                    <textarea class="inputform">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <button data-bs-toggle="modal" data-bs-target="#historyModal" class="btn btn-danger btn-lg w-100">
+                      <span class="fa fa-history"></span>
+                      History
+                    </button>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-danger btn-lg w-100">
+                      <span class="fa fa-save"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

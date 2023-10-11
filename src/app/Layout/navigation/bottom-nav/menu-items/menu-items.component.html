@@ -1,0 +1,18 @@
+<mat-menu #menu="matMenu" class="bg-dark dashboard-menu " [xPosition]="xPosition ">
+  <ng-template matMenuContent>
+
+    <ng-container *ngFor="let subMenuitem of menuItems;let isLast = last">
+      <ng-container *ngIf="subMenuitem.hasSub; else elseNoSubs2Template">
+        <a mat-menu-item [matMenuTriggerFor]="subMenuTag.matMenu" class="dropdown-item "
+          [ngClass]="{ underline: !isLast }">
+          {{ subMenuitem.label|appTranslate|async }}</a>
+        <app-menu-items #subMenuTag [xPosition]="xPosition " [menuItems]="subMenuitem.subs">
+        </app-menu-items>
+      </ng-container>
+      <ng-template #elseNoSubs2Template>
+        <a mat-menu-item class="dropdown-item " routerLink="{{ subMenuitem.link }}" [ngClass]="{ underline: !isLast }">
+          {{ subMenuitem.label|appTranslate|async }} </a>
+      </ng-template>
+    </ng-container>
+  </ng-template>
+</mat-menu>

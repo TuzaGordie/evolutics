@@ -1,0 +1,83 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Add Member</h5>
+  <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+</div>
+<div class="row align-items-end gx-2" *ngFor="let i of memberCounter()">
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Client Number'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="col-md-auto d-flex">
+    <div class="me-2">
+      <app-btn icon="search" type="secondary" [iconBtn]="true" hint="Find client"></app-btn>
+    </div>
+    <app-btn icon="add" type="outline" [iconBtn]="true" hint="Add new client"></app-btn>
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Staff ID'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Rel Basis'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Relationship'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray">
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Related To'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Member name'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Subgroup No'|appTranslate|async}}</label>
+      <input type="text" class="form-control control-bg-gray">
+    </div>
+  </div>
+  <div class="col-md">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">&nbsp;</label>
+      <app-button buttonType="upload" text="Picture"></app-button>
+    </div>
+  </div>
+  <div class="col-md-auto d-flex">
+    <div class="me-2">
+      <app-btn icon="delete" type="danger" [iconBtn]="true" hint="Delete Member" (mclick)="memberInc(-1)"></app-btn>
+    </div>
+    <app-btn (mclick)="memberInc()" icon="add" type="outline" [iconBtn]="true" hint="Add another member"></app-btn>
+  </div>
+</div>
+<hr>
+<div class="row justify-content-between mt-3">
+  <div class="col-md-auto d-flex">
+    <div class="me-2">
+      <app-btn icon="download" type="outline" (mclick)="downloadTemplate()">Download CSV Template</app-btn>
+    </div>
+    <app-button buttonType="upload" text="Upload Members"></app-button>
+  </div>
+  <div class="col-md-2">
+    <app-button [buttonType]="'save'"></app-button>
+  </div>
+</div>

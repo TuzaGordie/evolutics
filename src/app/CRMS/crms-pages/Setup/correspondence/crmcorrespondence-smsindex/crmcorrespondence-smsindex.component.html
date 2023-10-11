@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <br><br><br>
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+      <label>{{'Enter Document Code'|appTranslate|async}}</label>
+      <select class="form-control mt-4 control-bg-gray"
+              name="correspondence-code" type="text">
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+      </select>
+    </div>
+  </div>
+  <br>
+
+
+  <div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'show'" routerLink="/crms/setup/correspondence/SMS-create"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'create-red'" routerLink="/crms/setup/correspondence/SMS-create"></app-button>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <app-button [buttonType]="'clone-red'" routerLink="/crms/setup/correspondence/SMS-create"></app-button>
+    </div>
+
+  </div>
+
+</div>
+

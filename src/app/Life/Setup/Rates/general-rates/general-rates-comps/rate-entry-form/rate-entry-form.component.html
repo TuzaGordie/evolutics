@@ -1,0 +1,108 @@
+<loader [loading]="loading" class="vh-70">
+  <div class="">
+    <div class="row ">
+      <div class="col-md">
+        <text-case-1 lbl="Rate" [light]="true" val="{{form?.value?.code}} - {{form?.value?.description}}" [stacked]="true">
+        </text-case-1>
+      </div>
+      <div class="col-md">
+        <text-case-1 lbl="Retrieval Basis" [light]="true"
+          [val]="getRetrievalBasisDesc|functionCaller1:form?.value?.retrievalBasis|async" [stacked]="true">
+        </text-case-1>
+      </div>
+      <ng-container *ngIf="rate?.retrievalBasis">
+        <ng-container *ngIf="rate?.retrievalBasis  == retBasisCode.l ">
+          <div class="col-md">
+            <text-case-1 lbl="Lookup Field" [light]="true"
+              [val]="getKeyDescByCode|functionCaller1:rate?.lookupValue|async" [stacked]="true">
+            </text-case-1>
+          </div>
+          <div class="col-md">
+            <text-case-1 lbl="Banding Field" [light]="true"
+              [val]="getKeyDescByCode|functionCaller1:rate?.bandParameter|async" [stacked]="true">
+            </text-case-1>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="rate?.retrievalBasis == retBasisCode.m ">
+          <div class="col-md">
+            <text-case-1 lbl="X Axis" [light]="true" [val]="getKeyDescByCode|functionCaller1:rate?.axisXValue|async"
+              [stacked]="true">
+            </text-case-1>
+          </div>
+          <div class="col-md">
+            <text-case-1 lbl="Y Axis" [light]="true" [val]="getKeyDescByCode|functionCaller1:rate?.axisYValue|async"
+              [stacked]="true">
+            </text-case-1>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <hr>
+
+    <!-- RATE VALUES CONFIG -->
+    <div class="row align-items-end justify-content-center text-center">
+      <ng-container *ngIf="rate">
+        <ng-container *ngFor="let keyNum of keyNums">
+          <div class="col-md-2 my-1" *ngIf="rate['ratePartitionOptions'+keyNum] as key">
+            <!-- {{key.partitionValues|rateMetaDropDown:'key'+keyNum:metadata:isShow|json}} -->
+            <app-input-basic [label]="key.partitionTitle" [hint]="key.partitionTitle" 
+              [type]="(key.partitionValues|rateMetaDropDown:'key'+keyNum:metadata:isShow)?'select':'text'"
+              [options]="key.partitionValues|rateMetaDropDown:'key'+keyNum:metadata:isShow" [showEmptyOption]="false"
+              [form]="form2" name="key{{keyNum}}" [stacked]="true" valueField="code"
+              labelType="cdt" >
+            </app-input-basic>
+          </div>
+        </ng-container>
+      </ng-container>
+      <div class="col-md-2 my-1">
+        <app-input-basic label="Version No." type="select"
+          [options]="rate?.rateVersion|rateMetaDropDown:'version':metadata:isShow" [showEmptyOption]="false"
+          [optionFormatter]="versionOptionFormatter" valueField="versionNo" [form]="form3" name="versionNo"
+          [stacked]="true">
+        </app-input-basic>
+      </div>
+      <!--// -->
+
+      <ng-container *ngIf="!isCreate && !isClone">
+        <div class="col-md-auto my-1">
+          <app-btn (mclick)="fetchRateValues()" [disabled]="!isShow || (isShow &&!ratePartitionValuesValid)" (click)="logPartitions()"
+            type="secondary" icon="show">Fetch Rate Values
+          </app-btn>
+        </div>
+        <div class="col-md-3 my-1">
+          <ng-container *ngIf="isShow;else createModeTemplate">
+            <app-btn (mclick)="switchToCreateMode()" type="secondary" icon="adjust">Switch to Creation Mode</app-btn>
+          </ng-container>
+          <ng-template #createModeTemplate>
+            <app-btn (mclick)="switchToShowMode()" type="secondary" icon="adjust">Switch to Show Mode</app-btn>
+          </ng-template>
+        </div>
+      </ng-container>
+    </div>
+    <div>
+      <hr>
+      <div class="row align-items-end justify-content-center text-center" *ngIf="isShow && rateValues">
+        <ng-container>
+          <div class="col-md-2 my-1">
+            <app-input-basic label="Search Row Axis" type="select" [options]="rows " [showEmptyOption]="true"
+              [form]="form4" name="row" [stacked]="true">
+            </app-input-basic>
+          </div>
+          <div class="col-md-2 my-1">
+            <app-input-basic label="Search Column Axis" type="select" [options]="columns " [showEmptyOption]="true"
+              [form]="form4" name="column" [stacked]="true">
+            </app-input-basic>
+          </div>
+        </ng-container>
+      </div>
+      <app-input-matrix #inpMatrix [isCreationMode]="isCreationMode" [isFiltered]="isFiltered"
+        [customInput]="customInput" [fileName]="fileName" [isShow]="isShow" (showCustomInputForm)="showUWTable($event)"
+        (extractForGenRates)="submit($event)" [numOfCols]="rate?.retrievalBasis == retBasisCode.l?1:null"
+        [lockColumnGen]="rate?.retrievalBasis ==
+        retBasisCode.l"
+        [xAxisLabel]="getKeyDescByCode|functionCaller1:(rate?.retrievalBasis|xAxisLabel:rate?.bandParameter:rate?.axisXValue)|async"
+        [yAxisLabel]="getKeyDescByCode|functionCaller1:(rate?.retrievalBasis|yAxisLabel:rate?.lookupValue:rate?.axisYValue)|async">
+      </app-input-matrix>
+    </div>
+  </div>
+</loader>

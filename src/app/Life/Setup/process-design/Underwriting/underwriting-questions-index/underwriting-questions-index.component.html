@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="col-6 mx-auto">
+    <div class="row mt-5 px-2">
+      <label class="">{{"Select Question Set Category"|appTranslate|async}}</label>
+
+      <select [(ngModel)]="questionCategoryValue" (ngModelChange)="onChangeQuestionCategory($event)"
+        name="questionCategory" class="form-control form-control-sm control-bg-gray" #questionCategory="ngModel"
+        required class="form-control control-bg-gray">
+        <option value=""></option>
+        <option *ngFor="let item of questionCategoryArray" value="{{ item.code }}">
+          {{ item.code }} - {{ item.title }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="
+          questionCategory.errors &&
+          (questionCategory.dirty || questionCategory.touched)
+        ">
+        <p *ngIf="questionCategory.errors.required">
+          Question Category is required
+        </p>
+      </div>
+    </div>
+    <div class="row mt-2 px-2">
+      <label class="">{{"Select Question Set Code"|appTranslate|async}}</label>
+
+      <select [disabled]="!questionCategoryValue" [(ngModel)]="questionSetCodeValue" name="questionSetCode"
+        class="form-control form-control-sm control-bg-gray" #questionSetCode="ngModel" required
+        class="form-control control-bg-gray">
+        <option value=""></option>
+        <option *ngFor="let item of questionSetCodeArray" value="{{ item?.code }}">
+          {{ item?.code }}
+        </option>
+      </select>
+
+      <div class="text-danger" *ngIf="
+          questionSetCode.errors &&
+          (questionSetCode.dirty || questionSetCode.touched)
+        ">
+        <p *ngIf="questionSetCode.errors.required">
+          Question Set Code is required
+        </p>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col">
+        <button [class.disabled]="!questionSetCodeValue" class="btn btn-dark btn-lg w-100" (click)="show()">
+          <span class="fa fa-eye"></span>
+          Show
+        </button>
+      </div>
+      <div class="col">
+        <app-button buttonType="create" routerLink="../Questions-create"></app-button>
+      </div>
+      <div class="col">
+        <button [class.disabled]="!questionSetCodeValue" class="btn btn btn-outline-primary btn-lg btn-clone w-100" (click)="clone()">
+          <span class="fa fa-clone"></span>
+          Clone
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="text-center">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="text-{{data?.status?'success':'danger'}} ms-3 font-weight-bold text-uppercase">
+      <i class="fa fa-{{data?.status?'check-circle':'exclamation-circle'}}"></i> {{(data?.heading||'Notice')|appTranslate|async}}
+    </div>
+    <button mat-icon-button (click)="yes()" class="btn-outline-danger"><i class="material-icons">close</i></button>
+  </div>
+
+  <div class="card-body " [appTranslator]="data?.text">
+
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-auto my-1" *ngFor="let item of data?.btns">
+      <app-btn [type]="item.type||'secondary'" [icon]="item.icon"
+        (mclick)="item.action($event);yes();">
+        {{item.value}}
+      </app-btn>
+    </div>
+  </div>
+  <div  class="bg-{{data?.status?'success':'danger'}} mt-2 rounded bar"></div>
+</div>

@@ -1,0 +1,113 @@
+
+<div class="modal fade" id="lil_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">{{description}}</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <form [formGroup]="lifeForm" class="modal-body">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Pricing Basis</label>
+            <select formControlName="basis" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Initial Sum Assured</label>
+            <input formControlName="assured" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Benefit Payment Frequency</label>
+            <select formControlName="paymentFreq" id="" class="form-control control-bg-gray">
+              <option value=""></option>
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Sum Assured Escalation rate (%) before chaim</label>
+            <input formControlName="escalation_before" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Sum Assured Escalation rate (%) post chaim</label>
+            <input formControlName="escalation_after" type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+  
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Premium Payment Term</label>
+            <input formControlName="premTerm" type="text" placeholder="Years" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="premMonths" type="text" placeholder="months" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Benefit Payment Term</label>
+            <input formControlName="benTerm" type="text" placeholder="Years" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <input formControlName="benMonths" type="text" placeholder="months" class="form-control control-bg-gray">
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-6">
+          <div class="form-group">
+            <label for="" class="form-label text-primary">Enter Benefit Payment Schedule</label>
+            <input formControlName="benSchedule" type="checkbox" class="form-control control-bg-gray">
+          </div>
+        </div>
+  
+      </div>
+      <div class="row my-4">
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="from-group">
+            <label for="" class="form-label">Bank No</label>
+            <input formControlName="bank" type="text" class="form-control  control-bg-gray">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="from-group align-items-center pt-2">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn type="outline" icon="add" (mclick)="hide">Add</app-btn>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="modal-footer">
+      <app-btn type="outline" icon="save" (mclick)="stop()">Save</app-btn>
+    </div>
+  </div>
+</div>
+</div>
+

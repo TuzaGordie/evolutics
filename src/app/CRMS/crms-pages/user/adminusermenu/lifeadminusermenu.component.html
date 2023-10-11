@@ -1,0 +1,105 @@
+<app-form-navigation [title] = "'Admin User Menu'"></app-form-navigation> 
+<div *ngIf="operation === 'actions'" class="container-sm mt-5 vh-100 " id="form-body">
+    <div class="d-flex h-50 flex-column justify-content-center">
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5 align-middle">
+                <form>
+                    <div class="form-group mt-2">
+                        <label>Select User Menu</label>
+                        <select class="form-select form-select-lg control-bg-gray">
+                            <option></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group row my-3">
+                        <div class="col-sm-4 d-grid gap-1">
+                            <app-button [routerLink]="['Show']" [buttonType]="'show-red'"></app-button>
+                        </div>
+                        <div class="col-sm-4 d-grid gap-1">
+                            <app-button routerLink="/crms/admin/user" [buttonType]="'create-red'"></app-button>
+                        </div>
+                        <div class="col-sm-4 d-grid gap-1">
+                            <app-button [routerLink]="['clone']" [buttonType]="'clone-red'"></app-button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="operation === 'create' || operation === 'clone' " class="container-sm vh-100" id="form-body">
+    <div class="d-flex h-50 flex-column justify-content-center">
+        <div class="row">
+            <div class="col-md-6 mx-auto my-5 align-middle">
+                <form>
+                    <div class="form-group mt-2">
+                        <label class="mb-2"><b>Enter Code for New Menu</b></label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-select form-select-lg control-bg-gray">
+                            </div>
+                            <div class="col-md-4">
+                                <app-button [routerLink]="['../show']" [buttonType]="'create'"></app-button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="operation === 'show'">
+    <div class="form-body container-fluid mt-2">
+        <ul class="pills-tab" role="tablist" class="nav nav-pills nav-fill mb-3">
+            <li *ngFor="let menu of templateMenu" role="presentation" class="nav-item">
+                <button (click)="activate(menu.name)" class="nav-link" [ngClass]="{'active':menu.active}"
+                    id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="pills" type="button" role="tab"
+                    aria-selects="pills-basic">
+                    {{menu.name}}
+                </button>
+            </li>
+        </ul>
+        <div *ngIf="tab === 'Details'" class="tab-content vh-100" id="pills-tabContent">
+            <div class="container h-25 d-flex justify-content-center flex-column">
+                <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+                    aria-labelledby="pills-basic-tab">
+                    <div class="form-container col-lg-6 form-group">
+                        <label for=""> <b>Menu Code</b> </label>
+                        <input class="form-control w-80" type="text">
+                    </div>
+                    <div class="form-container col-lg-6 form-group">
+                        <label for=""><b>Description</b></label>
+                        <input class="form-control w-80" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="tab !== 'Details'" class="tab-content" id="pills-tabContent">
+            <div class="container">
+                <div class="row tab-pane fade show active mt-4" id="pills-basic" role="tabpanel"
+                    aria-labelledby="pills-basic-tab">
+                    <h5 class="title-border pb-2">
+                        {{tab}}
+                    </h5>
+                    <div class=" d-flex flex-wrap">
+                        <div *ngFor="let menu of activeUserMenuContent" class="row form-group mt-4 w-50  title-border pb-2">
+                                <div class="col-md-10">
+                                    <label class="form-check-label" > {{menu.subMenuName}}</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input class="form-check-input " type="checkbox">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,402 @@
+<loader [loading]="loading" text="{{loadingText}}" class="vh-30">
+  <div *ngIf="operation === 'actions'" class="container-sm mt-5" id="form-body">
+    <div class="row">
+      <div class="col-md-6 mx-auto my-5 align-middle">
+        <form>
+          <div class="form-group mt-2">
+            <label>{{'Select Batch Category'|appTranslate|async}}</label>
+            <select [(ngModel)]="batchCat" [ngModelOptions]="{ standalone: true }"
+              class="form-control form-control-lg control-bg-gray" (change)="selectCategory()">
+              <option></option>
+              <option value="{{ item.code }}" *ngFor="let item of selectBatchCategory">
+                {{ item.code }} - {{ item.title }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group mt-2">
+            <label>{{'Select Batch'|appTranslate|async}}</label>
+            <select [(ngModel)]="selectBat" [ngModelOptions]="{ standalone: true }"
+              class="form-control form-control-lg control-bg-gray">
+              <option *ngFor="let codes of batchSetupCodes" [value]="codes.code">
+                {{codes.code}} - {{codes.description}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group row my-3">
+            <div class="col-sm-4 d-grid gap-1">
+              <app-button (click)="show()" [buttonType]="'show'"></app-button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <app-button [routerLink]="['show']" [buttonType]="'create'"></app-button>
+            </div>
+            <div class="col-sm-4 d-grid gap-1">
+              <app-button (click)="clone()" [buttonType]="'clone'"></app-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- THIS IS WHERE I AM WORKIN ON -->
+  <div *ngIf="operation === 'show'" class="container">
+    <form (ngSubmit)="createBatch()" #createBatchForm="ngForm">
+      <div class="row mt-4">
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Batch Code'|appTranslate|async}}</label>
+            <input [(ngModel)]="createBatchData.batchSetup.code" disabled name="processCode" required
+              #processCode="ngModel" class="form-control control-bg-gray" />
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Batch Category'|appTranslate|async}}</label>
+            <select [(ngModel)]="createBatchData.batchSetup.category" required name="batchCategory"
+              #batchCategory="ngModel" class="form-control control-bg-gray" id="">
+              <option value="{{ item.code }}" *ngFor="let item of selectBatchCategory">
+                {{ item.code }} - {{ item.title }}
+              </option>
+            </select>
+
+            <div class="text-danger" *ngIf="
+              batchCategory.errors &&
+              (batchCategory.dirty || batchCategory.touched)
+            ">
+              <p *ngIf="batchCategory.errors.required">{{'Batch Category is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+            <input [(ngModel)]="createBatchData.batchSetup.description" required name="description"
+              class="form-control control-bg-gray" type="text" #description="ngModel" />
+            <div class="text-danger" *ngIf="
+              description.errors && (description.dirty || description.touched)
+            ">
+              <p *ngIf="description.errors.required">{{'Description is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngFor="let item of createBatchData.batchSetupSchedule; let i = index" class="row mt-4">
+        <div class="col-3">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Batch Day Basis'|appTranslate|async}}</label>
+
+            <select [(ngModel)]="item.scheduleBasis" required name="scheduleBasis_{{  item.rowId }}"
+              class="form-control control-bg-gray" id="" #scheduleBasis="ngModel">
+              <option *ngFor="let item of scheduleBasisArray" value="{{ item.code }}">
+                {{ item.title }}
+              </option>
+            </select>
+
+            <div class="text-danger" *ngIf="
+              scheduleBasis.errors &&
+              (scheduleBasis.dirty || scheduleBasis.touched)
+            ">
+              <p *ngIf="scheduleBasis.errors.required">
+                {{"Batch Day Basis is required"|appTranslate|async}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Batch Day'|appTranslate|async}}</label>
+            <input [(ngModel)]="item.scheduleDay" type="number" required min="1" max="30"
+              name="scheduleDay_{{  item.rowId }}" class="form-control control-bg-gray" #scheduleDay="ngModel" />
+
+            <div class="text-danger" *ngIf="
+              scheduleDay.errors && (scheduleDay.dirty || scheduleDay.touched)
+            ">
+              <p *ngIf="scheduleDay.errors.required">{{'Batch Day is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Start Date and Time'|appTranslate|async}}</label>
+            <input [(ngModel)]="item.startOn" [value]="item.startOn" type="datetime-local" required name="startDate_{{  item.rowId }}"
+              class="form-control control-bg-gray" #startDate="ngModel" />
+
+            <div class="text-danger" *ngIf="startDate.errors && (startDate.dirty || startDate.touched)">
+              <p *ngIf="startDate.errors.required">{{'Start Day is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Schedule Time'|appTranslate|async}}</label>
+            <input [(ngModel)]="item.scheduleTime" type="time" required name="scheduleTime_{{  item.rowId }}"
+              class="form-control control-bg-gray" #scheduleTime="ngModel" />
+
+            <div class="text-danger" *ngIf="
+              scheduleTime.errors &&
+              (scheduleTime.dirty || scheduleTime.touched)
+            ">
+              <p *ngIf="scheduleTime.errors.required">
+                Batch Day Basis is required
+              </p>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Active'|appTranslate|async}}</label>
+            <input type="checkbox" [(ngModel)]="item.active" name="active"
+              class="form-control control-bg-gray width-unset mt-2" #active="ngModel" />
+          </div>
+        </div>
+
+        <div class="col-1">
+          <div class="form-group mt-2">
+            <label for="" class="form-label text-primary">&nbsp;</label>
+            <app-button [buttonType]="'delete'" (click)="deleteSingleBatch(i)" [text]="'Delete'"></app-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button [buttonType]="'addCustom'" (click)="addBatch()" [text]="'Add'"></app-button>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <!-- <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label text-primary">{{'Start Time'|appTranslate|async}}</label>
+
+          <input
+            [(ngModel)]="createBatchData.startTime"
+            required
+            name="startTime"
+            class="form-control control-bg-gray"
+            type="text"
+            #startTime="ngModel"
+          />
+
+          <div
+            class="text-danger"
+            *ngIf="startTime.errors && (startTime.dirty || startTime.touched)"
+          >
+            <p *ngIf="startTime.errors.required">{{'Start Time is required'|appTranslate|async}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group mt-2">
+          <label class="form-label text-primary">{{'End Time'|appTranslate|async}}</label>
+          <input
+            [(ngModel)]="createBatchData.endTime"
+            required
+            name="endTime"
+            class="form-control control-bg-gray"
+            type="text"
+            #endTime="ngModel"
+          />
+          <div
+            class="text-danger"
+            *ngIf="endTime.errors && (endTime.dirty || endTime.touched)"
+          >
+            <p *ngIf="endTime.errors.required">{{'Batch Day Basis is required'|appTranslate|async}}</p>
+          </div>
+        </div>
+      </div> -->
+
+        <div class="col">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+
+            <select [(ngModel)]="createBatchData.batchSetupCompany.companyCode" required name="company"
+              class="form-control control-bg-gray" type="text" #company="ngModel">
+              <option value="{{ item.code }}" *ngFor="let item of companyArray">
+                {{ item.code }} - {{ item.description }}
+              </option>
+            </select>
+
+            <div class="text-danger" *ngIf="company.errors && (company.dirty || company.touched)">
+              <p *ngIf="company.errors.required">{{'Company is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="form-group mt-2">
+            <label class="form-label text-primary">{{'Batch Log Report Basis'|appTranslate|async}}</label>
+            <select [(ngModel)]="createBatchData.batchSetup.batchLogBasis" required name="batchLogReportBasis"
+              class="form-control control-bg-gray" id="" #batchLogReportBasis="ngModel">
+              <option value="{{ item.code }}" *ngFor="let item of batchLogReportBasisArray">
+                {{ item.code }} - {{ item.title }}
+              </option>
+            </select>
+
+            <div class="text-danger" *ngIf="
+              batchLogReportBasis.errors &&
+              (batchLogReportBasis.dirty || batchLogReportBasis.touched)
+            ">
+              <p *ngIf="batchLogReportBasis.errors.required">
+                {{"Batch Log Report Basis is required"|appTranslate|async}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row my-5">
+        <div class="col-2">
+          <div class="form-group mt-4">
+            <label for="" class="form-label text-primary">{{'Automate Batch'|appTranslate|async}}</label>
+            <input type="checkbox" [(ngModel)]="createBatchData.batchSetup.auto" name="automateBatch"
+              class="form-control control-bg-gray width-unset mt-2" #automateBatch="ngModel" />
+          </div>
+        </div>
+      </div>
+
+      <div *ngFor="let item of createBatchData.batchSetupProcess; let i = index" class="row content">
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary text-center">
+              {{"Line Number"|appTranslate|async}}
+            </label>
+            <input [(ngModel)]="item.lineNo" required disabled="true" name="lineNo_{{  item.rowId }}"
+              class="form-control control-bg-gray" type="number" #lineNo="ngModel" />
+
+            <div class="text-danger" *ngIf="lineNo.errors && (lineNo.dirty || lineNo.touched)">
+              <p *ngIf="lineNo.errors.required">{{'Line Number is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary text-center"> Type </label>
+            <select [(ngModel)]="item.processType" required name="type_{{  item.rowId }}"
+              class="form-control control-bg-gray" type="text" #type="ngModel">
+              <option value="{{ item.code }}" *ngFor="let item of typeArray">
+                {{ item.title }}
+              </option>
+            </select>
+
+            <div class="text-danger" *ngIf="type.errors && (type.dirty || type.touched)">
+              <p *ngIf="type.errors.required">{{'Type is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary text-center"> Process </label>
+            <select required [(ngModel)]="item.processCode" name="process_{{  item.rowId }}"
+              class="form-control control-bg-gray" id="" #processInput="ngModel">
+              <option></option>
+              <option *ngFor="let item of processCodeArray" value="{{  item.code }}">
+                {{ item.code }} - {{ item.description }}
+              </option>
+            </select>
+
+            <div class="text-danger" *ngIf="
+              processInput.errors &&
+              (processInput.dirty || processInput.touched)
+            ">
+              <p *ngIf="processInput.errors.required">{{'Process is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="form-label text-primary w-100 text-center">{{'Select'|appTranslate|async}}</label>
+            <input [(ngModel)]="item.select" name="select_{{  item.rowId }}" type="checkbox"
+              class="form-control control-bg-gray width-unset mx-auto mt-2" value="1" #select="ngModel" />
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-group">
+            <label class="form-label text-primary text-center">
+              {{"Parameter basis"|appTranslate|async}}
+            </label>
+            <select [disabled]="!processCodeArray" [(ngModel)]="item.parameterBasis"
+              (ngModelChange)="changeParameterBasis(i)" name="parameterBasis_{{ item.rowId }}" id=""
+              class="form-control control-bg-gray" #parameterBasis="ngModel">
+              <option *ngFor="let item of parameterBasisArray" value="{{ item.code }}">
+                {{ item.title }}
+              </option>
+            </select>
+            <!-- <div
+            class="text-danger"
+            *ngIf="
+              parameterBasis.errors &&
+              (parameterBasis.dirty || parameterBasis.touched)
+            ">
+            <p *ngIf="parameterBasis.errors.required">
+              Parameter Basis is required
+            </p>
+          </div> -->
+          </div>
+        </div>
+        <!-- 
+
+
+ -->
+        <div class="col-md">
+          <div class="form-group">
+            <label class="form-label text-primary text-center"> Parameter </label>
+
+            <select [(ngModel)]="item.parameter" name="parameter_{{ i }}" id="" class="form-control control-bg-gray"
+              #parameter="ngModel">
+              <option *ngFor="let item of parameterArray[i]" value="{{ item.parameter }}">
+                {{ item.parameter }}
+              </option>
+            </select>
+
+            <!-- <div
+            class="text-danger"
+            *ngIf="parameter.errors && (parameter.dirty || parameter.touched)"
+          >
+            <p *ngIf="parameter.errors.required">{{'Parameter is required'|appTranslate|async}}</p>
+          </div> -->
+          </div>
+        </div>
+
+        <div class="col-1">
+          <div class="form-group">
+            <label class="form-label text-primary text-center">
+              {{"Hours After"|appTranslate|async}}
+            </label>
+            <input [(ngModel)]="item.hoursAfter" required min="1" name="hoursAfter_{{ i }}" type="number"
+              class="form-control control-bg-gray" #hoursAfter="ngModel" />
+
+            <div class="text-danger" *ngIf="
+              hoursAfter.errors && (hoursAfter.dirty || hoursAfter.touched)
+            ">
+              <p *ngIf="hoursAfter.errors.required">{{'Hours After is required'|appTranslate|async}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button [buttonType]="'delete'" (click)="deleteTp(i)" [text]="'Delete'"></app-button>
+        </div>
+      </div>
+      <div class="col-4">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-button [buttonType]="'addCustom'" (click)="addTp()" [text]="'Add'"></app-button>
+      </div>
+
+      <div class="row justify-content-end mt-5">
+        <div class="col-2 justify-content-end">
+          <app-button (click)="createBatch()" [buttonType]="'custSave'" [text]="'Save'"></app-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</loader>

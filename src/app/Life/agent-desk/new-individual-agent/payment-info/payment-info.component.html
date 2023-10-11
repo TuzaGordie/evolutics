@@ -1,0 +1,81 @@
+<div class=" " [ngClass]="{'mt-3':!isModal}">
+  <form [formGroup]="paymentForm">
+    <div class=" mb-1">
+      <div class="d-lg-flex justify-content-between mb-3 align-items-center">
+        <h6 for="" class="text-primary">{{"Existing Accounts for Client"|appTranslate|async}} {{clientNo}}</h6>
+
+        <div class="d-flex">
+          <app-btn (mclick)="openCreateAccount()" icon="add" type="secondary">Create New Account</app-btn>
+          <ng-content select="[closeBtn]">
+          </ng-content>
+        </div>
+      </div>
+      <loader [loading]="loadingAccounts" class="vh-20">
+        <div class="cage border">
+          <table class="table table-striped">
+            <thead class="py-3">
+              <tr>
+                <th scope="col">{{"Bank No"|appTranslate|async}}</th>
+                <th scope="col">{{"Payee Name"|appTranslate|async}}</th>
+                <th scope="col">{{"Account Type"|appTranslate|async}}</th>
+                <th scope="col">{{"Account No"|appTranslate|async}}</th>
+                <th scope="col">{{"Institution"|appTranslate|async}}</th>
+                <th scope="col">{{"Select"|appTranslate|async}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of newBankDetails; let i=index;">
+                <th scope="row">{{item.no||'-'}}</th>
+                <td>{{item.accountName||'-'}}</td>
+                <td>{{item.accountType||'-'}}</td>
+                <td>{{item.accountNo||'-'}}</td>
+                <td>{{item.bankName||'-'}}</td>
+                <td class="d-flex justify-content-center">
+                  <app-btn [type]="selectedAccount==item?'primary':'secondary'" (click)="chooseAccount(item)">Select
+                  </app-btn>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </loader>
+    </div>
+    <div class="row align-items-end">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{"Payment Method"|appTranslate|async}}</label>
+          <input type="text" class="form-control control-bg-gray" readonly [value]="paymentMethod">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{"Payee Name"|appTranslate|async}}</label>
+          <input type="text" class="form-control control-bg-gray" formControlName="payeeName">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{"Frequency of payment"|appTranslate|async}}</label>
+          <select formControlName="{{frequencyField||'frequency'}}" class="control-bg-gray form-control" required>
+            <option [value]="null">{{"Select Frequency Payment"|appTranslate|async}}</option>
+            <option [value]="item.code" *ngFor="let item of frequency">{{item.title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">{{"Default Currency"|appTranslate|async}}</label>
+          <select formControlName="currency" class="control-bg-gray form-control" required>
+            <option [value]="null">{{"Select Default Currency"|appTranslate|async}}</option>
+            <option [value]="item.code" *ngFor="let item of currencyList">{{item.code}} - {{item.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6"  >
+        <ng-content select="[submissionSection]"></ng-content>
+
+      </div>
+    </div>
+
+  </form>
+</div>

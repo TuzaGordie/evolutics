@@ -1,0 +1,31 @@
+<br>
+<div class="container mt-4" >
+  <div class="col-6 mx-auto">
+    <div class="row mt-4">
+      <div class="col">
+        <input type="file" id="fileBtnImg1" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+        (change)="upload($event)">
+        <app-button buttonType="uploadGB" for="fileBtnImg1" (click)="getImage1()" text="Upload Ownership Certificate"></app-button>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <input type="file" id="fileBtnImg2" style="display: none;" accept=".png,.jpg,.docx,.pdf"
+        (change)="upload2($event)">
+        <app-button buttonType="uploadGB" for="fileBtnImg2" (click)="getImage2()" text="Upload Pictures"></app-button>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col">
+        <app-button buttonType="uploadGB" text="Other Uploads" (click)="openUploadOther()"></app-button>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+<br>

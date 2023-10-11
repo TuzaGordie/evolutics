@@ -1,0 +1,28 @@
+<div class="container-sm mt-5 " id="form-body">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+        <app-input-basic label="Select Interest Rate Group" [colored]="false" type="select" [form]="form"
+          name="codeGroup" [stacked]="true" [options]="iS.getCodeGroups|functionCaller|async" labelType="ct" #codeGroup>
+        </app-input-basic>
+        <app-input-basic label="Select Interest Rate" type="select" [colored]="false" [form]="form" name="rate"
+          [stacked]="true" [options]="getRates|functionCaller1:codeGroup.value|async" labelType="cd" #rate>
+        </app-input-basic>
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="dark" icon="show" [valid]="form?.valid" (mclick)="open(rate.value)">Show</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="outline" icon="add" routerLink="create">Create
+              New
+            </app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn type="secondary" icon="clone" [valid]="form?.valid" (mclick)="clone(rate.value)">Clone
+            </app-btn>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

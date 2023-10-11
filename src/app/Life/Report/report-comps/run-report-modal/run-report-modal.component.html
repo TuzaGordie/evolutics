@@ -1,0 +1,68 @@
+<div class="">
+  <div class="row align-items-center">
+    <div class="col">
+      <h5 class="text-primary mb-0">{{'Run Report'|appTranslate|async}} {{code}}</h5>
+
+    </div>
+    <div class="col-auto">
+      <app-btn group="close" (mclick)="close()"></app-btn>
+    </div>
+  </div>
+  <loader [loading]="loading2" class="vh-30">
+
+    <div class="" #container>
+
+      <!-- FILTERS -->
+      <div class="" *ngIf="filters?.controls?.length">
+        <hr>
+        <app-info-icon text="Run a report by modifying the values of the filter" [right]="true">
+          <h6 class="mb-0">{{'Filter Criteria'|appTranslate|async}}</h6>
+        </app-info-icon>
+      </div>
+      <ng-container *ngFor="let subForm of filters.controls; let k = index; let isLast= last">
+
+        <div class="row align-items-start">
+          <div class="col-lg my-2 my-lg-0">
+            <app-input-basic label="Field Type" type="select" [form]="subForm" name="fieldType" [stacked]="true"
+              [clearOnDisable]="false" [disabled]="true" valueField="code" [options]="fieldTypes" labelType="ct"
+              #fieldType>
+            </app-input-basic>
+          </div>
+          <div class="col-lg my-2 my-lg-0">
+            <app-input-basic label="Field Name" type="select" [form]="subForm" name="fieldName" [stacked]="true"
+              [clearOnDisable]="false" [disabled]="true" valueField="columnName" [options]="fieldNames"
+              (mchange)="patchFilterDataType(  fieldName?.value,subForm)"
+              [contextData]="getFieldNameType|functionCaller2:fieldNames:fieldName?.value" labelField="columnName"
+              #fieldName>
+            </app-input-basic>
+          </div>
+          <div class="col-lg my-2 my-lg-0">
+            <app-input-basic label="Operator" valueField="code" type="select" [form]="subForm" name="operator"
+              [clearOnDisable]="false" [disabled]="true" [stacked]="true" [options]="filterOperators" labelType="ct"
+              #operator>
+            </app-input-basic>
+          </div>
+          <div class="col-lg my-2 my-lg-0">
+            <app-input-basic label="Value" [required]="true" [type]="valueTyper|functionCaller1:fieldName?.contextData"
+              [form]="subForm" name="value" [stacked]="true" #value>
+            </app-input-basic>
+            <app-validation-message [input]="value"></app-validation-message>
+          </div>
+          <div class="col-lg-2 my-2 my-lg-0">
+            <app-input-basic label="Connector" type="viewer" [options]="filterConnectors" labelType="ct"
+              [clearOnDisable]="false" [disabled]="true" [showValidation]="connector.invalid" [showEmptyOption]="false"
+              valueField="code" [form]="subForm" name="connector" [stacked]="true" #connector>
+            </app-input-basic>
+          </div>
+        </div>
+      </ng-container>
+      <!--// -->
+      <div class="row d-flex justify-content-end  ">
+        <div class="col-lg-auto">
+          <app-btn type="secondary" icon="download" [valid]="form?.valid" [form]="form" (mclick)="run2()">Run Report
+          </app-btn>
+        </div>
+      </div>
+    </div>
+  </loader>
+</div>

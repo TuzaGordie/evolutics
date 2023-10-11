@@ -1,0 +1,4 @@
+.ng-invalid.ng-touched:not(form){
+    // indicate that field is invalid
+    border: 1px solid red;
+}

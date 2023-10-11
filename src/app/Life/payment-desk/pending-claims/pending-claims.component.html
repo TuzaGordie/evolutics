@@ -1,0 +1,170 @@
+<div class="row">
+  <div class="col-1">
+    <label class="form-label text-primary">{{'Show All'|appTranslate|async}}</label>
+    <input class="form-control control-bg-gray" id="showAll" type="checkbox" (change)="reset()" />
+  </div>
+  <div class="col form-group">
+    <label class="form-label text-primary">{{'Claim Status'|appTranslate|async}}</label>
+    <select class="form-control  control-bg-gray">
+      <option value=""></option>
+      <option [value]="status.code" *ngFor="let status of claimStatus">{{status.code}}-{{status.description}}</option>
+    </select>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray" [(ngModel)]="filterCurrency" (change)="filter()">
+        <option value=""></option>
+        <option [value]="currency.code" *ngFor="let currency of currencies">{{currency.code}}-{{currency.description}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray" [(ngModel)]="filterCompanyCode" (change)="filter()">
+        <option value=""></option>
+        <option [value]="company.code" *ngFor="let company of companies">{{company.code}}-{{company.description}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <!-- <div class="col-1"></div>
+  <div class="col-2">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">Items per page</label>
+      <select class="form-control control-bg-gray" #select>
+        <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+      </select>
+    </div>
+  </div> -->
+</div>
+
+<div class="items-per-page mt-2">
+  <div class="left">
+    <div class="row" *ngIf="checkedList2.length">
+      <div class="col">
+        <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizeModal">{{'Authorize'|appTranslate|async}}</span>
+      </div>
+      <div class="col">
+        <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declineModal">{{'Decline'|appTranslate|async}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div>
+
+    </div>
+  </div>
+</div>
+
+<div class="border">
+  <loader [loading]="connection.creating" text="Fetching records" class="vh-30">
+    <div style="width: 100%; overflow-x: scroll;">
+      <table class="table table-striped mt-2 pt-2">
+        <thead class="py-3">
+          <tr>
+            <th>{{'Claim No'|appTranslate|async}}</th>
+            <th>{{'Policy No'|appTranslate|async}}</th>
+            <th>{{'Claimant'|appTranslate|async}}</th>
+            <th>{{'Initial Estimate'|appTranslate|async}}</th>
+            <th>{{'Adjustments'|appTranslate|async}}</th>
+            <th>{{'Current Amount'|appTranslate|async}}</th>
+            <th>{{'Currency'|appTranslate|async}}</th>
+            <th>{{'Company Code'|appTranslate|async}}</th>
+            <th>{{'Created On'|appTranslate|async}}</th>
+            <th>{{'Created By'|appTranslate|async}}</th>
+            <th>{{'Updated By'|appTranslate|async}}</th>
+            <th>{{'Claim Status'|appTranslate|async}}</th>
+            <!-- <th scope="col">
+            <input type="checkbox" class="form-control" [(ngModel)]="isMasterSel" name="select" value="" (change)="checkUncheckAll()">
+          </th> -->
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let claim of pendingClaims">
+            <td><a [routerLink]="[ '../view-claim' ]" [queryParams]="{claimNo:claim.claimNo}"> {{claim.claimNo}}</a>
+            </td>
+            <td><a routerLink="../../policy-desk/view-policy" [queryParams]="{number:claim.policyNo,code:claim.policyCode,suffix:claim.policyNoSuffix}">
+                {{claim.policyNo}}</a></td>
+            <td>{{claim.claimant}}</td>
+            <td>{{claim.initialEstimate | number}}</td>
+            <td>{{claim.adjustments | number}}</td>
+            <td>{{claim.currentEstimate | number}}</td>
+            <td>{{claim.currency}}</td>
+            <td>{{claim.companyCode}}</td>
+            <td>{{claim.createdOn | date: 'd/M/yy, h:mm a'}}</td>
+            <td>{{claim.createdBy}}</td>
+            <td>{{claim.updatedBy}}</td>
+            <td>{{claim.status}}</td>
+            <!-- <td>
+            <input type="checkbox" class="form-control" [(ngModel)]="claim.selected" value="{{claim.authComplete}}" (change)="isAllSelected()">
+          </td> -->
+          </tr>
+          <tr *ngIf="data.retrieved && pendingClaims.length === 0">
+            <td colspan="13">
+              <span class="text-primary">{{'No records were found.'|appTranslate|async}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </loader>
+</div>
+
+
+
+
+
+<!-- Authorize Modal -->
+<div class="modal fade" id="authorizeModal" tabindex="-1" aria-labelledby="authorizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="exampleModalLabel"><i class="fa fa-exclamation-triangle"></i>{{'ALERT'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+            {{'Are you sure you want to Authorize'|appTranslate|async}}
+            <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+            <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+          </b></p>
+        <span *ngFor="let claim of checkedList2">
+          <p><b class="text-primary">{{claim.PaymentId}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5">{{'YES'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel"><i class="fa fa-exclamation-triangle"></i>{{'WARNING'|appTranslate|async}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+            {{'Are you sure you want to Decline'|appTranslate|async}}
+            <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+            <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+          </b></p>
+        <span *ngFor="let claim of checkedList2">
+          <p><b class="text-primary">{{claim.PaymentId}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary px-5">{{'YES'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>

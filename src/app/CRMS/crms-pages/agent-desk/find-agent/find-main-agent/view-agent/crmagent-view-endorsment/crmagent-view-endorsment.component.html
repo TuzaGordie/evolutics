@@ -1,0 +1,43 @@
+
+<div class="container mt-5" >
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">Endorsements</h1>
+      <p class="py-3"><b>Agent Name:</b> <span class="px-3">{{findClientService.clientInfo?.FIRST_NAME}}</span></p>
+      <table class="table">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col" style="border-bottom-left-radius: 12px;">Endorsements No</th>
+          <th scope="col">Endorsements Category</th>
+          <th scope="col">Type</th>
+          <th scope="col">Field Names</th>
+          <th scope="col">From</th>
+          <th scope="col">To</th>
+          <th scope="col">Created By</th>
+          <th scope="col">Auth By</th>
+          <th scope="col">Pending</th>
+          <th scope="col">Created On</th>
+          <th scope="col" style="border-top-right-radius: 12px;">Auth On</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of endorseList">
+          <th scope="row">{{item.ENDORSE_NO}}</th>
+          <td>{{item.ENDORSE_CAT}}</td>
+          <td>{{item.ENDORSE_TYPE}}</td>
+          <td>{{item.FIELD_NAME}}</td>
+          <td></td>
+          <td></td>
+          <td>{{item.CREATED_BY}}</td>
+          <td>{{item.AUTH_BY}}</td>
+          <td>{{item.PENDING}}</td>
+          <td>{{item.CREATED_ON}}</td>
+          <td>{{item.AUTH_ON}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+

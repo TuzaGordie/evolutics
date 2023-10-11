@@ -1,0 +1,32 @@
+<app-form-navigation [title] = "'Find Client'"></app-form-navigation>
+<div class="container mt-5" >
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        <h1 class="my-5">Client Search List</h1>
+
+        <table class="table table-responsive  table-striped">
+            <thead class="py-3 theader">
+              <tr>
+                <th scope="col" style="border-bottom-left-radius: 12px;">Client Number</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Other Names</th>
+                <th scope="col">Phone No</th>
+                <th scope="col" style="border-top-right-radius: 12px;">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of clientInfoList" (click)="viewInfo(item.CLIENT_NO)">
+                <th scope="row">{{item.CLIENT_NO}}</th>
+                <td>{{item.FULL_NAME}}</td>
+                <td>{{item.SURNAME}}</td>
+                <td>{{item.MIDDLE_NAME}}</td>
+                <td>{{item.PHONE_NO_1}}</td>
+                <td>{{item.EMAIL_ADD_1}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+</div>
+</div>
+    </div>

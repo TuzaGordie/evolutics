@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray" [(ngModel)]="filterCurrency" (change)="filter()">
+          <option value=""></option>
+          <option [value]="currency.code" *ngFor="let currency of currencies">{{currency.code}}-{{currency.description}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray" [(ngModel)]="filterCompanyCode" (change)="filter()">
+          <option value=""></option>
+          <option [value]="company.code" *ngFor="let company of companies">{{company.code}}-{{company.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- <div class="col-2">
+      <label for="" class="form-label text-primary">Items per page</label>
+      <select class="form-control control-bg-gray" #select>
+        <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+      </select>
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="items-per-page mt-2">
+        <div class="left">
+          <div class="row" *ngIf="checkedList2.length">
+            <div class="col">
+              <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizeModal">
+                {{'Authorize'|appTranslate|async}}
+              </span>
+            </div>
+            <div class="col">
+              <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declineModal">
+                {{'Decline'|appTranslate|async}}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <table class="table table-responsive table-striped mt-3">
+        <thead class="py-3">
+        <tr>
+          <th scope="col">{{'Coupon Number'|appTranslate|async}}</th>
+          <th scope="col">{{'DN. Number'|appTranslate|async}}</th>
+          <th scope="col">{{'Policy Number'|appTranslate|async}}</th>
+          <th scope="col">{{'Net Amount'|appTranslate|async}}</th>
+          <th scope="col">{{'Company Code'|appTranslate|async}}</th>
+          <th scope="col">{{'Currency'|appTranslate|async}}</th>
+          <th scope="col">{{'Created On'|appTranslate|async}}</th>
+          <th scope="col">{{'Created By'|appTranslate|async}}</th>
+          <th scope="col">{{'Updated By'|appTranslate|async}}</th>
+          <th scope="col">{{'Payment Status'|appTranslate|async}}</th>
+          <th scope="col">
+            <input type="checkbox" class="form-control" [(ngModel)]="isMasterSel" name="select" value="" (change)="checkUncheckAll()">
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let coupon of authorizeCoupons" class="nowrap">
+          <td class="pointer" (click)="updateCoupon(coupon)">{{coupon.no}}</td>
+          <td>{{coupon.no}}</td>
+          <td ><a routerLink="../../policy-desk/view-policy" [queryParams]="{number:coupon.policyNo,code:coupon.policyCode,suffix:coupon.policyNoSuffix}">{{coupon.policyNo}}</a></td>
+          <td>{{coupon.netAmount | number}}</td>
+          <td>{{coupon.companyCode }}</td>
+          <td>{{coupon.currency}}</td>
+          <td>{{coupon.authOn | date}}</td>
+          <td>{{coupon.createdBy}}</td>
+          <td></td>
+          <td>{{coupon.status}}</td>
+          <td>
+            <input type="checkbox" class="form-control" [(ngModel)]="coupon.selected" value="{{coupon.no}}" (change)="isAllSelected()">
+          </td>
+          </tr>
+          <tr *ngIf="authorizeCoupons.length === 0">
+            <td colspan="12">
+              <span class="text-primary">{{'No records were found.'|appTranslate|async}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Authorize Modal -->
+<div class="modal fade" id="authorizeModal" tabindex="-1" aria-labelledby="authorizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="exampleModalLabel">{{'ALERT'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Authorize'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this coupon'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these coupons'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let coupon of checkedList2">
+          <p><b class="text-primary">{{coupon}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5" (click)="authorizeCoupon()" data-bs-dismiss="modal">
+          <i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}
+        </button>
+        <button type="button" class="btn btn-danger px-5" data-bs-dismiss="modal">
+          <i class="fas fa-ban"></i> {{'No'|appTranslate|async}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">{{'WARNING'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Decline'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this coupon'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these coupons'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let coupon of checkedList2">
+          <p><b class="text-primary">{{coupon}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5" (click)="declineCoupon()" data-bs-dismiss="modal"> 
+          <i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}
+        </button>
+        <button type="button" class="btn btn-danger px-5" data-bs-dismiss="modal">
+          <i class="fas fa-ban"></i> {{'No'|appTranslate|async}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

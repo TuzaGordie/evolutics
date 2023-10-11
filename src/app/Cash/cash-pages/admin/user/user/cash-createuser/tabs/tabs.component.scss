@@ -1,0 +1,15 @@
+input[type="checkbox"] {
+  height: 25px;
+  width: 25px;
+}
+
+input[type="checkbox"]:checked {
+  background: #00BD6E;
+  border: 1px solid #00BD6E;
+}
+
+label {
+  color: #00BD6E;
+  font-size: 14px;
+}
+

@@ -1,0 +1,120 @@
+<!-- <app-form-navigation [title]="'Set Up / Agent / Band'"></app-form-navigation> -->
+
+<div class="container">
+  <div *ngFor="let item of agentBand; let i = index" class="row">
+    <div class="col-md-1">
+      <br />
+      <label>{{"Version No"|appTranslate|async}}</label>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <input
+        [(ngModel)]="item.versionNo"
+        class="form-control control-bg-gray"
+        type="text"
+      />
+    </div>
+    <div class="col-md-1">
+      <br />
+      <label>{{"Date Basis"|appTranslate|async}}</label>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <select
+        class="form-control form-control-sm control-bg-gray"
+        [(ngModel)]="item.dateBasis"
+      >
+        <option *ngFor="let item of dateBasis" value="{{ item.code }}">
+          {{ item.description }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-1">
+      <br />
+      <label>{{"Date"|appTranslate|async}}</label>
+    </div>
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <input
+        [(ngModel)]="item.date"
+        class="form-control control-bg-gray"
+        type="text"
+      />
+    </div>
+    <div class="col-md-2">
+      <label class="form-label text-primary">&nbsp;</label>
+      <app-button
+        [buttonType]="'delete'"
+        (click)="deleteAgentBand(i)"
+      ></app-button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button (click)="addAgentBand()" [buttonType]="'add'"> </app-button>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div *ngFor="let item of bandBasisFactor; let i = index" class="row">
+    <div class="col-md-2">
+      <label>{{"Band"|appTranslate|async}}</label>
+      <input
+        type="text"
+        [(ngModel)]="item.band"
+        class="form-control control-bg-gray"
+        type="text"
+      /><br />
+    </div>
+    <div class="col-md-4">
+      <label>{{"Basis"|appTranslate|async}}</label>
+
+      <select
+        [(ngModel)]="item.basis"
+        class="form-control form-control-sm control-bg-gray"
+      >
+        <option *ngFor="let item of basis" value="{{ item.code }}">
+          {{ item.description }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label>{{"Factor"|appTranslate|async}}</label>
+      <input
+        [(ngModel)]="item.factor"
+        type="text"
+        class="form-control control-bg-gray"
+        type="text"
+      />
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label text-primary">&nbsp;</label>
+      <app-button
+        [buttonType]="'delete'"
+        (click)="deletebandBasisFactor(i)"
+      ></app-button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="col-10 d-flex justify-content-end">
+        <app-button (click)="addbandBasisFactor()" [buttonType]="'add'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  <div class="row">
+    <div class="col">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button [buttonType]="'save'"> </app-button>
+      </div>
+    </div>
+  </div>
+</div>

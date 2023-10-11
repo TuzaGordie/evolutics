@@ -1,0 +1,7 @@
+<div class="loading custom-progress-bar">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+</div>
+<loader [loading]="pS.pageLoader" text="Loading" [height]="screenHeight">
+  <router-outlet></router-outlet>
+  <app-chat-help-desk></app-chat-help-desk>
+</loader>

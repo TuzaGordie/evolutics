@@ -1,0 +1,90 @@
+<div class="container">
+
+
+    <h6>{{"Email Out"|appTranslate|async}}</h6>
+    <!-- *ngFor="let i of emailOutCounter()" -->
+    <div  class="row">
+      <div class="col-1">
+        <label class="form-label text-primary small1">{{"Active"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="checkbox" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Server"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-3">
+        <label class="form-label text-primary small1">{{"Sender Email Address"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="email" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Password"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="password" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Port"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Secure"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-2">
+        <label class="form-label text-primary small1">{{"Email Sender Name"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Protocol"|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray">
+          <option value=""></option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1 text-center w-100">{{"Internal use only"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray mx-auto" type="checkbox" />
+      </div>
+      <div class="col-1">
+        <label class="form-label text-primary">&nbsp;</label>
+        <!-- (click)="emailOutInc()" -->
+        <app-button [buttonType]="'addCustom'" ></app-button>
+      </div>
+    </div>
+
+
+    <h6>{{"Email In"|appTranslate|async}}</h6>
+    <div class="row mt-2" >
+        <!-- *ngFor="let i of emailInCounter()" -->
+      <div class="col-1">
+        <label class="form-label text-primary small1">{{"Active"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="checkbox" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Server"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Sender Email Address"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="email" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Password"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="password" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Port"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary small1">{{"Secure"|appTranslate|async}}</label>
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-1">
+        <label class="form-label text-primary">&nbsp;</label>
+         <!-- (click)="emailInInc()" -->
+        <app-button [buttonType]="'addCustom'"></app-button>
+      </div>
+    </div>
+
+
+  </div>

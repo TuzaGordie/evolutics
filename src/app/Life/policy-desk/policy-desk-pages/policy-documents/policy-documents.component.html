@@ -1,0 +1,72 @@
+<div class="">
+  <div class="page-head">
+    {{'Documents'|appTranslate|async}}
+  </div>
+  <div class="row justify-content-between">
+    <div class="col-lg-3 mb-3">
+      <app-input [input]="inputs[0]" [stacked]="true"></app-input>
+    </div>
+    <div class="col-lg-3 mb-3">
+      <text-case-1 lbl="Client Name:" [val]="name" [stacked]="false"></text-case-1>
+    </div>
+  </div>
+  <div class="my-2">
+    <table-plain [data]="list" [displayedColumns]="dCols"></table-plain>
+  </div>
+  <div class="d-flex justify-content-between my-4">
+    <div class="col-md-3 mt-5">
+      <app-btn mclass="btn btn-outline-primary w-100" icon='add' (mclick)="add()">Add Document</app-btn>
+    </div>
+    <div class="col-md-3 mt-5">
+      <!-- <app-btn type="primary" icon="generate" (mclick)="gen()">Generate Document</app-btn> -->
+      <app-btn type="primary" icon="generate" data-bs-toggle="modal" data-bs-target="#generateDocumentModal">Generate Document</app-btn>
+    </div>
+    <!-- <div class="">
+    <img src="../../../../../assets/img/back-curved.svg" alt="" class="pointer" (click)="pdS.back()">
+  </div> -->
+  </div>
+
+<!-- Modal -->
+<div class="modal fade" id="generateDocumentModal" tabindex="-1" aria-labelledby="generateDocumentModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">{{'Generate Documents'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="overflow-y:auto; min-height: 600px;">
+
+        <div class=" py-3">
+          <div class="row text-primary">
+            <div class="col-3 text-center">
+              {{'Normal Trigger'|appTranslate|async}}
+            </div>
+            <div class="col-3 text-center">
+              {{'How Delivered'|appTranslate|async}}
+            </div>
+            <div class="col-3">
+              {{'Documents'|appTranslate|async}}
+            </div>
+          </div>
+          <div class="row mb-2 align-items-center" *ngFor="let item of docs">
+            <div class="col-3 text-center">
+              {{item.sendBy}}
+            </div>
+            <div class="col-3 text-center">
+              {{item.delivery}}
+            </div>
+            <div class="col-3">
+              {{item.code}}_{{item.description}}
+            </div>
+            <div class="col-2 text-center">
+              <app-btn type="primary" icon="save"  data-bs-dismiss="modal" (click)="generatePolicyDocument(item.code)">
+                Generate
+              </app-btn>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

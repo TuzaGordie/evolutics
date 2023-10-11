@@ -1,0 +1,41 @@
+<div class="container">
+  <br />
+  <!-- *ngFor="let i of smsCounter()"  -->
+  <div class="row" [formGroup]="emailGateway" (ngSubmit)="submitForm()">
+    <div class="row row-equal-height"  *ngFor="let form of smsFormArray.controls;let i= index;">
+      <div class="col-1">
+        <label class="form-label text-primary" for="active-{{i}}">{{"Active"|appTranslate|async}}</label>
+        <input fromControlName="active" id="active-{{i}}" class="form-control  control-bg-gray" type="checkbox" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary" for="smsUrl-{{i}}">{{"Default SMS Url"|appTranslate|async}}</label>
+        <input fromControlName="smsUrl" id="smsUrl-{{i}}" class="form-control  control-bg-gray" type="url" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary" for="mobileNo-{{i}}">{{"Mobile No Parameter"|appTranslate|async}}</label>
+        <input fromControlName="mobileNo" id="mobileNo-{{i}}" class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary" for="messagePar-{{i}}">{{"Message Parameter"|appTranslate|async}}</label>
+        <input fromControlName="messagePar" id="messagePar-{{i}}" class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary" for="username-{{i}}">{{"Username"|appTranslate|async}}</label>
+        <input fromControlName="username" id="username-{{i}}" class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary" for="password-{{i}}">{{"Password"|appTranslate|async}}</label>
+        <input fromControlName="password" id="password-{{i}}" class="form-control  control-bg-gray" type="password" />
+      </div>
+      <div class="col">
+        <label class="form-label text-primary" for="senderName-{{i}}">{{"Sender Name"|appTranslate|async}}</label>
+        <input fromControlName="senderName" id="senderName-{{i}}" class="form-control  control-bg-gray" type="text" />
+      </div>
+    </div>
+    <div class="col">
+      <label class="form-label text-primary">&nbsp;</label>
+      <app-button [buttonType]="'add'" (click)="addMoreGateWay()"></app-button>
+    </div>
+  </div>
+
+</div>

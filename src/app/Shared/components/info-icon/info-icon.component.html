@@ -1,0 +1,9 @@
+<span class="d-flex align-items-center">
+    <i *ngIf="left"  class="fa fa-info-circle me-2" [ngClass]="{'text-primary':coloured}"
+    [matTooltip]="text|appTranslate|async"></i>
+  <span  >
+    <ng-content></ng-content>
+  </span>
+  <i *ngIf="right" class="fa fa-info-circle ms-2" [ngClass]="{'text-primary':coloured}"
+  [matTooltip]="text|appTranslate|async"></i>
+</span>

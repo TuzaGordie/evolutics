@@ -1,0 +1,140 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{"Edit Product Permissions"|appTranslate|async}}</h5>
+    <button mat-dialog-close class="btn-close"></button>
+</div>
+<mat-dialog-content>
+    <loader [loading]="isLoading">
+        <table class="table table-striped my-5">
+            <thead>
+                <tr>
+                    <th>{{"ID"|appTranslate|async}}</th>
+                    <th>{{"Product Class"|appTranslate|async}}</th>
+                    <th>{{"Product"|appTranslate|async}}</th>
+                    <th>{{"Active"|appTranslate|async}}</th>
+                    <!-- <th>{{"Updated By"|appTranslate|async}}</th>
+                    <th>{{"Updated On"|appTranslate|async}}</th> -->
+                    <th>
+                        <!--Edit-->
+                    </th>
+                    <th>
+                        <!--Delete-->
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!isLoading">
+                <ng-container *ngFor="let record of productClassPermissionForm.controls">
+                    <tr [formGroup]="$any(record)">
+                        <td>
+                            <input formControlName="id" type="text" class="form-control" readonly>
+                        </td>
+                        <td>
+                            <input *ngIf="recordStatus[record.value.id] == 'VIEW'" type="text" readonly
+                                [value]="getProductClassValue(record)" class="form-control">
+                            <select *ngIf="recordStatus[record.value.id] != 'VIEW'" formControlName="productClass"
+                                class="form-control"
+                                [attr.disabled]="recordStatus[record.value.id] != 'EDITING' ? 'disabled' : null"
+                                (change)="onProductClassChange(record)">
+                                <option value=""></option>
+                                <option *ngFor="let pc of productClassesList" [value]="pc.code">{{pc.code}} -
+                                    {{pc.title}}</option>
+                            </select>
+                        </td>
+                        <td class="position-relative">
+                            <input *ngIf="recordStatus[record.value.id] == 'VIEW'" type="text" readonly
+                                [value]="getProductValue(record)" class="form-control">
+                            <select *ngIf="recordStatus[record.value.id] != 'VIEW'" formControlName="product"
+                                class="form-control"
+                                [attr.disabled]="recordStatus[record.value.id] != 'EDITING' ? 'disabled' : null">
+                                <option value=""></option>
+                                <option *ngFor="let product of productsLists[record.value.id]" [value]="product.code">
+                                    {{product.code}} - {{product.description}}</option>
+                            </select>
+                            <div *ngIf="isLoadingProductsList[record.value.id]"
+                                class="position-absolute start-50 top-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="active" class="form-control"
+                                [attr.disabled]="recordStatus[record.value.id] != 'EDITING' ? 'disabled' : null" />
+                        </td>
+                        <!-- <td>
+                        <input type="text" formControlName="updatedBy" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'updatedBy') && 'border border-danger'" placeholder="Updated By">
+                        </td>
+                        <td>
+                        <input type="date" formControlName="updatedOn" class="form-control" [readonly]="recordStatus[record.value.id] != 'EDITING'" [ngClass]="isFieldInvalid(record, 'updatedOn') && 'border border-danger'" placeholder="Updated On">
+                        </td> -->
+                        <td class="position-relative">
+                            <app-button *ngIf="recordStatus[record.value.id] == 'VIEW' || !recordStatus[record.value.id]" buttonType="edit"
+                                (click)="recordStatus[record.value.id] = 'EDITING'"></app-button>
+                            <app-button *ngIf="recordStatus[record.value.id] == 'EDITING'" buttonType="custSave"
+                                (click)="onUpdateRecord(record)"></app-button>
+                            <div *ngIf="recordStatus[record.value.id] == 'PENDING'"
+                                class="position-absolute top-50 start-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                        <td class="position-relative">
+                            <app-button *ngIf="!isDeletingRecord[record.value.id]" buttonType="delete"
+                                (click)="confirmDeleteRecord(record)"></app-button>
+                            <div *ngIf="isDeletingRecord[record.value.id]"
+                                class="position-absolute start-50 top-50 translate-middle">
+                                <div class="fa fa-refresh fa-spin"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <tr *ngIf="showNewRecordForm" [formGroup]="newRecordForm">
+                    <td>
+                        <input formControlName="id" type="text" class="form-control" placeholder="ID"
+                            readonly>
+                    </td>
+                    <td>
+                        <select formControlName="productClass" class="form-control"
+                            (change)="onProductClassChange(newRecordForm)"
+                            [attr.disabled]="isCreating ? 'disabled' : null">
+                            <option value=""></option>
+                            <option *ngFor="let pc of productClassesList" [value]="pc.code">{{pc.code}} - {{pc.title}}
+                            </option>
+                        </select>
+                    </td>
+                    <td class="position-relative">
+                        <select formControlName="product" class="form-control" placeholder="Product"
+                            [attr.disabled]="isCreating ? 'disabled' : null">
+                            <option value=""></option>
+                            <option *ngFor="let product of productsLists[newRecordForm.value.id]"
+                                [value]="product.code">{{product.code}} - {{product.description}}</option>
+                        </select>
+                        <div *ngIf="isLoadingProductsList[newRecordForm.value.id]"
+                            class="position-absolute start-50 top-50 translate-middle">
+                            <div class="fa fa-refresh fa-spin"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="checkbox" formControlName="active" class="form-control"
+                            [attr.disabled]="isCreating ? 'disabled' : null" />
+                    </td>
+                    <!-- <td>
+                    <input type="text" formControlName="updatedBy" class="form-control" [readonly]="isCreating" placeholder="Updated By">
+                    </td>
+                    <td>
+                        <input type="date" formControlName="updatedOn" class="form-control" [readonly]="isCreating" placeholder="Updated On">
+                    </td> -->
+                    <td class="position-relative" colspan="2">
+                        <app-button *ngIf="!isCreating" buttonType="save" (click)="onCreateRecord()"></app-button>
+                        <div *ngIf="isCreating" class="position-absolute top-50 start-50 translate-middle">
+                            <div class="fa fa-refresh fa-spin"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p *ngIf="!isLoading && !productClassPermissionForm.controls.length" class="text-center">0 records found</p>
+    </loader>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+    <button class="btn btn-outline-primary btn-lg" [disabled]="showNewRecordForm" (click)="showNewRecordForm = true">
+        <span class="fa fa-plus"></span>
+        Add new record
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,161 @@
+<!-- <app-form-navigation [title]="'Asset Desk / View Asset'"></app-form-navigation> -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+
+      <div class="row mt-4">
+        <table class="table table-responsive  table-striped">
+          <thead class="py-3 theader">
+          <tr>
+            <th scope="col">Tracker ID</th>
+            <th scope="col">Linked On</th>
+            <th scope="col">Linked By</th>
+            <th scope="col">Status</th>
+
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let i of dvaCounter()">
+            <th><input type="text" class="form-control"></th>
+            <td><input type="date" class="form-control"></td>
+            <td><input type="text" class="form-control"></td>
+            <td><select name="" id="" class="form-control"></select></td>
+            <td>
+              <div class="row">
+                <div class="col">
+                  <app-button buttonType="addCustom" text="Add New" (click)="dvaInc()"></app-button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-2">
+        <div class="col-2">
+          <app-button buttonType="btnCustomClone" text="Trip Details" data-bs-toggle="modal" data-bs-target="#tripDetailsModal"></app-button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-responsive  table-striped">
+          <thead class="py-3 theader">
+          <tr>
+            <th scope="col">Trip No</th>
+            <th scope="col">Start On</th>
+            <th scope="col">End On</th>
+            <th scope="col">Location From</th>
+            <th scope="col">Location To</th>
+            <th scope="col">Distance Travelled(km)</th>
+            <th scope="col">Max Speed</th>
+            <th scope="col">Max Acceleration</th>
+            <th scope="col">Trip Score</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+
+            <td>1</td>
+            <td>12/12/2023</td>
+            <td>12/12/2023</td>
+            <td>Agboville</td>
+            <td>gagnoa</td>
+            <td>100</td>
+            <td>90</td>
+            <td>60</td>
+            <td>8</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save"></app-button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="tripDetailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Trip Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-3">
+              <div class="form-group">
+
+                <label for="" class="form-label text-primary">Date From</label>
+                <input type="date" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+
+                <label for="" class="form-label text-primary">Date To</label>
+                <input type="date" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col-2">
+              <label for="" class="form-label">&nbsp;</label>
+              <app-button buttonType="show"></app-button>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <table class="table table-responsive  table-striped">
+              <thead class="py-3 theader">
+              <tr>
+                <th scope="col">Trip No</th>
+                <th scope="col">Start On</th>
+                <th scope="col">End On</th>
+                <th scope="col">Location From</th>
+                <th scope="col">Location To</th>
+                <th scope="col">Distance (KM)</th>
+                <th scope="col">Max Speed</th>
+                <th scope="col">Max Acceleration</th>
+                <th scope="col">Trip Score</th>
+
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

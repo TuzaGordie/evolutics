@@ -1,0 +1,18 @@
+.table thead tr {
+  /* background-color: #3335a4 !important */
+}
+.table thead tr th {
+  /* color:white; */
+}
+.table thead {
+  background-color: transparent !important;
+}
+.table thead tr th:first-child {
+  border-bottom-left-radius: 10px;
+}
+.table thead tr th:last-child {
+  border-top-right-radius: 10px;
+}
+.table thead {
+  border-radius: 0 10px;
+}

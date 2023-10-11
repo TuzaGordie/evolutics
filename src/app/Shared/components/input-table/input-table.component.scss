@@ -1,0 +1,29 @@
+tr {
+  vertical-align: top;
+}
+.content-cell {
+  min-width: 200px;
+}
+th:first-child,
+td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+th:last-child,
+td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+}
+th,
+td {
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #d4d4d4;
+}

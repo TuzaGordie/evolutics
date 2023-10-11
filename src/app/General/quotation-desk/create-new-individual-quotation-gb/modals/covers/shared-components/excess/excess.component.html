@@ -1,0 +1,83 @@
+<ng-container [ngSwitch]="excessType">
+  <div class="col" *ngSwitchCase="'number'">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Excess' | appTranslate | async
+      }}</label>
+      <span style="padding-left: 10px" *ngIf="excessMin || excessMax"
+        >min: {{ excessMin | number }} - max: {{ excessMax | number }}</span
+      >
+      <input
+        class="form-control control-bg-gray"
+        #excessField="ngModel"
+        [(ngModel)]="excessAmount"
+        (change)="onExcessAmountChange($event)"
+        type="number"
+        [readonly]="excessDisabled"
+        [min]="excessMin"
+        [max]="excessMax"
+        [ngClass]="{
+          'border border-danger': excessField.touched && excessField.errors
+        }"
+      />
+      <span
+        class="text-danger"
+        *ngIf="excessField.touched && excessField.errors?.min"
+        >{{
+          'You entered a number less than the minimum' | appTranslate | async
+        }}</span
+      >
+      <span
+        class="text-danger"
+        *ngIf="excessField.touched && excessField.errors?.max"
+        >{{
+          'You entered a number higher than the maximum' | appTranslate | async
+        }}</span
+      >
+    </div>
+  </div>
+  <div class="col" *ngSwitchCase="'text'">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Excess' | appTranslate | async
+      }}</label>
+      <input
+        class="form-control control-bg-gray"
+        [value]="excessDisplay"
+        [readonly]="true"
+        type="text"
+      />
+    </div>
+  </div>
+  <div class="col" *ngSwitchCase="'select'">
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Excess Option Rate' | appTranslate | async
+      }}</label>
+      <select [(ngModel)]="excessRate" class="form-control control-bg-gray">
+        <option
+          *ngFor="let option of excessOptions"
+          [value]="option.excessOptRate"
+        >
+          {{ option.excessOptRate }}%
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="" class="form-label text-primary">{{
+        'Excess Option Amount' | appTranslate | async
+      }}</label>
+      <select [(ngModel)]="excessAmount" class="form-control control-bg-gray">
+        <option
+          *ngFor="let option of excessOptions"
+          [value]="option.fixedExcessOptionAmount"
+        >
+          {{
+            option.fixedExcessOptionAmount
+              | currency: 'NGN':'symbol-narrow':'1.0-0'
+          }}
+        </option>
+      </select>
+    </div>
+  </div>
+</ng-container>

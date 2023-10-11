@@ -1,0 +1,35 @@
+<div class="sub-head ">{{heading}}</div>
+<div class="my-2"> <span class="text-danger" *ngIf="message">{{message}}</span>
+  <input #file type="file" accept='image/*' class="d-none" value="Add Image"
+    (change)="single?preview(file.files):previews(file.files)" />
+  <div class="text-center mb-2" *ngIf="!(this.single == true && (this.outImages.length > 0||inImages?.length>0))">
+    <button type="button" (click)="openFile()" class="my-btn-outline w-auto" mat-raised-button>Select
+      Image{{single?'':'s'}}</button>
+  </div>
+  <div class="border rounded p-2" *ngIf="outImages?.length">
+    <h5 class="text-center">Pending Upload Image{{single?'':'s'}}</h5>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-6 col-lg-2 p-1 " *ngFor="let imgURL of outImages;let i =index">
+        <div class="img-card new shadow">
+          <img [src]="sanitizer(imgURL)" class="preview-image  ">
+          <button mat-icon-button (click)="removeFromOut(i)" class="del text-danger">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border rounded p-2 mt-2" *ngIf="inImages?.length">
+    <h5 class="text-center">Already Uploaded Image{{single?'':'s'}}</h5>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12 col-md-6 col-lg-2 p-1 " *ngFor="let imgURL of inImages;let i = index">
+        <div class="img-card previous shadow">
+          <img [src]="imgURL?.src" class="preview-image">
+          <button mat-icon-button (click)="removeFromIn(i)" class="del text-danger">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

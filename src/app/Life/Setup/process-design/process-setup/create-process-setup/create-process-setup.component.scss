@@ -1,0 +1,16 @@
+.align-top td{
+    vertical-align: top;
+}
+.disable-table-section{
+    background-color: rgba($color: #fff, $alpha: 0.5);
+    cursor: not-allowed;
+}
+
+.required::after{
+    content: '*';
+    color: red;
+}
+
+.ng-invalid.ng-touched:not(form){
+    border: 1px solid red;
+}

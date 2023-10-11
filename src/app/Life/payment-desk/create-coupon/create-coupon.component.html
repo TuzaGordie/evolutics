@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="form-group mt-2">
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-3 pt-3">
+
+        <div class="col-md-2">
+          <label class="form-label text-primary">{{'Policy Number'|appTranslate|async}}</label>
+          <input type="text" name="policyNo" [(ngModel)]="policyNo" (change)="getPolicyCode(policyNo)" (change)="getCurrency()" autocomplete="on"
+            (change)="getDebitNote()" (blur)="getOwnerName()" class="form-control control-bg-gray">
+        </div>
+        <div class="col-auto form-group mt-2 pt-2">
+          <label class="form-label text-primary">&nbsp; </label>
+          <app-button (click)="openPolicyFinderModal()" [buttonType]="'find'"></app-button>
+
+        </div>
+        <div class="col-md form-group mt-2 pt-2">
+          <label class="form-label">&nbsp;</label>
+          <input class="form-control control-bg-gray" value="{{ownerName}}" type="text" disabled>
+        </div>
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+          <input type="text" [value]="currency || ''" name="currency" class="form-control control-bg-gray" disabled>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mt-2">
+      <div class="row g-3 form-group mt-2 pt-2">
+
+        <div class="col-6">
+          <label class="form-label text-primary">{{'Policy Code'|appTranslate|async}}</label>
+          <select class="form-control  control-bg-gray" name="policyCode" [(ngModel)]="policyCode" (change)="getDebitNote()">
+            <option value=""></option>
+            <option *ngFor="let code of policyCodes">{{code.policyCode}}</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label text-primary">{{'Effective Date'|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" type="date" name="effectiveDate" [(ngModel)]="effectiveDate" />
+        </div>
+
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Amount Received'|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" type="text" name="netAmount" (keyup)="sumGrossAmount()" [(ngModel)]="amountReceived" appCommafyNumber/>
+        </div>
+
+        <div class="col-6 form-group mt-6 pt-6">
+          <label class="form-label text-primary">{{'Gross Amount'|appTranslate|async}}</label>
+          <input class="form-control  control-bg-gray" type="text" name="grossAmount" [(ngModel)]="netAmount" appCommafyNumber/>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex mt-4">
+      <app-input-ngmodel type="checkbox" label="Deduction Made at Source" [light]="false" [model]="hasDeductions"
+        [stacked]="false" [mini]="true" id="deductionMadeAtSource" #deductionMadeAtSource (mchange)="toggleDeductions(deductionMadeAtSource.value)">
+      </app-input-ngmodel>
+    </div>
+    <div class="row">
+      <div class="col-md-6 g-3">  
+        <ng-container *ngIf="hasDeductions">
+            <div class="mt-2 pt-2 form-group">
+              <label class="form-label text-primary">{{'VAT Deducted at Source'|appTranslate|async}}</label>
+              <input type="number" class="form-control  control-bg-gray" name="vatDeduction"
+                [(ngModel)]="vatDeductedAtSource" (keyup)="sumGrossAmount()" />
+            </div>
+            <div class="mt-2 pt-2 form-group">
+              <label class="form-label text-primary">{{'WHT Deducted at Source'|appTranslate|async}}</label>
+              <input type="number" class="form-control control-bg-gray" name="commDeduction"
+                [(ngModel)]="whtDeductedAtSource" (keyup)="sumGrossAmount()" />
+            </div>
+            <div class="mt-2 pt-2 form-group">
+              <label class="form-label text-primary">{{'Commission Deducted at Source'|appTranslate|async}}</label>
+              <input type="number" class="form-control control-bg-gray" name="commDeduction"
+                [(ngModel)]="commissionDeductedAtSource" (keyup)="sumGrossAmount()" />
+            </div>
+            <div class="mt-2 pt-2 form-group">
+              <label class="form-label text-primary">{{'Colnsurance Fees Deducted at Source'|appTranslate|async}}</label>
+              <input type="number" class="form-control control-bg-gray" name="coinsFeeDeduction"
+                [(ngModel)]="coinsuranceFeeDeductedAtSource" (keyup)="sumGrossAmount()" />
+            </div>
+            <div class="mt-2 pt-2 form-group">
+              <label class="form-label text-primary">
+                {{'Colnsurance Underwriting Expense Deducted at Source'|appTranslate|async}}</label>
+              <input type="number" class="form-control control-bg-gray" name="whtDeduction"
+                [(ngModel)]="coinsuranceUnderWritingDeductedAtSource" (keyup)="sumGrossAmount()" />
+            </div>
+        </ng-container>
+      </div>
+      <div class="col-md-6 g-3">
+        <div class="mt-2 pt-2 form-group">
+          <label class="form-label text-primary">{{'Debit Note'|appTranslate|async}}</label>
+          <select class="form-control control-bg-gray" name="note" [(ngModel)]="debitNote">
+            <option value=""></option>
+            <option *ngFor="let note of debitNotes" [value]="note.no">{{note.no}} - {{note.amount | number}}</option>
+          </select>
+        </div>
+        <div class="mt-2 pt-2 form-group">
+          <label class="form-label text-primary">{{'Reciept Number'|appTranslate|async}}</label>
+          <input class="form-control control-bg-gray" type="text" name="receiptNo" disabled [(ngModel)]="receiptNo" />
+        </div>
+
+        <div class="mt-2 pt-2 form-group">
+          <label class="form-label text-primary">{{'Narration'|appTranslate|async}}</label>
+          <textarea class="form-control control-bg-gray" name="narration" [(ngModel)]="narration"></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="!coupon.created" class="form-group mt-2">
+      <div class="row g-3 form-group mt-1 pt-1 justify-content-end">
+        <div class="col-3">
+          <app-button buttonType="submit" (click)="createCoupon()"></app-button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="coupon.created" class="form-group mt-2">
+      <div class="row g-3 form-group mt-1 pt-1 justify-content-end">
+        <div class="col-3">
+          <app-btn type="outline" icon="add" (click)="createNew()">Create New</app-btn>
+        </div>
+        <div class="col-3">
+          <app-btn type="outline" icon="show" (click)="viewCoupon()">View {{couponNo}}</app-btn>
+        </div>
+      </div>
+    </div>
+
+  </div>

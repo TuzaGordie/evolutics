@@ -1,0 +1,11 @@
+@media (min-width:1024px) {
+    div.labelCheck{
+        text-align: center;
+    }
+    .chkbox{
+        margin: auto;
+    }
+   td:first-child:hover,td:nth-child(2):hover,td:nth-child(3):hover{
+    cursor: pointer;
+   }
+}

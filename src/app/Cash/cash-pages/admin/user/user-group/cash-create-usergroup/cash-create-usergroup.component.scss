@@ -1,0 +1,83 @@
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    border-bottom: 2px solid #00BD6E !important;
+    font-weight: bold;
+    font-size: 22px;
+}
+.nav-tabs .nav-link, .nav-tabs .nav-item.show .nav-link {
+   color: black;
+   font-size: 22px;
+}
+
+label {
+    color: #00BD6E;
+}
+
+.form-label {
+    color: #00BD6E;
+}
+
+.show-button {
+    background: #00BD6E;
+    color: #fff;
+}
+
+.show-button:hover {
+    background: #00bd6e2c;
+    border: 1px solid #00BD6E;
+    color: #00BD6E;
+}
+
+.remove-button {
+    background: #00bd6e2c;
+    color: #00BD6E;
+    border: 1px solid #00BD6E;
+}
+
+.remove-button:hover {
+    background: #00BD6E;
+    color: #fff;
+}
+
+.create-button {
+    background: #fff;
+    color: #00BD6E;
+    border: 1px solid #00BD6E;
+}
+
+.create-button:hover {
+    background: #00BD6E;
+    color: #fff;
+}
+
+.clone-button {
+    background: #00bd6e2c;
+    color: #00BD6E;
+    border: 1px solid #00BD6E;
+}
+
+.clone-button:hover {
+    background: #00BD6E;
+    color: #fff;
+}
+
+.heading-color-primary {
+    color: #00BD6E;
+}
+
+.tab-pane {
+    color: #00BD6E;
+}
+
+.nav-pills .nav-link{
+    color: #00BD6E;
+}
+
+.nav-pills .nav-link.active{
+    background: #00BD6E;
+    color: #fff;
+}
+
+.w-100 {
+    width: 100%;
+}
+

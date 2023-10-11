@@ -1,0 +1,38 @@
+<nav class="navbar  navbar-expand-lg  navbar-dark {{navColor}} shadow-sm sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/img/evolutics_logo.png" alt="" height="24">
+    </a>
+    <a routerLink="/" class="navbar-brand">Evolutics</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse overflow-x-auto" id="navbarNav">
+      <ul class="navbar-nav  mx-auto">
+        <li class="nav-item mx-0 mx-md-0 mx-xl-1 mx-lg-1 " *ngFor="let item of appS.topMenu">
+          <ng-container *ngIf="(item|isMenuEnabled:uS.environment?.userMenu?.userMenuConfigDetails).enabled; else elseTemplate">
+            <a class="nav-link px-md-0 px-lg-0 px-sm-0 px-xl-2" (click)="setCurrentMenu(item)"
+              routerLink="{{item?.link}}" routerLinkActive="active" [id]="item.id">
+              <span class="{{item.icon}}"></span>
+              {{item.label|appTranslate|async}}
+            </a>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <!-- <a class="nav-link px-md-0 px-lg-0 px-sm-0 px-xl-2" disabled [id]="item.id">
+              <span class="{{item.icon}}"></span>
+              {{item.label|appTranslate|async}}
+            </a> -->
+          </ng-template>
+        </li>
+        <li class="nav-item mx-0 mx-md-0 mx-xl-1 mx-lg-1 " *ngIf="uS.isMobile && false ">
+          <app-navbar-search></app-navbar-search>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-item mx-0 mx-md-0 mx-xl-1 mx-lg-1 " *ngIf="!uS.isMobile && false">
+      <app-navbar-search></app-navbar-search>
+    </div>
+  </div>
+
+</nav>

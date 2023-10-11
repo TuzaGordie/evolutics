@@ -1,0 +1,48 @@
+<!-- <app-form-navigation [title]="'Set Up / Appraisal / Sub-Division'"></app-form-navigation> -->
+<div class="container-sm mt-5 ">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+
+        <div class="form-group mt-2">
+          <label>{{"Select Company "|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="company" name="company">
+            <option *ngFor="let company of companies" (click)="getCompanyCode(company.code)">{{company.code}}-{{company.description}}</option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>{{"Select Division Code"|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="division" name="division">
+            <option *ngFor="let dv of divisions" [value]="dv.code" (click)="getSubDivision(dv.code)">
+              {{dv.code}}-{{dv.description}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group mt-2">
+          <label>{{"Select Sub-Division Code"|appTranslate|async}}</label>
+          <select class="form-control form-control-lg control-bg-gray" [(ngModel)]="subDivision" name="subDivision">
+            <option *ngFor="let code of subDivisions">{{code.code}}-{{code.description}}</option>
+          </select>
+        </div>
+
+
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn icon="show" type="dark" routerLink="../create-subdivision-appraisal">Show</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn icon="add" type="outline" routerLink="../start-subdivision-appraisal">Create new</app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn icon="clone" type="outline-nm" routerLink="../start-subdivision-appraisal">Clone</app-btn>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+</div>
+

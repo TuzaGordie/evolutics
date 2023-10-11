@@ -1,0 +1,47 @@
+<div>
+  <div class="row">
+    <div class="col-3">
+      <label for="">{{'Claim No'|appTranslate|async}}: <span class="text-primary">{{ claimNo }}</span></label>
+    </div>
+    <div class="col-3">
+      <label for="">{{'Cover Name'|appTranslate|async}}:
+        <span class="text-primary">{{ coverName || '--' }}</span></label
+      >
+    </div>
+    <!-- <div class="col-3">
+      <label for="">Claim Type: <span class="text-primary">claimType</span></label>
+    </div>
+    <div class="col-3">
+      <label for="">Peril: <span class="text-primary">{{peril}}</span></label>
+    </div> -->
+  </div>
+  <div class="row my-3">
+    <div class="col-3">
+      <label for="">{{'Claim Estimate'|appTranslate|async}}</label>
+      <input type="text" class="inputform" [value]="claimEstimate" />
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <app-button
+        buttonType="btnCustomClone"
+        text="Adjust Claim"
+        (click)="openModal('adjustClaim')"
+      ></app-button>
+    </div>
+    <div class="col">
+      <app-btn type="primary" (click)="openModal('addProvider')">
+        Add Provider
+      </app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="primary">Generate DV</app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="primary">Cancel Claim</app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="primary" (click)="openModal('changeStatus')">Change Status</app-btn>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<loader [loading]="loading" text="Saving Payment Information" [height]="container?.offsetHeight" >
+  <div #container>
+      <app-payment-info [isModal]="true" [clientNo]="data?.clientNo" [paymentInfo]="data?.paymentInfo"
+        [dimensions]="data?.dimensions">
+        <div class="ms-2" closeBtn>
+          <app-btn (mclick)="close()" icon="close" type="danger-outline">Close</app-btn>
+        </div>
+        <div class="d-lg-flex justify-content-between align-items-center" submissionSection>
+          <div class="text-danger">
+            {{message|appTranslate|async}}
+          </div>
+          <app-btn (mclick)="save()" icon="save" type="secondary">Save</app-btn>
+        </div>
+      </app-payment-info>
+  </div>
+</loader>

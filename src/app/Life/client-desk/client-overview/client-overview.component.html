@@ -1,0 +1,57 @@
+<div class="container p-3">
+  <!-- <div class="d-flex justify-content-around" id="cards-section">
+    <div class="card p-3 leaf-border bg-success d-flex flex-column align-items-end">
+      <div class="small">{{"Active Client"|appTranslate|async}}</div>
+      <div class="display-4">{{activeClient}}</div>
+    </div>
+    <div class="card p-3 leaf-border bg-warning d-flex flex-column align-items-end">
+      <div class="small">{{"Pending Client"|appTranslate|async}}</div>
+      <div class="display-4">{{pendingClient}}</div>
+    </div>
+  </div> -->
+  <div class="row my-3">
+    <div class="col-md-6">
+      <div class="my-3">{{"Client Summary YTD"|appTranslate|async}}</div>
+      <div class="card leaf-border p-3 pt-5" (click)="openModal('clientMovementSummary')">
+        <canvas baseChart
+          [options]="clientSummaryYTD.options"
+          [datasets]="clientSummaryYTD.data.datasets"
+          [labels]="clientSummaryYTD.data.labels"
+          [chartType]="clientSummaryYTD.type"
+        ></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="my-3">{{"Active Client Count Summary By Category"|appTranslate|async}}</div>
+      <div class="card leaf-border p-3 pt-5" (click)="openModal('policyHolderCountSummary')">
+        <canvas baseChart
+          [options]="activeClientCountSummary.options"
+          [datasets]="activeClientCountSummary.data.datasets"
+          [labels]="activeClientCountSummary.data.labels"
+          [chartType]="activeClientCountSummary.type"
+        ></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #policyHolderCountSummary>
+  <h3 matDialogTitle>{{"Policyholder count Summary"|appTranslate|async}}</h3>
+  <mat-dialog-content>
+    <canvas baseChart
+      [options]="policyHolderCountSummaryChart.options"
+      [datasets]="policyHolderCountSummaryChart.data.datasets"
+      [labels]="policyHolderCountSummaryChart.data.labels"
+      [chartType]="policyHolderCountSummaryChart.type"
+    ></canvas>
+  </mat-dialog-content>
+</ng-template>
+
+<!-- <ng-template #clientMovementSummary>
+  <h3 matDialogTitle>{{"Client Movement Summary"|appTranslate|async}}</h3>
+  <mat-dialog-content>
+    <p class="text-primary">First 10 records displayed. For full record, click Export to Excel</p>
+    <table></table>
+    <app-button buttonType="document">Export to Excel</app-button>
+  </mat-dialog-content>
+</ng-template> -->

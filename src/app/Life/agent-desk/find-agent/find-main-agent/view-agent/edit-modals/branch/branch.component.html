@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between">
+    <h5 mat-dialog-title>{{"Edit Agent Branch"|appTranslate|async}}</h5>
+    <button mat-dialog-close class="btn-close"></button>
+</div>
+<mat-dialog-content>
+    <table class="table table-striped my-5">
+        <thead>
+            <tr>
+                <th>{{"Agent No"|appTranslate|async}}</th>
+                <th>{{"Branch Code"|appTranslate|async}}</th>
+                <th>{{"Company Code"|appTranslate|async}}</th>
+                <th>{{"Created By"|appTranslate|async}}</th>
+                <th>{{"Active"|appTranslate|async}}</th>
+                <th><!--Edit--></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="!isLoading" [formGroup]="branchForm">
+                <td>
+                    <input type="text" formControlName="agentNo" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="Agent No" [ngClass]="isFieldInvalid('agentNo') && 'border border-danger'">
+                </td>
+                <td>
+                    <input type="text" formControlName="branchCode" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="Branch Code" [ngClass]="isFieldInvalid('branchCode') && 'border border-danger'">
+                </td>
+                <td>
+                    <input type="text" formControlName="companyCode" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="companyCode" [ngClass]="isFieldInvalid('companyCode') && 'border border-danger'">
+                </td>
+                <td>
+                    <input type="text" formControlName="createdBy" class="form-control" [readonly]="recordStatus != 'EDITING'" placeholder="createdBy" [ngClass]="isFieldInvalid('createdBy') && 'border border-danger'">
+                </td>
+                <td>
+                    <select type="text" formControlName="active" class="form-control" [attr.disabled]="recordStatus != 'EDITING' ? 'disabled' : null" placeholder="active" [ngClass]="isFieldInvalid('active') && 'border border-danger'">
+                        <option value=""></option>
+                        <option [value]="true">{{"Yes"|appTranslate|async}}</option>
+                        <option [value]="false">{{"No"|appTranslate|async}}</option>
+                    </select>
+                </td>
+                <td class="position-relative">
+                    <app-button *ngIf="!recordStatus || recordStatus == 'VIEW'" buttonType="edit" (click)="recordStatus = 'EDITING'"></app-button>
+                    <app-button *ngIf="recordStatus == 'EDITING'" buttonType="custSave" (click)="onSave()"></app-button>
+                    <div *ngIf="recordStatus == 'PENDING'" class="position-absolute top-50 start-50 translate-middle">
+                        <div class="fa fa-refresh fa-spin"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <loader [loading]="isLoading"></loader>
+</mat-dialog-content>

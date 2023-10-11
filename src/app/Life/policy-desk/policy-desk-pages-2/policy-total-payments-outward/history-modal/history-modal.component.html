@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>{{'History'|appTranslate|async}}</h5>
+  <span class="btn-close" mat-dialog-close aria-label="Close"></span>
+</div>
+<mat-dialog-content>
+  <div class="row justify-content-center">
+    <div class="col small1 text-primary text-center text-bold">{{'Policy Number'|appTranslate|async}}</div>
+    <div class="col small1 text-primary text-center text-bold">{{'Owner'|appTranslate|async}}</div>
+    <div class="col small1 text-primary text-center text-bold">
+      {{'Initial Estimate'|appTranslate|async}}
+    </div>
+    <div class="col small1 text-primary text-center text-bold">
+      {{'Total Adjustments'|appTranslate|async}}
+    </div>
+    <div class="col small1 text-primary text-center text-bold">
+      {{'Updated Amount'|appTranslate|async}}
+    </div>
+    <div class="col small1 text-primary text-center text-bold">
+      {{'Payment Type'|appTranslate|async}}
+    </div>
+    <div class="col small1 text-primary text-center text-bold">{{'Currency'|appTranslate|async}}</div>
+    <div class="col small1 text-primary text-center text-bold">{{'Cover Name'|appTranslate|async}}</div>
+    <div class="col-2 small1 text-primary text-center text-bold">
+      {{'Policy Code Claimed On'|appTranslate|async}}
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col small1 text-center">LTR22456</div>
+    <div class="col small1 text-center">XXXX</div>
+    <div class="col small1 text-center">12000</div>
+    <div class="col small1 text-center">22000</div>
+    <div class="col small1 text-center">23000</div>
+    <div class="col small1 text-center">Saving</div>
+    <div class="col small1 text-center">NGN</div>
+    <div class="col small1 text-center">Saving</div>
+    <div class="col-2 small1 text-center">3</div>
+  </div>
+  <hr />
+  <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th scope="col">{{'Action'|appTranslate|async}}</th>
+        <th scope="col">{{'Created On'|appTranslate|async}}</th>
+        <th scope="col">{{'Created By'|appTranslate|async}}</th>
+        <th scope="col">{{'Reason'|appTranslate|async}}</th>
+        <th scope="col">{{'Auth By'|appTranslate|async}}</th>
+        <th scope="col">{{'Auth On'|appTranslate|async}}</th>
+        <th scope="col">{{'Parameter'|appTranslate|async}}</th>
+        <th scope="col">{{'Old Value'|appTranslate|async}}</th>
+        <th scope="col">{{'New Value'|appTranslate|async}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Claim Notified</td>
+        <td>1/1/2020</td>
+        <td>J-Bond</td>
+        <td>Interest</td>
+        <td>System</td>
+        <td>1/1/2020</td>
+        <td>Status Code</td>
+        <td>30000</td>
+        <td>35000</td>
+      </tr>
+      <tr>
+        <td>Claim Notified</td>
+        <td>1/1/2020</td>
+        <td>J-Bond</td>
+        <td>Interest</td>
+        <td>System</td>
+        <td>1/1/2020</td>
+        <td>Status Code</td>
+        <td>30000</td>
+        <td>35000</td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions class="row">
+  <div class="col-8"></div>
+  <div class="col-2">
+    <button
+      class="btn btn-outline-primary btn-lg w-100"
+      (click)="close('OPEN_ADJUST')"
+    >
+      {{'Adjust'|appTranslate|async}}
+    </button>
+  </div>
+  <div class="col-2">
+    <button class="btn btn-outline-primary btn-lg w-100">{{'Action'|appTranslate|async}}</button>
+  </div>
+</mat-dialog-actions>

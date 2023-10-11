@@ -1,0 +1,194 @@
+<div [formGroup]="form">
+  <div class="row g-3 align-items-center justify-content-between mb-3">
+    <div class="col-md-auto order-lg-1">
+      <text-case-1 lbl="Product" [val]="product?.basic?.code +' - '+product?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+    <div class="col-md-auto order-lg-0">
+      <app-btn text="Create Cover" type="secondary" icon="add" (mclick)="openAddCover()"></app-btn>
+    </div>
+  </div> 
+  <ng-container formArrayName="cover">
+    <div class="border p-2 mb-2 rounded" *ngFor="let subForm of coverArray?.controls; let i = index;"
+      [formGroupName]="i"> 
+      <div class="row align-items-center">
+        <div class="col-lg">
+          <div class="align-items-end justify-content-center row">
+            <div class="col-lg-3">
+              <app-input-basic label="Company" [form]="subForm" name="company" [stacked]="true" [xsmall]="true"
+                type="select" [options]="companyList" labelType="cd" valueField="code" #company>
+              </app-input-basic>
+            </div>
+            <div class="col-lg-3"> 
+                <app-input-basic label="Cover" [form]="subForm" [name]="isShow?'cd':'coverCode'" [stacked]="true" [xsmall]="true"
+                  [type]="isShow?'viewer':'select'" [options]="fpS.getCoversByCompanyCode|functionCaller1:company?.value|async"
+                   (mchange)="patchCover($event,i,1,coverCodeTag.rawOptions)"
+                  labelType="cd"
+                  valueField="code" #coverCodeTag>
+                </app-input-basic> 
+
+
+            </div>
+            <div class="col-lg-2">
+              <app-input-basic label="Max No" [form]="subForm" name="maxNo" [stacked]="true" type="number"
+                [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-2">
+              <app-input-basic label="Age Assured Limit" [form]="subForm" name="ageAssuredLimit" [stacked]="true" type="number"
+                [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-2">
+              <app-input-basic label="Funding Option" [form]="subForm" name="fundingOption" [stacked]="true"
+                [xsmall]="true" type="select" [options]="fundingOptions" labelType="ct" valueField="code">
+              </app-input-basic>
+            </div>
+          </div>
+          <div class="align-items-end justify-content-center row mt-2 gx-lg-5">
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Available Post Issue" [form]="subForm" name="availablePostIssue"
+                [type]="'checkbox'" [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Base" [form]="subForm" [clearOnDisable]="false" [disabled]="i!=0" name="base" [type]="'checkbox'" [stacked]="false"
+                [mini]="true" [xsmall]="true" [showValidation]="base.invalid" [showValidationIcon]="false" #base
+                (mchange)="validateBase(base.control,false)">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Blank SA" [form]="subForm" name="blankSumAssured" [type]="'checkbox'"
+                [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Mandatory" [form]="subForm" name="mandatory" [type]="'checkbox'" [stacked]="false"
+                [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Sum Assured is equal to
+              Base Cover Sum Assured" [form]="subForm" name="sumAssuredEqualBaseCoverSumAssured" [type]="'checkbox'"
+                [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+          </div>
+        </div>
+        <!-- -->
+        <div class="col-lg-auto d-flex justify-content-center">
+          <!--// -->
+          <div class="me-2">
+            <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeCoverArray(i)" *ngIf="!isShow"
+              [valid]="coverArray?.length>1"> </app-btn>
+          </div>
+          <app-btn group="add" [iconBtn]="true" (mclick)="addNewCoverArray(null,i+1)" *ngIf="!isShow "> </app-btn>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <hr>
+</div>
+<div class=" ">
+  <div class="col-lg">
+    <div class="form-group mt-2">
+      <p class="text-primary">{{"Permanent SubGroups"|appTranslate|async}}</p>
+    </div>
+  </div>
+</div>
+<div class="row g-3 gx-lg-2">
+  <div class="col-lg-2" *ngIf="subgroupNo">
+    <text-case-1 [xsmall]="true" [stacked]="true" lbl="SubGroup No" [val]="subgroupNo"></text-case-1>
+  </div>
+  <div class="col-lg-{{ subgroupNo?'2':'4'}}">
+    <app-input-basic label="SubGroup Name" type="text" [form]="subgroupForm" name="subgroupName" [stacked]="true"
+      [xsmall]="true">
+    </app-input-basic>
+  </div>
+</div>
+<div class=" " [formGroup]="form">
+  <ng-container formArrayName="permanentSubgroups">
+    <div class="border p-2 mt-2 rounded" *ngFor="let subForm of permanentSubgroupsForm?.controls; let i = index;"
+      [formGroupName]="i">
+      <div class="row align-items-center mt-2">
+        <div class="col-lg">
+          <div class="align-items-end justify-content-center row">
+            <div class="col-lg-3">
+              <app-input-basic label="Company" [form]="subForm" name="sgCompany" [stacked]="true" [xsmall]="true"
+                type="select" [options]="companyList" labelType="cd" valueField="code" #company>
+              </app-input-basic>
+            </div>
+            <div class="col-lg-3">
+              <ng-container *ngIf="isShow; else elseEnterCoverTemplate">
+                <app-input-ngmodel [disabled]="true" label="Cover" [stacked]="true" [xsmall]="true"
+                  [model]="subForm.value?.sgCoverCode?(subForm.value?.sgCoverCode+' - '+subForm.value?.sgDescription):''"></app-input-ngmodel>
+              </ng-container>
+              <ng-template #elseEnterCoverTemplate>
+                <app-input-basic label="Cover" [form]="subForm" [name]="isShow?'cd':'sgCoverCode'"  
+                  [stacked]="true" [xsmall]="true"
+                   [type]="isShow?'viewer':'select'"
+                   [options]="fpS.getCoversByCompanyCode|functionCaller1:company?.value|async"
+                    (mchange)="patchCover($event,i,2,sgCoverCodeTag.rawOptions)"
+                  labelType="cd"
+                  valueField="code" #sgCoverCodeTag>
+                </app-input-basic>
+              </ng-template>
+            </div>
+            <div class="col-lg-2">
+              <app-input-basic label="Max No" [form]="subForm" name="sgMaxNo" [stacked]="true" [xsmall]="true"
+                type="number">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-2">
+              <app-input-basic label="Age Assured Limit" [form]="subForm" name="sgAgeAssuredLimit" [stacked]="true" type="number"
+                [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-2">
+              <app-input-basic label="Funding Option" [form]="subForm" name="sgFundingOption" [stacked]="true"
+                [xsmall]="true" type="select" [options]="fundingOptions" labelType="ct" valueField="code">
+              </app-input-basic>
+            </div>
+          </div>
+          <div class="align-items-end justify-content-center row mt-2 gx-lg-5">
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Available Post Issue" [form]="subForm" name="sgAvailablePostIssue"
+                [type]="'checkbox'" [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4 text-lg-center">
+              <app-input-basic label="Base" [form]="subForm" [clearOnDisable]="false" [disabled]="i!=0" name="sgBase"
+                [type]="'checkbox'" [stacked]="false"
+                [mini]="true" [xsmall]="true" [showValidation]="sgBase.invalid" [showValidationIcon]="false" #sgBase
+                (mchange)="validateBase(sgBase.control, true)">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4  text-lg-center">
+              <app-input-basic label="Blank SA" [form]="subForm" name="sgBlankSumAssured" [type]="'checkbox'"
+                [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4  text-lg-center">
+              <app-input-basic label="Mandatory" [form]="subForm" name="sgMandatory" [type]="'checkbox'"
+                [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+            <div class="col-lg-auto col-4  text-lg-center">
+              <app-input-basic label="Sum Assured is equal to
+                    Base Cover Sum Assured" [form]="subForm" name="sgSumAssuredEqualBaseCoverSumAssured"
+                [type]="'checkbox'" [stacked]="false" [mini]="true" [xsmall]="true">
+              </app-input-basic>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-auto d-flex justify-content-center">
+          <div class="me-2">
+            <app-btn icon="delete" [iconBtn]="true" type="danger-outline" (mclick)="removeSubCoverArray(i)"
+              *ngIf="!isShow" [valid]="permanentSubgroupsForm?.length>1"> </app-btn>
+          </div>
+          <app-btn group="add" [iconBtn]="true" (mclick)="addNewSubCoverArray(null,i+1)" *ngIf="!isShow "> </app-btn>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

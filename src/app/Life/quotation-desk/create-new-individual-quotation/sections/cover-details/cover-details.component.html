@@ -1,0 +1,207 @@
+<q-annuities-certain
+  #ac_modal
+  (saveEvent)="saveStuff($event)"
+></q-annuities-certain>
+<q-bond #bond_modal (saveEvent)="saveStuff($event)"></q-bond>
+<q-building #bl_modal (saveEvent)="saveStuff($event)"></q-building>
+<q-defense-recourse
+  #dr_modal
+  (saveEvent)="saveStuff($event)"
+></q-defense-recourse>
+<q-endowment #end_modal (saveEvent)="saveStuff($event)"></q-endowment>
+<q-individual-savings
+  #is_modal
+  (saveEvent)="saveStuff($event)"
+></q-individual-savings>
+<q-life-annuity #lia_modal (saveEvent)="saveStuff($event)"></q-life-annuity>
+<q-life-credit #lic_modal (saveEvent)="saveStuff($event)"></q-life-credit>
+<q-life-insurance #lil_modal (saveEvent)="saveStuff($event)"></q-life-insurance>
+<q-life-risk #lir_modal (saveEvent)="saveStuff($event)"></q-life-risk>
+<q-marine-cargo #mc_modal (saveEvent)="saveStuff($event)"></q-marine-cargo>
+<q-marine-hull #mh_modal (saveEvent)="saveStuff($event)"></q-marine-hull>
+<q-motor-accessories
+  #acc_modal
+  (saveEvent)="saveStuff($event)"
+></q-motor-accessories>
+<q-motor-third-party
+  #tp_modal
+  (saveEvent)="saveStuff($event)"
+></q-motor-third-party>
+<q-property-content
+  #pc_modal
+  (saveEvent)="saveStuff($event)"
+></q-property-content>
+<q-savings #sav_modal (saveEvent)="saveStuff($event)"></q-savings>
+<q-simple-life #sl_modal (saveEvent)="saveStuff($event)"></q-simple-life>
+<q-deferred-life-annuity
+  #dlia_modal
+  (saveEvent)="saveStuff($event)"
+></q-deferred-life-annuity>
+
+<div>
+  <br />
+  <div class="row mt-3 mb-4">
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Code' | appTranslate | async }}:
+        <a
+          routerLink="../../../setups/product/product-code/show"
+          [queryParams]="{ prodCode: product.code }"
+          class="text-primary"
+          >{{ product?.code }}</a
+        ></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Product Description' | appTranslate | async }}:
+        <span class="text-primary">{{ product?.description }}</span></span
+      >
+    </div>
+    <div class="col-md-auto">
+      <span
+        >{{ 'Quote No' | appTranslate | async }}:
+        <span class="text-primary">{{ quoteNo }}</span></span
+      >
+    </div>
+  </div>
+  <form [formGroup]="coverDetailsForm">
+    <div>
+      <hr />
+      <div class="row g-2">
+        <div class="col-md-4">
+          <label for="" class="text-primary form-label">{{
+            'Select Cover' | appTranslate | async
+          }}</label>
+        </div>
+        <div class="col-md-2">
+          <label for="" class="text-primary form-label">{{
+            'Assured' | appTranslate | async
+          }}</label>
+        </div>
+        <div class="col-md-2">
+          <label for="" class="text-primary form-label">{{
+            'Assured Name' | appTranslate | async
+          }}</label>
+        </div>
+        <div class="col-md-1">
+          <label for="" class="text-primary form-label">&nbsp;</label>
+        </div>
+        <div class="col-md-2">
+          <label for="" class="text-primary form-label">{{
+            'Assured Relationship to Owner' | appTranslate | async
+          }}</label>
+        </div>
+        <div class="col-md-1">
+          <label for="" class="text-primary form-label text-center w-100">{{
+            'Details' | appTranslate | async
+          }}</label>
+        </div>
+      </div>
+      <div class="text-center" *ngIf="coverScreens && coverScreens.length == 0">
+        {{ 'No Covers to display' | appTranslate | async }}
+      </div>
+      <div *ngIf="coverScreens && coverScreens.length > 0">
+        <div
+          formArrayName="covers"
+          *ngFor="
+            let cover of coverDetailsForm.get('covers')['controls'];
+            let i = index
+          "
+        >
+          <div class="row" formGroupName="{{ i }}">
+            <div class="row g-2 mb-2">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <div class="row d-flex align-items-center">
+                    <div *ngIf="isDependent[i]" class="col-1"></div>
+                    <div class="col-md-2">
+                      <input
+                        readonly
+                        [checked]="selected[i]"
+                        class="form-control control-bg-gray"
+                        type="checkbox"
+                        [disabled]="coverDisabled[i]"
+                        (change)="setSelected(i)"
+                      />
+                    </div>
+                    <div class="col-md-auto">
+                      <label for="" class="text-black-50 form-label small1">
+                        <a
+                          routerLink="../../../setups/product/product-cover-code/show"
+                          [queryParams]="{
+                            code:
+                              newCoverScreens[i].info.coverCode ||
+                              newCoverScreens[i].info.riderCoverCode
+                          }"
+                          class="text-primary"
+                          >{{
+                            newCoverScreens[i].info.coverCode ||
+                              newCoverScreens[i].info.riderCoverCode
+                          }}
+                          - {{ newCoverScreens[i].info.description }}</a
+                        >
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    #imput
+                    formControlName="assuredNo"
+                    type="text"
+                    class="form-control control-bg-gray"
+                    (keyup)="findAssured(i, imput.value)"
+                  />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    formControlName="assuredName"
+                    readonly
+                    [value]="client[i]?.fullName"
+                    type="text"
+                    class="form-control control-bg-gray"
+                  />
+                </div>
+              </div>
+              <div class="col-md-1">
+                <app-button
+                  [buttonType]="'createCustom2'"
+                  routerLink="/general/client-desk/create/individual"
+                  [text]="'Assured'"
+                ></app-button>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    formControlName="assuredRel"
+                    readonly
+                    [value]="assuredRelToOwner$[i]"
+                    type="text"
+                    class="form-control control-bg-gray"
+                  />
+                </div>
+              </div>
+              <div class="col-md-1">
+                <input
+                  [disabled]="!selected[i]"
+                  id="checkbox_{{ i }}"
+                  class="form-control control-bg-gray mx-auto mt-1"
+                  (click)="showCoverScreen($event, newCoverScreens[i], i)"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="{{ modal[i] }}"
+                  type="checkbox"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

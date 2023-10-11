@@ -1,0 +1,265 @@
+<div
+  class="modal fade"
+  id="marineHullModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{ description }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="marineHullForm" class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Destination From Port' | appTranslate | async
+                }}</label>
+                <input
+                  formControlName="dfp"
+                  type="text"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Destination To Port' | appTranslate | async
+                }}</label>
+                <input
+                  formControlName="dtp"
+                  type="text"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Shipment Medium' | appTranslate | async
+                }}</label>
+                <select
+                  formControlName="medium"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Destination From Country' | appTranslate | async
+                }}</label>
+                <select
+                  formControlName="dfc"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Destination To Country' | appTranslate | async
+                }}</label>
+                <select
+                  formControlName="dtc"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'No of Trips Covered' | appTranslate | async
+                }}</label>
+                <input
+                  formControlName="trips"
+                  type="text"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Nature Of Cover' | appTranslate | async
+                }}</label>
+                <select
+                  formControlName="cover_nature"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Currency' | appTranslate | async
+                }}</label>
+                <input
+                  formControlName="currency"
+                  type="text"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Value Of Goods' | appTranslate | async
+                }}</label>
+                <select
+                  formControlName="value"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Exchange Rate Applicable' | appTranslate | async
+                }}</label>
+                <input
+                  formControlName="exchange"
+                  type="text"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Nature Of Goods Transported' | appTranslate | async
+                }}</label>
+                <select
+                  formControlName="good_nature"
+                  class="form-control control-bg-gray"
+                >
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Details Of Goods' | appTranslate | async
+                }}</label>
+                <textarea
+                  formControlName="details"
+                  class="form-control control-bg-gray"
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="2"
+                >
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3 justify-content-end">
+            <div class="col-4">
+              <label for="" class="text-primary small1">{{
+                'Please note that the sum insured would represent CIF+10%'
+                  | appTranslate
+                  | async
+              }}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Type Of Cover' | appTranslate | async
+                }}</label>
+                <div class="d-flex">
+                  <input
+                    formControlName="comp_cover"
+                    class="form-control control-bg-gray"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                  &nbsp; &nbsp;
+                  <label class="form-label" for="flexCheckDefault">
+                    Clause <strong>A</strong> :
+                    {{
+                      'Comprehensive (Cover good from port to warehouse against loss, damage etc)'
+                        | appTranslate
+                        | async
+                    }}
+                  </label>
+                </div>
+                <div class="d-flex mt-2">
+                  <input
+                    formControlName="loss_cover"
+                    class="form-control control-bg-gray"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
+                  &nbsp; &nbsp;
+                  <label class="form-label" for="flexCheckDefault">
+                    Clause <strong>B</strong> :
+                    {{
+                      'Cover total loss of goods only' | appTranslate | async
+                    }}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="" class="form-label text-primary">{{
+                  'Identity of vessel/airline' | appTranslate | async
+                }}</label>
+                <input
+                  formControlName="vessel"
+                  type="text"
+                  class="form-control control-bg-gray"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="modal-footer">
+        <app-button
+          buttonType="btnCustomCloneGB"
+          text="Risk Questionnaire"
+          data-bs-dismiss="modal"
+        ></app-button>
+        <app-button
+          buttonType="saveGB"
+          (click)="(stop)"
+          data-bs-dismiss="modal"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

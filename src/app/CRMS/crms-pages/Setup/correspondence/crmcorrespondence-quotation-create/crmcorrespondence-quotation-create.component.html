@@ -1,0 +1,364 @@
+<div class="container-fluid mt-2 " id="form-body">
+  <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+              type="button" role="tab" aria-controls="pills-basic" aria-selected="true">{{'Basic'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-fields-tab" data-bs-toggle="pill" data-bs-target="#pills-fields" type="button"
+              role="tab" aria-controls="pills-fields" aria-selected="false">{{'Fields'|appTranslate|async}}
+      </button>
+
+    </li>
+
+  </ul>
+  <form>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Document Code'|appTranslate|async}}</label>
+              <input type="text" class="form-control  control-bg-gray" name="documentCode"
+                     [(ngModel)]="createCorrespondence.correspondence.code" disabled />
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Body'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" name="emailBody"
+                     [(ngModel)]="createCorrespondence.correspondence.emailBody">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Gateway'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" name="emailGateway"
+                     [(ngModel)]="createCorrespondence.correspondence.emailGateway">
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Description'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" name="description"
+                     [(ngModel)]="createCorrespondence.correspondence.description" />
+            </div>
+
+
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Subject Template'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" name="emailSubjectTemplate"
+                     [(ngModel)]="createCorrespondence.correspondence.emailSubjectTemplate">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Body Template'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" name="emailBodyTemplate"
+                     [(ngModel)]="createCorrespondence.correspondence.emailBodyTemplate">
+            </div>
+
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Status'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="status"
+                      [(ngModel)]="createCorrespondence.correspondence.docStatus">
+                <option *ngFor="let code of statusCodes" [value]="code.code">{{code.title}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Send By'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="sendBy"
+                      [(ngModel)]="createCorrespondence.correspondence.sendBy">
+                <option *ngFor="let code of sendByCodes" [value]="code.code">{{code.title}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Body Template'|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" name="pathDocNotEmailed"
+                     [(ngModel)]="createCorrespondence.correspondence.pathDocNotEmailed">
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Category'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="docCategory"
+                      [(ngModel)]="createCorrespondence.correspondence.docCategory">
+                <option *ngFor="let category of categoryCodes" [value]="category.code">{{category.title}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">S{{'Spool Folder Path'|appTranslate|async}}</label>
+              <input type="text" class="form-control control-bg-gray" name="spoolPath"
+                     [(ngModel)]="createCorrespondence.correspondence.spoolPath">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Subject'|appTranslate|async}}</label>
+              <input type="text" class="form-control  control-bg-gray" name="emailSubject"
+                     [(ngModel)]="createCorrespondence.correspondence.emailSubject">
+            </div>
+
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Primary Table Name'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="tableName"
+                      [(ngModel)]="createCorrespondence.correspondence.tableName">
+                <option *ngFor="let tableName of tableNames" [value]="tableName.tableName">{{tableName.tableName}}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email To'|appTranslate|async}}</label>
+              <input type="text" class="form-control  control-bg-gray" name="emailTo"
+                     [(ngModel)]="createCorrespondence.correspondence.emailTo">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email Bcc'|appTranslate|async}}</label>
+              <input type="text" class="form-control  control-bg-gray" name="emailBcc"
+                     [(ngModel)]="createCorrespondence.correspondence.emailBcc">
+            </div>
+
+
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Template Name'|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="templateName"
+                      [(ngModel)]="createCorrespondence.correspondence.templateName">
+                <option *ngFor="let templateCode of templateCodes" [value]="templateCode.templateCode">
+                  {{templateCode.templateCode}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Email CC'|appTranslate|async}}</label>
+              <input type="text" class="form-control control-bg-gray" name="emailCc"
+                     [(ngModel)]="createCorrespondence.correspondence.emailCc">
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label text-red">{{'Auto Attach Document To Workflow Code'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control control-bg-gray mx-auto"
+                     [(ngModel)]="createCorrespondence.correspondence.autoAttachWf" name="autoAttachWf"
+                     data-bs-toggle="modal">
+            </div>
+          </div>
+
+
+          <div class="row mt-4 justify-content-center">
+            <div class="col-3">
+              <label class="form-label text-red w-100 text-center">{{'Add Filter'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control control-bg-gray mx-auto" data-bs-target="#addFilterModal"
+                     data-bs-toggle="modal">
+            </div>
+            <div class="col-3">
+              <label class="form-label text-red  w-100 text-center">{{'Generate But Do Not Email'|appTranslate|async}}</label>
+              <input type="checkbox" class="form-control control-bg-gray mx-auto"
+                     [ngModel]="createCorrespondence.correspondence.doNotSendEmail">
+            </div>
+            <div class="col-3">
+              <label class="form-label text-red w-100 text-center">{{'Convert To PDF'|appTranslate|async}}</label>
+              <input type="checkbox" class="control-bg-gray form-control mx-auto"
+                     [ngModel]="createCorrespondence.correspondence.pdfEnforce">
+            </div>
+            <div class="col-3">
+              <label class="form-label text-red w-100 text-center">{{'Can Be Viewed By Client On Mobile'|appTranslate|async}}</label>
+              <input type="checkbox" class="control-bg-gray form-control mx-auto"
+                     [ngModel]="createCorrespondence.correspondence.viewByClient">
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-4">
+              <div class="row" *ngFor="let i of documentsLinkedCounter()">
+                <div class="col">
+                  <label class="form-label text-red">{{'Other document Linked'|appTranslate|async}}</label>
+                  <select class="form-control  control-bg-gray" name="otherDocLinked"
+                          [(ngModel)]="createCorrespondence.correspondence.otherDocLinked">
+                    <option *ngFor="let templateCode of templateCodes" [value]="templateCode.templateCode">
+                      {{templateCode.templateCode}}</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label class="form-label text-red">&nbsp;</label>
+                  <app-button buttonType="addCustom-red" (click)="documentsLinkedInc()"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <br><br><br>
+
+
+      </div>
+      <div class="tab-pane fade" id="pills-fields" role="tabpanel" aria-labelledby="pills-fields-tab">
+        <div class="container">
+          <label>{{'Join Template'|appTranslate|async}}</label>
+          <div
+            *ngFor="let correspondenceJoinTemplateList of createCorrespondence.correspondenceJoinTemplateList; let i = index;"
+            class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Template Name'|appTranslate|async}}</label>
+                <input type="text" class="form-control control-bg-gray"
+                       name="joinTemplate_{{correspondenceJoinTemplateList.id}}"
+                       [(ngModel)]="correspondenceJoinTemplateList.joinTemplate">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Connector Type'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray" name="connectorType_{{correspondenceJoinTemplateList.id}}"
+                        [(ngModel)]="correspondenceJoinTemplateList.connectorType">
+                  <option *ngFor="let connectorType of connectorTypes" [value]="connectorType.code">
+                    {{connectorType.title}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Connector'|appTranslate|async}}</label>
+                <select class="form-control control-bg-gray" name="connector_{{correspondenceJoinTemplateList.id}}"
+                        [(ngModel)]="correspondenceJoinTemplateList.connector">
+                  <option>Connector String</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Label Prefix'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" name="labelPrefix_{{correspondenceJoinTemplateList.id}}"
+                       [(ngModel)]="correspondenceJoinTemplateList.labelPrefix" />
+              </div>
+            </div>
+            <!-- <div class="col-1">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="addCustom" (click)="templateInc()"></app-button>
+              </div>
+            </div> -->
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="delete" (click)="removeCorrespondenceJoinTemplate(i)"></app-button>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end mb-5">
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="addred" (click)="addCorrespondenceJoinTemplate()"></app-button>
+              </div>
+            </div>
+          </div>
+
+          <label>{{'Output Fields'|appTranslate|async}}</label>
+          <div
+            *ngFor="let correspondenceOutputFieldList of createCorrespondence.correspondenceOutputFieldList; let i = index;"
+            class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Label'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" name="fieldLabel_{{correspondenceOutputFieldList.id}}"
+                       [(ngModel)]="correspondenceOutputFieldList.fieldLabel" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Field Type'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" name="fieldType_{{correspondenceOutputFieldList.id}}"
+                       [(ngModel)]="correspondenceOutputFieldList.fieldType" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Field Name'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" name="fieldType_{{correspondenceOutputFieldList.id}}"
+                       [(ngModel)]="correspondenceOutputFieldList.fieldName" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">{{'Output Conversion'|appTranslate|async}}</label>
+                <input class="form-control control-bg-gray" name="fieldConv_{{correspondenceOutputFieldList.id}}"
+                       [(ngModel)]="correspondenceOutputFieldList.fieldConv" />
+              </div>
+            </div>
+            <!-- <div class="col-1">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="addCustom" (click)="labelInc()"></app-button>
+              </div>
+            </div> -->
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="delete" (click)="removeCorrespondenceOutputField(i)"></app-button>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-2">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="addred" (click)="addCorrespondenceOutputField()"></app-button>
+              </div>
+            </div>
+          </div>
+
+          <div class=" mt-5 row justify-content-end">
+            <div class="col-2">
+              <div class="form-group">
+                <label class="form-label text-red">&nbsp;</label>
+                <app-button buttonType="save-red" (click)="createCorrespondenceQuoatation()"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </form>
+
+</div>
+
+<div class="modal fade" id="addFilterModal" aria-hidden="true" aria-labelledby="addFilterModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">{{'Add Filter'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngFor="let i of filterCounter()">
+          <div class="col">
+            <label for="" class="form-label text-red">{{'Filter'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-red">{{'Operator'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-red">{{'Value'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-red">{{'And/Or'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray"></select>
+          </div>
+          <div class="col">
+            <label for="" class="form-label text-red">&nbsp;</label>
+            <app-button buttonType="addred" (click)="filterInc()"></app-button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-button buttonType="save-red"></app-button>
+      </div>
+    </div>
+  </div>
+</div>

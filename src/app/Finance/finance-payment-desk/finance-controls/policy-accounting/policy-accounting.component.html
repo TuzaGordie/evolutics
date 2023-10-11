@@ -1,0 +1,240 @@
+
+<div class="container-fluid">
+    <div class="">
+        <form [formGroup]="form">
+        <div class="row d-flex align-items-center text-success">
+            <div class="col-md-1">
+                <div class="mt-3 ">
+                  <div class="labelCheck">
+                      <label for="showAll">Show All</label>
+                  </div>
+                  <div>
+                      <input type="checkbox" class="form-control chkbox" [style.width.px] = 'styleCheck' formControlName="showAll">
+                  </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="mt-3">
+                    <div>
+                        <label for="company">Company</label>
+                    </div>
+                    <div>
+                        <select name="" id="" class="form-control" formControlName="company">
+                            <option value=""></option>
+                            <option value="tbd1">tbd1</option>
+                            <option value="tbd2">tbd2</option>
+                        </select>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-3">
+                <div class="mt-3">
+                    <div>
+                        <label for="company">Currency</label>
+                    </div>
+                    <div>
+                        <select name="" id="" class="form-control" formControlName="currency">
+                            <option value=""></option>
+                            <option value="tbd1">tbd1</option>
+                            <option value="tbd1">tbd2</option>
+                        </select>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mt-3">
+                  <div class="labelCheck">
+                    <label for="authAll">Authorize All</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="form-control chkbox" [style.width.px] = 'styleCheck' formControlName="authAll">
+                </div>
+            </div>
+            </div>
+            <div class="col-md-1">
+                <div class="mt-3">
+                  <div class="labelCheck">
+                    <label for="authAll">Decline All</label>
+                </div>
+                <div>
+                    <input type="checkbox" class="form-control chkbox" [style.width.px] = 'styleCheck' formControlName="decAll">
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="table-responsive mt-5">
+            <table class="table table-striped">
+                <thead class="text-success">
+                    <ng-container *ngFor="let item of thead">
+                        <th scope="col">{{item}}</th>
+                    </ng-container>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of tdata;let i = index">
+                        <!-- <td><input class="square {{item.SLA}}" type="checkbox"/></td> -->
+                        <td (click)='check(i)' data-bs-toggle="modal" data-bs-target="#exampleModal">{{item.transNo}}</td>
+                        <td (click)='check(i)' data-bs-toggle="modal" data-bs-target="#exampleModal">{{item.absAmt}}</td>
+                        <td (click)='goto(item.policyNo)'>{{item.policyNo}}</td>
+                        <td>{{item.transType}}</td>
+                        <td>{{item.account}}</td>
+                        <td>{{item.account2}}</td>
+                        <td>{{item.currency}}</td>
+                        <td>{{item.created | date}}</td>
+                        <td>{{item.createdUser | uppercase}}</td>
+                        <td>{{item.lastModifiedUser | uppercase}}</td>
+                        <td>{{item.paymentStatus |uppercase}}</td>
+                        <td><input type="checkbox" class="form-control mx-auto" [style.width.px] = 'styleCheck'/></td>
+                        <td><input type="checkbox" class="form-control mx-auto" [style.width.px] = 'styleCheck'/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end mt-5">
+            <button class="btn btn-lg btn-outline-success">
+                <fa-icon [icon]="faSave"></fa-icon>
+                    Submit
+             </button>
+        </div>
+        </form>
+    </div>
+</div>
+  
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-xxl-down">
+      <div class="modal-content">
+        <div class=''>
+          <button class="btn border-none outline-none" type="button"  data-bs-dismiss="modal">
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+          </button>
+        </div>
+        <div class="modal-body">
+         <div class="container">
+                <div class="row text-success text-center">
+                    <div class="col-lg-1 mt-3">
+                        <div>
+                            <label for="policyNo">Policy No</label>
+                        </div>
+                        <div>
+                            <span>
+                                {{policyNo}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 mt-3">
+                        <div>
+                            <label for="coverName">Cover Name</label>
+                        </div>
+                        <div>
+                            <span>
+                                <!-- {{}} -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 mt-3">
+                        <div>
+                            <label for="owner">Policy Owner</label>
+                        </div>
+                        <div>
+                            <span>
+                                <!-- {{}} -->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 mt-3">
+                        <div>
+                            <label for="currency">Account Currency</label>
+                        </div>
+                        <div class="col-lg-1 mt-3">
+                            <span>
+                                {{currency}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 mt-3">
+                        <div>
+                            <label for="absAmt">Absolute Amount</label>
+                        </div>
+                        <div>
+                            <span>
+                                {{absAmt}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 mt-3">
+                        <div>
+                            <label for="created">Trans Created By</label>
+                        </div>
+                        <div>
+                            <span>
+                                {{created}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 mt-3">
+                        <div>
+                            <label for="createdTime">Trans Created At</label>
+                        </div>
+                        <div>
+                            <span>
+                                {{createdAt | date}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 mt-3">
+                        <div>
+                            <label for="transNo">Trans No</label>
+                        </div>
+                        <div>
+                            <span>
+                                {{transNo}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 mt-3">
+                        <div>
+                            <label for="transCode">Trans Code</label>
+                        </div>
+                        <div>
+                            <span>
+                                <!-- {{}} -->
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 table-responsive">
+                    <table class="table table-striped w-100">
+                        <thead>
+                            <ng-container *ngFor="let item of ths">
+                                <th class="text-success">{{item}}</th>
+                            </ng-container>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of newVal">
+                                <td>{{item.accountCode}}</td>
+                                <td>{{item.ledgerCode}}</td>
+                                <td>{{item.coverNo}}</td>
+                                <td>{{item.amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                 <form [formGroup]="formData">
+                    <div class="col-sm-6 row mt-5 d-flex align-items-center text-success">
+                        <div>
+                            <label for="narration">Narration</label>
+                        </div>
+                        <div>
+                            <textarea name="" id="" cols="" rows="" class="form-control" formControlName="narration"></textarea>
+                        </div>
+                 </div>
+                 </form>
+                </div>
+             </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

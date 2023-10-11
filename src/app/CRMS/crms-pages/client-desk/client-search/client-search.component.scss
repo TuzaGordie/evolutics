@@ -1,0 +1,14 @@
+tr{
+    cursor: pointer;
+
+    .hover-highlight {
+        &:hover {
+            color: orange;
+            text-decoration: underline;
+        }
+        &:active {
+            color: red;
+            text-decoration: underline;
+        }
+    }
+}

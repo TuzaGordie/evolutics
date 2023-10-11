@@ -1,0 +1,133 @@
+ <div class="d-flex justify-content-between align-items-center">
+   <h5 class="modal-title" id="exampleModalLabel">{{'User Access'|appTranslate|async}}</h5>
+   <button type="button" class="btn-close" (click)="close()" attr.aria-label="Close"></button>
+ </div>
+ <div class=" ">
+   <div class="row g-3">
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center"> {{"Allow Access through web service"|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+           [(ngModel)]="user.allowWs">
+       </div>
+     </div>
+
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'User Allowed to snooze tasks'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+           [(ngModel)]="user.allowSnooze">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Send notification email on workflow issuance'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+           [(ngModel)]="user.sendNoticeWf">
+       </div>
+     </div>
+
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Relationship Manager'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+           [(ngModel)]="user.relManager">
+       </div>
+     </div>
+
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Sub Relationship Manager'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2"
+           [(ngModel)]="user.subRelManager" name="subRelManager">
+       </div>
+     </div>
+
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{"Tele-Marketer"|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" [(ngModel)]="user.tm">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Terminate Workflow'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowTermWf">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Setups'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthSetup">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Client Endorsements'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthClient">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Agent Endorsements'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthAgent">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Policy Endorsements'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthPolicy">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Policy Accounting'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthPolicyAcct">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Policy Suspense Switch'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthSuspenseSwitch">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Coupon'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthCoupon">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Reassign Workflow'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowReassignWf">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Override Exist Client'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.overrideExistClient">
+       </div>
+     </div>
+     <div class="col-xxl-3 col-md-4">
+       <div class="form-group mt-4">
+         <label for="" class="form-label text-primary w-100 text-center">{{'Allow Authorize Snooze'|appTranslate|async}}</label>
+         <input [disabled]="isShow"type="checkbox" class="form-control control-bg-gray width-unset mx-auto mt-2" value="1"
+           [(ngModel)]="user.allowAuthSnooze">
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="d-flex justify-content-end align-items-center mt-2" *ngIf="!isShow">
+   <app-btn text="Submit" icon="save" type="secondary" (mclick)="save()"></app-btn>
+ </div>

@@ -1,0 +1,59 @@
+<div class="container ">
+  <form [formGroup]="fc" (ngSubmit)="onSubmit()">
+    <div class="row mt-4 align-items-start">
+      <div class="col-md-4">
+        <app-input-basic type="select" label='ID Type' [form]="fc" name='idType' [stacked]="true"
+          [options]="ccS.getIDTypes|functionCaller|async" labelType="ct" valueField="code">
+        </app-input-basic>
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.idType">
+        </app-validation-message>
+      </div>
+      <div class=" col-md-4">
+        <label class="form-label text-primary">{{"ID Number"|appTranslate|async}}</label><br>
+        <input type="text" formControlName="idNumber" class="form-control control-bg-gray">
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.idNumber"
+          label="ID number">
+        </app-validation-message>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label text-primary">{{"ID Expiry date"|appTranslate|async}}</label><br>
+        <input type="date" formControlName="idExpiryDate" class="form-control control-bg-gray">
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.idExpiryDate">
+        </app-validation-message>
+      </div>
+      <div class=" col-md-4">
+        <label class="form-label text-primary">{{"Tax Identification Number"|appTranslate|async}}</label><br>
+        <input type="text" formControlName="taxIdentificationNumber" class="form-control control-bg-gray">
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.taxIdentificationNumber"
+          label="TIN">
+        </app-validation-message>
+      </div>
+      <div class=" col-md-4">
+        <label class="form-label text-primary">{{"National Insurance Number"|appTranslate|async}}</label><br>
+        <input type="text" formControlName="nationalInsuranceNumber" class="form-control control-bg-gray">
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.nationalInsuranceNumber"
+          label="NIN">
+        </app-validation-message>
+      </div>
+      <div class=" col-md-4">
+        <label class="form-label text-primary">{{"Bank Verification Number"|appTranslate|async}}</label><br>
+        <input type="text" formControlName="bvn" class="form-control control-bg-gray">
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.bvn" label="BVN">
+        </app-validation-message>
+      </div>
+      <div class="  col-md-4">
+        <label class="form-label text-primary">{{"Pension Commission Number"|appTranslate|async}}</label><br>
+        <input type="text" formControlName="pensionCommissionNumber" class="form-control control-bg-gray">
+        <app-validation-message [validationKey]="eValidationType.unique" [control]="validation?.pensionCommissionNumber"
+          label="Pension commission number">
+        </app-validation-message>
+      </div>
+      <div class="col-md-4">
+        <app-file-upload label="Upload Passport Photo" accept="image" [(file)]="passportFile"></app-file-upload>
+      </div>
+      <div class="col-md-4">
+        <app-file-upload label="Upload Identity Card" accept="image" [(file)]="idcardFile"></app-file-upload>
+      </div>
+    </div>
+  </form>
+</div>

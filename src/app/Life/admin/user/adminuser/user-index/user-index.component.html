@@ -1,0 +1,36 @@
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5 align-middle">
+      <form>
+        <div class="">
+          <app-input-basic label="User Group" type="select" [form]="searchForm" valueField="group" name="group"
+            labelType="gd" [stacked]="true" [options]="userS.getAllUsersGroup|functionCaller|async">
+          </app-input-basic>
+        </div>
+        <!-- <div class="">
+            <app-input-basic label="User Group" type="select" [form]="searchForm" valueField="group" name="group" labelType="gd"
+              [stacked]="true" [options]="userS.getAllUsersGroup|functionCaller|async">
+            </app-input-basic>
+          </div>   -->
+        <!-- <div class="">
+          <app-input-basic label="Status" type="select" [form]="searchForm" valueField="code" name="" labelType="ct"
+            [stacked]="true" [options]="userS.getUserStatus|functionCaller|async">
+          </app-input-basic>
+        </div> -->
+        <div class="border-top">
+          <app-autocomplete label="Select User" [stacked]="true" valueField="id" labelType="uf" name="user"
+            [form]="form2" [options]="userSearchResponse?.page?.content"></app-autocomplete>
+        </div>
+        <div class="form-group row my-3">
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn (mclick)="show()" [valid]="form2.valid" icon="show" type="dark" [text]="'Show'"></app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn routerLink="../create/index" icon="add" type="outline" [text]="'Create'"></app-btn>
+          </div>
+          <div class="col-sm-4 d-grid gap-1">
+            <app-btn (mclick)="clone()" [valid]="form2.valid" icon="clone" type="secondary" [text]="'Clone'"></app-btn>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

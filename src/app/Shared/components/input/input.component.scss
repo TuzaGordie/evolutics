@@ -1,0 +1,54 @@
+.bordercheck {
+  border: 1px solid #4ef580;
+  outline: 0;
+}
+.borderuncheck {
+  border: 1px solid red;
+  outline: 0;
+}
+
+.light {
+  font-weight: 500;
+}
+.validity-icon {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: unset;
+  right: 20px;
+  height: 100%;
+  align-items: center;
+}
+.valid {
+  display: flex !important;
+  color: #4ef580;
+}
+.pending {
+  display: flex !important;
+  color: orangered;
+}
+.invalid {
+  display: flex !important;
+  color: red;
+}
+.inputform {
+  height: 41px;
+}
+.invalid-label {
+  color: red !important;
+}
+input[type='checkbox']:checked {
+  // padding: 0.75rem 0.75rem;
+  position: relative;
+}
+label {
+  min-height: 32px !important;
+}
+.password-icons {
+  position: absolute;
+  right: 20px;
+  top: 17%;
+}
+[disabled]{
+  cursor: default;
+}

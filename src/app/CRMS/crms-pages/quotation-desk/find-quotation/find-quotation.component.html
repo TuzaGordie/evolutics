@@ -1,0 +1,117 @@
+<app-form-navigation [title] = "'Find Quotation'"></app-form-navigation>
+<div class="container mt-5" >
+    <form [formGroup]="findQuotationForm" >
+    <div class="row" >
+        <div class="col-md-12 mx-auto">
+            <div class="row my-2">
+                <div class="col-md-2">
+                    <label class="py-2">Quote No</label>
+                </div>
+                <div class="col-md">
+                <input type="text" formControlName="quotationNo"  class="inputform mr-2"
+                [ngClass]="{bordercheck: validResult == 'true' , borderuncheck: validResult == 'false'}"   required (keyup)="setQuotationList()">
+            <div style="display: none;"  [ngClass]="{checkmark: validResult == 'true'}" ><i class="fa fa-check"  ></i></div>
+            <div style="display: none;"  [ngClass]="{uncheckmark: validResult == 'false'}"> <i class="fa fa-times" ></i></div>
+            </div>
+            <div class="col-md-2">
+            <button type="submit" class="py-2 btn-dark mx-2"  [disabled]="validResult == 'false' || validResult == '' " style="width: 60%; padding:0px" (click)="onNext()">Show</button>
+        </div>
+        </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Client Number</label> </div>
+                           <div class="col-md" >
+                    <input type="text" formControlName="clientNo"  class="inputform mr-2"  (keyup)="setQuotationList()" required >
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Agent</label> </div>
+                           <div class="col-md">
+                    <input type="text" formControlName="agentID"  class="inputform mr-2"   required >
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Status</label> </div>
+                           <div class="col-md">
+                    <input type="text" formControlName="statusID"  class="inputform mr-2"   required >
+            </div>
+                <div class="col-md-2">
+
+            </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Product Class</label> </div>
+                           <div class="col-md">
+                    <input type="text" formControlName="productClass"  class="inputform mr-2"   required >
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2" >Product Code</label> </div>
+                           <div class="col-md">
+                    <input type="text" formControlName="productCode"  class="inputform mr-2"    required >
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Created By</label> </div>
+                           <div class="col-md">
+                            <select formControlName="quotationNo" (change)="setQuotationList()" class="inputform mr-2" required>
+                                <option [value]="item.CREATED_BY" *ngFor="let item of quotationList">{{item.CREATED_BY}}</option>
+                            </select>
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Created Date From</label> </div>
+                           <div class="col-md">
+                    <input type="date" formControlName="createdDateFrom"  class="inputform mr-2"   required >
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+            <div class="row my-2">
+                <div class="col-md-2"><label class="py-2">Created Date To</label> </div>
+                           <div class="col-md">
+                    <input type="date" formControlName="createdDateTo"  class="inputform mr-2"   required >
+            </div>
+                <div class="col-md-2">
+            </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 my-5">
+<button class="btn btn-secondary py-2 px-4" (click)="onSearch()" [disabled]="validResult == 'false' || validResult == '' ">Search</button>
+        </div>
+
+        <!-- <div class=" my-5">
+            <div  style="float: right; margin-top: 10%;">
+
+              <button type="submit" [disabled]="validResult == 'false' || validResult == '' "
+              [ngClass]="{diablecolor: validResult == 'false' || validResult == ''}"
+              class="border-0 next-blue ml-3 py-2" (click)="onNext()" >
+                  <span class="mx-3 my-auto">Next</span><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div> -->
+    </div>
+
+</form>
+
+</div>

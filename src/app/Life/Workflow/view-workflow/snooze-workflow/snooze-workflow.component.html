@@ -1,0 +1,59 @@
+
+<!-- Bootstrap modal -->
+
+<button #launchBtn type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" hidden aria-hidden="true">
+    {{'launch'|appTranslate|async}}
+</button>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fs-4 fw-bold" id="staticBackdropLabel">{{'SNOOZE'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCloseClick()" #closeBtn></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+             <div class="col-6 d-inline-flex align-items-center mb-3">
+                 <label>
+                    {{'Basis'|appTranslate|async}}:
+                 </label>
+                 <select class="form-control control-bg-gray">
+                     <option></option>
+                     <option *ngFor="let basis of snoozeBasesList">{{basis.title}}</option>
+                 </select>
+             </div>
+             
+             <div class="col-6 d-inline-flex align-items-center mb-3">
+                <label>
+                    {{'Duration'|appTranslate|async}}:
+                </label>
+                <input type="number" min="0" class="form-control control-bg-gray">
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-6 d-inline-flex align-items-center mb-3">
+                    <label>
+                        {{'Reason'|appTranslate|async}}:
+                    </label>
+                    <select class="form-control control-bg-gray">
+                        <option></option>
+                        <option *ngFor="let reason of snoozeReasonsList">{{reason.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <br>
+            <div class="row">
+                <label class="fw-bold">
+                    {{'Additional Comment'|appTranslate|async}}
+                </label>
+                <textarea class="form-control control-bg-gray"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal" (click)="onCloseClick()"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+

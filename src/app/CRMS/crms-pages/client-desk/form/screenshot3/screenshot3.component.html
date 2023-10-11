@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <form [formGroup]="directorsForm" (ngSubmit)="onSubmit()">
+
+    <div class="container">
+      <div class="row mt-4 " formArrayName="directorsDetails" *ngFor="let data of allContact.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <div class="row">
+            <h6 class="">Contact Info {{1 + i}}</h6>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="" class="form-label text-red">Client Number</label>
+              <input type="text" class="form-control control-bg-gray">
+            </div>
+            <div class="col-1">
+              <label for="" class="form-label text-red">&nbsp;</label>
+              <app-button [buttonType]="'findsmallred'"></app-button>
+            </div>
+            <div class="col-1">
+              <label for="" class="form-label text-red">&nbsp;</label>
+              <app-button [buttonType]="'createCustom2smallRed'" [text]="'New'"></app-button>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Full Name</label>
+                <input type="text" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Relationship</label>
+                <select class="form-control control-bg-gray">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Phone Number</label>
+                <input type="tel" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="" class="form-label text-red">Email</label>
+                <input type="email" class="form-control control-bg-gray">
+              </div>
+            </div>
+            <div class="col-1">
+              <div class="form-group">
+                <label for="" class="form-label text-red">&nbsp;</label>
+                <app-button [buttonType]="'delete'" (click)="onDeleteContact(i)"></app-button>
+              </div>
+
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <hr>
+
+
+      <div class="row mt-5 mx-3">
+        <div class="col-md-3 p-0">
+          <button (click)="onContactInfo()" class="btn btn-outline-danger  px-5">Add Contact</button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </form>
+</div>

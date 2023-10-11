@@ -1,0 +1,381 @@
+<!-- <app-form-navigation [title]="'Set Up / Appraisal / Individual'"></app-form-navigation> -->
+<div class="container-fluid mt-2 " id="form-body">
+  <div class="d-flex justify-content-end my-3" *ngIf="showEditButton">
+    <app-btn [type]="form.form.disabled ? 'outline': 'primary'"
+      (mclick)="toggleEditMode()">
+      <span class="fa fa-edit"></span> {{'Edit'|appTranslate|async}}
+    </app-btn>
+  </div>
+  <hr *ngIf="showEditButton">
+  <ul class="nav nav-pills nav-fill mb-3" id="nav-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-basic-tab" data-bs-toggle="pill" data-bs-target="#pills-basic"
+              type="button" role="tab" aria-controls="pills-basic" aria-selected="true">{{'Basic'|appTranslate|async}}
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-weightings-tab" data-bs-toggle="pill" data-bs-target="#pills-weightings"
+              type="button" role="tab" aria-controls="pills-weightings" aria-selected="false">{{'Weightings'|appTranslate|async}}
+      </button>
+
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-individual-tab" data-bs-toggle="pill" data-bs-target="#pills-individual"
+              type="button" role="tab" aria-controls="pills-individual" aria-selected="false">{{'Objectives'|appTranslate|async}}
+      </button>
+
+    </li>
+
+  </ul>
+  <form #form="ngForm">
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-basic" role="tabpanel" aria-labelledby="pills-basic-tab">
+        <div class="container">
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Appraisal Code"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" name="appraisalCode" [(ngModel)]="appraisalCode" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="text" name="description" [(ngModel)]="description" required>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Appraisal Level"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="appraisalLevel" [(ngModel)]="appraisalLevel" required>
+                <option value=""></option>
+                <option *ngFor="let level of appraisalLevels">{{level.code}}-{{level.title}}</option>
+              </select>
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Company Code"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="companyCode" #companycode [(ngModel)]="companyCode" required>
+                <option value=""></option>
+                <option *ngFor="let code of companyCodes" [value]="code.code" >{{code.code}} - {{code.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-5"></div>
+          <div *ngFor="let i of dateCounter()" class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Version No"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="versionNo" [(ngModel)]="versionNo" required>
+
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Version Date"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="date" name="versionDate" [(ngModel)]="versionDate" required>
+
+            </div>
+          </div>
+
+          <div class="row justify-content-end mt-2" *ngIf="form.form.enabled">
+            <div class="col-2">
+              <app-button buttonType="add"  (click)="dateInc()"></app-button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="pills-weightings" role="tabpanel" aria-labelledby="pills-weightings-tab">
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Version No"|appTranslate|async}}</label>
+              <input class="form-control control-bg-gray" type="text" name="versionNo" [(ngModel)]="versionNo" list="versionNumbers">
+              <datalist id="versionNumbers">
+                <option *ngFor="let version versionNumbers" [value]="version">{{version}}</option>
+              </datalist>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Individual Performance Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="individualPerformanceWeight" [(ngModel)]="individualPerformanceWeight" (keyup)="getTotalWeight()">
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Team Performance Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="teamPerformanceWeight" [(ngModel)]="teamPerformanceWeight" (keyup)="getTotalWeight()">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Division Performance Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="divisionPerformanceWeight" [(ngModel)]="divisionPerformanceWeight" (keyup)="getTotalWeight()">
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Company Performance Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="companyPerformanceWeight" [(ngModel)]="companyPerformanceWeight" (keyup)="getTotalWeight()">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Group Performance Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="groupPerformanceWeight" [(ngModel)]="groupPerformanceWeight" (keyup)="getTotalWeight()">
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label for="" class="form-label text-primary">{{"SubDivision Performance Weight (%)"|appTranslate|async}}</label>
+              <input type="number" class="form-control control-bg-gray" name="subDivisionPerformanceWeight" [(ngModel)]="subDivisionPerformanceWeight" (keyup)="getTotalWeight()">
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Total Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" value="{{totalWeight}}" name="totalWeight" [(ngModel)]="totalWeight" readonly required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label text-primary"></label>
+              <div class="bg-danger form-control text-white p-2 mt-2" *ngIf="isTotalWeight">
+                {{'Total Weight must be equal to 100'|appTranslate|async}}
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-individual" role="tabpanel" aria-labelledby="pills-individual-tab">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-label text-primary">{{"Workflow weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number"  name="workflowWeight" [(ngModel)]="workflowWeight">
+
+            </div>
+
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-1">
+              <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+              <p>1</p>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Appraisal Criteria"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="appraisalCriteria1" [(ngModel)]="criteria1">
+                <option value=""></option>
+                <option *ngFor="let criteria of criterias" [value]="criteria.code">{{criteria.code}} - {{criteria.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Condition"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="condition1" [(ngModel)]="condition1">
+                <option value=""></option>
+                <option *ngFor="let condition of conditions" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="productClass1" [(ngModel)]="productClass1">
+                <option value=""></option>
+                <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}} - {{class.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="value1" [(ngModel)]="value1">
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="weight1" [(ngModel)]="weight1">
+            </div>
+            <div class="row justify-content-end mt-2">
+              <div class="col-md-1">
+                <app-button (click)="showCriteria2()" *ngIf="!hideButton1" buttonType="addCustom"></app-button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mt-2" *ngIf="isCriteria2">
+            <div class="col-md-1">
+              <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+              <p>2</p>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Appraisal Criteria"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="appraisalCriteria2" [(ngModel)]="criteria2">
+                <option value=""></option>
+                <option *ngFor="let criteria of criterias" [value]="criteria.code">{{criteria.code}} - {{criteria.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Condition"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="condition2" [(ngModel)]="condition2">
+                <option value=""></option>
+                <option *ngFor="let condition of conditions" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="productClass2" [(ngModel)]="productClass2">
+                <option value=""></option>
+                <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}} - {{class.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="value2" [(ngModel)]="value2">
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="weight2" [(ngModel)]="weight2">
+            </div>
+            <div class="row justify-content-end mt-2">
+              <div class="col-md-2 row">
+                <app-button class="col-md-6" (click)="showCriteria3()" *ngIf="!hideButton2" buttonType="addCustom"></app-button>
+                <app-button class="col-md-6" (click)="deleteCriteria(2)" *ngIf="!hideButton2" buttonType="delete"></app-button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2" *ngIf="isCriteria3">
+            <div class="col-md-1">
+              <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+              <p>3</p>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Appraisal Criteria"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="appraisalCriteria3" [(ngModel)]="criteria3">
+                <option value=""></option>
+                <option *ngFor="let criteria of criterias" [value]="criteria.code">{{criteria.code}} - {{criteria.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Condition"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="condition3" [(ngModel)]="condition3">
+                <option value=""></option>
+                <option *ngFor="let condition of conditions" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="productClass3" [(ngModel)]="productClass3">
+                <option value=""></option>
+                <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}} - {{class.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="value3" [(ngModel)]="value3">
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="weight3" [(ngModel)]="weight3">
+            </div>
+            <div class="row justify-content-end mt-2">
+              <div class="col-md-2 row">
+                <app-button class="col-md-6" (click)="showCriteria4()" *ngIf="!hideButton3" buttonType="addCustom"></app-button>
+                <app-button class="col-md-6" (click)="deleteCriteria(3)" *ngIf="!hideButton3" buttonType="delete"></app-button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2" *ngIf="isCriteria4">
+            <div class="col-md-1">
+              <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+              <p>4</p>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Appraisal Criteria"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="appraisalCriteria4" [(ngModel)]="criteria4">
+                <option value=""></option>
+                <option *ngFor="let criteria of criterias" [value]="criteria.code">{{criteria.code}}-{{criteria.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Condition"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="condition4" [(ngModel)]="condition4">
+                <option value=""></option>
+                <option *ngFor="let condition of conditions" [value]="condition.code">{{condition.code}}-{{condition.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="productClass4" [(ngModel)]="productClass4">
+                <option value=""></option>
+                <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}}-{{class.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="value4" [(ngModel)]="value4">
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="weight4" [(ngModel)]="weight4">
+            </div>
+            <div class="row justify-content-end mt-2">
+              <div class="col-md-2 row">
+                <app-button class="col-md-6" (click)="showCriteria5()" *ngIf="!hideButton4" buttonType="addCustom"></app-button>
+                <app-button class="col-md-6" (click)="deleteCriteria(4)" *ngIf="!hideButton4" buttonType="delete"></app-button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2" *ngIf="isCriteria5">
+            <div class="col-md-1">
+              <label class="form-label text-primary">{{"Criteria No"|appTranslate|async}}</label>
+              <p>5</p>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Appraisal Criteria"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="appraisalCriteria5" [(ngModel)]="criteria5">
+                <option value=""></option>
+                <option *ngFor="let criteria of criterias" [value]="criteria.code">{{criteria.code}} - {{criteria.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Condition"|appTranslate|async}}</label>
+              <select class="form-control control-bg-gray" name="condition5" [(ngModel)]="condition5">
+                <option value=""></option>
+                <option *ngFor="let condition of conditions" [value]="condition.code">{{condition.code}} - {{condition.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Product Class"|appTranslate|async}}</label>
+              <select class="form-control  control-bg-gray" name="productClass5" [(ngModel)]="productClass5">
+                <option value=""></option>
+                <option *ngFor="let class of productClasses" [value]="class.code">{{class.code}} - {{class.title}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Value"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="value5" [(ngModel)]="value5">
+            </div>
+            <div class="col">
+              <label class="form-label text-primary">{{"Weight (%)"|appTranslate|async}}</label>
+              <input class="form-control  control-bg-gray" type="number" name="weight5" [(ngModel)]="weight5">
+            </div>
+            <div class="row justify-content-end mt-2">
+              <div class="col-md-1">
+                <app-button (click)="deleteCriteria(5)" buttonType="delete"></app-button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mt-5 mb-5">
+            <div class="col-10"></div>
+            <div class="col-2">
+              <app-button [buttonType]="'submit'" (click)="createNewIndividualAppraisal()"></app-button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>

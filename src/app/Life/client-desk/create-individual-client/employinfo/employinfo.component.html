@@ -1,0 +1,109 @@
+<div class="container ">
+  <form [formGroup]="fc" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <div class="d-block">
+          <div class="mt-4">
+            <label class="form-label text-primary">{{"Employment Status"|appTranslate|async}}</label><br>
+            <select formControlName="employStatus" class="form-control  control-bg-gray">
+              <option [value]="null">{{"Select Employment Status"|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of employmentStatusList">{{item.code}} - {{item.title}}
+              </option>
+            </select>
+            <div
+              *ngIf="validation.employStatus.errors && (validation.employStatus.dirty || validation.employStatus.touched)">
+              <div class="text-danger" *ngIf="validation.employStatus?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+              </div>
+            </div>
+
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-primary">{{"Sector"|appTranslate|async}}</label><br>
+            <select formControlName="employerSector" class="form-control  control-bg-gray">
+              <option [value]="null">{{"Select Sector"|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of sectorList">{{item.code}} - {{item.title}}</option>
+            </select>
+            <div
+              *ngIf="validation.employerSector.errors && (validation.employerSector.dirty || validation.employerSector.touched)">
+              <div class="text-danger" *ngIf="validation.employerSector?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-primary">{{"Income Band"|appTranslate|async}}</label><br> 
+            <select formControlName="incomeBand"
+              class="form-control  control-bg-gray">
+              <option [value]="null">{{"Select Income Band"|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of incomeBands">{{item.code}} - {{item.title}}</option>
+            </select>
+            <div *ngIf="validation.incomeBand.errors && validation.incomeBand.dirty">
+              <div class="text-danger" *ngIf="validation.incomeBand?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-primary">{{"Occupation"|appTranslate|async}}</label><br>
+            <select formControlName="occupation" class="form-control  control-bg-gray">
+              <option [value]="null">{{"Select Occupation"|appTranslate|async}}</option>
+              <option [value]="item.code" *ngFor="let item of occupationList">{{item.code}} - {{item.title}}</option>
+            </select>
+            <div *ngIf="validation.occupation.errors && (validation.occupation.dirty || validation.occupation.touched)">
+              <div class="text-danger" *ngIf="validation.occupation?.errors?.required">{{"Field is invalid"|appTranslate|async}}!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md position-relative">
+        <div class="mt-4">
+          <label class="form-label text-primary">{{"Employer Client Number"|appTranslate|async}}</label><br>
+          <div class="row">
+            <div class="col">
+              <app-input-basic name="employerClientNo" [form]="fc" [showLabel]="false"
+                [showValidation]="!employerClientNoTag.valid" [showValidationIcon]="true" #employerClientNoTag>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-btn type="secondary" icon="search"
+                (mclick)="clientS.openFindClientModal(employerClientNoTag.control)">Find</app-btn>
+            </div>
+
+            <div class="col">
+              <app-btn type="outline-nm" icon="add"
+                (mclick)="clientS.openCreateCorporateClientModal(employerClientNoTag.control)">Create New</app-btn>
+            </div>
+
+          </div>
+          <div
+            *ngIf="validation.employerClientNo.errors && (validation.employerClientNo.dirty || validation.employerClientNo.touched)">
+            <div class="text-danger" *ngIf="validation.employerClientNo?.errors?.required">{{"Field is invalid"|appTranslate|async}}!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-primary">{{"Company Name"|appTranslate|async}}</label><br>
+          <input type="text" [value]="companyName" class="form-control  control-bg-gray" readonly>
+          <div
+            *ngIf="validation.companyName.errors && (validation.companyName.dirty || validation.companyName.touched)">
+            <div class="text-danger" *ngIf="validation.companyName?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-primary">{{"Occupation Group"|appTranslate|async}}</label><br>
+          <select formControlName="occupationGroup" class="form-control  control-bg-gray"
+            (change)="setOccupationList()">
+            <option [value]="null">{{"Select Ocupation Group"|appTranslate|async}}</option>
+            <option [value]="item.code" *ngFor="let item of occupationGroupList">{{item.code}} - {{item.title}}</option>
+          </select>
+          <div
+            *ngIf="validation.occupationGroup.errors && (validation.occupationGroup.dirty || validation.occupationGroup.touched)">
+            <div class="text-danger" *ngIf="validation.occupationGroup?.errors?.required ">{{"Field is invalid"|appTranslate|async}}!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,49 @@
+<app-form-navigation [title]="'Age Group'"></app-form-navigation>
+<loader [loading]="loading" [height]="formTag.offsetHeight">
+  <div class="container">
+    <form [formGroup]="form" (submit)="onSubmit()" #formTag>
+      <div class="row">
+        <div class="col">
+
+          <div class="row mt-2">
+            <div class="col">
+              <div class="form-group">
+                <app-input-basic label="Age Group Code" type="text" [form]="form" [readonly]="true"  name="code" [stacked]="true">
+                </app-input-basic>
+            </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col">
+              <div class="form-group">
+                <app-input-basic label="Age From" type="text" [form]="form" name="ageFrom" [stacked]="true">
+                </app-input-basic>
+                <div class="feedback" *ngIf="form['controls']['ageFrom'].errors?.min">{{'Minimum Age is 1.'|appTranslate|async}}</div>
+                <div class="feedback" *ngIf="form['controls']['ageFrom'].errors?.max">{{'Maximum Age is 120.'|appTranslate|async}}</div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <app-input-basic label="Age To" type="text" [form]="form" name="ageTo" [stacked]="true">
+                </app-input-basic>
+                <div class="feedback" *ngIf="form['controls']['ageTo'].errors?.max">{{'Maximum Age is 120.'|appTranslate|async}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 justify-content-end">
+            <div class="col-2">
+              <app-btn type="secondary" icon="save" [hidden]="showPage" [valid]="form?.valid" (mclick)="onSubmit()">Submit</app-btn>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</loader>

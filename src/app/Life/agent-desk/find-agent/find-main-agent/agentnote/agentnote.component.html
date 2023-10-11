@@ -1,0 +1,73 @@
+<div class="container mt-5">
+
+  <form [formGroup]="noteForm">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+
+        <div class="mt-4">
+          <label class="mb-4 " style="text-decoration: underline">{{"Active Notes"|appTranslate|async}}</label><br>
+
+          <table class="table table-responsive table-striped">
+            <thead>
+            <tr class="">
+              <th scope="col">{{"ID"|appTranslate|async}}</th>
+              <th scope="col" style="width: 50%">{{"Note"|appTranslate|async}}</th>
+              <th scope="col">{{"Created By"|appTranslate|async}}</th>
+              <th scope="col">{{"Created On"|appTranslate|async}}</th>
+              <th scope="col">{{"Resolved"|appTranslate|async}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let note of notesList">
+              <td>{{note.id}}</td>
+              <td>{{note.note}}</td>
+              <td>{{note.createdBy}}</td>
+              <td>{{note.createdOn | date}}</td>
+              <td>
+                <div class="position-relative">
+                  <input *ngIf="!note.resolving" type="checkbox" class="form-control mx-auto" [checked]="note.resolve" (click)="resolve($event, note)" [ngClass]="{'cursor-not-allowed': note.resolve}">
+                  <div *ngIf="note.resolving" class="position-absolute top-50 start-50 translate-middle">
+                      <span class="fa fa-refresh fa-spin"></span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4">
+          <div class="row">
+            <div class="col-2">
+              <app-button buttonType="addCustom" text="Add New Note" (click)="onAddNote()"></app-button>
+            </div>
+          </div>
+          <div [hidden]="isNoteHidden" [formGroup]="noteForm">
+            <div class="row mt-4">
+              <textarea rows="10" class="form-control control-bg-gray" formControlName="note" [ngClass]="isInvalidNote ? 'border border-danger' : ''"></textarea>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col-2">
+                <label for="" class="form-label text-primary">{{"Visible To All"|appTranslate|async}}</label>
+                <input type="checkbox" class="form-control control-bg-gray" formControlName="visibleToAll">
+              </div>
+              <div class="col-2 ">
+                <label for="" class="form-label">&nbsp;</label>
+                <app-button buttonType="save" text="New Note" (click)="onSave()" *ngIf="!saving"></app-button>
+                <button *ngIf="saving" class="btn btn-outline-primary w-100" [disabled]="true">
+                    <span class="fa fa-refresh fa-spin"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+
+  </form>
+
+</div>

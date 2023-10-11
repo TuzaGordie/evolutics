@@ -1,0 +1,634 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-6 mb-2">
+      <h5 class="text-primary">{{"Premium"|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let item of createCoverCode.premium.coversPremium.premiumFrequency; let i = index">
+    <div class="col">
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group mt-2">
+            <app-input-td-rf #inp label="Frequency" [(model)]="item.frequency" [debug]="true"
+              [options]="frequencyTableList" type="select" labelType="ct" valueField="code" [stacked]="true"
+              [validators]="[validators.required]" #frequencyTag>
+            </app-input-td-rf>
+            <app-validation-message [input]="frequencyTag"></app-validation-message>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group mt-2">
+            <app-input-td-rf #inp label="Method" [(model)]="item.method" [options]="paymentInMethodsList" type="select"
+              labelType="cd" valueField="code" [stacked]="true" [validators]="[validators.required]" #methodTag>
+            </app-input-td-rf>
+            <app-validation-message [input]="methodTag"></app-validation-message>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group mt-2">
+            <app-input-td-rf #inp label="Factor" [(model)]="item.factor" [debug]="true" type="number" [stacked]="true"
+              [validators]="[validators.required]" #factorTag>
+            </app-input-td-rf>
+            <app-validation-message [input]="factorTag"></app-validation-message>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto d-flex">
+      <div class="form-group mt-2 me-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+
+        <app-button (click)="deleteNewFactorRow(i)" [buttonType]="'delete'">
+        </app-button>
+
+      </div>
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+
+        <app-button (click)="addNewFactorRow(i+1)" [buttonType]="'addCustom'"></app-button>
+
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Premium Calculation Basis"
+          [(model)]="createCoverCode.premium.coversPremium.premiumCalculationBasis" type="select" valueField="code"
+          labelType="ct" [options]="premiumCalcBasisList" [stacked]="true" [validators]="[validators.required]"
+          #premiumCalculationBasisTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="premiumCalculationBasisTag"></app-validation-message>
+      </div>
+      <div class="form-group mt-2">
+        <app-input-td-rf #inp label="Rate Calculation Basis"
+          [(model)]="createCoverCode.premium.coversPremium.rateCalculationBasis" type="select" valueField="code"
+          labelType="ct" [options]="rateCalculationBasisList" [stacked]="true" [validators]="[validators.required]"
+          #rateCalculationBasisTag>
+        </app-input-td-rf>
+        <app-validation-message [input]="rateCalculationBasisTag"></app-validation-message>
+      </div>
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Fixed Premium Amount"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.fixedPremiumAmount" type="number" />
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{"Fixed Rate Basis"|appTranslate|async}}</label>
+            <select #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.premium.coversPremium.fixedRateBasis">
+              <option></option>
+              <option *ngFor="let ot of fixedRateCalcBasisList" [ngValue]="ot.code">{{ot.code}} -
+                {{ot.title}}
+              </option>
+            </select>
+            <app-validation-message></app-validation-message>
+          </div>
+        </div>
+        <div class="col-5">
+          <div class="form-group mt-2">
+            <label class=" text-primary">{{"Fixed Rate"|appTranslate|async}}</label>
+            <input #inp="ngModel" class="form-control  control-bg-gray"
+              [(ngModel)]="createCoverCode.premium.coversPremium.fixedRate" type="number" />
+            <app-validation-message></app-validation-message>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Primary Premium Rate Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.primaryPremiumRateTable">
+          <option></option>
+          <option *ngFor="let ot of primaryPremiumRateList" [ngValue]="ot.code">
+            {{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Secondary Premium Rate Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.secondaryPremiumRateTable">
+          <option></option>
+          <option *ngFor="let ot of secondaryPremiumRateTableList" [ngValue]="ot.code">
+            {{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Short Term Rate Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.shortTermRateTable">
+          <option></option>
+          <option *ngFor="let ot of shortTermRateTableList" [ngValue]="ot.code">
+            {{ot.code}} - {{ot.description}}
+          </option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Policy Fee Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.policyFeeBasis" (change)="onSelectPolicyFeeBasis()">
+          <!-- <option>Select Policy Fee Basis</option> -->
+          <option></option>
+          <option *ngFor="let ot of policyFeeBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Policy Fee Fixed Amount"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.policyFeeFixedAmount" type="number" />
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="form-group mt-2" *ngIf="createCoverCode.premium.coversPremium.policyFeeFixedAmount == 1">
+        <label class=" text-primary">{{"Policy Fee Amount Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.policyFeeAmountTable">
+          <option></option>
+          <option *ngFor="let ot of policyFeeAmountTableList" [ngValue]="ot.code">{{ot.code}}
+            - {{ot.title}}</option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="form-group mt-2" *ngIf="createCoverCode.premium.coversPremium.policyFeeFixedAmount != 1">
+        <label class=" text-primary">{{"Policy Fee Amount Table"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.policyFeeAmountTable" type="number" />
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Premium Rounding Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.premiumRoundingBasis">
+          <option></option>
+          <option *ngFor="let ot of premiumRoundingBasisList" [ngValue]="ot.code">{{ot.code}}
+            - {{ot.title}}</option>
+        </select>
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Premium Rounding Factor"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.premiumRoundingFactor" type="number" />
+        <app-validation-message></app-validation-message>
+      </div>
+    </div>
+
+    <div class="col">
+
+      <div class="row mt-2 " *ngFor="let item of createCoverCode.premium.coversDiscounts; let i = index">
+        <div class="col">
+          <label class=" text-primary">{{"Discount Codes Allowed"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="item.discCode">
+            <option></option>
+            <option *ngFor="let ot of discountCodeAllowedList" [ngValue]="ot.companyCode">
+              {{ot.companyCode}} - {{ot.description}}
+            </option>
+          </select>
+          <app-validation-message></app-validation-message>
+        </div>
+        <div class="col-auto d-flex">
+          <div class="form-group mt-2 me-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="deleteNewdiscountCodeAllowedRow(i)" [buttonType]="'delete'">
+            </app-button>
+          </div>
+          <div class="form-group mt-2">
+            <label class=" text-primary">&nbsp;<br /></label>
+            <app-button (click)="addNewdiscountCodeAllowedRow(i+1)" [buttonType]="'addCustom'">
+            </app-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Fixed Smoker Age Adjustment"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.fixedSmokerAgeAdjustment" type="number" />
+        <app-validation-message></app-validation-message>
+      </div>
+
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Fixed Female Age Adjustment"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.premium.coversPremium.fixedFemaleAgeAdjustment" type="number" />
+        <app-validation-message></app-validation-message>
+      </div>
+
+      <div class="form-group mt-2"> <label class=" text-primary">&nbsp;</label>
+
+        <app-button buttonType="btnCustomClone" text="First Principle Parameters" data-bs-target="#fpModal"
+          data-bs-toggle="modal"></app-button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="savePremium()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="fpModal" tabindex="-1" data-bs-backdrop="false" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{'First Principle'|appTranslate|async}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div *ngIf="showMode == false" class="row">
+              <div class="row justify-content-center col-10"
+                *ngFor="let version of createCoverCode.premium.coversPremiumFPVersion; let i = index">
+                <div class="col-5">
+                  <div class="form-group">
+                    <label class="text-primary">{{"Version No"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="text" name="versionNo_{{version.rowId}}" [(ngModel)]="version.versionNo"
+                      disabled class="form-control control-bg-gray">
+                  </div>
+                </div>
+                <div class="col-5">
+                  <div class="form-group">
+                    <label class="text-primary">{{"Version Date"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="datetime-local" name="versionDate_{{version.rowId}}"
+                      [(ngModel)]="version.versionDate" class="form-control control-bg-gray">
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="form-group">
+                    <label for="" class="text-primary ">&nbsp;</label>
+                    <app-button buttonType="delete" (click)="deletePremiumVersion(i)">
+                    </app-button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="text-primary ">&nbsp;</label>
+                  <app-button buttonType="add" (click)="newPremiumVersion()"></app-button>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="showMode == true">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Version No"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    (change)="fetchByVersionNo(version.value)" [(ngModel)]="defaultVersionNo" #version>
+                    <option></option>
+                    <option *ngFor="let item of createCoverCode.premium.coversPremiumFPVersion"
+                      [value]="item.versionNo">
+                      {{item.versionNo}} - {{item.versionDate}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="text-primary ">&nbsp;</label>
+                  <app-button buttonType="add" (click)="newPremiumVersion()"></app-button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2 mb-4">
+              <hr>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Gross Yield Fixed Rate(%)"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.grossYieldFixedRate"
+                    class="form-control control-bg-gray">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"UW Expense Fixed Amount - At Time 0"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.uwExpenseFixedAmt"
+                    class="form-control control-bg-gray">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Hierarchy Comm Expense Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.hierarchyCommExpRate"
+                    class="form-control control-bg-gray">
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"VNB Target Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" [(ngModel)]="createCoverCode.premium.coversPremiumFP.vnbTargetRate"
+                    class="form-control control-bg-gray">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Gross Yield Rate Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.grossYieldRateTable">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"UW Expense Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id=""
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.uwExpenseTable"
+                    class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Hierarchy Commission Exp Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id=""
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.hierarchyCommExpTable"
+                    class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"VNB Target Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id=""
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.vnbTargetTable"
+                    class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Mortality Rate Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id=""
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.mortalityTable"
+                    class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Inflation Rate Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id=""
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.inflationRateTable"
+                    class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Lapse Fixed Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.lapseFixedRate" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Ref SA for CashFlow Projections"|appTranslate|async}}</label>
+                  <input #inp="ngModel" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.refSACashFlowPricing" />
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Profit Margin Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.profitMarginRate" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Other Margin Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.otherMarginRate" />
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Regulatory Levy 1 Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.regLvl1Rate" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Gross Yield Margin Rate Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.grossYieldMarginalRateTable">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Profit Margin Rate Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.profitMarginTable">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Other Margin Rate Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.otherMarginRateTable">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Regulatory Levy 2 Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.regLvl2Table">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Ref Monthly Annuity"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.refMonthlyAnnuityAmt" />
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Reward Expense Fixed Amount"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.rewardExpenseFixedAmt" />
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Initial Expense Amount"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.initialExpAmt" />
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Regulatory Levy 2 Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.regLvl2Rate" />
+                </div>
+              </div>
+              <div class="col-3">
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Reward Expense Amount Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.rewardExpAmt">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Commission Exp Rate"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.commExpRate" />
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Regulatory Levy 2 Table"|appTranslate|async}}</label>
+                  <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.regLvl2Table">
+                    <option></option>
+                    <option *ngFor="let item of genRates" [value]="item.code">
+                      {{item.code}} - {{item.description}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-3">
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-3">
+
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <label class="text-primary">{{"Commission Exp Rate Table"|appTranslate|async}}</label>
+                  <input #inp="ngModel" type="text" class="form-control control-bg-gray"
+                    [(ngModel)]="createCoverCode.premium.coversPremiumFP.commExpRateTable" />
+                </div>
+              </div>
+
+              <div class="col-3">
+
+              </div>
+              <div class="col-3">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</loader>

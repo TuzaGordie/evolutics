@@ -1,0 +1,150 @@
+<div class="container mt-5">
+  <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col-md">
+        <div class="d-block">
+          <div class="mt-4">
+            <label class="form-label text-red">Name</label><br>
+            <input type="text" formControlName="name" class="form-control  control-bg-gray" required>
+            <!-- <ng-container *ngIf="companyForm.get('name')?.invalid " >This is invalid field</ng-container> -->
+            <!-- <ng-container *ngIf="name.invalid && (name.dirty || name.touched)" class="danger"></ng-container> -->
+            <div *ngIf="validation.name.errors && (validation.name.dirty || validation.name.touched)">
+              <div class="text-danger" *ngIf="validation.name?.errors?.required ">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Country of Registration</label><br>
+            <input type="text" formControlName="country" class="form-control  control-bg-gray" required>
+            <div *ngIf="validation.country.errors && (validation.country.dirty || validation.country.touched)">
+              <div class="text-danger" *ngIf="validation.country?.errors?.required">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Email</label><br>
+            <input type="email" formControlName="email" class="form-control  control-bg-gray" required>
+            <div *ngIf="validation.email.errors && validation.email.dirty">
+              <div class="text-danger" *ngIf="validation.email?.errors?.required || validation.email?.errors?.pattern">
+                Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Phone Number</label><br>
+            <input type="number" formControlName="phoneNo" class="form-control  control-bg-gray" required>
+            <div *ngIf="validation.phoneNo.errors && (validation.phoneNo.dirty || validation.phoneNo.touched)">
+              <div class="text-danger" *ngIf="validation.phoneNo?.errors?.required">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Address</label><br>
+            <input type="text" formControlName="address" class="form-control  control-bg-gray" required>
+            <div *ngIf="validation.address.errors && (validation.address.dirty || validation.address.touched)">
+              <div class="text-danger" *ngIf="validation.address?.errors?.required">Field is invalid!
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <label class="form-label text-red">Address State</label><br>
+            <select formControlName="addressState" (change)="setTownList()" class="form-control  control-bg-gray"
+                    required>
+              <option [value]="null">Select State</option>
+              <option [value]="item.ID" *ngFor="let item of stateList">{{item.DESCRIPTION}}</option>
+            </select>
+            <div
+              *ngIf="validation.addressState.errors && (validation.addressState.dirty || validation.addressState.touched)">
+              <div class="text-danger" *ngIf="validation.addressState?.errors?.required">Field is invalid!
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label class="form-label text-red">Address Town</label><br>
+            <select formControlName="addressTown" class="form-control  control-bg-gray">
+              <option [value]="null">Select Town</option>
+              <option [value]="item.ID" *ngFor="let item of townList">{{item.DESCRIPTION}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md position-relative">
+        <div class="mt-4">
+          <label class="form-label text-red">Company redg no</label><br>
+          <input type="text" formControlName="companyRedg" class="form-control  control-bg-gray" required>
+          <div
+            *ngIf="validation.companyRedg.errors && (validation.companyRedg.dirty || validation.companyRedg.touched)">
+            <div class="text-danger" *ngIf="validation.companyRedg?.errors?.required">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Segment</label><br>
+          <select formControlName="seagment" class="form-control  control-bg-gray" required>
+            <option [value]="null">Select Sector</option>
+            <option [value]="item.ID" *ngFor="let item of segmentList">{{item.CODE_TITLE}}</option>
+          </select>
+          <div *ngIf="validation.country.errors && (validation.seagment.dirty || validation.seagment.touched)">
+            <div class="text-danger" *ngIf="validation.seagment?.errors?.required">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Website</label><br>
+          <input type="text" formControlName="website" class="form-control  control-bg-gray"
+                 placeholder="www.example.com" required>
+          <div *ngIf="validation.website.errors && (validation.website.dirty || validation.website.touched)">
+            <div class="text-danger"
+                 *ngIf="validation.website?.errors?.required || validation.website?.errors?.pattern">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Sector</label><br>
+          <select formControlName="sector" class="form-control  control-bg-gray" required>
+            <option [value]="null">Select Sector</option>
+            <option [value]="item.ID" *ngFor="let item of sectorList">{{item.CODE_TITLE}}</option>
+          </select>
+          <div *ngIf="validation.sector.errors && (validation.sector.dirty || validation.sector.touched)">
+            <div class="text-danger" *ngIf="validation.sector?.errors?.required ">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Address Country</label><br>
+          <select formControlName="addressCountry" (change)="setRegionList()" class="form-control  control-bg-gray"
+                  required>
+            <option [value]="null">Select Country</option>
+            <option [value]="item.ID" *ngFor="let item of countryList">{{item.DESCRIPTION}}</option>
+          </select>
+          <div
+            *ngIf="validation.addressCountry.errors && (validation.addressCountry.dirty || validation.addressCountry.touched)">
+            <div class="text-danger" *ngIf="validation.addressCountry?.errors?.required">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <label class="form-label text-red">Address Region</label><br>
+          <select formControlName="addressRegion" (change)="setStateList()" class="form-control  control-bg-gray"
+                  required>
+            <option [value]="null">Select Region</option>
+            <option [value]="item.ID" *ngFor="let item of regionList">{{item.DESCRIPTION}}</option>
+          </select>
+          <div
+            *ngIf="validation.addressRegion.errors && (validation.addressRegion.dirty || validation.addressRegion.touched)">
+            <div class="text-danger" *ngIf="validation.addressRegion?.errors?.required">Field is invalid!
+            </div>
+          </div>
+        </div>
+        <!-- <div class="nextbtn">
+            <span class="mx-3">Next</span>
+            <button type="submit"  class="btn next ml-3"><i class="fas fa-arrow-right"></i></button>
+        </div> -->
+      </div>
+    </div>
+
+
+  </form>
+</div>

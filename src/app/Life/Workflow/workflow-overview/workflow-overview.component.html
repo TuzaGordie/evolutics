@@ -1,0 +1,74 @@
+<!--<app-form-navigation [title]="'Workflow Overview'"></app-form-navigation>-->
+
+<div class="container-fluid bgcol">
+    <div class="row bggrey">
+        
+        <div class="col-12 col-lg-6 mx-auto">
+            <div class="row d-flex justify-content-center ">
+                <div class="restrict-height m-4" >
+                    <canvas baseChart class="spacing mb-4 "
+                        [datasets]="barChartData1"
+                        [labels]="barChartLabels1"
+                        [options]="barChartOptions1"
+                        [legend]="barChartLegend"
+
+                        [chartType]="barChartType1">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay container-fluid position-fixed top-0 start-0 op w-100 h-100" *ngIf="largearray.firstLayer">
+    
+    
+        </div>
+        <div class="overlay container-fluid position-absolute opabsolute" *ngIf="largearray.firstLayer" style="top: 20px; left: 0">
+            <div class="restrict-height">
+                <div class="close" (click)="open('firstLayer')">  <i class="fas fa-times"></i> </div>
+                <canvas baseChart class="spacing mb-4 isale "
+                [datasets]="barChartData3"
+                [labels]="barChartLabels3"
+                [options]="barChartOptions3"
+                [legend]="barChartLegend" 
+                [colors] = "chartColors3"
+                [chartType]="barChartType3">
+                
+                </canvas>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 mx-auto">
+            <div class="row bgcol d-flex justify-content-center ">
+                 <div class="m-4" >
+                     <canvas baseChart class="spacing mb-4 "
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [legend]="!barChartLegend"
+                        [colors] = "chartColors"
+    
+                        [chartType]="barChartType">
+    
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 my-5 mx-auto">
+            <div class="row  d-flex justify-content-center ">
+                <div class="restrict-height m-4" >
+                    <canvas baseChart class="spacing mb-4 "
+                        [datasets]="barChartData2"
+                        [labels]="barChartLabels2"
+                        [options]="barChartOptions2"
+                        [legend]="barChartLegend"
+                    
+                        [chartType]="barChartType2">
+        
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

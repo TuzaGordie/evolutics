@@ -1,0 +1,28 @@
+  .checkmark{
+    position: absolute;
+    left: 93%;
+    top: 12%;
+    font-size: 25px;
+    color: #514ef5;
+    display: block !important;
+  }
+  .bordercheck {
+    border: 2px solid #514ef5;
+    outline: 0;
+}
+.borderuncheck {
+    border: 2px solid red;
+    outline: 0;
+}
+.uncheckmark{
+    position: absolute;
+    left: 94%;
+    top: 12%;
+    font-size: 25px;
+    color: red;
+    display: block !important;
+}
+ .changecolor{
+   background-color: #514ef5 ;
+ }
+ 

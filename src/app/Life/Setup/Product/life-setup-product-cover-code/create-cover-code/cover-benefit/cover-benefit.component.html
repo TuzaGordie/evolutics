@@ -1,0 +1,565 @@
+<loader [text]="loadingText" [loading]="loading" [height]="container.offsetHeight">
+  <div class="" #container>
+    <div class="row mt-2 align-items-center">
+      <div class="col mb-2">
+        <h5 class="text-primary">{{'Benefits'|appTranslate|async}}</h5>
+      </div>
+      <div class="col-auto mb-2">
+        <text-case-1 lbl="Cover"
+          [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+        </text-case-1>
+      </div>
+    </div>
+    <div class="row align-items-end"
+      *ngFor="let coversBenefitClaims of createCoverCode.benefit.coversBenefitClaims; let i = index">
+      <div class="col-md">
+        <div class="form-group mt-2">
+          <label class=" text-primary">{{"Claims Type"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="coversBenefitClaims.type">
+            <option></option>
+            <option *ngFor="let ot of claimTypeList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}</option>
+          </select>
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-group mt-2">
+          <label class=" text-primary">{{"Benefit Payment Basis"|appTranslate|async}}</label>
+          <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="coversBenefitClaims.benPayBasis">
+            <option></option>
+            <option *ngFor="let ot of benifitPaymentList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+            </option>
+          </select>
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="form-group mt-2">
+          <label class=" text-primary text-center w-100">&nbsp;</label>
+          <app-button [buttonType]="'btnCustomClone'" [text]="'Details'" (click)="onBenefDetailView(i)">
+          </app-button>
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class=" d-flex ">
+          <app-button [buttonType]="'delete'" (click)="removeCoverBenefitClaim(i)"></app-button>
+          <span class="mx-1"></span>
+          <app-button [buttonType]="'addCustom'" (click)="addCoverBenefitClaim(i+1)"></app-button>
+        </div>
+        <app-validation-message></app-validation-message>
+      </div>
+      <div class="modal  fade" id="benefModal{{i}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        data-bs-backdrop="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title w-100" id="exampleModalLabel">{{'Claim Type:'|appTranslate|async}}
+                {{coversBenefitClaims.type}} &nbsp;
+                &nbsp;
+                &nbsp; &nbsp; &nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {{'Benefit Payment Basis:'|appTranslate|async}} {{coversBenefitClaims.benPayBasis}} </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"No of Payments"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="number" [(ngModel)]="coversBenefitClaims.noBenPay"
+                      class="control-bg-gray form-control ">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"Waiting Period (months)"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="number" [(ngModel)]="coversBenefitClaims.waitPeriod"
+                      class="control-bg-gray form-control ">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"No of Payments Table"|appTranslate|async}}</label>
+                    <select #inp="ngModel" name="" id="" [(ngModel)]="coversBenefitClaims.noPayTable"
+                      class="control-bg-gray form-control">
+                      <option value=""></option>
+                      <option *ngFor="let ot of noOfPayments" [value]="ot.code">{{ot.code}} -
+                        {{ot.description}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"Max No of Claims in 1 Policy Year"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="text" [(ngModel)]="coversBenefitClaims.maxNoClaimYr"
+                      class="control-bg-gray form-control ">
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"Frequency of Payments"|appTranslate|async}}</label>
+                    <select #inp="ngModel" name="" id="" [(ngModel)]="coversBenefitClaims.benPayFreq"
+                      class="control-bg-gray form-control">
+                      <option value=""></option>
+                      <option *ngFor="let ot of frequencyOfPayments" [value]="ot.code">{{ot.code}} -
+                        {{ot.title}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"Max No of Claims in Policy Life"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="text" [(ngModel)]="coversBenefitClaims.macNoClaimLife"
+                      class="control-bg-gray form-control ">
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-between">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"Cover Status On Claim"|appTranslate|async}}</label>
+                    <select #inp="ngModel" name="" id="" [(ngModel)]="coversBenefitClaims.statusOnClaim"
+                      class="control-bg-gray form-control">
+                      <option value=""></option>
+                      <option *ngFor="let ot of coverStatusOnClaim" [value]="ot.code">{{ot.code}} -
+                        {{ot.description}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"Claim Reporting Limit(months)"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="number" [(ngModel)]="coversBenefitClaims.claimReportLimit"
+                      class="control-bg-gray form-control ">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class=" text-primary">{{"No of Premiums Waived"|appTranslate|async}}</label>
+                    <input #inp="ngModel" type="number" [(ngModel)]="coversBenefitClaims.noPremWaived"
+                      class="control-bg-gray form-control ">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <app-input-td-rf #inp label="No of Premiums Waived Table"
+                    [(model)]="coversBenefitClaims.noPremWaivedTable" type="select" labelType="cd" valueField="code"
+                    [options]="grS.getRatesByCat|functionCaller1:'P'|async" [stacked]="true" #dependCoverTag>
+                  </app-input-td-rf>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <app-button [buttonType]="'save'" data-bs-dismiss="modal"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-3">
+        <div class="form-group mt-2">
+          <label class=" text-primary">{{"Min Sum Assured"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.benefit.coversSumAssured.minSumAssured" type="number" />
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group mt-2">
+          <label class=" text-primary">{{"Max Sum Assured"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control  control-bg-gray"
+            [(ngModel)]="createCoverCode.benefit.coversSumAssured.maxSumAssured" type="number" />
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mt-2">
+          <app-input-td-rf #inp label="Sum Assured Calc Basis"
+            [(model)]="createCoverCode.benefit.coversSumAssured.saCalcBasis" type="select" labelType="ct"
+            valueField="code" [options]="sumAssuredCalcBasisList" [stacked]="true" [validators]="[validators.required]"
+            #saCalcBasisTag>
+          </app-input-td-rf>
+          <app-validation-message [input]="saCalcBasisTag"></app-validation-message>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-2">
+          <app-input-td-rf #inp label="Cover on which Sum Assured Depends"
+            [(model)]="createCoverCode.benefit.coversSumAssured.dependCover" type="select" labelType="cd"
+            valueField="code" [options]="coversWaivedList" [stacked]="true" #dependCoverTag>
+          </app-input-td-rf>
+          <app-validation-message></app-validation-message>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-2">
+          <app-input-td-rf #inp label="Sum Assured Factor" [(model)]="createCoverCode.benefit.coversSumAssured.rate"
+            [disabled]="!dependCoverTag.value||sumAssuredFactorOptionsTag.value" type="text"
+            [validators]="(!!dependCoverTag.value&&!sumAssuredFactorOptionsTag.value)?[validators.required]:null"
+            [stacked]="true" #sumAssuredFactorTag>
+          </app-input-td-rf>
+          <app-validation-message [input]="sumAssuredFactorTag"></app-validation-message>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group mt-2">
+          <app-input-td-rf #inp label="Sum Assured Factor Options"
+            [(model)]="createCoverCode.benefit.coversSumAssuredFactorOptions.factorAllowed"
+            [disabled]="!dependCoverTag.value||sumAssuredFactorTag.value" type="number"
+            [validators]="(!!dependCoverTag.value&&!sumAssuredFactorTag.value)?[validators.required]:null"
+            [stacked]="true" #sumAssuredFactorOptionsTag>
+          </app-input-td-rf>
+          <app-validation-message [input]="sumAssuredFactorOptionsTag"></app-validation-message>
+        </div>
+      </div>
+
+      <div class="col-md-auto">
+        <div class="form-group mt-2 justify-content-center">
+          <label
+            class=" text-primary text-center w-100">{{"Automatically Decrease SA when above Max"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control  control-bg-gray mx-auto"
+            [(ngModel)]="createCoverCode.benefit.coversSumAssured.decreaseSaWhenAboveMax" type="checkbox" />
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="form-group mt-2 justify-content-center">
+          <label
+            class=" text-primary text-center w-100">{{"Deduct Outstanding Premiums from Benefit"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control  control-bg-gray mx-auto"
+            [(ngModel)]="createCoverCode.benefit.coversBenefit.deductOutstandingPremiumFromBenefit" type="checkbox" />
+        </div>
+      </div>
+
+      <div class="col-md-auto">
+        <div class="form-group mt-2 justify-content-center">
+          <label class=" text-primary text-center w-100">{{"Auto Process Maturity Benefit"|appTranslate|async}}</label>
+          <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+            [(ngModel)]="createCoverCode.benefit.coversBenefit.autoProcessMaturityBenefit" type="checkbox" />
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <div class="form-group mt-2 justify-content-center">
+          <label class=" text-primary text-center w-100">&nbsp;</label>
+          <app-button buttonType="btnCustomClone" text="Enter Schedule of Payments" (click)="onViewSchedulePayment()">
+          </app-button>
+
+        </div>
+      </div>
+
+
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4"
+        *ngFor="let coversSumAssuredOpts of createCoverCode.benefit.coversSumAssuredOpts; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group mt-2">
+              <app-input-td-rf #inp label="Sum Assured Options" [(model)]="coversSumAssuredOpts.saAllowed"
+                [disabled]="!!(createCoverCode.benefit.coversSumAssured.minSumAssured||createCoverCode.benefit.coversSumAssured.maxSumAssured)"
+                type="number" [stacked]="true">
+              </app-input-td-rf>
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="deleteNewbenefitAssuredRow(i)" [buttonType]="'delete'">
+              </app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="addNewbenefitAssuredRow(i+1)" [buttonType]="'addCustom'">
+              </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-4" *ngFor="let coversLoanIntRates of createCoverCode.benefit.coversLoanIntRates; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group mt-2">
+              <label class=" text-primary">{{"Loan Interest Rate Options"|appTranslate|async}}</label>
+              <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="coversLoanIntRates.loanIntRate"
+                name="loanIntRate_{{coversLoanIntRates.rowId}}" type="number" />
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="deleteNewbenefitInterestRow(i)" [buttonType]="'delete'">
+              </app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="addNewbenefitInterestRow(i+1)" [buttonType]="'addCustom'">
+              </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4"
+        *ngFor="let coversBenefitEscals of createCoverCode.benefit.coversBenefitEscals; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group mt-2">
+              <label class=" text-primary">{{"Sum Assured Escalation Options"|appTranslate|async}}</label>
+              <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="coversBenefitEscals.rate"
+                type="number" name="rate_{{coversBenefitEscals.rowId}}" />
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="deleteNewsumAssuredEscalationRow(i)" [buttonType]="'delete'">
+              </app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="addNewsumAssuredEscalationRow(i+1)" [buttonType]="'addCustom'">
+              </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let settle of createCoverCode.benefit.coversAutoSettleCover; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group mt-2">
+              <label class=" text-primary">{{"On Claim, Also settle"|appTranslate|async}}</label>
+              <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="settle.autoSettleCover"
+                name="settle_{{settle.rowId}}">
+                <option></option>
+                <option *ngFor="let ot of claimSettleList" [ngValue]="ot.code">
+                  {{ot.code}} - {{ot.description}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button [buttonType]="'delete'" (click)="deleteAutoSettle(i)">
+              </app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button [buttonType]="'addCustom'" (click)="addSettle(i+1)"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let terminate of createCoverCode.benefit.coversAutoTerminateCover; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group mt-2">
+              <label class=" text-primary">{{"On Caim, Also Terminate"|appTranslate|async}}</label>
+              <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="terminate.autoTerminateCover"
+                name="autoTerminateCover_{{terminate.rowId}}">
+                <option></option>
+                <option *ngFor="let ot of claimSettleList" [ngValue]="ot.code">{{ot.code}} - {{ot.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button [buttonType]="'delete'" (click)="deleteTerminate(i)"></app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button [buttonType]="'addCustom'" (click)="addTerminate(i+1)"></app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-4" *ngFor="let coversCoversWaived of createCoverCode.benefit.coversCoversWaived; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group mt-2">
+              <label class=" text-primary">{{"Covers Waived On Claim"|appTranslate|async}}</label>
+              <select #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="coversCoversWaived.codeWaived"
+                name="codeWaived_{{coversCoversWaived.rowId}}">
+                <option></option>
+                <option *ngFor="let ot of coversWaivedList" [ngValue]="ot.code">
+                  {{ot.code}} - {{ot.description}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="deleteNewCoversWaivedArrayRow(i)" [buttonType]="'delete'">
+              </app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="addNewCoversWaivedArrayRow(i+1)" [buttonType]="'addCustom'">
+              </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let item of createCoverCode.benefit.coverBenefitFreqs; let i = index">
+        <div class="row">
+          <div class="col-md">
+            <div class="row">
+              <div class="form-group mt-2">
+                <label class=" text-primary">{{"Benefit Payment Frequency"|appTranslate|async}}</label>
+                <select #inp="ngModel" class="form-control control-bg-gray" [(ngModel)]="item.benPayFreq"
+                  name="benPayFreq_{{item.rowId}}">
+                  <option></option>
+                  <option *ngFor="let ot of benefitPaymentFrequencies" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-auto d-flex">
+            <div class="form-group mt-2 me-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="removeBenefitFreq(i)" [buttonType]="'delete'">
+              </app-button>
+            </div>
+            <div class="form-group mt-2">
+              <label class=" text-primary">&nbsp;<br /></label>
+              <app-button (click)="addCoverBenefitFreq()" [buttonType]="'addCustom'">
+              </app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal  fade" id="exampleModal" tabindex="-1" data-bs-backdrop="false"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{'Schedule of Payments'|appTranslate|async}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- <div class="row">
+                        <div class="col-3">
+                            <label class=" text-primary">{{"Benefit Schedule Basis"|appTranslate|async}}</label>
+                           <select #inp="ngModel" name="" id="" class="form-control control-bg-gray"
+                                [(ngModel)]="createCoverCode.benefit.coversBenefitSchedules[0].benSchedBasis">
+                                <option *ngFor="let item of benefitScheduleBasis" [value]="item.code">
+                                    {{item.code}} - {{item.title}}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+            <div class="row mt-3">
+              <div class="col-md">
+                <label class=" text-primary">{{"Schedule Term"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+                <label class=" text-primary">{{"Schedule Duration"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+                <label class=" text-primary">{{"Schedule Factor"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+                <label class=" text-primary">{{"Sum Assured"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+
+              </div>
+            </div>
+            <div class="row mt">
+              <div class="col-md">
+                <label class=" text-primary ">{{"(Months)"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+                <label class="text-primary ">{{"(% Policy Term)"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+                <label class="text-primary ">{{"(% Sum Assured)"|appTranslate|async}}</label>
+              </div>
+              <div class="col-md">
+                <label class="text-primary ">&nbsp;</label>
+              </div>
+              <div class="col-3">
+
+              </div>
+            </div>
+            <div class="row mt-3"
+              *ngFor="let coversBenefitSchedules of createCoverCode.benefit.coversBenefitSchedules; let i = index">
+              <div class="col-md">
+                <input #inp="ngModel" type="number" [(ngModel)]="coversBenefitSchedules.schedTerm"
+                  class="form-control control-bg-gray">
+              </div>
+              <div class="col-md">
+                <input #inp="ngModel" type="text" [(ngModel)]="coversBenefitSchedules.schedDuration"
+                  class="form-control control-bg-gray">
+              </div>
+              <div class="col-md">
+                <input #inp="ngModel" type="text" [(ngModel)]="coversBenefitSchedules.schedFactor"
+                  class="form-control control-bg-gray">
+              </div>
+              <div class="col-md">
+                <input #inp="ngModel" type="text" [(ngModel)]="coversBenefitSchedules.amount"
+                  class="form-control control-bg-gray">
+              </div>
+              <div class="col-2">
+                <app-button [buttonType]="'delete'" (click)="removeCoverSchedule(i)"></app-button>
+              </div>
+            </div>
+
+            <div class="row mt-3 justify-content-end">
+              <div class="col-2">
+                <app-button [buttonType]="'add'" (click)="addCoversSchedule()"></app-button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <app-button buttonType="save" data-bs-dismiss="modal"></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3" *ngIf="!coverService.isShow">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <div class="form-group mt-2">
+          <label class=" text-primary">&nbsp;<br /></label>
+          <app-btn (mclick)="saveBenefits()" text="Submit" icon="save" [disabled]="isFormInvalid" type="outline"
+            *ngIf="!coverService.isShow" [text]="'save'">
+          </app-btn>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</loader>

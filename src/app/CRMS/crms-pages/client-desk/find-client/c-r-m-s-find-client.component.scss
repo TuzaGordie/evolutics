@@ -1,0 +1,125 @@
+  .checkmark{
+    position: absolute;
+    left: 80%;
+    top: 12%;
+    font-size: 25px;
+    color: #0da00d;
+    display: block !important;
+  }
+  .bordercheck {
+    border: 2px solid rgb(11, 165, 50);
+    outline: 0;
+}
+.borderuncheck {
+    border: 2px solid rgb(161, 31, 31);
+    outline: 0;
+}
+.uncheckmark{
+    position: absolute;
+    left: 80%;
+    top: 12%;
+    font-size: 25px;
+    color: red;
+    display: block !important;
+}
+ .changecolor{
+   background-color: #f54e4e; ;
+ }
+
+
+
+
+  select.form-control-lg {
+    font-size: 1rem;
+    min-height: auto;
+    padding: 0.5rem 0.75rem;
+  }
+
+  a.nav-link{
+    font-weight: bolder;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  // .navbar-nav > li{
+  //   padding-left:8px;
+  //   padding-right:8px;
+  // }
+
+
+  .navbar-nav > li{
+    margin-left:8px;
+    margin-right:8px;
+  }
+
+  .top-btn{
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+
+
+  .avatar {
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 20px !important;
+  }
+
+  .search-bar input,
+  .search-bar::-webkit-input-placeholder {
+    padding:2px 2px 2px 2px !important;
+    font-size: 1rem;
+    line-height: 2.3;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  td{
+    a{
+      color:black;
+    }
+  }
+
+  .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(255,0,0,0.2);
+  }
+
+  .dropdown-item{
+    display: block;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    margin: 0px;
+  }
+
+
+  .submenu-bar-dropdown{
+    font-size: 8px;
+  }
+
+  .page-link {
+    position: relative;
+    display: block;
+    color: black;
+    text-decoration: none;
+    background-color: #fff;
+    /* border: 1px solid #dee2e6; */
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+
+.created-date{
+  font-size: .75rem;
+  margin-top: -0.8rem;
+  display: block;
+  margin-left: 1rem;
+}
+

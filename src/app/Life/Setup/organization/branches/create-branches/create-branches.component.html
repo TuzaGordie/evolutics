@@ -1,0 +1,97 @@
+<!-- <app-form-navigation [title]="'Set Up / Organization / Branch'"></app-form-navigation> -->
+<form novalidate #f="ngForm">
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch Code"|appTranslate|async}}</label>
+        <input class="form-control form-control-sm control-bg-gray" [attr.disabled]="branchCodeDisable ? '' : null"
+          name="branchCode" [(ngModel)]="createBranch.code">
+      </div>
+      <div class="col">
+        <label class="form-label text-primary">{{"Company"|appTranslate|async}}</label>
+        <select class="form-control form-control-sm control-bg-gray" name="companyCode"
+          [(ngModel)]="createBranch.companyCode">
+          <option></option>
+          <option *ngFor="let company of companies" [value]="company.code">{{company.code}} - {{company.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch Address"|appTranslate|async}}</label>
+        <input class="form-control form-control-sm control-bg-gray" name="branchAddress"
+          [(ngModel)]="createBranch.branchAddress">
+      </div>
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch Phone No"|appTranslate|async}}</label>
+        <input class="form-control form-control-sm control-bg-gray" name="branchPhone"
+          [(ngModel)]="createBranch.branchPhone">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch Country"|appTranslate|async}}</label>
+        <!-- <input class="form-control form-control-sm control-bg-gray"> -->
+        <select class="form-control form-control-sm control-bg-gray" #country (change)="selectCountry(country.value)"
+          name="country" [(ngModel)]="createBranch.country">
+          <option value=""></option>
+          <option *ngFor="let country of countries" [value]="country.code">{{country.code}} - {{country.description}}</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch Region"|appTranslate|async}}</label>
+        <select class="form-control form-control-sm control-bg-gray" #region (change)="selectRegion(region.value)"
+          name="region" [(ngModel)]="createBranch.region">
+          <option></option>
+          <option *ngFor="let region of regions" [value]="region.code">{{region.code}} - {{region.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch State"|appTranslate|async}}</label>
+        <select class="form-control form-control-sm control-bg-gray" #state (change)="selectState(state.value)"
+          name="city" [(ngModel)]="createBranch.city">
+          <option></option>
+          <option *ngFor="let state of states" [value]="state.code">{{state.code}} - {{state.description}}</option>
+        </select>
+      </div>
+
+      <div class="col">
+        <label class="form-label text-primary">{{"Branch Town"|appTranslate|async}}</label>
+        <select class="form-control form-control-sm control-bg-gray" name="town"
+          [(ngModel)]="createBranch.town">
+          <option></option>
+          <option *ngFor="let town of towns" [value]="town.code">{{town.code}} - {{town.description}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label class="form-label text-primary">{{"Spool Directory"|appTranslate|async}}</label>
+        <input class="form-control form-control-sm control-bg-gray" name="spoolFolderPath"
+          [(ngModel)]="createBranch.spoolFolderPath">
+      </div>
+      <div class="col-6">
+        <label class="form-label text-primary">{{"Description"|appTranslate|async}}</label>
+        <input class="form-control form-control-sm control-bg-gray" name="description"
+          [(ngModel)]="createBranch.description">
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12 d-flex justify-content-end">
+        <div class="form-group">
+          <label for="" class="form-label text-primary">&nbsp;</label>
+          <app-button buttonType="save" (click)="submitCreateBranchForm()"></app-button>
+        </div>
+      </div>
+    </div>  
+  </div>
+</form>

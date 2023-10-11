@@ -1,0 +1,228 @@
+<div class="container justify-content-between">
+    <h6>{{"Payment Authorization Tiers"|appTranslate|async}}</h6>
+    <div class="row" >
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Tier CAter"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label text-primary">{{"Tier 1"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 2"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 3"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 4"|appTranslate|async}}</label></div>
+    </div>
+    <div class="row mt-2"  *ngFor="let payment of paymentAuthTierArray.controls;">
+        <!--  -->
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray">
+          <option value="cat1">{{"Pa"|appTranslate|async}}</option>
+          <option value="cat2">{{"Qa"|appTranslate|async}}</option>
+          <option value="cat3">{{"Dv"|appTranslate|async}}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button [buttonType]="'add'" (click)="addPaymentAuthTierArray()" ></app-button>
+         <!--  -->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h6>{{"Quotation Authorization Tiers"|appTranslate|async}}</h6>
+    <div class="row">
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label text-primary">{{"Tier 1"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 2"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 3"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 4"|appTranslate|async}}</label></div>
+    </div>
+    <div class="row mt-2" *ngFor="let quoter of quoterAuthTierArray.controls;" >
+        <!-- -->
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray">{{"Currency"|appTranslate|async}}</select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button [buttonType]="'add'" (click)="addQuoterAuthTier()" ></app-button>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h6>{{"Discharge Voucher Authorization Tiers"|appTranslate|async}}</h6>
+    <div class="row">
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label text-primary">{{"Tier 1"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 2"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 3"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 4"|appTranslate|async}}</label></div>
+    </div>
+    <div class="row mt-2" *ngFor="let discharge of dischargeVoucherAuthTierArray.controls;">
+        <!--  -->
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray">{{"Currency"|appTranslate|async}}</select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button [buttonType]="'add'" (click)="addDischargeVoucherAuthTier()"  ></app-button>
+         <!---->
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h6>{{"Policy Accounting Authorization Tiers"|appTranslate|async}}</h6>
+    <div class="row">
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label text-primary">{{"Tier 1"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 2"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 3"|appTranslate|async}}</label></div>
+      <div class="col-md-1">
+        <label class="form-label text-primary">{{"Currency"|appTranslate|async}}</label>
+      </div>
+      <div class="col-md-2"><label class="form-label text-primary">{{"Tier 4"|appTranslate|async}}</label></div>
+    </div>
+    <div class="row mt-2" *ngFor="let policy of policyAccountAuthTierArray.controls;" >
+        <!-- -->
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray">{{"Currency"|appTranslate|async}}</select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+      <div class="col-md-1">
+        <select fromControlName=""class="form-control control-bg-gray"></select>
+      </div>
+      <div class="col-md-2">
+        <input class="form-control  control-bg-gray" type="text" />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 d-flex justify-content-end">
+        <app-button [buttonType]="'add'"(click)="addPolicyAccountAuthTier()" ></app-button>
+        <!--  -->
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <h4>{{'Convert Quote'|appTranslate|async}}</h4>
+    </div>
+    <div class="col-auto">
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="close()"
+      ></button>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="" class="form-label text-primary"
+            >{{'Reason for Conversion'|appTranslate|async}}</label
+          >
+          <select
+            formControlName="reason"
+            name=""
+            id=""
+            class="form-control control-bg-gray"
+          >
+            <option disabled>{{'Choose an option'|appTranslate|async}}</option>
+            <ng-container *ngFor="let b of reasons">
+              <option [value]="b.code">{{ b.code }} - {{ b.title }}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end my-5">
+      <app-btn (mclick)="submit()" icon="save" type="secondary"
+        >Convert</app-btn
+      >
+    </div>
+  </form>
+</div>

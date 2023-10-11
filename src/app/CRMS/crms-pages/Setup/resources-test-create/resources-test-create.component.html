@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-lg-4 row-cols-md-2 row-cols-sm-1 row cols-xs-1">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Test Code'|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray" disabled>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Product Class'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Product Code'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Version No'|appTranslate|async}}</label>
+        <input type="number" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Version Date'|appTranslate|async}}</label>
+        <input type="date" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Status'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray"></select>
+      </div>
+    </div>
+    <div class="col-lg-2 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn icon="save" type="secondary">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+
+  <hr class="mt-3">
+
+  <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 row-cols-sm-1 row cols-xs-1 justify-content-end mt-3">
+    <div class="col">
+      <app-btn type="secondary" icon="download">{{'Download'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="secondary" icon="upload">{{'Upload'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 row-cols-sm-1 row cols-xs-1" *ngFor="let i of tableCounter()">
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Question Code'|appTranslate|async}}</label>
+        <input type="text" class="form-control control-bg-gray" disabled>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Text'|appTranslate|async}}</label>
+        <textarea class="form-control control-bg-gray" rows="1"></textarea>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Response Required'|appTranslate|async}}</label>
+        <input type="checkbox" class="form-control control-bg-gray">
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">{{'Response Type'|appTranslate|async}}</label>
+        <select name="" id="" class="form-control control-bg-gray" ngModel (ngModelChange)="valueChanged($event)">
+          <option value="OBJ">OBJ</option>
+          <option value="ABC">ABC</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn type="dark" icon="add" (click)="tableInc()"></app-btn>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="form-group">
+        <label for="" class="form-label text-primary">&nbsp;</label>
+        <app-btn type="outline" icon="delete" (click)="tableDec()"></app-btn>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-lg-6 row-cols-md-2 row-cols-sm-1 row cols-xs-1 justify-content-between mt-5">
+    <div class="col">
+      <app-btn type="dark" icon="add" (click)="tableInc()">{{'Add'|appTranslate|async}}</app-btn>
+    </div>
+    <div class="col">
+      <app-btn type="secondary" icon="checked">{{'Submit'|appTranslate|async}}</app-btn>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="OBJModal" tabindex="-1" aria-labelledby="OBJModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

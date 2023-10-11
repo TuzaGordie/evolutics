@@ -1,0 +1,9 @@
+<div [formGroup]="form">
+  <app-input-label [colored]="colored" [form]="form" [hint]="hint" [id]="id" [invalidCheckbox]="invalidCheckbox"
+    [isRequired]="isRequired" [label]="label" [lblCl]="lblCl" [light]="light" [mini]="mini" [showLabel]="showLabel"
+    [small]="small" [stacked]="stacked" [theme]="theme" [xsmall]="xsmall">
+  </app-input-label>
+  <input type="text" [formControlName]="name" [class]="inpCl|inputClass:valid:invalid:showValidation" ng2TelInput
+    [ng2TelInputOptions]="config" (hasError)="isValid($event)" #pn (ng2TelOutput)="getNumber($event)"
+    (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)" />
+</div>

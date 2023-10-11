@@ -1,0 +1,42 @@
+<!-- <app-form-navigation [title] = "'View Client'"></app-form-navigation> -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h1 class="my-5">{{"Endorsements"|appTranslate|async}}</h1>
+      <p class="py-3"><b>{{"Client Name"|appTranslate|async}}:</b> <span class="px-3">{{endorseList?.clientNo}}</span></p>
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+          <tr>
+            <th scope="col" style="border-bottom-left-radius: 12px;">{{"Endorsements No"|appTranslate|async}}</th>
+            <th scope="col">{{"Endorsements Category"|appTranslate|async}}</th>
+            <th scope="col">{{"Type"|appTranslate|async}}</th>
+            <th scope="col">{{"Field Names"|appTranslate|async}}</th>
+            <th scope="col">{{"From"|appTranslate|async}}</th>
+            <th scope="col">{{"To"|appTranslate|async}}</th>
+            <th scope="col">{{"Created By"|appTranslate|async}}</th>
+            <th scope="col">{{"Auth By"|appTranslate|async}}</th>
+            <th scope="col">{{"Pending"|appTranslate|async}}</th>
+            <th scope="col">{{"Created On"|appTranslate|async}}</th>
+            <th scope="col" style="border-top-right-radius: 12px;">{{"Auth On"|appTranslate|async}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{endorseList.endorseNo}}</th>
+            <td>{{endorseList.endorseCat}}</td>
+            <td>{{endorseList.endorseType}}</td>
+            <td>{{endorseList.fieldName}}</td>
+            <td></td>
+            <td></td>
+            <td>{{endorseList.createdBy}}</td>
+            <td>{{endorseList.authBy}}</td>
+            <td>{{endorseList.pending}}</td>
+            <td>{{endorseList.createdOn}}</td>
+            <td>{{endorseList.authOn}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

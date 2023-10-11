@@ -1,0 +1,273 @@
+<loader [loading]="loading" text="Saving Asset Details...">
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="container-fluid">
+          <div class="control-grp">
+            <label class="form-label "> Property Type</label>
+            <select [(ngModel)]="propertyType" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Property Type</option>
+              <option *ngFor="let asset of propertTypeData" [value]="asset.code">{{asset.code}} - {{asset.title}}
+              </option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Property Usage</label>
+            <select [(ngModel)]="propertyUsage" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Property Usage</option>
+              <option *ngFor="let asset of propertyUsageData" [value]="asset.code">{{asset.code}} - {{asset.title}}
+              </option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Relationship of Assured to Property</label>
+            <select [(ngModel)]="relationshipOfAssuredToproperty" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Relationship Of Assured To Property</option>
+              <option *ngFor="let asset of relationshipofAssuredtoPropertyData" [value]="asset.code">{{asset.code}} -
+                {{asset.code}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Country</label>
+            <select [(ngModel)]="country" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Country</option>
+              <option *ngFor="let asset of lS.getCountries|functionCaller|async" value="{{asset.code}}">{{asset.code}} -
+                {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Region</label>
+            <select [(ngModel)]="region" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Region</option>
+              <option *ngFor="let asset of lS.getRegion|functionCaller1:country|async" [value]="asset.code">
+                {{asset.code}}
+                - {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> State</label>
+            <select [(ngModel)]="state" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select State</option>
+              <option *ngFor="let asset of lS.getStates|functionCaller1:region|async" [value]="asset.code">
+                {{asset.code}}
+                - {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div><br>
+          <div class="control-grp">
+            <label class="form-label "> Town</label>
+            <select [(ngModel)]="town" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Town</option>
+              <option *ngFor="let asset of lS.getTown|functionCaller1:state|async" [value]="asset.code">
+                {{asset.description}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Address</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="address" name="address">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Geolocation</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="geolocation" name="geolocation">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Construction Status</label>
+            <input type="text" class="form-control control-bg-gray mr-2" [(ngModel)]="constructionStatus"
+              name="constructionStatus">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="container-fluid">
+          <div class="control-grp">
+            <label class="form-label "> Nature of Goods Produced- <span class="fw-light">Only where usage is
+                factory</span></label>
+            <select [(ngModel)]="numberOfGoodsProduced" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Number of Goods Produced</option>
+              <option *ngFor="let asset of numberofGoodsProducedData" [value]="asset.code">{{asset.code}} -
+                {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> No of Floors</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="noOfFloors" name="noOfFloors">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> No of Appartments in Building</label>
+            <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="noOfApartmentsInBuilding"
+              name="noOfApartmentsInBuilding">
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <p class="form-label  fw-bold">Is any of the following within a 10km radius? <span class="fw-light">Tick if
+                Yes</span></p>
+            <div class="row">
+              <div class="col d-inline-flex">
+                <label class="me-3 form-label  fw-bold">
+                  Sawmill
+                </label>
+                <input type="checkbox" [(ngModel)]="sawmill" name="sawmill"
+                  class="mt-auto form-control control-bg-gray d-inline-block">
+              </div>
+              <div class="col d-inline-flex">
+                <label class="me-3 form-label  fw-bold">
+                  Fuel Station
+                </label>
+                <input type="checkbox" [(ngModel)]="fuelStation" name="fuelStation"
+                  class="mt-auto form-control control-bg-gray d-inline-block">
+              </div>
+              <div class="col d-inline-flex">
+                <label class="me-3 form-label  fw-bold">
+                  Factory
+                </label>
+                <input type="checkbox" [(ngModel)]="factory" name="factory"
+                  class="mt-auto form-control control-bg-gray d-inline-block">
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> No of Rooms in insured Property</label>
+            <select [(ngModel)]="noOfRoomsInInsuredProp" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Rooms insured Property</option>
+              <option *ngFor="let asset of noofRoomsInInsuredPropertyData" [value]="asset.code">{{asset.code}} -
+                {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Insured Portion of Building</label>
+            <select [(ngModel)]="insuredPortionOfBuild" class="form-control control-bg-gray ht-41">
+              <option [ngValue]="null">Select Insured Portion of Building</option>
+              <option *ngFor="let asset of insuredPortionofBuildingData" [value]="asset.code">{{asset.code}} -
+                {{asset.title}}</option>
+            </select>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i></div>
+          </div>
+          <br>
+          <div class="control-grp">
+            <label class="form-label "> Apartment Nos insured- <span class="fw-light">If Part
+                insured</span></label>
+            <div class="row">
+              <div class="col-7">
+                <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="apartmentNosInsured"
+                  name="apartmentNosInsured">
+              </div>
+              <!--<div class="col-3">
+              <app-button buttonType="addCustomGB" text="Add"></app-button>
+            </div>-->
+            </div>
+            <div style="display: none;"><i class="fa fa-check"></i></div>
+            <div style="display: none;"><i class="fa fa-times"></i>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-label "> Currency</label>
+              <select [(ngModel)]="currency" class="form-control control-bg-gray ht-41">
+                <option [ngValue]="null">Select Currency</option>
+                <option *ngFor="let asset of currencyData" [value]="asset.code">{{asset.code}} - {{asset.description}}
+                </option>
+              </select>
+              <div style="display: none;"><i class="fa fa-check"></i></div>
+              <div style="display: none;"><i class="fa fa-times"></i></div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label "> Insured Portion of Building</label>
+              <input class="form-control control-bg-gray mr-2" [(ngModel)]="insuredPortionOfBuild"
+                name="insuredPortionOfBuild">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-label "> Monthly Rent <span class="fw-light">If tenant</span></label>
+              <input type="number" class="form-control control-bg-gray mr-2" [(ngModel)]="monthlyRent"
+                name="monthlyRent">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label "> Year of Construction</label>
+              <input type="date" class="form-control control-bg-gray mr-2" [(ngModel)]="yearOfConstrution"
+                name="yearOfConstrution">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="form-label "> Surface Area</label>
+              <input class="form-control control-bg-gray mr-2" [(ngModel)]="surfaceArea" name="surfaceArea">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label "> Risk Category</label>
+              <input class="form-control control-bg-gray mr-2" [(ngModel)]="riskCategory" name="riskCategory">
+            </div>
+          </div>
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class="row justify-content-between btns-area">
+        <div class="col-md-6">
+          <div class="row">
+            <!--<div class="col-5">
+            <app-button buttonType="defaultGB" text="Content"></app-button>
+          </div>
+          <div class="col-5">
+            <app-button buttonType="defaultGB" text="Risk Survey"></app-button>
+          </div>-->
+          </div>
+        </div>
+        <div class="col-md-2">
+          <app-btn icon="save" mclass="btn btn-outline-warning btn-lg btn-clone w-100" (click)="save()">Save</app-btn>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</loader>

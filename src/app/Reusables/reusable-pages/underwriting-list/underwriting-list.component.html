@@ -1,0 +1,346 @@
+<div class="">
+  <div class="">
+    <div class="my-4">
+      <h5 class="text-primary">
+        {{'Questionnaire'|appTranslate|async}}
+      </h5>
+      <div class="">
+        <table-plain [data]="list" [displayedColumns]="dCols"></table-plain>
+      </div>
+    </div>
+    <div class="my-5 ">
+      <h5 class="text-primary">
+        {{'Requirements'|appTranslate|async}}
+      </h5>
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col">{{'Assured'|appTranslate|async}}</th>
+          <th scope="col">{{'Requirement'|appTranslate|async}}</th>
+          <th scope="col">{{'Cover'|appTranslate|async}}</th>
+          <th scope="col">{{'Provider Assigned'|appTranslate|async}}</th>
+          <th scope="col">{{'Requested By'|appTranslate|async}}</th>
+          <th scope="col">{{'Requested On'|appTranslate|async}}</th>
+          <th scope="col">{{'Status'|appTranslate|async}}</th>
+          <th scope="col">{{'Updated On'|appTranslate|async}}</th>
+          <th scope="col">{{'Updated By'|appTranslate|async}}</th>
+          <th scope="col">{{'Valid'|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>--</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-- <i class="fas fa-pencil-alt ml-2" aria-hidden="true" data-bs-toggle="modal"
+                    data-bs-target="#providerAssignedModal"></i></td>
+          <td>-</td>
+          <td>-</td>
+          <td>-- <i class="fas fa-pencil-alt ml-2" aria-hidden="true" data-bs-toggle="modal"
+                    data-bs-target="#statusChangeModal"></i></td>
+          <td>--</td>
+          <td>--</td>
+          <td>--</td>
+
+        </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+    <div class="my-5 ">
+      <h5 class="text-primary">
+        {{'Underwriting Result'|appTranslate|async}}
+      </h5>
+
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col">{{'Code'|appTranslate|async}}</th>
+          <th scope="col">{{'Description'|appTranslate|async}}</th>
+          <th scope="col">{{'Assured'|appTranslate|async}}</th>
+          <th scope="col">{{'Auto Loading'|appTranslate|async}}</th>
+          <th scope="col">{{'Status'|appTranslate|async}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>--</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+
+        </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+    <div class="row">
+      <div class="col">
+        <app-btn type="secondary" >{{'Calculate BMI'|appTranslate|async}}</app-btn>
+      </div>
+      <div class="col">
+        <app-btn type="secondary" routerLink="document">{{'Document'|appTranslate|async}}</app-btn>
+      </div>
+      <div class="col">
+        <app-btn type="secondary" routerLink="decision">{{'Decision'|appTranslate|async}}</app-btn>
+      </div>
+      <div class="col">
+        <app-btn type="secondary" data-bs-toggle="modal"
+                 data-bs-target="#providerAssignedModal2">{{'Assign Provider'|appTranslate|async}}
+        </app-btn>
+      </div>
+      <div class="col">
+        <app-btn type="secondary" data-bs-toggle="modal"
+                 data-bs-target="#addRequirementModal">{{'Add Requirement'|appTranslate|async}}
+        </app-btn>
+      </div>
+      <div class="col">
+        <app-btn type="secondary"  data-bs-toggle="modal"
+                 data-bs-target="#addConditionModal">{{'Add Condition'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="providerAssignedModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Assign Provider'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Provider Action Required'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Provider No'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col-2">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn icon="search" type="outline"></app-btn>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">&nbsp;</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Instruction to provider - optional'|appTranslate|async}}</label>
+            <textarea class="form-control control-bg-gray">
+
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="providerAssignedModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Assign Provider'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{'This action will impact all the requirement codes'|appTranslate|async}}</p>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Provider Action Required'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Provider No'|appTranslate|async}}</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+          <div class="col-2">
+            <label for="" class="form-label">&nbsp;</label>
+            <app-btn icon="search" type="outline"></app-btn>
+          </div>
+          <div class="col">
+            <label for="" class="form-label">&nbsp;</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Instruction to provider - optional'|appTranslate|async}}</label>
+            <textarea class="form-control control-bg-gray">
+
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="statusChangeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Change Status'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'New Status'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addRequirementModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Add Requirement'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Requirement Code'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Description'|appTranslate|async}}</label>
+            <input class="form-control control-bg-gray">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Reason'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="addConditionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Add Condition'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row row-cols-1 row-cols-lg-2 row-cols-md-2 row-cols-sm-1 row-cols-xs-1">
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Assured'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+          </div>
+
+
+
+
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Condition Basis'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+
+
+          </div>
+
+
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Condition value'|appTranslate|async}}</label>
+            <textarea rows="1" class="form-control control-bg-gray"></textarea>
+          </div>
+
+
+
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Claim Type'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+
+
+          </div>
+
+
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Peril'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+
+
+          </div>
+
+
+          <div class="col">
+            <label for="" class="form-label text-primary">{{'Reason'|appTranslate|async}}</label>
+            <select class="form-control control-bg-gray">
+              <option value=""></option>
+            </select>
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <app-btn type="outline" icon="save">{{'Save'|appTranslate|async}}</app-btn>
+      </div>
+    </div>
+  </div>
+</div>

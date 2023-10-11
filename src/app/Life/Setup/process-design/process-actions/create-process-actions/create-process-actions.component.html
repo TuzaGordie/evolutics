@@ -1,0 +1,234 @@
+<loader [text]="loadingText" [loading]="loading">
+  <!-- <app-form-navigation [title]="'Set Up / Process Design / Process Actions '"></app-form-navigation> -->
+  <div class="d-flex justify-content-end my-3" *ngIf="isEdit">
+    <app-btn [type]="processActionForm.form.enabled ? 'outline': 'primary'" (mclick)="toggleEditMode()" icon="edit">
+      Edit
+    </app-btn>
+  </div>
+  <hr *ngIf="isEdit">
+  <form (ngSubmit)="createProcessAction()" #processActionForm="ngForm">
+    <div class="container">
+      <div class="row">
+        <p>
+          {{ 'Process Code' | appTranslate | async }}:
+          {{ processSetup?.code }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{
+            'Description' | appTranslate | async
+          }}: {{ processSetup?.description }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          &nbsp;{{ 'Process Group' | appTranslate | async }}:
+          {{ processSetup?.group }}
+        </p>
+      </div>
+      <div>
+        <br />
+        <div class="row">
+          <div class="col-md-2">
+            <label for="" class="form-label text-primary">{{
+              'Event Code' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-md-2">
+            <label for="" class="form-label text-primary">{{
+              'Action' | appTranslate | async
+            }}</label>
+          </div>
+
+          <div class="col-md-2">
+            <label for="" class="form-label text-primary">{{
+              'Batch' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-md-2">
+            <label for="" class="form-label text-primary">{{
+              'Document Code' | appTranslate | async
+            }}</label>
+          </div>
+          <div class="col-md-2">
+            <label for="" class="form-label text-primary"
+              >{{ 'Workflow Task Code' | appTranslate | async }}
+            </label>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <div
+          class="row mb-2"
+          *ngFor="let item of processActions; let i = index"
+        >
+          <div class="col-md-2">
+            <input
+              [(ngModel)]="item.eventCode"
+              class="form-control control-bg-gray"
+              name="eventCode_{{ i }}"
+              #eventCode="ngModel"
+              required
+              disabled
+            />
+
+            <!-- <div class="text-danger" *ngIf="eventCode.errors && (eventCode.dirty || eventCode.touched)">
+              <p *ngIf="eventCode.errors.required">{{"Event Code is required"|appTranslate|async}}</p>
+            </div> -->
+          </div>
+          <div class="col-md-2">
+            <select
+              [(ngModel)]="item.eventAction"
+              (ngModelChange)="changedAction($event, item)"
+              class="form-control control-bg-gray"
+              name="action_{{ i }}"
+              required
+              #action="ngModel"
+              [disabled]="isShow"
+            >
+              <option value=""></option>
+              <option
+                value="{{ actionItem?.code }}"
+                *ngFor="let actionItem of actionArray"
+              >
+                {{ actionItem?.code }} - {{ actionItem?.title }}
+              </option>
+            </select>
+
+            <div
+              class="text-danger"
+              *ngIf="action.errors && (action.dirty || action.touched)"
+            >
+              <p *ngIf="action.errors.required">
+                {{ 'Action is required' | appTranslate | async }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <select
+              [(ngModel)]="item.batchLinked"
+              class="form-control control-bg-gray"
+              name="batch_{{ i }}"
+              required
+              #batch="ngModel"
+              [disabled]="isShow || item.eventAction != 'TB'"
+            >
+              <option value=""></option>
+              <option
+                value="{{ batch?.code }}"
+                *ngFor="let batch of batchArray"
+              >
+                {{ batch?.code }} - {{ batch?.description }}
+              </option>
+            </select>
+
+            <div
+              class="text-danger"
+              *ngIf="batch.errors && (batch.dirty || batch.touched)"
+            >
+              <p *ngIf="batch.errors.required">
+                {{ 'Batch is required' | appTranslate | async }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <select
+              [disabled]="isShow || item.eventAction != 'TC'"
+              [(ngModel)]="item.docCodeLinked"
+              class="form-control control-bg-gray"
+              name="documentCode_{{ i }}"
+              required
+              #documentCode="ngModel"
+            >
+              <option value=""></option>
+              <option
+                value="{{ documentCode?.code }}"
+                *ngFor="let documentCode of documentCodeArray"
+              >
+                {{ documentCode?.code }} - {{ documentCode?.description }}
+              </option>
+            </select>
+
+            <div
+              class="text-danger"
+              *ngIf="
+                documentCode.errors &&
+                (documentCode.dirty || documentCode.touched)
+              "
+            >
+              <p *ngIf="documentCode.errors.required">
+                {{ 'Document Code is required' | appTranslate | async }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <select
+              [disabled]="
+                isShow || item.eventAction != 'TW'
+              "
+              [(ngModel)]="item.workFlowLinked"
+              class="form-control control-bg-gray"
+              name="workflowTaskCode_{{ i }}"
+              required
+              #workflowTaskCode="ngModel"
+            >
+              <option value=""></option>
+              <option
+                value="{{ workflowTaskCode?.code }}"
+                *ngFor="let workflowTaskCode of workflowTaskCodeArray"
+              >
+                {{ workflowTaskCode?.code }} -
+                {{ workflowTaskCode?.description }}
+              </option>
+            </select>
+
+            <div
+              class="text-danger"
+              *ngIf="
+                workflowTaskCode.errors &&
+                (workflowTaskCode.dirty || workflowTaskCode.touched)
+              "
+            >
+              <p *ngIf="workflowTaskCode.errors.required">
+                {{
+                  'Workflow Task Code Code is required' | appTranslate | async
+                }}
+              </p>
+            </div>
+          </div>
+
+          <!-- <div class="col-md-2">
+            <app-button
+              buttonType="delete"
+              (click)="deleteFilter(i)"
+            ></app-button>
+          </div> -->
+        </div>
+
+        <!-- <div class="col-1">
+          <app-button buttonType="add" (click)="addFilter()"></app-button>
+        </div> -->
+      </div>
+
+      <div class="row justify-content-end mt-5">
+        <div class="col-md-2">
+          <app-button
+            (click)="createProcessAction()"
+            buttonType="save"
+          ></app-button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="d-flex justify-content-end my-3" *ngIf="isShow">
+    <app-btn
+      text="Edit"
+      routerLink="../edit"
+      icon="edit"
+      [queryParamsHandling]="'merge'"
+      type="secondary"
+    >
+    </app-btn>
+    <span class="mx-1"></span>
+    <app-btn
+      text="Clone"
+      routerLink="../clone"
+      icon="clone"
+      [queryParamsHandling]="'merge'"
+      type="secondary"
+    >
+    </app-btn>
+  </div>
+  <br /><br />
+</loader>

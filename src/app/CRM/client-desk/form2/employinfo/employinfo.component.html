@@ -1,0 +1,99 @@
+
+<div class="container mt-5">
+    <form [formGroup]="employmentForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md" >
+            <div class="d-block">
+                <div class="mt-4">
+                    <label>Employment Status</label><br>
+                    <select formControlName="employstatus" class="inputform" required>
+                        <option [value]="null">Select Employment Status</option>
+                        <option [value]="item.code" *ngFor="let item of employmentStatusList">{{item.code_title}}</option>
+                    </select>
+     <div *ngIf="validation.employstatus.errors && (validation.employstatus.dirty || validation.employstatus.touched)">
+                            <div class="text-danger" *ngIf="validation.employstatus?.errors?.required ">Field is invalid!
+                            </div>
+                        </div>
+                   
+        </div>
+        <div class="mt-4">
+            <label>Sector</label><br>
+            <select formControlName="sector" class="inputform" required>
+                <option [value]="null">Select Sector</option>
+                <option [value]="item.ID" *ngFor="let item of sectorList">{{item.CODE_TITLE}}</option>
+            </select>
+            <div *ngIf="validation.sector.errors && (validation.sector.dirty || validation.sector.touched)">
+                <div class="text-danger" *ngIf="validation.sector?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Income Band</label><br>
+            <input type="text" formControlName="incomeBand" class="inputform" required>
+            <div *ngIf="validation.incomeBand.errors && validation.incomeBand.dirty">
+                <div class="text-danger" *ngIf="validation.incomeBand?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+            <div class="mt-4">
+            <label>Occupation</label><br>
+            <select formControlName="occupation" class="inputform" required>
+                <option [value]="null">Select Occupation</option>
+                <option [value]="item.code" *ngFor="let item of occupationList">{{item.CODE_TITLE}}</option>
+            </select>
+            <div *ngIf="validation.occupation.errors && (validation.occupation.dirty || validation.occupation.touched)">
+                <div class="text-danger" *ngIf="validation.occupation?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md position-relative">
+            <div class="mt-4">
+                <label>Employer Client Number</label><br>
+                <div class="d-flex">
+                <input type="text" style="width: 40%;" formControlName="employerClientNo" class="inputform">
+                <button type="button" class="btn-dark mx-1 px-4 py-auto border-0" style="height: 30px;">Find</button>
+                <button type="button" class="createbtn px-4 py-auto " style="height: 30px;">Create New</button>
+            </div>
+            <div *ngIf="validation.employerClientNo.errors && (validation.employerClientNo.dirty || validation.employerClientNo.touched)">
+                <div class="text-danger" *ngIf="validation.employerClientNo?.errors?.required">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Company Name</label><br>
+            <input type="text" formControlName="companyName" class="inputform"  required>
+            <div *ngIf="validation.companyName.errors && (validation.companyName.dirty || validation.companyName.touched)">
+                <div class="text-danger" *ngIf="validation.companyName?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <label>Occupation Group</label><br>
+            <select formControlName="ocupationGroup" class="inputform" required>
+                <option [value]="null">Select Ocupation Group</option>
+                <option [value]="item.ID" *ngFor="let item of occupationGroupList">{{item.CODE_TITLE}}</option>
+            </select>
+            <div *ngIf="validation.ocupationGroup.errors && (validation.ocupationGroup.dirty || validation.ocupationGroup.touched)">
+                <div class="text-danger" *ngIf="validation.ocupationGroup?.errors?.required ">Field is invalid!
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+   <div class="d-flex justify-content-between mx-5 my-5">
+        <div class="d-flex" >
+            <button type="button" (click)="changeTab('Identification')" class="border-0 prev ml-3"><i class="fas fa-arrow-left"></i></button>
+            <span class="mx-3 my-auto">Prev</span>
+        </div>
+        <div class="d-flex">
+            <span class="mx-3 my-auto">Next</span>
+            <button type="submit" [disabled]="employmentForm.invalid" (click)="changeTab('paymentInfo')"class="border-0 next ml-3"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+</form>
+</div>

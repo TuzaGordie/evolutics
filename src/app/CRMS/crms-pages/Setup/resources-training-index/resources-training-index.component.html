@@ -1,0 +1,33 @@
+<div class="container   " style="min-height: 400px;">
+  <div class="row mt-5">
+    <div class="col-lg-6 col-sm-12 col-xs-12 mx-auto mt-4">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="">{{'Category'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <div class="form-group">
+            <label for="" class="">{{'Code'|appTranslate|async}}</label>
+            <select name="" id="" class="form-control control-bg-gray"></select>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 mt-3">
+        <div class="col-lg-4 col-xs-12 col-sm-12">
+          <app-btn type="dark" icon="show">{{'Show'|appTranslate|async}}</app-btn>
+        </div>
+        <div class="col-lg-4 col-xs-12 col-sm-12">
+          <app-btn type="outline" icon="add" routerLink="../create">{{'Create New'|appTranslate|async}}</app-btn>
+        </div>
+        <div class="col-lg-4 col-xs-12 col-sm-12">
+          <app-btn type="outline" icon="clone">{{'Clone'|appTranslate|async}}</app-btn>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

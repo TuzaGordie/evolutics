@@ -1,0 +1,212 @@
+<loader [loading]="loading" [height]="formTag.offsetHeight">
+  <app-form-navigation [title]="'Create New Campaign'"></app-form-navigation>
+  <div class="container-sm mt-5 " id="form-body">
+    <form [formGroup]="form" (submit)="onSubmit()" #formTag>
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row  row-cols-1 row-cols-xl-2 row-cols-lg-2 g-3">
+                <div class="col">
+                  <app-input-basic type="text" [readonly]="true" [form]="form" lblCl="10"
+                    label="{{'Campaign Code'|appTranslate|async}}">
+                  </app-input-basic>
+                </div>
+                <div class="col">
+                  <app-input-basic type="textarea" [form]="form" name="description" lblCl="10"
+                    label="{{'Description'|appTranslate|async}}">
+                  </app-input-basic>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col" style="max-width: 40px;">
+              <div class="circle-shape"></div>
+            </div>
+            <div class="col d-flex align-items-center pt-1">
+              <label for="" class=" d-flex align-items-center"> {{'Define Group'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-xs-1 row-cols-lg-2">
+            <div class="col-2">
+              <app-input-basic [form]="form" type="select" name="targetGroup" [stacked]="true"
+                label="{{'Target Group'|appTranslate|async}}" lblCl="10" [options]="targetGroupArray"
+                valueField="clientGroup" labelField="clientGroup" #targetGroup>
+              </app-input-basic>
+            </div>
+            <div class="col-10">
+              <div class="row">
+                <div class="col-5">
+                  <app-input-basic type="text" [form]="form" name="controlGroup" (keyup)="calculateControlTarget()"
+                    label="{{'Control Group (% of Target)'|appTranslate|async}}" lblCl="10" [stacked]="true">
+                  </app-input-basic>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label">&nbsp;</label>
+                  <div *ngIf="totalCount != null" class="text-primary">
+                    {{totalCount}} {{'total'|appTranslate|async}}
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="" class="form-label">&nbsp;</label>
+                  <app-btn type="secondary" icon="upload">Upload Target List</app-btn>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" formArrayName="template">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col" style="max-width: 40px;">
+              <div class="circle-shape"></div>
+            </div>
+            <div class="col d-flex align-items-center pt-1">
+              <label for="" class=" d-flex align-items-center"> {{'Template'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="row justify-content-center" *ngFor="let dt of template.controls; let i = index;"
+            [formGroupName]="i">
+            <div class="col-3">
+              <div class="form-group">
+                <app-input-basic [form]="form" type="select" [form]="dt" name="template" [stacked]="true"
+                  label="{{'Template Name'|appTranslate|async}}" [required]="true" lblCl="10"
+                  [options]="setS.getTemplateName|functionCaller|async" labelType="cd" labelField="code" valueField="code" #templateName>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <app-input-basic type="text" [form]="dt" name="medium" lblCl="10" [stacked]="true"
+                  label="{{'Medium'|appTranslate|async}}" [readonly]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group pt-2">
+                <label for="" class="form-label">&nbsp;</label>
+                <app-button buttonType="addCustom-red" text="Add" (click)="templateInc()"></app-button>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group pt-2">
+                <label for="" class="form-label">&nbsp;</label>
+                <app-button buttonType="addCustom-red" text="delete" (click)="removeTemplate(i)"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col" style="max-width: 40px;">
+              <div class="circle-shape"></div>
+            </div>
+            <div class="col d-flex align-items-center pt-1">
+              <label for="" class=" d-flex align-items-center"> {{'Content and Execution'|appTranslate|async}}</label>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-lg-3 row-cols-xl-3 row-cols-sm-1">
+            <div class="col">
+              <app-input-basic type="date" [form]="form" name="startDate" [stacked]="true"
+                label="{{'Start Date'|appTranslate|async}}" lblCl="10">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-input-basic type="time" [form]="form" name="sendTime" [stacked]="true" lblCl="10"
+                label="{{'Send Time'|appTranslate|async}}">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-input-basic [form]="form" name="endDate" type="date" [stacked]="true" lblCl="10"
+                label="{{'End Date'|appTranslate|async}}">
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-input-basic [form]="form" type="select" name="recurrence" [stacked]="true"
+                label="{{'Recurrence'|appTranslate|async}}" lblCl="10"
+                [options]="setS.getCodeSubGroup|functionCaller1:'FREQUENCY'|async" valueField="code" labelField="code"
+                labelType="ct" #recurrence>
+              </app-input-basic>
+            </div>
+            <div class="col">
+              <app-input-basic type="text" [form]="form" name="campaignCost" [stacked]="true" lblCl="10"
+                label="{{'Campaign Cost'|appTranslate|async}}">
+              </app-input-basic>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="card" formArrayName="defineTargets">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col" style="max-width: 40px;">
+              <div class="circle-shape"></div>
+            </div>
+            <div class="col d-flex align-items-center pt-1">
+              <Label class="">{{'Define Targets'|appTranslate|async}}</Label>
+            </div>
+          </div>
+
+
+          <div class="row justify-content-center" *ngFor="let dt of defineTargets.controls; let i = index;" [formGroupName]="i">
+            <div class="col-2">
+              <div class="form-group">
+                <app-input-basic label="Attribute" [form]="dt" type="select" name="attribute" [stacked]="true"
+                  [options]="setS.getCodeSubGroup|functionCaller1:'CUSTOMER_ATTRIBUTES'|async" valueField="code"
+                  labelField="code" labelType="ct" #attribute>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <app-input-basic label="Condition" [form]="dt" type="select" name="condition" [stacked]="true"
+                  [options]="setS.getCodeSubGroup|functionCaller1:'CONDITION'|async" valueField="code" labelField="code"
+                  labelType="ct" #condition>
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <app-input-basic label="Value" type="text" [form]="dt" name="value" [stacked]="true">
+                </app-input-basic>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group pt-2">
+                <label for="" class="form-label">&nbsp;</label>
+                <app-button buttonType="addCustom-red" text="Add" (click)="targetInc()"></app-button>
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group pt-2">
+                <label for="" class="form-label">&nbsp;</label>
+                <app-button buttonType="addCustom-red" text="delete" (click)="removeCampaign(i)"></app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 justify-content-end">
+
+        <div class="col-md-2 my-5">
+          <app-btn type="secondary" icon="save" [valid]="form?.valid" (mclick)="onSubmit()">Submit</app-btn>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</loader>

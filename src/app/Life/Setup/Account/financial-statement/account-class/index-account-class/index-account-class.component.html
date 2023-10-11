@@ -1,0 +1,66 @@
+<!-- <app-form-navigation [title] = "'Set Up/Accounts/Financial Statement/Account Class'"></app-form-navigation> --> 
+<div class="container">
+    <br><br><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <label>{{"Company"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray">
+                <option></option>
+                <option>1</option>
+              </select>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <label>{{"Account Format"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray">
+                <option></option>
+                <option>1</option>
+              </select>
+
+        </div>
+
+    </div><br>
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6">
+            <label>{{"Account Class"|appTranslate|async}}</label>
+            <select class="form-control form-control-md control-bg-gray">
+                <option></option>
+                <option>1</option>
+              </select>
+
+        </div>
+
+    </div><br>
+ 
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <app-button [buttonType]="'show'" routerLink="../create"></app-button>
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <app-button [buttonType]="'create'" routerLink="../create"></app-button>
+        </div>
+        <div class="col-md-2">
+            <label>&nbsp;</label>
+            <app-button [buttonType]="'clone'" routerLink="../create"></app-button>
+        </div>
+
+    </div>
+
+</div>
+

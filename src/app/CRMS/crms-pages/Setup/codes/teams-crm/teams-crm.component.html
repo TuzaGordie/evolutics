@@ -1,0 +1,95 @@
+<loader [loading]="loading" [height]="formTag.offsetHeight">
+<div class="container">
+  <form [formGroup]="form" (submit)="onSubmit()" #formTag>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Team Code" type="text" [disabled]="true" [form]="form" name="teamCode" [stacked]="true">
+        </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Description" type="text" [form]="form" name="description" [stacked]="true">
+      </app-input-basic>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <app-input-basic label="Category" [form]="form" type="select" name="category" [stacked]="true"
+        [options]="setS.getCodeSubGroup|functionCaller1:'TEAM_CATEGORY'|async" labelType="ct" #category>
+      </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Company" [form]="form" type="select" name="company" [stacked]="true"
+        [options]="setS.getCompanyCodeAndDesc|functionCaller|async" labelType="cd" #companyCode>
+      </app-input-basic>
+      </div>
+    </div>
+
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Channel" [form]="form" type="select" name="channel" [stacked]="true"
+        [options]="setS.getCodeSubGroup|functionCaller1:'CHANNEL'|async" labelType="ct" #channel>
+      </app-input-basic>
+      </div>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <app-input-basic label="Team Lead" [form]="form" type="select" name="company" [stacked]="true"
+        [options]="setS.getTeamLead|functionCaller|async" labelType="cd" #companyCode>
+      </app-input-basic>
+      </div>
+    </div>
+
+  </div>
+
+    <fieldset>
+      <legend>{{'Team Members'|appTranslate|async}}</legend>
+      <div formArrayName="teamMembers">
+      <div class="row mt-4" *ngFor="let teams of teamMembers.controls; let m = index;" [formGroupName]="m">
+        <div class="col-5">
+          <div class="form-group">
+            <app-input-basic  (keyup)="getPersonnelName()"  label="Sales Personnel Code" type="text" [form]="teams" name="salesPersonnelCode" [stacked]="true">
+            </app-input-basic>
+          </div>
+        </div>
+        <div class="col-1">
+          <label for="" class="form-label">&nbsp;</label>
+          <app-button buttonType="find"></app-button>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <app-input-basic label="Sales Personnel Name" type="text" [form]="teams" name="salesPersonnelName" [stacked]="true">
+            </app-input-basic>
+          </div>
+        </div>
+        <div class="col-1">
+          <label for="" class="form-label">&nbsp;</label>
+          <app-button buttonType="addCustom" (click)="teamMembersInc()"></app-button>
+        </div>
+        <div class="col-1">
+          <label for="" class="form-label">&nbsp;</label>
+          <app-button buttonType="delete" (click)="removeTeamMembers(m)"></app-button>
+        </div>
+      </div>
+    </div>
+    </fieldset>
+
+    <div class="row mt-4">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <label></label>
+        <!-- <app-button (click)="addDestinationStatus()"  buttonType="addred"></app-button> -->
+        <app-btn type="secondary" icon="save" [valid]="form?.valid" (mclick)="onSubmit()">Submit</app-btn>
+      </div>
+    </div>
+  </form>
+</div>
+</loader>

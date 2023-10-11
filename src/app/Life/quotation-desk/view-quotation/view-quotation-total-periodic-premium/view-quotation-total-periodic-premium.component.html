@@ -1,0 +1,139 @@
+<table class="table table-responsive table-striped text-center">
+  <thead class="py-3 theader">
+    <tr>
+      <th scope="col">{{ 'Receipt Number' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Gross Amount' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Amount Received' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Deduction' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Type' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Reason' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Reconciled' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Canceled' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Dates' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Users' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Receiving Bank' | appTranslate | async }}</th>
+      <th scope="col">{{ 'Details' | appTranslate | async }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions; let i = index">
+      <td>{{ transaction.receiptNo || '-' }}</td>
+      <td>{{ transaction.amount || 0 | number }}</td>
+      <td>{{ transaction.netAmount || 0 | number }}</td>
+      <td>
+        <input
+          type="checkbox"
+          class="form-control"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          [checked]="transaction.dedSource"
+          trigger="hover focus"
+          delay="0"
+          title="Comm Deducted: {{
+            transaction.commDeduct || '-'
+          }}  UW Expense Deducted: {{
+            transaction.uwExpDeduct || '-'
+          }}  Co-Ins Fee Deducted: {{
+            transaction.coinsDeduct || '-'
+          }}  VAT Deducted : {{ transaction.vatDeduct }} WHT Deducted: {{
+            transaction.whtDeduct || '-'
+          }}"
+        />
+      </td>
+      <td>{{ transaction.payInType || '-' }}</td>
+      <td>{{ transaction.reason || '-' }}</td>
+      <td>
+        <input
+          type="checkbox"
+          class="form-control"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          trigger="hover focus"
+          [checked]="transaction.reconciled"
+          delay="0"
+          title="OS Days To Clear: {{
+            transaction.osDaysToClear || '-'
+          }}  Reconciled Reason: {{ transaction.reconcileReason || '-' }} "
+        />
+      </td>
+      <td>
+        <input
+          type="checkbox"
+          class="form-control"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          trigger="hover focus"
+          [checked]="transaction.cancel"
+          delay="0"
+          title="Canceled Reason: {{ transaction.cancelReason || '-' }}"
+        />
+      </td>
+      <td>
+        <button
+          class="btn btn-dark"
+          type="button"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          trigger="hover focus"
+          delay="0"
+          title="Created On: {{
+            transaction.createdOn || '-'
+          }}  Effective On: {{ transaction.effOn || '-' }}  Controlled On: {{
+            transaction.controlledOn || '-'
+          }}  Reconciled On: {{ transaction.reconciledOn || '-' }} "
+        >
+          <i class="fas fa-calendar-alt"></i>
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-dark"
+          type="button"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          trigger="hover focus"
+          delay="0"
+          title="Created By: {{
+            transaction.createdBy || '-'
+          }}  Reconciled By: {{
+            transaction.reconciledBy || '-'
+          }}  Canceled By: {{
+            transaction.cancelledBy || '-'
+          }}  Controlled by: {{ transaction.controlledBy || '-' }}  "
+        >
+          <i class="fa fa-users" aria-hidden="true"></i>
+        </button>
+      </td>
+      <td
+        data-bs-toggle="tooltip"
+        data-bs-html="true"
+        trigger="hover focus"
+        delay="0"
+        title="Receiving Bank Name: {{
+          transaction.bankName || '-'
+        }}  Receiving Account Number: {{ transaction.bankAccount || '-' }}"
+      >
+        <a href="javascript:void(0)">{{ transaction.bankCode }}</a>
+      </td>
+      <td>
+        <button
+          class="btn btn-dark"
+          type="button"
+          data-bs-toggle="tooltip"
+          data-bs-html="true"
+          trigger="hover focus"
+          delay="0"
+          title="Ref Number: {{
+            transaction.transRefNo || '-'
+          }}  Loan Number: {{ transaction.loanNo || '-' }}  Coupon Number: {{
+            transaction.couponNo || '-'
+          }}  Payor : {{ transaction.payorNo || '-' }} Batch Number: {{
+            transaction.batchNo || '-'
+          }} Debit Note: {{ transaction.dnNo || '-' }}"
+        >
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

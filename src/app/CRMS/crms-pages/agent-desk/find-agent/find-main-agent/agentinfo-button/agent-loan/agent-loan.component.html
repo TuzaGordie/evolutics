@@ -1,0 +1,52 @@
+<app-form-navigation [title] = "'View Agent'"></app-form-navigation> 
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+           <div class=" row my-5">
+            <div class="col-md"><h1 >Agent Loan</h1></div>
+            <div class="col-md-3"><p class="py-3" style="float: right;"><b>Agent No:</b> <span class="px-3">{{findAgentService.agentInfo?.AGENT_NO}}</span></p></div>
+            <div class="col-md-3"><p class="py-3" style="float: right;"><b>Agent Name:</b> <span class="px-3">{{findAgentService.agentInfo?.NAME}}</span></p></div>
+               
+            </div> 
+        <p class="py-3"><b>Agent Name:</b> <span class="px-3">{{findAgentService.agentInfo?.NAME}}</span></p>
+            <table class="table">
+                <thead class="py-3 theader">
+                  <tr>
+                    <th scope="col" style="border-bottom-left-radius: 12px;">Loan ID</th>
+                    <th scope="col">Loan Commense DT</th>
+                    <th scope="col">Loan Amount</th>
+                    <th scope="col">Loan Interest Rate</th>
+                    <th scope="col">Loan Tenor</th>
+                    <th scope="col">Currency</th>
+                    <th scope="col">Repayment Amount</th>
+                    <th scope="col" style="border-top-right-radius: 12px;">Loan Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of agentloanList">
+                    <th scope="row">{{item.AGENT_LOAN_ID}}</th>
+                    <td></td>
+                    <td>{{item.LOAN_AMOUNT}}</td>
+                    <td>{{item.INTEREST_RATE}}</td>
+                    <td>{{item.LOAN_TERM}}</td>
+                    <td>{{item.LOAN_CURRENCY}}</td>
+                    <td>{{item.REPAYMENT_AMOUNT}}</td>
+                    <td>{{item.LOAN_BALANCE}}</td>
+                  
+                  </tr>
+                </tbody>
+              </table>
+    
+    </div>
+
+    <div class="col-md-12 mx-auto mt-5">
+        <button type="button"  class="btn-ir p-0 px-4 btn-radius mx-2" style="float: right;">
+            <span class="mx-3 my-auto">Payment From Agent</span></button>
+        <button type="button"  class="btn-ir p-0 px-4 btn-radius " style="float: right;">
+            <span class="mx-3 my-auto">Create New Loan</span></button>
+    </div>
+    </div>
+
+        </div>
+
+    

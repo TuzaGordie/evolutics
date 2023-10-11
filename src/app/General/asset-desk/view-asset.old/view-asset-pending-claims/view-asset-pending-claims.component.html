@@ -1,0 +1,1138 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <h5 class="text-primary">Pending Claims</h5>
+
+
+      <table class="table table-responsive  table-striped form-group mt-5 pt-2">
+        <thead class="py-3">
+        <tr>
+
+          <th scope="col">Claim No</th>
+          <th scope="col">Created On</th>
+          <th scope="col">Created By</th>
+          <th scope="col">Initial Estimate</th>
+          <th scope="col">Adjustments</th>
+          <th scope="col">Current Estimate</th>
+          <th scope="col">Claim Status</th>
+          <th scope="col">Days to SLA</th>
+          <th scope="col">Valid</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><a>1343</a></td>
+          <td>5678</td>
+          <td>100353</td>
+          <td>25000</td>
+          <td>2300</td>
+          <td>20000</td>
+          <td>ADV</td>
+          <td>3</td>
+          <td>
+            Y
+          </td>
+          <td>
+            <app-btn icon="edit" type="outline">Update</app-btn>
+          </td>
+          <td>
+            <app-button [buttonType]="'generate'" [text]="'Generate DV'"></app-button>
+          </td>
+          <td><a data-bs-toggle="modal" href="#" data-bs-target="#adjust">
+            <app-button [buttonType]="'adjust'" [text]="'Adjust'"></app-button>
+          </a></td>
+          <td><a data-bs-toggle="modal" href="#" data-bs-target="#historys">
+            <app-button [buttonType]="'history'" [text]="'History'"></app-button>
+          </a>
+          </td>
+          <td><a>
+            <app-btn icon="cash" data-bs-toggle="modal" data-bs-target="#setPayeeModal" type="outline">Payout
+            </app-btn>
+          </a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="registerClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register Claim</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <ul class="nav nav-pills mb-3  mx-auto justify-content-center " style="width:fit-content" id="nav-tab"
+            role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active small1" id="pills-basic-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-basic" type="button" role="tab" aria-controls="pills-basic"
+                    aria-selected="true">Basic
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-document-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-document" type="button" role="tab" aria-controls="pills-document"
+                    aria-selected="false">Document
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link small1" id="pills-estimate-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-estimate" type="button" role="tab" aria-controls="pills-estimate"
+                    aria-selected="false">Estimate
+            </button>
+          </li>
+
+
+        </ul>
+        <div class="tab-content  justify-content-start" id="pills-tabContent">
+          <div [formGroup]="newClaimForm" class="tab-pane fade show active" id="pills-basic" role="tabpanel"
+               aria-labelledby="pills-basic-tab">
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Policy No</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" (change)="onPolicyNoChange()"
+                            formControlName="policyNo">
+                      <option value=""></option>
+                      <option *ngFor="let policy of policiesList">{{policy.policyNo}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPolicyNos">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Policy Code</label>
+                  <input class="form-control control-bg-gray" type="text" (change)="onPolicyCodeChange()"
+                         formControlName="policyCode">
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Policy No Suffix</label>
+                  <input class="form-control control-bg-gray" type="text">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Policy Currency</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="currency">
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Cover</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="coverCode" (change)="onCoverChange()">
+                      <option value=""></option>
+                      <option *ngFor="let cover of policyCoversList" [value]="cover.code">{{cover.code}}
+                        - {{cover.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingCovers">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Claim Type</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="claimType"
+                            (change)="onClaimTypeChange()">
+                      <option></option>
+                      <option *ngFor="let claimType of claimTypesList"
+                              [value]="claimType.type">{{claimType.type}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingClaimTypes">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Peril</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="perilCat" (change)="onPerilChange()">
+                      <option></option>
+                      <option *ngFor="let peril of perilsList" [value]="peril.perilCode">{{peril.perilCode}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingPerils">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Severity Level</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="severityLevel"/>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Report Date Time</label>
+                  <input class="form-control control-bg-gray" type="datetime-local" formControlName="reportOn">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event Date Time</label>
+                  <input class="form-control control-bg-gray" type="datetime-local" formControlName="eventOn">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event Country</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationCountry"
+                            (change)="setRegionsList()">
+                      <option value=""></option>
+                      <option *ngFor="let country of countriesList" [value]="country.code">{{country.code}}
+                        - {{country.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingCountries">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event Region</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationRegion"
+                            (change)="setStatesList()">
+                      <option value=""></option>
+                      <option *ngFor="let region of regionsList" [value]="region.code">{{region.code}}
+                        - {{region.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingRegions">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event State</label>
+                  <div class="position-relative">
+                    <select class="form-control control-bg-gray" formControlName="locationState">
+                      <option value=""></option>
+                      <option *ngFor="let state of statesList" [value]="state.code">{{state.code}}
+                        - {{state.description}}</option>
+                    </select>
+                    <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingStates">
+                      <span class="fa fa-sync fa-spin"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event Town</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="locationTown">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event Address</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="locationAddress">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Event Geo Location</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="geolocation">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Client Loss Estimate</label>
+                  <input class="form-control control-bg-gray" type="text" formControlName="initialEstimate">
+                </div>
+              </div>
+              <div class="col-2">
+                <label for="" class="form-label text-primary">Proximate Cause</label>
+                <div class="position-relative">
+                  <select class="form-control control-bg-gray">
+                    <option></option>
+                    <option *ngFor="let proxCause of proximateCausesAllowedList"
+                            [value]="proxCause.proximateCauseAllowed">{{proxCause.proximateCauseAllowed}}</option>
+                  </select>
+                  <span class="position-absolute top-50 start-50 translate-middle" *ngIf="loadingProximateCauses">
+                    <span class="fa fa-sync fa-spin"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary">Narration</label>
+                  <textarea class="form-control control-bg-gray" formControlName="narration"></textarea>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <button class="btn btn-outline-primary btn-lg d-block ms-auto" (click)="onSaveNewClaim()">
+              <i class="fa fa-save"></i>
+              Save
+            </button>
+          </div>
+          <div class="tab-pane fade" id="pills-document" role="tabpanel" aria-labelledby="pills-document-tab">
+            <div class="row">
+              <h3 class="text-center text-primary my-5">Claim Requirements</h3>
+            </div>
+            <div class="table-responsive px-3">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Action</th>
+                  <th>Received?</th>
+                  <th>Received By</th>
+                  <th>Received On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Medical Cause of Death</td>
+                  <td>
+                    <app-button buttonType="upload"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Birth Certificate</td>
+                  <td>
+                    <app-button buttonType="upload"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                <tr>
+                  <td>Claim Batch</td>
+                  <td>
+                    <app-button buttonType="upload"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                <tr *ngFor="let item of claimDocsArray()">
+                  <td>
+                    <input type="text" class="inputform">
+                  </td>
+                  <td>
+                    <app-button buttonType="upload"></app-button>
+                  </td>
+                  <td>
+                    <input class="form-control control-bg-gray mx-auto" type="checkbox">
+                  </td>
+                  <td>
+                    <input class="inputform">
+                  </td>
+                  <td>
+                    <input type="date" class="inputform">
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-3">
+                <div class="form-group">
+                  <label for="" class="form-label text-primary text-center">&nbsp;</label>
+                  <app-button buttonType="addCustom" (click)="incClaimDocsCount()"></app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab">
+            <div class="container">
+              <h3>Claim Estimate</h3>
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Claim No: <span class="text-primary">57773'3</span></label>
+                </div>
+                <div class="col-3">
+                  <label for="">Cover Name: <span class="text-primary">Death</span></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="" class="form-label text-primary"></label>
+                  <input type="text" class="form-control control-bg-gray">
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-3">
+                  <label for="" class="form-label text-primary"></label>
+                  <input type="checkbox" class="form-control control-bg-gray">
+                </div>
+
+              </div>
+              <div class="row mt-4">
+                <div class="col">
+                  <app-button buttonType="btnCustomClone" data-bs-toggle="modal" data-bs-target="#adjustClaimModal"
+                              data-bs-dismiss="modal" text="Adjust Claim"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomClone" text="Assign Provider"  data-bs-toggle="modal" data-bs-target="#assignProviderModal"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomClone" text="Generate DV"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomClone" text="Cancel Claim"></app-button>
+                </div>
+                <div class="col">
+                  <app-button buttonType="btnCustomClone" data-bs-toggle="modal" data-bs-target="#changeStatus"
+                              text="Change Status"></app-button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="assignProviderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Assign Provider</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#registerClaimModal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container p-3">
+          <div>
+            <p class="me-5">Claim No: <span class="text-primary">5777*3</span></p>
+            <p>Cover Name: <span class="text-primary">Death</span></p>
+          </div>
+          <form>
+            <div class="row my-3">
+              <div class="col-md-5">
+                <label for="providerActionRequired" class="fw-normal small text-primary">Provider Action Required</label>
+                <select id="providerActionRequired" class="inputform">
+                  <option [value]="null"></option>
+                </select>
+              </div>
+            </div>
+            <div class="row my-3 align-items-end">
+              <div class="col-md-3">
+                <label for="providerNo" class="fw-normal small text-primary">Provider No</label>
+                <input type="text" class="inputform">
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#findProviderModal"><i class="fa fa-search"></i>&nbsp;Find</button>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="inputform">
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-12">
+                <label for="instructionToProvider" class="fw-normal small text-primary">Instruction to Provider - <span class="text-secondary">Optional</span></label>
+                <textarea id="instructionToProvider" rows="5" class="inputform"></textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary px-3" data-bs-dismiss="modal" ><i class="fa fa-save"></i>&nbsp;Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="findProviderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Find Provider</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#assignProviderModal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3">
+          <form>
+            <div class="my-3">
+              <label for="providerName" class="fw-normal small text-primary">Provider Name</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerCategory" class="fw-normal small text-primary">Provider Category</label>
+              <select class="inputform">
+                <option value=""></option>
+              </select>
+            </div>
+            <div class="my-3">
+              <label for="providerCountry" class="fw-normal small text-primary">Provider Country</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerState" class="fw-normal small text-primary">Provider State</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="providerTown" class="fw-normal small text-primary">Provider Town</label>
+              <input type="text" class="inputform">
+            </div>
+            <div class="my-3">
+              <label for="provider" class="fw-normal small text-primary">Provider</label>
+              <select class="inputform">
+                <option value=""></option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#assignProviderModal">
+          <span class="fa fa-search"></span> Search
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="adjustClaimModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adjust Claim</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#registerClaimModal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="" name="test"
+                                     [stacked]="true"></app-input-basic>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="" name="test"
+                                     [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-primary btn-lg w-100">
+                      <span class="fa fa-search"></span>
+                      Find
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <label class="text-primary small">Narration</label>
+                    <textarea class="inputform">
+                    </textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <button data-bs-toggle="modal" data-bs-target="#historyModal" class="btn btn-primary btn-lg w-100">
+                      <span class="fa fa-history"></span>
+                      History
+                    </button>
+                  </div>
+                  <div class="col-lg-2">
+                    <button class="btn btn-outline-primary btn-lg w-100">
+                      <span class="fa fa-save"></span>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-primary text-center text-bold">Policy No</div>
+                <div class="col small1 text-primary text-center text-bold">Owner</div>
+                <div class="col small1 text-primary text-center text-bold">Initial Estimate</div>
+                <div class="col small1 text-primary text-center text-bold">Total Adjustments</div>
+                <div class="col small1 text-primary text-center text-bold">Updated Amount</div>
+                <div class="col small1 text-primary text-center text-bold">Payment Type</div>
+                <div class="col small1 text-primary text-center text-bold">Currency</div>
+                <div class="col small1 text-primary text-center text-bold">Cover Name</div>
+                <div class="col-2 small1 text-primary text-center text-bold">Policy Code Claimed On</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+              <hr>
+              <table class="table table-responsive">
+                <thead>
+                <tr>
+                  <th scope="col">Action</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Reason</th>
+                  <th scope="col">Auth By</th>
+                  <th scope="col">Auth On</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Old Value</th>
+                  <th scope="col">New Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+                </tr>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#adjustClaimModal">
+                      Adjust
+                    </button>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-outline-primary btn-lg w-100">Action</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="changeStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Change Status</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target="#registerClaimModal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>Current Value</label>
+                    <input class="form-control control-bg-gray"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>New Value</label>
+                    <select name="" id="" class="form-control control-bg-gray">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div>
+                    <label>Comment (Optional)</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div>
+                    <app-button [buttonType]="'submit'"></app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="historys" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>History</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+              <div class="row justify-content-center">
+                <div class="col small1 text-primary text-center text-bold">Policy No</div>
+                <div class="col small1 text-primary text-center text-bold">Owner</div>
+                <div class="col small1 text-primary text-center text-bold">Initial Estimate</div>
+                <div class="col small1 text-primary text-center text-bold">Total Adjustments</div>
+                <div class="col small1 text-primary text-center text-bold">Updated Amount</div>
+                <div class="col small1 text-primary text-center text-bold">Payment Type</div>
+                <div class="col small1 text-primary text-center text-bold">Currency</div>
+                <div class="col small1 text-primary text-center text-bold">Cover Name</div>
+                <div class="col-2 small1 text-primary text-center text-bold">Policy Code Claimed On</div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col small1 text-center">LTR22456</div>
+                <div class="col small1 text-center">XXXX</div>
+                <div class="col small1 text-center">12000</div>
+                <div class="col small1 text-center">22000</div>
+                <div class="col small1 text-center">23000</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col small1 text-center">NGN</div>
+                <div class="col small1 text-center">Saving</div>
+                <div class="col-2 small1 text-center">3</div>
+              </div>
+
+              <hr>
+
+              <table class="table table-responsive">
+                <thead>
+                <tr>
+                  <th scope="col">Action</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Created By</th>
+                  <th scope="col">Reason</th>
+                  <th scope="col">Auth By</th>
+                  <th scope="col">Auth On</th>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Old Value</th>
+                  <th scope="col">New Value</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+
+                </tr>
+                <tr>
+                  <td>Claim Notified</td>
+                  <td>1/1/2020</td>
+                  <td>J-Bond</td>
+                  <td>Interest</td>
+                  <td>System</td>
+                  <td>1/1/2020</td>
+                  <td>Status Code</td>
+                  <td>30000</td>
+                  <td>35000</td>
+
+                </tr>
+
+                </tbody>
+              </table>
+
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-8"></div>
+                  <div class="col-2">
+                    <app-button data-bs-toggle="modal" href="#" data-bs-target="#adjust" [buttonType]="'adjusts'">
+                    </app-button>
+                  </div>
+                  <div class="col-2">
+                    <app-button [buttonType]="'action'"></app-button>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="adjust" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Adjust</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-between">
+          <div class="col-lg">
+            <text-case-1 lbl="Policy No" [stacked]="true" val="LTR21456"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Owner" [stacked]="true" val="John Smith"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Initial Estimate" [stacked]="true" val="21000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Total Adjustments" [stacked]="true" val="22000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Updated Amount" [stacked]="true" val="23000"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Payment Type" [stacked]="true" val="Saving"></text-case-1>
+          </div>
+          <div class="col-lg">
+            <text-case-1 lbl="Currency" [stacked]="true" val="NGN"></text-case-1>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="form-group mt-2">
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-6">
+                    <app-input-basic label="New Adjustment" type="text" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-6">
+                    <app-input-basic label="Reason" type="select" [options]="[]" [form]="form" name="test"
+                                     [stacked]="true"></app-input-basic>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2 align-items-end">
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjustment Party" type="select" [options]="[]" [form]="form" name="test"
+                                     [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-5">
+                    <app-input-basic label="Adjuster Number" type="text" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+                  <div class="col-lg-2">
+                    <app-btn icon="search" type="secondary">
+                      Find
+                    </app-btn>
+                  </div>
+
+                </div>
+              </div>
+              <hr>
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-lg-9">
+                    <app-input-basic label="Narration" type="textarea" [form]="form" name="test" [stacked]="true">
+                    </app-input-basic>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-lg-2 offset-lg-8">
+                    <app-btn data-bs-toggle="modal" href="#" data-bs-target="#historys" type="primary">
+                      History
+                    </app-btn>
+                  </div>
+                  <div class="col-lg-2">
+                    <app-btn icon="save" type="secondary">
+                      Submit
+                    </app-btn>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="setPayeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <label>Set Payee</label>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-2">
+            <app-btn type="primary"> Set Payee</app-btn>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-3">
+            <app-btn type="primary" icon="add"> Creat Payment Outward</app-btn>
+          </div>
+        </div>
+        <div class="row mt-4 ">
+          <h6>Set Payee</h6>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Provider</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Policy Owner</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Other</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Policy</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Payee No</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="search">Find</app-btn>
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="add">Create</app-btn>
+          </div>
+          <div class="col-3">
+            <label class="form-label text-primary">Payee Name</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row mt-4 justify-content-end">
+          <div class="col-2">
+            <app-btn type="secondary" icon="checked">Submit</app-btn>
+          </div>
+        </div>
+
+        <div class="row mt-4 ">
+          <h6>Create Payment Outward</h6>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Provider</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Policy Owner</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Other</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Pay To Policy</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">Payee No</label>
+            <input type="checkbox" class="form-control control-bg-gray">
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="search">Find</app-btn>
+          </div>
+          <div class="col">
+            <label class="form-label text-primary">&nbsp;</label>
+            <app-btn type="primary" icon="add">Create</app-btn>
+          </div>
+          <div class="col-3">
+            <label class="form-label text-primary">Payee Name</label>
+            <input type="text" class="form-control control-bg-gray">
+          </div>
+        </div>
+        <div class="row mt-4 justify-content-end">
+          <div class="col-2">
+            <app-btn type="secondary" icon="checked">Submit</app-btn>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

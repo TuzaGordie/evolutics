@@ -1,0 +1,518 @@
+<div class="container mt-2">
+  <form [formGroup]="ownerForm">
+    <div class="row justify-content-between mt-3">
+      <span class="col-2">Client Class: <span class="text-danger">Corporate</span></span>
+      <span class="col-2">Client Number: <span class="text-danger">1</span></span>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col-2">
+        <app-button [buttonType]="'editRed'" data-bs-target="#exampleModal" [text]="'Edit'" data-bs-toggle="modal"
+                    (click)="onEdit('surname')"></app-button>
+      </div>
+
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomCloneRed'" [text]="'Provider View'"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button [buttonType]="'btnCustomNoteRed'" [routerLink]="['/life/agent-desk/note']"
+                    [text]="'Note'"></app-button>
+      </div>
+    </div>
+    <hr style="margin-top: 5px;">
+
+    <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+      <div class="d-block text-center mr-2">
+        <img alt="" class="rounded-circle"
+             src="https://ritecaremedicalofficepc.com/wp-content/uploads/2019/09/img_avatar.png" width="100px">
+        <p class="pt-2">{{findClientService.clientInfo?.FIRST_NAME}}</p>
+        <span style="color:#2ecc71">Active</span>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-danger">Full Name</label>
+          <input class="inputform1 " formControlName="fullName" readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Redg No</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label text-danger">No of employee</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label text-danger">Financial Size Category</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label text-danger">Sector</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-danger">Phone Number 1</label>
+          <input [ngClass]="{higlightbox: checkHighlight('phoneNo')}" [readonly]="checkReadonly('phoneNo')"
+                 class="inputform1"
+                 formControlName="phoneNo"
+                 type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Phone Number 2</label>
+          <input class="inputform1 " formControlName="phoneNo2" readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Email</label>
+          <input [ngClass]="{higlightbox: checkHighlight('email')}" [readonly]="checkReadonly('email')"
+                 class="inputform1"
+                 formControlName="email"
+                 type="text">
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label text-danger">Website</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label text-danger">Address</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+
+      </div>
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-danger">CRM ID</label>
+          <input class="inputform1 " formControlName="crm" readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Client Category</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Language</label>
+          <input [ngClass]="{higlightbox: checkHighlight('language')}" [readonly]="checkReadonly('language')"
+                 class="inputform1"
+                 formControlName="language"
+                 type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Date Created</label>
+          <input [ngClass]="{higlightbox: checkHighlight('dateCreated')}" [readonly]="checkReadonly('dateCreated')"
+                 class="inputform1"
+                 formControlName="dateCreated"
+                 type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">State</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-danger">Provider Category</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+
+        <div class="pb-4">
+          <label class="form-label text-danger">Band</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Bank No</label>
+          <div class="row">
+            <div class="col"><input class="inputform1 " formControlName="bankNo" readonly type="text"></div>
+            <div class="col-3"><a><i aria-hidden="true" class="fas fa-pencil-alt ml-2" data-bs-toggle="modal"
+                                     data-bs-target="#editbank"></i> </a>
+            </div>
+          </div>
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">CLV</label>
+          <input [ngClass]="{higlightbox: checkHighlight('clv')}" [readonly]="checkReadonly('clv')" class="inputform1"
+                 formControlName="clv"
+                 type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Communication</label>
+
+          <input class="inputform1 " formControlName="communication" readonly type="text">
+
+
+        </div>
+      </div>
+
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-danger">Provider Sub Category</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">No of Groups</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Group No</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+        <div class="pb-4">
+          <label class="form-label text-danger">Social Media</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+      </div>
+      <div class="d-block mx-2">
+        <div class="pb-4">
+          <label class="form-label text-danger">Provider Code</label>
+          <input class="inputform1 " readonly type="text">
+        </div>
+      </div>
+
+    </div>
+    <hr class="my-2">
+    <div class="row justify-content-center my-4">
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaisedRed" text="Endorsements"
+                    [routerLink]="['/life/agent-endorsements']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaisedRed" text="Documents"
+                    [routerLink]="['/life/agent-documents']"></app-button>
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaisedRed" text="Workflows"
+                    [routerLink]="['/life/agent-workflows']"></app-button>
+
+      </div>
+      <div class="col-2">
+        <app-button buttonType="btnCustomCloneRaisedRed" text="Web log in"
+                    [routerLink]="['/life/agent-web-login']"></app-button>
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-around section-cards card-red">
+      <div class="card color1 shadow-sm" [routerLink]="['/life/policies']">
+        <div class="card-body">
+          <h6 class="card-title">No of Policies</h6>
+          <p class="card-number">55</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/relationships']">
+        <div class="card-body">
+          <h6 class="card-title">No Of Relationships</h6>
+          <p class="card-number">12</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/business']">
+        <div class="card-body">
+          <h6 class="card-title">Other Business</h6>
+          <p class="card-number">43</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/pendingquotes']">
+        <div class="card-body">
+          <h6 class="card-title">Pending Quotes</h6>
+          <p class="card-number">12</p>
+        </div>
+
+      </div>
+      <div class="card color1 shadow-sm" [routerLink]="['/life/pendingpayments']">
+        <div class="card-body">
+          <h6 class="card-title">Pending Payments</h6>
+          <p class="card-number">22</p>
+        </div>
+
+      </div>
+    </div>
+
+
+  </form>
+
+
+  <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal" tabindex="-1">
+    <form [formGroup]="ownerForm">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Owner Info</h5>
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+          </div>
+          <div class="modal-body">
+
+
+            <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+              <div class="d-block mx-2">
+                <div class="mt-4">
+                  <label>Full Name</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('fullName')}" [readonly]="checkReadonly('fullName')"
+                         class="inputform "
+                         formControlName="fullName"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Redg No</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('redgNo')}" [readonly]="checkReadonly('redgNo')"
+                         class="inputform "
+                         formControlName="redgNo"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>No. of Employees</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('employeNo')}" [readonly]="checkReadonly('employeNo')"
+                         class="inputform "
+                         formControlName="employeNo"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Financial Size Category</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('financial')}" [readonly]="checkReadonly('financial')"
+                         class="inputform "
+                         formControlName="financial"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Sector</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('sector')}" [readonly]="checkReadonly('sector')"
+                         class="inputform "
+                         formControlName="sector"
+                         type="text">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="mt-4">
+                  <label>Phone Number 1</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('phoneNo')}" [readonly]="checkReadonly('phoneNo')"
+                         class="inputform "
+                         formControlName="phoneNo"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Phone Number 2</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('phoneNo2')}" [readonly]="checkReadonly('phoneNo2')"
+                         class="inputform "
+                         formControlName="phoneNo2"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Email</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('email')}" [readonly]="checkReadonly('email')"
+                         class="inputform "
+                         formControlName="email"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Website</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('website')}" [readonly]="checkReadonly('website')"
+                         class="inputform "
+                         formControlName="website"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Address</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('address')}" [readonly]="checkReadonly('address')"
+                         class="inputform "
+                         formControlName="address"
+                         type="text">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="mt-4">
+                  <label>CRM ID</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('crmid')}" [readonly]="checkReadonly('crmid')"
+                         class="inputform "
+                         formControlName="crmid"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Client Category</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('clientCategory')}"
+                         [readonly]="checkReadonly('clientCategory')" class="inputform "
+                         formControlName="clientCategory"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Language</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('language')}" [readonly]="checkReadonly('language')"
+                         class="inputform "
+                         formControlName="language"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Date</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('date')}" [readonly]="checkReadonly('date')"
+                         class="inputform "
+                         formControlName="date"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>State</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('state')}" [readonly]="checkReadonly('state')"
+                         class="inputform "
+                         formControlName="state"
+                         type="text">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="mt-4">
+                  <label>Provider Category</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('providerCategory')}"
+                         [readonly]="checkReadonly('providerCategory')" class="inputform "
+                         formControlName="providerCategory"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Brand</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('brand')}" [readonly]="checkReadonly('brand')"
+                         class="inputform "
+                         formControlName="brand"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Bank No</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('bankNo')}" [readonly]="checkReadonly('bankNo')"
+                         class="inputform "
+                         formControlName="bankNo"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>CLV</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('clv')}" [readonly]="checkReadonly('clv')"
+                         class="inputform "
+                         formControlName="clv"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Communication</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('communication')}"
+                         [readonly]="checkReadonly('communication')" class="inputform "
+                         formControlName="communication"
+                         type="text">
+                </div>
+              </div>
+
+              <div class="d-block mx-2">
+                <div class="mt-4">
+                  <label>Provider Sub Category</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('subCategory')}"
+                         [readonly]="checkReadonly('subCategory')" class="inputform "
+                         formControlName="subCategory"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>No of Groups</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('groups')}" [readonly]="checkReadonly('groups')"
+                         class="inputform "
+                         formControlName="groups"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Group No</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('groupNo')}" [readonly]="checkReadonly('groupNo')"
+                         class="inputform "
+                         formControlName="groupNo"
+                         type="text">
+                </div>
+                <div class="mt-4">
+                  <label>Social Media</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('socialmedia')}"
+                         [readonly]="checkReadonly('socialmedia')" class="inputform "
+                         formControlName="socialmedia"
+                         type="text">
+                </div>
+              </div>
+
+              <div class="d-block ml-2">
+                <div class="mt-4">
+                  <label>Provider Code</label><br>
+                  <input [ngClass]="{higlightbox: checkHighlight('providerCode')}"
+                         [readonly]="checkReadonly('providerCode')" class="inputform "
+                         formControlName="providerCode"
+                         type="text">
+                </div>
+              </div>
+
+            </div>
+
+            <!--                         <button type="submit" (click)="onSubmit()" data-bs-dismiss="modal" class="btn btn-primary">update</button>
+             -->
+
+
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="border-0 prev-blue" data-bs-dismiss="modal">Close</button> -->
+            <button (click)="onSubmit()" class="border-0 next-blue" data-bs-dismiss="modal" type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+<div class="modal fade" id="editbank" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Bank No</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless table-striped my-5">
+          <thead>
+          <tr class="">
+            <th scope="col">Bank No</th>
+            <th scope="col">Account Name</th>
+            <th scope="col">Bank Method</th>
+            <th scope="col">Bank Name</th>
+            <th scope="col">Sort Code</th>
+            <th scope="col">Account No</th>
+            <th scope="col">Blocked</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>5667_1</td>
+            <td>Ogene Obaseki</td>
+            <td>NG Banking</td>
+            <td>FBN</td>
+            <td>05677889</td>
+            <td>21923776</td>
+            <td>Y</td>
+          </tr>
+          <tr>
+            <td>5667_1</td>
+            <td>Ogene Obaseki</td>
+            <td>NG Banking</td>
+            <td>FBN</td>
+            <td>05677889</td>
+            <td>21923776</td>
+            <td>N</td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <app-button [buttonType]="'addCustom'" [text]="'Create new Account'" data-bs-dismiss="modal"></app-button>
+
+
+      </div>
+    </div>
+  </div>
+</div>

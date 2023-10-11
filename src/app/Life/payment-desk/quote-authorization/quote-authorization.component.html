@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-1">
+      <label for="" class="form-label text-primary">{{'Show All'|appTranslate|async}}</label>
+      <input type="checkbox" class="form-control control-bg-gray">
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{'Currency'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray"></select>
+    </div>
+    <div class="col">
+      <label for="" class="form-label text-primary">{{'Company'|appTranslate|async}}</label>
+      <select class="form-control control-bg-gray"></select>
+    </div>
+
+  </div>
+  <div class="items-per-page mt-2">
+    <div class="left">
+      <div class="row" *ngIf="checkedList2.length">
+        <div class="col">
+          <!-- <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizePaymentModal">Authorize</span> -->
+          <span class="badge bg-primary" (click)="openAuthorizeDialog()">{{'Authorize'|appTranslate|async}}</span>
+        </div>
+        <div class="col">
+          <!-- <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declinePaymentModal">Decline</span> -->
+          <span class="badge bg-danger" (click)="openDeclineDialog()">{{'Decline'|appTranslate|async}}</span>
+
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <table class="table table-responsive  table-striped">
+        <thead class="py-3 theader">
+        <tr>
+          <th scope="col">{{'Quote Number'|appTranslate|async}}</th>
+          <th scope="col">{{'Number Covers'|appTranslate|async}}</th>
+          <th scope="col">{{'Product'|appTranslate|async}}</th>
+          <th scope="col">{{'Total Premium'|appTranslate|async}}</th>
+          <th scope="col">{{'Frequency'|appTranslate|async}}</th>
+          <th scope="col">{{'Dates'|appTranslate|async}}</th>
+          <th scope="col">{{'Users'|appTranslate|async}}</th>
+          <th scope="col">{{'Company'|appTranslate|async}}</th>
+          <th scope="col">{{'Currency'|appTranslate|async}}</th>
+          <th scope="col">{{'Next Auth Tier'|appTranslate|async}}</th>
+          <th scope="col"><input type="checkbox" class="form-control" [(ngModel)]="isMasterSel" name="select" value=""
+                                 (change)="checkUncheckAll()"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <button class="btn btn-dark" type="button" data-bs-toggle="tooltip" data-bs-html="true"
+                    trigger="hover focus" delay="0"
+                    title="Created By: --  Auth 1 By: --  Auth 2 By: --  Auth 3 By: -- Auth 4 By: -- Declined By: -- ">
+              <i
+                class="fa fa-users" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-dark" type="button" data-bs-toggle="tooltip" data-bs-html="true"
+                    trigger="hover focus" delay="0"
+                    title="Created On: --  Auth 1 On: --  Auth 2 On: --  Auth 3 On: -- Auth 4 On: --  Declined On: --  ">
+              <i
+                class="fa fa-calendar-alt" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><input type="checkbox" class="form-control"
+                     (change)="isAllSelected()" value="gfjhjv"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

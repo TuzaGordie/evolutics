@@ -1,0 +1,149 @@
+<loader [text]="loadingText" [loading]="loading">
+  <div class="row justify-content-between align-items-center mt-2 ">
+    <div class="col-md-6 mb-2">
+      <h5 class="text-primary">{{'Lapse'|appTranslate|async}}</h5>
+    </div>
+    <div class="col-auto mb-2">
+      <text-case-1 lbl="Cover"
+        [val]="createCoverCode.basic?.basic?.code +' - '+createCoverCode.basic?.basic?.description" [stacked]="false">
+      </text-case-1>
+    </div>
+  </div>
+
+  <div class="row g-3 justify-content-center">
+    <div class="col-md-auto">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{"Lapse Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.lapse.lapseAllowed" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-md-auto">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{"Auto Reinstate"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.lapse.autoReinstate" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-md-auto">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{"Reinstatement Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.lapse.reinstatementAllowed" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-md-auto">
+      <div class="form-group mt-2">
+        <label
+          class=" text-primary w-100 text-center">{{'Convert to Paid Up Instead of Lapsing'|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.lapse.convertToPaidUpLapsing" type="checkbox" />
+      </div>
+    </div>
+    <div class="col-md-auto">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100 text-center">{{"Claim Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control width-unset control-bg-gray mx-auto"
+          [(ngModel)]="createCoverCode.lapse.claimAllowed" type="checkbox" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-end">
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary w-100">{{"Lapse Value Basis"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.lapse.lapseValueBasis">
+          <option></option>
+          <option *ngFor="let ot of lapseValueBasisList" [ngValue]="ot.code">{{ot.code}} - {{ot.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Lapse Value Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.lapse.lapseValueTable">
+          <option></option>
+          <option *ngFor="let ot of lapseValueTableList" [ngValue]="ot.code"> {{ot.code}} - {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-input-td-rf #inp label="Days Lapse Before Reinstatement Charges"
+        [(model)]="createCoverCode.lapse.daysReinstChargeFree" type="number" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Days of Grace"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.lapse.daysOfGrace"
+          type="number" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <app-input-td-rf #inp label="Days of Grace Table" [(model)]="createCoverCode.lapse.daysOfGraceTable" type="select"
+        labelType="cd" valueField="code" [options]="grS.getRatesByCat|functionCaller1:'DG'|async" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"No of Lapses Allowed"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray" [(ngModel)]="createCoverCode.lapse.noOfLapseAllowed"
+          type="number" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <app-input-td-rf #inp label="Do not Reinstate if Lapse Exceeds" hint="Days"
+        [(model)]="createCoverCode.lapse.maxLapseAllowed" type="number" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-md-6">
+      <app-input-td-rf #inp label="Min Policy Duration For Lapse" hint="Days"
+        [(model)]="createCoverCode.lapse.minPolicyDurLapse" type="number" [stacked]="true">
+      </app-input-td-rf>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Reinstatement Charge Amount Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.lapse.reinstatementChargeAmountTable">
+          <option></option>
+          <option *ngFor="let ot of reinstatementChargeAmountTableList" [ngValue]="ot.code">{{ot.code}} -
+            {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Reinstatement Interest Rate Table"|appTranslate|async}}</label>
+        <select #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.lapse.reinstatementInterestRateTable">
+          <option></option>
+          <option *ngFor="let ot of reinstatementIntrestTableList" [ngValue]="ot.code">{{ot.code}} -
+            {{ot.description}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group mt-2">
+        <label class=" text-primary">{{"Reinstatement Fixed Charge Amount"|appTranslate|async}}</label>
+        <input #inp="ngModel" class="form-control  control-bg-gray"
+          [(ngModel)]="createCoverCode.lapse.reinstatementFixedChargeAmount" type="number" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10"></div>
+    <div class="col-2">
+      <div class="form-group mt-2">
+        <label class=" text-primary">&nbsp;<br /></label>
+        <app-button (click)="saveLapse()" [buttonType]="'submit'" *ngIf="!coverService.isShow" [text]="'save'">
+        </app-button>
+      </div>
+    </div>
+  </div>
+</loader>

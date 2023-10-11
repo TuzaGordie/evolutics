@@ -1,0 +1,537 @@
+<div class="container">
+  <div class="form-group mt-2">
+    <div class="row g-3 form-group mt-2 pt-2">
+      <div class="col-1">
+        <label class="text-primary form-label">{{'Show All'|appTranslate|async}}</label>
+        <input class="form-control width-unset control-bg-gray" id="showAll" type="checkbox" (change)="reset()"/>
+      </div>
+      <div class="col form-group">
+        <label class="text-primary form-label">{{'Payment Status'|appTranslate|async}}</label>
+        <select class="form-control  control-bg-gray" [(ngModel)]="filterPaymentStatus" (change)="filter()">
+          <option value=""></option>
+          <option [value]="status.code" *ngFor="let status of paymentStatus">{{status.code}}-{{status.title}}</option>
+        </select>
+      </div>
+      <!-- <div class="col">
+        <label class="text-primary form-label">SLA Level</label>
+        <select class="form-control  control-bg-gray"></select>
+      </div> -->
+      <div class="col form-group">
+        <label class="text-primary form-label">{{'Currency'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray" [(ngModel)]="filterCurrency" (change)="filter()">
+          <option value=""></option>
+          <option [value]="currency.code" *ngFor="let currency of currencies">{{currency.code}}
+            -{{currency.description}}</option>
+        </select>
+      </div>
+      <div class="col form-group">
+        <label class="text-primary form-label">{{'Company'|appTranslate|async}}</label>
+        <select class="form-control control-bg-gray" [(ngModel)]="filterCompanyCode" (change)="filter()">
+          <option value=""></option>
+          <option [value]="company.code" *ngFor="let company of companies">{{company.code}}
+            -{{company.description}}</option>
+        </select>
+      </div>
+      <!-- <div class="col-2 form-group">
+        <label for="" class="form-label text-primary">Items per page</label>
+        <select class="form-control control-bg-gray" #select>
+          <option *ngFor="let item of itemsPerPageParmeters" [value]="item.number">{{item.number}}</option>
+        </select>
+      </div> -->
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="items-per-page mt-2">
+        <div class="left">
+          <div class="row" *ngIf="checkedList2.length">
+            <div class="col">
+              <span class="badge bg-primary" data-bs-toggle="modal" data-bs-target="#authorizeModal">{{'Authorize'|appTranslate|async}}</span>
+            </div>
+            <div class="col">
+              <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#declineModal">{{'Decline'|appTranslate|async}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div>
+
+          </div>
+        </div>
+      </div>
+
+      <table class="table table-responsive mt-2 table-striped">
+        <thead class="py-3 pytable">
+        <tr>
+          <th scope="col" class="tableth">{{'Transaction Number'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Absolute Amount'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Policy Number'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Transaction Type'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Account'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Currency'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Created On'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Created By'|appTranslate|async}}</th>
+          <th scope="col" class="tableth">{{'Updated By'|appTranslate|async}}</th>
+          <th scope="col">
+            <input type="checkbox" class="form-control" [(ngModel)]="isMasterSel" name="select" value=""
+                   (change)="checkUncheckAll()">
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let policy of authorizePolicies" class="nowrap">
+          <td data-bs-toggle="modal" data-bs-target="#transModal">{{policy.TransNo}}</td>
+          <td>{{policy.AbsoluteAmount}}</td>
+          <td ><a routerLink="../../policy-desk/view-policy" [queryParams]="{number:policy.policyNo,code:policy.policyCode,suffix:policy.policyNoSuffix}">{{policy.PolicyNo}}</a></td>
+          <td>{{policy.TransType}}</td>
+          <td>{{policy.Account}}</td>
+          <td>{{policy.Currency}}</td>
+          <td>{{policy.CreatedOn}}</td>
+          <td>{{policy.CreatedBy}}</td>
+          <td>{{policy.LastModifiedUser}}</td>
+          <td>
+            <input type="checkbox" class="form-control" [(ngModel)]="policy.selected" value="{{policy.TransNo}}"
+                   (change)="isAllSelected()">
+          </td>
+        </tr>
+        <tr *ngIf="authorizePolicies.length === 0">
+          <td colspan="14">
+            <span class="text-primary">{{'No records were found.'|appTranslate|async}}</span>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+
+      <!-- <div class="row justify-content-end">
+        <div class="col-3">
+          <app-button buttonType="save"></app-button>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="row">
+              <div class="col"></div>
+            </div>
+            <div class="form-group mt-2">
+
+              <table class="table table-responsive">
+                <thead>
+                <tr>
+                  <th scope="col" class="tablepopupth">{{'Policy Number'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Cover Name'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Policy Owner'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Account Currency'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Absolute Amount'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Transaction Created By'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Transaction Created At'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Transaction Number'|appTranslate|async}}</th>
+                  <th scope="col" class="tablepopupth">{{'Transaction Code'|appTranslate|async}}</th>
+
+                </tr>
+                </thead>
+                <tbody class="tablepopuptd">
+                <tr>
+                  <th class="tablepopuptd">LTT2100353</th>
+                  <th class="tablepopuptd">1-Saving</th>
+                  <th class="tablepopuptd">James</th>
+                  <th class="tablepopuptd">NGN</th>
+                  <th class="tablepopuptd">25000</th>
+                  <th class="tablepopuptd">J-Bond</th>
+                  <th class="tablepopuptd">Dec 15 2020 09:30</th>
+                  <th class="tablepopuptd">57778</th>
+                  <th class="tablepopuptd">Payment</th>
+                </tr>
+                </tbody>
+              </table>
+
+
+              <table class="table table-responsive">
+                <thead>
+                <tr>
+                  <th scope="col" class="tablepopupth">Account Code</th>
+                  <th scope="col" class="tablepopupth">Ledger Code</th>
+                  <th scope="col" class="tablepopupth">Cover No</th>
+                  <th scope="col" class="tablepopupth">Amount</th>
+
+                </tr>
+                </thead>
+                <tbody class="tablepopuptd">
+                <tr>
+                  <th class="tablepopuptd">susp</th>
+                  <th class="tablepopuptd">5768</th>
+                  <th class="tablepopuptd">1</th>
+                  <th class="tablepopuptd">23000</th>
+
+                </tr>
+                <tr>
+                  <th class="tablepopuptd">Prem</th>
+                  <th class="tablepopuptd">5768</th>
+                  <th class="tablepopuptd">1</th>
+                  <th class="tablepopuptd">23000</th>
+
+                </tr>
+                </tbody>
+              </table>
+
+              <div class="form-group mt-2">
+
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-9">
+                    <label class="tablepopuptd">{{'Narration'|appTranslate|async}}</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                  <div class="col-1 form-group mt-2 pt-2"></div>
+
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-7"></div>
+                  <div class="col-2">
+
+                  </div>
+                  <div class="col-2">
+                    <a data-bs-toggle="modal" href="#" data-bs-target="#exampleModals">
+                      <app-button [buttonType]="'action'"></app-button>
+                    </a>
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+
+            <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+              <div class="container">
+                <div class="form-group mt-2">
+
+                  <div class="form-group mt-2">
+                    <div class="row g-3 form-group mt-2 pt-2">
+                      <div class="col-5">
+                        <label>{{'User Id'|appTranslate|async}}:J-Bond</label>
+
+                      </div>
+                      <div class="col-1 form-group mt-2 pt-2"></div>
+                      <div class="col-6 form-group mt-6 pt-6">
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group mt-2">
+                    <div class="row g-3 form-group mt-2 pt-2">
+                      <div class="col-5">
+                        <label>{{'Password'|appTranslate|async}}</label>
+                        <input class="form-control  control-bg-gray" type="text"/>
+                      </div>
+                      <div class="col-1 form-group mt-2 pt-2"></div>
+                      <div class="col-6 form-group mt-6 pt-6">
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                    <div class="row g-3 form-group mt-2 pt-2">
+                      <div class="col-7">
+                        <label>{{'Comment(Optional)'|appTranslate|async}}</label>
+                        <textarea class="form-control  control-bg-gray"></textarea>
+                      </div>
+                      <div class="col-1 form-group mt-2 pt-2"></div>
+                      <div class="col-4 form-group mt-6 pt-6">
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                    <div class="row g-3 form-group mt-1 pt-1">
+                      <div class="col-7"></div>
+                      <div class="col-2">
+                        <app-button [buttonType]="'Authorise'"></app-button>
+                      </div>
+                      <div class="col-2">
+                        <app-button [buttonType]="'Decline'"></app-button>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                    <div class="row g-3 form-group mt-2 pt-2">
+                      <div class="col-7">
+
+                      </div>
+                      <div class="col-1 form-group mt-2 pt-2"></div>
+                      <div class="col-4 form-group mt-6 pt-6">
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mt-2">
+                    <div class="row g-3 form-group mt-2 pt-2">
+                      <div class="col-7">
+
+                      </div>
+                      <div class="col-1 form-group mt-2 pt-2"></div>
+                      <div class="col-4 form-group mt-6 pt-6">
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="transModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-bold" id="exampleModalLabel">Trans No.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="d-flex justify-content-around" style="font-size: 15px;">
+
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <p>{{'Payout No'|appTranslate|async}}: <span class="text-primary">LRP3440298</span></p>
+              </div>
+              <div class="col">
+                <p>{{'Cover Name'|appTranslate|async}}: <span class="text-primary">1-Saving</span></p>
+              </div>
+              <div class="col">
+                <p>{{'Policy Owner'|appTranslate|async}}: <span class="text-primary">465-James</span></p>
+              </div>
+              <div class="col">
+                <p>{{'Account Currency'|appTranslate|async}}: <span class="text-primary">NGN</span></p>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>{{'Transaction Created By'|appTranslate|async}}: <span class="text-primary">J-Bond</span></p>
+              </div>
+              <div class="col">
+                <p>{{'Transaction Created At'|appTranslate|async}}: <span class="text-primary">10/Jan/2020</span></p>
+              </div>
+              <div class="col">
+                <p>{{'Transaction No'|appTranslate|async}}: <span class="text-primary">16768</span></p>
+              </div>
+              <div class="col">
+                <p>{{'Transaction Code'|appTranslate|async}}: <span class="text-primary">7868</span></p>
+              </div>
+            </div>
+            <div class="form-group mt-2">
+
+
+              <table class="table table-borderless table-striped mt-5">
+                <thead>
+                <tr>
+                  <th scope="col">{{'Account Code'|appTranslate|async}}</th>
+                  <th scope="col">{{'Ledger Code'|appTranslate|async}}</th>
+                  <th scope="col">{{'Cover No'|appTranslate|async}}</th>
+                  <th scope="col">{{'Amount'|appTranslate|async}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>SUSP</td>
+                  <td>57688</td>
+                  <td>--</td>
+                  <td>20.000</td>
+                </tr>
+                <tr>
+                  <td>PREM</td>
+                  <td>57688</td>
+                  <td>--</td>
+                  <td>-20.000</td>
+                </tr>
+
+                </tbody>
+              </table>
+
+
+              <div class="form-group mt-2">
+                <hr>
+                <div class="row g-3 form-group mt-2 pt-2">
+                  <div class="col-9">
+                    <label>{{'Narration'|appTranslate|async}}</label>
+                    <textarea class="form-control  control-bg-gray"></textarea>
+                  </div>
+                  <div class="col-1 form-group mt-2 pt-2"></div>
+
+                </div>
+              </div>
+
+              <div class="form-group mt-2">
+                <div class="row g-3 form-group mt-1 pt-1">
+                  <div class="col-7"></div>
+                  <div class="col-2">
+
+                  </div>
+
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-clone btn-outline-primary" data-bs-toggle="modal" data-bs-target="#confirmModal"><i
+          class="fas fa-check-circle"></i> {{'Authorize'|appTranslate|async}}
+        </button>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#declineModal"><i class="fas fa-ban"></i>
+          Decline
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Authorize Modal -->
+<div class="modal fade" id="authorizeModal" tabindex="-1" aria-labelledby="authorizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="exampleModalLabel">{{'ALERT'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Authorize'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let claim of checkedList2">
+          <p><b class="text-primary">{{claim.TransNo}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5"><i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}</button>
+        <button type="button" class="btn btn-danger px-5"><i class="fas fa-ban"></i> {{'No'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Decline Modal -->
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="declineModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">{{'WARNING'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Decline'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let claim of checkedList2">
+          <p><b class="text-primary">{{claim.TransNo}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5"><i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}</button>
+        <button type="button" class="btn btn-danger px-5"><i class="fas fa-ban"></i> {{'No'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="authorizeModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="exampleModalLabel">{{'ALERT'|appTranslate|async}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><b>
+          {{'Are you sure you want to Authorize'|appTranslate|async}}
+          <span *ngIf="checkedList2.length === 1">{{'this payment'|appTranslate|async}}</span>
+          <span *ngIf="checkedList2.length > 1"> {{'these payments'|appTranslate|async}}</span>?
+        </b></p>
+        <span *ngFor="let payment of checkedList2">
+          <p><b class="text-primary">{{payment.TransNo}}</b>,</p>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5"><i class="far fa-check-circle"></i> {{'Yes'|appTranslate|async}}</button>
+        <button type="button" class="btn btn-danger px-5"><i class="fas fa-ban"></i> {{'No'|appTranslate|async}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="declineModal" tabindex="-1" aria-labelledby="authorizeModal" aria-hidden="true">
+</div>

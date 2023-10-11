@@ -1,0 +1,18 @@
+<div class="d-flex justify-content-between">
+  <h5 mat-dialog-title>Change Status</h5>
+  <button type="button" class="btn-close" mat-dialog-close></button>
+</div>
+<mat-dialog-content>
+  <div class="row px-3">
+    <label for="" class="form-label text-primary">New Status</label>
+    <select class="form-control control-bg-gray" [(ngModel)]="clientStatus">
+      <option value=""></option>
+      <option *ngFor="let status of clientStatusesList" [value]="status.code">
+        {{ status.title }}
+      </option>
+    </select>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <app-button buttonType="save" (click)="onClose()"></app-button>
+</mat-dialog-actions>
